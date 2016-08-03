@@ -1,6 +1,0 @@
-node_modules
-dist
-.tmp
-*.sw*
-.DS_Store
-data/copy.json
