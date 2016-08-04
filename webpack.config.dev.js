@@ -23,9 +23,6 @@ module.exports = {
 				loader: 'babel',
 				exclude: /node_modules/,
 				include: __dirname,
-				query: {
-					presets: ['react-hmre'],
-				},
 			},
 			{
 				test: /\.styl$/,
