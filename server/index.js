@@ -1,3 +1,5 @@
+/* eslint-disable global-require */
+
 require('babel-register')
 
 if (process.env.NODE_ENV === 'production') {

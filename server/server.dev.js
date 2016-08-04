@@ -1,8 +1,8 @@
 import express from 'express'
 import webpack from 'webpack'
-import handleRender from './handleRender.js'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
+import handleRender from './handleRender.js'
 import webpackConfig from './../webpack.config.dev.js'
 
 const app = express()
@@ -14,7 +14,7 @@ const compiler = webpack(webpackConfig)
 // Tell express to use webpack dev middleware to compile js on the fly
 app.use(webpackDevMiddleware(compiler, {
 	noInfo: true,
-	publicPath: webpackConfig.output.publicPath
+	publicPath: webpackConfig.output.publicPath,
 }))
 
 // Use this middleware to set up hot module reloading via webpack
