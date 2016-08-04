@@ -1,6 +1,8 @@
 doctype html
 html(lang="en")
 	head
+		if isProduction
+			link(href='/static/compiled.css', rel='stylesheet', type='text/css')
 	body
 		#root!= appHtml
 		script(src='/static/bundle.js')

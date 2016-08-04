@@ -3,7 +3,9 @@
     "port": 3001
   },
   "scripts": {
-    "dev": "node server/index.js"
+    "start": "node server/index.js",
+    "build": "webpack --config webpack.config.prod.js --progress",
+		"prod": "NODE_ENV=production npm run start"
   },
   "dependencies": {
     "babel-core": "^6.11.4",
@@ -15,6 +17,7 @@
     "babel-register": "^6.11.6",
     "css-loader": "^0.23.1",
     "express": "^4.14.0",
+    "extract-text-webpack-plugin": "^1.0.1",
     "fontfaceobserver": "^1.7.1",
     "promis": "^1.1.4",
     "pug": "^2.0.0-alpha6",

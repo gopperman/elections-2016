@@ -4,8 +4,13 @@ Please note: do not reproduce Boston Globe logos or fonts without written permis
 
 ## setup
 
-`npm i`
+- `npm i`
 
 ## dev
 
-`npm run dev`
+- `npm run dev`
+
+## prod
+
+- `npm run build`
+- `npm run prod`

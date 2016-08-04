@@ -4,6 +4,7 @@ export default function handleRender(req, res) {
 	res.render('html', {
 		pretty: true,
 		appHtml: 'server',
+		isProduction: process.env.NODE_ENV === 'production',
 	})
 
 }
