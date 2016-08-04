@@ -8,7 +8,7 @@ Please note: do not reproduce Boston Globe logos or fonts without written permis
 
 ## dev
 
-- `npm run dev`
+- `npm run start`
 
 ## prod
 
