@@ -27,6 +27,10 @@ module.exports = {
           presets: ['react-hmre'],
         },
       },
+      {
+        test: /\.styl$/,
+        loader: 'style-loader!css-loader!stylus-loader',
+      },
     ],
   },
 }
