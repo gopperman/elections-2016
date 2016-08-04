@@ -1,29 +1,26 @@
 import express from 'express'
-import webpack from 'webpack'
+// import favicon from 'serve-favicon'
+import compression from 'compression'
 import handleRender from './handleRender.js'
-import webpackDevMiddleware from 'webpack-dev-middleware'
-import webpackHotMiddleware from 'webpack-hot-middleware'
-import webpackConfig from './../webpack.config.dev.js'
 
 const app = express()
 const port = process.env.npm_package_config_port
 
-// Get webpack config
-const compiler = webpack(webpackConfig)
+// enable compression
+app.use(compression())
 
-// Tell express to use webpack dev middleware to compile js on the fly
-app.use(webpackDevMiddleware(compiler, {
-	noInfo: true,
-	publicPath: webpackConfig.output.publicPath
-}))
+app.disable('x-powered-by')
 
-// Use this middleware to set up hot module reloading via webpack
-app.use(webpackHotMiddleware(compiler))
+// tell express to serve static files from the static directory
+app.use('/static', express.static('static'))
 
 // Tell express to use pug as our view engine
 // We'll only use this to render the top-level html wrapper
 app.set('views', './common')
 app.set('view engine', 'pug')
+
+// // serve favicon
+// app.use(favicon(`${__dirname}/../assets/favicon.ico`))
 
 // This is fired every time the server side receives a request
 app.get('*', handleRender)
