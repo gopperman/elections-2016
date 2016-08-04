@@ -2,6 +2,7 @@ import express from 'express'
 import webpack from 'webpack'
 import handleRender from './handleRender.js'
 import webpackDevMiddleware from 'webpack-dev-middleware'
+import webpackHotMiddleware from 'webpack-hot-middleware'
 import webpackConfig from './../webpack.config.dev.js'
 
 const app = express()
@@ -15,6 +16,9 @@ app.use(webpackDevMiddleware(compiler, {
 	noInfo: true,
 	publicPath: webpackConfig.output.publicPath
 }))
+
+// Use this middleware to set up hot module reloading via webpack
+app.use(webpackHotMiddleware(compiler))
 
 // Tell express to use pug as our view engine
 // We'll only use this to render the top-level html wrapper

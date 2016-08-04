@@ -1,1 +1,6 @@
-console.log('index.js')
+import React from 'react'
+import { render } from 'react-dom'
+
+const rootElement = document.getElementById('root')
+
+render(<p>client</p>, rootElement)
