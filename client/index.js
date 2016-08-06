@@ -11,7 +11,7 @@ const rootElement = document.getElementById('root')
 // https://github.com/reactjs/redux/pull/1455 (cleaner than react-hmre)
 let render = () => {
 
-// eslint-disable-next-line global-require
+	// eslint-disable-next-line global-require
 	const Root = require('./../common/components/Root.js').default
 
 	ReactDOM.render(<Root history={browserHistory} />, rootElement)
