@@ -4,6 +4,7 @@ import App from './App.js'
 import State from './State.js'
 import Race from './Race.js'
 
+// eslint-disable-next-line react/prefer-stateless-function
 class Root extends Component {
 
 	static propTypes = {
