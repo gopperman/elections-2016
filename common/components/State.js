@@ -2,7 +2,7 @@ import React from 'react'
 
 const State = () => (
 
-	<div className='State'>States</div>
+	<div className='State'>State</div>
 
 )
 

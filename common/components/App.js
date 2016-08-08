@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { Link } from 'react-router'
 
-const App = () => (
+const App = ({ children }) => (
 
 	<div className='App'>
 		<h1>App</h1>
@@ -9,8 +9,13 @@ const App = () => (
 			<li><Link to='/state'>State</Link></li>
 			<li><Link to='/state/race'>Race</Link></li>
 		</ul>
+		{ children }
 	</div>
 
 )
+
+App.propTypes = {
+	children: PropTypes.object.isRequired,
+}
 
 export default App

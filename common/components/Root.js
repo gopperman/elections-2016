@@ -16,9 +16,10 @@ class Root extends Component {
 
 		return (
 			<Router history={history}>
-				<Route path='/' component={App} />
-				<Route path='/state' component={State} />
-				<Route path='/state/race' component={Race} />
+				<Route path='/' component={App}>
+					<Route path='/state' component={State} />
+					<Route path='/state/race' component={Race} />
+				</Route>
 			</Router>
 		)
 
