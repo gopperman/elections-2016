@@ -15,7 +15,7 @@ const App = ({ children }) => (
 )
 
 App.propTypes = {
-	children: PropTypes.object.isRequired,
+	children: PropTypes.object,
 }
 
 export default App

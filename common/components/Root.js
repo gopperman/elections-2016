@@ -1,3 +1,4 @@
+import { Provider } from 'react-redux'
 import React, { Component, PropTypes } from 'react'
 import { Router, Route } from 'react-router'
 import App from './App.js'
@@ -13,15 +14,17 @@ class Root extends Component {
 
 	render() {
 
-		const { history } = this.props
+		const { history, store } = this.props
 
 		return (
-			<Router history={history}>
-				<Route path='/' component={App}>
-					<Route path='/state' component={State} />
-					<Route path='/state/race' component={Race} />
-				</Route>
-			</Router>
+			<Provider store={store}>
+				<Router history={history}>
+					<Route path='/' component={App}>
+						<Route path='/state' component={State} />
+						<Route path='/state/race' component={Race} />
+					</Route>
+				</Router>
+			</Provider>
 		)
 
 	}

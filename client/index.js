@@ -1,10 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { browserHistory } from 'react-router'
+import configureStore from './../common/store/configureStore.js'
 
 // eslint-disable-next-line no-unused-vars
 import css from './../common/styles/config.styl'
 
+const store = configureStore({})
 const rootElement = document.getElementById('root')
 
 // the following code (render, module.hot if, etc) comes from
@@ -14,7 +16,8 @@ let render = () => {
 	// eslint-disable-next-line global-require
 	const Root = require('./../common/components/Root.js').default
 
-	ReactDOM.render(<Root history={browserHistory} />, rootElement)
+	ReactDOM.render(
+		<Root history={browserHistory} store={store} />,rootElement)
 
 }
 
