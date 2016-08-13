@@ -9,6 +9,7 @@ import Race from './Race.js'
 class Root extends Component {
 
 	static propTypes = {
+		store: PropTypes.object.isRequired,
 		history: PropTypes.object.isRequired,
 	}
 

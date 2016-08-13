@@ -8,6 +8,7 @@
 		"comma-dangle": [2, "always-multiline"],
 		"indent": [2, "tab", {"SwitchCase": 1}],
 		"jsx-quotes": [2, "prefer-single"],
+		"import/no-extraneous-dependencies": ["error", {"devDependencies": true}],
 		"max-len": [2, 100, 2],
 		"padded-blocks": [0],
 		"quotes": [2, "single", "avoid-escape"],

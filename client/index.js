@@ -17,7 +17,7 @@ let render = () => {
 	const Root = require('./../common/components/Root.js').default
 
 	ReactDOM.render(
-		<Root history={browserHistory} store={store} />,rootElement)
+		<Root history={browserHistory} store={store} />, rootElement)
 
 }
 

@@ -6,7 +6,8 @@
     "start": "node server/index.js",
     "build": "npm run lint && webpack --config webpack.config.prod.js --progress",
     "prod": "NODE_ENV=production npm run start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "mocha --compilers js:babel-core/register \"./{,!(node_modules)/**/}*.test.js\""
   },
   "dependencies": {
     "babel-cli": "^6.11.4",
@@ -43,5 +44,10 @@
     "webpack": "^1.13.1",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-hot-middleware": "^2.12.2"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.0.2",
+    "tap": "^6.3.2"
   }
 }
