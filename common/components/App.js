@@ -7,7 +7,6 @@ const App = ({ children }) => (
 		<h1>App</h1>
 		<ul>
 			<li><Link to='/state'>State</Link></li>
-			<li><Link to='/state/race'>Race</Link></li>
 		</ul>
 		{ children }
 	</div>

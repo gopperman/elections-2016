@@ -1,34 +1,18 @@
 import { bindActionCreators } from 'redux'
 import React, { Component, PropTypes } from 'react'
 import { connect } from 'react-redux'
-
 import * as actions from './../actions/actionCreators.js'
+import Clock from './Clock.js'
 
-// eslint-disable-next-line react/prefer-stateless-function
 class State extends Component {
 
 	static propTypes = {
 		actions: PropTypes.object,
 		results: PropTypes.object,
+		timer: PropTypes.object,
 	}
 
 	componentDidMount = () => this.fireFetchResults()
-
-	componentDidUpdate = (prevProps) => {
-
-		const { results } = this.props
-		const { isFetching } = results
-
-		// did we just go from fetching to not fetching,
-		// i.e., did our fetchResults complete?
-		if (!isFetching && prevProps.results.isFetching) {
-
-			// start the timer if results are incomplete
-			// otherwise, don't start the timer
-
-		}
-
-	}
 
 	fireFetchResults = () => {
 
@@ -39,9 +23,14 @@ class State extends Component {
 
 	render() {
 
+		const { startTimer, stopTimer } = this.props.actions
+		const { startedAt } = this.props.timer
+		const { isFetching } = this.props.results
+
 		return (
 			<div className='State'>
 				State
+				<Clock {...{ startTimer, stopTimer, startedAt, isFetching }} />
 			</div>
 		)
 
