@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { interval } from 'd3-timer'
 
-const DURATION = 15000
+const DURATION = 5000
 
 class Clock extends Component {
 
@@ -17,6 +17,7 @@ class Clock extends Component {
 		// not sure where these belong
 		// but it doesn't feel right to put them here
 		isFetching: PropTypes.bool,
+		isComplete: PropTypes.bool,
 		fetchResults: PropTypes.func,
 
 	}
@@ -30,7 +31,7 @@ class Clock extends Component {
 	componentDidUpdate = (prevProps) => {
 
 		const { isFetching, startTimer, stopTimer, fetchResults,
-			startedAt } = this.props
+			startedAt, isComplete } = this.props
 
 		// if clock is not running,
 		if (!startedAt) {
@@ -43,10 +44,14 @@ class Clock extends Component {
 			if (!isFetching && prevProps.isFetching) {
 
 				// if race is complete, do nothing
-				// otherwise dispatch startTimer action
-				// this will set Date.now() to state
-				// TODO: check if race is complete
-				startTimer()
+				if (!isComplete) {
+
+					// otherwise dispatch startTimer action
+					// this will set Date.now() to state
+					startTimer()
+
+				}
+
 			}
 
 		} else if (Date.now() - startedAt >= DURATION) {

@@ -25,7 +25,7 @@ class State extends Component {
 
 		const { startTimer, stopTimer, fetchResults } = this.props.actions
 		const { startedAt } = this.props.timer
-		const { isFetching } = this.props.results
+		const { isFetching, isComplete } = this.props.results
 
 		const clockProps = {
 			startTimer,
@@ -33,6 +33,7 @@ class State extends Component {
 			startedAt,
 			fetchResults,
 			isFetching,
+			isComplete,
 		}
 
 		return (

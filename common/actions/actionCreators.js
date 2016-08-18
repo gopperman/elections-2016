@@ -7,7 +7,13 @@ import {
 	FETCH_RESULTS_SUCCESS,
 	// FETCH_RESULTS_FAILURE,
 
+	COMPLETE_RACE,
+
 } from './actionTypes.js'
+
+const completeRace = () => ({
+	type: COMPLETE_RACE,
+})
 
 const startTimer = (now = Date.now()) => ({
 	type: START_TIMER,
@@ -51,4 +57,6 @@ export {
 	// fetchResultsFailure,
 
 	fetchResults,
+
+	completeRace,
 }
