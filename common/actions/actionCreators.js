@@ -9,7 +9,7 @@ import {
 
 } from './actionTypes.js'
 
-const startTimer = (now = new Date().getTime()) => ({
+const startTimer = (now = Date.now()) => ({
 	type: START_TIMER,
 	now,
 })

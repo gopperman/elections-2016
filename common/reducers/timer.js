@@ -1,5 +1,6 @@
 import {
 	START_TIMER,
+	STOP_TIMER,
 } from './../actions/actionTypes.js'
 
 export default(state = {}, action) => {
@@ -13,6 +14,12 @@ export default(state = {}, action) => {
 			return {
 				...state,
 				startedAt: now,
+			}
+
+		case STOP_TIMER:
+			return {
+				...state,
+				startedAt: null,
 			}
 
 		default:

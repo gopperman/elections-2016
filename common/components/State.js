@@ -23,14 +23,21 @@ class State extends Component {
 
 	render() {
 
-		const { startTimer, stopTimer } = this.props.actions
+		const { startTimer, stopTimer, fetchResults } = this.props.actions
 		const { startedAt } = this.props.timer
 		const { isFetching } = this.props.results
 
+		const clockProps = {
+			startTimer,
+			stopTimer,
+			startedAt,
+			fetchResults,
+			isFetching,
+		}
+
 		return (
 			<div className='State'>
-				State
-				<Clock {...{ startTimer, stopTimer, startedAt, isFetching }} />
+				<Clock {...clockProps} />
 			</div>
 		)
 
