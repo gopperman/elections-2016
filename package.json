@@ -3,7 +3,7 @@
     "port": 3001
   },
   "scripts": {
-    "start": "node server/index.js",
+    "start": "webpack-dashboard -- node server/index.js",
     "build": "npm run lint && webpack --config webpack.config.prod.js --progress",
     "prod": "NODE_ENV=production npm run start",
     "lint": "eslint .",
@@ -43,6 +43,7 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^2.1.2",
     "webpack": "^1.13.1",
+    "webpack-dashboard": "^0.1.1",
     "webpack-dev-middleware": "^1.6.1",
     "webpack-hot-middleware": "^2.12.2"
   },
