@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { interval } from 'd3-timer'
 
-const DURATION = 5000
+const DURATION = 15000
 
 class Clock extends Component {
 
@@ -24,7 +24,7 @@ class Clock extends Component {
 	componentDidMount = () => {
 		this.interval = interval(() => {
 			this.forceUpdate()
-		}, 1000)
+		}, 100)
 	}
 
 	componentDidUpdate = (prevProps) => {
@@ -66,17 +66,22 @@ class Clock extends Component {
 
 		const { isFetching, startedAt } = this.props
 
-		const updating = isFetching ? <div>updating</div> : null
+		let timeLeft
+		if (startedAt) {
 
-		// TODO: display time until next update
-		const elapsed = startedAt ?
-			<div>Time since clock started: { Date.now() - startedAt }</div> :
-			null
+			// use Math.max to make sure we never display a negative number
+			timeLeft = Math.max(
+				Math.round((DURATION - (Date.now() - startedAt)) / 1000), 0)
+
+		}
+
+		const updating = isFetching ? <div>updating</div> : null
+		const updateIn = startedAt ? <div>update in {timeLeft}</div> : null
 
 		return (
 			<div className='Clock'>
 				{updating}
-				{elapsed}
+				{updateIn}
 			</div>
 		)
 
