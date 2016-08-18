@@ -2,6 +2,7 @@ import express from 'express'
 // import favicon from 'serve-favicon'
 import compression from 'compression'
 import handleRender from './handleRender.js'
+import api from './api.js'
 
 const app = express()
 const port = process.env.npm_package_config_port
@@ -21,6 +22,8 @@ app.set('view engine', 'pug')
 
 // // serve favicon
 // app.use(favicon(`${__dirname}/../assets/favicon.ico`))
+
+app.get('/api/:results', api)
 
 // This is fired every time the server side receives a request
 app.get('*', handleRender)

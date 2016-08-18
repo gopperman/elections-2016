@@ -4,6 +4,7 @@ import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
 import DashboardPlugin from 'webpack-dashboard/plugin'
 import handleRender from './handleRender.js'
+import api from './api.js'
 import webpackConfig from './../webpack.config.dev.js'
 
 const app = express()
@@ -30,6 +31,8 @@ app.use(webpackHotMiddleware(compiler, {
 // We'll only use this to render the top-level html wrapper
 app.set('views', './common')
 app.set('view engine', 'pug')
+
+app.get('/api/:results', api)
 
 // This is fired every time the server side receives a request
 app.get('*', handleRender)
