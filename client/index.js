@@ -6,7 +6,8 @@ import configureStore from './../common/store/configureStore.js'
 // eslint-disable-next-line no-unused-vars
 import css from './../common/styles/config.styl'
 
-const store = configureStore({})
+const initialState = window.REDUX__INITIALSTATE
+const store = configureStore(initialState)
 const rootElement = document.getElementById('root')
 
 // the following code (render, module.hot if, etc) comes from
