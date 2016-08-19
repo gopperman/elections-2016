@@ -1,8 +1,7 @@
 import { Provider } from 'react-redux'
 import React, { Component, PropTypes } from 'react'
-import { Router, Route } from 'react-router'
-import App from './App.js'
-import State from './State.js'
+import { Router } from 'react-router'
+import routes from './../routes.js'
 
 // eslint-disable-next-line react/prefer-stateless-function
 class Root extends Component {
@@ -19,9 +18,7 @@ class Root extends Component {
 		return (
 			<Provider store={store}>
 				<Router history={history}>
-					<Route path='/' component={App}>
-						<Route path='/state' component={State} />
-					</Route>
+					{ routes }
 				</Router>
 			</Provider>
 		)
