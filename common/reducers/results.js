@@ -7,8 +7,9 @@ import {
 
 export default(state = {}, action) => {
 
-	const { type } = action
+	const { type, data } = action
 
+	// TODO: consider switching to something like updeep
 	switch (type) {
 
 		case COMPLETE_RACE:
@@ -29,6 +30,7 @@ export default(state = {}, action) => {
 
 			return {
 				...state,
+				data,
 				isFetching: false,
 			}
 

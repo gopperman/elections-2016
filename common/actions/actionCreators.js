@@ -28,8 +28,9 @@ const fetchResultsRequest = () => ({
 	type: FETCH_RESULTS_REQUEST,
 })
 
-const fetchResultsSuccess = () => ({
+const fetchResultsSuccess = ({ data }) => ({
 	type: FETCH_RESULTS_SUCCESS,
+	data,
 })
 
 // const fetchResultsFailure = () => ({
@@ -42,9 +43,19 @@ const fetchResults = () =>
 
 		dispatch(fetchResultsRequest())
 
-		setTimeout(() => {
-			dispatch(fetchResultsSuccess())
-		}, 2000)
+		// TODO: don't hardcode url
+		fetch('api/electoral-us')
+			.then(response => {
+
+				// if error, bail out
+				if (response.status !== 200) throw new Error(response.statusText)
+
+				return response
+
+			})
+			.then(response => response.json())
+			.then(data => dispatch(fetchResultsSuccess({ data })))
+			// TODO: add error handling
 
 	}
 
