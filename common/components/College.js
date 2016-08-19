@@ -1,16 +1,16 @@
-import React, { Component } from 'react'
+// import React, { Component } from 'react'
 
-class College extends Component {
+// class College extends Component {
 
-	render() {
+// 	render() {
 
-		return (
-			<div className='College'>
-				College
-			</div>
-		)
+// 		return (
+// 			<div className='College'>
+// 				College
+// 			</div>
+// 		)
 
-	}
+// 	}
 
-}
-export default College
+// }
+// export default College
