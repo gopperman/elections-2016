@@ -5,4 +5,5 @@ html(lang="en")
 			link(href='/static/compiled.css', rel='stylesheet', type='text/css')
 	body
 		#root!= appHtml
+		script window.REDUX__INITIALSTATE = !{JSON.stringify(initialState)}
 		script(src='/static/bundle.js')

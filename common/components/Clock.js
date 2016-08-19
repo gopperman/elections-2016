@@ -1,7 +1,7 @@
 import React, { Component, PropTypes } from 'react'
 import { interval } from 'd3-timer'
 
-const DURATION = 5000
+const DURATION = 50000
 
 class Clock extends Component {
 
