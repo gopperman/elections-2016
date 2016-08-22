@@ -11,6 +11,8 @@ import {
 
 } from './actionTypes.js'
 
+const fetch = require('fetch-ponyfill')()
+
 const completeRace = () => ({
 	type: COMPLETE_RACE,
 })
