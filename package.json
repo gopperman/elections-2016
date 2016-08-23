@@ -43,7 +43,6 @@
     "react-redux": "^4.4.5",
     "react-router": "^2.6.1",
     "redbox-react": "^1.2.10",
-    "redial": "^0.4.2",
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
     "style-loader": "^0.13.1",
