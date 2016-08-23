@@ -1,5 +1,4 @@
 import express from 'express'
-// import favicon from 'serve-favicon'
 import compression from 'compression'
 import handleRender from './handleRender.js'
 import api from './api.js'
@@ -19,9 +18,6 @@ app.use('/static', express.static('static'))
 // We'll only use this to render the top-level html wrapper
 app.set('views', './common')
 app.set('view engine', 'pug')
-
-// // serve favicon
-// app.use(favicon(`${__dirname}/../assets/favicon.ico`))
 
 app.get('/api/:results', api)
 
