@@ -43,13 +43,17 @@ const fetchResults = () =>
 
 	(dispatch) => {
 
+		console.log('dispatching fetchResultsRequest')
+
 		dispatch(fetchResultsRequest())
 
 		const apiUrl = process.env.npm_package_config_api_url
 
 		// TODO: don't hardcode url
-		fetch(`${apiUrl}/api/electoral-us`)
+		return fetch(`${apiUrl}/api/electoral-us`)
 			.then(response => {
+
+				console.log('fetched data from api')
 
 				// if error, bail out
 				if (response.status !== 200) throw new Error(response.statusText)

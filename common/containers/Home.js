@@ -1,6 +1,24 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
+import { bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { provideHooks } from 'redial'
+import * as actions from './../actions/actionCreators.js'
 
-class Home extends Component {
+const mapDispatchToProps = (dispatch) => ({
+	actions: bindActionCreators(actions, dispatch),
+})
+
+@provideHooks({
+	fetch: ({ dispatch }) => dispatch(actions.fetchResults()),
+})
+@connect(s => s, mapDispatchToProps)
+export default class Home extends Component {
+
+	static propTypes = {
+		actions: PropTypes.object,
+		results: PropTypes.object,
+		timer: PropTypes.object,
+	}
 
 	apiUrl = 'electoral-us'
 
@@ -8,11 +26,10 @@ class Home extends Component {
 
 		return (
 			<div className='Home'>
-				Home
+				{ JSON.stringify(this.props, null, 2) }
 			</div>
 		)
 
 	}
 
 }
-export default Home
