@@ -7,15 +7,9 @@ import {
 	FETCH_RESULTS_SUCCESS,
 	// FETCH_RESULTS_FAILURE,
 
-	COMPLETE_RACE,
-
 } from './actionTypes.js'
 
 const fetch = require('fetch-ponyfill')()
-
-const completeRace = () => ({
-	type: COMPLETE_RACE,
-})
 
 const startTimer = (now = Date.now()) => ({
 	type: START_TIMER,
@@ -26,12 +20,14 @@ const stopTimer = () => ({
 	type: STOP_TIMER,
 })
 
-const fetchResultsRequest = () => ({
+const fetchResultsRequest = ({ url }) => ({
 	type: FETCH_RESULTS_REQUEST,
+	url,
 })
 
-const fetchResultsSuccess = ({ data }) => ({
+const fetchResultsSuccess = ({ url, data }) => ({
 	type: FETCH_RESULTS_SUCCESS,
+	url,
 	data,
 })
 
@@ -39,21 +35,16 @@ const fetchResultsSuccess = ({ data }) => ({
 // 	type: FETCH_RESULTS_FAILURE,
 // })
 
-const fetchResults = () =>
+const fetchResults = ({ url }) =>
 
 	(dispatch) => {
 
-		console.log('dispatching fetchResultsRequest')
-
-		dispatch(fetchResultsRequest())
+		dispatch(fetchResultsRequest({ url }))
 
 		const apiUrl = process.env.npm_package_config_api_url
 
-		// TODO: don't hardcode url
-		return fetch(`${apiUrl}/api/electoral-us`)
+		return fetch(`${apiUrl}/api/${url}`)
 			.then(response => {
-
-				console.log('fetched data from api')
 
 				// if error, bail out
 				if (response.status !== 200) throw new Error(response.statusText)
@@ -62,21 +53,14 @@ const fetchResults = () =>
 
 			})
 			.then(response => response.json())
-			.then(data => dispatch(fetchResultsSuccess({ data })))
-			.catch(e => console.log(e))
+			.then(data => dispatch(fetchResultsSuccess({ url, data })))
 			// TODO: add error handling
+			.catch(e => console.log(e))
 
 	}
 
 export {
 	startTimer,
 	stopTimer,
-
-	// fetchResultsRequest,
-	// fetchResultsSuccess,
-	// fetchResultsFailure,
-
 	fetchResults,
-
-	completeRace,
 }
