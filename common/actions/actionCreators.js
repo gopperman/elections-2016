@@ -39,16 +39,16 @@ const fetchResultsSuccess = ({ data }) => ({
 // 	type: FETCH_RESULTS_FAILURE,
 // })
 
-const fetchResults = () =>
+const fetchResults = () => {
 
-	(dispatch) => {
+	return function (dispatch) {
 
 		dispatch(fetchResultsRequest())
 
 		const apiUrl = process.env.npm_package_config_api_url
 
 		// TODO: don't hardcode url
-		fetch(`${apiUrl}/api/electoral-us`)
+		return fetch(`${apiUrl}/api/electoral-us`)
 			.then(response => {
 
 				// if error, bail out
@@ -63,6 +63,8 @@ const fetchResults = () =>
 			// TODO: add error handling
 
 	}
+
+}
 
 export {
 	startTimer,
