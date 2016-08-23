@@ -39,9 +39,11 @@ const fetchResultsSuccess = ({ data }) => ({
 // 	type: FETCH_RESULTS_FAILURE,
 // })
 
-const fetchResults = () => {
+const fetchResults = () =>
 
-	return function (dispatch) {
+	(dispatch) => {
+
+		console.log('dispatching fetchResultsRequest')
 
 		dispatch(fetchResultsRequest())
 
@@ -50,6 +52,8 @@ const fetchResults = () => {
 		// TODO: don't hardcode url
 		return fetch(`${apiUrl}/api/electoral-us`)
 			.then(response => {
+
+				console.log('fetched data from api')
 
 				// if error, bail out
 				if (response.status !== 200) throw new Error(response.statusText)
@@ -63,8 +67,6 @@ const fetchResults = () => {
 			// TODO: add error handling
 
 	}
-
-}
 
 export {
 	startTimer,

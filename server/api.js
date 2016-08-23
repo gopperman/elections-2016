@@ -3,8 +3,16 @@ import { readFileSync } from 'jsonfile'
 
 export default (req, res) => {
 
-	const file = readFileSync(`./data/${req.params.results}.json`)
+	console.log('waiting to read file.json')
 
-	res.json(file)
+	setTimeout(() => {
+
+		console.log('reading file.json')
+		const file = readFileSync(`./data/${req.params.results}.json`)
+
+		console.log('sending file.json')
+		res.json(file)
+
+	}, 2000)
 
 }

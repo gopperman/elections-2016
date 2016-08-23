@@ -1,7 +1,8 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import { renderToString } from 'react-dom/server'
-import { match, RouterContext } from 'react-router'
+import { match, RouterContext, createMemoryHistory } from 'react-router'
+import { trigger } from 'redial'
 
 import configureStore from './../common/store/configureStore.js'
 import initialState from './../common/store/initialState.js'
@@ -9,46 +10,70 @@ import routes from './../common/routes.js'
 
 export default (req, res) => {
 
-	match({ routes, location: req.url }, (err, redirect, props) => {
+	// Create a new Redux store instance
+	const store = configureStore(initialState)
+	const { dispatch, getState } = store
 
-		// in here we can make some decisions all at once
-		if (err) {
+  // Set up history for router
+	const history = createMemoryHistory(req.url)
+
+	match({ routes, history }, (error, redirect, props) => {
+
+		if (error) {
 
 			// there was an error somewhere during route matching
-			res.status(500).send(err.message)
+			// TODO: better error handling
+			res.status(500).send(error.message)
 
 		} else if (redirect) {
 
-			// we haven't talked about `onEnter` hooks on routes, but before a
-			// route is entered, it can redirect. Here we handle on the server.
+			// TODO: better understanding of this line
 			res.redirect(redirect.pathname + redirect.search)
 
 		} else if (props) {
 
-			// Create a new Redux store instance
-			const store = configureStore(initialState)
+			// Get array of route handler components
+			const { components } = props
 
-			// Render the component to a string
-			const appHtml = renderToString(
-				<Provider store={store}>
-					<RouterContext {...props} />
-				</Provider>
-			)
+			// Define locals to be provided to all lifecycle hooks
+			const locals = {
+				path: props.location.pathname,
+				query: props.location.query,
+				params: props.params,
 
-			// Grab the initial state from our Redux store
-			const finalState = store.getState()
+				// Allow lifecycle hooks to dispatch Redux actions
+				dispatch,
+			}
 
-			// Make express render 'html' view with an object as parameter
-			res.render('html', {
-				pretty: true,
-				appHtml,
-				initialState: finalState,
-				isProduction: process.env.NODE_ENV === 'production',
-			})
+			// Wait for async data fetching to complete, then render
+			trigger('fetch', components, locals)
+				.then(() => {
+
+					const state = getState()
+
+					// Render the component to a string
+					const appHtml = renderToString(
+						<Provider store={store}>
+							<RouterContext {...props} />
+						</Provider>
+					)
+
+					// Make express render 'html' view with an object as parameter
+					res.render('html', {
+						pretty: true,
+						appHtml,
+						initialState: state,
+						isProduction: process.env.NODE_ENV === 'production',
+					})
+
+				})
+				// TODO: better error handling
+				.catch(e => console.log(e))
 
 		} else {
 
 			// no errors, no redirect, we just didn't match anything
+			// TODO: better error handling
 			res.status(404).send('Not Found')
 
 		}
