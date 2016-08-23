@@ -11,6 +11,8 @@ import {
 
 } from './actionTypes.js'
 
+const fetch = require('fetch-ponyfill')()
+
 const completeRace = () => ({
 	type: COMPLETE_RACE,
 })
@@ -43,8 +45,10 @@ const fetchResults = () =>
 
 		dispatch(fetchResultsRequest())
 
+		const apiUrl = process.env.npm_package_config_api_url
+
 		// TODO: don't hardcode url
-		fetch('api/electoral-us')
+		fetch(`${apiUrl}/api/electoral-us`)
 			.then(response => {
 
 				// if error, bail out
@@ -55,6 +59,7 @@ const fetchResults = () =>
 			})
 			.then(response => response.json())
 			.then(data => dispatch(fetchResultsSuccess({ data })))
+			.catch(e => console.log(e))
 			// TODO: add error handling
 
 	}
