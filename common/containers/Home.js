@@ -15,9 +15,9 @@ const mapDispatchToProps = (dispatch) => ({
 export default class Home extends Component {
 
 	static propTypes = {
-		actions: PropTypes.object,
-		results: PropTypes.object,
-		timer: PropTypes.object,
+		actions: PropTypes.object.isRequired,
+		results: PropTypes.object.isRequired,
+		timer: PropTypes.object.isRequired,
 	}
 
 	apiUrl = 'electoral-us'

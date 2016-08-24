@@ -8,6 +8,8 @@ export default (req, res) => {
 
 	const { endpoint } = req.params
 
+	console.log(`requesting ${endpoint}`)
+
 	switch (endpoint) {
 
 		case 'president':

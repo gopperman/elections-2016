@@ -8,17 +8,17 @@ class Clock extends Component {
 	static propTypes = {
 
 		// actions
-		startTimer: PropTypes.func,
-		stopTimer: PropTypes.func,
+		startTimer: PropTypes.func.isRequired,
+		stopTimer: PropTypes.func.isRequired,
 
 		// state
-		startedAt: PropTypes.number,
+		startedAt: PropTypes.number.isRequired,
 
 		// not sure where these belong
 		// but it doesn't feel right to put them here
-		isFetching: PropTypes.bool,
-		isComplete: PropTypes.bool,
-		fetchResults: PropTypes.func,
+		isFetching: PropTypes.bool.isRequired,
+		isComplete: PropTypes.bool.isRequired,
+		fetchResults: PropTypes.func.isRequired,
 
 	}
 
