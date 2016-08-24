@@ -19,7 +19,7 @@ app.use('/static', express.static('static'))
 app.set('views', './common')
 app.set('view engine', 'pug')
 
-app.get('/api/:results', api)
+app.get('/api/:endpoint', api)
 
 // This is fired every time the server side receives a request
 app.get('*', handleRender)
