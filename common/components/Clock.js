@@ -7,18 +7,17 @@ class Clock extends Component {
 
 	static propTypes = {
 
-		// actions
 		startTimer: PropTypes.func.isRequired,
 		stopTimer: PropTypes.func.isRequired,
+		callback: PropTypes.func.isRequired,
 
 		// state
 		startedAt: PropTypes.number,
+		isWaiting: PropTypes.bool.isRequired,
 
 		// not sure where these belong
 		// but it doesn't feel right to put them here
-		isFetching: PropTypes.bool.isRequired,
-		isComplete: PropTypes.bool,
-		fetchResults: PropTypes.func.isRequired,
+		isDone: PropTypes.bool,
 
 	}
 
@@ -30,8 +29,8 @@ class Clock extends Component {
 
 	componentDidUpdate = (prevProps) => {
 
-		const { isFetching, startTimer, stopTimer, fetchResults,
-			startedAt, isComplete } = this.props
+		const { isWaiting, startTimer, stopTimer, callback,
+			startedAt, isDone } = this.props
 
 		// if clock is not running,
 		if (!startedAt) {
@@ -39,12 +38,12 @@ class Clock extends Component {
 			// we're either waiting for the results to come back,
 			// or they are back, and the race is 100%
 
-			// did we just go from fetching to not fetching,
-			// i.e., did our fetchResults complete?
-			if (!isFetching && prevProps.isFetching) {
+			// did we just go from paused to not paused,
+			// i.e., did our callback complete?
+			if (!isWaiting && prevProps.isWaiting) {
 
 				// if race is complete, do nothing
-				if (!isComplete) {
+				if (!isDone) {
 
 					// otherwise dispatch startTimer action
 					// this will set Date.now() to state
@@ -61,15 +60,19 @@ class Clock extends Component {
 			// and call fetch results
 
 			stopTimer()
-			fetchResults()
+			callback()
 
 		}
 
 	}
 
+	componentWillUnmount = () => {
+		this.interval.stop()
+	}
+
 	render() {
 
-		const { isFetching, startedAt } = this.props
+		const { isWaiting, startedAt } = this.props
 
 		let timeLeft
 		if (startedAt) {
@@ -80,7 +83,7 @@ class Clock extends Component {
 
 		}
 
-		const updating = isFetching ? <div>updating</div> : null
+		const updating = isWaiting ? <div>updating</div> : null
 		const updateIn = startedAt ? <div>update in {timeLeft}</div> : null
 
 		return (

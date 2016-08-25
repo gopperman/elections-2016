@@ -17,6 +17,7 @@ export default(state = {}, action) => {
 			}
 
 		case STOP_TIMER:
+
 			return {
 				...state,
 				startedAt: null,

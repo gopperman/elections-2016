@@ -40,15 +40,15 @@ class President extends Component {
 		const { startTimer, stopTimer, fetchResults } = this.props.actions
 		const { startedAt } = this.props.timer
 		const { results } = this.props
-		const { isFetching, isComplete } = results
+		const { isFetching } = results
 
 		const clockProps = {
 			startTimer,
 			stopTimer,
 			startedAt,
-			isFetching,
-			isComplete,
-			fetchResults,
+			isWaiting: isFetching,
+			isDone: false,
+			callback: fetchResults,
 		}
 
 		return (

@@ -1,7 +1,3 @@
-const initialState = {
-
-	timer: {},
-
-}
+const initialState = {}
 
 export default initialState
