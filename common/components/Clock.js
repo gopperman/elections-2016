@@ -12,12 +12,12 @@ class Clock extends Component {
 		stopTimer: PropTypes.func.isRequired,
 
 		// state
-		startedAt: PropTypes.number.isRequired,
+		startedAt: PropTypes.number,
 
 		// not sure where these belong
 		// but it doesn't feel right to put them here
 		isFetching: PropTypes.bool.isRequired,
-		isComplete: PropTypes.bool.isRequired,
+		isComplete: PropTypes.bool,
 		fetchResults: PropTypes.func.isRequired,
 
 	}

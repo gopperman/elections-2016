@@ -10,15 +10,19 @@ export default (req, res) => {
 
 	console.log(`requesting ${endpoint}`)
 
+	let result
 	switch (endpoint) {
 
-		case 'president':
+		case 'president': {
 
-			res.json({
+			result = {
 				'president-ma-towns': readJson('president-ma-towns'),
 				'president-us-states': readJson('president-us-states'),
-			})
+			}
+
+			setTimeout(() => res.json(result), 3000)
 			break
+		}
 
 		default:
 

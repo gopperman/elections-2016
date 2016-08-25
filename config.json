@@ -1,0 +1,10 @@
+{
+	"dev": {
+		"apiUrl": "http://localhost:3001/api",
+		"port": 3001
+	},
+	"prod": {
+		"apiUrl": "http://prod",
+		"port": 9999
+	}
+}

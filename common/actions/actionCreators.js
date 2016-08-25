@@ -1,3 +1,4 @@
+import configRoot from './../../config.json'
 import {
 
 	START_TIMER,
@@ -8,6 +9,10 @@ import {
 	// FETCH_RESULTS_FAILURE,
 
 } from './actionTypes.js'
+
+const config = process.env.NODE_ENV === 'production' ?
+	configRoot.prod :
+	configRoot.dev
 
 const fetch = require('fetch-ponyfill')()
 
@@ -41,9 +46,11 @@ const fetchResults = ({ url }) =>
 
 		dispatch(fetchResultsRequest({ url }))
 
-		const apiUrl = process.env.npm_package_config_api_url
+		const { apiUrl } = config
 
-		return fetch(`${apiUrl}/api/${url}`)
+		const fullUrl = `${apiUrl}/${url}`
+
+		return fetch(fullUrl)
 			.then(response => {
 
 				// if error, bail out

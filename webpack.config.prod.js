@@ -42,6 +42,10 @@ module.exports = {
 				test: /\.styl$/,
 				loader: ExtractTextPlugin.extract('style-loader', 'css-loader!stylus-loader'),
 			},
+			{
+				test: /\.json$/,
+				loader: 'json-loader',
+			},
 		],
 	},
 }
