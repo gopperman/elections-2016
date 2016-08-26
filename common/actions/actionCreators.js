@@ -1,21 +1,21 @@
+import configRoot from './../../config.json'
 import {
 
 	START_TIMER,
 	STOP_TIMER,
+	CANCEL_TIMER,
 
 	FETCH_RESULTS_REQUEST,
 	FETCH_RESULTS_SUCCESS,
 	// FETCH_RESULTS_FAILURE,
 
-	COMPLETE_RACE,
-
 } from './actionTypes.js'
 
-const fetch = require('fetch-ponyfill')()
+const config = process.env.NODE_ENV === 'production' ?
+	configRoot.prod :
+	configRoot.dev
 
-const completeRace = () => ({
-	type: COMPLETE_RACE,
-})
+const fetch = require('fetch-ponyfill')()
 
 const startTimer = (now = Date.now()) => ({
 	type: START_TIMER,
@@ -26,12 +26,18 @@ const stopTimer = () => ({
 	type: STOP_TIMER,
 })
 
-const fetchResultsRequest = () => ({
-	type: FETCH_RESULTS_REQUEST,
+const cancelTimer = () => ({
+	type: CANCEL_TIMER,
 })
 
-const fetchResultsSuccess = ({ data }) => ({
+const fetchResultsRequest = ({ url }) => ({
+	type: FETCH_RESULTS_REQUEST,
+	url,
+})
+
+const fetchResultsSuccess = ({ url, data }) => ({
 	type: FETCH_RESULTS_SUCCESS,
+	url,
 	data,
 })
 
@@ -39,21 +45,18 @@ const fetchResultsSuccess = ({ data }) => ({
 // 	type: FETCH_RESULTS_FAILURE,
 // })
 
-const fetchResults = () =>
+const fetchResults = ({ url }) =>
 
 	(dispatch) => {
 
-		console.log('dispatching fetchResultsRequest')
+		dispatch(fetchResultsRequest({ url }))
 
-		dispatch(fetchResultsRequest())
+		const { apiUrl } = config
 
-		const apiUrl = process.env.npm_package_config_api_url
+		const fullUrl = `${apiUrl}/${url}`
 
-		// TODO: don't hardcode url
-		return fetch(`${apiUrl}/api/electoral-us`)
+		return fetch(fullUrl)
 			.then(response => {
-
-				console.log('fetched data from api')
 
 				// if error, bail out
 				if (response.status !== 200) throw new Error(response.statusText)
@@ -62,21 +65,17 @@ const fetchResults = () =>
 
 			})
 			.then(response => response.json())
-			.then(data => dispatch(fetchResultsSuccess({ data })))
-			.catch(e => console.log(e))
+			.then(data => dispatch(fetchResultsSuccess({ url, data })))
 			// TODO: add error handling
-
+			.catch(e => console.log(e))
 	}
 
 export {
+
 	startTimer,
 	stopTimer,
-
-	// fetchResultsRequest,
-	// fetchResultsSuccess,
-	// fetchResultsFailure,
+	cancelTimer,
 
 	fetchResults,
 
-	completeRace,
 }

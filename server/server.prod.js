@@ -2,9 +2,10 @@ import express from 'express'
 import compression from 'compression'
 import handleRender from './handleRender.js'
 import api from './api.js'
+import config from './../config.json'
 
 const app = express()
-const port = process.env.npm_package_config_port
+const { port } = config.prod
 
 // enable compression
 app.use(compression())
@@ -19,7 +20,7 @@ app.use('/static', express.static('static'))
 app.set('views', './common')
 app.set('view engine', 'pug')
 
-app.get('/api/:results', api)
+app.get('/api/:endpoint', api)
 
 // This is fired every time the server side receives a request
 app.get('*', handleRender)

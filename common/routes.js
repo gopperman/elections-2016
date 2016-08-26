@@ -1,12 +1,10 @@
 import React from 'react'
-import { Route, IndexRoute } from 'react-router'
+import { Route } from 'react-router'
 import App from './components/App.js'
-import Home from './containers/Home.js'
-import State from './components/State.js'
+import President from './containers/President.js'
 
 export default (
 	<Route path='/' component={App}>
-		<IndexRoute component={Home} />
-		<Route path='state' component={State} />
+		<Route path='president' component={President} />
 	</Route>
 )

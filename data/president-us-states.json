@@ -1,0 +1,2672 @@
+{
+    "PresStateByStatetable": {
+        "State": [
+            {
+                "Cand": [
+                    {
+                        "CandID": "893",
+                        "ElectWon": "9",
+                        "PopPct": "61",
+                        "PopVote": "1252453",
+                        "Winner": "X",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "0",
+                        "PopPct": "38",
+                        "PopVote": "793620",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "12283",
+                        "name": "Johnson",
+                        "party": "Ind"
+                    },
+                    {
+                        "CandID": "895",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "3382",
+                        "name": "Stein",
+                        "party": "Ind"
+                    },
+                    {
+                        "CandID": "713",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "2961",
+                        "name": "Goode",
+                        "party": "Ind"
+                    }
+                ],
+                "ElectTotal": "9",
+                "PostalCode": "AL",
+                "PrecinctsPct": "100"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "893",
+                        "ElectWon": "3",
+                        "PopPct": "55",
+                        "PopVote": "136848",
+                        "Winner": "X",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "0",
+                        "PopPct": "41",
+                        "PopVote": "102138",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "2",
+                        "PopVote": "6131",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "895",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "2366",
+                        "name": "Stein",
+                        "party": "Grn"
+                    }
+                ],
+                "ElectTotal": "3",
+                "PostalCode": "AK",
+                "PrecinctsPct": "100"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "893",
+                        "ElectWon": "11",
+                        "PopPct": "54",
+                        "PopVote": "1143051",
+                        "Winner": "X",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "0",
+                        "PopPct": "44",
+                        "PopVote": "930669",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "28609",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "895",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "7057",
+                        "name": "Stein",
+                        "party": "Grn"
+                    }
+                ],
+                "ElectTotal": "11",
+                "PostalCode": "AZ",
+                "PrecinctsPct": "100"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "893",
+                        "ElectWon": "6",
+                        "PopPct": "61",
+                        "PopVote": "644785",
+                        "Winner": "X",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "0",
+                        "PopPct": "37",
+                        "PopVote": "392402",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "2",
+                        "PopVote": "16214",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "895",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "9285",
+                        "name": "Stein",
+                        "party": "Grn"
+                    },
+                    {
+                        "CandID": "62562",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "1729",
+                        "name": "Lindsay",
+                        "party": "PSL"
+                    }
+                ],
+                "ElectTotal": "6",
+                "PostalCode": "AR",
+                "PrecinctsPct": "100"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "55",
+                        "PopPct": "59",
+                        "PopVote": "6493924",
+                        "Winner": "X",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "893",
+                        "ElectWon": "0",
+                        "PopPct": "38",
+                        "PopVote": "4202127",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "116960",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "895",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "69195",
+                        "name": "Stein",
+                        "party": "Grn"
+                    },
+                    {
+                        "CandID": "61907",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "43665",
+                        "name": "Barr",
+                        "party": "PFP"
+                    },
+                    {
+                        "CandID": "62535",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "31933",
+                        "name": "Hoefling",
+                        "party": "AIP"
+                    }
+                ],
+                "ElectTotal": "55",
+                "PostalCode": "CA",
+                "PrecinctsPct": "100"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "9",
+                        "PopPct": "51",
+                        "PopVote": "1238490",
+                        "Winner": "X",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "893",
+                        "ElectWon": "0",
+                        "PopPct": "47",
+                        "PopVote": "1125391",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "32262",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "895",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "6894",
+                        "name": "Stein",
+                        "party": "Grn"
+                    },
+                    {
+                        "CandID": "713",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "5807",
+                        "name": "Goode",
+                        "party": "AmC"
+                    },
+                    {
+                        "CandID": "61907",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "4537",
+                        "name": "Barr",
+                        "party": "PFP"
+                    },
+                    {
+                        "CandID": "62538",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "2394",
+                        "name": "Reed",
+                        "party": "Una"
+                    },
+                    {
+                        "CandID": "43773",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "1180",
+                        "name": "Anderson",
+                        "party": "JP"
+                    },
+                    {
+                        "CandID": "62537",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "742",
+                        "name": "Tittle",
+                        "party": "WTP"
+                    },
+                    {
+                        "CandID": "62535",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "632",
+                        "name": "Hoefling",
+                        "party": "AmP"
+                    },
+                    {
+                        "CandID": "7623",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "284",
+                        "name": "La Riva",
+                        "party": "PSL"
+                    },
+                    {
+                        "CandID": "61912",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "276",
+                        "name": "Alexander",
+                        "party": "SPU"
+                    },
+                    {
+                        "CandID": "62536",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "248",
+                        "name": "Miller",
+                        "party": "ATP"
+                    },
+                    {
+                        "CandID": "59660",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "211",
+                        "name": "Stevens",
+                        "party": "Obj"
+                    },
+                    {
+                        "CandID": "3486",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "177",
+                        "name": "Harris",
+                        "party": "SWP"
+                    },
+                    {
+                        "CandID": "25743",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "173",
+                        "name": "White",
+                        "party": "SEP"
+                    }
+                ],
+                "ElectTotal": "9",
+                "PostalCode": "CO",
+                "PrecinctsPct": "100"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "7",
+                        "PopPct": "58",
+                        "PopVote": "912531",
+                        "Winner": "X",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "893",
+                        "ElectWon": "0",
+                        "PopPct": "40",
+                        "PopVote": "631432",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "12628",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "43773",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "5596",
+                        "name": "Anderson",
+                        "party": "IP"
+                    }
+                ],
+                "ElectTotal": "7",
+                "PostalCode": "CT",
+                "PrecinctsPct": "100"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "3",
+                        "PopPct": "59",
+                        "PopVote": "242547",
+                        "Winner": "X",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "893",
+                        "ElectWon": "0",
+                        "PopPct": "40",
+                        "PopVote": "165476",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "3882",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "895",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "1939",
+                        "name": "Stein",
+                        "party": "Grn"
+                    }
+                ],
+                "ElectTotal": "3",
+                "PostalCode": "DE",
+                "PrecinctsPct": "100"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "3",
+                        "PopPct": "91",
+                        "PopVote": "222332",
+                        "Winner": "X",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "893",
+                        "ElectWon": "0",
+                        "PopPct": "7",
+                        "PopVote": "17337",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "895",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "2045",
+                        "name": "Stein",
+                        "party": "DCG"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "1634",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    }
+                ],
+                "ElectTotal": "3",
+                "PostalCode": "DC",
+                "PrecinctsPct": "100"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "29",
+                        "PopPct": "50",
+                        "PopVote": "4235270",
+                        "Winner": "X",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "893",
+                        "ElectWon": "0",
+                        "PopPct": "49",
+                        "PopVote": "4162081",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "44681",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "895",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "8933",
+                        "name": "Stein",
+                        "party": "Grn"
+                    },
+                    {
+                        "CandID": "61907",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "8147",
+                        "name": "Barr",
+                        "party": "PFP"
+                    },
+                    {
+                        "CandID": "59660",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "3855",
+                        "name": "Stevens",
+                        "party": "Obj"
+                    },
+                    {
+                        "CandID": "713",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "2603",
+                        "name": "Goode",
+                        "party": "CST"
+                    },
+                    {
+                        "CandID": "43773",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "1753",
+                        "name": "Anderson",
+                        "party": "JP"
+                    },
+                    {
+                        "CandID": "62535",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "944",
+                        "name": "Hoefling",
+                        "party": "AIP"
+                    },
+                    {
+                        "CandID": "62688",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "819",
+                        "name": "Barnett",
+                        "party": "RP"
+                    },
+                    {
+                        "CandID": "61912",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "797",
+                        "name": "Alexander",
+                        "party": "Soc"
+                    },
+                    {
+                        "CandID": "62562",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "322",
+                        "name": "Lindsay",
+                        "party": "PSL"
+                    }
+                ],
+                "ElectTotal": "29",
+                "PostalCode": "FL",
+                "PrecinctsPct": "100"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "893",
+                        "ElectWon": "16",
+                        "PopPct": "53",
+                        "PopVote": "2070221",
+                        "Winner": "X",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "0",
+                        "PopPct": "45",
+                        "PopVote": "1761761",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "45056",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    }
+                ],
+                "ElectTotal": "16",
+                "PostalCode": "GA",
+                "PrecinctsPct": "100"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "4",
+                        "PopPct": "71",
+                        "PopVote": "303090",
+                        "Winner": "X",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "893",
+                        "ElectWon": "0",
+                        "PopPct": "28",
+                        "PopVote": "119494",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "3789",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "895",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "3121",
+                        "name": "Stein",
+                        "party": "Grn"
+                    }
+                ],
+                "ElectTotal": "4",
+                "PostalCode": "HI",
+                "PrecinctsPct": "100"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "893",
+                        "ElectWon": "4",
+                        "PopPct": "65",
+                        "PopVote": "420750",
+                        "Winner": "X",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "0",
+                        "PopPct": "33",
+                        "PopVote": "212560",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "9448",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "895",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "4400",
+                        "name": "Stein",
+                        "party": "Ind"
+                    },
+                    {
+                        "CandID": "43773",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "2495",
+                        "name": "Anderson",
+                        "party": "Ind"
+                    },
+                    {
+                        "CandID": "713",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "2218",
+                        "name": "Goode",
+                        "party": "CST"
+                    }
+                ],
+                "ElectTotal": "4",
+                "PostalCode": "ID",
+                "PrecinctsPct": "100"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "20",
+                        "PopPct": "57",
+                        "PopVote": "2916811",
+                        "Winner": "X",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "893",
+                        "ElectWon": "0",
+                        "PopPct": "41",
+                        "PopVote": "2090116",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "54798",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "895",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "29336",
+                        "name": "Stein",
+                        "party": "Grn"
+                    }
+                ],
+                "ElectTotal": "20",
+                "PostalCode": "IL",
+                "PrecinctsPct": "99"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "893",
+                        "ElectWon": "11",
+                        "PopPct": "54",
+                        "PopVote": "1412956",
+                        "Winner": "X",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "0",
+                        "PopPct": "44",
+                        "PopVote": "1141177",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "2",
+                        "PopVote": "49857",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    }
+                ],
+                "ElectTotal": "11",
+                "PostalCode": "IN",
+                "PrecinctsPct": "99"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "6",
+                        "PopPct": "52",
+                        "PopVote": "816429",
+                        "Winner": "X",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "893",
+                        "ElectWon": "0",
+                        "PopPct": "46",
+                        "PopVote": "727928",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "12825",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "895",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "3739",
+                        "name": "Stein",
+                        "party": "Grn"
+                    },
+                    {
+                        "CandID": "713",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "3022",
+                        "name": "Goode",
+                        "party": "CST"
+                    },
+                    {
+                        "CandID": "62605",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "1196",
+                        "name": "Litzel",
+                        "party": "Ind"
+                    },
+                    {
+                        "CandID": "3486",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "465",
+                        "name": "Harris",
+                        "party": "SWP"
+                    },
+                    {
+                        "CandID": "7623",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "364",
+                        "name": "La Riva",
+                        "party": "PSL"
+                    }
+                ],
+                "ElectTotal": "6",
+                "PostalCode": "IA",
+                "PrecinctsPct": "100"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "893",
+                        "ElectWon": "6",
+                        "PopPct": "60",
+                        "PopVote": "678719",
+                        "Winner": "X",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "0",
+                        "PopPct": "38",
+                        "PopVote": "427918",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "2",
+                        "PopVote": "19870",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "59208",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "4737",
+                        "name": "Baldwin",
+                        "party": "RP"
+                    }
+                ],
+                "ElectTotal": "6",
+                "PostalCode": "KS",
+                "PrecinctsPct": "100"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "893",
+                        "ElectWon": "8",
+                        "PopPct": "61",
+                        "PopVote": "1087127",
+                        "Winner": "X",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "0",
+                        "PopPct": "38",
+                        "PopVote": "679340",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "17047",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "61513",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "6872",
+                        "name": "Terry",
+                        "party": "Ind"
+                    },
+                    {
+                        "CandID": "895",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "6350",
+                        "name": "Stein",
+                        "party": "Grn"
+                    }
+                ],
+                "ElectTotal": "8",
+                "PostalCode": "KY",
+                "PrecinctsPct": "100"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "893",
+                        "ElectWon": "8",
+                        "PopPct": "58",
+                        "PopVote": "1152460",
+                        "Winner": "X",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "0",
+                        "PopPct": "41",
+                        "PopVote": "808496",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "18135",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "895",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "6981",
+                        "name": "Stein",
+                        "party": "Grn"
+                    },
+                    {
+                        "CandID": "713",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "2504",
+                        "name": "Goode",
+                        "party": "CST"
+                    },
+                    {
+                        "CandID": "62537",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "1762",
+                        "name": "Tittle",
+                        "party": "WTP"
+                    },
+                    {
+                        "CandID": "43773",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "1362",
+                        "name": "Anderson",
+                        "party": "JP"
+                    },
+                    {
+                        "CandID": "62562",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "592",
+                        "name": "Lindsay",
+                        "party": "PSL"
+                    },
+                    {
+                        "CandID": "46996",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "519",
+                        "name": "Fellure",
+                        "party": "Pro"
+                    },
+                    {
+                        "CandID": "3486",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "388",
+                        "name": "Harris",
+                        "party": "SWP"
+                    },
+                    {
+                        "CandID": "25743",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "356",
+                        "name": "White",
+                        "party": "SEP"
+                    }
+                ],
+                "ElectTotal": "8",
+                "PostalCode": "LA",
+                "PrecinctsPct": "100"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "4",
+                        "PopPct": "56",
+                        "PopVote": "397754",
+                        "Winner": "X",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "893",
+                        "ElectWon": "0",
+                        "PopPct": "41",
+                        "PopVote": "290437",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "2",
+                        "PopVote": "13446",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "895",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "9101",
+                        "name": "Stein",
+                        "party": "Grn"
+                    }
+                ],
+                "ElectTotal": "4",
+                "PostalCode": "ME",
+                "PrecinctsPct": "98"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "10",
+                        "PopPct": "62",
+                        "PopVote": "1527686",
+                        "Winner": "X",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "893",
+                        "ElectWon": "0",
+                        "PopPct": "37",
+                        "PopVote": "904970",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "27729",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "895",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "15571",
+                        "name": "Stein",
+                        "party": "Grn"
+                    }
+                ],
+                "ElectTotal": "10",
+                "PostalCode": "MD",
+                "PrecinctsPct": "99"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "11",
+                        "PopPct": "61",
+                        "PopVote": "1901276",
+                        "Winner": "X",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "893",
+                        "ElectWon": "0",
+                        "PopPct": "38",
+                        "PopVote": "1178245",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "30538",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "895",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "19672",
+                        "name": "Stein",
+                        "party": "Grn"
+                    }
+                ],
+                "ElectTotal": "11",
+                "PostalCode": "MA",
+                "PrecinctsPct": "100"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "16",
+                        "PopPct": "54",
+                        "PopVote": "2561911",
+                        "Winner": "X",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "893",
+                        "ElectWon": "0",
+                        "PopPct": "45",
+                        "PopVote": "2112673",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "895",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "21204",
+                        "name": "Stein",
+                        "party": "Grn"
+                    },
+                    {
+                        "CandID": "713",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "16792",
+                        "name": "Goode",
+                        "party": "UST"
+                    },
+                    {
+                        "CandID": "43773",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "5148",
+                        "name": "Anderson",
+                        "party": "NLP"
+                    }
+                ],
+                "ElectTotal": "16",
+                "PostalCode": "MI",
+                "PrecinctsPct": "100"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "10",
+                        "PopPct": "53",
+                        "PopVote": "1547668",
+                        "Winner": "X",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "893",
+                        "ElectWon": "0",
+                        "PopPct": "45",
+                        "PopVote": "1321575",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "35158",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "895",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "13045",
+                        "name": "Stein",
+                        "party": "Grn"
+                    },
+                    {
+                        "CandID": "713",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "3727",
+                        "name": "Goode",
+                        "party": "CST"
+                    },
+                    {
+                        "CandID": "62588",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "3172",
+                        "name": "Carlson",
+                        "party": "GRP"
+                    },
+                    {
+                        "CandID": "43773",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "2013",
+                        "name": "Anderson",
+                        "party": "JP"
+                    },
+                    {
+                        "CandID": "62659",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "1106",
+                        "name": "Morstad",
+                        "party": "Cnl"
+                    },
+                    {
+                        "CandID": "3486",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "1062",
+                        "name": "Harris",
+                        "party": "SWP"
+                    },
+                    {
+                        "CandID": "62562",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "416",
+                        "name": "Lindsay",
+                        "party": "PSL"
+                    }
+                ],
+                "ElectTotal": "10",
+                "PostalCode": "MN",
+                "PrecinctsPct": "100"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "893",
+                        "ElectWon": "6",
+                        "PopPct": "56",
+                        "PopVote": "674302",
+                        "Winner": "X",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "0",
+                        "PopPct": "44",
+                        "PopVote": "528260",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "6408",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "713",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "2531",
+                        "name": "Goode",
+                        "party": "CST"
+                    },
+                    {
+                        "CandID": "895",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "1534",
+                        "name": "Stein",
+                        "party": "Grn"
+                    },
+                    {
+                        "CandID": "28712",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "969",
+                        "name": "Washer",
+                        "party": "RP"
+                    }
+                ],
+                "ElectTotal": "6",
+                "PostalCode": "MS",
+                "PrecinctsPct": "100"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "893",
+                        "ElectWon": "10",
+                        "PopPct": "54",
+                        "PopVote": "1478961",
+                        "Winner": "X",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "0",
+                        "PopPct": "44",
+                        "PopVote": "1215031",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "2",
+                        "PopVote": "43029",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "713",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "7914",
+                        "name": "Goode",
+                        "party": "CST"
+                    }
+                ],
+                "ElectTotal": "10",
+                "PostalCode": "MO",
+                "PrecinctsPct": "100"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "893",
+                        "ElectWon": "3",
+                        "PopPct": "55",
+                        "PopVote": "264974",
+                        "Winner": "X",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "0",
+                        "PopPct": "42",
+                        "PopVote": "200489",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "3",
+                        "PopVote": "13923",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    }
+                ],
+                "ElectTotal": "3",
+                "PostalCode": "MT",
+                "PrecinctsPct": "94"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "893",
+                        "ElectWon": "5",
+                        "PopPct": "61",
+                        "PopVote": "462972",
+                        "Winner": "X",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "0",
+                        "PopPct": "38",
+                        "PopVote": "289154",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "10610",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "61513",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "2347",
+                        "name": "Terry",
+                        "party": "PEC"
+                    }
+                ],
+                "ElectTotal": "5",
+                "PostalCode": "NE",
+                "PrecinctsPct": "100"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "6",
+                        "PopPct": "52",
+                        "PopVote": "528801",
+                        "Winner": "X",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "893",
+                        "ElectWon": "0",
+                        "PopPct": "46",
+                        "PopVote": "462422",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "10895",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "100013",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "5753",
+                        "name": "None of these candidates",
+                        "party": "NPD"
+                    },
+                    {
+                        "CandID": "713",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "3234",
+                        "name": "Goode",
+                        "party": "IAP"
+                    }
+                ],
+                "ElectTotal": "6",
+                "PostalCode": "NV",
+                "PrecinctsPct": "100"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "4",
+                        "PopPct": "52",
+                        "PopVote": "368529",
+                        "Winner": "X",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "893",
+                        "ElectWon": "0",
+                        "PopPct": "46",
+                        "PopVote": "327870",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "8319",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "713",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "1156",
+                        "name": "Goode",
+                        "party": "CST"
+                    }
+                ],
+                "ElectTotal": "4",
+                "PostalCode": "NH",
+                "PrecinctsPct": "100"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "14",
+                        "PopPct": "58",
+                        "PopVote": "1960744",
+                        "Winner": "X",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "893",
+                        "ElectWon": "0",
+                        "PopPct": "41",
+                        "PopVote": "1383233",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "19483",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "895",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "9036",
+                        "name": "Stein",
+                        "party": "Grn"
+                    },
+                    {
+                        "CandID": "713",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "1911",
+                        "name": "Goode",
+                        "party": "CST"
+                    },
+                    {
+                        "CandID": "43773",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "1571",
+                        "name": "Anderson",
+                        "party": "JP"
+                    },
+                    {
+                        "CandID": "59593",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "907",
+                        "name": "Boss",
+                        "party": "Ind"
+                    },
+                    {
+                        "CandID": "62536",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "838",
+                        "name": "Miller",
+                        "party": "ATP"
+                    },
+                    {
+                        "CandID": "3486",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "658",
+                        "name": "Harris",
+                        "party": "SWP"
+                    },
+                    {
+                        "CandID": "62562",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "445",
+                        "name": "Lindsay",
+                        "party": "PSL"
+                    }
+                ],
+                "ElectTotal": "14",
+                "PostalCode": "NJ",
+                "PrecinctsPct": "99"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "5",
+                        "PopPct": "53",
+                        "PopVote": "408312",
+                        "Winner": "X",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "893",
+                        "ElectWon": "0",
+                        "PopPct": "43",
+                        "PopVote": "331915",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "4",
+                        "PopVote": "27337",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "895",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "2641",
+                        "name": "Stein",
+                        "party": "Grn"
+                    },
+                    {
+                        "CandID": "43773",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "1151",
+                        "name": "Anderson",
+                        "party": "NMI"
+                    },
+                    {
+                        "CandID": "713",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "973",
+                        "name": "Goode",
+                        "party": "CST"
+                    }
+                ],
+                "ElectTotal": "5",
+                "PostalCode": "NM",
+                "PrecinctsPct": "100"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "29",
+                        "PopPct": "63",
+                        "PopVote": "3875826",
+                        "Winner": "X",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "893",
+                        "ElectWon": "0",
+                        "PopPct": "36",
+                        "PopVote": "2226637",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "42452",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "895",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "35595",
+                        "name": "Stein",
+                        "party": "Grn"
+                    },
+                    {
+                        "CandID": "713",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "6354",
+                        "name": "Goode",
+                        "party": "CST"
+                    },
+                    {
+                        "CandID": "62562",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "2118",
+                        "name": "Lindsay",
+                        "party": "PSL"
+                    }
+                ],
+                "ElectTotal": "29",
+                "PostalCode": "NY",
+                "PrecinctsPct": "98"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "893",
+                        "ElectWon": "15",
+                        "PopPct": "51",
+                        "PopVote": "2275853",
+                        "Winner": "X",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "0",
+                        "PopPct": "48",
+                        "PopVote": "2178388",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "44798",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    }
+                ],
+                "ElectTotal": "15",
+                "PostalCode": "NC",
+                "PrecinctsPct": "100"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "893",
+                        "ElectWon": "3",
+                        "PopPct": "59",
+                        "PopVote": "187586",
+                        "Winner": "X",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "0",
+                        "PopPct": "39",
+                        "PopVote": "124490",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "2",
+                        "PopVote": "5213",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "895",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "1357",
+                        "name": "Stein",
+                        "party": "Grn"
+                    },
+                    {
+                        "CandID": "713",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "1179",
+                        "name": "Goode",
+                        "party": "CST"
+                    }
+                ],
+                "ElectTotal": "3",
+                "PostalCode": "ND",
+                "PrecinctsPct": "100"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "18",
+                        "PopPct": "50",
+                        "PopVote": "2697260",
+                        "Winner": "X",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "893",
+                        "ElectWon": "0",
+                        "PopPct": "48",
+                        "PopVote": "2593779",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "47287",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "895",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "17860",
+                        "name": "Stein",
+                        "party": "Grn"
+                    },
+                    {
+                        "CandID": "56224",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "12148",
+                        "name": "Duncan",
+                        "party": "Una"
+                    },
+                    {
+                        "CandID": "713",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "7883",
+                        "name": "Goode",
+                        "party": "CST"
+                    },
+                    {
+                        "CandID": "61912",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "2873",
+                        "name": "Alexander",
+                        "party": "Soc"
+                    }
+                ],
+                "ElectTotal": "18",
+                "PostalCode": "OH",
+                "PrecinctsPct": "100"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "893",
+                        "ElectWon": "7",
+                        "PopPct": "67",
+                        "PopVote": "889372",
+                        "Winner": "X",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "0",
+                        "PopPct": "33",
+                        "PopVote": "442647",
+                        "name": "Obama",
+                        "party": "Dem"
+                    }
+                ],
+                "ElectTotal": "7",
+                "PostalCode": "OK",
+                "PrecinctsPct": "100"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "7",
+                        "PopPct": "54",
+                        "PopVote": "937321",
+                        "Winner": "X",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "893",
+                        "ElectWon": "0",
+                        "PopPct": "43",
+                        "PopVote": "733743",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "23015",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "895",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "18668",
+                        "name": "Stein",
+                        "party": "PAG"
+                    },
+                    {
+                        "CandID": "43982",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "4283",
+                        "name": "Christensen",
+                        "party": "CST"
+                    },
+                    {
+                        "CandID": "43773",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "3253",
+                        "name": "Anderson",
+                        "party": "Prg"
+                    }
+                ],
+                "ElectTotal": "7",
+                "PostalCode": "OR",
+                "PrecinctsPct": "96"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "20",
+                        "PopPct": "52",
+                        "PopVote": "2907448",
+                        "Winner": "X",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "893",
+                        "ElectWon": "0",
+                        "PopPct": "47",
+                        "PopVote": "2619583",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "48758",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "895",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "20710",
+                        "name": "Stein",
+                        "party": "Grn"
+                    }
+                ],
+                "ElectTotal": "20",
+                "PostalCode": "PA",
+                "PrecinctsPct": "99"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "4",
+                        "PopPct": "63",
+                        "PopVote": "274342",
+                        "Winner": "X",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "893",
+                        "ElectWon": "0",
+                        "PopPct": "36",
+                        "PopVote": "155355",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "4334",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "895",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "2370",
+                        "name": "Stein",
+                        "party": "Grn"
+                    },
+                    {
+                        "CandID": "713",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "452",
+                        "name": "Goode",
+                        "party": "CST"
+                    },
+                    {
+                        "CandID": "43773",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "403",
+                        "name": "Anderson",
+                        "party": "JP"
+                    },
+                    {
+                        "CandID": "62562",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "124",
+                        "name": "Lindsay",
+                        "party": "PSL"
+                    }
+                ],
+                "ElectTotal": "4",
+                "PostalCode": "RI",
+                "PrecinctsPct": "99"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "893",
+                        "ElectWon": "9",
+                        "PopPct": "55",
+                        "PopVote": "1049507",
+                        "Winner": "X",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "0",
+                        "PopPct": "44",
+                        "PopVote": "845756",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "16060",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "895",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "5331",
+                        "name": "Stein",
+                        "party": "Grn"
+                    },
+                    {
+                        "CandID": "713",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "4709",
+                        "name": "Goode",
+                        "party": "CST"
+                    }
+                ],
+                "ElectTotal": "9",
+                "PostalCode": "SC",
+                "PrecinctsPct": "100"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "893",
+                        "ElectWon": "3",
+                        "PopPct": "58",
+                        "PopVote": "210541",
+                        "Winner": "X",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "0",
+                        "PopPct": "40",
+                        "PopVote": "144988",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "2",
+                        "PopVote": "5795",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "713",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "2371",
+                        "name": "Goode",
+                        "party": "CST"
+                    }
+                ],
+                "ElectTotal": "3",
+                "PostalCode": "SD",
+                "PrecinctsPct": "100"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "893",
+                        "ElectWon": "11",
+                        "PopPct": "59",
+                        "PopVote": "1453097",
+                        "Winner": "X",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "0",
+                        "PopPct": "39",
+                        "PopVote": "953043",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "18536",
+                        "name": "Johnson",
+                        "party": "Ind"
+                    },
+                    {
+                        "CandID": "713",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "7305",
+                        "name": "Goode",
+                        "party": "CST"
+                    },
+                    {
+                        "CandID": "895",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "6450",
+                        "name": "Stein",
+                        "party": "Grn"
+                    },
+                    {
+                        "CandID": "43773",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "2626",
+                        "name": "Anderson",
+                        "party": "Ind"
+                    },
+                    {
+                        "CandID": "62536",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "1747",
+                        "name": "Miller",
+                        "party": "Ind"
+                    }
+                ],
+                "ElectTotal": "11",
+                "PostalCode": "TN",
+                "PrecinctsPct": "99"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "893",
+                        "ElectWon": "38",
+                        "PopPct": "57",
+                        "PopVote": "4555799",
+                        "Winner": "X",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "0",
+                        "PopPct": "41",
+                        "PopVote": "3294440",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "88110",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "895",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "24450",
+                        "name": "Stein",
+                        "party": "Grn"
+                    }
+                ],
+                "ElectTotal": "38",
+                "PostalCode": "TX",
+                "PrecinctsPct": "100"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "893",
+                        "ElectWon": "6",
+                        "PopPct": "73",
+                        "PopVote": "671747",
+                        "Winner": "X",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "0",
+                        "PopPct": "25",
+                        "PopVote": "229463",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "11071",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "43773",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "4725",
+                        "name": "Anderson",
+                        "party": "JP"
+                    },
+                    {
+                        "CandID": "895",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "3378",
+                        "name": "Stein",
+                        "party": "Grn"
+                    },
+                    {
+                        "CandID": "713",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "2572",
+                        "name": "Goode",
+                        "party": "CST"
+                    },
+                    {
+                        "CandID": "7623",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "345",
+                        "name": "La Riva",
+                        "party": "Una"
+                    }
+                ],
+                "ElectTotal": "6",
+                "PostalCode": "UT",
+                "PrecinctsPct": "100"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "3",
+                        "PopPct": "67",
+                        "PopVote": "199259",
+                        "Winner": "X",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "893",
+                        "ElectWon": "0",
+                        "PopPct": "31",
+                        "PopVote": "92700",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "3482",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "43773",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "1139",
+                        "name": "Anderson",
+                        "party": "JP"
+                    },
+                    {
+                        "CandID": "62562",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "694",
+                        "name": "Lindsay",
+                        "party": "PSL"
+                    }
+                ],
+                "ElectTotal": "3",
+                "PostalCode": "VT",
+                "PrecinctsPct": "100"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "13",
+                        "PopPct": "51",
+                        "PopVote": "1905528",
+                        "Winner": "X",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "893",
+                        "ElectWon": "0",
+                        "PopPct": "48",
+                        "PopVote": "1789618",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "30570",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "713",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "13677",
+                        "name": "Goode",
+                        "party": "CST"
+                    },
+                    {
+                        "CandID": "895",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "8465",
+                        "name": "Stein",
+                        "party": "Grn"
+                    }
+                ],
+                "ElectTotal": "13",
+                "PostalCode": "VA",
+                "PrecinctsPct": "99"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "12",
+                        "PopPct": "56",
+                        "PopVote": "1620432",
+                        "Winner": "X",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "893",
+                        "ElectWon": "0",
+                        "PopPct": "42",
+                        "PopVote": "1210369",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "37732",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "895",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "18316",
+                        "name": "Stein",
+                        "party": "Grn"
+                    },
+                    {
+                        "CandID": "713",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "8071",
+                        "name": "Goode",
+                        "party": "CST"
+                    },
+                    {
+                        "CandID": "43773",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "4332",
+                        "name": "Anderson",
+                        "party": "JP"
+                    },
+                    {
+                        "CandID": "62562",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "1148",
+                        "name": "Lindsay",
+                        "party": "PSL"
+                    },
+                    {
+                        "CandID": "3486",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "1099",
+                        "name": "Harris",
+                        "party": "SWP"
+                    }
+                ],
+                "ElectTotal": "12",
+                "PostalCode": "WA",
+                "PrecinctsPct": "90"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "893",
+                        "ElectWon": "5",
+                        "PopPct": "62",
+                        "PopVote": "412406",
+                        "Winner": "X",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "0",
+                        "PopPct": "36",
+                        "PopVote": "234925",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "6204",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "895",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "4341",
+                        "name": "Stein",
+                        "party": "Mnt"
+                    },
+                    {
+                        "CandID": "61513",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "3767",
+                        "name": "Terry",
+                        "party": "NPA"
+                    }
+                ],
+                "ElectTotal": "5",
+                "PostalCode": "WV",
+                "PrecinctsPct": "100"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "10",
+                        "PopPct": "53",
+                        "PopVote": "1613950",
+                        "Winner": "X",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "893",
+                        "ElectWon": "0",
+                        "PopPct": "46",
+                        "PopVote": "1408746",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "20279",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "895",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "7601",
+                        "name": "Stein",
+                        "party": "Grn"
+                    },
+                    {
+                        "CandID": "713",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "4908",
+                        "name": "Goode",
+                        "party": "CST"
+                    },
+                    {
+                        "CandID": "25743",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "601",
+                        "name": "White",
+                        "party": "SEP"
+                    },
+                    {
+                        "CandID": "7623",
+                        "ElectWon": "0",
+                        "PopPct": "0",
+                        "PopVote": "528",
+                        "name": "La Riva",
+                        "party": "PSL"
+                    }
+                ],
+                "ElectTotal": "10",
+                "PostalCode": "WI",
+                "PrecinctsPct": "99"
+            },
+            {
+                "Cand": [
+                    {
+                        "CandID": "893",
+                        "ElectWon": "3",
+                        "PopPct": "69",
+                        "PopVote": "170265",
+                        "Winner": "X",
+                        "name": "Romney",
+                        "party": "GOP"
+                    },
+                    {
+                        "CandID": "1918",
+                        "ElectWon": "0",
+                        "PopPct": "28",
+                        "PopVote": "68780",
+                        "name": "Obama",
+                        "party": "Dem"
+                    },
+                    {
+                        "CandID": "31708",
+                        "ElectWon": "0",
+                        "PopPct": "2",
+                        "PopVote": "5302",
+                        "name": "Johnson",
+                        "party": "Lib"
+                    },
+                    {
+                        "CandID": "713",
+                        "ElectWon": "0",
+                        "PopPct": "1",
+                        "PopVote": "1438",
+                        "name": "Goode",
+                        "party": "CST"
+                    }
+                ],
+                "ElectTotal": "3",
+                "PostalCode": "WY",
+                "PrecinctsPct": "100"
+            }
+        ],
+        "Test": "0",
+        "timestamp": "2012-11-29T15:59:19Z"
+    }
+}

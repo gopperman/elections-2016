@@ -1,18 +1,35 @@
 // TODO: remove this file
 import { readFileSync } from 'jsonfile'
 
+const readJson = (endpoint) =>
+	readFileSync(`./data/${endpoint}.json`)
+
 export default (req, res) => {
 
-	console.log('waiting to read file.json')
+	const { endpoint } = req.params
 
-	setTimeout(() => {
+	console.log(`requesting ${endpoint}`)
 
-		console.log('reading file.json')
-		const file = readFileSync(`./data/${req.params.results}.json`)
+	let result
+	switch (endpoint) {
 
-		console.log('sending file.json')
-		res.json(file)
+		case 'president': {
 
-	}, 2000)
+			result = {
+				'president-ma-towns': readJson('president-ma-towns'),
+				'president-us-states': readJson('president-us-states'),
+			}
+
+			console.log('about to send president data')
+
+			setTimeout(() => res.json(result), 3000)
+			break
+		}
+
+		default:
+
+			res.sendStatus(500)
+
+	}
 
 }

@@ -6,9 +6,10 @@ import DashboardPlugin from 'webpack-dashboard/plugin'
 import handleRender from './handleRender.js'
 import api from './api.js'
 import webpackConfig from './../webpack.config.dev.js'
+import config from './../config.json'
 
 const app = express()
-const port = process.env.npm_package_config_port
+const { port } = config.dev
 
 // Get webpack config
 const compiler = webpack(webpackConfig)
@@ -32,7 +33,7 @@ app.use(webpackHotMiddleware(compiler, {
 app.set('views', './common')
 app.set('view engine', 'pug')
 
-app.get('/api/:results', api)
+app.get('/api/:endpoint', api)
 
 // This is fired every time the server side receives a request
 app.get('*', handleRender)
