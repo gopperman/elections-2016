@@ -30,7 +30,9 @@ describe('timer', () => {
 			}
 
 			const finalState = {
-				results: {},
+				results: {
+					isFetching: false,
+				},
 				timer: {
 					status: RUNNING,
 					startedAt: 1,
@@ -56,7 +58,9 @@ describe('timer', () => {
 			}
 
 			const finalState = {
-				results: {},
+				results: {
+					isFetching: false,
+				},
 				timer: {
 					status: RUNNING,
 					startedAt: 3,
@@ -85,7 +89,9 @@ describe('timer', () => {
 			}
 
 			const finalState = {
-				results: {},
+				results: {
+					isFetching: false,
+				},
 				timer: {
 					status: STOPPED,
 				},
@@ -113,7 +119,9 @@ describe('timer', () => {
 			}
 
 			const finalState = {
-				results: {},
+				results: {
+					isFetching: false,
+				},
 				timer: {
 					status: CANCELED,
 				},
