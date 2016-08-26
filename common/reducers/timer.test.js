@@ -8,6 +8,10 @@ import {
 	CANCEL_TIMER,
 } from '../actions/actionTypes.js'
 
+import Timer from './../components/Timer.js'
+
+const { CANCELED, RUNNING, STOPPED } = Timer.status
+
 describe('timer', () => {
 
 	describe('START_TIMER', () => {
@@ -16,18 +20,20 @@ describe('timer', () => {
 
 			const initialState = {
 				timer: {
-					status: 'canceled',
+					status: CANCELED,
 				},
 			}
 
 			const action = {
 				type: START_TIMER,
+				now: 1,
 			}
 
 			const finalState = {
 				results: {},
 				timer: {
-					status: 'running',
+					status: RUNNING,
+					startedAt: 1,
 				},
 			}
 
@@ -40,18 +46,20 @@ describe('timer', () => {
 
 			const initialState = {
 				timer: {
-					status: 'stopped',
+					status: STOPPED,
 				},
 			}
 
 			const action = {
 				type: START_TIMER,
+				now: 3,
 			}
 
 			const finalState = {
 				results: {},
 				timer: {
-					status: 'running',
+					status: RUNNING,
+					startedAt: 3,
 				},
 			}
 
@@ -68,7 +76,7 @@ describe('timer', () => {
 
 			const initialState = {
 				timer: {
-					status: 'running',
+					status: RUNNING,
 				},
 			}
 
@@ -79,7 +87,7 @@ describe('timer', () => {
 			const finalState = {
 				results: {},
 				timer: {
-					status: 'stopped',
+					status: STOPPED,
 				},
 			}
 
@@ -96,7 +104,7 @@ describe('timer', () => {
 
 			const initialState = {
 				timer: {
-					status: 'stopped',
+					status: STOPPED,
 				},
 			}
 
@@ -107,7 +115,7 @@ describe('timer', () => {
 			const finalState = {
 				results: {},
 				timer: {
-					status: 'canceled',
+					status: CANCELED,
 				},
 			}
 

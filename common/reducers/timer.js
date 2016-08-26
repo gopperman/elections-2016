@@ -4,10 +4,17 @@ import {
 	CANCEL_TIMER,
 } from './../actions/actionTypes.js'
 
-export default(state = {}, action) => {
+import Timer from './../components/Timer.js'
 
-	const { type } = action
+const { CANCELED, RUNNING, STOPPED } = Timer.status
 
+const initialState = {
+	status: STOPPED,
+}
+
+export default(state = initialState, action) => {
+
+	const { type, now } = action
 	const { status } = state
 
 	switch (type) {
@@ -16,8 +23,9 @@ export default(state = {}, action) => {
 
 			return {
 				...state,
-				status: status === 'canceled' || status === 'stopped' ?
-					'running' :
+				startedAt: now,
+				status: status === CANCELED || status === STOPPED ?
+					RUNNING :
 					status,
 			}
 
@@ -25,8 +33,8 @@ export default(state = {}, action) => {
 
 			return {
 				...state,
-				status: status === 'running' ?
-					'stopped' :
+				status: status === RUNNING ?
+					STOPPED :
 					status,
 			}
 
@@ -34,8 +42,8 @@ export default(state = {}, action) => {
 
 			return {
 				...state,
-				status: status === 'stopped' ?
-					'canceled' :
+				status: status === STOPPED ?
+					CANCELED :
 					status,
 			}
 

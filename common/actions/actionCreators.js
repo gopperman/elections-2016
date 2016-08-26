@@ -3,6 +3,7 @@ import {
 
 	START_TIMER,
 	STOP_TIMER,
+	CANCEL_TIMER,
 
 	FETCH_RESULTS_REQUEST,
 	FETCH_RESULTS_SUCCESS,
@@ -23,6 +24,10 @@ const startTimer = (now = Date.now()) => ({
 
 const stopTimer = () => ({
 	type: STOP_TIMER,
+})
+
+const cancelTimer = () => ({
+	type: CANCEL_TIMER,
 })
 
 const fetchResultsRequest = ({ url }) => ({
@@ -63,11 +68,14 @@ const fetchResults = ({ url }) =>
 			.then(data => dispatch(fetchResultsSuccess({ url, data })))
 			// TODO: add error handling
 			.catch(e => console.log(e))
-
 	}
 
 export {
+
 	startTimer,
 	stopTimer,
+	cancelTimer,
+
 	fetchResults,
+
 }

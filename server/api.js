@@ -20,6 +20,8 @@ export default (req, res) => {
 				'president-us-states': readJson('president-us-states'),
 			}
 
+			console.log('about to send president data')
+
 			setTimeout(() => res.json(result), 3000)
 			break
 		}

@@ -3,7 +3,11 @@ import {
 	FETCH_RESULTS_SUCCESS,
 } from './../actions/actionTypes.js'
 
-export default(state = {}, action) => {
+const initialState = {
+	isFetching: false,
+}
+
+export default(state = initialState, action) => {
 
 	const { type, data, url } = action
 
