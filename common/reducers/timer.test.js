@@ -5,17 +5,70 @@ import rootReducer from '../../common/reducers/index.js'
 import {
 	START_TIMER,
 	STOP_TIMER,
+	CANCEL_TIMER,
 } from '../actions/actionTypes.js'
 
 describe('timer', () => {
 
-	describe('STOP_TIMER', () => {
+	describe('START_TIMER', () => {
 
-		it('should stop the timer', () => {
+		it('should take the timer from canceled to running', () => {
 
 			const initialState = {
 				timer: {
-					startedAt: 123,
+					status: 'canceled',
+				},
+			}
+
+			const action = {
+				type: START_TIMER,
+			}
+
+			const finalState = {
+				results: {},
+				timer: {
+					status: 'running',
+				},
+			}
+
+			expect(rootReducer(initialState, action))
+				.to.deep.equal(finalState)
+
+		})
+
+		it('should take the timer from stopped to running', () => {
+
+			const initialState = {
+				timer: {
+					status: 'stopped',
+				},
+			}
+
+			const action = {
+				type: START_TIMER,
+			}
+
+			const finalState = {
+				results: {},
+				timer: {
+					status: 'running',
+				},
+			}
+
+			expect(rootReducer(initialState, action))
+				.to.deep.equal(finalState)
+
+		})
+
+	})
+
+	describe('STOP_TIMER', () => {
+
+		it('should take the timer from running to stopped', () => {
+
+			const initialState = {
+				timer: {
+					status: 'running',
 				},
 			}
 
@@ -26,7 +79,7 @@ describe('timer', () => {
 			const finalState = {
 				results: {},
 				timer: {
-					startedAt: null,
+					status: 'stopped',
 				},
 			}
 
@@ -34,25 +87,27 @@ describe('timer', () => {
 				.to.deep.equal(finalState)
 
 		})
+
 	})
 
-	describe('START_TIMER', () => {
+	describe('CANCEL_TIMER', () => {
 
-		it('should start the timer', () => {
+		it('should take the timer from stopped to canceled', () => {
 
-			const initialState = {}
-
-			const now = new Date().getTime()
+			const initialState = {
+				timer: {
+					status: 'stopped',
+				},
+			}
 
 			const action = {
-				type: START_TIMER,
-				now,
+				type: CANCEL_TIMER,
 			}
 
 			const finalState = {
 				results: {},
 				timer: {
-					startedAt: now,
+					status: 'canceled',
 				},
 			}
 
