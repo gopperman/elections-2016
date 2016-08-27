@@ -3,8 +3,9 @@ import { provideHooks } from 'redial'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actions from './../actions/actionCreators.js'
-// import ElectoralCollege from './../components/ElectoralCollege.js'
 import Timer from './../components/Timer.js'
+import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
+import ElectoralCollegeMap from './../components/ElectoralCollegeMap.js'
 
 const hooks = {
 	fetch: ({ dispatch }) =>
@@ -63,7 +64,7 @@ class President extends Component {
 	render() {
 
 		const { props, fetchData } = this
-		const { timer } = props
+		const { timer, results } = props
 		const { stopTimer } = props.actions
 
 		const timerProps = {
@@ -74,12 +75,12 @@ class President extends Component {
 			},
 		}
 
-		// <ElectoralCollege data={results.data['president-us-states']} />
-
 		return (
 			<div className='President'>
 				<h1>President</h1>
 				<Timer {...timerProps} />
+				<ElectoralCollegeBar data={results.data['president-us']} />
+				<ElectoralCollegeMap data={results.data['president-us-states']} />
 			</div>
 		)
 

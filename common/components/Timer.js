@@ -70,7 +70,7 @@ class Timer extends Component {
 
 		return (
 			<div className='Timer'>
-				Timer
+				<h1>Timer</h1>
 				<p>Status: {status}</p>
 				<p>Message: {message}</p>
 			</div>
