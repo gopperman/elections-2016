@@ -16,8 +16,9 @@ export default (req, res) => {
 		case 'president': {
 
 			result = {
-				'president-ma-towns': readJson('president-ma-towns'),
+				'president-us': readJson('president-us'),
 				'president-us-states': readJson('president-us-states'),
+				'president-ma-towns': readJson('president-ma-towns'),
 			}
 
 			console.log('about to send president data')

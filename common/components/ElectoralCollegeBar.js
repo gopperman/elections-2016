@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react'
 
 // TODO: remove all unnecessary prefer-stateless-functions disables
 // eslint-disable-next-line react/prefer-stateless-function
-export default class ElectoralCollege extends Component {
+export default class ElectoralCollegeBar extends Component {
 
 	static propTypes = {
 		data: PropTypes.object.isRequired,
@@ -10,11 +10,15 @@ export default class ElectoralCollege extends Component {
 
 	render() {
 
+		const { data } = this.props
+
+		// get summary results
+
 		return (
-			<div className='ElectoralCollege'>
-				ElectoralCollege
+			<div className='ElectoralCollegeBar'>
+				ElectoralCollegeBar
 				<pre>
-					{ JSON.stringify(this.props.data, null, 2) }
+					{ JSON.stringify(data, null, 2) }
 				</pre>
 			</div>
 		)
