@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import _ from 'lodash'
 
 // TODO: remove all unnecessary prefer-stateless-functions disables
 // eslint-disable-next-line react/prefer-stateless-function
@@ -10,22 +11,18 @@ export default class ElectoralCollegeBar extends Component {
 
 	render() {
 
-		// TODO: assume nothing about existence of fields
 		const { data } = this.props
 
 		const { Sumtable } = data
-		const candidates = Sumtable ? Sumtable.Cand : []
+		const candidates = (Sumtable && Sumtable.Cand) || []
 
-		// TODO: polyfill find
-		const dem = candidates.find(x => x.party === 'Dem')
-		const gop = candidates.find(x => x.party === 'GOP')
-		// TODO: assume nothing, e.g. maybe there is no Others?
-		const others = candidates.find(x => x.name === 'Others')
-
-		const undecided = 538 - dem.ElectWon - gop.ElectWon - others.ElectWon
+		const dem = _.find(candidates, { party: 'Dem' }) || {}
+		const gop = _.find(candidates, { party: 'GOP' }) || {}
+		const totalWon = _.sumBy(candidates, 'ElectWon')
+		const undecided = 538 - totalWon
 
 		return (
-			<div className='ElectoralCollegeBar'>
+			<div>
 				ElectoralCollegeBar
 
 				<div>
