@@ -18,12 +18,12 @@ export default class ElectoralCollegeBar extends Component {
 
 		const dem = _.find(candidates, { party: 'Dem' }) || {}
 		const gop = _.find(candidates, { party: 'GOP' }) || {}
-		const totalWon = _.sumBy(candidates, 'ElectWon')
+		const totalWon = _.sumBy(candidates, x => +x.ElectWon)
 		const undecided = 538 - totalWon
 
 		return (
-			<div>
-				ElectoralCollegeBar
+			<div className='ElectoralCollegeBar'>
+				<h1>ElectoralCollegeBar</h1>
 
 				<div>
 					<h3>Dem</h3>
