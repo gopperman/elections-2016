@@ -23,7 +23,7 @@ export default (req, res) => {
 
 			console.log('about to send president data')
 
-			setTimeout(() => res.json(result), 3000)
+			setTimeout(() => res.json(result), 0)
 			break
 		}
 

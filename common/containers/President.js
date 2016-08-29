@@ -47,11 +47,12 @@ class President extends Component {
 			console.log(this.count)
 
 			// is the race over?
-			if (this.count > 2) {
+			if (this.count > 0) {
 				cancelTimer()
 			} else {
 				startTimer()
 			}
+
 		}
 
 	}

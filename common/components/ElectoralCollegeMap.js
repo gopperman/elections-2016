@@ -12,6 +12,7 @@ class ElectoralCollegeMap extends Component {
 
 		// TODO: there can be a popular vote tie,
 		// but can there be an electoral college tie?
+		// in other words, can a state be tied
 		const { PresStateByStatetable } = this.props.data
 		const states =
 			(PresStateByStatetable && PresStateByStatetable.State) || []
