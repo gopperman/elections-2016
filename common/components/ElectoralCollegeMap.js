@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import { getTopCandidate } from './../utils/presidentialStateTable.js'
 
 // eslint-disable-next-line react/prefer-stateless-function
 class ElectoralCollegeMap extends Component {
@@ -17,16 +18,27 @@ class ElectoralCollegeMap extends Component {
 		const states =
 			(PresStateByStatetable && PresStateByStatetable.State) || []
 
-				// <ul>
-				// 	{ states.map(s => (
-				// 		<li>State: {s.PostalCode}</li>
-				// 		<li>Candidate
-				// 	))}
-				// </ul>
-
 		return (
 			<div className='ElectoralCollegeMap'>
 				<h1>ElectoralCollegeMap</h1>
+				<ul>
+					{ states.map(s => {
+
+						const topCandidate = getTopCandidate(s)
+						return (
+							<li>
+								<p>State: {s.PostalCode}</p>
+								<p>Top candidate: {topCandidate.name}</p>
+								<p>Party: {topCandidate.party}</p>
+								<p>Winner: {topCandidate.Winner ? 'Yes' : 'No'}</p>
+								<p>Electoral votes: {topCandidate.ElectWon}</p>
+								<p>Popular votes percent: {topCandidate.PopPct}%</p>
+								<p>Popular votes: {topCandidate.PopVote}</p>
+							</li>
+						)
+
+					})}
+				</ul>
 			</div>
 		)
 
