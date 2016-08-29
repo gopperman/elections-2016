@@ -6,6 +6,7 @@ import * as actions from './../actions/actionCreators.js'
 import Timer from './../components/Timer.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 import ElectoralCollegeMap from './../components/ElectoralCollegeMap.js'
+import MassMap from './../components/MassMap.js'
 
 const hooks = {
 	fetch: ({ dispatch }) =>
@@ -79,6 +80,7 @@ class President extends Component {
 			<div className='President'>
 				<h1>President</h1>
 				<Timer {...timerProps} />
+				<MassMap data={results.data['president-ma-towns']} />
 				<ElectoralCollegeBar data={results.data['president-us']} />
 				<ElectoralCollegeMap data={results.data['president-us-states']} />
 			</div>
