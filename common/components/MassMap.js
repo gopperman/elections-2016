@@ -1,6 +1,6 @@
 import React, { Component, PropTypes } from 'react'
 import topojson from 'topojson'
-import { geoBounds, geoPath, geoConicConformal } from 'd3-geo'
+import { geoPath, geoConicConformal } from 'd3-geo'
 import TOWNS from './../../data/output/TOWNS.json'
 
 // eslint-disable-next-line react/prefer-stateless-function
@@ -10,33 +10,20 @@ class MassMap extends Component {
 		data: PropTypes.object.isRequired,
 	}
 
-	// componentDidMount = () => {
-
-	// 	console.log(this._map)
-
-
-	// }
-
 	render() {
 
 		const { races } = this.props.data
 		const race = (races && races[0]) || {}
+		console.log(race)
 
 		const towns =
 			topojson.feature(TOWNS, TOWNS.objects.TOWNS)
 
-		console.log(towns)
-
-		const bounds = geoBounds(towns)
-
-		console.log(bounds)
-
 		const path = geoPath()
 		.projection(geoConicConformal()
-								.parallels([33, 45])
-								.rotate([96, -39])
-								.fitSize([400, 200], towns)
-							 )
+			.parallels([41 + (43 / 60), 42 + (41 / 60)])
+			.rotate([71 + (30 / 60), -41])
+			.fitSize([400, 200], towns))
 
 		const d = path(towns)
 
