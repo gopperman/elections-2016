@@ -16,6 +16,7 @@ export default class ElectoralCollegeBar extends Component {
 		const { Sumtable } = data
 		const candidates = (Sumtable && Sumtable.Cand) || []
 
+		// TODO: do we want to incorporate "leading"?
 		const dem = _.find(candidates, { party: 'Dem' }) || {}
 		const gop = _.find(candidates, { party: 'GOP' }) || {}
 		const totalWon = _.sumBy(candidates, x => +x.ElectWon)
