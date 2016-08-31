@@ -44,7 +44,6 @@ class President extends Component {
 
 			// TODO: add data completeness check
 			++this.count
-			console.log(this.count)
 
 			// is the race over?
 			if (this.count > 0) {
