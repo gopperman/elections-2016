@@ -46,7 +46,7 @@ class President extends Component {
 			++this.count
 
 			// is the race over?
-			if (this.count > 0) {
+			if (this.count > 2) {
 				cancelTimer()
 			} else {
 				startTimer()

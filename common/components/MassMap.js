@@ -70,7 +70,7 @@ class MassMap extends Component {
 
 		// DATA JOIN
 		const paths = select(this._svg).selectAll('path')
-			.data(this._towns)
+			.data(this._towns, d => d.properties.REPORTING_UNIT)
 			.on('mousemove', function onMouseMove() {
 				select(this).classed('selected', true)
 				this.parentNode.appendChild(this)
