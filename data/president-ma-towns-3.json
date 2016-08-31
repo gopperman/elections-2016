@@ -79,7 +79,7 @@
                             "party": "Dem",
                             "polID": "1918",
                             "polNum": "27009",
-                            "voteCount": 4104,
+                            "voteCount": 4,
                             "winner": "X"
                         },
                         {
@@ -90,7 +90,7 @@
                             "party": "GOP",
                             "polID": "893",
                             "polNum": "27003",
-                            "voteCount": 4051
+                            "voteCount": 3
                         },
                         {
                             "ballotOrder": 1,
@@ -100,7 +100,7 @@
                             "party": "Lib",
                             "polID": "31708",
                             "polNum": "27005",
-                            "voteCount": 52
+                            "voteCount": 0
                         },
                         {
                             "ballotOrder": 4,
@@ -110,7 +110,7 @@
                             "party": "Grn",
                             "polID": "895",
                             "polNum": "26917",
-                            "voteCount": 37
+                            "voteCount": 0
                         }
                     ],
                     "fipsCode": "25023",
