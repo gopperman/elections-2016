@@ -12,7 +12,7 @@ import Timer from './../components/Timer.js'
 
 const { CANCELED, RUNNING, STOPPED } = Timer.status
 
-describe('timer', () => {
+describe('timer reducer', () => {
 
 	describe('START_TIMER', () => {
 
@@ -30,17 +30,14 @@ describe('timer', () => {
 			}
 
 			const finalState = {
-				results: {
-					isFetching: false,
-				},
 				timer: {
 					status: RUNNING,
 					startedAt: 1,
 				},
 			}
 
-			expect(rootReducer(initialState, action))
-				.to.deep.equal(finalState)
+			expect(rootReducer(initialState, action).timer)
+				.to.deep.equal(finalState.timer)
 
 		})
 
@@ -58,17 +55,14 @@ describe('timer', () => {
 			}
 
 			const finalState = {
-				results: {
-					isFetching: false,
-				},
 				timer: {
 					status: RUNNING,
 					startedAt: 3,
 				},
 			}
 
-			expect(rootReducer(initialState, action))
-				.to.deep.equal(finalState)
+			expect(rootReducer(initialState, action).timer)
+				.to.deep.equal(finalState.timer)
 
 		})
 
@@ -89,16 +83,13 @@ describe('timer', () => {
 			}
 
 			const finalState = {
-				results: {
-					isFetching: false,
-				},
 				timer: {
 					status: STOPPED,
 				},
 			}
 
-			expect(rootReducer(initialState, action))
-				.to.deep.equal(finalState)
+			expect(rootReducer(initialState, action).timer)
+				.to.deep.equal(finalState.timer)
 
 		})
 
@@ -119,16 +110,13 @@ describe('timer', () => {
 			}
 
 			const finalState = {
-				results: {
-					isFetching: false,
-				},
 				timer: {
 					status: CANCELED,
 				},
 			}
 
-			expect(rootReducer(initialState, action))
-				.to.deep.equal(finalState)
+			expect(rootReducer(initialState, action).timer)
+				.to.deep.equal(finalState.timer)
 
 		})
 
