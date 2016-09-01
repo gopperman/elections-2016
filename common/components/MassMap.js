@@ -11,6 +11,7 @@ class MassMap extends Component {
 
 	static propTypes = {
 		data: PropTypes.object.isRequired,
+		selectTown: PropTypes.func.isRequired,
 	}
 
 	// create the map
@@ -68,16 +69,16 @@ class MassMap extends Component {
 
 	drawFeatures() {
 
+		const { selectTown } = this.props
+
 		// DATA JOIN
 		const paths = select(this._svg).selectAll('path')
 			.data(this._towns, d => d.properties.REPORTING_UNIT)
-			.on('mousemove', function onMouseMove() {
-				select(this).classed('selected', true)
-				this.parentNode.appendChild(this)
-			})
-			.on('mouseleave', function onMouseLeave() {
-				select(this).classed('selected', false)
-			})
+			.on('mousemove', d => selectTown({ town: d.properties.REPORTING_UNIT }))
+
+			// .on('mouseleave', function onMouseLeave() {
+			// 	// select(this).classed('selected', false)
+			// })
 
 		// UPDATE
 
