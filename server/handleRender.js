@@ -14,7 +14,7 @@ export default (req, res) => {
 	const store = configureStore(initialState)
 	const { dispatch, getState } = store
 
-  // Set up history for router
+	// Set up history for router
 	const history = createMemoryHistory(req.url)
 
 	match({ routes, history }, (error, redirect, props) => {
