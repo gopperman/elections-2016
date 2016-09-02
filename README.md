@@ -8,9 +8,14 @@ Please note: do not reproduce Boston Globe logos or fonts without written permis
 
 ## dev
 
-- `npm start`
+- `npm start` - start the app
+- `npm run doc` - generate documentation
 
 ## prod
 
 - `npm run build`
 - `npm run prod`
+
+## License
+
+MIT © [The Boston Globe](http://github.com/BostonGlobe)
