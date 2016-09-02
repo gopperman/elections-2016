@@ -2,6 +2,10 @@
 
 Please note: do not reproduce Boston Globe logos or fonts without written permission.
 
+## documentation
+
+https://bostonglobe.github.io/elections-2016/
+
 ## setup
 
 - `npm i`
