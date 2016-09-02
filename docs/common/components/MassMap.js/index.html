@@ -1,0 +1,844 @@
+<!doctype html>
+<html>
+  <head>
+    <title>common/components/MassMap.js</title>
+    <link rel="stylesheet" href="./../../../public/style.css" />
+    <link rel="icon" type="image/png" href="./../../../public/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./../../../public/jquery.min.js"></script>
+    <script src="./../../../public/script.js"></script>
+  </head>
+  <body class="code">
+    
+    <main id="sections">
+
+      <!-- The header -->
+
+        
+      <section class="section header files-hidden" id="header">
+
+        <aside class="comment">
+
+          <header>
+
+            <div class="file-path">
+              
+              
+              <a id="project-overview" href="./../../.." title="Project Overview">elections-2016<span id="version"></span></a>
+              
+              <div class="files-menu">
+                <span id="filename" title="common/components/MassMap.js">common/components/MassMap.js</span>
+                
+              
+                <ul class="files hidable">
+                  
+                  
+<li class="file">
+  
+<a href="../../../webpack.config.dev.js" title="webpack.config.dev.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">webpack.config.dev.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../../webpack.config.prod.js" title="webpack.config.prod.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">webpack.config.prod.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../../../client/index.js" title="client/index.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">client/index.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../../routes.js" title="common/routes.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/routes.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../../actions/actionCreators.js" title="common/actions/actionCreators.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/actions/actionCreators.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../actions/actionTypes.js" title="common/actions/actionTypes.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/actions/actionTypes.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../App.js" title="common/components/App.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/App.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../ElectoralCollegeBar.js" title="common/components/ElectoralCollegeBar.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/ElectoralCollegeBar.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../ElectoralCollegeMap.js" title="common/components/ElectoralCollegeMap.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/ElectoralCollegeMap.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../Root.js" title="common/components/Root.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/Root.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../State.js" title="common/components/State.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/State.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../Timer.js" title="common/components/Timer.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/Timer.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../../containers/Home.js" title="common/containers/Home.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/containers/Home.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../containers/President.js" title="common/containers/President.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/containers/President.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../../reducers/index.js" title="common/reducers/index.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/reducers/index.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../reducers/results.js" title="common/reducers/results.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/reducers/results.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../reducers/selection.js" title="common/reducers/selection.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/reducers/selection.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../reducers/selection.test.js" title="common/reducers/selection.test.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/reducers/selection.test.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../reducers/timer.js" title="common/reducers/timer.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/reducers/timer.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../reducers/timer.test.js" title="common/reducers/timer.test.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/reducers/timer.test.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../../store/configureStore.js" title="common/store/configureStore.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/store/configureStore.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../store/initialState.js" title="common/store/initialState.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/store/initialState.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../../utils/Candidates.js" title="common/utils/Candidates.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/utils/Candidates.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../utils/bindSubunitsToFeatures.js" title="common/utils/bindSubunitsToFeatures.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/utils/bindSubunitsToFeatures.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../utils/chooseColorClass.js" title="common/utils/chooseColorClass.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/utils/chooseColorClass.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../utils/compareStrings.js" title="common/utils/compareStrings.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/utils/compareStrings.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../utils/presidentialStateTable.js" title="common/utils/presidentialStateTable.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/utils/presidentialStateTable.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../utils/presidentialStateTable.test.js" title="common/utils/presidentialStateTable.test.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/utils/presidentialStateTable.test.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../../../server/api.js" title="server/api.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">server/api.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../../server/handleRender.js" title="server/handleRender.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">server/handleRender.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../../server/index.js" title="server/index.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">server/index.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../../server/server.dev.js" title="server/server.dev.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">server/server.dev.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../../server/server.prod.js" title="server/server.prod.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">server/server.prod.js</span>
+
+</a>
+
+</li>
+
+                  
+                </ul>
+                
+              </div>
+                
+            </div>
+
+            <div class="spacer"></div>
+            
+            
+          </header>
+            
+        </aside>
+
+        
+        <div class="code empty">
+        </div>
+
+      </section>
+
+      <!-- The main code section -->
+      
+      <section class="section">
+
+  
+  <aside class="comment empty">
+    <div class="text markdown"></div>
+  </aside>
+
+  <div class="code">
+    <pre><code><span class="hljs-keyword">import</span> React, { Component, PropTypes } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
+<span class="hljs-keyword">import</span> topojson <span class="hljs-keyword">from</span> <span class="hljs-string">'topojson'</span>
+<span class="hljs-keyword">import</span> { geoPath, geoConicConformal } <span class="hljs-keyword">from</span> <span class="hljs-string">'d3-geo'</span>
+<span class="hljs-keyword">import</span> { select } <span class="hljs-keyword">from</span> <span class="hljs-string">'d3-selection'</span>
+<span class="hljs-keyword">import</span> TOWNS <span class="hljs-keyword">from</span> <span class="hljs-string">'./../../data/output/TOWNS.json'</span>
+<span class="hljs-keyword">import</span> bindSubunitsToFeatures <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/bindSubunitsToFeatures.js'</span>
+<span class="hljs-keyword">import</span> chooseColorClass <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/chooseColorClass.js'</span>
+
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MassMap</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+
+	<span class="hljs-keyword">static</span> propTypes = {
+		data: PropTypes.object.isRequired,
+		selectTown: PropTypes.func.isRequired,
+	}</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>create the map</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>	componentDidMount() {</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>convert TOWNS to a GeoJSON object (via topojson)</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">const</span> townsObject = topojson.feature(TOWNS, TOWNS.objects.TOWNS)</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>setup a MA-centric projection</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">const</span> projection = geoConicConformal()
+			.parallels([<span class="hljs-number">41</span> + (<span class="hljs-number">43</span> / <span class="hljs-number">60</span>), <span class="hljs-number">42</span> + (<span class="hljs-number">41</span> / <span class="hljs-number">60</span>)])
+			.rotate([<span class="hljs-number">71</span> + (<span class="hljs-number">30</span> / <span class="hljs-number">60</span>), <span class="hljs-number">-41</span>])</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>create the path</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">this</span>._path = geoPath().projection(projection)</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>find MA bounds and aspect ratio for this projection</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">const</span> b = <span class="hljs-keyword">this</span>._path.bounds(townsObject)
+		<span class="hljs-keyword">const</span> aspect = (b[<span class="hljs-number">1</span>][<span class="hljs-number">0</span>] - b[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>]) / (b[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>] - b[<span class="hljs-number">0</span>][<span class="hljs-number">1</span>])</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>create width and heights, using 100 as width reference</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">const</span> width = <span class="hljs-keyword">this</span>._svg.parentNode.offsetWidth
+		<span class="hljs-keyword">const</span> height = <span class="hljs-built_in">Math</span>.round(width / aspect)</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>fit this projection to the newly-calculated aspect ratio</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		projection.fitSize([width, height], townsObject)</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>set viewBox on svg</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		select(<span class="hljs-keyword">this</span>._svg).attr(<span class="hljs-string">'viewBox'</span>, <span class="hljs-string">`0 0 <span class="hljs-subst">${width}</span> <span class="hljs-subst">${height}</span>`</span>)</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>save GeoJSON features for convenience</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">this</span>._towns = townsObject.features</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>draw features</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">this</span>.drawFeatures()
+
+	}</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>update map with data</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>	componentDidUpdate() {
+
+		<span class="hljs-keyword">const</span> { races } = <span class="hljs-keyword">this</span>.props.data
+		<span class="hljs-keyword">const</span> race = (races &amp;&amp; races[<span class="hljs-number">0</span>]) || {}
+		<span class="hljs-keyword">const</span> subunits = race.reportingUnits || []</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>bind AP data to GeoJSON features
+TODO: maybe, when baking the topojson, we should give it an id
+so we don&#39;t rely on the property &#39;REPORTING_UNIT&#39;</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">this</span>._towns =
+			bindSubunitsToFeatures({ subunits, features: <span class="hljs-keyword">this</span>._towns })
+
+		<span class="hljs-keyword">this</span>.drawFeatures()
+
+	}
+
+	drawFeatures() {
+
+		<span class="hljs-keyword">const</span> { selectTown } = <span class="hljs-keyword">this</span>.props</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>DATA JOIN</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">const</span> paths = select(<span class="hljs-keyword">this</span>._svg).selectAll(<span class="hljs-string">'path'</span>)
+			.data(<span class="hljs-keyword">this</span>._towns, d =&gt; d.properties.REPORTING_UNIT)
+			.on(<span class="hljs-string">'mousemove'</span>, d =&gt; selectTown({ town: d.properties.REPORTING_UNIT }))</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>.on(&#39;mouseleave&#39;, function onMouseLeave() {
+    // select(this).classed(&#39;selected&#39;, false)
+})</p>
+</div>
+  </aside>
+  
+
+
+  <div class="code empty">
+    <pre><code></code></pre>
+  </div>
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>UPDATE</p>
+</div>
+  </aside>
+  
+
+
+  <div class="code empty">
+    <pre><code></code></pre>
+  </div>
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>ENTER</p>
+</div>
+  </aside>
+  
+
+
+  <div class="code empty">
+    <pre><code></code></pre>
+  </div>
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>ENTER + UPDATE</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		paths.enter().append(<span class="hljs-string">'path'</span>)
+			.attr(<span class="hljs-string">'d'</span>, <span class="hljs-keyword">this</span>._path)
+		.merge(paths)
+		.attr(<span class="hljs-string">'class'</span>, d =&gt;
+			chooseColorClass({
+				candidates: d.subunit &amp;&amp; d.subunit.candidates }))</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>EXIT</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		paths.exit().remove()
+
+	}
+
+	_svg = <span class="hljs-literal">null</span>
+	_path = <span class="hljs-literal">null</span>
+	_towns = <span class="hljs-literal">null</span>
+
+	render() {
+
+		<span class="hljs-keyword">return</span> (</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>eslint-disable-next-line no-return-assign</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>			&lt;svg className=<span class="hljs-string">'MassMap'</span> ref={(c) =&gt; <span class="hljs-keyword">this</span>._svg = c} /&gt;
+		)
+
+	}
+
+}
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> MassMap</code></pre>
+  </div>
+
+  
+</section>
+
+      
+      
+      <section class="section footer" id="footer">
+        
+        <aside class="comment">
+          <span class="content project-copyright">&copy; Copyright 2016 The Boston Globe.</span>
+        </aside>
+
+        <div class="code">
+          <span class="content page-generation-time">Generated Fri, 02 Sep 2016 00:01:03 GMT</span>
+        </div>
+        
+      </section>
+      
+    </main>
+
+  </body>
+</html>
+

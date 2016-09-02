@@ -6,7 +6,6 @@ import TOWNS from './../../data/output/TOWNS.json'
 import bindSubunitsToFeatures from './../utils/bindSubunitsToFeatures.js'
 import chooseColorClass from './../utils/chooseColorClass.js'
 
-// eslint-disable-next-line react/prefer-stateless-function
 class MassMap extends Component {
 
 	static propTypes = {
