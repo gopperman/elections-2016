@@ -1,0 +1,12 @@
+{
+	"name": "elections-2016",
+	"owners": "The Boston Globe",
+	"output": "docs",
+	"readme": "README.md",
+	"files": [
+		"client/**/*.js",
+		"common/**/*.js",
+		"server/**/*.js",
+		"webpack.config.*.js"
+	]
+}

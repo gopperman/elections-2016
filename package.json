@@ -4,7 +4,8 @@
     "build": "npm run lint && webpack --config webpack.config.prod.js --progress",
     "prod": "NODE_ENV=production npm run start",
     "lint": "eslint .",
-    "test": "mocha --compilers js:babel-core/register \"./{,!(node_modules)/**/}*.test.js\""
+    "test": "mocha --compilers js:babel-core/register \"./{,!(node_modules)/**/}*.test.js\"",
+		"doc": "rimraf docs && indoc -c indoc.json"
   },
   "dependencies": {
     "babel-cli": "^6.11.4",
@@ -60,8 +61,9 @@
   },
   "devDependencies": {
     "chai": "^3.5.0",
-    "docco": "^0.7.0",
+    "indoc": "^0.4.10",
     "mocha": "^3.0.2",
+    "rimraf": "^2.5.4",
     "tap": "^6.3.2"
   }
 }
