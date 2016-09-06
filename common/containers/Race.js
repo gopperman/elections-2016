@@ -10,7 +10,7 @@ import MassMap from './../components/MassMap.js'
 
 const hooks = {
 	fetch: ({ dispatch }) =>
-		dispatch(actions.fetchResults({ url: 'president' })),
+		dispatch(actions.fetchResults({ url: 'race' })),
 }
 
 const mapDispatchToProps = (dispatch) => ({
@@ -82,7 +82,6 @@ class Race extends Component {
 				<h1>Race</h1>
 				<Timer {...timerProps} />
 				<MassMap data={results.data['president-ma-towns']} />
-				<ElectoralCollegeBar data={results.data['president-us']} />
 				<ElectoralCollegeMap data={results.data['president-us-states']} />
 			</div>
 		)
