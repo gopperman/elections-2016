@@ -29,6 +29,7 @@ export default (req, res) => {
 
 		case 'race': {
 			result = {
+				'senate-ma-towns': readJson('senate-ma-towns'),
 				'president-us': readJson('president-us'),
 				'president-us-states': readJson('president-us-states'),
 				'president-ma-towns': readJson('president-ma-towns'),

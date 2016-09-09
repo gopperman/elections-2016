@@ -5,7 +5,8 @@ import { connect } from 'react-redux'
 import * as actions from './../actions/actionCreators.js'
 import Timer from './../components/Timer.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
-import ElectoralCollegeMap from './../components/ElectoralCollegeMap.js'
+import ElectoralCollegeMap from './../components/ElectoralCollegeMap.js' //TODO: Purge?
+import ReportingUnitList from './../components/ReportingUnitList.js'
 import MassMap from './../components/MassMap.js'
 
 const hooks = {
@@ -81,8 +82,8 @@ class Race extends Component {
 			<div className='Race'>
 				<h1>Race</h1>
 				<Timer {...timerProps} />
-				<MassMap data={results.data['president-ma-towns']} />
-				<ElectoralCollegeMap data={results.data['president-us-states']} />
+				<MassMap data={results.data['senate-ma-towns']} />
+				<ReportingUnitList data={results.data['senate-ma-towns'].races[0]} />
 			</div>
 		)
 
