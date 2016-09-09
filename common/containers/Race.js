@@ -4,8 +4,6 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actions from './../actions/actionCreators.js'
 import Timer from './../components/Timer.js'
-import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
-import ElectoralCollegeMap from './../components/ElectoralCollegeMap.js' //TODO: Purge?
 import ReportingUnitList from './../components/ReportingUnitList.js'
 import MassMap from './../components/MassMap.js'
 
