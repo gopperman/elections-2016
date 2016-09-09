@@ -36,6 +36,17 @@ export default (req, res) => {
 			break
 		}
 
+		case 'race': {
+			result = {
+				'senate-ma-towns': readJson('senate-ma-towns'),
+			}
+
+			console.log('about to send race data')
+
+			setTimeout(() => res.json(result), 0)
+			break
+		}
+
 		default:
 
 			res.sendStatus(500)
