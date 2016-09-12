@@ -1,7 +1,9 @@
+/* eslint-disable no-return-assign */
+
 import React, { Component, PropTypes } from 'react'
 import topojson from 'topojson'
 import { geoPath, geoConicConformal } from 'd3-geo'
-import { select } from 'd3-selection'
+import { mouse, select } from 'd3-selection'
 import TOWNS from './../../data/output/TOWNS.json'
 import bindSubunitsToFeatures from './../utils/bindSubunitsToFeatures.js'
 import chooseColorClass from './../utils/chooseColorClass.js'
@@ -71,12 +73,25 @@ class MassMap extends Component {
 
 		const { selectTown, selection } = this.props
 
+		const svg = select(this._svg)
+
 		// DATA JOIN
-		const paths = select(this._svg).selectAll('path')
+		const paths = svg.selectAll('path')
 			.data(this._towns, d => d.properties.REPORTING_UNIT)
-			.on('mousemove', d =>
-				selectTown({ town: d.properties.REPORTING_UNIT }))
-			.on('mouseleave', () => selectTown({ town: null }))
+			.on('mousemove', function mousemove(d) {
+
+				const [x, y] = mouse(this)
+				const [, , width, height] = svg.attr('viewBox').split(' ')
+
+				const position = {
+					x: 100 * (x / (+width)),
+					y: 100 * (y / (+height)),
+				}
+
+				selectTown({ town: d.properties.REPORTING_UNIT, position })
+
+			})
+			.on('mouseleave', () => selectTown({}))
 
 		// UPDATE
 
@@ -92,7 +107,8 @@ class MassMap extends Component {
 				candidates: d.subunit && d.subunit.candidates })
 
 			// TODO: will we always have a d.properties.REPORTING_UNIT?
-			const selected = d.properties.REPORTING_UNIT === selection.town ?
+			const selected =
+				d.properties.REPORTING_UNIT === selection.town.name ?
 				'selected' : ''
 
 			// TODO: this is a side-effect and should maybe happen elsewhere
@@ -115,9 +131,24 @@ class MassMap extends Component {
 
 	render() {
 
+		const { town } = this.props.selection
+
+		const { x, y } = town.position || {}
+
+		const tooltipStyle = {
+			top: `${y}%`,
+			left: `${x}%`,
+		}
+
 		return (
-			// eslint-disable-next-line no-return-assign
-			<svg className='MassMap' ref={(c) => this._svg = c} />
+			<div className='MassMap'>
+				<svg ref={(c) => this._svg = c} />
+				<div className='tooltip' style={tooltipStyle}>
+					<pre>
+						{ JSON.stringify(town, null, 2) }
+					</pre>
+				</div>
+			</div>
 		)
 
 	}

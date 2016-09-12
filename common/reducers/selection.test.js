@@ -18,12 +18,14 @@ describe('selection reducer', () => {
 
 			const action = {
 				type: SELECT_TOWN,
-				town: null,
 			}
 
 			const finalState = {
 				selection: {
-					town: null,
+					town: {
+						name: null,
+						position: null,
+					},
 				},
 			}
 
@@ -40,11 +42,15 @@ describe('selection reducer', () => {
 			const action = {
 				type: SELECT_TOWN,
 				town: 'hello',
+				position: [1, 2],
 			}
 
 			const finalState = {
 				selection: {
-					town: 'hello',
+					town: {
+						name: 'hello',
+						position: [1, 2],
+					},
 				},
 			}
 
