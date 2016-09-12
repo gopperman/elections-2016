@@ -65,7 +65,7 @@ class President extends Component {
 	render() {
 
 		const { props, fetchData } = this
-		const { timer, results } = props
+		const { timer, results, selection } = props
 		const { stopTimer, selectTown } = props.actions
 
 		const timerProps = {
@@ -80,7 +80,10 @@ class President extends Component {
 			<div className='President'>
 				<h1>President</h1>
 				<Timer {...timerProps} />
-				<MassMap selectTown={selectTown} data={results.data['president-ma-towns']} />
+				<MassMap
+					selection={selection}
+					selectTown={selectTown}
+					data={results.data['president-ma-towns']} />
 				<ElectoralCollegeBar data={results.data['president-us']} />
 				<ElectoralCollegeMap data={results.data['president-us-states']} />
 			</div>

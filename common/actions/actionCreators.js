@@ -19,9 +19,10 @@ const config = process.env.NODE_ENV === 'production' ?
 
 const fetch = require('fetch-ponyfill')()
 
-const selectTown = ({ town }) => ({
+const selectTown = ({ town, position }) => ({
 	type: SELECT_TOWN,
 	town,
+	position,
 })
 
 const startTimer = (now = Date.now()) => ({
