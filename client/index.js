@@ -1,3 +1,6 @@
+// This is the app's client-side entry point. Webpack starts here when
+// bundling the entire codebase.
+
 /* eslint-disable global-require, no-unused-vars */
 import React from 'react'
 import ReactDOM from 'react-dom'
