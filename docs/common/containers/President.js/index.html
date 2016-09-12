@@ -512,10 +512,11 @@
       
       <section class="section">
 
-  
-  <aside class="comment empty">
-    <div class="text markdown"></div>
+  <aside class="comment">
+    <div class="text markdown"><p>The <code>President</code> class displays presidential results for both US and MA.</p>
+</div>
   </aside>
+  
 
   <div class="code">
     <pre><code><span class="hljs-keyword">import</span> React, { Component, PropTypes } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
@@ -526,19 +527,102 @@
 <span class="hljs-keyword">import</span> Timer <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/Timer.js'</span>
 <span class="hljs-keyword">import</span> ElectoralCollegeBar <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/ElectoralCollegeBar.js'</span>
 <span class="hljs-keyword">import</span> ElectoralCollegeMap <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/ElectoralCollegeMap.js'</span>
-<span class="hljs-keyword">import</span> MassMap <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/MassMap.js'</span>
+<span class="hljs-keyword">import</span> MassMap <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/MassMap.js'</span></code></pre>
+  </div>
 
-<span class="hljs-keyword">const</span> hooks = {
-	fetch: ({ dispatch }) =&gt;
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>This object, used by the <code>@provideHooks</code> decorator, defines our custom
+data loading dependencies. At the moment we just have one: <code>fetch</code>. It
+gets triggered on both server and client.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code><span class="hljs-keyword">const</span> hooks = {</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p><code>fetch</code> takes a <code>dispatch</code> argument, which we will use to fire
+our custom data loading actions. In this case, we dispatch the
+<code>fetchResults</code> action.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>	fetch: ({ dispatch }) =&gt;
 		dispatch(actions.fetchResults({ url: <span class="hljs-string">'president'</span> })),
-}
+}</code></pre>
+  </div>
 
-<span class="hljs-keyword">const</span> mapDispatchToProps = (dispatch) =&gt; ({
-	dispatch,
-	actions: bindActionCreators(actions, dispatch),
-})
+  
+</section>
+<section class="section">
 
-@provideHooks(hooks)
+  <aside class="comment">
+    <div class="text markdown"><p>This object maps various properties as React <code>props</code>:</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code><span class="hljs-keyword">const</span> mapDispatchToProps = (dispatch) =&gt; ({</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p><code>actions</code> which have already been bound with <code>dispatch</code> for convenience,</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>	actions: bindActionCreators(actions, dispatch),</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>and <code>dispatch</code>, so we can pass it to <code>fetch</code> above. Normally we
+wouldn&#39;t set <code>dispatch</code> as a React <code>props</code>, but we need it to fire
+our custom <code>fetch</code> lifecycle event above.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>	dispatch,
+
+})</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Decorate the <code>President</code> class with <code>connect</code> and <code>provideHooks</code>, in that
+order (it matters).</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>@provideHooks(hooks)
 @connect(s =&gt; s, mapDispatchToProps)
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">President</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
 
@@ -555,7 +639,8 @@
 <section class="section">
 
   <aside class="comment">
-    <div class="text markdown"><p>when component is initially mounted onto DOM, fire its &#39;fetch&#39; hook</p>
+    <div class="text markdown"><p>This lifecycle event gets called once, immediately after the initial
+rendering occurs. We will use it to fire the <code>fetch</code> hook.</p>
 </div>
   </aside>
   
@@ -563,9 +648,22 @@
   <div class="code">
     <pre><code>	componentDidMount = () =&gt; {
 		<span class="hljs-keyword">this</span>.fetchData()
-	}
+	}</code></pre>
+  </div>
 
-	componentDidUpdate = (prevProps) =&gt; {
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>This gets called once after the component&#39;s updates are flushed to DOM.
+At the moment we will use it to determine whether to stop the clock.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>	componentDidUpdate = (prevProps) =&gt; {
 
 		<span class="hljs-keyword">const</span> { props } = <span class="hljs-keyword">this</span>
 		<span class="hljs-keyword">const</span> { startTimer, cancelTimer } = props.actions</code></pre>
@@ -576,7 +674,8 @@
 <section class="section">
 
   <aside class="comment">
-    <div class="text markdown"><p>did we stop fetching?</p>
+    <div class="text markdown"><p>Did we stop fetching - that is, did we go from <code>isFetching == true</code>
+to <code>isFetching == false</code>? If so,</p>
 </div>
   </aside>
   
@@ -590,27 +689,29 @@
 <section class="section">
 
   <aside class="comment">
-    <div class="text markdown"><p>TODO: add data completeness check</p>
+    <div class="text markdown"><p>check to see if all results are in so we can stop the clock.</p>
 </div>
   </aside>
   
 
-  <div class="code">
-    <pre><code>			++<span class="hljs-keyword">this</span>.count</code></pre>
-  </div>
 
+  <div class="code empty">
+    <pre><code></code></pre>
+  </div>
   
 </section>
 <section class="section">
 
   <aside class="comment">
-    <div class="text markdown"><p>is the race over?</p>
+    <div class="text markdown"><p>TODO: implement</p>
 </div>
   </aside>
   
 
   <div class="code">
-    <pre><code>			<span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.count &gt; <span class="hljs-number">2</span>) {
+    <pre><code>			++<span class="hljs-keyword">this</span>.count
+
+			<span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.count &gt; <span class="hljs-number">2</span>) {
 				cancelTimer()
 			} <span class="hljs-keyword">else</span> {
 				startTimer()
@@ -618,29 +719,117 @@
 
 		}
 
-	}
+	}</code></pre>
+  </div>
 
-	fetchData = () =&gt; {
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Wrap the <code>fetch</code> call in a simpler <code>fetchData</code> function.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>	fetchData = () =&gt; {
 		hooks.fetch({ dispatch: <span class="hljs-keyword">this</span>.props.dispatch })
-	}
+	}</code></pre>
+  </div>
 
-	count = <span class="hljs-number">0</span>
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>TODO: remove when we implement data completion check.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>	count = <span class="hljs-number">0</span>
 
 	render() {
 
 		<span class="hljs-keyword">const</span> { props, fetchData } = <span class="hljs-keyword">this</span>
 		<span class="hljs-keyword">const</span> { timer, results, selection } = props
-		<span class="hljs-keyword">const</span> { stopTimer, selectTown } = props.actions
+		<span class="hljs-keyword">const</span> { stopTimer, selectTown } = props.actions</code></pre>
+  </div>
 
-		<span class="hljs-keyword">const</span> timerProps = {
-			...timer,
-			callback: () =&gt; {
-				stopTimer()
-				fetchData()
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Prepare <code>Timer</code> props, including</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">const</span> timerProps = {
+			...timer,</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>a callback which gets invoked when the <code>Timer</code> runs out. If so,</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>			callback: () =&gt; {</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>fire the <code>stopTimer</code> action,</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>				stopTimer()</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>and fire the <code>fetch</code> hook, which will fire the <code>fetchResults</code>
+action.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>				fetchData()
 			},
-		}
+		}</code></pre>
+  </div>
 
-		<span class="hljs-keyword">return</span> (
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Finally we can render all the components!</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">return</span> (
 			&lt;div className='President'&gt;
 				&lt;h1&gt;President&lt;/h1&gt;
 				&lt;Timer {...timerProps} /&gt;
@@ -672,7 +861,7 @@ export default President</code></pre>
         </aside>
 
         <div class="code">
-          <span class="content page-generation-time">Generated Mon, 12 Sep 2016 21:49:30 GMT</span>
+          <span class="content page-generation-time">Generated Mon, 12 Sep 2016 22:38:22 GMT</span>
         </div>
         
       </section>
