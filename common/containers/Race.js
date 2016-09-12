@@ -66,7 +66,7 @@ class Race extends Component {
 
 		const { props, fetchData } = this
 		const { timer, results } = props
-		const { stopTimer } = props.actions
+		const { stopTimer, selectTown } = props.actions
 
 		const timerProps = {
 			...timer,
@@ -76,12 +76,14 @@ class Race extends Component {
 			},
 		}
 
+		const [summary, ...reportingUnits] = results.data['senate-ma-towns'].races[0].reportingUnits
+		
 		return (
 			<div className='Race'>
 				<h1>Race</h1>
 				<Timer {...timerProps} />
-				<MassMap data={results.data['senate-ma-towns']} />
-				<ReportingUnitList data={results.data['senate-ma-towns'].races[0]} />
+				<MassMap selectTown={selectTown} data={results.data['senate-ma-towns']} />
+				<ReportingUnitList data={reportingUnits} />
 			</div>
 		)
 

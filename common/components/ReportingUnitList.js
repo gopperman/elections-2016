@@ -5,11 +5,11 @@ import ReportingUnitResults from './../components/ReportingUnitResults.js'
 class ReportingUnitList extends Component {
 
 	static propTypes = {
-		data: PropTypes.object.isRequired,
+		data: PropTypes.array.isRequired,
 	}
 
 	render() {
-		const reportingUnits = this.props.data.reportingUnits
+		const reportingUnits = this.props.data
 		return (
 			<div className='ReportingUnitList'>
 				<h1>Town by Town Results</h1>
