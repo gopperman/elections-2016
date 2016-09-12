@@ -1,6 +1,10 @@
+// The `Timer` class is a finite state machine that displays seconds left
+// until next action (whatever that may be).
+
 import React, { Component, PropTypes } from 'react'
 import { interval } from 'd3-timer'
 
+// Hardcode duration to `3` for now.
 const DURATION = 3 * 1000
 
 class Timer extends Component {
@@ -11,25 +15,33 @@ class Timer extends Component {
 		callback: PropTypes.func.isRequired,
 	}
 
+	// This lifecycle event gets called once, immediately after the initial
+	// rendering occurs. We will use it to create a new `interval` which
+	// will call `this.forceUpdate` every 100ms.
 	componentDidMount = () => {
 		this.interval = interval(() => {
 			this.forceUpdate()
 		}, 100)
 	}
 
+	// This gets called once after the component's updates are flushed to DOM.
+	// We will use it to determine if we ran out of time.
 	componentDidUpdate = () => {
 
 		const { status, startedAt, callback } = this.props
 
-		// did we run out of time?
+		// Is the timer running, and we ran out of time?
 		if (status === Timer.status.RUNNING &&
 				(Date.now() - startedAt >= DURATION)) {
-			// call parent callback
+
+			// Then call the user-supplied `callback`.
 			callback()
 		}
 
 	}
 
+	// This gets called once immediately before the component is unmounted
+	// from the DOM. This is a good place to stop the `interval` timer.
 	componentWillUnmount = () => {
 		this.interval.stop()
 	}
@@ -37,19 +49,22 @@ class Timer extends Component {
 	render() {
 
 		const { status, startedAt } = this.props
-
 		const { CANCELED, RUNNING, STOPPED } = Timer.status
-
 		let message
+
+		// The `render` function will display different messages, depending
+		// on the `Timer` state.
 		switch (status) {
 
+			// If `CANCELED`, don't display anything.
 			case CANCELED:
 				message = ''
 				break
 
+			// If `RUNNING`, display time left until `callback`.
 			case RUNNING: {
 
-				// use Math.max to make sure we never display a negative number
+				// Use Math.max to make sure we never display a negative number.
 				const timeLeft = Math.max(
 					Math.round((DURATION - (Date.now() - startedAt)) / 1000), 0)
 
@@ -58,6 +73,7 @@ class Timer extends Component {
 
 			}
 
+			// If `STOPPED`, display a loading message.
 			case STOPPED:
 				message = 'loading'
 				break
@@ -80,6 +96,7 @@ class Timer extends Component {
 
 }
 
+// These are the finite state machine states.
 Timer.status = {
 	CANCELED: 'canceled',
 	RUNNING: 'running',

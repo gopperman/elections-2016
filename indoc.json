@@ -5,6 +5,7 @@
 	"readme": "README.md",
 	"files": [
 		"client/index.js",
-		"common/containers/President.js"
+		"common/containers/President.js",
+		"common/components/Timer.js"
 	]
 }
