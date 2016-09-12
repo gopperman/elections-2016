@@ -4,9 +4,7 @@
 	"output": "docs",
 	"readme": "README.md",
 	"files": [
-		"client/**/*.js",
-		"common/**/*.js",
-		"server/**/*.js",
-		"webpack.config.*.js"
+		"client/index.js",
+		"common/containers/President.js"
 	]
 }
