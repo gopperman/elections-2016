@@ -6,6 +6,7 @@
 	"files": [
 		"client/index.js",
 		"common/containers/President.js",
-		"common/components/Timer.js"
+		"common/components/Timer.js",
+		"common/components/MassMap.js"
 	]
 }

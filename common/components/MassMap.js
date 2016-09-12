@@ -1,3 +1,5 @@
+// The `MassMap` class displays MA results for state-wide races.
+
 /* eslint-disable no-return-assign */
 
 import React, { Component, PropTypes } from 'react'
@@ -16,111 +18,130 @@ class MassMap extends Component {
 		selectTown: PropTypes.func.isRequired,
 	}
 
-	// create the map
+	// This lifecycle event gets called once, immediately after the initial
+	// rendering occurs. We will use it to create the map.
 	componentDidMount() {
 
-		// convert TOWNS to a GeoJSON object (via topojson)
+		// Convert TOWNS to a GeoJSON object (via topojson).
 		const townsObject = topojson.feature(TOWNS, TOWNS.objects.TOWNS)
 
-		// setup a MA-centric projection
+		// Setup a MA-centric projection.
 		const projection = geoConicConformal()
 			.parallels([41 + (43 / 60), 42 + (41 / 60)])
 			.rotate([71 + (30 / 60), -41])
 
-		// create the path
+		// Create the `path`.
 		this._path = geoPath().projection(projection)
 
-		// find MA bounds and aspect ratio for this projection
+		// Find MA bounds and aspect ratio for this projection.
 		const b = this._path.bounds(townsObject)
 		const aspect = (b[1][0] - b[0][0]) / (b[1][1] - b[0][1])
 
-		// create width and heights, using 100 as width reference
+		// Create width and height.
 		const width = this._svg.parentNode.offsetWidth
 		const height = Math.round(width / aspect)
 
-		// fit this projection to the newly-calculated aspect ratio
+		// Fit this projection to the newly-calculated aspect ratio.
 		projection.fitSize([width, height], townsObject)
 
-		// set viewBox on svg
+		// Set viewBox on svg.
 		select(this._svg).attr('viewBox', `0 0 ${width} ${height}`)
 
-		// save GeoJSON features for convenience
+		// Save GeoJSON features for convenience.
 		this._towns = townsObject.features
 
-		// draw features
+		// Draw features.
 		this.drawFeatures()
 
 	}
 
-	// update map with data
+	// This gets called once after the component's updates are flushed to DOM.
+	// We will use it to update the map.
 	componentDidUpdate() {
 
+		// Grab the `data.races` property.
 		const { races } = this.props.data
+
+		// If possible, grab the first race. Otherwise set it to an empty
+		// object.
 		const race = (races && races[0]) || {}
 		const subunits = race.reportingUnits || []
 
-		// bind AP data to GeoJSON features
-		// TODO: maybe, when baking the topojson, we should give it an id
-		// so we don't rely on the property 'REPORTING_UNIT'
+		// Bind AP data to GeoJSON features.
+		// TODO: Maybe, when baking the topojson, we should give it an id
+		// so we don't rely on the property 'REPORTING_UNIT'.
+		// Save `_towns` for convenience.
 		this._towns =
 			bindSubunitsToFeatures({ subunits, features: this._towns })
 
+		// Draw features.
 		this.drawFeatures()
 
 	}
 
+	// This function draws the map shapes and listens to mouseovers.
 	drawFeatures() {
 
 		const { selectTown, selection } = this.props
 
 		const svg = select(this._svg)
 
-		// DATA JOIN
+		// DATA JOIN (d3 pattern)
 		const paths = svg.selectAll('path')
 			.data(this._towns, d => d.properties.REPORTING_UNIT)
+			// On mousemove,
 			.on('mousemove', function mousemove(d) {
 
+				// grab the mouse x/y relative to this svg container,
 				const [x, y] = mouse(this)
+
+				// grab the svg's aspect ratio from viewBox,
 				const [, , width, height] = svg.attr('viewBox').split(' ')
 
+				// calculate a percentage-based position,
 				const position = {
 					x: 100 * (x / (+width)),
 					y: 100 * (y / (+height)),
 				}
 
+				// and fire a Redux `selectTown` action.
 				selectTown({ town: d.properties.REPORTING_UNIT, position })
 
 			})
+
+			// On mouseleave fire an empty `selectTown` action.
 			.on('mouseleave', () => selectTown({}))
 
-		// UPDATE
-
-		// ENTER
-
-		// ENTER + UPDATE
+		// ENTER + UPDATE (d3 pattern)
 		paths.enter().append('path')
 			.attr('d', this._path)
 		.merge(paths)
 		.attr('class', function createClass(d) {
 
+			// Get the shape color class based on who's winning.
 			const colorClass = chooseColorClass({
 				candidates: d.subunit && d.subunit.candidates })
 
-			// TODO: will we always have a d.properties.REPORTING_UNIT?
+			// Add a `selected` class if we hovered over this shape.
+			// TODO: Will we always have a d.properties.REPORTING_UNIT?
 			const selected =
 				d.properties.REPORTING_UNIT === selection.town.name ?
 				'selected' : ''
 
-			// TODO: this is a side-effect and should maybe happen elsewhere
+			// If we selected this shape,
 			if (selected === 'selected') {
+
+				// bring it to the top, so its borders aren't under other shapes.
+				// TODO: This is a side-effect and should maybe happen elsewhere.
 				select(this).raise()
 			}
 
+			// Finally return both classes.
 			return [colorClass, selected].join(' ')
 
 		})
 
-		// EXIT
+		// EXIT (d3 pattern)
 		paths.exit().remove()
 
 	}
@@ -135,6 +156,7 @@ class MassMap extends Component {
 
 		const { x, y } = town.position || {}
 
+		// Position the tooltip based on mouseover position.
 		const tooltipStyle = {
 			top: `${y}%`,
 			left: `${x}%`,
