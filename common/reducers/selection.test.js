@@ -10,7 +10,28 @@ describe('selection reducer', () => {
 
 	describe('SELECT_TOWN', () => {
 
-		it('should set town', () => {
+		it('should clear town if null', () => {
+
+			const initialState = {
+				selection: {},
+			}
+
+			const action = {
+				type: SELECT_TOWN,
+				town: null,
+			}
+
+			const finalState = {
+				selection: {
+					town: null,
+				},
+			}
+
+			expect(rootReducer(initialState, action).selection)
+				.to.deep.equal(finalState.selection)
+
+		})
+		it('should set town if present', () => {
 
 			const initialState = {
 				selection: {},

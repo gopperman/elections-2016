@@ -9,6 +9,7 @@ import chooseColorClass from './../utils/chooseColorClass.js'
 class MassMap extends Component {
 
 	static propTypes = {
+		selection: PropTypes.object.isRequired,
 		data: PropTypes.object.isRequired,
 		selectTown: PropTypes.func.isRequired,
 	}
@@ -68,16 +69,14 @@ class MassMap extends Component {
 
 	drawFeatures() {
 
-		const { selectTown } = this.props
+		const { selectTown, selection } = this.props
 
 		// DATA JOIN
 		const paths = select(this._svg).selectAll('path')
 			.data(this._towns, d => d.properties.REPORTING_UNIT)
-			.on('mousemove', d => selectTown({ town: d.properties.REPORTING_UNIT }))
-
-			// .on('mouseleave', function onMouseLeave() {
-			// 	// select(this).classed('selected', false)
-			// })
+			.on('mousemove', d =>
+				selectTown({ town: d.properties.REPORTING_UNIT }))
+			.on('mouseleave', () => selectTown({ town: null }))
 
 		// UPDATE
 
@@ -87,9 +86,17 @@ class MassMap extends Component {
 		paths.enter().append('path')
 			.attr('d', this._path)
 		.merge(paths)
-		.attr('class', d =>
-			chooseColorClass({
-				candidates: d.subunit && d.subunit.candidates }))
+		.attr('class', d => {
+
+			const colorClass = chooseColorClass({
+				candidates: d.subunit && d.subunit.candidates })
+
+			const selected = d.properties.REPORTING_UNIT === selection.town ?
+				'selected' : ''
+
+			return [colorClass, selected].join(' ')
+
+		})
 
 		// EXIT
 		paths.exit().remove()
