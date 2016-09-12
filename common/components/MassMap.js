@@ -86,13 +86,19 @@ class MassMap extends Component {
 		paths.enter().append('path')
 			.attr('d', this._path)
 		.merge(paths)
-		.attr('class', d => {
+		.attr('class', function createClass(d) {
 
 			const colorClass = chooseColorClass({
 				candidates: d.subunit && d.subunit.candidates })
 
+			// TODO: will we always have a d.properties.REPORTING_UNIT?
 			const selected = d.properties.REPORTING_UNIT === selection.town ?
 				'selected' : ''
+
+			// TODO: this is a side-effect and should maybe happen elsewhere
+			if (selected === 'selected') {
+				select(this).raise()
+			}
 
 			return [colorClass, selected].join(' ')
 
