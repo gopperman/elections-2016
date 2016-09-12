@@ -152,6 +152,19 @@
   
 <li class="file">
   
+<a href="../../common/components/ReportingUnitList.js" title="common/components/ReportingUnitList.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/ReportingUnitList.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
 <a href="../../common/components/Root.js" title="common/components/Root.js">
     
 <span class="language" style="background-color: #f1e05a">js</span>
@@ -210,6 +223,19 @@
 
 
 <span class="filename">common/containers/President.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../common/containers/Race.js" title="common/containers/Race.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/containers/Race.js</span>
 
 </a>
 
@@ -486,16 +512,18 @@
       
       <section class="section">
 
-  
-  <aside class="comment empty">
-    <div class="text markdown"></div>
+  <aside class="comment">
+    <div class="text markdown"><p>eslint-disable global-require, no-unused-vars</p>
+</div>
   </aside>
+  
 
   <div class="code">
     <pre><code><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
 <span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom'</span>
 <span class="hljs-keyword">import</span> { browserHistory } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-router'</span>
-<span class="hljs-keyword">import</span> configureStore <span class="hljs-keyword">from</span> <span class="hljs-string">'./../common/store/configureStore.js'</span></code></pre>
+<span class="hljs-keyword">import</span> configureStore <span class="hljs-keyword">from</span> <span class="hljs-string">'./../common/store/configureStore.js'</span>
+<span class="hljs-keyword">import</span> css <span class="hljs-keyword">from</span> <span class="hljs-string">'./../common/styles/config.styl'</span></code></pre>
   </div>
 
   
@@ -503,16 +531,28 @@
 <section class="section">
 
   <aside class="comment">
-    <div class="text markdown"><p>eslint-disable-next-line no-unused-vars</p>
+    <div class="text markdown"><p>Grab the initial Redux state (a json string created by the server).</p>
 </div>
   </aside>
   
 
   <div class="code">
-    <pre><code><span class="hljs-keyword">import</span> css <span class="hljs-keyword">from</span> <span class="hljs-string">'./../common/styles/config.styl'</span>
+    <pre><code><span class="hljs-keyword">const</span> initialState = <span class="hljs-built_in">window</span>.REDUX__INITIALSTATE</code></pre>
+  </div>
 
-<span class="hljs-keyword">const</span> initialState = <span class="hljs-built_in">window</span>.REDUX__INITIALSTATE
-<span class="hljs-keyword">const</span> store = configureStore(initialState)
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Hydrate the Redux store with <code>initialState</code>.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code><span class="hljs-keyword">const</span> store = configureStore(initialState)
+
 <span class="hljs-keyword">const</span> rootElement = <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">'root'</span>)</code></pre>
   </div>
 
@@ -521,14 +561,16 @@
 <section class="section">
 
   <aside class="comment">
-    <div class="text markdown"><p>the following code (render, module.hot if, etc) comes from
-<a href="https://github.com/reactjs/redux/pull/1455" title="">https://github.com/reactjs/redux/pull/1455</a> (cleaner than react-hmre)</p>
+    <div class="text markdown"><p>Setup a <code>render</code> function that we will overwrite for hot module
+reloading - see <a href="https://github.com/reactjs/redux/pull/1455" title="">https://github.com/reactjs/redux/pull/1455</a>.</p>
 </div>
   </aside>
   
 
   <div class="code">
-    <pre><code><span class="hljs-keyword">let</span> render = () =&gt; {</code></pre>
+    <pre><code><span class="hljs-keyword">let</span> render = () =&gt; {
+
+	<span class="hljs-keyword">const</span> Root = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./../common/components/Root.js'</span>).default</code></pre>
   </div>
 
   
@@ -536,23 +578,16 @@
 <section class="section">
 
   <aside class="comment">
-    <div class="text markdown"><p>eslint-disable-next-line global-require</p>
+    <div class="text markdown"><p>Render React app to <code>rootElement</code>.</p>
 </div>
   </aside>
   
 
   <div class="code">
-    <pre><code>	<span class="hljs-keyword">const</span> Root = <span class="hljs-built_in">require</span>(<span class="hljs-string">'./../common/components/Root.js'</span>).default
-
-	ReactDOM.render(
+    <pre><code>	ReactDOM.render(
 		<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Root</span> <span class="hljs-attr">history</span>=<span class="hljs-string">{browserHistory}</span> <span class="hljs-attr">store</span>=<span class="hljs-string">{store}</span> /&gt;</span>, rootElement)
 
-}
-
-if (module.hot) {
-
-	const renderRoot = render
-	const renderError = (error) =&gt; {</span></code></pre>
+}</span></code></pre>
   </div>
 
   
@@ -560,35 +595,77 @@ if (module.hot) {
 <section class="section">
 
   <aside class="comment">
-    <div class="text markdown"><p>eslint-disable-next-line global-require</p>
+    <div class="text markdown"><p>If HMR is enabled,</p>
 </div>
   </aside>
   
 
   <div class="code">
-    <pre><code>		<span class="hljs-keyword">const</span> RedBox = <span class="hljs-built_in">require</span>(<span class="hljs-string">'redbox-react'</span>)
+    <pre><code><span class="hljs-keyword">if</span> (<span class="hljs-built_in">module</span>.hot) {
 
-		ReactDOM.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">RedBox</span> <span class="hljs-attr">error</span>=<span class="hljs-string">{error}</span> /&gt;</span>, rootElement)
+	<span class="hljs-keyword">const</span> renderRoot = render</code></pre>
+  </div>
 
-	}
+  
+</section>
+<section class="section">
 
-	render = () =&gt; {
+  <aside class="comment">
+    <div class="text markdown"><p>and we have an error,</p>
+</div>
+  </aside>
+  
 
-		try {
+  <div class="code">
+    <pre><code>	<span class="hljs-keyword">const</span> renderError = (error) =&gt; {
+
+		<span class="hljs-keyword">const</span> RedBox = <span class="hljs-built_in">require</span>(<span class="hljs-string">'redbox-react'</span>)</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>render error with <code>RedBox</code> styling.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		ReactDOM.render(<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">RedBox</span> <span class="hljs-attr">error</span>=<span class="hljs-string">{error}</span> /&gt;</span>, rootElement)
+
+	}</span></code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Otherwise try to render app normally.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>	render = () =&gt; {
+
+		<span class="hljs-keyword">try</span> {
 			renderRoot()
-		} catch (error) {
+		} <span class="hljs-keyword">catch</span> (error) {
 			renderError(error)
 		}
 
 	}
 
-	module.hot.accept('./../common/components/Root.js', () =&gt; {
+	<span class="hljs-built_in">module</span>.hot.accept(<span class="hljs-string">'./../common/components/Root.js'</span>, () =&gt; {
 		setTimeout(render)
 	})
 
 }
 
-render()</span></code></pre>
+render()</code></pre>
   </div>
 
   
@@ -603,7 +680,7 @@ render()</span></code></pre>
         </aside>
 
         <div class="code">
-          <span class="content page-generation-time">Generated Fri, 02 Sep 2016 00:01:03 GMT</span>
+          <span class="content page-generation-time">Generated Mon, 12 Sep 2016 21:49:30 GMT</span>
         </div>
         
       </section>

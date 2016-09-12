@@ -165,6 +165,19 @@
   
 <li class="file">
   
+<a href="../../components/ReportingUnitList.js" title="common/components/ReportingUnitList.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/ReportingUnitList.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
 <a href="../../components/Root.js" title="common/components/Root.js">
     
 <span class="language" style="background-color: #f1e05a">js</span>
@@ -210,6 +223,19 @@
 
 
 <span class="filename">common/containers/Home.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../Race.js" title="common/containers/Race.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/containers/Race.js</span>
 
 </a>
 
@@ -603,7 +629,7 @@
 	render() {
 
 		<span class="hljs-keyword">const</span> { props, fetchData } = <span class="hljs-keyword">this</span>
-		<span class="hljs-keyword">const</span> { timer, results } = props
+		<span class="hljs-keyword">const</span> { timer, results, selection } = props
 		<span class="hljs-keyword">const</span> { stopTimer, selectTown } = props.actions
 
 		<span class="hljs-keyword">const</span> timerProps = {
@@ -618,7 +644,10 @@
 			&lt;div className='President'&gt;
 				&lt;h1&gt;President&lt;/h1&gt;
 				&lt;Timer {...timerProps} /&gt;
-				&lt;MassMap selectTown={selectTown} data={results.data['president-ma-towns']} /&gt;
+				&lt;MassMap
+					selection={selection}
+					selectTown={selectTown}
+					data={results.data['president-ma-towns']} /&gt;
 				&lt;ElectoralCollegeBar data={results.data['president-us']} /&gt;
 				&lt;ElectoralCollegeMap data={results.data['president-us-states']} /&gt;
 			&lt;/div&gt;
@@ -643,7 +672,7 @@ export default President</code></pre>
         </aside>
 
         <div class="code">
-          <span class="content page-generation-time">Generated Fri, 02 Sep 2016 00:01:03 GMT</span>
+          <span class="content page-generation-time">Generated Mon, 12 Sep 2016 21:49:30 GMT</span>
         </div>
         
       </section>

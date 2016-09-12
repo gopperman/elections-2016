@@ -152,6 +152,19 @@
   
 <li class="file">
   
+<a href="../ReportingUnitList.js" title="common/components/ReportingUnitList.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/ReportingUnitList.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
 <a href="../Root.js" title="common/components/Root.js">
     
 <span class="language" style="background-color: #f1e05a">js</span>
@@ -210,6 +223,19 @@
 
 
 <span class="filename">common/containers/President.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../containers/Race.js" title="common/containers/Race.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/containers/Race.js</span>
 
 </a>
 
@@ -486,16 +512,17 @@
       
       <section class="section">
 
-  
-  <aside class="comment empty">
-    <div class="text markdown"></div>
+  <aside class="comment">
+    <div class="text markdown"><p>eslint-disable no-return-assign</p>
+</div>
   </aside>
+  
 
   <div class="code">
     <pre><code><span class="hljs-keyword">import</span> React, { Component, PropTypes } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
 <span class="hljs-keyword">import</span> topojson <span class="hljs-keyword">from</span> <span class="hljs-string">'topojson'</span>
 <span class="hljs-keyword">import</span> { geoPath, geoConicConformal } <span class="hljs-keyword">from</span> <span class="hljs-string">'d3-geo'</span>
-<span class="hljs-keyword">import</span> { select } <span class="hljs-keyword">from</span> <span class="hljs-string">'d3-selection'</span>
+<span class="hljs-keyword">import</span> { mouse, select } <span class="hljs-keyword">from</span> <span class="hljs-string">'d3-selection'</span>
 <span class="hljs-keyword">import</span> TOWNS <span class="hljs-keyword">from</span> <span class="hljs-string">'./../../data/output/TOWNS.json'</span>
 <span class="hljs-keyword">import</span> bindSubunitsToFeatures <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/bindSubunitsToFeatures.js'</span>
 <span class="hljs-keyword">import</span> chooseColorClass <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/chooseColorClass.js'</span>
@@ -503,6 +530,7 @@
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MassMap</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
 
 	<span class="hljs-keyword">static</span> propTypes = {
+		selection: PropTypes.object.isRequired,
 		data: PropTypes.object.isRequired,
 		selectTown: PropTypes.func.isRequired,
 	}</code></pre>
@@ -694,7 +722,9 @@ so we don&#39;t rely on the property &#39;REPORTING_UNIT&#39;</p>
 
 	drawFeatures() {
 
-		<span class="hljs-keyword">const</span> { selectTown } = <span class="hljs-keyword">this</span>.props</code></pre>
+		<span class="hljs-keyword">const</span> { selectTown, selection } = <span class="hljs-keyword">this</span>.props
+
+		<span class="hljs-keyword">const</span> svg = select(<span class="hljs-keyword">this</span>._svg)</code></pre>
   </div>
 
   
@@ -708,27 +738,24 @@ so we don&#39;t rely on the property &#39;REPORTING_UNIT&#39;</p>
   
 
   <div class="code">
-    <pre><code>		<span class="hljs-keyword">const</span> paths = select(<span class="hljs-keyword">this</span>._svg).selectAll(<span class="hljs-string">'path'</span>)
+    <pre><code>		<span class="hljs-keyword">const</span> paths = svg.selectAll(<span class="hljs-string">'path'</span>)
 			.data(<span class="hljs-keyword">this</span>._towns, d =&gt; d.properties.REPORTING_UNIT)
-			.on(<span class="hljs-string">'mousemove'</span>, d =&gt; selectTown({ town: d.properties.REPORTING_UNIT }))</code></pre>
+			.on(<span class="hljs-string">'mousemove'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">mousemove</span>(<span class="hljs-params">d</span>) </span>{
+
+				<span class="hljs-keyword">const</span> [x, y] = mouse(<span class="hljs-keyword">this</span>)
+				<span class="hljs-keyword">const</span> [, , width, height] = svg.attr(<span class="hljs-string">'viewBox'</span>).split(<span class="hljs-string">' '</span>)
+
+				<span class="hljs-keyword">const</span> position = {
+					x: <span class="hljs-number">100</span> * (x / (+width)),
+					y: <span class="hljs-number">100</span> * (y / (+height)),
+				}
+
+				selectTown({ town: d.properties.REPORTING_UNIT, position })
+
+			})
+			.on(<span class="hljs-string">'mouseleave'</span>, () =&gt; selectTown({}))</code></pre>
   </div>
 
-  
-</section>
-<section class="section">
-
-  <aside class="comment">
-    <div class="text markdown"><p>.on(&#39;mouseleave&#39;, function onMouseLeave() {
-    // select(this).classed(&#39;selected&#39;, false)
-})</p>
-</div>
-  </aside>
-  
-
-
-  <div class="code empty">
-    <pre><code></code></pre>
-  </div>
   
 </section>
 <section class="section">
@@ -771,9 +798,46 @@ so we don&#39;t rely on the property &#39;REPORTING_UNIT&#39;</p>
     <pre><code>		paths.enter().append(<span class="hljs-string">'path'</span>)
 			.attr(<span class="hljs-string">'d'</span>, <span class="hljs-keyword">this</span>._path)
 		.merge(paths)
-		.attr(<span class="hljs-string">'class'</span>, d =&gt;
-			chooseColorClass({
-				candidates: d.subunit &amp;&amp; d.subunit.candidates }))</code></pre>
+		.attr(<span class="hljs-string">'class'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">createClass</span>(<span class="hljs-params">d</span>) </span>{
+
+			<span class="hljs-keyword">const</span> colorClass = chooseColorClass({
+				candidates: d.subunit &amp;&amp; d.subunit.candidates })</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>TODO: will we always have a d.properties.REPORTING_UNIT?</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>			<span class="hljs-keyword">const</span> selected =
+				d.properties.REPORTING_UNIT === selection.town.name ?
+				<span class="hljs-string">'selected'</span> : <span class="hljs-string">''</span></code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>TODO: this is a side-effect and should maybe happen elsewhere</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>			<span class="hljs-keyword">if</span> (selected === <span class="hljs-string">'selected'</span>) {
+				select(<span class="hljs-keyword">this</span>).raise()
+			}
+
+			<span class="hljs-keyword">return</span> [colorClass, selected].join(<span class="hljs-string">' '</span>)
+
+		})</code></pre>
   </div>
 
   
@@ -797,27 +861,30 @@ so we don&#39;t rely on the property &#39;REPORTING_UNIT&#39;</p>
 
 	render() {
 
-		<span class="hljs-keyword">return</span> (</code></pre>
-  </div>
+		<span class="hljs-keyword">const</span> { town } = <span class="hljs-keyword">this</span>.props.selection
 
-  
-</section>
-<section class="section">
+		<span class="hljs-keyword">const</span> { x, y } = town.position || {}
 
-  <aside class="comment">
-    <div class="text markdown"><p>eslint-disable-next-line no-return-assign</p>
-</div>
-  </aside>
-  
+		<span class="hljs-keyword">const</span> tooltipStyle = {
+			top: <span class="hljs-string">`<span class="hljs-subst">${y}</span>%`</span>,
+			left: <span class="hljs-string">`<span class="hljs-subst">${x}</span>%`</span>,
+		}
 
-  <div class="code">
-    <pre><code>			&lt;svg className=<span class="hljs-string">'MassMap'</span> ref={(c) =&gt; <span class="hljs-keyword">this</span>._svg = c} /&gt;
+		<span class="hljs-keyword">return</span> (
+			<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'MassMap'</span>&gt;</span>
+				<span class="hljs-tag">&lt;<span class="hljs-name">svg</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">{(c)</span> =&gt;</span> this._svg = c} /&gt;
+				<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'tooltip'</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{tooltipStyle}</span>&gt;</span>
+					<span class="hljs-tag">&lt;<span class="hljs-name">pre</span>&gt;</span>
+						{ JSON.stringify(town, null, 2) }
+					<span class="hljs-tag">&lt;/<span class="hljs-name">pre</span>&gt;</span>
+				<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+			<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 		)
 
 	}
 
 }
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> MassMap</code></pre>
+export default MassMap</span></code></pre>
   </div>
 
   
@@ -832,7 +899,7 @@ so we don&#39;t rely on the property &#39;REPORTING_UNIT&#39;</p>
         </aside>
 
         <div class="code">
-          <span class="content page-generation-time">Generated Fri, 02 Sep 2016 00:01:03 GMT</span>
+          <span class="content page-generation-time">Generated Mon, 12 Sep 2016 21:49:30 GMT</span>
         </div>
         
       </section>

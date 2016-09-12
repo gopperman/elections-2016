@@ -165,6 +165,19 @@
   
 <li class="file">
   
+<a href="../../components/ReportingUnitList.js" title="common/components/ReportingUnitList.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/ReportingUnitList.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
 <a href="../../components/Root.js" title="common/components/Root.js">
     
 <span class="language" style="background-color: #f1e05a">js</span>
@@ -223,6 +236,19 @@
 
 
 <span class="filename">common/containers/President.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../containers/Race.js" title="common/containers/Race.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/containers/Race.js</span>
 
 </a>
 
@@ -503,7 +529,30 @@ describe(<span class="hljs-string">'selection reducer'</span>, () =&gt; {
 
 	describe(<span class="hljs-string">'SELECT_TOWN'</span>, () =&gt; {
 
-		it(<span class="hljs-string">'should set town'</span>, () =&gt; {
+		it(<span class="hljs-string">'should clear town if null'</span>, () =&gt; {
+
+			<span class="hljs-keyword">const</span> initialState = {
+				selection: {},
+			}
+
+			<span class="hljs-keyword">const</span> action = {
+				type: SELECT_TOWN,
+			}
+
+			<span class="hljs-keyword">const</span> finalState = {
+				selection: {
+					town: {
+						name: <span class="hljs-literal">null</span>,
+						position: <span class="hljs-literal">null</span>,
+					},
+				},
+			}
+
+			expect(rootReducer(initialState, action).selection)
+				.to.deep.equal(finalState.selection)
+
+		})
+		it(<span class="hljs-string">'should set town if present'</span>, () =&gt; {
 
 			<span class="hljs-keyword">const</span> initialState = {
 				selection: {},
@@ -512,11 +561,15 @@ describe(<span class="hljs-string">'selection reducer'</span>, () =&gt; {
 			<span class="hljs-keyword">const</span> action = {
 				type: SELECT_TOWN,
 				town: <span class="hljs-string">'hello'</span>,
+				position: [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>],
 			}
 
 			<span class="hljs-keyword">const</span> finalState = {
 				selection: {
-					town: <span class="hljs-string">'hello'</span>,
+					town: {
+						name: <span class="hljs-string">'hello'</span>,
+						position: [<span class="hljs-number">1</span>, <span class="hljs-number">2</span>],
+					},
 				},
 			}
 
@@ -542,7 +595,7 @@ describe(<span class="hljs-string">'selection reducer'</span>, () =&gt; {
         </aside>
 
         <div class="code">
-          <span class="content page-generation-time">Generated Fri, 02 Sep 2016 00:01:03 GMT</span>
+          <span class="content page-generation-time">Generated Mon, 12 Sep 2016 21:49:30 GMT</span>
         </div>
         
       </section>

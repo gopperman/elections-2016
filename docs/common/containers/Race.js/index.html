@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>common/store/configureStore.js</title>
+    <title>common/containers/Race.js</title>
     <link rel="stylesheet" href="./../../../public/style.css" />
     <link rel="icon" type="image/png" href="./../../../public/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,7 +27,7 @@
               <a id="project-overview" href="./../../.." title="Project Overview">elections-2016<span id="version"></span></a>
               
               <div class="files-menu">
-                <span id="filename" title="common/store/configureStore.js">common/store/configureStore.js</span>
+                <span id="filename" title="common/containers/Race.js">common/containers/Race.js</span>
                 
               
                 <ul class="files hidable">
@@ -217,7 +217,7 @@
 <li class="file separator">
   
   
-<a href="../../containers/Home.js" title="common/containers/Home.js">
+<a href="../Home.js" title="common/containers/Home.js">
     
 <span class="language" style="background-color: #f1e05a">js</span>
 
@@ -230,25 +230,12 @@
   
 <li class="file">
   
-<a href="../../containers/President.js" title="common/containers/President.js">
+<a href="../President.js" title="common/containers/President.js">
     
 <span class="language" style="background-color: #f1e05a">js</span>
 
 
 <span class="filename">common/containers/President.js</span>
-
-</a>
-
-</li>
-  
-<li class="file">
-  
-<a href="../../containers/Race.js" title="common/containers/Race.js">
-    
-<span class="language" style="background-color: #f1e05a">js</span>
-
-
-<span class="filename">common/containers/Race.js</span>
 
 </a>
 
@@ -334,7 +321,20 @@
 <li class="file separator">
   
   
-<a href="../initialState.js" title="common/store/initialState.js">
+<a href="../../store/configureStore.js" title="common/store/configureStore.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/store/configureStore.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../store/initialState.js" title="common/store/initialState.js">
     
 <span class="language" style="background-color: #f1e05a">js</span>
 
@@ -518,31 +518,142 @@
   </aside>
 
   <div class="code">
-    <pre><code><span class="hljs-keyword">import</span> { createStore, applyMiddleware, compose } <span class="hljs-keyword">from</span> <span class="hljs-string">'redux'</span>
-<span class="hljs-keyword">import</span> thunk <span class="hljs-keyword">from</span> <span class="hljs-string">'redux-thunk'</span>
-<span class="hljs-keyword">import</span> reducers <span class="hljs-keyword">from</span> <span class="hljs-string">'./../reducers/index.js'</span>
+    <pre><code><span class="hljs-keyword">import</span> React, { Component, PropTypes } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
+<span class="hljs-keyword">import</span> { provideHooks } <span class="hljs-keyword">from</span> <span class="hljs-string">'redial'</span>
+<span class="hljs-keyword">import</span> { bindActionCreators } <span class="hljs-keyword">from</span> <span class="hljs-string">'redux'</span>
+<span class="hljs-keyword">import</span> { connect } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-redux'</span>
+<span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> actions <span class="hljs-keyword">from</span> <span class="hljs-string">'./../actions/actionCreators.js'</span>
+<span class="hljs-keyword">import</span> Timer <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/Timer.js'</span>
+<span class="hljs-keyword">import</span> ReportingUnitList <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/ReportingUnitList.js'</span>
+<span class="hljs-keyword">import</span> MassMap <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/MassMap.js'</span>
 
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> (initialState) =&gt; {
+<span class="hljs-keyword">const</span> hooks = {
+	fetch: ({ dispatch }) =&gt;
+		dispatch(actions.fetchResults({ url: <span class="hljs-string">'race'</span> })),
+}
 
-	<span class="hljs-keyword">const</span> isProd = process.env.NODE_ENV === <span class="hljs-string">'production'</span>
-	<span class="hljs-keyword">const</span> showDevTools = !isProd &amp;&amp;
-		<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">window</span> !== <span class="hljs-string">'undefined'</span> &amp;&amp;
-		<span class="hljs-built_in">window</span>.devToolsExtension
+<span class="hljs-keyword">const</span> mapDispatchToProps = (dispatch) =&gt; ({
+	dispatch,
+	actions: bindActionCreators(actions, dispatch),
+})
 
-	<span class="hljs-keyword">const</span> store = createStore(
-		reducers,
-		initialState,
-		compose(
-			applyMiddleware(
-				thunk,
-			),
-			showDevTools ? <span class="hljs-built_in">window</span>.devToolsExtension() : f =&gt; f,
+@provideHooks(hooks)
+@connect(s =&gt; s, mapDispatchToProps)
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Race</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+
+	<span class="hljs-keyword">static</span> propTypes = {
+		actions: PropTypes.object.isRequired,
+		timer: PropTypes.object.isRequired,
+		results: PropTypes.object.isRequired,
+		dispatch: PropTypes.func.isRequired,
+	}</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>when component is initially mounted onto DOM, fire its &#39;fetch&#39; hook</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>	componentDidMount = () =&gt; {
+		<span class="hljs-keyword">this</span>.fetchData()
+	}
+
+	componentDidUpdate = (prevProps) =&gt; {
+
+		<span class="hljs-keyword">const</span> { props } = <span class="hljs-keyword">this</span>
+		<span class="hljs-keyword">const</span> { startTimer, cancelTimer } = props.actions</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>did we stop fetching?</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">if</span> (prevProps.results.isFetching &amp;&amp; !props.results.isFetching) {</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>TODO: add data completeness check</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>			++<span class="hljs-keyword">this</span>.count
+			<span class="hljs-built_in">console</span>.log(<span class="hljs-keyword">this</span>.count)</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>is the race over?</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>			<span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.count &gt; <span class="hljs-number">0</span>) {
+				cancelTimer()
+			} <span class="hljs-keyword">else</span> {
+				startTimer()
+			}
+
+		}
+
+	}
+
+	fetchData = () =&gt; {
+		hooks.fetch({ dispatch: <span class="hljs-keyword">this</span>.props.dispatch })
+	}
+
+	count = <span class="hljs-number">0</span>
+
+	render() {
+
+		<span class="hljs-keyword">const</span> { props, fetchData } = <span class="hljs-keyword">this</span>
+		<span class="hljs-keyword">const</span> { timer, results } = props
+		<span class="hljs-keyword">const</span> { stopTimer } = props.actions
+
+		<span class="hljs-keyword">const</span> timerProps = {
+			...timer,
+			callback: () =&gt; {
+				stopTimer()
+				fetchData()
+			},
+		}
+
+		<span class="hljs-keyword">return</span> (
+			&lt;div className='Race'&gt;
+				&lt;h1&gt;Race&lt;/h1&gt;
+				&lt;Timer {...timerProps} /&gt;
+				&lt;MassMap data={results.data['senate-ma-towns']} /&gt;
+				&lt;ReportingUnitList data={results.data['senate-ma-towns'].races[0]} /&gt;
+			&lt;/div&gt;
 		)
-	)
 
-	<span class="hljs-keyword">return</span> store
+	}
 
-}</code></pre>
+}
+
+export default Race</code></pre>
   </div>
 
   
