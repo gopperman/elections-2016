@@ -1,4 +1,5 @@
 import React, { Component, PropTypes } from 'react'
+import ReportingUnitResults from './../components/ReportingUnitResults.js'
 
 // eslint-disable-next-line react/prefer-stateless-function
 class ReportingUnitList extends Component {
@@ -14,19 +15,7 @@ class ReportingUnitList extends Component {
 				<h1>Town by Town Results</h1>
 				<ul>
 					{ reportingUnits.map( ru => (
-							<li key={ru.reportingunitID}>
-								<h2>{ru.reportingunitName}</h2>
-								<p>Precincts Reporting: { ru.precinctsReporting } ({ ru.precinctsReportingPct}%)</p>
-								<ul>
-									{ ru.candidates.map( c => (
-											<li key={c.polID}>
-												<p>{c.first} {c.last} ({c.party})</p>
-												<p>Votes: {c.voteCount} {c.winner}</p>
-											</li>
-										)
-									)}
-								</ul>
-							</li>
+							<ReportingUnitResults data={ru} />
 						)
 					)}
 				</ul>
