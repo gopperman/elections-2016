@@ -7,7 +7,20 @@ describe('Candidate', () => {
 
 	describe('percent', () => {
 
-		it('should work with valid candidates and candidate', () => {
+		it('should work with zero votes', () => {
+
+			const candidates = [
+				{ voteCount: 0, candidateID: 'a' },
+				{ voteCount: 0, candidateID: 'b' },
+				{ voteCount: 0, candidateID: 'c' },
+			]
+
+			assert.equal(percent({ candidates, candidateID: 'a' }), 0)
+			assert.equal(percent({ candidates, candidateID: 'b' }), 0)
+
+		})
+
+		it('should work with non-zero votes', () => {
 
 			const candidates = [
 				{ voteCount: 0, candidateID: 'a' },
