@@ -2,7 +2,8 @@ import _ from 'lodash'
 import compare from './compareStrings.js'
 
 const findMatchingSubunit = ({ subunits, name }) =>
-	_.find(subunits, s => name.length && compare(s.reportingunitName, name))
+	_.find(subunits, s => name && name.length &&
+		compare(s.reportingunitName, name))
 
 export default ({ subunits, features }) =>
 	features.map(f => ({

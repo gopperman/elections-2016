@@ -45,7 +45,7 @@ describe('bindSubunitsToFeatures', () => {
 		it('should not return a subunit with a null name', () => {
 
 			const subunits = subunitsInput.races[0].reportingUnits
-			const name = ''
+			const name = null
 
 			const output = findMatchingSubunit({ subunits, name })
 
