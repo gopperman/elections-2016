@@ -7,8 +7,10 @@ import topojson from 'topojson'
 import { geoPath, geoConicConformal } from 'd3-geo'
 import { mouse, select } from 'd3-selection'
 import TOWNS from './../../data/output/TOWNS.json'
-import bindSubunitsToFeatures from './../utils/bindSubunitsToFeatures.js'
+import bindSubunitsToFeatures, { findMatchingSubunit }
+	from './../utils/bindSubunitsToFeatures.js'
 import chooseColorClass from './../utils/chooseColorClass.js'
+import Tooltip from './Tooltip.js'
 
 class MassMap extends Component {
 
@@ -62,8 +64,7 @@ class MassMap extends Component {
 		// Grab the `data.races` property.
 		const { races } = this.props.data
 
-		// If possible, grab the first race. Otherwise set it to an empty
-		// object.
+		// If possible, grab the first race. Otherwise set it to an empty object.
 		const race = (races && races[0]) || {}
 		const subunits = race.reportingUnits || []
 
@@ -72,7 +73,7 @@ class MassMap extends Component {
 		// so we don't rely on the property 'REPORTING_UNIT'.
 		// Save `_towns` for convenience.
 		this._towns =
-			bindSubunitsToFeatures({ subunits, features: this._towns })
+			bindSubunitsToFeatures({ features: this._towns, subunits })
 
 		// Draw features.
 		this.drawFeatures()
@@ -108,7 +109,6 @@ class MassMap extends Component {
 				selectTown({ town: d.properties.REPORTING_UNIT, position })
 
 			})
-
 			// On mouseleave fire an empty `selectTown` action.
 			.on('mouseleave', () => selectTown({}))
 
@@ -152,24 +152,34 @@ class MassMap extends Component {
 
 	render() {
 
-		const { town } = this.props.selection
+		let tooltip = null
 
-		const { x, y } = town.position || {}
+		const { name, position } = this.props.selection.town
 
-		// Position the tooltip based on mouseover position.
-		const tooltipStyle = {
-			top: `${y}%`,
-			left: `${x}%`,
+		// Do we have a `name` or `position` - did the user select a town? If so,
+		if (name || position) {
+
+			// get the town's race results:
+
+			// Grab the `data.races` property.
+			const { races } = this.props.data
+
+			// If possible, grab the first race. Otherwise set it to an empty object.
+			const race = (races && races[0]) || {}
+			const subunits = race.reportingUnits || []
+
+			// Find the matching results so we can pass them to `Tooltip`.
+			const results = findMatchingSubunit({ name, subunits })
+
+			// Create the `Tooltip` component.
+			tooltip = <Tooltip {...{ results, position }} />
+
 		}
 
 		return (
 			<div className='MassMap'>
 				<svg ref={(c) => this._svg = c} />
-				<div className='tooltip' style={tooltipStyle}>
-					<pre>
-						{ JSON.stringify(town, null, 2) }
-					</pre>
-				</div>
+				{tooltip}
 			</div>
 		)
 

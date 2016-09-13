@@ -7,6 +7,7 @@
 		"client/index.js",
 		"common/containers/President.js",
 		"common/components/Timer.js",
+		"common/components/Tooltip.js",
 		"common/components/MassMap.js"
 	]
 }
