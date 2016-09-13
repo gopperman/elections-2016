@@ -14,6 +14,7 @@ const createSummary = ({ reportingunitName }) =>
 
 const Tooltip = ({ results, position }) => (
 	<div>
+		<h1>Tooltip</h1>
 		<pre>{ JSON.stringify(position, null, 2) }</pre>
 		<table summary={createSummary(results)}>
 			<caption>
@@ -46,7 +47,7 @@ const Tooltip = ({ results, position }) => (
 
 					// Create this candidate's table row.
 					return (
-						<tr>
+						<tr key={i}>
 							<th scope='row'><span>&nbsp;</span>{name}</th>
 							<td>{pctForDisplay}<span>%</span></td>
 							<td><span>{vote}</span></td>
