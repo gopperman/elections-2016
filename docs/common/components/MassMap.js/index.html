@@ -58,6 +58,19 @@
 </a>
 
 </li>
+  
+<li class="file">
+  
+<a href="../Tooltip.js" title="common/components/Tooltip.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/Tooltip.js</span>
+
+</a>
+
+</li>
 <li class="file separator">
   
   
@@ -122,8 +135,10 @@
 <span class="hljs-keyword">import</span> { geoPath, geoConicConformal } <span class="hljs-keyword">from</span> <span class="hljs-string">'d3-geo'</span>
 <span class="hljs-keyword">import</span> { mouse, select } <span class="hljs-keyword">from</span> <span class="hljs-string">'d3-selection'</span>
 <span class="hljs-keyword">import</span> TOWNS <span class="hljs-keyword">from</span> <span class="hljs-string">'./../../data/output/TOWNS.json'</span>
-<span class="hljs-keyword">import</span> bindSubunitsToFeatures <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/bindSubunitsToFeatures.js'</span>
+<span class="hljs-keyword">import</span> bindSubunitsToFeatures, { findMatchingSubunit }
+	<span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/bindSubunitsToFeatures.js'</span>
 <span class="hljs-keyword">import</span> chooseColorClass <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/chooseColorClass.js'</span>
+<span class="hljs-keyword">import</span> Tooltip <span class="hljs-keyword">from</span> <span class="hljs-string">'./Tooltip.js'</span>
 
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MassMap</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
 
@@ -315,8 +330,7 @@ We will use it to update the map.</p>
 <section class="section">
 
   <aside class="comment">
-    <div class="text markdown"><p>If possible, grab the first race. Otherwise set it to an empty
-object.</p>
+    <div class="text markdown"><p>If possible, grab the first race. Otherwise set it to an empty object.</p>
 </div>
   </aside>
   
@@ -341,7 +355,7 @@ Save <code>_towns</code> for convenience.</p>
 
   <div class="code">
     <pre><code>		<span class="hljs-keyword">this</span>._towns =
-			bindSubunitsToFeatures({ subunits, features: <span class="hljs-keyword">this</span>._towns })</code></pre>
+			bindSubunitsToFeatures({ features: <span class="hljs-keyword">this</span>._towns, subunits })</code></pre>
   </div>
 
   
@@ -598,9 +612,9 @@ TODO: This is a side-effect and should maybe happen elsewhere.</p>
 
 	render() {
 
-		<span class="hljs-keyword">const</span> { town } = <span class="hljs-keyword">this</span>.props.selection
+		<span class="hljs-keyword">let</span> tooltip = <span class="hljs-literal">null</span>
 
-		<span class="hljs-keyword">const</span> { x, y } = town.position || {}</code></pre>
+		<span class="hljs-keyword">const</span> { name, position } = <span class="hljs-keyword">this</span>.props.selection.town</code></pre>
   </div>
 
   
@@ -608,32 +622,98 @@ TODO: This is a side-effect and should maybe happen elsewhere.</p>
 <section class="section">
 
   <aside class="comment">
-    <div class="text markdown"><p>Position the tooltip based on mouseover position.</p>
+    <div class="text markdown"><p>Do we have a <code>name</code> or <code>position</code> - did the user select a town? If so,</p>
 </div>
   </aside>
   
 
   <div class="code">
-    <pre><code>		<span class="hljs-keyword">const</span> tooltipStyle = {
-			top: <span class="hljs-string">`<span class="hljs-subst">${y}</span>%`</span>,
-			left: <span class="hljs-string">`<span class="hljs-subst">${x}</span>%`</span>,
+    <pre><code>		<span class="hljs-keyword">if</span> (name || position) {</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>get the town&#39;s race results:</p>
+</div>
+  </aside>
+  
+
+
+  <div class="code empty">
+    <pre><code></code></pre>
+  </div>
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Grab the <code>data.races</code> property.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>			<span class="hljs-keyword">const</span> { races } = <span class="hljs-keyword">this</span>.props.data</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>If possible, grab the first race. Otherwise set it to an empty object.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>			<span class="hljs-keyword">const</span> race = (races &amp;&amp; races[<span class="hljs-number">0</span>]) || {}
+			<span class="hljs-keyword">const</span> subunits = race.reportingUnits || []</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Find the matching results so we can pass them to <code>Tooltip</code>.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>			<span class="hljs-keyword">const</span> results = findMatchingSubunit({ name, subunits })</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Create the <code>Tooltip</code> component.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>			tooltip = &lt;Tooltip {...{ results, position }} /&gt;
+
 		}
 
-		<span class="hljs-keyword">return</span> (
-			<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'MassMap'</span>&gt;</span>
-				<span class="hljs-tag">&lt;<span class="hljs-name">svg</span> <span class="hljs-attr">ref</span>=<span class="hljs-string">{(c)</span> =&gt;</span> this._svg = c} /&gt;
-				<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'tooltip'</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{tooltipStyle}</span>&gt;</span>
-					<span class="hljs-tag">&lt;<span class="hljs-name">pre</span>&gt;</span>
-						{ JSON.stringify(town, null, 2) }
-					<span class="hljs-tag">&lt;/<span class="hljs-name">pre</span>&gt;</span>
-				<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-			<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+		return (
+			&lt;div className='MassMap'&gt;
+				&lt;svg ref={(c) =&gt; this._svg = c} /&gt;
+				{tooltip}
+			&lt;/div&gt;
 		)
 
 	}
 
 }
-export default MassMap</span></code></pre>
+export default MassMap</code></pre>
   </div>
 
   
@@ -648,7 +728,7 @@ export default MassMap</span></code></pre>
         </aside>
 
         <div class="code">
-          <span class="content page-generation-time">Generated Mon, 12 Sep 2016 23:36:27 GMT</span>
+          <span class="content page-generation-time">Generated Tue, 13 Sep 2016 20:40:45 GMT</span>
         </div>
         
       </section>
