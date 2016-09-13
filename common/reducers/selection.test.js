@@ -33,6 +33,7 @@ describe('selection reducer', () => {
 				.to.deep.equal(finalState.selection)
 
 		})
+
 		it('should set town if present', () => {
 
 			const initialState = {
