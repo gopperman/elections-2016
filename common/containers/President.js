@@ -8,6 +8,7 @@ import * as actions from './../actions/actionCreators.js'
 import Timer from './../components/Timer.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 import ElectoralCollegeMap from './../components/ElectoralCollegeMap.js'
+import DetailedResults from './../components/DetailedResults.js'
 import MassMap from './../components/MassMap.js'
 
 // This object, used by the `@provideHooks` decorator, defines our custom
@@ -119,6 +120,7 @@ class President extends Component {
 					selection={selection}
 					selectTown={selectTown}
 					data={results.data['president-ma-towns']} />
+				<DetailedResults data={results.data['president-ma-towns']} />
 				<ElectoralCollegeBar data={results.data['president-us']} />
 				<ElectoralCollegeMap data={results.data['president-us-states']} />
 			</div>

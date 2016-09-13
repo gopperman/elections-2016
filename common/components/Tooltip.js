@@ -12,7 +12,7 @@ import { percentForDisplay } from './../utils/standardize.js'
 const createSummary = ({ reportingunitName }) =>
 	`A table that has the candidate, percent, and vote count for top candidates across the top and the candidates down the left hand side for ${reportingunitName} results.`
 
-const Tooltip = ({ results, position }) => (
+const Tooltip = ({ results, position }) =>
 	<div>
 		<h1>Tooltip</h1>
 		<pre>{ JSON.stringify(position, null, 2) }</pre>
@@ -57,7 +57,6 @@ const Tooltip = ({ results, position }) => (
 			</tbody>
 		</table>
 	</div>
-)
 
 Tooltip.propTypes = {
 	results: PropTypes.object.isRequired,
