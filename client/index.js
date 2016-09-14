@@ -36,7 +36,7 @@ if (module.hot) {
 	// and we have an error,
 	const renderError = (error) => {
 
-		const RedBox = require('redbox-react')
+		const RedBox = require('redbox-react').default
 
 		// render error with `RedBox` styling.
 		ReactDOM.render(<RedBox error={error} />, rootElement)
