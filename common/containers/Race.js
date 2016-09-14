@@ -3,10 +3,10 @@ import { provideHooks } from 'redial'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actions from './../actions/actionCreators.js'
-import RaceSummary from './../components/RaceSummary.js'
-import ReportingUnitList from './../components/ReportingUnitList.js'
+// import RaceSummary from './../components/RaceSummary.js'
 import Timer from './../components/Timer.js'
 import MassMap from './../components/MassMap.js'
+import DetailedResultsTable from './../components/DetailedResultsTable.js'
 
 const hooks = {
 	fetch: ({ dispatch }) =>
@@ -65,7 +65,7 @@ class Race extends Component {
 	render() {
 
 		const { props, fetchData } = this
-		const { timer, results } = props
+		const { timer, results, selection } = props
 		const { stopTimer, selectTown } = props.actions
 
 		const timerProps = {
@@ -76,13 +76,17 @@ class Race extends Component {
 			},
 		}
 
-		const [summary, ...reportingUnits] = results.data['senate-ma-towns'].races[0].reportingUnits
+		// <RaceSummary data={summary} />
+
+		const data = results.data['senate-ma-towns']
+		const unitName = 'town'
+
 		return (
 			<div className='Race'>
 				<h1>Race</h1>
-				<RaceSummary data={summary} />
-				<MassMap selectTown={selectTown} data={results.data['senate-ma-towns']} />
-				<ReportingUnitList data={reportingUnits} />
+				<Timer {...timerProps} />
+				<MassMap {...{ selection, selectTown, data }} />
+				<DetailedResultsTable {...{ data, unitName }} />
 			</div>
 		)
 
