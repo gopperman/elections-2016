@@ -13,7 +13,8 @@ class ReportingUnitResults extends Component {
 				<h2>{ru.reportingunitName}</h2>
 				<p>Precincts Reporting: { ru.precinctsReporting } ({ ru.precinctsReportingPct}%)</p>
 				<ul>
-					{ ru.candidates.map( c => (
+					{ 
+						ru.candidates.map( c => (
 							<li key={c.polID}>
 								<p>{c.first} {c.last} ({c.party})</p>
 								<p>Votes: {c.voteCount} {c.winner}</p>
