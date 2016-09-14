@@ -1,8 +1,6 @@
 // The `Tooltip` class displays detailed results for the given reporting
 // unit.
 
-/* eslint-disable max-len */
-
 import React, { PropTypes } from 'react'
 import addCommas from 'add-commas'
 import { sort } from './../utils/Candidates.js'
@@ -11,6 +9,7 @@ import { percentForDisplay } from './../utils/standardize.js'
 
 // TODO: implement
 const createSummary = ({ reportingunitName }) =>
+	// eslint-disable-next-line max-len
 	`A table that has the candidate, percent, and vote count for top candidates across the top and the candidates down the left hand side for ${reportingunitName} results.`
 
 const Tooltip = ({ results, position }) =>

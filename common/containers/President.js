@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actions from './../actions/actionCreators.js'
 import Timer from './../components/Timer.js'
-import DetailedResults from './../components/DetailedResults.js'
+import DetailedResultsTable from './../components/DetailedResultsTable.js'
 import MassMap from './../components/MassMap.js'
 // import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 // import ElectoralCollegeMap from './../components/ElectoralCollegeMap.js'
@@ -121,7 +121,10 @@ class President extends Component {
 			<div className='President'>
 				<h1>President</h1>
 				<Timer {...timerProps} />
-				<DetailedResults data={results.data['president-ma-towns']} />
+				<DetailedResultsTable
+					race={results.data['president-ma-towns']}
+					unitName='town'
+				/>
 				<MassMap
 					selection={selection}
 					selectTown={selectTown}

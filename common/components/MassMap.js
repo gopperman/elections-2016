@@ -11,7 +11,7 @@ import bindSubunitsToFeatures, { findMatchingSubunit }
 	from './../utils/bindSubunitsToFeatures.js'
 import chooseColorClass from './../utils/chooseColorClass.js'
 import Tooltip from './Tooltip.js'
-import { getRaceSubunits } from './../utils/dataUtil.js'
+import { getRaceUnits } from './../utils/dataUtil.js'
 
 class MassMap extends Component {
 
@@ -62,7 +62,7 @@ class MassMap extends Component {
 	// We will use it to update the map.
 	componentDidUpdate() {
 
-		const subunits = getRaceSubunits(this.props.data)
+		const subunits = getRaceUnits(this.props.data)
 
 		// Bind AP data to GeoJSON features.
 		// TODO: Maybe, when baking the topojson, we should give it an id
@@ -158,7 +158,7 @@ class MassMap extends Component {
 
 			// get the town's race results:
 
-			const subunits = getRaceSubunits(this.props.data)
+			const subunits = getRaceUnits(this.props.data)
 
 			// Find the matching results so we can pass them to `Tooltip`.
 			const results = findMatchingSubunit({ name, subunits })
