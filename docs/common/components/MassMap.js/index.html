@@ -48,6 +48,32 @@
 <li class="file separator">
   
   
+<a href="../DetailedResultsTable.js" title="common/components/DetailedResultsTable.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/DetailedResultsTable.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../DetailedResultsTableRow.js" title="common/components/DetailedResultsTableRow.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/DetailedResultsTableRow.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
 <a href="../Timer.js" title="common/components/Timer.js">
     
 <span class="language" style="background-color: #f1e05a">js</span>
@@ -139,6 +165,7 @@
 	<span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/bindSubunitsToFeatures.js'</span>
 <span class="hljs-keyword">import</span> chooseColorClass <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/chooseColorClass.js'</span>
 <span class="hljs-keyword">import</span> Tooltip <span class="hljs-keyword">from</span> <span class="hljs-string">'./Tooltip.js'</span>
+<span class="hljs-keyword">import</span> { getRaceUnits } <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/dataUtil.js'</span>
 
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MassMap</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
 
@@ -308,36 +335,9 @@ We will use it to update the map.</p>
   
 
   <div class="code">
-    <pre><code>	componentDidUpdate() {</code></pre>
-  </div>
+    <pre><code>	componentDidUpdate() {
 
-  
-</section>
-<section class="section">
-
-  <aside class="comment">
-    <div class="text markdown"><p>Grab the <code>data.races</code> property.</p>
-</div>
-  </aside>
-  
-
-  <div class="code">
-    <pre><code>		<span class="hljs-keyword">const</span> { races } = <span class="hljs-keyword">this</span>.props.data</code></pre>
-  </div>
-
-  
-</section>
-<section class="section">
-
-  <aside class="comment">
-    <div class="text markdown"><p>If possible, grab the first race. Otherwise set it to an empty object.</p>
-</div>
-  </aside>
-  
-
-  <div class="code">
-    <pre><code>		<span class="hljs-keyword">const</span> race = (races &amp;&amp; races[<span class="hljs-number">0</span>]) || {}
-		<span class="hljs-keyword">const</span> subunits = race.reportingUnits || []</code></pre>
+		<span class="hljs-keyword">const</span> subunits = getRaceUnits(<span class="hljs-keyword">this</span>.props.data)</code></pre>
   </div>
 
   
@@ -622,7 +622,8 @@ TODO: This is a side-effect and should maybe happen elsewhere.</p>
 <section class="section">
 
   <aside class="comment">
-    <div class="text markdown"><p>Do we have a <code>name</code> or <code>position</code> - did the user select a town? If so,</p>
+    <div class="text markdown"><p>Do we have a <code>name</code> or <code>position</code> - did the user select a town?
+If so,</p>
 </div>
   </aside>
   
@@ -641,37 +642,8 @@ TODO: This is a side-effect and should maybe happen elsewhere.</p>
   </aside>
   
 
-
-  <div class="code empty">
-    <pre><code></code></pre>
-  </div>
-  
-</section>
-<section class="section">
-
-  <aside class="comment">
-    <div class="text markdown"><p>Grab the <code>data.races</code> property.</p>
-</div>
-  </aside>
-  
-
   <div class="code">
-    <pre><code>			<span class="hljs-keyword">const</span> { races } = <span class="hljs-keyword">this</span>.props.data</code></pre>
-  </div>
-
-  
-</section>
-<section class="section">
-
-  <aside class="comment">
-    <div class="text markdown"><p>If possible, grab the first race. Otherwise set it to an empty object.</p>
-</div>
-  </aside>
-  
-
-  <div class="code">
-    <pre><code>			<span class="hljs-keyword">const</span> race = (races &amp;&amp; races[<span class="hljs-number">0</span>]) || {}
-			<span class="hljs-keyword">const</span> subunits = race.reportingUnits || []</code></pre>
+    <pre><code>			<span class="hljs-keyword">const</span> subunits = getRaceUnits(<span class="hljs-keyword">this</span>.props.data)</code></pre>
   </div>
 
   
@@ -728,7 +700,7 @@ export default MassMap</code></pre>
         </aside>
 
         <div class="code">
-          <span class="content page-generation-time">Generated Tue, 13 Sep 2016 20:40:45 GMT</span>
+          <span class="content page-generation-time">Generated Wed, 14 Sep 2016 23:51:56 GMT</span>
         </div>
         
       </section>

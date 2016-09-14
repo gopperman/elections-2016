@@ -48,6 +48,32 @@
 <li class="file separator">
   
   
+<a href="../../components/DetailedResultsTable.js" title="common/components/DetailedResultsTable.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/DetailedResultsTable.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../components/DetailedResultsTableRow.js" title="common/components/DetailedResultsTableRow.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/DetailedResultsTableRow.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
 <a href="../../components/MassMap.js" title="common/components/MassMap.js">
     
 <span class="language" style="background-color: #f1e05a">js</span>
@@ -122,11 +148,25 @@
 <span class="hljs-keyword">import</span> { connect } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-redux'</span>
 <span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> actions <span class="hljs-keyword">from</span> <span class="hljs-string">'./../actions/actionCreators.js'</span>
 <span class="hljs-keyword">import</span> Timer <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/Timer.js'</span>
-<span class="hljs-keyword">import</span> ElectoralCollegeBar <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/ElectoralCollegeBar.js'</span>
-<span class="hljs-keyword">import</span> ElectoralCollegeMap <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/ElectoralCollegeMap.js'</span>
+<span class="hljs-keyword">import</span> DetailedResultsTable <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/DetailedResultsTable.js'</span>
 <span class="hljs-keyword">import</span> MassMap <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/MassMap.js'</span></code></pre>
   </div>
 
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>import ElectoralCollegeBar from &#39;./../components/ElectoralCollegeBar.js&#39;
+import ElectoralCollegeMap from &#39;./../components/ElectoralCollegeMap.js&#39;</p>
+</div>
+  </aside>
+  
+
+
+  <div class="code empty">
+    <pre><code></code></pre>
+  </div>
   
 </section>
 <section class="section">
@@ -420,22 +460,38 @@ action.</p>
 <section class="section">
 
   <aside class="comment">
+    <div class="text markdown"><p>TODO: before bringing these back, make sure they reference data
+safely.</p>
+<p>&lt;ElectoralCollegeBar data={results.data[&#39;president-us&#39;]} /&gt;</p>
+<p>&lt;ElectoralCollegeMap data={results.data[&#39;president-us-states&#39;]} /&gt;</p>
+</div>
+  </aside>
+  
+
+
+  <div class="code empty">
+    <pre><code></code></pre>
+  </div>
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
     <div class="text markdown"><p>Finally we can render all the components!</p>
 </div>
   </aside>
   
 
   <div class="code">
-    <pre><code>		<span class="hljs-keyword">return</span> (
+    <pre><code>		<span class="hljs-keyword">const</span> data = results.data[<span class="hljs-string">'president-ma-towns'</span>]
+		<span class="hljs-keyword">const</span> unitName = <span class="hljs-string">'town'</span>
+
+		<span class="hljs-keyword">return</span> (
 			&lt;div className='President'&gt;
 				&lt;h1&gt;President&lt;/h1&gt;
 				&lt;Timer {...timerProps} /&gt;
-				&lt;MassMap
-					selection={selection}
-					selectTown={selectTown}
-					data={results.data['president-ma-towns']} /&gt;
-				&lt;ElectoralCollegeBar data={results.data['president-us']} /&gt;
-				&lt;ElectoralCollegeMap data={results.data['president-us-states']} /&gt;
+				&lt;DetailedResultsTable {...{ data, unitName }} /&gt;
+				&lt;MassMap {...{ selection, selectTown, data }} /&gt;
 			&lt;/div&gt;
 		)
 
@@ -458,7 +514,7 @@ export default President</code></pre>
         </aside>
 
         <div class="code">
-          <span class="content page-generation-time">Generated Tue, 13 Sep 2016 20:40:45 GMT</span>
+          <span class="content page-generation-time">Generated Wed, 14 Sep 2016 23:51:56 GMT</span>
         </div>
         
       </section>

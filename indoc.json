@@ -8,6 +8,8 @@
 		"common/containers/President.js",
 		"common/components/Timer.js",
 		"common/components/Tooltip.js",
+		"common/components/DetailedResultsTable.js",
+		"common/components/DetailedResultsTableRow.js",
 		"common/components/MassMap.js"
 	]
 }

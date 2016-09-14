@@ -48,6 +48,32 @@
 <li class="file separator">
   
   
+<a href="../DetailedResultsTable.js" title="common/components/DetailedResultsTable.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/DetailedResultsTable.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../DetailedResultsTableRow.js" title="common/components/DetailedResultsTableRow.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/DetailedResultsTableRow.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
 <a href="../MassMap.js" title="common/components/MassMap.js">
     
 <span class="language" style="background-color: #f1e05a">js</span>
@@ -110,21 +136,8 @@
       <section class="section">
 
   <aside class="comment">
-    <div class="text markdown"><p>The <code>Tooltip</code> class displays detailed results for the given reporting unit.</p>
-</div>
-  </aside>
-  
-
-
-  <div class="code empty">
-    <pre><code></code></pre>
-  </div>
-  
-</section>
-<section class="section">
-
-  <aside class="comment">
-    <div class="text markdown"><p>eslint-disable max-len</p>
+    <div class="text markdown"><p>The <code>Tooltip</code> class displays detailed results for the given reporting
+unit.</p>
 </div>
   </aside>
   
@@ -132,7 +145,7 @@
   <div class="code">
     <pre><code><span class="hljs-keyword">import</span> React, { PropTypes } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
 <span class="hljs-keyword">import</span> addCommas <span class="hljs-keyword">from</span> <span class="hljs-string">'add-commas'</span>
-<span class="hljs-keyword">import</span> Candidates <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/Candidates.js'</span>
+<span class="hljs-keyword">import</span> { sort } <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/Candidates.js'</span>
 <span class="hljs-keyword">import</span> { fullName, percent } <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/Candidate.js'</span>
 <span class="hljs-keyword">import</span> { percentForDisplay } <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/standardize.js'</span></code></pre>
   </div>
@@ -148,11 +161,25 @@
   
 
   <div class="code">
-    <pre><code><span class="hljs-keyword">const</span> createSummary = ({ reportingunitName }) =&gt;
-	<span class="hljs-string">`A table that has the candidate, percent, and vote count for top candidates across the top and the candidates down the left hand side for <span class="hljs-subst">${reportingunitName}</span> results.`</span>
+    <pre><code><span class="hljs-keyword">const</span> createSummary = ({ reportingunitName }) =&gt;</code></pre>
+  </div>
 
-<span class="hljs-keyword">const</span> Tooltip = ({ results, position }) =&gt; (
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>eslint-disable-next-line max-len</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>	<span class="hljs-string">`A table that has the candidate, percent, and vote count for top candidates across the top and the candidates down the left hand side for <span class="hljs-subst">${reportingunitName}</span> results.`</span>
+
+<span class="hljs-keyword">const</span> Tooltip = ({ results, position }) =&gt;
 	&lt;div&gt;
+		&lt;h1&gt;Tooltip&lt;/h1&gt;
 		&lt;pre&gt;{ JSON.stringify(position, null, 2) }&lt;/pre&gt;
 		&lt;table summary={createSummary(results)}&gt;
 			&lt;caption&gt;
@@ -167,7 +194,7 @@
 				&lt;/tr&gt;
 			&lt;/thead&gt;
 			&lt;tbody&gt;
-				{ Candidates.sort(results.candidates).map((candidate, i, candidates) =&gt; {
+				{ sort(results.candidates).map((candidate, i, candidates) =&gt; {
 
 					const { candidateID, voteCount } = candidate</code></pre>
   </div>
@@ -240,7 +267,7 @@
 
   <div class="code">
     <pre><code>					return (
-						&lt;tr&gt;
+						&lt;tr key={i}&gt;
 							&lt;th scope='row'&gt;&lt;span&gt;&amp;nbsp;&lt;/span&gt;{name}&lt;/th&gt;
 							&lt;td&gt;{pctForDisplay}&lt;span&gt;%&lt;/span&gt;&lt;/td&gt;
 							&lt;td&gt;&lt;span&gt;{vote}&lt;/span&gt;&lt;/td&gt;
@@ -250,7 +277,6 @@
 			&lt;/tbody&gt;
 		&lt;/table&gt;
 	&lt;/div&gt;
-)
 
 Tooltip.propTypes = {
 	results: PropTypes.object.isRequired,
@@ -272,7 +298,7 @@ export default Tooltip</code></pre>
         </aside>
 
         <div class="code">
-          <span class="content page-generation-time">Generated Tue, 13 Sep 2016 20:40:45 GMT</span>
+          <span class="content page-generation-time">Generated Wed, 14 Sep 2016 23:51:56 GMT</span>
         </div>
         
       </section>

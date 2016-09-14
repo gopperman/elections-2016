@@ -1,0 +1,314 @@
+<!doctype html>
+<html>
+  <head>
+    <title>common/components/DetailedResultsTableRow.js</title>
+    <link rel="stylesheet" href="./../../../public/style.css" />
+    <link rel="icon" type="image/png" href="./../../../public/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./../../../public/jquery.min.js"></script>
+    <script src="./../../../public/script.js"></script>
+  </head>
+  <body class="code">
+    
+    <main id="sections">
+
+      <!-- The header -->
+
+        
+      <section class="section header files-hidden" id="header">
+
+        <aside class="comment">
+
+          <header>
+
+            <div class="file-path">
+              
+              
+              <a id="project-overview" href="./../../.." title="Project Overview">elections-2016<span id="version"></span></a>
+              
+              <div class="files-menu">
+                <span id="filename" title="common/components/DetailedResultsTableRow.js">common/components/DetailedResultsTableRow.js</span>
+                
+              
+                <ul class="files hidable">
+                  
+                  
+<li class="file">
+  
+<a href="../../../client/index.js" title="client/index.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">client/index.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../DetailedResultsTable.js" title="common/components/DetailedResultsTable.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/DetailedResultsTable.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../MassMap.js" title="common/components/MassMap.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/MassMap.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../Timer.js" title="common/components/Timer.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/Timer.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../Tooltip.js" title="common/components/Tooltip.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/Tooltip.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../../containers/President.js" title="common/containers/President.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/containers/President.js</span>
+
+</a>
+
+</li>
+
+                  
+                </ul>
+                
+              </div>
+                
+            </div>
+
+            <div class="spacer"></div>
+            
+            
+          </header>
+            
+        </aside>
+
+        
+        <div class="code empty">
+        </div>
+
+      </section>
+
+      <!-- The main code section -->
+      
+      <section class="section">
+
+  
+  <aside class="comment empty">
+    <div class="text markdown"></div>
+  </aside>
+
+  <div class="code">
+    <pre><code><span class="hljs-keyword">import</span> React, { PropTypes } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
+<span class="hljs-keyword">import</span> _ <span class="hljs-keyword">from</span> <span class="hljs-string">'lodash'</span>
+<span class="hljs-keyword">import</span> addCommas <span class="hljs-keyword">from</span> <span class="hljs-string">'add-commas'</span>
+<span class="hljs-keyword">import</span> { percent } <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/Candidate.js'</span>
+<span class="hljs-keyword">import</span> { sortByIDs } <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/Candidates.js'</span>
+<span class="hljs-keyword">import</span> { percentForDisplay } <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/standardize.js'</span>
+
+<span class="hljs-keyword">const</span> DetailedResultsTableRow = ({ unit, summaryCandidates }) =&gt; {</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Get this unit&#39;s candidates.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>	<span class="hljs-keyword">const</span> { candidates } = unit</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Get candidate ids for the overall candidates (winner order).</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>	<span class="hljs-keyword">const</span> candidateIDs = _.map(summaryCandidates, <span class="hljs-string">'candidateID'</span>)</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Sort the unit candidates by overall order.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>	<span class="hljs-keyword">const</span> sortedCandidates = sortByIDs({ candidates, candidateIDs })</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Create the candidate tds.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>	<span class="hljs-keyword">const</span> tds = sortedCandidates.map((candidate, i, array) =&gt; {
+
+		<span class="hljs-keyword">const</span> { candidateID, voteCount } = candidate</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Add appropriate commas to the candidate&#39;s vote count.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">const</span> vote = addCommas(voteCount)</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Get the candidate&#39;s vote percent.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">const</span> pct = percent({ candidates: array, candidateID })</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Get the display-ready version of the percent.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">const</span> pctForDisplay = percentForDisplay(pct)
+
+		<span class="hljs-keyword">return</span> (
+			<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{i}</span>&gt;</span>
+				<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{pctForDisplay}%<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+				<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{vote}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+			<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span></span>
+		)
+
+	})</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Create the entire row.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>	<span class="hljs-keyword">return</span> (
+		<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>
+				<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{unit.reportingunitName}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+				<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{unit.precinctsReporting} of {unit.precinctsTotal}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+			<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+			{tds}
+		<span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span></span>
+	)
+}
+
+DetailedResultsTableRow.propTypes = {
+	unit: PropTypes.object.isRequired,
+	summaryCandidates: PropTypes.array.isRequired,
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> DetailedResultsTableRow</code></pre>
+  </div>
+
+  
+</section>
+
+      
+      
+      <section class="section footer" id="footer">
+        
+        <aside class="comment">
+          <span class="content project-copyright">&copy; Copyright 2016 The Boston Globe.</span>
+        </aside>
+
+        <div class="code">
+          <span class="content page-generation-time">Generated Wed, 14 Sep 2016 23:51:56 GMT</span>
+        </div>
+        
+      </section>
+      
+    </main>
+
+  </body>
+</html>
+
