@@ -3,8 +3,9 @@ import { provideHooks } from 'redial'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actions from './../actions/actionCreators.js'
-import Timer from './../components/Timer.js'
+import RaceSummary from './../components/RaceSummary.js'
 import ReportingUnitList from './../components/ReportingUnitList.js'
+import Timer from './../components/Timer.js'
 import MassMap from './../components/MassMap.js'
 
 const hooks = {
@@ -43,7 +44,6 @@ class Race extends Component {
 
 			// TODO: add data completeness check
 			++this.count
-			console.log(this.count)
 
 			// is the race over?
 			if (this.count > 0) {
@@ -66,7 +66,7 @@ class Race extends Component {
 
 		const { props, fetchData } = this
 		const { timer, results } = props
-		const { stopTimer } = props.actions
+		const { stopTimer, selectTown } = props.actions
 
 		const timerProps = {
 			...timer,
@@ -76,12 +76,13 @@ class Race extends Component {
 			},
 		}
 
+		const [summary, ...reportingUnits] = results.data['senate-ma-towns'].races[0].reportingUnits
 		return (
 			<div className='Race'>
 				<h1>Race</h1>
-				<Timer {...timerProps} />
-				<MassMap data={results.data['senate-ma-towns']} />
-				<ReportingUnitList data={results.data['senate-ma-towns'].races[0]} />
+				<RaceSummary data={summary} />
+				<MassMap selectTown={selectTown} data={results.data['senate-ma-towns']} />
+				<ReportingUnitList data={reportingUnits} />
 			</div>
 		)
 

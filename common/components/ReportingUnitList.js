@@ -1,38 +1,23 @@
 import React, { Component, PropTypes } from 'react'
-import { getTopCandidate } from './../utils/presidentialStateTable.js'
+import ReportingUnitResults from './../components/ReportingUnitResults.js'
 
 // eslint-disable-next-line react/prefer-stateless-function
 class ReportingUnitList extends Component {
 
 	static propTypes = {
-		data: PropTypes.object.isRequired,
+		data: PropTypes.array.isRequired,
 	}
 
 	render() {
-		const reportingUnits = this.props.data.reportingUnits
-		console.log(reportingUnits)
+		const reportingUnits = this.props.data
 		return (
 			<div className='ReportingUnitList'>
 				<h1>Town by Town Results</h1>
 				<ul>
-					{ reportingUnits.map( ru => {
-						return (
-							<li key={ru.reportingunitID}>
-								<h2>{ru.reportingunitName}</h2>
-								<p>Precincts Reporting: { ru.precinctsReporting } ({ ru.precinctsReportingPct}%)</p>
-								<ul>
-									{ ru.candidates.map( c => {
-										return (
-											<li key={c.polID}>
-												<p>{c.first} {c.last} ({c.party})</p>
-												<p>Votes: {c.voteCount} {c.winner}</p>
-											</li>
-										)
-									})}
-								</ul>
-							</li>
+					{ reportingUnits.map( ru => (
+							<ReportingUnitResults data={ru} />
 						)
-					})}
+					)}
 				</ul>
 			</div>
 		)
