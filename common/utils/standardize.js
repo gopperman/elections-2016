@@ -1,3 +1,6 @@
+const toSentenceCase = (s) =>
+	[s[0].toUpperCase(), s.slice(1)].join('')
+
 const percentForDisplay = (x, shorten) => {
 
 	const decimalPlaces = shorten ? 0 : 1
@@ -18,4 +21,5 @@ const percentForDisplay = (x, shorten) => {
 export {
 	// eslint-disable-next-line import/prefer-default-export
 	percentForDisplay,
+	toSentenceCase,
 }

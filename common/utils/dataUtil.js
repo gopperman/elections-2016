@@ -1,4 +1,4 @@
-const getRaceSubunits = (data) => {
+const getRaceUnits = (data) => {
 
 	// Grab the `data.races` property.
 	const { races } = data
@@ -14,5 +14,5 @@ const getRaceSubunits = (data) => {
 
 export {
 	// eslint-disable-next-line import/prefer-default-export
-	getRaceSubunits,
+	getRaceUnits,
 }
