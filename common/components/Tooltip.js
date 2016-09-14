@@ -1,10 +1,11 @@
-// The `Tooltip` class displays detailed results for the given reporting unit.
+// The `Tooltip` class displays detailed results for the given reporting
+// unit.
 
 /* eslint-disable max-len */
 
 import React, { PropTypes } from 'react'
 import addCommas from 'add-commas'
-import Candidates from './../utils/Candidates.js'
+import { sort } from './../utils/Candidates.js'
 import { fullName, percent } from './../utils/Candidate.js'
 import { percentForDisplay } from './../utils/standardize.js'
 
@@ -29,7 +30,7 @@ const Tooltip = ({ results, position }) =>
 				</tr>
 			</thead>
 			<tbody>
-				{ Candidates.sort(results.candidates).map((candidate, i, candidates) => {
+				{ sort(results.candidates).map((candidate, i, candidates) => {
 
 					const { candidateID, voteCount } = candidate
 
