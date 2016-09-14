@@ -1,10 +1,10 @@
-import Candidates from './Candidates.js'
+import { sort } from './Candidates.js'
 
 export default ({ candidates = [] }) => {
 
 	let klass
 
-	const cands = Candidates.sort(candidates)
+	const cands = sort(candidates)
 
 	// are there candidates, and does the first one have votes?
 	if (cands.length && cands[0].voteCount > 0) {

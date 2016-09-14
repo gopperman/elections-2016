@@ -6,9 +6,10 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actions from './../actions/actionCreators.js'
 import Timer from './../components/Timer.js'
-import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
-import ElectoralCollegeMap from './../components/ElectoralCollegeMap.js'
+import DetailedResults from './../components/DetailedResults.js'
 import MassMap from './../components/MassMap.js'
+// import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
+// import ElectoralCollegeMap from './../components/ElectoralCollegeMap.js'
 
 // This object, used by the `@provideHooks` decorator, defines our custom
 // data loading dependencies. At the moment we just have one: `fetch`. It
@@ -110,17 +111,21 @@ class President extends Component {
 			},
 		}
 
+		// TODO: before bringing these back, make sure they reference data
+		// safely.
+		// <ElectoralCollegeBar data={results.data['president-us']} />
+		// <ElectoralCollegeMap data={results.data['president-us-states']} />
+
 		// Finally we can render all the components!
 		return (
 			<div className='President'>
 				<h1>President</h1>
 				<Timer {...timerProps} />
+				<DetailedResults data={results.data['president-ma-towns']} />
 				<MassMap
 					selection={selection}
 					selectTown={selectTown}
 					data={results.data['president-ma-towns']} />
-				<ElectoralCollegeBar data={results.data['president-us']} />
-				<ElectoralCollegeMap data={results.data['president-us-states']} />
 			</div>
 		)
 

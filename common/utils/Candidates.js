@@ -1,10 +1,9 @@
 import _ from 'lodash'
 
-const Candidates = {
+const sort = (candidates) =>
+_.orderBy(candidates, ['voteCount'], ['desc'])
 
-	sort: (candidates) =>
-		_.orderBy(candidates, ['voteCount'], ['desc']),
-
+export {
+	// eslint-disable-next-line import/prefer-default-export
+	sort,
 }
-
-export default Candidates

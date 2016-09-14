@@ -1,10 +1,11 @@
-// The `Tooltip` class displays detailed results for the given reporting unit.
+// The `Tooltip` class displays detailed results for the given reporting
+// unit.
 
 /* eslint-disable max-len */
 
 import React, { PropTypes } from 'react'
 import addCommas from 'add-commas'
-import Candidates from './../utils/Candidates.js'
+import { sort } from './../utils/Candidates.js'
 import { fullName, percent } from './../utils/Candidate.js'
 import { percentForDisplay } from './../utils/standardize.js'
 
@@ -12,7 +13,7 @@ import { percentForDisplay } from './../utils/standardize.js'
 const createSummary = ({ reportingunitName }) =>
 	`A table that has the candidate, percent, and vote count for top candidates across the top and the candidates down the left hand side for ${reportingunitName} results.`
 
-const Tooltip = ({ results, position }) => (
+const Tooltip = ({ results, position }) =>
 	<div>
 		<h1>Tooltip</h1>
 		<pre>{ JSON.stringify(position, null, 2) }</pre>
@@ -29,7 +30,7 @@ const Tooltip = ({ results, position }) => (
 				</tr>
 			</thead>
 			<tbody>
-				{ Candidates.sort(results.candidates).map((candidate, i, candidates) => {
+				{ sort(results.candidates).map((candidate, i, candidates) => {
 
 					const { candidateID, voteCount } = candidate
 
@@ -57,7 +58,6 @@ const Tooltip = ({ results, position }) => (
 			</tbody>
 		</table>
 	</div>
-)
 
 Tooltip.propTypes = {
 	results: PropTypes.object.isRequired,
