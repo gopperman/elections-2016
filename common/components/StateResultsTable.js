@@ -3,19 +3,19 @@
 
 import React, { PropTypes } from 'react'
 
-const StateResultsTable = ({ data }) => {
+const StateResultsTable = ({ race }) => {
 
-	console.log(data)
+	console.log(race)
 
 	return (
-		<div>
-			{ JSON.stringify(data, null, 2)}
-		</div>
+		<pre>
+			{ JSON.stringify(race, null, 2)}
+		</pre>
 	)
 }
 
 StateResultsTable.propTypes = {
-	data: PropTypes.object.isRequired,
+	race: PropTypes.object.isRequired,
 }
 
 export default StateResultsTable
