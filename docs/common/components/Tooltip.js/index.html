@@ -203,26 +203,10 @@ unit.</p>
   <div class="code">
     <pre><code>	<span class="hljs-string">`A table that has the candidate, percent, and vote count for top candidates across the top and the candidates down the left hand side for <span class="hljs-subst">${reportingunitName}</span> results.`</span>
 
-<span class="hljs-keyword">const</span> Tooltip = ({ results, position }) =&gt;
-	&lt;div&gt;
-		&lt;h1&gt;Tooltip&lt;/h1&gt;
-		&lt;pre&gt;{ JSON.stringify(position, null, 2) }&lt;/pre&gt;
-		&lt;table summary={createSummary(results)}&gt;
-			&lt;caption&gt;
-				&lt;div&gt;&lt;span&gt;{results.reportingunitName}&lt;/span&gt;&lt;/div&gt;
-				&lt;div&gt;&lt;span&gt;{results.precinctsReportingPct}% reporting&lt;/span&gt;&lt;/div&gt;
-			&lt;/caption&gt;
-			&lt;thead&gt;
-				&lt;tr&gt;
-					&lt;th scope='col'&gt;Candidate&lt;/th&gt;
-					&lt;th scope='col'&gt;Percent&lt;/th&gt;
-					&lt;th scope='col'&gt;Votes&lt;/th&gt;
-				&lt;/tr&gt;
-			&lt;/thead&gt;
-			&lt;tbody&gt;
-				{ sortByVoteCount(results.candidates).map((candidate, i, candidates) =&gt; {
+<span class="hljs-keyword">const</span> createRows = (candidates) =&gt;
+	sortByVoteCount(candidates).map((candidate, i) =&gt; {
 
-					const { candidateID, voteCount } = candidate</code></pre>
+		<span class="hljs-keyword">const</span> { candidateID, voteCount } = candidate</code></pre>
   </div>
 
   
@@ -236,7 +220,7 @@ unit.</p>
   
 
   <div class="code">
-    <pre><code>					<span class="hljs-keyword">const</span> name = fullName(candidate)</code></pre>
+    <pre><code>		<span class="hljs-keyword">const</span> name = fullName(candidate)</code></pre>
   </div>
 
   
@@ -250,7 +234,7 @@ unit.</p>
   
 
   <div class="code">
-    <pre><code>					<span class="hljs-keyword">const</span> vote = addCommas(voteCount)</code></pre>
+    <pre><code>		<span class="hljs-keyword">const</span> vote = addCommas(voteCount)</code></pre>
   </div>
 
   
@@ -264,7 +248,7 @@ unit.</p>
   
 
   <div class="code">
-    <pre><code>					<span class="hljs-keyword">const</span> pct = percent({ candidates, candidateID })</code></pre>
+    <pre><code>		<span class="hljs-keyword">const</span> pct = percent({ candidates, candidateID })</code></pre>
   </div>
 
   
@@ -278,7 +262,7 @@ unit.</p>
   
 
   <div class="code">
-    <pre><code>					<span class="hljs-keyword">const</span> pctForDisplay = percentForDisplay(pct)</code></pre>
+    <pre><code>		<span class="hljs-keyword">const</span> pctForDisplay = percentForDisplay(pct)</code></pre>
   </div>
 
   
@@ -292,24 +276,43 @@ unit.</p>
   
 
   <div class="code">
-    <pre><code>					return (
-						&lt;tr key={i}&gt;
-							&lt;th scope='row'&gt;&lt;span&gt;&amp;nbsp;&lt;/span&gt;{name}&lt;/th&gt;
-							&lt;td&gt;{pctForDisplay}&lt;span&gt;%&lt;/span&gt;&lt;/td&gt;
-							&lt;td&gt;&lt;span&gt;{vote}&lt;/span&gt;&lt;/td&gt;
-						&lt;/tr&gt;
-					)
-				})}
-			&lt;/tbody&gt;
-		&lt;/table&gt;
-	&lt;/div&gt;
+    <pre><code>		<span class="hljs-keyword">return</span> (
+			<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">tr</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{i}</span>&gt;</span>
+				<span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">scope</span>=<span class="hljs-string">'row'</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>&amp;nbsp;<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>{name}<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+				<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>{pctForDisplay}<span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>%<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+				<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{vote}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+			<span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span></span>
+		)
+	})
+
+<span class="hljs-keyword">const</span> Tooltip = ({ results, position }) =&gt;
+	<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'tooltip'</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Tooltip<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">pre</span>&gt;</span>{ JSON.stringify(position, null, 2) }<span class="hljs-tag">&lt;/<span class="hljs-name">pre</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">table</span> <span class="hljs-attr">summary</span>=<span class="hljs-string">{createSummary(results)}</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">caption</span>&gt;</span>
+				<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{results.reportingunitName}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+				<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>{results.precinctsReportingPct}% reporting<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+			<span class="hljs-tag">&lt;/<span class="hljs-name">caption</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">thead</span>&gt;</span>
+				<span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
+					<span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">scope</span>=<span class="hljs-string">'col'</span>&gt;</span>Candidate<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+					<span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">scope</span>=<span class="hljs-string">'col'</span>&gt;</span>Percent<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+					<span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">scope</span>=<span class="hljs-string">'col'</span>&gt;</span>Votes<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+				<span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+			<span class="hljs-tag">&lt;/<span class="hljs-name">thead</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">tbody</span>&gt;</span>
+				{ createRows(results.candidates) }
+			<span class="hljs-tag">&lt;/<span class="hljs-name">tbody</span>&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>
 
 Tooltip.propTypes = {
 	results: PropTypes.object.isRequired,
 	position: PropTypes.object.isRequired,
 }
 
-export default Tooltip</code></pre>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Tooltip</code></pre>
   </div>
 
   
@@ -324,7 +327,7 @@ export default Tooltip</code></pre>
         </aside>
 
         <div class="code">
-          <span class="content page-generation-time">Generated Thu, 15 Sep 2016 23:08:44 GMT</span>
+          <span class="content page-generation-time">Generated Thu, 15 Sep 2016 23:28:00 GMT</span>
         </div>
         
       </section>
