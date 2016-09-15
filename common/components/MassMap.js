@@ -170,8 +170,8 @@ class MassMap extends Component {
 
 		return (
 			<div className='MassMap'>
-				<svg ref={(c) => this._svg = c} />
 				{tooltip}
+				<svg ref={(c) => this._svg = c} />
 			</div>
 		)
 
