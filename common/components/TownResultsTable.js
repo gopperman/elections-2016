@@ -12,10 +12,10 @@ const createSummary = (raceName) =>
 	// eslint-disable-next-line max-len
 	`A table that has the candidate percent and vote count across the top and the towns down the left hand side for the ${raceName}.`
 
-const TownResultsTable = ({ data }) => {
+const TownResultsTable = ({ race }) => {
 
 	// Get this race's reporting units.
-	const units = getRaceUnits(data)
+	const units = getRaceUnits(race)
 
 	// Get the statewide unit.
 	const state = _.find(units, { level: 'state' })
@@ -60,7 +60,7 @@ const TownResultsTable = ({ data }) => {
 }
 
 TownResultsTable.propTypes = {
-	data: PropTypes.object.isRequired,
+	race: PropTypes.object.isRequired,
 }
 
 export default TownResultsTable

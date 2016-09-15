@@ -78,14 +78,14 @@ class Race extends Component {
 
 		// <RaceSummary data={summary} />
 
-		const data = results.data['senate-ma-towns']
+		const race = results.data['senate-ma-towns']
 
 		return (
 			<div className='Race'>
 				<h1>Race</h1>
 				<Timer {...timerProps} />
-				<MassMap {...{ selection, selectTown, data }} />
-				<TownResultsTable {...{ data }} />
+				<MassMap {...{ selection, selectTown, race }} />
+				<TownResultsTable {...{ race }} />
 			</div>
 		)
 

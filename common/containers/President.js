@@ -117,14 +117,14 @@ class President extends Component {
 		// <ElectoralCollegeMap data={results.data['president-us-states']} />
 
 		// Finally we can render all the components!
-		const data = results.data['president-ma-towns']
+		const race = results.data['president-ma-towns']
 
 		return (
 			<div className='President'>
 				<h1>President</h1>
 				<Timer {...timerProps} />
-				<TownResultsTable {...{ data }} />
-				<MassMap {...{ selection, selectTown, data }} />
+				<TownResultsTable {...{ race }} />
+				<MassMap {...{ selection, selectTown, race }} />
 			</div>
 		)
 
