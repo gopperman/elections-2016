@@ -3,7 +3,7 @@
 
 import React, { PropTypes } from 'react'
 import addCommas from 'add-commas'
-import { sort } from './../utils/Candidates.js'
+import { sortByVoteCount } from './../utils/Candidates.js'
 import { fullName, percent } from './../utils/Candidate.js'
 import { percentForDisplay } from './../utils/standardize.js'
 
@@ -29,7 +29,7 @@ const Tooltip = ({ results, position }) =>
 				</tr>
 			</thead>
 			<tbody>
-				{ sort(results.candidates).map((candidate, i, candidates) => {
+				{ sortByVoteCount(results.candidates).map((candidate, i, candidates) => {
 
 					const { candidateID, voteCount } = candidate
 

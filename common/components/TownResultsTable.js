@@ -3,7 +3,7 @@
 
 import _ from 'lodash'
 import React, { PropTypes } from 'react'
-import { sort } from './../utils/Candidates.js'
+import { sortByVoteCount } from './../utils/Candidates.js'
 import { getRaceUnits } from './../utils/dataUtil.js'
 import TownResultsTableRow from './TownResultsTableRow.js'
 
@@ -21,16 +21,14 @@ const TownResultsTable = ({ race }) => {
 	const state = _.find(units, { level: 'state' })
 
 	// Get statewide candidates.
-	const summaryCandidates = sort(state.candidates)
+	const summaryCandidates = sortByVoteCount(state.candidates)
 
 	// Get the town units.
 	const towns = _.filter(units, { level: 'subunit' })
 
 	// Create the town rows.
 	const rows = _.sortBy(towns, 'reportingunitName').map((town, key) => (
-		<TownResultsTableRow
-			{...{ town, summaryCandidates, key }}
-		/>
+		<TownResultsTableRow {...{ town, summaryCandidates, key }} />
 	))
 
 	return (
