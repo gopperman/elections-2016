@@ -1,9 +1,26 @@
-/* global describe, it, afterEach */
+/* global describe, it */
 
 import assert from 'assert'
-import { percentForDisplay } from './standardize.js'
+import { readFileSync } from 'jsonfile'
+import { percentForDisplay, formatStateAsReportingUnit }
+	from './standardize.js'
+
+const input = readFileSync('./data/president-us-states.json')
+const output = readFileSync('./data/president-us-state-as-ru.json')
 
 describe('standardize', () => {
+
+	describe('formatStateAsReportingUnit', () => {
+
+		it('should work', () => {
+
+			const state = input.PresStateByStatetable.State[0]
+			const expected = formatStateAsReportingUnit(state)
+			assert.deepStrictEqual(output, expected)
+
+		})
+
+	})
 
 	describe('percentForDisplay', () => {
 
