@@ -17,7 +17,7 @@ class MassMap extends Component {
 
 	static propTypes = {
 		selection: PropTypes.object.isRequired,
-		data: PropTypes.object.isRequired,
+		race: PropTypes.object.isRequired,
 		selectTown: PropTypes.func.isRequired,
 	}
 
@@ -62,7 +62,7 @@ class MassMap extends Component {
 	// We will use it to update the map.
 	componentDidUpdate() {
 
-		const subunits = getRaceUnits(this.props.data)
+		const subunits = getRaceUnits(this.props.race)
 
 		// Bind AP data to GeoJSON features.
 		// TODO: Maybe, when baking the topojson, we should give it an id
@@ -158,7 +158,7 @@ class MassMap extends Component {
 
 			// get the town's race results:
 
-			const subunits = getRaceUnits(this.props.data)
+			const subunits = getRaceUnits(this.props.race)
 
 			// Find the matching results so we can pass them to `Tooltip`.
 			const results = findMatchingSubunit({ name, subunits })

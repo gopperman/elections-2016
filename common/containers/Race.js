@@ -6,7 +6,7 @@ import * as actions from './../actions/actionCreators.js'
 // import RaceSummary from './../components/RaceSummary.js'
 import Timer from './../components/Timer.js'
 import MassMap from './../components/MassMap.js'
-import DetailedResultsTable from './../components/DetailedResultsTable.js'
+import TownResultsTable from './../components/TownResultsTable.js'
 
 const hooks = {
 	fetch: ({ dispatch }) =>
@@ -78,15 +78,14 @@ class Race extends Component {
 
 		// <RaceSummary data={summary} />
 
-		const data = results.data['senate-ma-towns']
-		const unitName = 'town'
+		const race = results.data['senate-ma-towns']
 
 		return (
 			<div className='Race'>
 				<h1>Race</h1>
 				<Timer {...timerProps} />
-				<MassMap {...{ selection, selectTown, data }} />
-				<DetailedResultsTable {...{ data, unitName }} />
+				<MassMap {...{ selection, selectTown, race }} />
+				<TownResultsTable {...{ race }} />
 			</div>
 		)
 
