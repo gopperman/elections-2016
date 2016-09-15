@@ -48,12 +48,12 @@
 <li class="file separator">
   
   
-<a href="../DetailedResultsTable.js" title="common/components/DetailedResultsTable.js">
+<a href="../StateResultsTable.js" title="common/components/StateResultsTable.js">
     
 <span class="language" style="background-color: #f1e05a">js</span>
 
 
-<span class="filename">common/components/DetailedResultsTable.js</span>
+<span class="filename">common/components/StateResultsTable.js</span>
 
 </a>
 
@@ -61,12 +61,12 @@
   
 <li class="file">
   
-<a href="../DetailedResultsTableRow.js" title="common/components/DetailedResultsTableRow.js">
+<a href="../StateResultsTableRow.js" title="common/components/StateResultsTableRow.js">
     
 <span class="language" style="background-color: #f1e05a">js</span>
 
 
-<span class="filename">common/components/DetailedResultsTableRow.js</span>
+<span class="filename">common/components/StateResultsTableRow.js</span>
 
 </a>
 
@@ -93,6 +93,32 @@
 
 
 <span class="filename">common/components/Tooltip.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../TownResultsTable.js" title="common/components/TownResultsTable.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/TownResultsTable.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../TownResultsTableRow.js" title="common/components/TownResultsTableRow.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/TownResultsTableRow.js</span>
 
 </a>
 
@@ -171,7 +197,7 @@
 
 	<span class="hljs-keyword">static</span> propTypes = {
 		selection: PropTypes.object.isRequired,
-		data: PropTypes.object.isRequired,
+		race: PropTypes.object.isRequired,
 		selectTown: PropTypes.func.isRequired,
 	}</code></pre>
   </div>
@@ -337,7 +363,7 @@ We will use it to update the map.</p>
   <div class="code">
     <pre><code>	componentDidUpdate() {
 
-		<span class="hljs-keyword">const</span> subunits = getRaceUnits(<span class="hljs-keyword">this</span>.props.data)</code></pre>
+		<span class="hljs-keyword">const</span> subunits = getRaceUnits(<span class="hljs-keyword">this</span>.props.race)</code></pre>
   </div>
 
   
@@ -643,7 +669,7 @@ If so,</p>
   
 
   <div class="code">
-    <pre><code>			<span class="hljs-keyword">const</span> subunits = getRaceUnits(<span class="hljs-keyword">this</span>.props.data)</code></pre>
+    <pre><code>			<span class="hljs-keyword">const</span> subunits = getRaceUnits(<span class="hljs-keyword">this</span>.props.race)</code></pre>
   </div>
 
   
@@ -700,7 +726,7 @@ export default MassMap</code></pre>
         </aside>
 
         <div class="code">
-          <span class="content page-generation-time">Generated Wed, 14 Sep 2016 23:51:56 GMT</span>
+          <span class="content page-generation-time">Generated Thu, 15 Sep 2016 23:08:44 GMT</span>
         </div>
         
       </section>
