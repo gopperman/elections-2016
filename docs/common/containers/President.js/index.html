@@ -48,38 +48,38 @@
 <li class="file separator">
   
   
-<a href="../../components/DetailedResultsTable.js" title="common/components/DetailedResultsTable.js">
-    
-<span class="language" style="background-color: #f1e05a">js</span>
-
-
-<span class="filename">common/components/DetailedResultsTable.js</span>
-
-</a>
-
-</li>
-  
-<li class="file">
-  
-<a href="../../components/DetailedResultsTableRow.js" title="common/components/DetailedResultsTableRow.js">
-    
-<span class="language" style="background-color: #f1e05a">js</span>
-
-
-<span class="filename">common/components/DetailedResultsTableRow.js</span>
-
-</a>
-
-</li>
-  
-<li class="file">
-  
 <a href="../../components/MassMap.js" title="common/components/MassMap.js">
     
 <span class="language" style="background-color: #f1e05a">js</span>
 
 
 <span class="filename">common/components/MassMap.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../components/StateResultsTable.js" title="common/components/StateResultsTable.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/StateResultsTable.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../components/StateResultsTableRow.js" title="common/components/StateResultsTableRow.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/StateResultsTableRow.js</span>
 
 </a>
 
@@ -106,6 +106,32 @@
 
 
 <span class="filename">common/components/Tooltip.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../components/TownResultsTable.js" title="common/components/TownResultsTable.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/TownResultsTable.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../components/TownResultsTableRow.js" title="common/components/TownResultsTableRow.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/TownResultsTableRow.js</span>
 
 </a>
 
@@ -142,14 +168,20 @@
   
 
   <div class="code">
-    <pre><code><span class="hljs-keyword">import</span> React, { Component, PropTypes } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
+    <pre><code><span class="hljs-keyword">import</span> _ <span class="hljs-keyword">from</span> <span class="hljs-string">'lodash'</span>
+<span class="hljs-keyword">import</span> React, { Component, PropTypes } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
 <span class="hljs-keyword">import</span> { provideHooks } <span class="hljs-keyword">from</span> <span class="hljs-string">'redial'</span>
 <span class="hljs-keyword">import</span> { bindActionCreators } <span class="hljs-keyword">from</span> <span class="hljs-string">'redux'</span>
 <span class="hljs-keyword">import</span> { connect } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-redux'</span>
 <span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> actions <span class="hljs-keyword">from</span> <span class="hljs-string">'./../actions/actionCreators.js'</span>
 <span class="hljs-keyword">import</span> Timer <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/Timer.js'</span>
-<span class="hljs-keyword">import</span> DetailedResultsTable <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/DetailedResultsTable.js'</span>
-<span class="hljs-keyword">import</span> MassMap <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/MassMap.js'</span></code></pre>
+<span class="hljs-keyword">import</span> TownResultsTable <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/TownResultsTable.js'</span>
+<span class="hljs-keyword">import</span> StateResultsTable <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/StateResultsTable.js'</span>
+<span class="hljs-keyword">import</span> MassMap <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/MassMap.js'</span>
+<span class="hljs-keyword">import</span> {
+	formatElectoralSummary,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/standardize.js'</span>
+<span class="hljs-keyword">import</span> { sortByElectoralCount } <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/Candidates.js'</span></code></pre>
   </div>
 
   
@@ -477,21 +509,66 @@ safely.</p>
 <section class="section">
 
   <aside class="comment">
+    <div class="text markdown"><p>Get fake API results.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">const</span> massRace = results.data[<span class="hljs-string">'president-ma-towns'</span>]
+		<span class="hljs-keyword">const</span> statesRace = results.data[<span class="hljs-string">'president-us-states'</span>]</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>TODO: this endpoint doesn&#39;t give us all candidates, just the top two.
+This might be problematic if we want to show third-party candidates
+in the state-by-state results table.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">const</span> usRace = formatElectoralSummary(
+			results.data[<span class="hljs-string">'president-us'</span>].Sumtable)</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Create an array of ordered presidential candidates:</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">const</span> summaryCandidates = sortByElectoralCount(
+			_.filter(usRace.candidates, <span class="hljs-string">'candidateID'</span>))</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
     <div class="text markdown"><p>Finally we can render all the components!</p>
 </div>
   </aside>
   
 
   <div class="code">
-    <pre><code>		<span class="hljs-keyword">const</span> data = results.data[<span class="hljs-string">'president-ma-towns'</span>]
-		<span class="hljs-keyword">const</span> unitName = <span class="hljs-string">'town'</span>
-
-		<span class="hljs-keyword">return</span> (
+    <pre><code>		<span class="hljs-keyword">return</span> (
 			&lt;div className='President'&gt;
 				&lt;h1&gt;President&lt;/h1&gt;
 				&lt;Timer {...timerProps} /&gt;
-				&lt;DetailedResultsTable {...{ data, unitName }} /&gt;
-				&lt;MassMap {...{ selection, selectTown, data }} /&gt;
+				&lt;StateResultsTable {...{ race: statesRace, summaryCandidates }} /&gt;
+				&lt;TownResultsTable {...{ race: massRace }} /&gt;
+				&lt;MassMap {...{ selection, selectTown, race: massRace }} /&gt;
 			&lt;/div&gt;
 		)
 
@@ -514,7 +591,7 @@ export default President</code></pre>
         </aside>
 
         <div class="code">
-          <span class="content page-generation-time">Generated Wed, 14 Sep 2016 23:51:56 GMT</span>
+          <span class="content page-generation-time">Generated Thu, 15 Sep 2016 23:08:44 GMT</span>
         </div>
         
       </section>

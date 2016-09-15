@@ -2,18 +2,22 @@
 // state in the race.
 
 import React, { PropTypes } from 'react'
+import StateResultsTableRow from './StateResultsTableRow.js'
+import { formatStateAsReportingUnit } from './../utils/standardize.js'
 
 // TODO: implement
 const createSummary = (raceName) =>
 	// eslint-disable-next-line max-len
 	`A table that has the candidate percent and vote count across the top and the states down the left hand side for the ${raceName}.`
 
-const StateResultsTable = ({ race }) => {
+const StateResultsTable = ({ race, summaryCandidates }) => {
 
-	console.log(race)
-
-	// How do we decide on a sorting order for these candidates?
-	// By electoral leading? electoral won?
+	// TODO: order states by their full name.
+	const rows = race.PresStateByStatetable.State
+		.map(formatStateAsReportingUnit)
+		.map((state, key) => (
+			<StateResultsTableRow {...{ state, summaryCandidates, key }} />
+		))
 
 	return (
 		<div>
@@ -25,9 +29,17 @@ const StateResultsTable = ({ race }) => {
 							<div>State</div>
 							<div>Precincts reporting</div>
 						</th>
-
+						{ summaryCandidates.map((c, i) => (
+							<th scope='col' key={i}>
+								<div>{c.last}</div>
+								<div>{i === 0 ? 'Votes' : ''}</div>
+							</th>
+						))}
 					</tr>
 				</thead>
+				<tbody>
+					{rows}
+				</tbody>
 			</table>
 		</div>
 	)
@@ -35,6 +47,7 @@ const StateResultsTable = ({ race }) => {
 
 StateResultsTable.propTypes = {
 	race: PropTypes.object.isRequired,
+	summaryCandidates: PropTypes.array.isRequired,
 }
 
 export default StateResultsTable

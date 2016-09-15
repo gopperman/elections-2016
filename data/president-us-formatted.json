@@ -1,0 +1,44 @@
+{
+    "Sumtable": {
+        "candidates": [
+            {
+                "candidateID": "1918",
+                "electLead": 0,
+                "electWon": 332,
+                "popPct": 51,
+                "voteCount": 62615406,
+                "statesLead": 0,
+                "statesWon": 27,
+                "winner": "X",
+                "last": "Obama",
+                "party": "Dem"
+            },
+            {
+                "candidateID": "893",
+                "electLead": 0,
+                "electWon": 206,
+                "popPct": 48,
+                "voteCount": 59142004,
+                "statesLead": 0,
+                "statesWon": 24,
+                "winner": "",
+                "last": "Romney",
+                "party": "GOP"
+            },
+            {
+                "electLead": 0,
+                "electWon": 0,
+                "popPct": 2,
+                "voteCount": 1969004,
+                "statesLead": 0,
+                "statesWon": 0,
+                "winner": "",
+                "last": "Others"
+            }
+        ],
+        "precinctsReportingPct": 99,
+        "test": "0",
+        "office": "President",
+        "timestamp": "2012-11-29T15:59:21Z"
+    }
+}

@@ -1,5 +1,6 @@
 // The `President` class displays presidential results for both US and MA.
 
+import _ from 'lodash'
 import React, { Component, PropTypes } from 'react'
 import { provideHooks } from 'redial'
 import { bindActionCreators } from 'redux'
@@ -9,6 +10,11 @@ import Timer from './../components/Timer.js'
 import TownResultsTable from './../components/TownResultsTable.js'
 import StateResultsTable from './../components/StateResultsTable.js'
 import MassMap from './../components/MassMap.js'
+import {
+	formatElectoralSummary,
+} from './../utils/standardize.js'
+import { sortByElectoralCount } from './../utils/Candidates.js'
+
 // import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 // import ElectoralCollegeMap from './../components/ElectoralCollegeMap.js'
 
@@ -117,15 +123,27 @@ class President extends Component {
 		// <ElectoralCollegeBar data={results.data['president-us']} />
 		// <ElectoralCollegeMap data={results.data['president-us-states']} />
 
-		// Finally we can render all the components!
+		// Get fake API results.
 		const massRace = results.data['president-ma-towns']
-		const usRace = results.data['president-us-states']
+		const statesRace = results.data['president-us-states']
+
+		// TODO: this endpoint doesn't give us all candidates, just the top two.
+		// This might be problematic if we want to show third-party candidates
+		// in the state-by-state results table.
+		const usRace = formatElectoralSummary(
+			results.data['president-us'].Sumtable)
+
+		// Create an array of ordered presidential candidates:
+		const summaryCandidates = sortByElectoralCount(
+			_.filter(usRace.candidates, 'candidateID'))
+
+		// Finally we can render all the components!
 
 		return (
 			<div className='President'>
 				<h1>President</h1>
 				<Timer {...timerProps} />
-				<StateResultsTable {...{ race: usRace }} />
+				<StateResultsTable {...{ race: statesRace, summaryCandidates }} />
 				<TownResultsTable {...{ race: massRace }} />
 				<MassMap {...{ selection, selectTown, race: massRace }} />
 			</div>

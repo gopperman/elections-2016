@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>common/components/DetailedResultsTableRow.js</title>
+    <title>common/components/TownResultsTableRow.js</title>
     <link rel="stylesheet" href="./../../../public/style.css" />
     <link rel="icon" type="image/png" href="./../../../public/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,7 +27,7 @@
               <a id="project-overview" href="./../../.." title="Project Overview">elections-2016<span id="version"></span></a>
               
               <div class="files-menu">
-                <span id="filename" title="common/components/DetailedResultsTableRow.js">common/components/DetailedResultsTableRow.js</span>
+                <span id="filename" title="common/components/TownResultsTableRow.js">common/components/TownResultsTableRow.js</span>
                 
               
                 <ul class="files hidable">
@@ -48,12 +48,12 @@
 <li class="file separator">
   
   
-<a href="../DetailedResultsTable.js" title="common/components/DetailedResultsTable.js">
+<a href="../MassMap.js" title="common/components/MassMap.js">
     
 <span class="language" style="background-color: #f1e05a">js</span>
 
 
-<span class="filename">common/components/DetailedResultsTable.js</span>
+<span class="filename">common/components/MassMap.js</span>
 
 </a>
 
@@ -61,12 +61,25 @@
   
 <li class="file">
   
-<a href="../MassMap.js" title="common/components/MassMap.js">
+<a href="../StateResultsTable.js" title="common/components/StateResultsTable.js">
     
 <span class="language" style="background-color: #f1e05a">js</span>
 
 
-<span class="filename">common/components/MassMap.js</span>
+<span class="filename">common/components/StateResultsTable.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../StateResultsTableRow.js" title="common/components/StateResultsTableRow.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/StateResultsTableRow.js</span>
 
 </a>
 
@@ -93,6 +106,19 @@
 
 
 <span class="filename">common/components/Tooltip.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../TownResultsTable.js" title="common/components/TownResultsTable.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/TownResultsTable.js</span>
 
 </a>
 
@@ -148,7 +174,7 @@
 <span class="hljs-keyword">import</span> { sortByIDs } <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/Candidates.js'</span>
 <span class="hljs-keyword">import</span> { percentForDisplay } <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/standardize.js'</span>
 
-<span class="hljs-keyword">const</span> DetailedResultsTableRow = ({ unit, summaryCandidates }) =&gt; {</code></pre>
+<span class="hljs-keyword">const</span> TownResultsTableRow = ({ town, summaryCandidates }) =&gt; {</code></pre>
   </div>
 
   
@@ -156,13 +182,13 @@
 <section class="section">
 
   <aside class="comment">
-    <div class="text markdown"><p>Get this unit&#39;s candidates.</p>
+    <div class="text markdown"><p>Get this town&#39;s candidates.</p>
 </div>
   </aside>
   
 
   <div class="code">
-    <pre><code>	<span class="hljs-keyword">const</span> { candidates } = unit</code></pre>
+    <pre><code>	<span class="hljs-keyword">const</span> { candidates } = town</code></pre>
   </div>
 
   
@@ -184,7 +210,7 @@
 <section class="section">
 
   <aside class="comment">
-    <div class="text markdown"><p>Sort the unit candidates by overall order.</p>
+    <div class="text markdown"><p>Sort the town candidates by overall order.</p>
 </div>
   </aside>
   
@@ -274,20 +300,20 @@
     <pre><code>	<span class="hljs-keyword">return</span> (
 		<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
 			<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>
-				<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{unit.reportingunitName}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-				<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{unit.precinctsReporting} of {unit.precinctsTotal}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+				<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{town.reportingunitName}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+				<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{town.precinctsReporting} of {town.precinctsTotal}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
 			<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
 			{tds}
 		<span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span></span>
 	)
 }
 
-DetailedResultsTableRow.propTypes = {
-	unit: PropTypes.object.isRequired,
+TownResultsTableRow.propTypes = {
+	town: PropTypes.object.isRequired,
 	summaryCandidates: PropTypes.array.isRequired,
 }
 
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> DetailedResultsTableRow</code></pre>
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> TownResultsTableRow</code></pre>
   </div>
 
   
@@ -302,7 +328,7 @@ DetailedResultsTableRow.propTypes = {
         </aside>
 
         <div class="code">
-          <span class="content page-generation-time">Generated Wed, 14 Sep 2016 23:51:56 GMT</span>
+          <span class="content page-generation-time">Generated Thu, 15 Sep 2016 23:08:44 GMT</span>
         </div>
         
       </section>

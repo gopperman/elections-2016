@@ -1,0 +1,48 @@
+{
+    "candidates": [
+        {
+            "candidateID": "893",
+            "electWon": 9,
+            "popPct": 61,
+            "voteCount": 1252453,
+            "winner": "X",
+            "last": "Romney",
+            "party": "GOP"
+        },
+        {
+            "candidateID": "1918",
+            "electWon": 0,
+            "popPct": 38,
+            "voteCount": 793620,
+            "last": "Obama",
+            "party": "Dem"
+        },
+        {
+            "candidateID": "31708",
+            "electWon": 0,
+            "popPct": 1,
+            "voteCount": 12283,
+            "last": "Johnson",
+            "party": "Ind"
+        },
+        {
+            "candidateID": "895",
+            "electWon": 0,
+            "popPct": 0,
+            "voteCount": 3382,
+            "last": "Stein",
+            "party": "Ind"
+        },
+        {
+            "candidateID": "713",
+            "electWon": 0,
+            "popPct": 0,
+            "voteCount": 2961,
+            "last": "Goode",
+            "party": "Ind"
+        }
+    ],
+    "electTotal": 9,
+    "statePostal": "AL",
+    "precinctsReportingPct": 100
+}
