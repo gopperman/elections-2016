@@ -3,20 +3,41 @@
 import _ from 'lodash'
 import assert from 'assert'
 import { readFileSync } from 'jsonfile'
-import { sort, sortByIDs } from './Candidates.js'
+import {
+	sortByVoteCount,
+	sortByElectoralCount,
+	sortByIDs,
+} from './Candidates.js'
 import { getRaceUnits } from './../utils/dataUtil.js'
-
-const input = readFileSync('./data/president-ma-towns-0.json')
 
 describe('Candidates', () => {
 
 	describe('sortByIDs', () => {
 
-		it('should work', () => {
+		it('should work when arrays are of different length', () => {
+
+			const candidateIDs = sortByElectoralCount(
+				readFileSync('./data/president-us-formatted.json')
+				.Sumtable.candidates)
+				.map(v => v.candidateID)
+
+			const candidates =
+				readFileSync('./data/president-us-state-as-ru.json').candidates
+
+			const result = sortByIDs({ candidates, candidateIDs })
+
+			assert.deepEqual(_.map(result, 'last'),
+				['Obama', 'Romney', 'Johnson', 'Stein', 'Goode'])
+
+		})
+
+		it('should work when both arrays are equal length', () => {
+
+			const input = readFileSync('./data/president-ma-towns-0.json')
 
 			const units = getRaceUnits(input)
 			const state = _.find(units, { level: 'state' })
-			const summaryCandidates = sort(state.candidates)
+			const summaryCandidates = sortByVoteCount(state.candidates)
 			const candidateIDs = _.map(summaryCandidates, 'candidateID')
 
 			const acton = sortByIDs({
