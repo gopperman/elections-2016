@@ -1,19 +1,18 @@
-// The `DetailedResultsTable` className displays detailed results for each
-// reporting unit in the race.
+// The `TownResultsTable` className displays detailed results for each
+// town in the race.
 
 import _ from 'lodash'
 import React, { PropTypes } from 'react'
 import { sort } from './../utils/Candidates.js'
 import { getRaceUnits } from './../utils/dataUtil.js'
-import { toSentenceCase } from './../utils/standardize.js'
-import DetailedResultsTableRow from './DetailedResultsTableRow.js'
+import TownResultsTableRow from './TownResultsTableRow.js'
 
 // TODO: implement
 const createSummary = (raceName) =>
 	// eslint-disable-next-line max-len
-	`A table that has the candidate percent and vote count across the top and the town or counties down the left hand side for the ${raceName}.`
+	`A table that has the candidate percent and vote count across the top and the towns down the left hand side for the ${raceName}.`
 
-const DetailedResultsTable = ({ data, unitName }) => {
+const TownResultsTable = ({ data }) => {
 
 	// Get this race's reporting units.
 	const units = getRaceUnits(data)
@@ -24,19 +23,19 @@ const DetailedResultsTable = ({ data, unitName }) => {
 	// Get statewide candidates.
 	const summaryCandidates = sort(state.candidates)
 
-	// Get the subunits (town or counties).
-	const subunits = _.filter(units, { level: 'subunit' })
+	// Get the town units.
+	const towns = _.filter(units, { level: 'subunit' })
 
-	// Create the subunit rows.
-	const rows = _.sortBy(subunits, 'reportingunitName').map((unit, key) => (
-		<DetailedResultsTableRow
-			{...{ unit, summaryCandidates, key }}
+	// Create the town rows.
+	const rows = _.sortBy(towns, 'reportingunitName').map((town, key) => (
+		<TownResultsTableRow
+			{...{ town, summaryCandidates, key }}
 		/>
 	))
 
 	return (
 		<div>
-			<h1>{toSentenceCase(`${unitName} by ${unitName} results`)}</h1>
+			<h1>Town by town results</h1>
 			<table summary={createSummary()}>
 				<thead>
 					<tr>
@@ -60,9 +59,8 @@ const DetailedResultsTable = ({ data, unitName }) => {
 	)
 }
 
-DetailedResultsTable.propTypes = {
+TownResultsTable.propTypes = {
 	data: PropTypes.object.isRequired,
-	unitName: PropTypes.string.isRequired,
 }
 
-export default DetailedResultsTable
+export default TownResultsTable

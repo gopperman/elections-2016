@@ -5,15 +5,15 @@ import { percent } from './../utils/Candidate.js'
 import { sortByIDs } from './../utils/Candidates.js'
 import { percentForDisplay } from './../utils/standardize.js'
 
-const DetailedResultsTableRow = ({ unit, summaryCandidates }) => {
+const TownResultsTableRow = ({ town, summaryCandidates }) => {
 
-	// Get this unit's candidates.
-	const { candidates } = unit
+	// Get this town's candidates.
+	const { candidates } = town
 
 	// Get candidate ids for the overall candidates (winner order).
 	const candidateIDs = _.map(summaryCandidates, 'candidateID')
 
-	// Sort the unit candidates by overall order.
+	// Sort the town candidates by overall order.
 	const sortedCandidates = sortByIDs({ candidates, candidateIDs })
 
 	// Create the candidate tds.
@@ -43,17 +43,17 @@ const DetailedResultsTableRow = ({ unit, summaryCandidates }) => {
 	return (
 		<tr>
 			<td>
-				<div>{unit.reportingunitName}</div>
-				<div>{unit.precinctsReporting} of {unit.precinctsTotal}</div>
+				<div>{town.reportingunitName}</div>
+				<div>{town.precinctsReporting} of {town.precinctsTotal}</div>
 			</td>
 			{tds}
 		</tr>
 	)
 }
 
-DetailedResultsTableRow.propTypes = {
-	unit: PropTypes.object.isRequired,
+TownResultsTableRow.propTypes = {
+	town: PropTypes.object.isRequired,
 	summaryCandidates: PropTypes.array.isRequired,
 }
 
-export default DetailedResultsTableRow
+export default TownResultsTableRow

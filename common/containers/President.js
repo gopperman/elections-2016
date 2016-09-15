@@ -6,7 +6,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actions from './../actions/actionCreators.js'
 import Timer from './../components/Timer.js'
-import DetailedResultsTable from './../components/DetailedResultsTable.js'
+import TownResultsTable from './../components/TownResultsTable.js'
 import MassMap from './../components/MassMap.js'
 // import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 // import ElectoralCollegeMap from './../components/ElectoralCollegeMap.js'
@@ -118,13 +118,12 @@ class President extends Component {
 
 		// Finally we can render all the components!
 		const data = results.data['president-ma-towns']
-		const unitName = 'town'
 
 		return (
 			<div className='President'>
 				<h1>President</h1>
 				<Timer {...timerProps} />
-				<DetailedResultsTable {...{ data, unitName }} />
+				<TownResultsTable {...{ data }} />
 				<MassMap {...{ selection, selectTown, data }} />
 			</div>
 		)
