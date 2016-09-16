@@ -42,7 +42,7 @@ const TownResultsTable = ({ race }) => {
 							<div>Precincts reporting</div>
 						</th>
 						{ summaryCandidates.map((c, i) => (
-							<th scope='col'>
+							<th scope='col' key={i}>
 								<div>{c.last}</div>
 								<div>{i === 0 ? 'Votes' : ''}</div>
 							</th>
