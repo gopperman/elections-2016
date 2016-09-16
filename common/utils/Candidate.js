@@ -1,7 +1,6 @@
 /** @module */
 
 import _ from 'lodash'
-import { totalVotes } from './Candidates.js'
 
 /**
  * Get candidate's full name (first and last).
