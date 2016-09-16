@@ -8,6 +8,9 @@ const getRaceUnits = (data) => {
 	const race = (races && races[0]) || {}
 	const subunits = race.reportingUnits || []
 
+	console.log('race:')
+	console.log(race)
+
 	return subunits
 
 }
