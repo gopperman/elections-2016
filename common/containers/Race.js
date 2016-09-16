@@ -91,7 +91,6 @@ class Race extends Component {
 
 		// Get the statewide unit.
 		const state = _.find(units, { level: 'state' })
-		console.log(state)
 
 		return (
 			<div className='Race'>

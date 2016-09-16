@@ -16,7 +16,7 @@ import { percentForDisplay } from './../utils/standardize.js'
 // TODO: implement
 const createSummary = (raceName) =>
 	// eslint-disable-next-line max-len
-	`A table that has the candidate percent and vote count across the top and the towns down the left hand side for the ${raceName}.`
+	`A table that has the candidate percent and vote count across the top and the town down the left hand side for the ${raceName}.`
 
 const RaceSummary = ({ race }) => {
 
@@ -44,13 +44,19 @@ const RaceSummary = ({ race }) => {
 		// Get the display-ready version of the percent.
 		const pctForDisplay = percentForDisplay(pct)
 
+		const barStyle = {
+			width: `${pctForDisplay}%`
+		}
+
+		const barClass = `fill--${i}`
+
 		return (
 			<tr className='state-t--row'>
 				<th scope='row' className='state-t--candidate'>
 					<div className='state-t--meta'>
 						<div className='state-t--name'>{fullName(candidate)}<span className='quit'></span></div>
 						<div className='state-t--bar'>
-							<span className='fill--{i}'></span>
+							<span className={barClass} style={barStyle}></span>
 						</div>
 					</div>
 
@@ -63,8 +69,7 @@ const RaceSummary = ({ race }) => {
 					<span class='suffix'> votes</span></td>
 			</tr>
 		)
-	})
-	
+	})	
 
 	// TODO: Add winner-tag class to candidates
 	return (
