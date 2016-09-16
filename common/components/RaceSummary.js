@@ -1,3 +1,5 @@
+// The `RaceSummary` class displays detailed the race's summary results.
+
 import _ from 'lodash'
 import React, { PropTypes } from 'react'
 import addCommas from 'add-commas'
@@ -22,8 +24,8 @@ const RaceSummary = ({ race }) => {
 	// Get statewide candidates.
 	const summaryCandidates = sortByVoteCount(state.candidates)
 
-	// Get total votes
-	const votesCast = totalVotes(state.candidates)
+	// Get total votes.
+	const votesCast = addCommas(totalVotes(state.candidates))
 
 	const rows = summaryCandidates.map((candidate, i, array) => {
 		const { candidateID, voteCount } = candidate
@@ -38,7 +40,7 @@ const RaceSummary = ({ race }) => {
 		const pctForDisplay = percentForDisplay(pct)
 
 		const barStyle = {
-			width: `${pctForDisplay}%`
+			width: `${pctForDisplay}%`,
 		}
 
 		const barClass = `fill--${i}`
@@ -47,9 +49,9 @@ const RaceSummary = ({ race }) => {
 			<tr className='state-t--row' key={i}>
 				<th scope='row' className='state-t--candidate'>
 					<div className='state-t--meta'>
-						<div className='state-t--name'>{fullName(candidate)}<span className='quit'></span></div>
+						<div className='state-t--name'>{fullName(candidate)}</div>
 						<div className='state-t--bar'>
-							<span className={barClass} style={barStyle}></span>
+							<span className={barClass} style={barStyle} />
 						</div>
 					</div>
 
@@ -59,22 +61,22 @@ const RaceSummary = ({ race }) => {
 
 				<td className='state-t--votes'>
 					<span className='value'>{vote}</span>
-					<span className='suffix'> votes</span></td>
+					<span className='suffix'> votes</span>
+				</td>
 			</tr>
 		)
-	})	
+	})
 
 	// TODO: Add winner-tag class to candidates
 	return (
-		<div className="container">
+		<div className='container'>
 			<div className='precincts-overall flex-item' aria-live={'polite'}>{state.precinctsReportingPct}% precincts reporting ({votesCast} votes total)</div>
-			<table 
-				className="state-t" summary={createSummary()}>
-				<thead className="state-t--hed">
+			<table className='state-t' summary={createSummary()}>
+				<thead className='state-t--hed'>
 					<tr>
-						<th scope="col" className="candidate">Candidate</th>
-						<th scope="col" className="percent">Percent</th>
-						<th scope="col" className="votes">Votes</th>
+						<th scope='col' className='candidate'>Candidate</th>
+						<th scope='col' className='percent'>Percent</th>
+						<th scope='col' className='votes'>Votes</th>
 					</tr>
 				</thead>
 				<tbody>

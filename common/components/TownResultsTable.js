@@ -1,4 +1,4 @@
-// The `TownResultsTable` className displays detailed results for each
+// The `TownResultsTable` class displays detailed results for each
 // town in the race.
 
 import _ from 'lodash'
