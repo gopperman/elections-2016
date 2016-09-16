@@ -10,7 +10,7 @@ import { percentForDisplay } from './../utils/standardize.js'
 // TODO: implement
 const createSummary = ({ reportingunitName }) =>
 	// eslint-disable-next-line max-len
-	`A table that has the candidate, percent, and vote count for top candidates across the top and the candidates down the left hand side for ${reportingunitName} results.`
+	`A table that has the candidate, percent, and vote count across the top and the candidates down the left hand side for the ${reportingunitName}.`
 
 const createRows = (candidates) =>
 	sortByVoteCount(candidates).map((candidate, i) => {
