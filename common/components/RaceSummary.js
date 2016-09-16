@@ -2,7 +2,7 @@ import _ from 'lodash'
 import React, { PropTypes } from 'react'
 import addCommas from 'add-commas'
 import { fullName, percent } from './../utils/Candidate.js'
-import { sort, totalVotes } from './../utils/Candidates.js'
+import { sortByVoteCount, totalVotes } from './../utils/Candidates.js'
 import { getRaceUnits } from './../utils/dataUtil.js'
 import { percentForDisplay } from './../utils/standardize.js'
 
@@ -27,7 +27,7 @@ const RaceSummary = ({ race }) => {
 	const state = _.find(units, { level: 'state' })
 
 	// Get statewide candidates.
-	const summaryCandidates = sort(state.candidates)
+	const summaryCandidates = sortByVoteCount(state.candidates)
 
 	// Get total votes
 	const votesCast = totalVotes(state.candidates)
