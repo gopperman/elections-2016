@@ -5,6 +5,7 @@
 	"readme": "README.md",
 	"files": [
 		"client/index.js",
+		"common/containers/Race.js",
 		"common/containers/President.js",
 		"common/components/Timer.js",
 		"common/components/Tooltip.js",
@@ -12,6 +13,7 @@
 		"common/components/StateResultsTableRow.js",
 		"common/components/TownResultsTable.js",
 		"common/components/TownResultsTableRow.js",
+		"common/components/RaceSummary.js",
 		"common/components/MassMap.js"
 	]
 }

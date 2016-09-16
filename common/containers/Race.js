@@ -1,3 +1,5 @@
+// The `Race` class displays race results.
+
 import _ from 'lodash'
 import React, { Component, PropTypes } from 'react'
 import { provideHooks } from 'redial'
@@ -77,8 +79,6 @@ class Race extends Component {
 				fetchData()
 			},
 		}
-
-// 	<MassMap {...{ selection, selectTown, race }} />
 
 		const race = results.data['senate-ma-towns']
 

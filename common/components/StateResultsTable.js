@@ -1,4 +1,4 @@
-// The `StateResultsTable` className displays detailed results for each
+// The `StateResultsTable` class displays detailed results for each
 // state in the race.
 
 import React, { PropTypes } from 'react'

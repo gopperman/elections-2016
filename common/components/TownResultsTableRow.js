@@ -1,3 +1,6 @@
+// The `TownResultsTableRow` class displays detailed results for a town row
+// within a `TownResultsTable`.
+
 import React, { PropTypes } from 'react'
 import _ from 'lodash'
 import addCommas from 'add-commas'

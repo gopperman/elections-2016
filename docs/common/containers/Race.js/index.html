@@ -1,0 +1,403 @@
+<!doctype html>
+<html>
+  <head>
+    <title>common/containers/Race.js</title>
+    <link rel="stylesheet" href="./../../../public/style.css" />
+    <link rel="icon" type="image/png" href="./../../../public/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./../../../public/jquery.min.js"></script>
+    <script src="./../../../public/script.js"></script>
+  </head>
+  <body class="code">
+    
+    <main id="sections">
+
+      <!-- The header -->
+
+        
+      <section class="section header files-hidden" id="header">
+
+        <aside class="comment">
+
+          <header>
+
+            <div class="file-path">
+              
+              
+              <a id="project-overview" href="./../../.." title="Project Overview">elections-2016<span id="version"></span></a>
+              
+              <div class="files-menu">
+                <span id="filename" title="common/containers/Race.js">common/containers/Race.js</span>
+                
+              
+                <ul class="files hidable">
+                  
+                  
+<li class="file">
+  
+<a href="../../../client/index.js" title="client/index.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">client/index.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../../components/MassMap.js" title="common/components/MassMap.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/MassMap.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../components/RaceSummary.js" title="common/components/RaceSummary.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/RaceSummary.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../components/StateResultsTable.js" title="common/components/StateResultsTable.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/StateResultsTable.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../components/StateResultsTableRow.js" title="common/components/StateResultsTableRow.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/StateResultsTableRow.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../components/Timer.js" title="common/components/Timer.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/Timer.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../components/Tooltip.js" title="common/components/Tooltip.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/Tooltip.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../components/TownResultsTable.js" title="common/components/TownResultsTable.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/TownResultsTable.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../components/TownResultsTableRow.js" title="common/components/TownResultsTableRow.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/TownResultsTableRow.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../President.js" title="common/containers/President.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/containers/President.js</span>
+
+</a>
+
+</li>
+
+                  
+                </ul>
+                
+              </div>
+                
+            </div>
+
+            <div class="spacer"></div>
+            
+            
+          </header>
+            
+        </aside>
+
+        
+        <div class="code empty">
+        </div>
+
+      </section>
+
+      <!-- The main code section -->
+      
+      <section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>The <code>Race</code> class displays race results.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code><span class="hljs-keyword">import</span> _ <span class="hljs-keyword">from</span> <span class="hljs-string">'lodash'</span>
+<span class="hljs-keyword">import</span> React, { Component, PropTypes } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
+<span class="hljs-keyword">import</span> { provideHooks } <span class="hljs-keyword">from</span> <span class="hljs-string">'redial'</span>
+<span class="hljs-keyword">import</span> { bindActionCreators } <span class="hljs-keyword">from</span> <span class="hljs-string">'redux'</span>
+<span class="hljs-keyword">import</span> { connect } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-redux'</span>
+<span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> actions <span class="hljs-keyword">from</span> <span class="hljs-string">'./../actions/actionCreators.js'</span>
+<span class="hljs-keyword">import</span> { getRaceUnits } <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/dataUtil.js'</span>
+<span class="hljs-keyword">import</span> Timer <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/Timer.js'</span>
+<span class="hljs-keyword">import</span> RaceSummary <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/RaceSummary.js'</span>
+<span class="hljs-keyword">import</span> MassMap <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/MassMap.js'</span>
+<span class="hljs-keyword">import</span> TownResultsTable <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/TownResultsTable.js'</span>
+
+<span class="hljs-keyword">const</span> hooks = {
+	fetch: ({ dispatch }) =&gt;
+		dispatch(actions.fetchResults({ url: <span class="hljs-string">'race'</span> })),
+}
+
+<span class="hljs-keyword">const</span> mapDispatchToProps = (dispatch) =&gt; ({
+	dispatch,
+	actions: bindActionCreators(actions, dispatch),
+})
+
+@provideHooks(hooks)
+@connect(s =&gt; s, mapDispatchToProps)
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Race</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+
+	<span class="hljs-keyword">static</span> propTypes = {
+		actions: PropTypes.object.isRequired,
+		timer: PropTypes.object.isRequired,
+		results: PropTypes.object.isRequired,
+		dispatch: PropTypes.func.isRequired,
+	}</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>when component is initially mounted onto DOM, fire its &#39;fetch&#39; hook</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>	componentDidMount = () =&gt; {
+		<span class="hljs-keyword">this</span>.fetchData()
+	}
+
+	componentDidUpdate = (prevProps) =&gt; {
+
+		<span class="hljs-keyword">const</span> { props } = <span class="hljs-keyword">this</span>
+		<span class="hljs-keyword">const</span> { startTimer, cancelTimer } = props.actions</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>did we stop fetching?</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">if</span> (prevProps.results.isFetching &amp;&amp; !props.results.isFetching) {</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>TODO: add data completeness check</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>			++<span class="hljs-keyword">this</span>.count</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>is the race over?</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>			<span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span>.count &gt; <span class="hljs-number">0</span>) {
+				cancelTimer()
+			} <span class="hljs-keyword">else</span> {
+				startTimer()
+			}
+
+		}
+
+	}
+
+	fetchData = () =&gt; {
+		hooks.fetch({ dispatch: <span class="hljs-keyword">this</span>.props.dispatch })
+	}
+
+	count = <span class="hljs-number">0</span>
+
+	render() {
+
+		<span class="hljs-keyword">const</span> { props, fetchData } = <span class="hljs-keyword">this</span>
+		<span class="hljs-keyword">const</span> { timer, results, selection } = props
+		<span class="hljs-keyword">const</span> { stopTimer, selectTown } = props.actions
+
+		<span class="hljs-keyword">const</span> timerProps = {
+			...timer,
+			callback: () =&gt; {
+				stopTimer()
+				fetchData()
+			},
+		}
+
+		<span class="hljs-keyword">const</span> race = results.data[<span class="hljs-string">'senate-ma-towns'</span>]</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Let&#39;s get the name of the office we&#39;re reporting on</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">const</span> raceTitle = (race.races &amp;&amp; race.races[<span class="hljs-number">0</span>].officeName) || <span class="hljs-string">''</span></code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Get this race&#39;s reporting units.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">const</span> units = getRaceUnits(race)</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Get the statewide unit.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">const</span> state = _.find(units, { level: <span class="hljs-string">'state'</span> })
+
+		<span class="hljs-keyword">return</span> (
+			&lt;div className='Race'&gt;
+				&lt;h1&gt;{state.stateName} {raceTitle}&lt;/h1&gt;
+				&lt;Timer {...timerProps} /&gt;
+				&lt;RaceSummary {...{ race }} /&gt;
+				&lt;MassMap {...{ selection, selectTown, race }} /&gt;
+				&lt;TownResultsTable {...{ race }} /&gt;
+			&lt;/div&gt;
+		)
+
+	}
+
+}
+
+export default Race</code></pre>
+  </div>
+
+  
+</section>
+
+      
+      
+      <section class="section footer" id="footer">
+        
+        <aside class="comment">
+          <span class="content project-copyright">&copy; Copyright 2016 The Boston Globe.</span>
+        </aside>
+
+        <div class="code">
+          <span class="content page-generation-time">Generated Fri, 16 Sep 2016 22:36:12 GMT</span>
+        </div>
+        
+      </section>
+      
+    </main>
+
+  </body>
+</html>
+

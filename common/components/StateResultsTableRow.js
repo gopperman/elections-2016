@@ -1,3 +1,6 @@
+// The `StateResultsTableRow` class displays detailed results for a state row
+// within a `StateResultsTable`.
+
 import _ from 'lodash'
 import React, { PropTypes } from 'react'
 import addCommas from 'add-commas'
