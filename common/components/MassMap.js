@@ -24,9 +24,9 @@ class MassMap extends Component {
 	// This lifecycle event gets called once, immediately after the initial
 	// rendering occurs. We will use it to create the map.
 	componentDidMount() {
-
+		console.log(topojson)
 		// Convert TOWNS to a GeoJSON object (via topojson).
-		const townsObject = topojson.feature(TOWNS, TOWNS.objects.TOWNS)
+/*		const townsObject = topojson.feature(TOWNS, TOWNS.objects.TOWNS)
 
 		// Setup a MA-centric projection.
 		const projection = geoConicConformal()
@@ -55,13 +55,13 @@ class MassMap extends Component {
 
 		// Draw features.
 		this.drawFeatures()
-
+*/
 	}
 
 	// This gets called once after the component's updates are flushed to DOM.
 	// We will use it to update the map.
 	componentDidUpdate() {
-
+/*
 		const subunits = getRaceUnits(this.props.race)
 
 		// Bind AP data to GeoJSON features.
@@ -73,7 +73,7 @@ class MassMap extends Component {
 
 		// Draw features.
 		this.drawFeatures()
-
+*/
 	}
 
 	// This function draws the map shapes and listens to mouseovers.

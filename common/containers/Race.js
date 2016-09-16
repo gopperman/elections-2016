@@ -79,7 +79,6 @@ class Race extends Component {
 		}
 
 // 	<MassMap {...{ selection, selectTown, race }} />
-//	<TownResultsTable {...{ race }} />
 
 		const race = results.data['senate-ma-towns']
 
@@ -97,7 +96,7 @@ class Race extends Component {
 				<h1>{state.stateName} {raceTitle}</h1>
 				<Timer {...timerProps} />
 				<RaceSummary {...{ race }} />
-				<MassMap {...{ selection, selectTown, race }} />
+				<TownResultsTable {...{ race }} />
 			</div>
 		)
 

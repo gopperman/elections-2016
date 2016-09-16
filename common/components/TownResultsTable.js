@@ -3,7 +3,7 @@
 
 import _ from 'lodash'
 import React, { PropTypes } from 'react'
-import { sort } from './../utils/Candidates.js'
+import { sortByIDs } from './../utils/Candidates.js'
 import { getRaceUnits } from './../utils/dataUtil.js'
 import TownResultsTableRow from './TownResultsTableRow.js'
 
@@ -15,13 +15,13 @@ const createSummary = (raceName) =>
 const TownResultsTable = ({ race }) => {
 
 	// Get this race's reporting units.
-	const units = getRaceUnits(race.races)
+	const units = getRaceUnits(race)
 
 	// Get the statewide unit.
 	const state = _.find(units, { level: 'state' })
-/*
+
 	// Get statewide candidates.
-	
+	const summaryCandidates = sortByIDs(state.candidates)
 
 	// Get the town units.
 	const towns = _.filter(units, { level: 'subunit' })
@@ -33,7 +33,8 @@ const TownResultsTable = ({ race }) => {
 		/>
 	))
 
-			<div>
+	return (
+		<div>
 			<h1>Town by town results</h1>
 			<table summary={createSummary()}>
 				<thead>
@@ -54,9 +55,7 @@ const TownResultsTable = ({ race }) => {
 					{rows}
 				</tbody>
 			</table>
-		</div>*/
-	return (
-		<h1>hello</h1>
+		</div>
 	)
 }
 
