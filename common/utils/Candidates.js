@@ -51,7 +51,7 @@ const sortByIDs = ({ candidates, candidateIDs }) => _(candidates)
 
 /**
  * Get candidates' total vote count.
- * @memberof candidates
+ * @memberof Candidates
  * @function
  * @param {Array} candidates an array of candidates
  * @returns {number} the candidates' total vote count.
