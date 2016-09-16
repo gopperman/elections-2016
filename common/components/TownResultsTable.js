@@ -19,9 +19,11 @@ const TownResultsTable = ({ race }) => {
 
 	// Get the statewide unit.
 	const state = _.find(units, { level: 'state' })
+	console.log(state.candidates)
 
 	// Get statewide candidates.
 	const summaryCandidates = sortByIDs(state.candidates)
+		console.log(summaryCandidates)
 
 	// Get the town units.
 	const towns = _.filter(units, { level: 'subunit' })
@@ -32,7 +34,6 @@ const TownResultsTable = ({ race }) => {
 			{...{ town, summaryCandidates, key }}
 		/>
 	))
-
 	return (
 		<div>
 			<h1>Town by town results</h1>

@@ -3,7 +3,7 @@
 /* eslint-disable no-return-assign */
 
 import React, { Component, PropTypes } from 'react'
-import topojson from 'topojson'
+import * as topojson from 'topojson'
 import { geoPath, geoConicConformal } from 'd3-geo'
 import { mouse, select } from 'd3-selection'
 import TOWNS from './../../data/output/TOWNS.json'
@@ -26,7 +26,7 @@ class MassMap extends Component {
 	componentDidMount() {
 		console.log(topojson)
 		// Convert TOWNS to a GeoJSON object (via topojson).
-/*		const townsObject = topojson.feature(TOWNS, TOWNS.objects.TOWNS)
+		const townsObject = topojson.feature(TOWNS, TOWNS.objects.TOWNS)
 
 		// Setup a MA-centric projection.
 		const projection = geoConicConformal()
@@ -55,13 +55,13 @@ class MassMap extends Component {
 
 		// Draw features.
 		this.drawFeatures()
-*/
+
 	}
 
 	// This gets called once after the component's updates are flushed to DOM.
 	// We will use it to update the map.
 	componentDidUpdate() {
-/*
+
 		const subunits = getRaceUnits(this.props.race)
 
 		// Bind AP data to GeoJSON features.
@@ -73,7 +73,7 @@ class MassMap extends Component {
 
 		// Draw features.
 		this.drawFeatures()
-*/
+
 	}
 
 	// This function draws the map shapes and listens to mouseovers.
