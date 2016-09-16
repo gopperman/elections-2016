@@ -11,7 +11,7 @@ import { percentForDisplay } from './../utils/standardize.js'
 // TODO: implement
 const createSummary = (raceName) =>
 	// eslint-disable-next-line max-len
-	`A table that has the candidate percent and vote count across the top and the town down the left hand side for the ${raceName}.`
+	`A table that has the candidate, percent, and vote count across the top and the candidates down the left hand side for the ${raceName}.`
 
 const RaceSummary = ({ race }) => {
 
