@@ -6,13 +6,6 @@ import { sortByVoteCount, totalVotes } from './../utils/Candidates.js'
 import { getRaceUnits } from './../utils/dataUtil.js'
 import { percentForDisplay } from './../utils/standardize.js'
 
-/*		// Get the candidate's vote percent.
-		const pct = percent({ candidates: array, candidateID })
-
-		// Get the display-ready version of the percent.
-		const pctForDisplay = percentForDisplay(pct)
-		*/
-
 // TODO: implement
 const createSummary = (raceName) =>
 	// eslint-disable-next-line max-len
