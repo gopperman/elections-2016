@@ -24,10 +24,11 @@ const RaceSummary = ({ race }) => {
 	// Get statewide candidates.
 	const summaryCandidates = sortByVoteCount(state.candidates)
 
-	// Get total votes.
+	// Get total votes, with commas.
 	const votesCast = addCommas(totalVotes(state.candidates))
 
 	const rows = summaryCandidates.map((candidate, i, array) => {
+
 		const { candidateID, voteCount } = candidate
 
 		// Add appropriate commas to the candidate's vote count.
@@ -43,25 +44,20 @@ const RaceSummary = ({ race }) => {
 			width: `${pctForDisplay}%`,
 		}
 
-		const barClass = `fill--${i}`
-
 		return (
-			<tr className='state-t--row' key={i}>
-				<th scope='row' className='state-t--candidate'>
-					<div className='state-t--meta'>
-						<div className='state-t--name'>{fullName(candidate)}</div>
-						<div className='state-t--bar'>
-							<span className={barClass} style={barStyle} />
+			<tr key={i}>
+				<th scope='row'>
+					<div>
+						<div>{fullName(candidate)}</div>
+						<div>
+							<span style={barStyle} />
 						</div>
 					</div>
-
 				</th>
-
-				<td className='state-t--pct'>{pctForDisplay}%</td>
-
-				<td className='state-t--votes'>
-					<span className='value'>{vote}</span>
-					<span className='suffix'> votes</span>
+				<td>{pctForDisplay}%</td>
+				<td>
+					<span>{vote}</span>
+					<span> votes</span>
 				</td>
 			</tr>
 		)
@@ -69,14 +65,14 @@ const RaceSummary = ({ race }) => {
 
 	// TODO: Add winner-tag class to candidates
 	return (
-		<div className='container'>
-			<div className='precincts-overall flex-item' aria-live={'polite'}>{state.precinctsReportingPct}% precincts reporting ({votesCast} votes total)</div>
-			<table className='state-t' summary={createSummary()}>
-				<thead className='state-t--hed'>
+		<div>
+			<div>{state.precinctsReportingPct}% precincts reporting ({votesCast} votes total)</div>
+			<table summary={createSummary()}>
+				<thead>
 					<tr>
-						<th scope='col' className='candidate'>Candidate</th>
-						<th scope='col' className='percent'>Percent</th>
-						<th scope='col' className='votes'>Votes</th>
+						<th scope='col'>Candidate</th>
+						<th scope='col'>Percent</th>
+						<th scope='col'>Votes</th>
 					</tr>
 				</thead>
 				<tbody>
