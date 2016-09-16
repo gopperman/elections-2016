@@ -1,9 +1,17 @@
 import _ from 'lodash'
 import React, { PropTypes } from 'react'
+import addCommas from 'add-commas'
 import { fullName, percent } from './../utils/Candidate.js'
 import { sort, totalVotes } from './../utils/Candidates.js'
 import { getRaceUnits } from './../utils/dataUtil.js'
-//import RaceSummaryRow from './RaceSummaryRow.js'
+import { percentForDisplay } from './../utils/standardize.js'
+
+/*		// Get the candidate's vote percent.
+		const pct = percent({ candidates: array, candidateID })
+
+		// Get the display-ready version of the percent.
+		const pctForDisplay = percentForDisplay(pct)
+		*/
 
 // TODO: implement
 const createSummary = (raceName) =>
@@ -24,6 +32,40 @@ const RaceSummary = ({ race }) => {
 	// Get total votes
 	const votesCast = totalVotes(state.candidates)
 
+	const rows = summaryCandidates.map((candidate, i, array) => {
+		const { candidateID, voteCount } = candidate
+
+		// Add appropriate commas to the candidate's vote count.
+		const vote = addCommas(voteCount)
+
+		// Get the candidate's vote percent.
+		const pct = percent({ candidates: array, candidateID })
+
+		// Get the display-ready version of the percent.
+		const pctForDisplay = percentForDisplay(pct)
+
+		return (
+			<tr className='state-t--row'>
+				<th scope='row' className='state-t--candidate'>
+					<div className='state-t--meta'>
+						<div className='state-t--name'>{fullName(candidate)}<span className='quit'></span></div>
+						<div className='state-t--bar'>
+							<span className='fill--{i}'></span>
+						</div>
+					</div>
+
+				</th>
+
+				<td className='state-t--pct'>{pctForDisplay}%</td>
+
+				<td className='state-t--votes'>
+					<span className='value'>{vote}</span>
+					<span class='suffix'> votes</span></td>
+			</tr>
+		)
+	})
+	
+
 	// TODO: Add winner-tag class to candidates
 	return (
 		<div class="container">
@@ -38,24 +80,7 @@ const RaceSummary = ({ race }) => {
 					</tr>
 				</thead>
 				<tbody>
-					console.log(summaryCandidates)
-					{ summaryCandidates.map((c, i) => (
-							<tr className='state-t--row'>
-								<th scope='row' className='state-t--candidate'>
-									<div className='state-t--meta'>
-										<div className='state-t--name'>{fullName(c)}<span className='quit'></span></div>
-										<div className='state-t--bar'>
-											<span className='fill--{i}'></span>
-										</div>
-									</div>
-
-								</th>
-
-								<td className='state-t--pct'>49.3%</td>
-
-								<td className='state-t--votes'><span className='value'>{c.voteCount}</span> <span class='suffix'>votes</span></td>
-							</tr>
-					))}
+					{ rows }
 				</tbody>
 			</table>
 		</div>
