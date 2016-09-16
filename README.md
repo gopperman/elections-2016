@@ -4,7 +4,8 @@ Please note: do not reproduce Boston Globe logos or fonts without written permis
 
 ## documentation
 
-<https://bostonglobe.github.io/elections-2016/>
+- components: <https://bostonglobe.github.io/elections-2016/>
+- utils API: <https://bostonglobe.github.io/elections-2016/utils>
 
 ## setup
 
