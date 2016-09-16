@@ -4,21 +4,21 @@ Please note: do not reproduce Boston Globe logos or fonts without written permis
 
 ## documentation
 
-https://bostonglobe.github.io/elections-2016/
+<https://bostonglobe.github.io/elections-2016/>
 
 ## setup
 
-- `npm i`
+-   `npm i`
 
 ## dev
 
-- `npm start` - start the app
-- `npm run doc` - generate documentation
+-   `npm start` - start the app
+-   `npm run doc` - generate documentation
 
 ## prod
 
-- `npm run build`
-- `npm run prod`
+-   `npm run build`
+-   `npm run prod`
 
 ## License
 

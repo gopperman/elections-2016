@@ -5,7 +5,10 @@
     "prod": "NODE_ENV=production npm run start",
     "lint": "eslint .",
     "test": "mocha --compilers js:babel-core/register \"./{,!(docs|node_modules)/**/}*.test.js\"",
-		"doc": "rimraf docs && indoc -c indoc.json"
+    "doc:user": "indoc -c indoc.json",
+    "doc:utils": "documentation build common/utils/*.js -o docs/utils -f html --github",
+    "doc:utilsdev": "documentation serve common/utils/*.js -w",
+    "doc": "rimraf docs && npm run doc:user && npm run doc:utils"
   },
   "dependencies": {
     "add-commas": "github:gabrielflorit/add-commas",
@@ -25,6 +28,7 @@
     "d3-selection": "^1.0.2",
     "d3-timer": "^1.0.2",
     "deep-equal": "^1.0.1",
+    "documentation": "^4.0.0-beta10",
     "es6-promise": "^3.2.1",
     "eslint": "^3.2.2",
     "eslint-config-airbnb": "^10.0.0",
