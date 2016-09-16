@@ -44,7 +44,7 @@ const RaceSummary = ({ race }) => {
 		const barClass = `fill--${i}`
 
 		return (
-			<tr className='state-t--row'>
+			<tr className='state-t--row' key={i}>
 				<th scope='row' className='state-t--candidate'>
 					<div className='state-t--meta'>
 						<div className='state-t--name'>{fullName(candidate)}<span className='quit'></span></div>
@@ -59,22 +59,22 @@ const RaceSummary = ({ race }) => {
 
 				<td className='state-t--votes'>
 					<span className='value'>{vote}</span>
-					<span class='suffix'> votes</span></td>
+					<span className='suffix'> votes</span></td>
 			</tr>
 		)
 	})	
 
 	// TODO: Add winner-tag class to candidates
 	return (
-		<div class="container">
+		<div className="container">
 			<div className='precincts-overall flex-item' aria-live={'polite'}>{state.precinctsReportingPct}% precincts reporting ({votesCast} votes total)</div>
 			<table 
-				class="state-t" summary={createSummary()}>
-				<thead class="state-t--hed">
+				className="state-t" summary={createSummary()}>
+				<thead className="state-t--hed">
 					<tr>
-						<th scope="col" class="candidate">Candidate</th>
-						<th scope="col" class="percent">Percent</th>
-						<th scope="col" class="votes">Votes</th>
+						<th scope="col" className="candidate">Candidate</th>
+						<th scope="col" className="percent">Percent</th>
+						<th scope="col" className="votes">Votes</th>
 					</tr>
 				</thead>
 				<tbody>
