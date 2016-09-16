@@ -18,9 +18,13 @@ const sortByIDs = ({ candidates, candidateIDs }) => _(candidates)
 		['asc', 'desc', 'desc'])
 	.value()
 
+const totalVotes = (candidates) =>
+	_.sumBy(candidates, 'voteCount')
+
 export {
 	// eslint-disable-next-line import/prefer-default-export
 	sortByElectoralCount,
 	sortByVoteCount,
 	sortByIDs,
+	totalVotes,
 }

@@ -15,7 +15,7 @@ const createSummary = (raceName) =>
 const TownResultsTable = ({ race }) => {
 
 	// Get this race's reporting units.
-	const units = getRaceUnits(race)
+	const units = getRaceUnits(race.races)
 
 	// Get the statewide unit.
 	const state = _.find(units, { level: 'state' })
