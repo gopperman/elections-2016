@@ -49,6 +49,15 @@ const sortByIDs = ({ candidates, candidateIDs }) => _(candidates)
 	.map(v => _.omit(v, 'externalCandidateID'))
 	.value()
 
+/**
+ * Get candidates' total vote count.
+ * @memberof candidates
+ * @function
+ * @param {Array} candidates an array of candidates
+ * @returns {number} the candidates' total vote count.
+ * @example
+ * totalVotes(candidates) //=> 123
+ */
 const totalVotes = (candidates) =>
 	_.sumBy(candidates, 'voteCount')
 
