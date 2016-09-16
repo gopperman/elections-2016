@@ -6,9 +6,9 @@
     "lint": "eslint .",
     "test": "mocha --compilers js:babel-core/register \"./{,!(docs|node_modules)/**/}*.test.js\"",
     "doc:user": "indoc -c indoc.json",
-    "doc:api": "documentation readme common/utils/*.js -s \"utils\" --github",
-    "doc:apidev": "documentation serve common/utils/*.js -w",
-    "doc": "rimraf docs && npm run doc:api && npm run doc:user"
+    "doc:utils": "documentation build common/utils/*.js -o docs/utils -f html --github",
+    "doc:utilsdev": "documentation serve common/utils/*.js -w",
+    "doc": "rimraf docs && npm run doc:user && npm run doc:utils"
   },
   "dependencies": {
     "add-commas": "github:gabrielflorit/add-commas",
