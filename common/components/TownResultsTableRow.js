@@ -5,7 +5,7 @@ import { percent } from './../utils/Candidate.js'
 import { sortByIDs } from './../utils/Candidates.js'
 import { percentForDisplay } from './../utils/standardize.js'
 
-const TownResultsTableRow = ({ town, summaryCandidates }) => {
+const TownResultsTableRow = ({ town, summaryCandidates, key }) => {
 
 	// Get this town's candidates.
 	const { candidates } = town
