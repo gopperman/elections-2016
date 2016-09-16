@@ -3,7 +3,7 @@
 /* eslint-disable no-return-assign */
 
 import React, { Component, PropTypes } from 'react'
-import topojson from 'topojson'
+import * as topojson from 'topojson'
 import { geoPath, geoConicConformal } from 'd3-geo'
 import { mouse, select } from 'd3-selection'
 import TOWNS from './../../data/output/TOWNS.json'
@@ -24,7 +24,6 @@ class MassMap extends Component {
 	// This lifecycle event gets called once, immediately after the initial
 	// rendering occurs. We will use it to create the map.
 	componentDidMount() {
-
 		// Convert TOWNS to a GeoJSON object (via topojson).
 		const townsObject = topojson.feature(TOWNS, TOWNS.objects.TOWNS)
 

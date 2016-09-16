@@ -9,7 +9,6 @@ const getRaceUnits = (data) => {
 	const subunits = race.reportingUnits || []
 
 	return subunits
-
 }
 
 export {
