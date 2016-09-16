@@ -6,8 +6,12 @@ const sort = (candidates) =>
 const sortByIDs = ({ candidates, candidateIDs }) =>
 	_.sortBy(candidates, v => _.indexOf(candidateIDs, v.candidateID))
 
+const totalVotes = (candidates) =>
+	_.sumBy(candidates, 'voteCount')
+
 export {
 	// eslint-disable-next-line import/prefer-default-export
 	sort,
 	sortByIDs,
+	totalVotes,
 }

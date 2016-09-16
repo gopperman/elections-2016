@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import { totalVotes } from './Candidates.js'
 
 const fullName = (candidate) =>
 	[candidate.first, candidate.last].join(' ').trim()
