@@ -33,7 +33,8 @@ const hooks = {
 // This object maps various properties as React `props`:
 const mapDispatchToProps = (dispatch) => ({
 
-	// `actions` which have already been bound with `dispatch` for convenience,
+	// `actions` which have already been bound with `dispatch`
+	// for convenience,
 	actions: bindActionCreators(actions, dispatch),
 
 	// and `dispatch`, so we can pass it to `fetch` above. Normally we

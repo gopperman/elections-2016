@@ -24,6 +24,7 @@ class MassMap extends Component {
 	// This lifecycle event gets called once, immediately after the initial
 	// rendering occurs. We will use it to create the map.
 	componentDidMount() {
+
 		// Convert TOWNS to a GeoJSON object (via topojson).
 		const townsObject = topojson.feature(TOWNS, TOWNS.objects.TOWNS)
 
@@ -177,4 +178,5 @@ class MassMap extends Component {
 	}
 
 }
+
 export default MassMap
