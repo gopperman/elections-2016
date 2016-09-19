@@ -8,8 +8,7 @@ const findMatchingSubunit = ({ subunits, name }) =>
 export default ({ subunits, features }) =>
 	features.map(f => ({
 		...f,
-		subunit:
-			findMatchingSubunit({ subunits, name: f.properties.REPORTING_UNIT }),
+		subunit: findMatchingSubunit({ subunits, name: f.id }),
 	}))
 
 export {

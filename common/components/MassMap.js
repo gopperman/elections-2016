@@ -65,8 +65,6 @@ class MassMap extends Component {
 		const subunits = getRaceUnits(this.props.race)
 
 		// Bind AP data to GeoJSON features.
-		// TODO: Maybe, when baking the topojson, we should give it an id
-		// so we don't rely on the property 'REPORTING_UNIT'.
 		// Save `_towns` for convenience.
 		this._towns =
 			bindSubunitsToFeatures({ features: this._towns, subunits })
@@ -85,7 +83,7 @@ class MassMap extends Component {
 
 		// DATA JOIN (d3 pattern)
 		const paths = svg.selectAll('path')
-			.data(this._towns, d => d.properties.REPORTING_UNIT)
+			.data(this._towns, d => d.id)
 			// On mousemove,
 			.on('mousemove', function mousemove(d) {
 
@@ -102,7 +100,7 @@ class MassMap extends Component {
 				}
 
 				// and fire a Redux `selectTown` action.
-				selectTown({ town: d.properties.REPORTING_UNIT, position })
+				selectTown({ town: d.id, position })
 
 			})
 			// On mouseleave fire an empty `selectTown` action.
@@ -119,9 +117,8 @@ class MassMap extends Component {
 				candidates: d.subunit && d.subunit.candidates })
 
 			// Add a `selected` class if we hovered over this shape.
-			// TODO: Will we always have a d.properties.REPORTING_UNIT?
-			const selected =
-				d.properties.REPORTING_UNIT === selection.town.name ?
+			// TODO: Will we always have a d.id?
+			const selected = d.id === selection.town.name ?
 				'selected' : ''
 
 			// If we selected this shape,
