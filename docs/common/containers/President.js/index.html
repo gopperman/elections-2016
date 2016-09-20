@@ -450,7 +450,7 @@ to <code>isFetching == false</code>? If so,</p>
 
 		<span class="hljs-keyword">const</span> { props, fetchData } = <span class="hljs-keyword">this</span>
 		<span class="hljs-keyword">const</span> { timer, results, selection } = props
-		<span class="hljs-keyword">const</span> { stopTimer, selectTown } = props.actions</code></pre>
+		<span class="hljs-keyword">const</span> { stopTimer, selectFeature } = props.actions</code></pre>
   </div>
 
   
@@ -594,7 +594,7 @@ in the state-by-state results table.</p>
 				&lt;Timer {...timerProps} /&gt;
 				&lt;StateResultsTable {...{ race: statesRace, summaryCandidates }} /&gt;
 				&lt;TownResultsTable {...{ race: massRace }} /&gt;
-				&lt;MassMap {...{ selection, selectTown, race: massRace }} /&gt;
+				&lt;MassMap {...{ selection, selectFeature, race: massRace }} /&gt;
 			&lt;/div&gt;
 		)
 

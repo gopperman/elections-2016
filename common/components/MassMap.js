@@ -18,7 +18,7 @@ class MassMap extends Component {
 	static propTypes = {
 		selection: PropTypes.object.isRequired,
 		race: PropTypes.object.isRequired,
-		selectTown: PropTypes.func.isRequired,
+		selectFeature: PropTypes.func.isRequired,
 	}
 
 	// This lifecycle event gets called once, immediately after the initial
@@ -77,7 +77,7 @@ class MassMap extends Component {
 	// This function draws the map shapes and listens to mouseovers.
 	drawFeatures() {
 
-		const { selectTown, selection } = this.props
+		const { selectFeature, selection } = this.props
 
 		const svg = select(this._svg)
 
@@ -99,12 +99,12 @@ class MassMap extends Component {
 					y: 100 * (y / (+height)),
 				}
 
-				// and fire a Redux `selectTown` action.
-				selectTown({ town: d.id, position })
+				// and fire a Redux `selectFeature` action.
+				selectFeature({ town: d.id, position })
 
 			})
-			// On mouseleave fire an empty `selectTown` action.
-			.on('mouseleave', () => selectTown({}))
+			// On mouseleave fire an empty `selectFeature` action.
+			.on('mouseleave', () => selectFeature({}))
 
 		// ENTER + UPDATE (d3 pattern)
 		paths.enter().append('path')

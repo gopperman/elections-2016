@@ -19,7 +19,7 @@ const config = process.env.NODE_ENV === 'production' ?
 
 const fetch = require('fetch-ponyfill')()
 
-const selectTown = ({ town, position }) => ({
+const selectFeature = ({ town, position }) => ({
 	type: SELECT_FEATURE,
 	town,
 	position,
@@ -80,7 +80,7 @@ const fetchResults = ({ url }) =>
 
 export {
 
-	selectTown,
+	selectFeature,
 
 	startTimer,
 	stopTimer,

@@ -71,7 +71,7 @@ class UsMap extends Component {
 
 	drawFeatures() {
 
-		// const { selectTown, selection } = this.props
+		// const { selectFeature, selection } = this.props
 
 		const svg = select(this._svg)
 
@@ -95,12 +95,12 @@ class UsMap extends Component {
 
 				console.log(position)
 
-				// // and fire a Redux `selectTown` action.
-				// selectTown({ town: d.id, position })
+				// // and fire a Redux `selectFeature` action.
+				// selectFeature({ town: d.id, position })
 
 			})
-			// On mouseleave fire an empty `selectTown` action.
-			// .on('mouseleave', () => selectTown({}))
+			// On mouseleave fire an empty `selectFeature` action.
+			// .on('mouseleave', () => selectFeature({}))
 
 		// ENTER + UPDATE (d3 pattern)
 		paths.enter().append('path')
