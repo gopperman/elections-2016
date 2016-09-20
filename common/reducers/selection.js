@@ -1,5 +1,5 @@
 import {
-	SELECT_TOWN,
+	SELECT_FEATURE,
 } from './../actions/actionTypes.js'
 
 const initialState = {
@@ -16,7 +16,7 @@ export default(state = initialState, action) => {
 	// TODO: consider switching to something like updeep
 	switch (type) {
 
-		case SELECT_TOWN:
+		case SELECT_FEATURE:
 
 			return {
 				...state,

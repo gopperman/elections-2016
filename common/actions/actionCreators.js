@@ -1,7 +1,7 @@
 import configRoot from './../../config.json'
 import {
 
-	SELECT_TOWN,
+	SELECT_FEATURE,
 
 	START_TIMER,
 	STOP_TIMER,
@@ -20,7 +20,7 @@ const config = process.env.NODE_ENV === 'production' ?
 const fetch = require('fetch-ponyfill')()
 
 const selectTown = ({ town, position }) => ({
-	type: SELECT_TOWN,
+	type: SELECT_FEATURE,
 	town,
 	position,
 })

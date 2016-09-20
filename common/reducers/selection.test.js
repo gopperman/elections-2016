@@ -3,12 +3,12 @@
 import { expect } from 'chai'
 import rootReducer from '../../common/reducers/index.js'
 import {
-	SELECT_TOWN,
+	SELECT_FEATURE,
 } from '../actions/actionTypes.js'
 
 describe('selection reducer', () => {
 
-	describe('SELECT_TOWN', () => {
+	describe('SELECT_FEATURE', () => {
 
 		it('should clear town if null', () => {
 
@@ -17,7 +17,7 @@ describe('selection reducer', () => {
 			}
 
 			const action = {
-				type: SELECT_TOWN,
+				type: SELECT_FEATURE,
 			}
 
 			const finalState = {
@@ -41,7 +41,7 @@ describe('selection reducer', () => {
 			}
 
 			const action = {
-				type: SELECT_TOWN,
+				type: SELECT_FEATURE,
 				town: 'hello',
 				position: [1, 2],
 			}
