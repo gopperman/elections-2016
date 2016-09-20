@@ -4,11 +4,18 @@
 
 import { select } from 'd3-selection'
 import * as topojson from 'topojson'
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { geoPath, geoAlbersUsa } from 'd3-geo'
+import { formatStateAsReportingUnit } from './../utils/standardize.js'
 import STATES from './../../data/output/STATES.json'
+import bindSubunitsToFeatures from './../utils/bindSubunitsToFeatures.js'
+import chooseColorClass from './../utils/chooseColorClass.js'
 
 class UsMap extends Component {
+
+	static propTypes = {
+		race: PropTypes.object.isRequired,
+	}
 
 	// This lifecycle event gets called once, immediately after the initial
 	// rendering occurs. We will use it to create the map.
@@ -39,6 +46,23 @@ class UsMap extends Component {
 
 		// Save GeoJSON features for convenience.
 		this._states = statesObject.features
+
+		// Draw features.
+		this.drawFeatures()
+
+	}
+
+	// This gets called once after the component's updates are flushed to DOM.
+	// We will use it to update the map.
+	componentDidUpdate() {
+
+		const subunits = this.props.race.PresStateByStatetable.State
+			.map(formatStateAsReportingUnit)
+
+		// Bind AP data to GeoJSON features.
+		// Save `_states` for convenience.
+		this._states = bindSubunitsToFeatures({
+			features: this._states, subunits, property: 'statePostal' })
 
 		// Draw features.
 		this.drawFeatures()
@@ -80,34 +104,35 @@ class UsMap extends Component {
 		// ENTER + UPDATE (d3 pattern)
 		paths.enter().append('path')
 			.attr('d', this._path)
-		// .merge(paths)
+		.merge(paths)
+		.attr('class', function createClass(d) {
 
-		// .attr('class', function createClass(d) {
+			// Get the shape color class based on who's winning.
+			const colorClass = chooseColorClass({
+				candidates: d.subunit && d.subunit.candidates })
 
-		// 	// Get the shape color class based on who's winning.
-		// 	const colorClass = chooseColorClass({
-		// 		candidates: d.subunit && d.subunit.candidates })
+			const selected = ''
 
-		// 	// Add a `selected` class if we hovered over this shape.
-		// 	// TODO: Will we always have a d.id?
-		// 	const selected = d.id === selection.town.name ?
-		// 		'selected' : ''
+			// // Add a `selected` class if we hovered over this shape.
+			// // TODO: Will we always have a d.id?
+			// const selected = d.id === selection.town.name ?
+			// 	'selected' : ''
 
-		// 	// If we selected this shape,
-		// 	if (selected === 'selected') {
+			// If we selected this shape,
+			if (selected === 'selected') {
 
-		// 		// bring it to the top, so its borders aren't under other shapes.
-		// 		// TODO: This is a side-effect and should maybe happen elsewhere.
-		// 		select(this).raise()
-		// 	}
+				// bring it to the top, so its borders aren't under other shapes.
+				// TODO: This is a side-effect and should maybe happen elsewhere.
+				select(this).raise()
+			}
 
-		// 	// Finally return both classes.
-		// 	return [colorClass, selected].join(' ')
+			// Finally return both classes.
+			return [colorClass, selected].join(' ')
 
-		// })
+		})
 
-		// // EXIT (d3 pattern)
-		// paths.exit().remove()
+		// EXIT (d3 pattern)
+		paths.exit().remove()
 
 	}
 

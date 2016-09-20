@@ -147,7 +147,7 @@ class President extends Component {
 			<div className='President'>
 				<h1>President</h1>
 				<Timer {...timerProps} />
-				<UsMap />
+				<UsMap {...{ race: statesRace }} />
 				<StateResultsTable {...{ race: statesRace, summaryCandidates }} />
 				<TownResultsTable {...{ race: massRace }} />
 			</div>
