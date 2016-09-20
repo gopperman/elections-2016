@@ -140,15 +140,13 @@ class President extends Component {
 			_.filter(usRace.candidates, 'candidateID'))
 
 		// Finally we can render all the components!
-
-				// <MassMap {...{ selection, selectTown, race: massRace }} />
-
 		return (
 			<div className='President'>
 				<h1>President</h1>
 				<Timer {...timerProps} />
 				<UsMap {...{ race: statesRace }} />
 				<StateResultsTable {...{ race: statesRace, summaryCandidates }} />
+				<MassMap {...{ selection, selectTown, race: massRace }} />
 				<TownResultsTable {...{ race: massRace }} />
 			</div>
 		)

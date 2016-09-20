@@ -2,9 +2,9 @@
 
 /* eslint-disable no-return-assign */
 
-import { select } from 'd3-selection'
 import * as topojson from 'topojson'
 import React, { Component, PropTypes } from 'react'
+import { mouse, select } from 'd3-selection'
 import { geoPath, geoAlbersUsa } from 'd3-geo'
 import { formatStateAsReportingUnit } from './../utils/standardize.js'
 import STATES from './../../data/output/STATES.json'
@@ -52,8 +52,8 @@ class UsMap extends Component {
 
 	}
 
-	// This gets called once after the component's updates are flushed to DOM.
-	// We will use it to update the map.
+	// This gets called once after the component's updates are flushed
+	// to DOM. We will use it to update the map.
 	componentDidUpdate() {
 
 		const subunits = this.props.race.PresStateByStatetable.State
@@ -78,27 +78,28 @@ class UsMap extends Component {
 		// DATA JOIN (d3 pattern)
 		const paths = svg.selectAll('path')
 			.data(this._states, d => d.id)
+			// On mousemove,
+			.on('mousemove', function mousemove() {
 
-			// // On mousemove,
-			// .on('mousemove', function mousemove(d) {
+				// grab the mouse x/y relative to this svg container,
+				const [x, y] = mouse(this)
 
-			// 	// grab the mouse x/y relative to this svg container,
-			// 	const [x, y] = mouse(this)
+				// grab the svg's aspect ratio from viewBox,
+				const [, , width, height] = svg.attr('viewBox').split(' ')
 
-			// 	// grab the svg's aspect ratio from viewBox,
-			// 	const [, , width, height] = svg.attr('viewBox').split(' ')
+				// calculate a percentage-based position,
+				const position = {
+					x: 100 * (x / (+width)),
+					y: 100 * (y / (+height)),
+				}
 
-			// 	// calculate a percentage-based position,
-			// 	const position = {
-			// 		x: 100 * (x / (+width)),
-			// 		y: 100 * (y / (+height)),
-			// 	}
+				console.log(position)
 
-			// 	// and fire a Redux `selectTown` action.
-			// 	selectTown({ town: d.id, position })
+				// // and fire a Redux `selectTown` action.
+				// selectTown({ town: d.id, position })
 
-			// })
-			// // On mouseleave fire an empty `selectTown` action.
+			})
+			// On mouseleave fire an empty `selectTown` action.
 			// .on('mouseleave', () => selectTown({}))
 
 		// ENTER + UPDATE (d3 pattern)
