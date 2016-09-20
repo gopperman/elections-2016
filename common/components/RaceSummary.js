@@ -5,6 +5,7 @@ import { fullName, percent } from './../utils/Candidate.js'
 import { sortByVoteCount, totalVotes } from './../utils/Candidates.js'
 import { getRaceUnits } from './../utils/dataUtil.js'
 import { percentForDisplay } from './../utils/standardize.js'
+import RaceSummaryRow from './../components/templates/RaceSummaryRow'
 
 // TODO: implement
 const createSummary = (raceName) =>
@@ -46,6 +47,7 @@ const RaceSummary = ({ race }) => {
 		return (
 			<tr className='state-t--row' key={i}>
 				<th scope='row' className='state-t--candidate'>
+					<RaceSummaryRow {...{candidate}} />
 					<div className='state-t--meta'>
 						<div className='state-t--name'>{fullName(candidate)}<span className='quit'></span></div>
 						<div className='state-t--bar'>

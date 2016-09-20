@@ -47,6 +47,13 @@ export default (req, res) => {
 			break
 		}
 
+		case 'town': {
+			result = {
+				'ma-general-towns': readJson('senate-ma-towns'),
+			}
+			console.log('about to send town data')
+		}
+
 		default:
 
 			res.sendStatus(500)
