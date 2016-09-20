@@ -10,6 +10,7 @@ import Timer from './../components/Timer.js'
 import TownResultsTable from './../components/TownResultsTable.js'
 import StateResultsTable from './../components/StateResultsTable.js'
 import MassMap from './../components/MassMap.js'
+import UsMap from './../components/UsMap.js'
 import {
 	formatElectoralSummary,
 } from './../utils/standardize.js'
@@ -140,13 +141,15 @@ class President extends Component {
 
 		// Finally we can render all the components!
 
+				// <MassMap {...{ selection, selectTown, race: massRace }} />
+
 		return (
 			<div className='President'>
 				<h1>President</h1>
 				<Timer {...timerProps} />
+				<UsMap />
 				<StateResultsTable {...{ race: statesRace, summaryCandidates }} />
 				<TownResultsTable {...{ race: massRace }} />
-				<MassMap {...{ selection, selectTown, race: massRace }} />
 			</div>
 		)
 
