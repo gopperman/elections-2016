@@ -10,7 +10,7 @@ describe('selection reducer', () => {
 
 	describe('SELECT_FEATURE', () => {
 
-		it('should clear town if null', () => {
+		it('should clear feature if null', () => {
 
 			const initialState = {
 				selection: {},
@@ -22,7 +22,7 @@ describe('selection reducer', () => {
 
 			const finalState = {
 				selection: {
-					town: {
+					feature: {
 						name: null,
 						position: null,
 					},
@@ -34,7 +34,7 @@ describe('selection reducer', () => {
 
 		})
 
-		it('should set town if present', () => {
+		it('should set feature if present', () => {
 
 			const initialState = {
 				selection: {},
@@ -42,13 +42,13 @@ describe('selection reducer', () => {
 
 			const action = {
 				type: SELECT_FEATURE,
-				town: 'hello',
+				feature: 'hello',
 				position: [1, 2],
 			}
 
 			const finalState = {
 				selection: {
-					town: {
+					feature: {
 						name: 'hello',
 						position: [1, 2],
 					},

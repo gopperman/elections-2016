@@ -100,7 +100,7 @@ class MassMap extends Component {
 				}
 
 				// and fire a Redux `selectFeature` action.
-				selectFeature({ town: d.id, position })
+				selectFeature({ feature: d.id, position })
 
 			})
 			// On mouseleave fire an empty `selectFeature` action.
@@ -118,7 +118,7 @@ class MassMap extends Component {
 
 			// Add a `selected` class if we hovered over this shape.
 			// TODO: Will we always have a d.id?
-			const selected = d.id === selection.town.name ?
+			const selected = d.id === selection.feature.name ?
 				'selected' : ''
 
 			// If we selected this shape,
@@ -147,9 +147,9 @@ class MassMap extends Component {
 
 		let tooltip = null
 
-		const { name, position } = this.props.selection.town
+		const { name, position } = this.props.selection.feature
 
-		// Do we have a `name` or `position` - did the user select a town?
+		// Do we have a `name` or `position` - did the user select a feature?
 		// If so,
 		if (name || position) {
 

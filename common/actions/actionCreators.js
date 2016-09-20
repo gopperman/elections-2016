@@ -19,9 +19,9 @@ const config = process.env.NODE_ENV === 'production' ?
 
 const fetch = require('fetch-ponyfill')()
 
-const selectFeature = ({ town, position }) => ({
+const selectFeature = ({ feature, position }) => ({
 	type: SELECT_FEATURE,
-	town,
+	feature,
 	position,
 })
 

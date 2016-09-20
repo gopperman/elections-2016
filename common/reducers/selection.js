@@ -3,7 +3,7 @@ import {
 } from './../actions/actionTypes.js'
 
 const initialState = {
-	town: {
+	feature: {
 		name: null,
 		position: null,
 	},
@@ -11,7 +11,7 @@ const initialState = {
 
 export default(state = initialState, action) => {
 
-	const { type, town, position } = action
+	const { type, feature, position } = action
 
 	// TODO: consider switching to something like updeep
 	switch (type) {
@@ -20,8 +20,8 @@ export default(state = initialState, action) => {
 
 			return {
 				...state,
-				town: {
-					name: town || null,
+				feature: {
+					name: feature || null,
 					position: position || null,
 				},
 			}
