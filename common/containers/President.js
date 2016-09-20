@@ -10,6 +10,7 @@ import Timer from './../components/Timer.js'
 import TownResultsTable from './../components/TownResultsTable.js'
 import StateResultsTable from './../components/StateResultsTable.js'
 import MassMap from './../components/MassMap.js'
+import UsMap from './../components/UsMap.js'
 import {
 	formatElectoralSummary,
 } from './../utils/standardize.js'
@@ -33,7 +34,8 @@ const hooks = {
 // This object maps various properties as React `props`:
 const mapDispatchToProps = (dispatch) => ({
 
-	// `actions` which have already been bound with `dispatch` for convenience,
+	// `actions` which have already been bound with `dispatch`
+	// for convenience,
 	actions: bindActionCreators(actions, dispatch),
 
 	// and `dispatch`, so we can pass it to `fetch` above. Normally we
@@ -138,14 +140,14 @@ class President extends Component {
 			_.filter(usRace.candidates, 'candidateID'))
 
 		// Finally we can render all the components!
-
 		return (
 			<div className='President'>
 				<h1>President</h1>
 				<Timer {...timerProps} />
+				<UsMap {...{ race: statesRace }} />
 				<StateResultsTable {...{ race: statesRace, summaryCandidates }} />
-				<TownResultsTable {...{ race: massRace }} />
 				<MassMap {...{ selection, selectTown, race: massRace }} />
+				<TownResultsTable {...{ race: massRace }} />
 			</div>
 		)
 

@@ -6,3 +6,7 @@ dist
 npm-debug.log
 
 .DS_Store
+
+data/output/STATES.geojson
+
+data/output/TOWNS.geojson
