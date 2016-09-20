@@ -7,6 +7,7 @@ import { fullName, percent } from './../utils/Candidate.js'
 import { sortByVoteCount, totalVotes } from './../utils/Candidates.js'
 import { getRaceUnits } from './../utils/dataUtil.js'
 import { percentForDisplay } from './../utils/standardize.js'
+import RaceSummaryRow from './../components/templates/RaceSummaryRow'
 
 // TODO: implement
 const createSummary = (raceName) =>
