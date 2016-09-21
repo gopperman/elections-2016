@@ -116,9 +116,11 @@ class MassMap extends Component {
 			const colorClass = chooseColorClass({
 				candidates: d.subunit && d.subunit.candidates })
 
+			const { feature } = selection
+
 			// Add a `selected` class if we hovered over this shape.
 			// TODO: Will we always have a d.id?
-			const selected = d.id === selection.feature.name ?
+			const selected = feature.map === 'mass' && d.id === feature.name ?
 				'selected' : ''
 
 			// If we selected this shape,
@@ -154,7 +156,6 @@ class MassMap extends Component {
 		if (map === 'mass' && (name || position)) {
 
 			// get the town's race results:
-
 			const subunits = getRaceUnits(this.props.race)
 
 			// Find the matching results so we can pass them to `TownTooltip`.
@@ -170,7 +171,7 @@ class MassMap extends Component {
 		}
 
 		return (
-			<div className='MassMap'>
+			<div className='map'>
 				{tooltip}
 				<svg ref={(c) => this._svg = c} />
 			</div>
