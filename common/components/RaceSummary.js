@@ -9,18 +9,14 @@ import { getRaceUnits } from './../utils/dataUtil.js'
 import { percentForDisplay } from './../utils/standardize.js'
 import RaceSummaryRow from './../components/templates/RaceSummaryRow'
 
-// TODO: implement
 const createSummary = (raceName) =>
 	// eslint-disable-next-line max-len
 	`A table that has the candidate, percent, and vote count across the top and the candidates down the left hand side for the ${raceName}.`
 
-const RaceSummary = ({ race }) => {
-
-	// Get this race's reporting units.
-	const units = getRaceUnits(race)
-
+const RaceSummary = ( { summary } ) => {
+	
 	// Get the statewide unit.
-	const state = _.find(units, { level: 'state' })
+	const state = summary.units
 
 	// Get statewide candidates.
 	const summaryCandidates = sortByVoteCount(state.candidates)
@@ -63,7 +59,7 @@ const RaceSummary = ({ race }) => {
 	return (
 		<div>
 			<div>{state.precinctsReportingPct}% precincts reporting ({votesCast} votes total)</div>
-			<table summary={createSummary()}>
+			<table summary={createSummary(summary.raceTitle)}>
 				<thead>
 					<tr>
 						<th scope='col'>Candidate</th>
@@ -80,7 +76,7 @@ const RaceSummary = ({ race }) => {
 }
 
 RaceSummary.propTypes = {
-	race: PropTypes.object.isRequired,
+	summary: PropTypes.object.isRequired,
 }
 
 export default RaceSummary
