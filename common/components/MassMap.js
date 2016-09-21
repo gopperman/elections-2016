@@ -53,7 +53,7 @@ class MassMap extends Component {
 		// Set features for convenience, so we don't keep topojsoning.
 		this._geoFeatures = townsObject.features
 
-		// Draw features.
+		// Draw features (although at this point we might not have data).
 		this.drawFeatures(this._geoFeatures)
 
 	}
@@ -62,27 +62,55 @@ class MassMap extends Component {
 	// We will use it to update the map.
 	componentDidUpdate() {
 
-		const subunits = getRaceUnits(this.props.race)
-
-		// Bind AP data to GeoJSON features.
-		const towns =
-			bindSubunitsToFeatures({ features: this._geoFeatures, subunits })
-
 		// Draw features.
-		this.drawFeatures(towns)
+		this.drawFeatures(this._geoFeatures)
 
 	}
 
 	// This function draws the map shapes and listens to mouseovers.
 	drawFeatures(features) {
 
-		const { selectFeature, selection } = this.props
-
+		const { selectFeature, selection, race } = this.props
 		const svg = select(this._svg)
+
+		const subunits = getRaceUnits(race)
+
+		// Bind AP data to GeoJSON features.
+		const towns = bindSubunitsToFeatures({ features, subunits })
 
 		// DATA JOIN (d3 pattern)
 		const paths = svg.selectAll('path')
-			.data(features, d => d.id)
+			.data(towns, d => d.id)
+
+		// ENTER + UPDATE (d3 pattern)
+		paths.enter().append('path')
+			.attr('d', this._path)
+		.merge(paths)
+			.attr('class', function createClass(d) {
+
+				// Get the shape color class based on who's winning.
+				const colorClass = chooseColorClass({
+					candidates: d.subunit && d.subunit.candidates })
+
+				const { feature } = selection
+
+				// Add a `selected` class if we hovered over this shape.
+				// TODO: Will we always have a d.id?
+				const selected = feature.map === 'mass' && d.id === feature.name ?
+					'selected' : ''
+
+				// If we selected this shape,
+				if (selected === 'selected') {
+
+					// bring it to the top, so its borders aren't under other shapes.
+					// TODO: This is a side-effect and should maybe happen elsewhere.
+					select(this).raise()
+				}
+
+				// Finally return both classes.
+				return [colorClass, selected].join(' ')
+
+			})
 			// On mousemove,
 			.on('mousemove', function mousemove(d) {
 
@@ -105,35 +133,6 @@ class MassMap extends Component {
 			// On mouseleave fire an empty `selectFeature` action.
 			.on('mouseleave', () => selectFeature({}))
 
-		// ENTER + UPDATE (d3 pattern)
-		paths.enter().append('path')
-			.attr('d', this._path)
-		.merge(paths)
-		.attr('class', function createClass(d) {
-
-			// Get the shape color class based on who's winning.
-			const colorClass = chooseColorClass({
-				candidates: d.subunit && d.subunit.candidates })
-
-			const { feature } = selection
-
-			// Add a `selected` class if we hovered over this shape.
-			// TODO: Will we always have a d.id?
-			const selected = feature.map === 'mass' && d.id === feature.name ?
-				'selected' : ''
-
-			// If we selected this shape,
-			if (selected === 'selected') {
-
-				// bring it to the top, so its borders aren't under other shapes.
-				// TODO: This is a side-effect and should maybe happen elsewhere.
-				select(this).raise()
-			}
-
-			// Finally return both classes.
-			return [colorClass, selected].join(' ')
-
-		})
 
 		// EXIT (d3 pattern)
 		paths.exit().remove()

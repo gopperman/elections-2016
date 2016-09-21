@@ -58,6 +58,10 @@ class President extends Component {
 		dispatch: PropTypes.func.isRequired,
 	}
 
+	state = {
+		showUS: true,
+	}
+
 	// This lifecycle event gets called once, immediately after the initial
 	// rendering occurs. We will use it to fire the `fetch` hook.
 	componentDidMount = () => {
@@ -66,6 +70,7 @@ class President extends Component {
 
 	// This gets called once after the component's updates are flushed to DOM.
 	// At the moment we will use it to determine whether to stop the clock.
+	// NOTE: the switcher triggers this.
 	componentDidUpdate = (prevProps) => {
 
 		const { props } = this
@@ -98,11 +103,16 @@ class President extends Component {
 	// TODO: remove when we implement data completion check.
 	count = 0
 
+	handleSwitcher = () => {
+		this.setState({ showUS: !this.state.showUS })
+	}
+
 	render() {
 
 		const { props, fetchData } = this
 		const { timer, results, selection } = props
 		const { stopTimer, selectFeature } = props.actions
+		const { showUS } = this.state
 
 		// Prepare `Timer` props, including
 		const timerProps = {
@@ -139,22 +149,33 @@ class President extends Component {
 		const summaryCandidates = sortByElectoralCount(
 			_.filter(usRace.candidates, 'candidateID'))
 
+		let switcherText
+		let map
+		let table
+
+		if (showUS) {
+
+			switcherText = 'Switch to MASS'
+			map = <UsMap {...{ selection, selectFeature, race: statesRace }} />
+			table = (<StateResultsTable
+				{...{ race: statesRace, summaryCandidates }} />)
+
+		} else {
+
+			switcherText = 'Switch to US'
+			map = <MassMap {...{ selection, selectFeature, race: massRace }} />
+			table = <TownResultsTable {...{ race: massRace }} />
+
+		}
+
 		// Finally we can render all the components!
 		return (
 			<div className='President'>
 				<h1>President</h1>
 				<Timer {...timerProps} />
-				<div className='columns'>
-					<div className='column'>
-						<UsMap {...{ selection, selectFeature, race: statesRace }} />
-						<StateResultsTable
-							{...{ race: statesRace, summaryCandidates }} />
-					</div>
-					<div className='column'>
-						<MassMap {...{ selection, selectFeature, race: massRace }} />
-						<TownResultsTable {...{ race: massRace }} />
-					</div>
-				</div>
+				<button onClick={this.handleSwitcher}>{switcherText}</button>
+				{map}
+				{table}
 			</div>
 		)
 
