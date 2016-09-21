@@ -6,13 +6,11 @@ import { connect } from 'react-redux'
 import * as actions from './../actions/actionCreators.js'
 import { getRaceUnits } from './../utils/dataUtil.js'
 import Timer from './../components/Timer.js'
-import RaceSummary from './../components/RaceSummary.js'
-import MassMap from './../components/MassMap.js'
-import TownResultsTable from './../components/TownResultsTable.js'
+import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 
 const hooks = {
 	fetch: ({ dispatch }) =>
-		dispatch(actions.fetchResults({ url: 'race' })),
+		dispatch(actions.fetchResults({ url: 'town' })),
 }
 
 const mapDispatchToProps = (dispatch) => ({
@@ -65,7 +63,7 @@ class Town extends Component {
 	count = 0
 
 	render() {
-
+		console.log(this)
 		const { props, fetchData } = this
 		const { timer, results, selection } = props
 		const { stopTimer, selectTown } = props.actions
@@ -78,22 +76,12 @@ class Town extends Component {
 			},
 		}
 
-		const race = results.data['senate-ma-towns']
-
-		// Let's get the name of the office we're reporting on
-		const raceTitle = (race.races && race.races[0].officeName) || ''
-
-		// Get this race's reporting units.
-		const units = getRaceUnits(race)
-
-		// Get the statewide unit.
-		const state = _.find(units, { level: 'state' })
+		const town = results.data['town-abington']
 
 		return (
 			<div className='Town'>
-				<div>Presidential Election Summary</div>
-				<h1>Town Name</h1>
-				
+				<ElectoralCollegeBar data={results.data['president-us']} />
+				<h1>Town Name, MA</h1>
 			</div>
 		)
 
