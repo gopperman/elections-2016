@@ -7,6 +7,7 @@ import * as actions from './../actions/actionCreators.js'
 import { getRaceUnits } from './../utils/dataUtil.js'
 import Timer from './../components/Timer.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
+import { toSentenceCase } from './../utils/standardize.js'
 
 const hooks = {
 	fetch: ({ dispatch }) =>
@@ -63,7 +64,6 @@ class Town extends Component {
 	count = 0
 
 	render() {
-		console.log(this)
 		const { props, fetchData } = this
 		const { timer, results, selection } = props
 		const { stopTimer, selectTown } = props.actions
@@ -76,12 +76,28 @@ class Town extends Component {
 			},
 		}
 
-		const town = results.data['town-abington']
+		const townName = toSentenceCase(props.params.townName)
+
+		const races = results.data['town-abington'].map((race) => {
+			const raceTitle = `${race.office_name} ${race.seat_name}`
+			const unit = (race.reporting_units && race.reporting_units[0]) || []
+			
+			// TO-DO: We're waiting on consistent test data so we can use RaceSummary
+			return (
+				<li key={race.race_number}>
+					{raceTitle}
+					(Race Summary goes here)
+				</li>
+			)
+		})
 
 		return (
 			<div className='Town'>
 				<ElectoralCollegeBar data={results.data['president-us']} />
-				<h1>Town Name, MA</h1>
+				<h1>{townName}, MA</h1>
+				<ul>
+					{races}
+				</ul>
 			</div>
 		)
 

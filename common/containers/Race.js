@@ -8,6 +8,7 @@ import { connect } from 'react-redux'
 import * as actions from './../actions/actionCreators.js'
 import { getRaceUnits } from './../utils/dataUtil.js'
 import Timer from './../components/Timer.js'
+import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 import RaceSummary from './../components/RaceSummary.js'
 import MassMap from './../components/MassMap.js'
 import TownResultsTable from './../components/TownResultsTable.js'
@@ -79,6 +80,7 @@ class Race extends Component {
 				fetchData()
 			},
 		}
+		console.log(props)
 
 		const race = results.data['senate-ma-towns']
 
@@ -93,6 +95,7 @@ class Race extends Component {
 
 		return (
 			<div className='Race'>
+				<ElectoralCollegeBar data={results.data['president-us']} />
 				<h1>{state.stateName} {raceTitle}</h1>
 				<RaceSummary unit={state} raceTitle />
 				<MassMap {...{ selection, selectTown, race }} />

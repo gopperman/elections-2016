@@ -9,6 +9,6 @@ export default (
 	<Route path='/' component={App}>
 		<Route path='president' component={President} />
 		<Route path='race' component={Race} />
-		<Route path='town' component={Town} />
+		<Route path='town/:townName' component={Town} />
 	</Route>
 )
