@@ -96,9 +96,9 @@ class Race extends Component {
 		return (
 			<div className='Race'>
 				<h1>{state.stateName} {raceTitle}</h1>
-				<Timer {...timerProps} />
 				<RaceSummary {...{ summary }} />
 				<MassMap {...{ selection, selectTown, race }} />
+				<Timer {...timerProps} />
 				<TownResultsTable {...{ race }} />
 			</div>
 		)
