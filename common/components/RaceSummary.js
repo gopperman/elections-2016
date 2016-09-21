@@ -32,6 +32,8 @@ const RaceSummary = ({ race }) => {
 
 		const { candidateID, voteCount } = candidate
 
+		const candidateName = fullName(candidate)
+
 		// Add appropriate commas to the candidate's vote count.
 		const vote = addCommas(voteCount)
 
@@ -41,26 +43,13 @@ const RaceSummary = ({ race }) => {
 		// Get the display-ready version of the percent.
 		const pctForDisplay = percentForDisplay(pct)
 
+
 		const barStyle = {
 			width: `${pctForDisplay}%`,
 		}
 
 		return (
-			<tr key={i}>
-				<th scope='row'>
-					<div>
-						<div>{fullName(candidate)}</div>
-						<div>
-							<span style={barStyle} />
-						</div>
-					</div>
-				</th>
-				<td>{pctForDisplay}%</td>
-				<td>
-					<span>{vote}</span>
-					<span> votes</span>
-				</td>
-			</tr>
+				<RaceSummaryRow {...{ candidateID, candidateName, barStyle, pctForDisplay, vote }} />
 		)
 	})
 
