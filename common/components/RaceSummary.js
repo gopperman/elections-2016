@@ -49,7 +49,13 @@ const RaceSummary = ({ race }) => {
 		}
 
 		return (
-				<RaceSummaryRow {...{ candidateID, candidateName, barStyle, pctForDisplay, vote }} />
+				<RaceSummaryRow {...{ 
+					'id': candidateID,
+					'name': candidateName, 
+					barStyle, 
+					pctForDisplay, 
+					vote 
+				}} />
 		)
 	})
 
