@@ -91,12 +91,10 @@ class Race extends Component {
 		// Get the statewide unit.
 		const state = _.find(units, { level: 'state' })
 
-		const summary = {...{ 'units': state, raceTitle}}
-
 		return (
 			<div className='Race'>
 				<h1>{state.stateName} {raceTitle}</h1>
-				<RaceSummary {...{ summary }} />
+				<RaceSummary unit={state} raceTitle />
 				<MassMap {...{ selection, selectTown, race }} />
 				<Timer {...timerProps} />
 				<TownResultsTable {...{ race }} />

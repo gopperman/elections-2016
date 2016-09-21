@@ -13,16 +13,13 @@ const createSummary = (raceName) =>
 	// eslint-disable-next-line max-len
 	`A table that has the candidate, percent, and vote count across the top and the candidates down the left hand side for the ${raceName}.`
 
-const RaceSummary = ( { summary } ) => {
-	
-	// Get the statewide unit.
-	const state = summary.units
+const RaceSummary = ({ unit, raceTitle }) => {
 
 	// Get statewide candidates.
-	const summaryCandidates = sortByVoteCount(state.candidates)
+	const summaryCandidates = sortByVoteCount(unit.candidates)
 
 	// Get total votes, with commas.
-	const votesCast = addCommas(totalVotes(state.candidates))
+	const votesCast = addCommas(totalVotes(unit.candidates))
 
 	const rows = summaryCandidates.map((candidate, i, array) => {
 
@@ -58,8 +55,8 @@ const RaceSummary = ( { summary } ) => {
 	// TODO: Add winner-tag class to candidates
 	return (
 		<div>
-			<div>{state.precinctsReportingPct}% precincts reporting ({votesCast} votes total)</div>
-			<table summary={createSummary(summary.raceTitle)}>
+			<div>{unit.precinctsReportingPct}% precincts reporting ({votesCast} votes total)</div>
+			<table summary={createSummary(raceTitle)}>
 				<thead>
 					<tr>
 						<th scope='col'>Candidate</th>
@@ -76,7 +73,8 @@ const RaceSummary = ( { summary } ) => {
 }
 
 RaceSummary.propTypes = {
-	summary: PropTypes.object.isRequired,
+	unit: PropTypes.object.isRequired,
+	raceTitle: PropTypes.string.isRequired,
 }
 
 export default RaceSummary
