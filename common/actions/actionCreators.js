@@ -19,10 +19,11 @@ const config = process.env.NODE_ENV === 'production' ?
 
 const fetch = require('fetch-ponyfill')()
 
-const selectFeature = ({ feature, position }) => ({
+const selectFeature = ({ feature, position, map }) => ({
 	type: SELECT_FEATURE,
 	feature,
 	position,
+	map,
 })
 
 const startTimer = (now = Date.now()) => ({

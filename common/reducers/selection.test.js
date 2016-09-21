@@ -25,6 +25,7 @@ describe('selection reducer', () => {
 					feature: {
 						name: null,
 						position: null,
+						map: null,
 					},
 				},
 			}
@@ -44,6 +45,7 @@ describe('selection reducer', () => {
 				type: SELECT_FEATURE,
 				feature: 'hello',
 				position: [1, 2],
+				map: 'a map',
 			}
 
 			const finalState = {
@@ -51,6 +53,7 @@ describe('selection reducer', () => {
 					feature: {
 						name: 'hello',
 						position: [1, 2],
+						map: 'a map',
 					},
 				},
 			}

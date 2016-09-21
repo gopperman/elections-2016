@@ -6,12 +6,13 @@ const initialState = {
 	feature: {
 		name: null,
 		position: null,
+		map: null,
 	},
 }
 
 export default(state = initialState, action) => {
 
-	const { type, feature, position } = action
+	const { type, feature, position, map } = action
 
 	// TODO: consider switching to something like updeep
 	switch (type) {
@@ -23,6 +24,7 @@ export default(state = initialState, action) => {
 				feature: {
 					name: feature || null,
 					position: position || null,
+					map: map || null,
 				},
 			}
 

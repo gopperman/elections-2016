@@ -100,7 +100,7 @@ class MassMap extends Component {
 				}
 
 				// and fire a Redux `selectFeature` action.
-				selectFeature({ feature: d.id, position })
+				selectFeature({ feature: d.id, position, map: 'mass' })
 
 			})
 			// On mouseleave fire an empty `selectFeature` action.
@@ -147,11 +147,11 @@ class MassMap extends Component {
 
 		let tooltip = null
 
-		const { name, position } = this.props.selection.feature
+		const { name, position, map } = this.props.selection.feature
 
 		// Do we have a `name` or `position` - did the user select a feature?
 		// If so,
-		if (name || position) {
+		if (map === 'mass' && (name || position)) {
 
 			// get the town's race results:
 
@@ -160,8 +160,12 @@ class MassMap extends Component {
 			// Find the matching results so we can pass them to `Tooltip`.
 			const results = findMatchingSubunit({ name, subunits })
 
-			// Create the `Tooltip` component.
-			tooltip = <Tooltip {...{ results, position }} />
+			if (results) {
+
+				// Create the `Tooltip` component.
+				tooltip = <Tooltip {...{ results, position }} />
+
+			}
 
 		}
 
