@@ -10,7 +10,7 @@ import TOWNS from './../../data/output/TOWNS.json'
 import bindSubunitsToFeatures, { findMatchingSubunit }
 	from './../utils/bindSubunitsToFeatures.js'
 import chooseColorClass from './../utils/chooseColorClass.js'
-import Tooltip from './Tooltip.js'
+import TownTooltip from './TownTooltip.js'
 import { getRaceUnits } from './../utils/dataUtil.js'
 
 class MassMap extends Component {
@@ -157,13 +157,13 @@ class MassMap extends Component {
 
 			const subunits = getRaceUnits(this.props.race)
 
-			// Find the matching results so we can pass them to `Tooltip`.
+			// Find the matching results so we can pass them to `TownTooltip`.
 			const results = findMatchingSubunit({ name, subunits })
 
 			if (results) {
 
-				// Create the `Tooltip` component.
-				tooltip = <Tooltip {...{ results, position }} />
+				// Create the `TownTooltip` component.
+				tooltip = <TownTooltip {...{ results, position }} />
 
 			}
 

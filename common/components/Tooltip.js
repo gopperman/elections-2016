@@ -1,4 +1,4 @@
-// The `Tooltip` class displays detailed results for the given reporting
+// The `TownTooltip` class displays detailed results for the given reporting
 // unit.
 
 import React, { PropTypes } from 'react'
@@ -39,9 +39,9 @@ const createRows = (candidates) =>
 		)
 	})
 
-const Tooltip = ({ results, position }) =>
+const TownTooltip = ({ results, position }) =>
 	<div className='tooltip'>
-		<h1>Tooltip</h1>
+		<h1>TownTooltip</h1>
 		<pre>{ JSON.stringify(position, null, 2) }</pre>
 		<table summary={createSummary(results)}>
 			<caption>
@@ -61,9 +61,9 @@ const Tooltip = ({ results, position }) =>
 		</table>
 	</div>
 
-Tooltip.propTypes = {
+TownTooltip.propTypes = {
 	results: PropTypes.object.isRequired,
 	position: PropTypes.object.isRequired,
 }
 
-export default Tooltip
+export default TownTooltip
