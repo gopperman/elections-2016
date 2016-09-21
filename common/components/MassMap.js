@@ -50,11 +50,11 @@ class MassMap extends Component {
 		// Set viewBox on svg.
 		select(this._svg).attr('viewBox', `0 0 ${width} ${height}`)
 
-		// Save GeoJSON features for convenience.
-		this._towns = townsObject.features
+		// Set features for convenience, so we don't keep topojsoning.
+		this._geoFeatures = townsObject.features
 
 		// Draw features.
-		this.drawFeatures()
+		this.drawFeatures(this._geoFeatures)
 
 	}
 
@@ -65,17 +65,16 @@ class MassMap extends Component {
 		const subunits = getRaceUnits(this.props.race)
 
 		// Bind AP data to GeoJSON features.
-		// Save `_towns` for convenience.
-		this._towns =
-			bindSubunitsToFeatures({ features: this._towns, subunits })
+		const towns =
+			bindSubunitsToFeatures({ features: this._geoFeatures, subunits })
 
 		// Draw features.
-		this.drawFeatures()
+		this.drawFeatures(towns)
 
 	}
 
 	// This function draws the map shapes and listens to mouseovers.
-	drawFeatures() {
+	drawFeatures(features) {
 
 		const { selectFeature, selection } = this.props
 
@@ -83,7 +82,7 @@ class MassMap extends Component {
 
 		// DATA JOIN (d3 pattern)
 		const paths = svg.selectAll('path')
-			.data(this._towns, d => d.id)
+			.data(features, d => d.id)
 			// On mousemove,
 			.on('mousemove', function mousemove(d) {
 
@@ -143,7 +142,7 @@ class MassMap extends Component {
 
 	_svg = null
 	_path = null
-	_towns = null
+	_geoFeatures = null
 
 	render() {
 

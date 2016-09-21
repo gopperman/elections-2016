@@ -48,11 +48,11 @@ class UsMap extends Component {
 		// Set viewBox on svg.
 		select(this._svg).attr('viewBox', `0 0 ${width} ${height}`)
 
-		// Save GeoJSON features for convenience.
-		this._states = statesObject.features
+		// Set features for convenience, so we don't keep topojsoning.
+		this._geoFeatures = statesObject.features
 
 		// Draw features.
-		this.drawFeatures()
+		this.drawFeatures(this._geoFeatures)
 
 	}
 
@@ -64,16 +64,16 @@ class UsMap extends Component {
 			.map(formatStateAsReportingUnit)
 
 		// Bind AP data to GeoJSON features.
-		// Save `_states` for convenience.
-		this._states = bindSubunitsToFeatures({
-			features: this._states, subunits, property: 'statePostal' })
+		const states = bindSubunitsToFeatures({
+			features: this._geoFeatures, subunits, property: 'statePostal' })
 
 		// Draw features.
-		this.drawFeatures()
+		this.drawFeatures(states)
 
 	}
 
-	drawFeatures() {
+	// This function draws the map shapes and listens to mouseovers.
+	drawFeatures(features) {
 
 		const { selectFeature, selection } = this.props
 
@@ -81,7 +81,7 @@ class UsMap extends Component {
 
 		// DATA JOIN (d3 pattern)
 		const paths = svg.selectAll('path')
-			.data(this._states, d => d.id)
+			.data(features, d => d.id)
 			// On mousemove,
 			.on('mousemove', function mousemove(d) {
 
@@ -141,7 +141,7 @@ class UsMap extends Component {
 
 	_svg = null
 	_path = null
-	_states = null
+	_geoFeatures = null
 
 	render() {
 
