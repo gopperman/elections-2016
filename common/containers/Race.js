@@ -70,7 +70,7 @@ class Race extends Component {
 
 		const { props, fetchData } = this
 		const { timer, results, selection } = props
-		const { stopTimer, selectTown } = props.actions
+		const { stopTimer, selectFeature } = props.actions
 
 		const timerProps = {
 			...timer,
@@ -96,7 +96,7 @@ class Race extends Component {
 				<h1>{state.stateName} {raceTitle}</h1>
 				<Timer {...timerProps} />
 				<RaceSummary {...{ race }} />
-				<MassMap {...{ selection, selectTown, race }} />
+				<MassMap {...{ selection, selectFeature, race }} />
 				<TownResultsTable {...{ race }} />
 			</div>
 		)

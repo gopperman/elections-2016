@@ -224,7 +224,7 @@
 	<span class="hljs-keyword">static</span> propTypes = {
 		selection: PropTypes.object.isRequired,
 		race: PropTypes.object.isRequired,
-		selectTown: PropTypes.func.isRequired,
+		selectFeature: PropTypes.func.isRequired,
 	}</code></pre>
   </div>
 
@@ -439,7 +439,7 @@ Save <code>_towns</code> for convenience.</p>
   <div class="code">
     <pre><code>	drawFeatures() {
 
-		<span class="hljs-keyword">const</span> { selectTown, selection } = <span class="hljs-keyword">this</span>.props
+		<span class="hljs-keyword">const</span> { selectFeature, selection } = <span class="hljs-keyword">this</span>.props
 
 		<span class="hljs-keyword">const</span> svg = select(<span class="hljs-keyword">this</span>._svg)</code></pre>
   </div>
@@ -523,13 +523,13 @@ Save <code>_towns</code> for convenience.</p>
 <section class="section">
 
   <aside class="comment">
-    <div class="text markdown"><p>and fire a Redux <code>selectTown</code> action.</p>
+    <div class="text markdown"><p>and fire a Redux <code>selectFeature</code> action.</p>
 </div>
   </aside>
   
 
   <div class="code">
-    <pre><code>				selectTown({ town: d.properties.REPORTING_UNIT, position })
+    <pre><code>				selectFeature({ town: d.properties.REPORTING_UNIT, position })
 
 			})</code></pre>
   </div>
@@ -539,13 +539,13 @@ Save <code>_towns</code> for convenience.</p>
 <section class="section">
 
   <aside class="comment">
-    <div class="text markdown"><p>On mouseleave fire an empty <code>selectTown</code> action.</p>
+    <div class="text markdown"><p>On mouseleave fire an empty <code>selectFeature</code> action.</p>
 </div>
   </aside>
   
 
   <div class="code">
-    <pre><code>			.on(<span class="hljs-string">'mouseleave'</span>, () =&gt; selectTown({}))</code></pre>
+    <pre><code>			.on(<span class="hljs-string">'mouseleave'</span>, () =&gt; selectFeature({}))</code></pre>
   </div>
 
   

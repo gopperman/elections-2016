@@ -102,7 +102,7 @@ class President extends Component {
 
 		const { props, fetchData } = this
 		const { timer, results, selection } = props
-		const { stopTimer, selectTown } = props.actions
+		const { stopTimer, selectFeature } = props.actions
 
 		// Prepare `Timer` props, including
 		const timerProps = {
@@ -144,10 +144,17 @@ class President extends Component {
 			<div className='President'>
 				<h1>President</h1>
 				<Timer {...timerProps} />
-				<UsMap {...{ race: statesRace }} />
-				<StateResultsTable {...{ race: statesRace, summaryCandidates }} />
-				<MassMap {...{ selection, selectTown, race: massRace }} />
-				<TownResultsTable {...{ race: massRace }} />
+				<div className='columns'>
+					<div className='column'>
+						<UsMap {...{ selection, selectFeature, race: statesRace }} />
+						<StateResultsTable
+							{...{ race: statesRace, summaryCandidates }} />
+					</div>
+					<div className='column'>
+						<MassMap {...{ selection, selectFeature, race: massRace }} />
+						<TownResultsTable {...{ race: massRace }} />
+					</div>
+				</div>
 			</div>
 		)
 

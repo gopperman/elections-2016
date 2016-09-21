@@ -3,28 +3,29 @@
 import { expect } from 'chai'
 import rootReducer from '../../common/reducers/index.js'
 import {
-	SELECT_TOWN,
+	SELECT_FEATURE,
 } from '../actions/actionTypes.js'
 
 describe('selection reducer', () => {
 
-	describe('SELECT_TOWN', () => {
+	describe('SELECT_FEATURE', () => {
 
-		it('should clear town if null', () => {
+		it('should clear feature if null', () => {
 
 			const initialState = {
 				selection: {},
 			}
 
 			const action = {
-				type: SELECT_TOWN,
+				type: SELECT_FEATURE,
 			}
 
 			const finalState = {
 				selection: {
-					town: {
+					feature: {
 						name: null,
 						position: null,
+						map: null,
 					},
 				},
 			}
@@ -34,23 +35,25 @@ describe('selection reducer', () => {
 
 		})
 
-		it('should set town if present', () => {
+		it('should set feature if present', () => {
 
 			const initialState = {
 				selection: {},
 			}
 
 			const action = {
-				type: SELECT_TOWN,
-				town: 'hello',
+				type: SELECT_FEATURE,
+				feature: 'hello',
 				position: [1, 2],
+				map: 'a map',
 			}
 
 			const finalState = {
 				selection: {
-					town: {
+					feature: {
 						name: 'hello',
 						position: [1, 2],
+						map: 'a map',
 					},
 				},
 			}

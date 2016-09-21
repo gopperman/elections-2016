@@ -8,13 +8,17 @@ import { mouse, select } from 'd3-selection'
 import { geoPath, geoAlbersUsa } from 'd3-geo'
 import { formatStateAsReportingUnit } from './../utils/standardize.js'
 import STATES from './../../data/output/STATES.json'
-import bindSubunitsToFeatures from './../utils/bindSubunitsToFeatures.js'
 import chooseColorClass from './../utils/chooseColorClass.js'
+import bindSubunitsToFeatures, { findMatchingSubunit }
+	from './../utils/bindSubunitsToFeatures.js'
+import StateTooltip from './StateTooltip.js'
 
 class UsMap extends Component {
 
 	static propTypes = {
+		selection: PropTypes.object.isRequired,
 		race: PropTypes.object.isRequired,
+		selectFeature: PropTypes.func.isRequired,
 	}
 
 	// This lifecycle event gets called once, immediately after the initial
@@ -71,7 +75,7 @@ class UsMap extends Component {
 
 	drawFeatures() {
 
-		// const { selectTown, selection } = this.props
+		const { selectFeature, selection } = this.props
 
 		const svg = select(this._svg)
 
@@ -79,7 +83,7 @@ class UsMap extends Component {
 		const paths = svg.selectAll('path')
 			.data(this._states, d => d.id)
 			// On mousemove,
-			.on('mousemove', function mousemove() {
+			.on('mousemove', function mousemove(d) {
 
 				// grab the mouse x/y relative to this svg container,
 				const [x, y] = mouse(this)
@@ -93,14 +97,12 @@ class UsMap extends Component {
 					y: 100 * (y / (+height)),
 				}
 
-				console.log(position)
-
-				// // and fire a Redux `selectTown` action.
-				// selectTown({ town: d.id, position })
+				// and fire a Redux `selectFeature` action.
+				selectFeature({ feature: d.id, position, map: 'us' })
 
 			})
-			// On mouseleave fire an empty `selectTown` action.
-			// .on('mouseleave', () => selectTown({}))
+			// On mouseleave fire an empty `selectFeature` action.
+			.on('mouseleave', () => selectFeature({}))
 
 		// ENTER + UPDATE (d3 pattern)
 		paths.enter().append('path')
@@ -112,12 +114,12 @@ class UsMap extends Component {
 			const colorClass = chooseColorClass({
 				candidates: d.subunit && d.subunit.candidates })
 
-			const selected = ''
+			const { feature } = selection
 
-			// // Add a `selected` class if we hovered over this shape.
-			// // TODO: Will we always have a d.id?
-			// const selected = d.id === selection.town.name ?
-			// 	'selected' : ''
+			// Add a `selected` class if we hovered over this shape.
+			// TODO: Will we always have a d.id?
+			const selected = feature.map === 'us' && d.id === feature.name ?
+				'selected' : ''
 
 			// If we selected this shape,
 			if (selected === 'selected') {
@@ -143,9 +145,34 @@ class UsMap extends Component {
 
 	render() {
 
+		let tooltip = null
+
+		const { name, position, map } = this.props.selection.feature
+
+		// Do we have a `name` or `position` - did the user select a feature?
+		// If so,
+		if (map === 'us' && (name || position)) {
+
+			// get the state's race results:
+			const subunits = this.props.race.PresStateByStatetable.State
+				.map(formatStateAsReportingUnit)
+
+			// Find the matching results so we can pass them to `StateTooltip`.
+			const results =
+				findMatchingSubunit({ name, subunits, property: 'statePostal' })
+
+			if (results) {
+
+				// Create the `StateTooltip` component.
+				tooltip = <StateTooltip {...{ results, position }} />
+
+			}
+
+		}
+
 		return (
-			<div className='UsMap'>
-				UsMap
+			<div className='map'>
+				{tooltip}
 				<svg ref={(c) => this._svg = c} />
 			</div>
 		)

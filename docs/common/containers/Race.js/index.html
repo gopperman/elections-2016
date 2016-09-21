@@ -308,7 +308,7 @@
 
 		<span class="hljs-keyword">const</span> { props, fetchData } = <span class="hljs-keyword">this</span>
 		<span class="hljs-keyword">const</span> { timer, results, selection } = props
-		<span class="hljs-keyword">const</span> { stopTimer, selectTown } = props.actions
+		<span class="hljs-keyword">const</span> { stopTimer, selectFeature } = props.actions
 
 		<span class="hljs-keyword">const</span> timerProps = {
 			...timer,
@@ -367,7 +367,7 @@
 				&lt;h1&gt;{state.stateName} {raceTitle}&lt;/h1&gt;
 				&lt;Timer {...timerProps} /&gt;
 				&lt;RaceSummary {...{ race }} /&gt;
-				&lt;MassMap {...{ selection, selectTown, race }} /&gt;
+				&lt;MassMap {...{ selection, selectFeature, race }} /&gt;
 				&lt;TownResultsTable {...{ race }} /&gt;
 			&lt;/div&gt;
 		)

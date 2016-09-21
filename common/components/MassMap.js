@@ -10,7 +10,7 @@ import TOWNS from './../../data/output/TOWNS.json'
 import bindSubunitsToFeatures, { findMatchingSubunit }
 	from './../utils/bindSubunitsToFeatures.js'
 import chooseColorClass from './../utils/chooseColorClass.js'
-import Tooltip from './Tooltip.js'
+import TownTooltip from './TownTooltip.js'
 import { getRaceUnits } from './../utils/dataUtil.js'
 
 class MassMap extends Component {
@@ -18,7 +18,7 @@ class MassMap extends Component {
 	static propTypes = {
 		selection: PropTypes.object.isRequired,
 		race: PropTypes.object.isRequired,
-		selectTown: PropTypes.func.isRequired,
+		selectFeature: PropTypes.func.isRequired,
 	}
 
 	// This lifecycle event gets called once, immediately after the initial
@@ -77,7 +77,7 @@ class MassMap extends Component {
 	// This function draws the map shapes and listens to mouseovers.
 	drawFeatures() {
 
-		const { selectTown, selection } = this.props
+		const { selectFeature, selection } = this.props
 
 		const svg = select(this._svg)
 
@@ -99,12 +99,12 @@ class MassMap extends Component {
 					y: 100 * (y / (+height)),
 				}
 
-				// and fire a Redux `selectTown` action.
-				selectTown({ town: d.id, position })
+				// and fire a Redux `selectFeature` action.
+				selectFeature({ feature: d.id, position, map: 'mass' })
 
 			})
-			// On mouseleave fire an empty `selectTown` action.
-			.on('mouseleave', () => selectTown({}))
+			// On mouseleave fire an empty `selectFeature` action.
+			.on('mouseleave', () => selectFeature({}))
 
 		// ENTER + UPDATE (d3 pattern)
 		paths.enter().append('path')
@@ -116,9 +116,11 @@ class MassMap extends Component {
 			const colorClass = chooseColorClass({
 				candidates: d.subunit && d.subunit.candidates })
 
+			const { feature } = selection
+
 			// Add a `selected` class if we hovered over this shape.
 			// TODO: Will we always have a d.id?
-			const selected = d.id === selection.town.name ?
+			const selected = feature.map === 'mass' && d.id === feature.name ?
 				'selected' : ''
 
 			// If we selected this shape,
@@ -147,26 +149,29 @@ class MassMap extends Component {
 
 		let tooltip = null
 
-		const { name, position } = this.props.selection.town
+		const { name, position, map } = this.props.selection.feature
 
-		// Do we have a `name` or `position` - did the user select a town?
+		// Do we have a `name` or `position` - did the user select a feature?
 		// If so,
-		if (name || position) {
+		if (map === 'mass' && (name || position)) {
 
 			// get the town's race results:
-
 			const subunits = getRaceUnits(this.props.race)
 
-			// Find the matching results so we can pass them to `Tooltip`.
+			// Find the matching results so we can pass them to `TownTooltip`.
 			const results = findMatchingSubunit({ name, subunits })
 
-			// Create the `Tooltip` component.
-			tooltip = <Tooltip {...{ results, position }} />
+			if (results) {
+
+				// Create the `TownTooltip` component.
+				tooltip = <TownTooltip {...{ results, position }} />
+
+			}
 
 		}
 
 		return (
-			<div className='MassMap'>
+			<div className='map'>
 				{tooltip}
 				<svg ref={(c) => this._svg = c} />
 			</div>
