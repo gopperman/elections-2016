@@ -15,9 +15,7 @@ import {
 	formatElectoralSummary,
 } from './../utils/standardize.js'
 import { sortByElectoralCount } from './../utils/Candidates.js'
-
-// import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
-// import ElectoralCollegeMap from './../components/ElectoralCollegeMap.js'
+import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 
 // This object, used by the `@provideHooks` decorator, defines our custom
 // data loading dependencies. At the moment we just have one: `fetch`. It
@@ -132,18 +130,16 @@ class President extends Component {
 
 		// TODO: before bringing these back, make sure they reference data
 		// safely.
-		// <ElectoralCollegeBar data={results.data['president-us']} />
-		// <ElectoralCollegeMap data={results.data['president-us-states']} />
 
 		// Get fake API results.
+		const usRaceResults = results.data['president-us']
 		const massRace = results.data['president-ma-towns']
 		const statesRace = results.data['president-us-states']
 
 		// TODO: this endpoint doesn't give us all candidates, just the top two.
 		// This might be problematic if we want to show third-party candidates
 		// in the state-by-state results table.
-		const usRace = formatElectoralSummary(
-			results.data['president-us'].Sumtable)
+		const usRace = formatElectoralSummary(usRaceResults.Sumtable)
 
 		// Create an array of ordered presidential candidates:
 		const summaryCandidates = sortByElectoralCount(
@@ -173,6 +169,7 @@ class President extends Component {
 			<div className='President'>
 				<h1>President</h1>
 				<Timer {...timerProps} />
+				<ElectoralCollegeBar data={usRaceResults} />
 				<button onClick={this.handleSwitcher}>{switcherText}</button>
 				{map}
 				{table}
