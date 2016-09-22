@@ -9,9 +9,9 @@ import * as actions from './../actions/actionCreators.js'
 import { getRaceUnits } from './../utils/dataUtil.js'
 import Timer from './../components/Timer.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
-import RaceSummary from './../components/RaceSummary.js'
-import MassMap from './../components/MassMap.js'
-import TownResultsTable from './../components/TownResultsTable.js'
+// import RaceSummary from './../components/RaceSummary.js'
+// import MassMap from './../components/MassMap.js'
+// import TownResultsTable from './../components/TownResultsTable.js'
 
 const hooks = {
 	fetch: ({ dispatch }) =>
@@ -70,8 +70,10 @@ class Race extends Component {
 	render() {
 
 		const { props, fetchData } = this
-		const { timer, results, selection } = props
-		const { stopTimer, selectFeature } = props.actions
+		const { timer, results } = props
+		// const { timer, results, selection } = props
+		const { stopTimer } = props.actions
+		// const { stopTimer, selectFeature } = props.actions
 
 		const timerProps = {
 			...timer,
@@ -81,9 +83,15 @@ class Race extends Component {
 			},
 		}
 
+		// Get API results.
 		const race = results.data['senate-ma-towns']
+		const usRace = results.data['president-us-states'].races
 
-		// Let's get the name of the office we're reporting on
+		// Get summary US race.
+		const summaryState = _.find(usRace, v =>
+			v.reportingUnits[0].statePostal === 'US')
+
+		// Let's get the name of the office we're reporting on.
 		const raceTitle = (race.races && race.races[0].officeName) || ''
 
 		// Get this race's reporting units.
@@ -92,14 +100,17 @@ class Race extends Component {
 		// Get the statewide unit.
 		const state = _.find(units, { level: 'state' })
 
+				// <MassMap {...{ selection, selectFeature, race }} />
+
+				// <TownResultsTable {...{ race }} />
+				// <RaceSummary unit={state} raceTitle />
+
 		return (
 			<div className='Race'>
-				<ElectoralCollegeBar data={results.data['president-us']} />
 				<h1>{state.stateName} {raceTitle}</h1>
-				<RaceSummary unit={state} raceTitle />
 				<Timer {...timerProps} />
-				<MassMap {...{ selection, selectFeature, race }} />
-				<TownResultsTable {...{ race }} />
+				<ElectoralCollegeBar {...summaryState} />
+
 			</div>
 		)
 
