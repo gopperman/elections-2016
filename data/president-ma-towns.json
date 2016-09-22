@@ -76,14 +76,14 @@
           "precinctsTotal": 5,
           "candidates": [
             {
-              "candidateID": "33821",
-              "polNum": "27515",
-              "first": "Hillary",
-              "last": "Clinton",
-              "polID": "1746",
-              "ballotOrder": 1,
-              "voteCount": 2190,
-              "party": "Dem"
+              "candidateID": "33844",
+              "polNum": "26917",
+              "first": "Jill",
+              "last": "Stein",
+              "polID": "895",
+              "ballotOrder": 4,
+              "voteCount": 443,
+              "party": "Grn"
             },
             {
               "candidateID": "33823",
@@ -97,14 +97,14 @@
               "party": "GOP"
             },
             {
-              "candidateID": "33844",
-              "polNum": "26917",
-              "first": "Jill",
-              "last": "Stein",
-              "polID": "895",
-              "ballotOrder": 4,
-              "voteCount": 443,
-              "party": "Grn"
+              "candidateID": "33821",
+              "polNum": "27515",
+              "first": "Hillary",
+              "last": "Clinton",
+              "polID": "1746",
+              "ballotOrder": 1,
+              "voteCount": 2190,
+              "party": "Dem"
             },
             {
               "candidateID": "33837",

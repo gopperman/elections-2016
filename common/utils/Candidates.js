@@ -31,7 +31,7 @@ const sortByVoteCount = (candidates) =>
 	_.orderBy(candidates, ['voteCount'], ['desc'])
 
 /**
- * Sort candidates by an external array of ordered polIDs. If a candidate doesn't have a polID, sorting defaults to vote count.
+ * Sort candidates by an external array of polIDs.
  * @memberof Candidates
  * @function
  * @param {Array} $0.candidates an array of candidates
@@ -48,6 +48,28 @@ const sortByPolIDs = ({ candidates, polIDs }) => _(candidates)
 			_.indexOf(polIDs, v.polID) : candidates.length,
 	}))
 	.orderBy(['polIDIndex', 'index'])
+	.map(v => _.omit(v, ['polIDIndex', 'index']))
+	.value()
+
+/**
+ * Sort candidates by an external array of candidateIDs.
+ * @memberof Candidates
+ * @function
+ * @param {Array} $0.candidates an array of candidates
+ * @param {Array} $0.candidateIDs an array of candidate IDs, which are unique for this candidate in a state's race.
+ * @returns {Array} a new array of candidates, sorted. Does not mutate original array.
+ * @example
+ * sortByCandidateIDs({ candidates, candidateIds }) //=> sortedCandidates
+ */
+const sortByCandidateIDs = ({ candidates, candidateIDs }) => _(candidates)
+	.map((v, i) => ({
+		...v,
+		index: i,
+		candidateIDIndex: _.indexOf(candidateIDs, v.candidateID) > -1 ?
+			_.indexOf(candidateIDs, v.candidateID) : candidates.length,
+	}))
+	.orderBy(['candidateIDIndex', 'index'])
+	.map(v => _.omit(v, ['candidateIDIndex', 'index']))
 	.value()
 
 /**
@@ -66,5 +88,6 @@ export {
 	sortByElectoralCount,
 	sortByVoteCount,
 	sortByPolIDs,
+	sortByCandidateIDs,
 	totalVotes,
 }

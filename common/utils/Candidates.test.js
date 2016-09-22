@@ -3,9 +3,39 @@
 import _ from 'lodash'
 import assert from 'assert'
 import { readFileSync } from 'jsonfile'
-import { sortByPolIDs } from './Candidates.js'
+import { sortByPolIDs, sortByCandidateIDs } from './Candidates.js'
 
 describe('Candidates', () => {
+
+	describe('sortByCandidateIDs', () => {
+
+		it('should work when summary array is a subset of the other', () => {
+
+			// Read test data
+			const input = readFileSync('./data/president-ma-towns.json')
+				.races[0].reportingUnits
+
+			// Get the summary candidates
+			const summaryCandidates =
+				_.find(input, { level: 'national' }).candidates
+
+			// Get the summary candidates candidateIDs
+			const candidateIDs = _.map(summaryCandidates, 'candidateID')
+
+			// Get the candidates we want to sort
+			const candidates =
+				_.find(input, { reportingunitName: 'Abington' }).candidates
+
+			// Sort
+			const output = sortByCandidateIDs({ candidates, candidateIDs })
+
+			assert.deepEqual(_.map(output, 'last'), [
+				'Clinton', 'Trump', 'Stein', 'Johnson',
+			])
+
+		})
+
+	})
 
 	describe('sortByPolIDs', () => {
 
