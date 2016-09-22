@@ -8,21 +8,21 @@
 import React, { PropTypes } from 'react'
 
 const RaceSummaryRow = (row) => (
-		<tr key={row.id}>
-			<th scope='row'>
+	<tr key={row.id}>
+		<th scope='row'>
+			<div>
+				<div>{row.name}</div>
 				<div>
-					<div>{row.name}</div>
-					<div>
-						<span style={row.barStyle} />
-					</div>
+					<span style={row.barStyle} />
 				</div>
-			</th>
-			<td>{row.pctForDisplay}%</td>
-			<td>
-				<span>{row.vote}</span>
-				<span> votes</span>
-			</td>
-		</tr>
+			</div>
+		</th>
+		<td>{row.pctForDisplay}%</td>
+		<td>
+			<span>{row.vote}</span>
+			<span> votes</span>
+		</td>
+	</tr>
 )
 
 

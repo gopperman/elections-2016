@@ -1,11 +1,8 @@
 // The `RaceSummary` class displays detailed the race's summary results.
-
-import _ from 'lodash'
 import React, { PropTypes } from 'react'
 import addCommas from 'add-commas'
 import { fullName, percent } from './../utils/Candidate.js'
 import { sortByVoteCount, totalVotes } from './../utils/Candidates.js'
-import { getRaceUnits } from './../utils/dataUtil.js'
 import { percentForDisplay } from './../utils/standardize.js'
 import RaceSummaryRow from './../components/templates/RaceSummaryRow'
 
@@ -41,20 +38,13 @@ const RaceSummary = ({ unit, raceTitle }) => {
 			width: `${pctForDisplay}%`,
 		}
 
-		/*				<RaceSummaryRow {...{ 
-					'id': candidateID,
-					'name': candidateName, 
-					barStyle, 
-					pctForDisplay, 
-					vote 
-				}} /> */
 		return (
-			<RaceSummaryRow {...{ 
-				'id': candidateID,
-				'name': candidateName, 
-				barStyle, 
-				pctForDisplay, 
-				vote 
+			<RaceSummaryRow {...{
+				id: candidateID,
+				name: candidateName,
+				barStyle,
+				pctForDisplay,
+				vote
 			}} />
 		)
 	})
