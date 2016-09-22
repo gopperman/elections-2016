@@ -2,22 +2,28 @@
 
 /* eslint-disable no-return-assign */
 
+import _ from 'lodash'
 import * as topojson from 'topojson'
 import React, { Component, PropTypes } from 'react'
-import { mouse, select } from 'd3-selection'
+import { select, mouse } from 'd3-selection'
 import { geoPath, geoAlbersUsa } from 'd3-geo'
-import { formatStateAsReportingUnit } from './../utils/standardize.js'
 import STATES from './../../data/output/STATES.json'
+import { sortByElectoralCount } from './../utils/Candidates.js'
 import chooseColorClass from './../utils/chooseColorClass.js'
-import bindSubunitsToFeatures, { findMatchingSubunit }
-	from './../utils/bindSubunitsToFeatures.js'
-import StateTooltip from './StateTooltip.js'
 
+// import { mouse, select } from 'd3-selection'
+// import { formatStateAsReportingUnit } from './../utils/standardize.js'
+// import bindSubunitsToFeatures, { findMatchingSubunit }
+	// from './../utils/bindSubunitsToFeatures.js'
+// import StateTooltip from './StateTooltip.js'
+
+// TODO: test when there are no states, or when the overall races API
+// object is []
 class UsMap extends Component {
 
 	static propTypes = {
 		selection: PropTypes.object.isRequired,
-		race: PropTypes.object.isRequired,
+		states: PropTypes.array.isRequired,
 		selectFeature: PropTypes.func.isRequired,
 	}
 
@@ -68,20 +74,22 @@ class UsMap extends Component {
 	// This function draws the map shapes and listens to mouseovers.
 	drawFeatures(features) {
 
-		const { selectFeature, selection, race } = this.props
-		const svg = select(this._svg)
-
-		// TODO: will we always have race. etc?
-		const subunits = race.PresStateByStatetable.State
-			.map(formatStateAsReportingUnit)
+		const { selectFeature, selection, states } = this.props
 
 		// Bind AP data to GeoJSON features.
-		const states = bindSubunitsToFeatures({
-			features, subunits, property: 'statePostal' })
+		const subunits = _(features)
+			.map(v => ({
+				...v,
+				subunit: _.find(states, s =>
+					s.reportingUnits[0].statePostal === v.id),
+			}))
+			.value()
+
+		const svg = select(this._svg)
 
 		// DATA JOIN (d3 pattern)
 		const paths = svg.selectAll('path')
-			.data(states, d => d.id)
+			.data(subunits, d => d.id)
 
 		// ENTER + UPDATE (d3 pattern)
 		paths.enter().append('path')
@@ -89,14 +97,15 @@ class UsMap extends Component {
 		.merge(paths)
 			.attr('class', function createClass(d) {
 
+				const { candidates } = d.subunit.reportingUnits[0]
+
 				// Get the shape color class based on who's winning.
 				const colorClass = chooseColorClass({
-					candidates: d.subunit && d.subunit.candidates })
+					candidates, sortingDelegate: sortByElectoralCount })
 
 				const { feature } = selection
 
 				// Add a `selected` class if we hovered over this shape.
-				// TODO: Will we always have a d.id?
 				const selected = feature.map === 'us' && d.id === feature.name ?
 					'selected' : ''
 
@@ -145,34 +154,35 @@ class UsMap extends Component {
 
 	render() {
 
-		let tooltip = null
+		// let tooltip = null
 
-		const { name, position, map } = this.props.selection.feature
+		// const { name, position, map } = this.props.selection.feature
 
-		// Do we have a `name` or `position` - did the user select a feature?
-		// If so,
-		if (map === 'us' && (name || position)) {
+		// // Do we have a `name` or `position` - did the user select a feature?
+		// // If so,
+		// if (map === 'us' && (name || position)) {
 
-			// get the state's race results:
-			const subunits = this.props.race.PresStateByStatetable.State
-				.map(formatStateAsReportingUnit)
+		// 	// get the state's race results:
+		// 	const subunits = this.props.race.PresStateByStatetable.State
+		// 		.map(formatStateAsReportingUnit)
 
-			// Find the matching results so we can pass them to `StateTooltip`.
-			const results =
-				findMatchingSubunit({ name, subunits, property: 'statePostal' })
+		// 	// Find the matching results so we can pass them to `StateTooltip`.
+		// 	const results =
+		// 		findMatchingSubunit({ name, subunits, property: 'statePostal' })
 
-			if (results) {
+		// 	if (results) {
 
-				// Create the `StateTooltip` component.
-				tooltip = <StateTooltip {...{ results, position }} />
+		// 		// Create the `StateTooltip` component.
+		// 		tooltip = <StateTooltip {...{ results, position }} />
 
-			}
+		// 	}
 
-		}
+		// }
+
+				// {tooltip}
 
 		return (
 			<div className='map'>
-				{tooltip}
 				<svg ref={(c) => this._svg = c} />
 			</div>
 		)

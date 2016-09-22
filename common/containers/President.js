@@ -9,9 +9,9 @@ import * as actions from './../actions/actionCreators.js'
 import Timer from './../components/Timer.js'
 import TownResultsTable from './../components/TownResultsTable.js'
 import StateResultsTable from './../components/StateResultsTable.js'
+import UsMap from './../components/UsMap.js'
 
 // import MassMap from './../components/MassMap.js'
-// import UsMap from './../components/UsMap.js'
 
 // import {
 // 	formatElectoralSummary,
@@ -112,10 +112,8 @@ class President extends Component {
 	render() {
 
 		const { props, fetchData } = this
-		const { timer, results } = props
-		// const { timer, results, selection } = props
-		const { stopTimer } = props.actions
-		// const { stopTimer, selectFeature } = props.actions
+		const { timer, results, selection } = props
+		const { stopTimer, selectFeature } = props.actions
 		// const { showUS } = this.state
 
 		// Prepare `Timer` props, including
@@ -184,6 +182,7 @@ class President extends Component {
 			.sortBy('reportingunitName')
 			.map(v => ({
 				...v,
+				// and sort candidates by overall candidates.
 				candidates: sortByCandidateIDs({
 					candidates: v.candidates,
 					candidateIDs: _.map(summaryTownCandidates, 'candidateID'),
@@ -235,6 +234,7 @@ class President extends Component {
 				<h1>President</h1>
 				<Timer {...timerProps} />
 				<ElectoralCollegeBar {...summaryState} />
+				<UsMap {...{ states, selection, selectFeature }} />
 				<StateResultsTable
 					{...{ states, summaryCandidates: summaryStateCandidates }} />
 				<TownResultsTable

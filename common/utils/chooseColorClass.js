@@ -1,10 +1,11 @@
 import { sortByVoteCount } from './Candidates.js'
 
-export default ({ candidates = [] }) => {
+// TODO: add 'winner' class
+export default ({ candidates = [], sortingDelegate = sortByVoteCount }) => {
 
 	let klass
 
-	const cands = sortByVoteCount(candidates)
+	const cands = sortingDelegate(candidates)
 
 	// are there candidates, and does the first one have votes?
 	if (cands.length && cands[0].voteCount > 0) {
