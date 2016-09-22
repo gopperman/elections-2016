@@ -1,10 +1,8 @@
-import _ from 'lodash'
 import React, { Component, PropTypes } from 'react'
 import { provideHooks } from 'redial'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actions from './../actions/actionCreators.js'
-import { getRaceUnits } from './../utils/dataUtil.js'
 import Timer from './../components/Timer.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 import { toSentenceCase } from './../utils/standardize.js'
@@ -65,24 +63,17 @@ class Town extends Component {
 
 	render() {
 		const { props, fetchData } = this
-		const { timer, results, selection } = props
-		const { stopTimer, selectTown } = props.actions
-
-		const timerProps = {
-			...timer,
-			callback: () => {
-				stopTimer()
-				fetchData()
-			},
-		}
+		const { timer, results } = props
+		const { stopTimer } = props.actions
 
 		const townName = toSentenceCase(props.params.townName)
 
 		const races = results.data['town-abington'].map((race) => {
 			const raceTitle = `${race.office_name} ${race.seat_name}`
-			const unit = (race.reporting_units && race.reporting_units[0]) || []
 			
 			// TO-DO: We're waiting on consistent test data so we can use RaceSummary
+			const unit = (race.reporting_units && race.reporting_units[0]) || []
+
 			return (
 				<li key={race.race_number}>
 					{raceTitle}
@@ -90,7 +81,7 @@ class Town extends Component {
 				</li>
 			)
 		})
-
+		
 		return (
 			<div className='Town'>
 				<ElectoralCollegeBar data={results.data['president-us']} />
