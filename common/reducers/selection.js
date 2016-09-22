@@ -1,28 +1,30 @@
 import {
-	SELECT_TOWN,
+	SELECT_FEATURE,
 } from './../actions/actionTypes.js'
 
 const initialState = {
-	town: {
+	feature: {
 		name: null,
 		position: null,
+		map: null,
 	},
 }
 
 export default(state = initialState, action) => {
 
-	const { type, town, position } = action
+	const { type, feature, position, map } = action
 
 	// TODO: consider switching to something like updeep
 	switch (type) {
 
-		case SELECT_TOWN:
+		case SELECT_FEATURE:
 
 			return {
 				...state,
-				town: {
-					name: town || null,
+				feature: {
+					name: feature || null,
 					position: position || null,
+					map: map || null,
 				},
 			}
 

@@ -1,19 +1,19 @@
-// The `MassMap` class displays MA results for state-wide races.
+// The `UsMap` class displays US results for nation-wide races.
 
 /* eslint-disable no-return-assign */
 
-import React, { Component, PropTypes } from 'react'
 import * as topojson from 'topojson'
-import { geoPath, geoConicConformal } from 'd3-geo'
+import React, { Component, PropTypes } from 'react'
 import { mouse, select } from 'd3-selection'
-import TOWNS from './../../data/output/TOWNS.json'
+import { geoPath, geoAlbersUsa } from 'd3-geo'
+import { formatStateAsReportingUnit } from './../utils/standardize.js'
+import STATES from './../../data/output/STATES.json'
+import chooseColorClass from './../utils/chooseColorClass.js'
 import bindSubunitsToFeatures, { findMatchingSubunit }
 	from './../utils/bindSubunitsToFeatures.js'
-import chooseColorClass from './../utils/chooseColorClass.js'
-import TownTooltip from './TownTooltip.js'
-import { getRaceUnits } from './../utils/dataUtil.js'
+import StateTooltip from './StateTooltip.js'
 
-class MassMap extends Component {
+class UsMap extends Component {
 
 	static propTypes = {
 		selection: PropTypes.object.isRequired,
@@ -25,19 +25,17 @@ class MassMap extends Component {
 	// rendering occurs. We will use it to create the map.
 	componentDidMount() {
 
-		// Convert TOWNS to a GeoJSON object (via topojson).
-		const townsObject = topojson.feature(TOWNS, TOWNS.objects.TOWNS)
+		// Convert STATES to a GeoJSON object (via topojson).
+		const statesObject = topojson.feature(STATES, STATES.objects.STATES)
 
-		// Setup a MA-centric projection.
-		const projection = geoConicConformal()
-			.parallels([41 + (43 / 60), 42 + (41 / 60)])
-			.rotate([71 + (30 / 60), -41])
+		// Setup a lower 48 + AK + HI projection
+		const projection = geoAlbersUsa()
 
-		// Create the `path`.
+		// Create the `path`
 		this._path = geoPath().projection(projection)
 
-		// Find MA bounds and aspect ratio for this projection.
-		const b = this._path.bounds(townsObject)
+		// Find US bounds and aspect ratio for this projection.
+		const b = this._path.bounds(statesObject)
 		const aspect = (b[1][0] - b[0][0]) / (b[1][1] - b[0][1])
 
 		// Create width and height.
@@ -45,21 +43,21 @@ class MassMap extends Component {
 		const height = Math.round(width / aspect)
 
 		// Fit this projection to the newly-calculated aspect ratio.
-		projection.fitSize([width, height], townsObject)
+		projection.fitSize([width, height], statesObject)
 
 		// Set viewBox on svg.
 		select(this._svg).attr('viewBox', `0 0 ${width} ${height}`)
 
 		// Set features for convenience, so we don't keep topojsoning.
-		this._geoFeatures = townsObject.features
+		this._geoFeatures = statesObject.features
 
 		// Draw features (although at this point we might not have data).
 		this.drawFeatures(this._geoFeatures)
 
 	}
 
-	// This gets called once after the component's updates are flushed to DOM.
-	// We will use it to update the map.
+	// This gets called once after the component's updates are flushed
+	// to DOM. We will use it to update the map.
 	componentDidUpdate() {
 
 		// Draw features.
@@ -73,14 +71,17 @@ class MassMap extends Component {
 		const { selectFeature, selection, race } = this.props
 		const svg = select(this._svg)
 
-		const subunits = getRaceUnits(race)
+		// TODO: will we always have race. etc?
+		const subunits = race.PresStateByStatetable.State
+			.map(formatStateAsReportingUnit)
 
 		// Bind AP data to GeoJSON features.
-		const towns = bindSubunitsToFeatures({ features, subunits })
+		const states = bindSubunitsToFeatures({
+			features, subunits, property: 'statePostal' })
 
 		// DATA JOIN (d3 pattern)
 		const paths = svg.selectAll('path')
-			.data(towns, d => d.id)
+			.data(states, d => d.id)
 
 		// ENTER + UPDATE (d3 pattern)
 		paths.enter().append('path')
@@ -96,7 +97,7 @@ class MassMap extends Component {
 
 				// Add a `selected` class if we hovered over this shape.
 				// TODO: Will we always have a d.id?
-				const selected = feature.map === 'mass' && d.id === feature.name ?
+				const selected = feature.map === 'us' && d.id === feature.name ?
 					'selected' : ''
 
 				// If we selected this shape,
@@ -127,12 +128,11 @@ class MassMap extends Component {
 				}
 
 				// and fire a Redux `selectFeature` action.
-				selectFeature({ feature: d.id, position, map: 'mass' })
+				selectFeature({ feature: d.id, position, map: 'us' })
 
 			})
 			// On mouseleave fire an empty `selectFeature` action.
 			.on('mouseleave', () => selectFeature({}))
-
 
 		// EXIT (d3 pattern)
 		paths.exit().remove()
@@ -151,18 +151,20 @@ class MassMap extends Component {
 
 		// Do we have a `name` or `position` - did the user select a feature?
 		// If so,
-		if (map === 'mass' && (name || position)) {
+		if (map === 'us' && (name || position)) {
 
-			// get the town's race results:
-			const subunits = getRaceUnits(this.props.race)
+			// get the state's race results:
+			const subunits = this.props.race.PresStateByStatetable.State
+				.map(formatStateAsReportingUnit)
 
-			// Find the matching results so we can pass them to `TownTooltip`.
-			const results = findMatchingSubunit({ name, subunits })
+			// Find the matching results so we can pass them to `StateTooltip`.
+			const results =
+				findMatchingSubunit({ name, subunits, property: 'statePostal' })
 
 			if (results) {
 
-				// Create the `TownTooltip` component.
-				tooltip = <TownTooltip {...{ results, position }} />
+				// Create the `StateTooltip` component.
+				tooltip = <StateTooltip {...{ results, position }} />
 
 			}
 
@@ -179,4 +181,4 @@ class MassMap extends Component {
 
 }
 
-export default MassMap
+export default UsMap

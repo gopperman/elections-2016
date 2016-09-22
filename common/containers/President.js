@@ -10,13 +10,12 @@ import Timer from './../components/Timer.js'
 import TownResultsTable from './../components/TownResultsTable.js'
 import StateResultsTable from './../components/StateResultsTable.js'
 import MassMap from './../components/MassMap.js'
+import UsMap from './../components/UsMap.js'
 import {
 	formatElectoralSummary,
 } from './../utils/standardize.js'
 import { sortByElectoralCount } from './../utils/Candidates.js'
-
-// import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
-// import ElectoralCollegeMap from './../components/ElectoralCollegeMap.js'
+import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 
 // This object, used by the `@provideHooks` decorator, defines our custom
 // data loading dependencies. At the moment we just have one: `fetch`. It
@@ -33,7 +32,8 @@ const hooks = {
 // This object maps various properties as React `props`:
 const mapDispatchToProps = (dispatch) => ({
 
-	// `actions` which have already been bound with `dispatch` for convenience,
+	// `actions` which have already been bound with `dispatch`
+	// for convenience,
 	actions: bindActionCreators(actions, dispatch),
 
 	// and `dispatch`, so we can pass it to `fetch` above. Normally we
@@ -56,6 +56,10 @@ class President extends Component {
 		dispatch: PropTypes.func.isRequired,
 	}
 
+	state = {
+		showUS: true,
+	}
+
 	// This lifecycle event gets called once, immediately after the initial
 	// rendering occurs. We will use it to fire the `fetch` hook.
 	componentDidMount = () => {
@@ -64,6 +68,7 @@ class President extends Component {
 
 	// This gets called once after the component's updates are flushed to DOM.
 	// At the moment we will use it to determine whether to stop the clock.
+	// NOTE: the switcher triggers this.
 	componentDidUpdate = (prevProps) => {
 
 		const { props } = this
@@ -96,11 +101,16 @@ class President extends Component {
 	// TODO: remove when we implement data completion check.
 	count = 0
 
+	handleSwitcher = () => {
+		this.setState({ showUS: !this.state.showUS })
+	}
+
 	render() {
 
 		const { props, fetchData } = this
 		const { timer, results, selection } = props
-		const { stopTimer, selectTown } = props.actions
+		const { stopTimer, selectFeature } = props.actions
+		const { showUS } = this.state
 
 		// Prepare `Timer` props, including
 		const timerProps = {
@@ -120,32 +130,49 @@ class President extends Component {
 
 		// TODO: before bringing these back, make sure they reference data
 		// safely.
-		// <ElectoralCollegeBar data={results.data['president-us']} />
-		// <ElectoralCollegeMap data={results.data['president-us-states']} />
 
 		// Get fake API results.
+		const usRaceResults = results.data['president-us']
 		const massRace = results.data['president-ma-towns']
 		const statesRace = results.data['president-us-states']
 
 		// TODO: this endpoint doesn't give us all candidates, just the top two.
 		// This might be problematic if we want to show third-party candidates
 		// in the state-by-state results table.
-		const usRace = formatElectoralSummary(
-			results.data['president-us'].Sumtable)
+		const usRace = formatElectoralSummary(usRaceResults.Sumtable)
 
 		// Create an array of ordered presidential candidates:
 		const summaryCandidates = sortByElectoralCount(
 			_.filter(usRace.candidates, 'candidateID'))
 
-		// Finally we can render all the components!
+		let switcherText
+		let map
+		let table
 
+		if (showUS) {
+
+			switcherText = 'Switch to MASS'
+			map = <UsMap {...{ selection, selectFeature, race: statesRace }} />
+			table = (<StateResultsTable
+				{...{ race: statesRace, summaryCandidates }} />)
+
+		} else {
+
+			switcherText = 'Switch to US'
+			map = <MassMap {...{ selection, selectFeature, race: massRace }} />
+			table = <TownResultsTable {...{ race: massRace }} />
+
+		}
+
+		// Finally we can render all the components!
 		return (
 			<div className='President'>
 				<h1>President</h1>
 				<Timer {...timerProps} />
-				<StateResultsTable {...{ race: statesRace, summaryCandidates }} />
-				<TownResultsTable {...{ race: massRace }} />
-				<MassMap {...{ selection, selectTown, race: massRace }} />
+				<ElectoralCollegeBar data={usRaceResults} />
+				<button onClick={this.handleSwitcher}>{switcherText}</button>
+				{map}
+				{table}
 			</div>
 		)
 
