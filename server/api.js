@@ -4,8 +4,6 @@ import { readFileSync } from 'jsonfile'
 const readJson = (endpoint) =>
 	readFileSync(`./data/${endpoint}.json`)
 
-let counter = 0
-
 export default (req, res) => {
 
 	const { endpoint } = req.params
@@ -17,26 +15,23 @@ export default (req, res) => {
 
 		case 'president': {
 
-			console.log(`requesting president-ma-towns-${counter}`)
+			console.log('requesting president')
 
 			result = {
-				'president-us': readJson('president-us'),
 				'president-us-states': readJson('president-us-states'),
-				'president-ma-towns': readJson(`president-ma-towns-${counter}`),
+				'president-ma-towns': readJson('president-ma-towns'),
 			}
 
 			console.log('about to send president data')
-
-			++counter
-			if (counter > 3) {
-				counter = 0
-			}
 
 			setTimeout(() => res.json(result), 0)
 			break
 		}
 
 		case 'race': {
+
+			console.log('requesting race')
+
 			result = {
 				'president-us': readJson('president-us'),
 				'senate-ma-towns': readJson('senate-ma-towns'),
