@@ -7,19 +7,19 @@
  */
 import React, { PropTypes } from 'react'
 
-const RaceSummaryRow = (row) => (
-	<tr key={row.id}>
+const RaceSummaryRow = ({ id, name, barStyle, pctForDisplay, vote}) => (
+	<tr key={id}>
 		<th scope='row'>
 			<div>
-				<div>{row.name}</div>
+				<div>{name}</div>
 				<div>
-					<span style={row.barStyle} />
+					<span style={barStyle} />
 				</div>
 			</div>
 		</th>
-		<td>{row.pctForDisplay}%</td>
+		<td>{pctForDisplay}%</td>
 		<td>
-			<span>{row.vote}</span>
+			<span>{vote}</span>
 			<span> votes</span>
 		</td>
 	</tr>
@@ -27,7 +27,11 @@ const RaceSummaryRow = (row) => (
 
 
 RaceSummaryRow.propTypes = {
-	row: PropTypes.object.isRequired,
+	id: PropTypes.number.isRequired,
+	name: PropTypes.string.isRequired,
+	barStyle: PropTypes.object.isRequired,
+	pctForDisplay: PropTypes.string.isRequired,
+	vote: PropTypes.string.isRequired,
 }
 
 export default RaceSummaryRow
