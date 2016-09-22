@@ -27,7 +27,7 @@ const RaceSummaryRow = ({ id, name, barStyle, pctForDisplay, vote}) => (
 
 
 RaceSummaryRow.propTypes = {
-	id: PropTypes.number.isRequired,
+	id: PropTypes.string.isRequired,
 	name: PropTypes.string.isRequired,
 	barStyle: PropTypes.object.isRequired,
 	pctForDisplay: PropTypes.string.isRequired,

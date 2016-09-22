@@ -53,7 +53,7 @@ const RaceSummary = ({ unit, raceTitle }) => {
 
 	// TODO: Add winner-tag class to candidates
 	return (
-		<div>
+		<div key={`${raceTitle} Summary`}>
 			<div>{unit.precinctsReportingPct}% precincts reporting ({votesCast} votes total)</div>
 			<table summary={createSummary(raceTitle)}>
 				<thead>
