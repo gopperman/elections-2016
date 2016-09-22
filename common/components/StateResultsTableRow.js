@@ -1,3 +1,6 @@
+// The `StateResultsTableRow` class displays detailed results for a state
+// row within a `StateResultsTableRow`.
+
 import React, { PropTypes } from 'react'
 import addCommas from 'add-commas'
 import { percent } from './../utils/Candidate.js'

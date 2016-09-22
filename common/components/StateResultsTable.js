@@ -1,3 +1,6 @@
+// The `StateResultsTable` class displays detailed results for each
+// state in the race.
+
 import React, { PropTypes } from 'react'
 import StateResultsTableRow from './StateResultsTableRow.js'
 
