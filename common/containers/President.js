@@ -9,12 +9,20 @@ import * as actions from './../actions/actionCreators.js'
 import Timer from './../components/Timer.js'
 import TownResultsTable from './../components/TownResultsTable.js'
 import StateResultsTable from './../components/StateResultsTable.js'
-import MassMap from './../components/MassMap.js'
-import UsMap from './../components/UsMap.js'
+
+// import MassMap from './../components/MassMap.js'
+// import UsMap from './../components/UsMap.js'
+
+// import {
+// 	formatElectoralSummary,
+// } from './../utils/standardize.js'
+
 import {
-	formatElectoralSummary,
-} from './../utils/standardize.js'
-import { sortByElectoralCount } from './../utils/Candidates.js'
+	sortByElectoralCount,
+	sortByVoteCount,
+	sortByPolIDs,
+	sortByCandidateIDs,
+} from './../utils/Candidates.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 
 // This object, used by the `@provideHooks` decorator, defines our custom
@@ -69,37 +77,33 @@ class President extends Component {
 	// This gets called once after the component's updates are flushed to DOM.
 	// At the moment we will use it to determine whether to stop the clock.
 	// NOTE: the switcher triggers this.
-	componentDidUpdate = (prevProps) => {
+	// componentDidUpdate = (prevProps) => {
 
-		const { props } = this
-		const { startTimer, cancelTimer } = props.actions
+// 		const { props } = this
+// 		const { cancelTimer } = props.actions
 
-		// Did we stop fetching - that is, did we go from `isFetching == true`
-		// to `isFetching == false`? If so,
-		if (prevProps.results.isFetching && !props.results.isFetching) {
+// 		// Did we stop fetching - that is, did we go from `isFetching == true`
+// 		// to `isFetching == false`? If so,
+// 		if (prevProps.results.isFetching && !props.results.isFetching) {
 
-			// check to see if all results are in so we can stop the clock.
+// 			// check to see if all results are in so we can stop the clock.
 
-			// TODO: implement
-			++this.count
+// 			cancelTimer()
 
-			if (this.count > 2) {
-				cancelTimer()
-			} else {
-				startTimer()
-			}
+// 			// if (true) {
+// 			// 	cancelTimer()
+// 			// } else {
+// 			// 	startTimer()
+// 			// }
 
-		}
+// 		}
 
-	}
+	// }
 
 	// Wrap the `fetch` call in a simpler `fetchData` function.
 	fetchData = () => {
 		hooks.fetch({ dispatch: this.props.dispatch })
 	}
-
-	// TODO: remove when we implement data completion check.
-	count = 0
 
 	handleSwitcher = () => {
 		this.setState({ showUS: !this.state.showUS })
@@ -108,9 +112,11 @@ class President extends Component {
 	render() {
 
 		const { props, fetchData } = this
-		const { timer, results, selection } = props
-		const { stopTimer, selectFeature } = props.actions
-		const { showUS } = this.state
+		const { timer, results } = props
+		// const { timer, results, selection } = props
+		const { stopTimer } = props.actions
+		// const { stopTimer, selectFeature } = props.actions
+		// const { showUS } = this.state
 
 		// Prepare `Timer` props, including
 		const timerProps = {
@@ -128,51 +134,113 @@ class President extends Component {
 			},
 		}
 
-		// TODO: before bringing these back, make sure they reference data
-		// safely.
+		// Get API results.
 
-		// Get fake API results.
-		const usRaceResults = results.data['president-us']
+		// Get US presidential race.
+		const usRace = results.data['president-us-states'].races
+
+		// Get summary US race.
+		const summaryState = _.find(usRace, v =>
+			v.reportingUnits[0].statePostal === 'US')
+
+		// Get summary US candidates, so we can sort by them.
+		const summaryStateCandidates = sortByElectoralCount(
+			summaryState.reportingUnits[0].candidates)
+
+		// Prepare the US race so it can be easily ingested by sub-components:
+		const states = _(usRace)
+			// don't include summary state,
+			.reject(v => v.reportingUnits[0].statePostal === 'US')
+			// sort states by their full name,
+			.sortBy(v => v.reportingUnits[0].stateName)
+			.map(v => ({
+				...v,
+				reportingUnits: v.reportingUnits.map(x => ({
+					...x,
+					// and sort candidates by overall candidates.
+					candidates: sortByPolIDs({
+						candidates: x.candidates,
+						polIDs: _.map(summaryStateCandidates, 'polID'),
+					}),
+				})),
+			}))
+			.value()
+
+		// Get MA presidential race.
 		const massRace = results.data['president-ma-towns']
-		const statesRace = results.data['president-us-states']
+			.races[0].reportingUnits
 
-		// TODO: this endpoint doesn't give us all candidates, just the top two.
-		// This might be problematic if we want to show third-party candidates
-		// in the state-by-state results table.
-		const usRace = formatElectoralSummary(usRaceResults.Sumtable)
+		// Get summary MA race.
+		const summaryTown = _.find(massRace, { level: 'national' })
 
-		// Create an array of ordered presidential candidates:
-		const summaryCandidates = sortByElectoralCount(
-			_.filter(usRace.candidates, 'candidateID'))
+		// Get summary MA candidates, so we can sort by them.
+		const summaryTownCandidates = sortByVoteCount(summaryTown.candidates)
 
-		let switcherText
-		let map
-		let table
+		// Prepare the MA race so it can be easily ingested by sub-components:
+		const towns = _(massRace)
+			// don't include summary town,
+			.reject({ level: 'national' })
+			// sort towns by their full name,
+			.sortBy('reportingunitName')
+			.map(v => ({
+				...v,
+				candidates: sortByCandidateIDs({
+					candidates: v.candidates,
+					candidateIDs: _.map(summaryTownCandidates, 'candidateID'),
+				}),
+			}))
+			.value()
 
-		if (showUS) {
+		console.log(JSON.stringify(towns, null, 2))
 
-			switcherText = 'Switch to MASS'
-			map = <UsMap {...{ selection, selectFeature, race: statesRace }} />
-			table = (<StateResultsTable
-				{...{ race: statesRace, summaryCandidates }} />)
+		// // Get fake API results.
+		// const usRaceResults = results.data['president-us']
+		// const statesRace = results.data['president-us-states']
 
-		} else {
+		// // TODO: this endpoint doesn't give us all candidates, just the top two.
+		// // This might be problematic if we want to show third-party candidates
+		// // in the state-by-state results table.
+		// const usRace = formatElectoralSummary(usRaceResults.Sumtable)
 
-			switcherText = 'Switch to US'
-			map = <MassMap {...{ selection, selectFeature, race: massRace }} />
-			table = <TownResultsTable {...{ race: massRace }} />
+		// // Create an array of ordered presidential candidates:
+		// const summaryStateCandidates = sortByElectoralCount(
+		// 	_.filter(usRace.candidates, 'candidateID'))
 
-		}
+		// let switcherText
+		// let map
+		// let table
+
+		// if (showUS) {
+
+		// 	switcherText = 'Switch to MASS'
+		// 	map = <UsMap {...{ selection, selectFeature, race: statesRace }} />
+		// 	table = (<StateResultsTable
+		// 		{...{ race: statesRace, summaryStateCandidates }} />)
+
+		// } else {
+
+		// 	switcherText = 'Switch to US'
+		// 	map = <MassMap {...{ selection, selectFeature, race: massRace }} />
+		// 	table = <TownResultsTable {...{ race: massRace }} />
+
+		// }
+
+				// <button onClick={this.handleSwitcher}>{switcherText}</button>
+				// {map}
+				// {table}
+
 
 		// Finally we can render all the components!
+
 		return (
 			<div className='President'>
 				<h1>President</h1>
 				<Timer {...timerProps} />
-				<ElectoralCollegeBar data={usRaceResults} />
-				<button onClick={this.handleSwitcher}>{switcherText}</button>
-				{map}
-				{table}
+				<ElectoralCollegeBar {...summaryState} />
+				<StateResultsTable
+					{...{ states, summaryCandidates: summaryStateCandidates }} />
+				<TownResultsTable
+					{...{ towns, summaryCandidates: summaryTownCandidates }} />
 			</div>
 		)
 
