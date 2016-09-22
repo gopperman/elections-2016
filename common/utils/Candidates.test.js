@@ -3,60 +3,65 @@
 import _ from 'lodash'
 import assert from 'assert'
 import { readFileSync } from 'jsonfile'
-import {
-	sortByVoteCount,
-	sortByElectoralCount,
-	sortByIDs,
-} from './Candidates.js'
-import { getRaceUnits } from './../utils/dataUtil.js'
+import { sortByPolIDs } from './Candidates.js'
 
 describe('Candidates', () => {
 
-	describe('sortByIDs', () => {
+	describe('sortByPolIDs', () => {
 
-		it('should work when arrays are of different length', () => {
+		it('should work when summary array is a subset of the other', () => {
 
-			const candidateIDs = sortByElectoralCount(
-				readFileSync('./data/president-us-formatted.json')
-				.Sumtable.candidates)
-				.map(v => v.candidateID)
+			// Read test data
+			const input = readFileSync('./data/president-us-states.json')
 
-			const candidates =
-				readFileSync('./data/president-us-state-as-ru.json').candidates
+			// Get the summary candidates (note we are not going to sort them)
+			const summaryCandidates = _.find(input.races, v =>
+					v.reportingUnits[0].statePostal === 'US')
+				.reportingUnits[0].candidates
 
-			const result = sortByIDs({ candidates, candidateIDs })
+			// Get the summary candidates polIDs
+			const polIDs = _.map(summaryCandidates, 'polID')
 
-			assert.deepEqual(_.map(result, 'last'),
-				['Obama', 'Romney', 'Johnson', 'Stein', 'Goode'])
+			// Get the candidates we want to sort
+			const candidates = _.find(input.races, v =>
+					v.reportingUnits[0].statePostal === 'AR')
+				.reportingUnits[0].candidates
+
+			// Sort
+			const output = sortByPolIDs({ candidates, polIDs })
+
+			assert.deepEqual(_.map(output, 'last'), [
+				'Clinton', 'Trump', 'Johnson', 'Stein', 'Castle', 'McMullin',
+				'Kahn', 'Hedges',
+			])
 
 		})
 
-		it('should work when both arrays are equal length', () => {
+		it('should work when arrays do not share all elements', () => {
 
-			const input = readFileSync('./data/president-ma-towns-0.json')
+			// Read test data
+			const input = readFileSync('./data/president-us-states.json')
 
-			const units = getRaceUnits(input)
-			const state = _.find(units, { level: 'state' })
-			const summaryCandidates = sortByVoteCount(state.candidates)
-			const candidateIDs = _.map(summaryCandidates, 'candidateID')
+			// Get the summary candidates (note we are not going to sort them)
+			const summaryCandidates = _.find(input.races, v =>
+					v.reportingUnits[0].statePostal === 'UT')
+				.reportingUnits[0].candidates
 
-			const acton = sortByIDs({
-				candidates:
-					_.find(units, { reportingunitName: 'Acton' }).candidates,
-				candidateIDs,
-			})
+			// Get the summary candidates polIDs
+			const polIDs = _.map(summaryCandidates, 'polID')
 
-			const ashby = sortByIDs({
-				candidates:
-					_.find(units, { reportingunitName: 'Ashby' }).candidates,
-				candidateIDs,
-			})
+			// Get the candidates we want to sort
+			const candidates = _.find(input.races, v =>
+					v.reportingUnits[0].statePostal === 'IA')
+				.reportingUnits[0].candidates
 
-			assert.deepEqual(_.map(acton, 'last'),
-				['Obama', 'Romney', 'Johnson', 'Stein'])
+			// Sort
+			const output = sortByPolIDs({ candidates, polIDs })
 
-			assert.deepEqual(_.map(ashby, 'last'),
-				['Obama', 'Romney', 'Johnson', 'Stein'])
+			assert.deepEqual(_.map(output, 'last'), [
+				'Clinton', 'Trump', 'McMullin', 'Castle', 'Stein', 'De La Fuente',
+				'Johnson', 'Vacek', 'La Riva', 'Kahn',
+			])
 
 		})
 

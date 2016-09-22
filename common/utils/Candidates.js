@@ -1,9 +1,11 @@
 /** @module */
 
+/* eslint-disable max-len */
+
 import _ from 'lodash'
 
 /**
- * Sort candidates by electoral votes won and leading, in that order.
+ * Sort candidates by electoral votes won and voteCount, in that order.
  * @memberof Candidates
  * @function
  * @param {Array} candidates an array of candidates
@@ -12,7 +14,9 @@ import _ from 'lodash'
  * sortByElectoralCount(candidate) //=> sortedCandidates
  */
 const sortByElectoralCount = (candidates) =>
-	_.orderBy(candidates, ['electWon', 'electLead'], ['desc', 'desc'])
+	_.orderBy(candidates,
+		['electWon', 'voteCount'],
+		['desc', 'desc'])
 
 /**
  * Sort candidates by total vote count.
@@ -27,26 +31,23 @@ const sortByVoteCount = (candidates) =>
 	_.orderBy(candidates, ['voteCount'], ['desc'])
 
 /**
- * Sort candidates by an external array of candidateIDs.
+ * Sort candidates by an external array of ordered polIDs. If a candidate doesn't have a polID, sorting defaults to vote count.
  * @memberof Candidates
  * @function
  * @param {Array} $0.candidates an array of candidates
- * @param {Array} $0.candidateIDs an array of candidate IDs
+ * @param {Array} $0.polIDs an array of candidate politician IDs, which are unique across all states and races (only for politicians who have run in a national race).
  * @returns {Array} a new array of candidates, sorted. Does not mutate original array.
  * @example
- * sortByIDs({ candidates, candidateIDs }) //=> sortedCandidates
+ * sortByPolIDs({ candidates, polIDs }) //=> sortedCandidates
  */
-const sortByIDs = ({ candidates, candidateIDs }) => _(candidates)
-	.map(v => ({
+const sortByPolIDs = ({ candidates, polIDs }) => _(candidates)
+	.map((v, i) => ({
 		...v,
-		externalCandidateID:
-			_.indexOf(candidateIDs, v.candidateID) > -1 ?
-				_.indexOf(candidateIDs, v.candidateID) : candidates.length - 1,
+		index: i,
+		polIDIndex: _.indexOf(polIDs, v.polID) > -1 ?
+			_.indexOf(polIDs, v.polID) : candidates.length,
 	}))
-	.orderBy(
-		['externalCandidateID', 'electWon', 'voteCount'],
-		['asc', 'desc', 'desc'])
-	.map(v => _.omit(v, 'externalCandidateID'))
+	.orderBy(['polIDIndex', 'index'])
 	.value()
 
 /**
@@ -64,6 +65,6 @@ const totalVotes = (candidates) =>
 export {
 	sortByElectoralCount,
 	sortByVoteCount,
-	sortByIDs,
+	sortByPolIDs,
 	totalVotes,
 }
