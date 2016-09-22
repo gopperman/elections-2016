@@ -1,21 +1,15 @@
-// The `Race` class displays race results.
-
-import _ from 'lodash'
 import React, { Component, PropTypes } from 'react'
 import { provideHooks } from 'redial'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actions from './../actions/actionCreators.js'
-import { getRaceUnits } from './../utils/dataUtil.js'
 import Timer from './../components/Timer.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
-import RaceSummary from './../components/RaceSummary.js'
-import MassMap from './../components/MassMap.js'
-import TownResultsTable from './../components/TownResultsTable.js'
+import { toSentenceCase } from './../utils/standardize.js'
 
 const hooks = {
 	fetch: ({ dispatch }) =>
-		dispatch(actions.fetchResults({ url: 'race' })),
+		dispatch(actions.fetchResults({ url: 'town' })),
 }
 
 const mapDispatchToProps = (dispatch) => ({
@@ -25,7 +19,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 @provideHooks(hooks)
 @connect(s => s, mapDispatchToProps)
-class Race extends Component {
+class Town extends Component {
 
 	static propTypes = {
 		actions: PropTypes.object.isRequired,
@@ -68,38 +62,33 @@ class Race extends Component {
 	count = 0
 
 	render() {
-
 		const { props, fetchData } = this
-		const { timer, results, selection } = props
-		const { stopTimer, selectFeature } = props.actions
+		const { timer, results } = props
+		const { stopTimer } = props.actions
 
-		const timerProps = {
-			...timer,
-			callback: () => {
-				stopTimer()
-				fetchData()
-			},
-		}
+		const townName = toSentenceCase(props.params.townName)
 
-		const race = results.data['senate-ma-towns']
+		const races = results.data['town-abington'].map((race) => {
+			const raceTitle = `${race.office_name} ${race.seat_name}`
+			
+			// TO-DO: We're waiting on consistent test data so we can use RaceSummary
+			const unit = (race.reporting_units && race.reporting_units[0]) || []
 
-		// Let's get the name of the office we're reporting on
-		const raceTitle = (race.races && race.races[0].officeName) || ''
-
-		// Get this race's reporting units.
-		const units = getRaceUnits(race)
-
-		// Get the statewide unit.
-		const state = _.find(units, { level: 'state' })
-
+			return (
+				<li key={race.race_number}>
+					{raceTitle}
+					(Race Summary goes here)
+				</li>
+			)
+		})
+		
 		return (
-			<div className='Race'>
+			<div className='Town'>
 				<ElectoralCollegeBar data={results.data['president-us']} />
-				<h1>{state.stateName} {raceTitle}</h1>
-				<RaceSummary unit={state} raceTitle />
-				<Timer {...timerProps} />
-				<MassMap {...{ selection, selectFeature, race }} />
-				<TownResultsTable {...{ race }} />
+				<h1>{townName}, MA</h1>
+				<ul>
+					{races}
+				</ul>
 			</div>
 		)
 
@@ -107,4 +96,4 @@ class Race extends Component {
 
 }
 
-export default Race
+export default Town

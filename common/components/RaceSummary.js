@@ -1,35 +1,28 @@
 // The `RaceSummary` class displays detailed the race's summary results.
-
-import _ from 'lodash'
 import React, { PropTypes } from 'react'
 import addCommas from 'add-commas'
 import { fullName, percent } from './../utils/Candidate.js'
 import { sortByVoteCount, totalVotes } from './../utils/Candidates.js'
-import { getRaceUnits } from './../utils/dataUtil.js'
 import { percentForDisplay } from './../utils/standardize.js'
+import RaceSummaryRow from './../components/templates/RaceSummaryRow'
 
-// TODO: implement
 const createSummary = (raceName) =>
 	// eslint-disable-next-line max-len
 	`A table that has the candidate, percent, and vote count across the top and the candidates down the left hand side for the ${raceName}.`
 
-const RaceSummary = ({ race }) => {
-
-	// Get this race's reporting units.
-	const units = getRaceUnits(race)
-
-	// Get the statewide unit.
-	const state = _.find(units, { level: 'state' })
+const RaceSummary = ({ unit, raceTitle }) => {
 
 	// Get statewide candidates.
-	const summaryCandidates = sortByVoteCount(state.candidates)
+	const summaryCandidates = sortByVoteCount(unit.candidates)
 
 	// Get total votes, with commas.
-	const votesCast = addCommas(totalVotes(state.candidates))
+	const votesCast = addCommas(totalVotes(unit.candidates))
 
 	const rows = summaryCandidates.map((candidate, i, array) => {
 
 		const { candidateID, voteCount } = candidate
+
+		const candidateName = fullName(candidate)
 
 		// Add appropriate commas to the candidate's vote count.
 		const vote = addCommas(voteCount)
@@ -40,34 +33,29 @@ const RaceSummary = ({ race }) => {
 		// Get the display-ready version of the percent.
 		const pctForDisplay = percentForDisplay(pct)
 
+
 		const barStyle = {
 			width: `${pctForDisplay}%`,
 		}
 
 		return (
-			<tr key={i}>
-				<th scope='row'>
-					<div>
-						<div>{fullName(candidate)}</div>
-						<div>
-							<span style={barStyle} />
-						</div>
-					</div>
-				</th>
-				<td>{pctForDisplay}%</td>
-				<td>
-					<span>{vote}</span>
-					<span> votes</span>
-				</td>
-			</tr>
+			<RaceSummaryRow
+				{...{
+					key: candidateID,
+					name: candidateName,
+					barStyle,
+					pctForDisplay,
+					vote,
+				}}
+			/>
 		)
 	})
 
 	// TODO: Add winner-tag class to candidates
 	return (
-		<div>
-			<div>{state.precinctsReportingPct}% precincts reporting ({votesCast} votes total)</div>
-			<table summary={createSummary()}>
+		<div key={`${raceTitle} Summary`}>
+			<div>{unit.precinctsReportingPct}% precincts reporting ({votesCast} votes total)</div>
+			<table summary={createSummary(raceTitle)}>
 				<thead>
 					<tr>
 						<th scope='col'>Candidate</th>
@@ -84,7 +72,8 @@ const RaceSummary = ({ race }) => {
 }
 
 RaceSummary.propTypes = {
-	race: PropTypes.object.isRequired,
+	unit: PropTypes.object.isRequired,
+	raceTitle: PropTypes.string.isRequired,
 }
 
 export default RaceSummary
