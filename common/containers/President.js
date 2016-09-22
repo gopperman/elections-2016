@@ -191,8 +191,6 @@ class President extends Component {
 			}))
 			.value()
 
-		console.log(JSON.stringify(towns, null, 2))
-
 		// // Get fake API results.
 		// const usRaceResults = results.data['president-us']
 		// const statesRace = results.data['president-us-states']
