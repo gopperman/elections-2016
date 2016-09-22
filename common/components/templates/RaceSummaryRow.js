@@ -7,8 +7,8 @@
  */
 import React, { PropTypes } from 'react'
 
-const RaceSummaryRow = ({ id, name, barStyle, pctForDisplay, vote}) => (
-	<tr key={id}>
+const RaceSummaryRow = ({name, barStyle, pctForDisplay, vote}) => (
+	<tr>
 		<th scope='row'>
 			<div>
 				<div>{name}</div>
@@ -27,7 +27,6 @@ const RaceSummaryRow = ({ id, name, barStyle, pctForDisplay, vote}) => (
 
 
 RaceSummaryRow.propTypes = {
-	id: PropTypes.string.isRequired,
 	name: PropTypes.string.isRequired,
 	barStyle: PropTypes.object.isRequired,
 	pctForDisplay: PropTypes.string.isRequired,

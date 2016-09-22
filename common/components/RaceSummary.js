@@ -41,7 +41,7 @@ const RaceSummary = ({ unit, raceTitle }) => {
 		return (
 			<RaceSummaryRow
 				{...{
-					id: candidateID,
+					key: candidateID,
 					name: candidateName,
 					barStyle,
 					pctForDisplay,
