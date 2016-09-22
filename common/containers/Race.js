@@ -80,7 +80,6 @@ class Race extends Component {
 				fetchData()
 			},
 		}
-		console.log(props)
 
 		const race = results.data['senate-ma-towns']
 
@@ -97,7 +96,7 @@ class Race extends Component {
 			<div className='Race'>
 				<ElectoralCollegeBar data={results.data['president-us']} />
 				<h1>{state.stateName} {raceTitle}</h1>
-				<RaceSummary {...{ race }} />
+				<RaceSummary unit={state} raceTitle />
 				<Timer {...timerProps} />
 				<MassMap {...{ selection, selectFeature, race }} />
 				<TownResultsTable {...{ race }} />

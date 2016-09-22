@@ -41,14 +41,21 @@ const RaceSummary = ({ unit, raceTitle }) => {
 			width: `${pctForDisplay}%`,
 		}
 
-		return (
-				<RaceSummaryRow {...{ 
+		/*				<RaceSummaryRow {...{ 
 					'id': candidateID,
 					'name': candidateName, 
 					barStyle, 
 					pctForDisplay, 
 					vote 
-				}} />
+				}} /> */
+		return (
+			<RaceSummaryRow {...{ 
+				'id': candidateID,
+				'name': candidateName, 
+				barStyle, 
+				pctForDisplay, 
+				vote 
+			}} />
 		)
 	})
 
