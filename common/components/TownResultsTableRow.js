@@ -26,8 +26,8 @@ precinctsTotal, candidates }) =>
 TownResultsTableRow.propTypes = {
 	candidates: PropTypes.array.isRequired,
 	reportingunitName: PropTypes.string.isRequired,
-	precinctsReporting: PropTypes.string.isRequired,
-	precinctsTotal: PropTypes.string.isRequired,
+	precinctsReporting: PropTypes.number.isRequired,
+	precinctsTotal: PropTypes.number.isRequired,
 }
 
 export default TownResultsTableRow
