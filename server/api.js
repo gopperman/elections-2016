@@ -13,6 +13,16 @@ export default (req, res) => {
 	let result
 	switch (endpoint) {
 
+		case 'election': {
+			result = {
+				'president-us-states': readJson('president-us-states'),
+			}
+			console.log('about to send election home data')
+
+			setTimeout(() => res.json(result), 0)
+			break
+		}
+
 		case 'president': {
 
 			console.log('requesting president')
