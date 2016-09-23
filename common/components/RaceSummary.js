@@ -33,7 +33,6 @@ const RaceSummary = ({ unit, raceTitle }) => {
 		// Get the display-ready version of the percent.
 		const pctForDisplay = percentForDisplay(pct)
 
-
 		const barStyle = {
 			width: `${pctForDisplay}%`,
 		}

@@ -7,7 +7,7 @@
  */
 import React, { PropTypes } from 'react'
 
-const RaceSummaryRow = ({name, barStyle, pctForDisplay, vote}) => (
+const RaceSummaryRow = ({ name, barStyle, pctForDisplay, vote }) => (
 	<tr>
 		<th scope='row'>
 			<div>
