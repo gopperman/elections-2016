@@ -13,10 +13,10 @@ const createPathAndFeatures = ({ width }) => {
 	// Convert STATES to a GeoJSON object (via topojson).
 	const statesObject = topojson.feature(STATES, STATES.objects.STATES)
 
-	// Setup a lower 48 + AK + HI projection
+	// Setup a lower 48 + AK + HI projection.
 	const projection = geoAlbersUsa()
 
-	// Create the `path`
+	// Create the `path`.
 	const path = geoPath().projection(projection)
 
 	// Find US bounds and aspect ratio for this projection.
@@ -38,6 +38,7 @@ const createPathAndFeatures = ({ width }) => {
 }
 
 // TODO: handle resizing in IE11
+// TODO: setup mouseovers
 class Map extends Component {
 
 	static propTypes = {
