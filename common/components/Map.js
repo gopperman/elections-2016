@@ -6,6 +6,7 @@ import * as topojson from 'topojson'
 import { geoPath } from 'd3-geo'
 import { select } from 'd3-selection'
 import chooseColorClass from './../utils/chooseColorClass.js'
+import compareStrings from './../utils/compareStrings.js'
 
 // TODO: draw tooltips
 // TODO: handle updating data and keeping tooltip+selected feature
@@ -16,6 +17,7 @@ class Map extends Component {
 		projection: PropTypes.func.isRequired,
 		data: PropTypes.array.isRequired,
 		sortingDelegate: PropTypes.func.isRequired,
+		unitName: PropTypes.string.isRequired,
 	}
 
 	// This lifecycle event gets called once, immediately after the initial
@@ -54,14 +56,14 @@ class Map extends Component {
 
 	drawFeatures() {
 
-		const { data, sortingDelegate } = this.props
+		const { data, sortingDelegate, unitName } = this.props
 
 		// Bind AP data to GeoJSON features.
 		const features = _(this._geoFeatures)
 			.map(v => ({
 				...v,
-				subunit: _.find(data, d =>
-					d.reportingUnits[0].statePostal === v.id),
+				subunit: _.find(data, f =>
+					compareStrings(f[unitName], v.id)),
 			}))
 			.value()
 
@@ -77,7 +79,7 @@ class Map extends Component {
 			.attr('d', this._path)
 			.attr('class', d =>
 				chooseColorClass({
-					candidates: d.subunit.reportingUnits[0].candidates,
+					candidates: d.subunit.candidates,
 					sortingDelegate,
 				})
 			)

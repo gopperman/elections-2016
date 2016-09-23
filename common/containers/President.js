@@ -1,6 +1,7 @@
 // The `President` class displays presidential results for both US and MA.
 
-import { geoAlbersUsa } from 'd3-geo'
+// TODO: figure out how best to display test data status
+import { geoAlbersUsa, geoConicConformal } from 'd3-geo'
 import _ from 'lodash'
 import React, { Component, PropTypes } from 'react'
 import { provideHooks } from 'redial'
@@ -11,7 +12,8 @@ import Timer from './../components/Timer.js'
 import TownResultsTable from './../components/TownResultsTable.js'
 import StateResultsTable from './../components/StateResultsTable.js'
 import Map from './../components/Map.js'
-import SOME from './../../data/output/STATES.json'
+import STATES from './../../data/output/STATES.json'
+import TOWNS from './../../data/output/TOWNS.json'
 import {
 	sortByElectoralCount,
 	sortByVoteCount,
@@ -130,32 +132,30 @@ class President extends Component {
 		// Get API results.
 
 		// Get US presidential race.
-		const usRace = results.data['president-us-states'].races
+		const usRace = results.data['president-us-states'].races.map(v => ({
+			...v.reportingUnits[0],
+		}))
 
 		// Get summary US race.
-		const summaryState = _.find(usRace, v =>
-			v.reportingUnits[0].statePostal === 'US')
+		const summaryState = _.find(usRace, { statePostal: 'US' })
 
 		// Get summary US candidates, so we can sort by them.
 		const summaryStateCandidates = sortByElectoralCount(
-			summaryState.reportingUnits[0].candidates)
+			summaryState.candidates)
 
 		// Prepare the US race so it can be easily ingested by sub-components:
 		const states = _(usRace)
 			// don't include summary state,
-			.reject(v => v.reportingUnits[0].statePostal === 'US')
+			.reject({ statePostal: 'US' })
 			// sort states by their full name,
-			.sortBy(v => v.reportingUnits[0].stateName)
+			.sortBy('stateName')
 			.map(v => ({
 				...v,
-				reportingUnits: v.reportingUnits.map(x => ({
-					...x,
-					// and sort candidates by overall candidates.
-					candidates: sortByPolIDs({
-						candidates: x.candidates,
-						polIDs: _.map(summaryStateCandidates, 'polID'),
-					}),
-				})),
+				// and sort candidates by overall candidates.
+				candidates: sortByPolIDs({
+					candidates: v.candidates,
+					polIDs: _.map(summaryStateCandidates, 'polID'),
+				}),
 			}))
 			.value()
 
@@ -185,21 +185,39 @@ class President extends Component {
 			}))
 			.value()
 
+		// Setup a MA-centric projection.
+		const massProjection = geoConicConformal()
+			.parallels([41 + (43 / 60), 42 + (41 / 60)])
+			.rotate([71 + (30 / 60), -41])
+
 		// Finally we can render all the components!
 		return (
 			<div className='President'>
 				<h1>President</h1>
 				<Timer {...timerProps} />
+
 				<ElectoralCollegeBar {...summaryState} />
+
 				<Map
-					topoObject={SOME}
+					topoObject={STATES}
 					data={states}
 					sortingDelegate={sortByElectoralCount}
-					projection={geoAlbersUsa()} />
+					projection={geoAlbersUsa()}
+					unitName='statePostal' />
+
+				<Map
+					topoObject={TOWNS}
+					data={towns}
+					sortingDelegate={sortByVoteCount}
+					projection={massProjection}
+					unitName='reportingunitName' />
+
 				<StateResultsTable
 					{...{ states, summaryCandidates: summaryStateCandidates }} />
+
 				<TownResultsTable
 					{...{ towns, summaryCandidates: summaryTownCandidates }} />
+
 			</div>
 		)
 
