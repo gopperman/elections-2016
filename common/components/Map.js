@@ -51,6 +51,12 @@ class Map extends Component {
 		console.log('setup event listener to recompute svg width and height')
 	}
 
+	// TODO: investigate better way of doing this
+	// https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/jsx-no-bind.md
+	onMouseMove = (subunit) => {
+		console.log(subunit)
+	}
+
 	render() {
 
 		const { states } = this.props
@@ -77,7 +83,13 @@ class Map extends Component {
 				candidates, sortingDelegate: sortByElectoralCount })
 
 			// Create the svg path.
-			return <path key={i} d={path(v)} className={colorClass} />
+			return (
+				<path
+					onMouseMove={() => this.onMouseMove(v.subunit)}
+					key={i}
+					d={path(v)}
+					className={colorClass} />
+			)
 
 		})
 
