@@ -26,12 +26,14 @@ reproject: reproject_MA reproject_US
 
 reproject_US:
 	cd data/output; \
-		ogr2ogr -where "GEOID NOT IN ('60','66','69','72','78')" -t_srs EPSG:4326 -f GeoJSON STATES.geojson ../input/cb_2015_us_state_500k.shp; \
-		topojson --id-property STUSPS -o STATES.json --simplify-proportion 0.05 STATES.geojson;
+		ogr2ogr -where "GEOID NOT IN ('60','66','69','72','78')" -t_srs EPSG:4326 -f GeoJSON UNITS.geojson ../input/cb_2015_us_state_500k.shp; \
+		topojson --id-property STUSPS -o STATES.json --simplify-proportion 0.05 UNITS.geojson; \
+		rm UNITS.geojson;
 
 reproject_MA:
 	cd data/output; \
-		ogr2ogr -t_srs EPSG:4326 -f GeoJSON TOWNS.geojson ../input/TOWNS_POLYM.shp; \
-		topojson --id-property TOWN -o TOWNS.json --simplify-proportion 0.05 TOWNS.geojson;
+		ogr2ogr -t_srs EPSG:4326 -f GeoJSON UNITS.geojson ../input/TOWNS_POLYM.shp; \
+		topojson --id-property TOWN -o TOWNS.json --simplify-proportion 0.05 UNITS.geojson; \
+		rm UNITS.geojson;
 
 all: clean download reproject

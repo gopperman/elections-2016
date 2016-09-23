@@ -1,5 +1,6 @@
 // The `President` class displays presidential results for both US and MA.
 
+import { geoAlbersUsa } from 'd3-geo'
 import _ from 'lodash'
 import React, { Component, PropTypes } from 'react'
 import { provideHooks } from 'redial'
@@ -9,15 +10,8 @@ import * as actions from './../actions/actionCreators.js'
 import Timer from './../components/Timer.js'
 import TownResultsTable from './../components/TownResultsTable.js'
 import StateResultsTable from './../components/StateResultsTable.js'
-import UsMap from './../components/UsMap.js'
 import Map from './../components/Map.js'
-
-// import MassMap from './../components/MassMap.js'
-
-// import {
-// 	formatElectoralSummary,
-// } from './../utils/standardize.js'
-
+import SOME from './../../data/output/STATES.json'
 import {
 	sortByElectoralCount,
 	sortByVoteCount,
@@ -113,8 +107,8 @@ class President extends Component {
 	render() {
 
 		const { props, fetchData } = this
-		const { timer, results, selection } = props
-		const { stopTimer, selectFeature } = props.actions
+		const { timer, results } = props
+		const { stopTimer } = props.actions
 		// const { showUS } = this.state
 
 		// Prepare `Timer` props, including
@@ -191,52 +185,17 @@ class President extends Component {
 			}))
 			.value()
 
-		// // Get fake API results.
-		// const usRaceResults = results.data['president-us']
-		// const statesRace = results.data['president-us-states']
-
-		// // TODO: this endpoint doesn't give us all candidates, just the top two.
-		// // This might be problematic if we want to show third-party candidates
-		// // in the state-by-state results table.
-		// const usRace = formatElectoralSummary(usRaceResults.Sumtable)
-
-		// // Create an array of ordered presidential candidates:
-		// const summaryStateCandidates = sortByElectoralCount(
-		// 	_.filter(usRace.candidates, 'candidateID'))
-
-		// let switcherText
-		// let map
-		// let table
-
-		// if (showUS) {
-
-		// 	switcherText = 'Switch to MASS'
-		// 	map = <UsMap {...{ selection, selectFeature, race: statesRace }} />
-		// 	table = (<StateResultsTable
-		// 		{...{ race: statesRace, summaryStateCandidates }} />)
-
-		// } else {
-
-		// 	switcherText = 'Switch to US'
-		// 	map = <MassMap {...{ selection, selectFeature, race: massRace }} />
-		// 	table = <TownResultsTable {...{ race: massRace }} />
-
-		// }
-
-				// <button onClick={this.handleSwitcher}>{switcherText}</button>
-				// {map}
-				// {table}
-
-
 		// Finally we can render all the components!
-
 		return (
 			<div className='President'>
 				<h1>President</h1>
 				<Timer {...timerProps} />
 				<ElectoralCollegeBar {...summaryState} />
-				<Map {...{ states }} />
-				<UsMap {...{ states, selection, selectFeature }} />
+				<Map
+					topoObject={SOME}
+					data={states}
+					sortingDelegate={sortByElectoralCount}
+					projection={geoAlbersUsa()} />
 				<StateResultsTable
 					{...{ states, summaryCandidates: summaryStateCandidates }} />
 				<TownResultsTable
