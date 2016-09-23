@@ -29,7 +29,7 @@ const StateResultsTable = ({ states, summaryCandidates }) =>
 			</thead>
 			<tbody>
 				{ states.map((state, key) => (
-					<StateResultsTableRow key={key} {...state.reportingUnits[0]} />
+					<StateResultsTableRow key={key} {...state} />
 				))}
 			</tbody>
 		</table>

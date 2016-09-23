@@ -2,9 +2,7 @@ import React, { PropTypes } from 'react'
 import _ from 'lodash'
 
 // TODO: sanitize data (cast strings to numbers)
-const ElectoralCollegeBar = ({ reportingUnits, test }) => {
-
-	const { candidates, precinctsReportingPct } = reportingUnits[0]
+const ElectoralCollegeBar = ({ candidates, precinctsReportingPct }) => {
 
 	const dem = _.find(candidates, { party: 'Dem' })
 	const gop = _.find(candidates, { party: 'GOP' })
@@ -14,7 +12,6 @@ const ElectoralCollegeBar = ({ reportingUnits, test }) => {
 	return (
 		<div className='ElectoralCollegeBar'>
 			<h1>ElectoralCollegeBar</h1>
-			<h2>test: {test.toString()}</h2>
 
 			<div>
 				<h3>Dem</h3>
@@ -50,8 +47,8 @@ const ElectoralCollegeBar = ({ reportingUnits, test }) => {
 }
 
 ElectoralCollegeBar.propTypes = {
-	reportingUnits: PropTypes.array.isRequired,
-	test: PropTypes.bool.isRequired,
+	candidates: PropTypes.array.isRequired,
+	precinctsReportingPct: PropTypes.string.isRequired,
 }
 
 export default ElectoralCollegeBar
