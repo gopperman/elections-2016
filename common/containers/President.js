@@ -10,6 +10,7 @@ import Timer from './../components/Timer.js'
 import TownResultsTable from './../components/TownResultsTable.js'
 import StateResultsTable from './../components/StateResultsTable.js'
 import UsMap from './../components/UsMap.js'
+import Map from './../components/Map.js'
 
 // import MassMap from './../components/MassMap.js'
 
@@ -234,6 +235,7 @@ class President extends Component {
 				<h1>President</h1>
 				<Timer {...timerProps} />
 				<ElectoralCollegeBar {...summaryState} />
+				<Map {...{ states }} />
 				<UsMap {...{ states, selection, selectFeature }} />
 				<StateResultsTable
 					{...{ states, summaryCandidates: summaryStateCandidates }} />
