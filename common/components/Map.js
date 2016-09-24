@@ -1,5 +1,6 @@
 /* eslint-disable no-return-assign */
 
+import deepEqual from 'deep-equal'
 import _ from 'lodash'
 import React, { Component, PropTypes } from 'react'
 import * as topojson from 'topojson'
@@ -13,11 +14,19 @@ import compareStrings from './../utils/compareStrings.js'
 class Map extends Component {
 
 	static propTypes = {
+
+		// These will never change.
 		topoObject: PropTypes.object.isRequired,
 		projection: PropTypes.func.isRequired,
-		data: PropTypes.array.isRequired,
 		sortingDelegate: PropTypes.func.isRequired,
 		unitName: PropTypes.string.isRequired,
+
+		// This will change.
+		data: PropTypes.array.isRequired,
+	}
+
+	state = {
+		selectionId: null,
 	}
 
 	// This lifecycle event gets called once, immediately after the initial
@@ -54,9 +63,26 @@ class Map extends Component {
 
 	}
 
-	drawFeatures() {
+	shouldComponentUpdate(nextProps) {
+
+		return !deepEqual(this.props.data, nextProps.data)
+
+	}
+
+	componentDidUpdate() {
+
+		this.drawFeatures()
+
+	}
+
+	drawFeatures = () => {
 
 		const { data, sortingDelegate, unitName } = this.props
+		const { selectionId } = this.state
+
+		const setState = function setState(state) {
+			this.setState(state)
+		}.bind(this)
 
 		// Bind AP data to GeoJSON features.
 		const features = _(this._geoFeatures)
@@ -65,6 +91,7 @@ class Map extends Component {
 				subunit: _.find(data, f =>
 					compareStrings(f[unitName], v.id)),
 			}))
+			.filter('subunit')
 			.value()
 
 		// Select the svg node.
@@ -77,18 +104,31 @@ class Map extends Component {
 		// ENTER + UPDATE (d3 pattern)
 		paths.enter().append('path')
 			.attr('d', this._path)
-			.attr('class', d =>
-				chooseColorClass({
-					candidates: d.subunit.candidates,
+		.merge(paths)
+			.attr('class', d => {
+
+				const colorClass = chooseColorClass({
+					candidates: d.subunit && d.subunit.candidates,
 					sortingDelegate,
 				})
-			)
-			.on('mousemove', function mousemove() {
+
+				const selectedClass = compareStrings(d.id, selectionId) ?
+					'selected' : ''
+
+				return [colorClass, selectedClass].join(' ')
+
+			})
+			.on('mousemove', function mousemove(d) {
+
+				setState({ selectionId: d.id })
+
 				select(this)
 					.classed('selected', true)
 					.raise()
+
 			})
 			.on('mouseleave', function mouseleave() {
+				setState({ selectionId: null })
 				select(this).classed('selected', false)
 			})
 
