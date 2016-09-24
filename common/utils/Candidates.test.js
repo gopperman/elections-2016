@@ -3,9 +3,58 @@
 import _ from 'lodash'
 import assert from 'assert'
 import { readFileSync } from 'jsonfile'
-import { sortByPolIDs, sortByCandidateIDs } from './Candidates.js'
+import {
+	sortByPolIDs,
+	sortByCandidateIDs,
+	sortByElectoralCount,
+	sortByVoteCount,
+} from './Candidates.js'
 
 describe('Candidates', () => {
+
+	describe('sortByVoteCount', () => {
+
+		it('should work', () => {
+
+			const input = [
+				{ voteCount: 1 },
+				{ voteCount: 0, winner: 'X' },
+			]
+
+			const output = sortByVoteCount(input)
+
+			const expected = [
+				{ voteCount: 0, winner: 'X' },
+				{ voteCount: 1 },
+			]
+
+			assert.deepEqual(output, expected)
+
+		})
+
+	})
+
+	describe('sortByElectoralCount', () => {
+
+		it('should work', () => {
+
+			const input = [
+				{ electWon: 1 },
+				{ electWon: 0, winner: 'X' },
+			]
+
+			const output = sortByElectoralCount(input)
+
+			const expected = [
+				{ electWon: 0, winner: 'X' },
+				{ electWon: 1 },
+			]
+
+			assert.deepEqual(output, expected)
+
+		})
+
+	})
 
 	describe('sortByCandidateIDs', () => {
 

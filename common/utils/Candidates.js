@@ -5,7 +5,7 @@
 import _ from 'lodash'
 
 /**
- * Sort candidates by electoral votes won and voteCount, in that order.
+ * Sort candidates by winner, electoral votes won and voteCount, in that order.
  * @memberof Candidates
  * @function
  * @param {Array} candidates an array of candidates
@@ -15,11 +15,11 @@ import _ from 'lodash'
  */
 const sortByElectoralCount = (candidates) =>
 	_.orderBy(candidates,
-		['electWon', 'voteCount'],
-		['desc', 'desc'])
+		['winner', 'electWon', 'voteCount'],
+		['asc', 'desc', 'desc'])
 
 /**
- * Sort candidates by total vote count.
+ * Sort candidates by winner and total vote count.
  * @memberof Candidates
  * @function
  * @param {Array} candidates an array of candidates
@@ -28,7 +28,7 @@ const sortByElectoralCount = (candidates) =>
  * sortByVoteCount(candidates) //=> sortedCandidates
  */
 const sortByVoteCount = (candidates) =>
-	_.orderBy(candidates, ['voteCount'], ['desc'])
+	_.orderBy(candidates, ['winner', 'voteCount'], ['asc', 'desc'])
 
 /**
  * Sort candidates by an external array of polIDs.
