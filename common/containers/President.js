@@ -25,7 +25,6 @@ import {
 	sortByPolIDs,
 	sortByCandidateIDs,
 } from './../utils/Candidates.js'
-import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 
 // This object, used by the `@provideHooks` decorator, defines our custom
 // data loading dependencies. At the moment we just have one: `fetch`. It
