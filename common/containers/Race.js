@@ -6,9 +6,9 @@ import { provideHooks } from 'redial'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actions from './../actions/actionCreators.js'
-import { getRaceUnits } from './../utils/dataUtil.js'
+import { getRaceUnits, getPresidentSummary } from './../utils/dataUtil.js'
 import Timer from './../components/Timer.js'
-import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
+import Header from './../components/templates/Header.js'
 // import RaceSummary from './../components/RaceSummary.js'
 // import MassMap from './../components/MassMap.js'
 // import TownResultsTable from './../components/TownResultsTable.js'
@@ -85,11 +85,6 @@ class Race extends Component {
 
 		// Get API results.
 		const race = results.data['senate-ma-towns']
-		const usRace = results.data['president-us-states'].races
-
-		// Get summary US race.
-		const summaryState = _.find(usRace, v =>
-			v.reportingUnits[0].statePostal === 'US')
 
 		// Let's get the name of the office we're reporting on.
 		const raceTitle = (race.races && race.races[0].officeName) || ''
@@ -107,10 +102,9 @@ class Race extends Component {
 
 		return (
 			<div className='Race'>
+				<Header summaryState={getPresidentSummary(results.data['president-us-states'])} />
 				<h1>{state.stateName} {raceTitle}</h1>
 				<Timer {...timerProps} />
-				<ElectoralCollegeBar {...summaryState} />
-
 			</div>
 		)
 

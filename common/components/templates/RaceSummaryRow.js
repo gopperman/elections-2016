@@ -1,5 +1,4 @@
 /* RaceSummaryRow expects the following data:
- * id
  * name
  * barStyle
  * pctForDisplay

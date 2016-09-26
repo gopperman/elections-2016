@@ -4,14 +4,13 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actions from './../actions/actionCreators.js'
 import { getPresidentSummary } from './../utils/dataUtil.js'
-import { toSentenceCase } from './../utils/standardize.js'
-import Header from './../components/templates/Header.js'
 import Timer from './../components/Timer.js'
-import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
+import Header from './../components/templates/Header.js'
+import { toSentenceCase } from './../utils/standardize.js'
 
 const hooks = {
 	fetch: ({ dispatch }) =>
-		dispatch(actions.fetchResults({ url: 'town' })),
+		dispatch(actions.fetchResults({ url: 'election' })),
 }
 
 const mapDispatchToProps = (dispatch) => ({
@@ -21,7 +20,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 @provideHooks(hooks)
 @connect(s => s, mapDispatchToProps)
-class Town extends Component {
+class Election extends Component {
 
 	static propTypes = {
 		actions: PropTypes.object.isRequired,
@@ -68,29 +67,10 @@ class Town extends Component {
 		const { timer, results } = props
 		const { stopTimer } = props.actions
 
-		const townName = toSentenceCase(props.params.townName)
-
-		const races = results.data['town-abington'].map((race) => {
-			const raceTitle = `${race.office_name} ${race.seat_name}`
-			
-			// TO-DO: We're waiting on consistent test data so we can use RaceSummary
-			const unit = (race.reporting_units && race.reporting_units[0]) || []
-
-			return (
-				<li key={race.race_number}>
-					{raceTitle}
-					(Race Summary goes here)
-				</li>
-			)
-		})
-		
 		return (
-			<div className='Town'>
+			<div className='Election'>
 				<Header summaryState={getPresidentSummary(results.data['president-us-states'])} />
-				<h1>{townName}, MA</h1>
-				<ul>
-					{races}
-				</ul>
+				<h1>Election Home</h1>
 			</div>
 		)
 
@@ -98,4 +78,4 @@ class Town extends Component {
 
 }
 
-export default Town
+export default Election

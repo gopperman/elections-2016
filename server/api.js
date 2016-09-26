@@ -15,6 +15,16 @@ export default (req, res) => {
 	let result
 	switch (endpoint) {
 
+		case 'election': {
+			result = {
+				'president-us-states': readJson('president-us-states-0'),
+			}
+			console.log('about to send election home data')
+
+			setTimeout(() => res.json(result), 0)
+			break
+		}
+
 		case 'president': {
 
 			console.log('requesting president')
@@ -40,7 +50,7 @@ export default (req, res) => {
 			console.log('requesting race')
 
 			result = {
-				'president-us-states': readJson('president-us-states'),
+				'president-us-states': readJson('president-us-states-0'),
 				'senate-ma-towns': readJson('senate-ma-towns'),
 			}
 
@@ -52,7 +62,7 @@ export default (req, res) => {
 
 		case 'town': {
 			result = {
-				'president-us-states': readJson('president-us-states'),
+				'president-us-states': readJson('president-us-states-0'),
 				'town-abington': readJson('town-abington'),
 			}
 			console.log('about to send town data')

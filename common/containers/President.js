@@ -8,6 +8,8 @@ import { provideHooks } from 'redial'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actions from './../actions/actionCreators.js'
+import { getPresidentSummary } from './../utils/dataUtil.js'
+import Header from './../components/templates/Header.js'
 import Timer from './../components/Timer.js'
 import TownResultsTable from './../components/TownResultsTable.js'
 import StateResultsTable from './../components/StateResultsTable.js'
@@ -21,7 +23,6 @@ import {
 	sortByPolIDs,
 	sortByCandidateIDs,
 } from './../utils/Candidates.js'
-import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 
 // This object, used by the `@provideHooks` decorator, defines our custom
 // data loading dependencies. At the moment we just have one: `fetch`. It
@@ -200,9 +201,8 @@ class President extends Component {
 		// Finally we can render all the components!
 		return (
 			<div className='President'>
+				<Header summaryState={summaryState} />
 				<h1>President</h1>
-
-				<ElectoralCollegeBar {...summaryState} />
 
 				<Timer {...timerProps} />
 
