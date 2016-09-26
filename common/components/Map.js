@@ -8,6 +8,7 @@ import { geoPath } from 'd3-geo'
 import { select } from 'd3-selection'
 import chooseColorClass from './../utils/chooseColorClass.js'
 import compareStrings from './../utils/compareStrings.js'
+import createTooltip from './../utils/createTooltip.js'
 
 // TODO: draw tooltips
 // TODO: handle updating data and keeping tooltip+selected feature
@@ -82,8 +83,19 @@ class Map extends Component {
 
 	}
 
+	// This draws the tooltip and gets called either by mousing or
+	// when new data comes in and we're on a feature.
+	drawTooltip = (subunit) => {
+
+		const { unitName } = this.props
+
+		this._tooltip.innerHTML = createTooltip({ subunit, unitName })
+
+	}
+
 	drawFeatures = () => {
 
+		const { drawTooltip } = this
 		const { data, sortingDelegate, unitName } = this.props
 		const { selectionId } = this.state
 
@@ -116,6 +128,8 @@ class Map extends Component {
 		.merge(paths)
 			.attr('class', d => {
 
+				let selectedClass = ''
+
 				// Get this feature's color class based on who's winning.
 				const colorClass = chooseColorClass({
 					candidates: d.subunit && d.subunit.candidates,
@@ -123,9 +137,16 @@ class Map extends Component {
 				})
 
 				// If this feature is selected (if the `selectionId` is in
-				// local state), give it a selected class.
-				const selectedClass = compareStrings(d.id, selectionId) ?
-					'selected' : ''
+				// local state),
+				if (compareStrings(d.id, selectionId)) {
+
+					// give it a selected class,
+					selectedClass = 'selected'
+
+					// and draw the tooltip.
+					drawTooltip(d.subunit)
+
+				}
 
 				return [colorClass, selectedClass].join(' ')
 
@@ -142,11 +163,17 @@ class Map extends Component {
 					// are on top.
 					.raise()
 
+				// Update the tooltip.
+				drawTooltip(d.subunit)
+
 			})
 			.on('mouseleave', function mouseleave() {
 
 				// Clear out local state,
 				setState({ selectionId: null })
+
+				// clear out the tooltip,
+				drawTooltip()
 
 				// and deselect the feature.
 				select(this).classed('selected', false)
@@ -161,8 +188,8 @@ class Map extends Component {
 
 		return (
 			<div className='map'>
-				<div ref={(c) => this._tooltip = c} />
 				<svg ref={(c) => this._svg = c} />
+				<div ref={(c) => this._tooltip = c} />
 			</div>
 		)
 
