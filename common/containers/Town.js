@@ -84,11 +84,9 @@ class Town extends Component {
 			)
 		})
 		
-		const summaryState = getPresidentSummary(results.data['president-us-states'])
-		console.log(summaryState)
 		return (
 			<div className='Town'>
-				<Header summaryState={summaryState} />
+				<Header summaryState={getPresidentSummary(results.data['president-us-states'])} />
 				<h1>{townName}, MA</h1>
 				<ul>
 					{races}
