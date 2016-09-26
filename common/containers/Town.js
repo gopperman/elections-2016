@@ -3,9 +3,11 @@ import { provideHooks } from 'redial'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actions from './../actions/actionCreators.js'
+import { getPresidentSummary } from './../utils/dataUtil.js'
+import { toSentenceCase } from './../utils/standardize.js'
+import Header from './../components/templates/Header.js'
 import Timer from './../components/Timer.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
-import { toSentenceCase } from './../utils/standardize.js'
 
 const hooks = {
 	fetch: ({ dispatch }) =>
@@ -82,9 +84,11 @@ class Town extends Component {
 			)
 		})
 		
+		const summaryState = getPresidentSummary(results.data['president-us-states'])
+		console.log(summaryState)
 		return (
 			<div className='Town'>
-				<ElectoralCollegeBar data={results.data['president-us']} />
+				<Header summaryState={summaryState} />
 				<h1>{townName}, MA</h1>
 				<ul>
 					{races}

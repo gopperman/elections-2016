@@ -1,15 +1,18 @@
 import React, { Component, PropTypes } from 'react'
+import _ from 'lodash'
 import { provideHooks } from 'redial'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actions from './../actions/actionCreators.js'
+import { getPresidentSummary } from './../utils/dataUtil.js'
 import Timer from './../components/Timer.js'
+import Header from './../components/templates/Header.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 import { toSentenceCase } from './../utils/standardize.js'
 
 const hooks = {
 	fetch: ({ dispatch }) =>
-		dispatch(actions.fetchResults({ url: 'town' })),
+		dispatch(actions.fetchResults({ url: 'election' })),
 }
 
 const mapDispatchToProps = (dispatch) => ({
@@ -61,6 +64,7 @@ class Election extends Component {
 
 	count = 0
 
+//<ElectoralCollegeBar data={results.data['president-us-states']} />
 	render() {
 		const { props, fetchData } = this
 		const { timer, results } = props
@@ -68,8 +72,8 @@ class Election extends Component {
 
 		return (
 			<div className='Election'>
+				<Header summaryState={getPresidentSummary(results.data['president-us-states'])} />
 				<h1>Election Home</h1>
-				<ElectoralCollegeBar data={results.data['president-us-states']} />
 			</div>
 		)
 
