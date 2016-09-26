@@ -4,12 +4,12 @@ import { percentForDisplay } from './standardize.js'
 
 // TODO: create summary
 // TODO: format 100.0% precincts reporting as 100 pre...
-export default ({ subunit = {}, unitName }) => {
+export default ({ subunit = {}, unitName, sortingDelegate }) => {
 
 	const title = subunit[unitName]
 	const { precinctsReportingPct } = subunit
 	const summary = ''
-	const candidates = subunit.candidates || []
+	const candidates = sortingDelegate(subunit.candidates || [])
 
 	const rows = candidates.map(v => {
 
