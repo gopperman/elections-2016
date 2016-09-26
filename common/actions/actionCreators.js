@@ -1,8 +1,6 @@
 import configRoot from './../../config.json'
 import {
 
-	SELECT_FEATURE,
-
 	START_TIMER,
 	STOP_TIMER,
 	CANCEL_TIMER,
@@ -18,13 +16,6 @@ const config = process.env.NODE_ENV === 'production' ?
 	configRoot.dev
 
 const fetch = require('fetch-ponyfill')()
-
-const selectFeature = ({ feature, position, map }) => ({
-	type: SELECT_FEATURE,
-	feature,
-	position,
-	map,
-})
 
 const startTimer = (now = Date.now()) => ({
 	type: START_TIMER,
@@ -80,8 +71,6 @@ const fetchResults = ({ url }) =>
 	}
 
 export {
-
-	selectFeature,
 
 	startTimer,
 	stopTimer,

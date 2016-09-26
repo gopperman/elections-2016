@@ -1,6 +1,8 @@
 // TODO: remove this file
 import { readFileSync } from 'jsonfile'
 
+let counter = 0
+
 const readJson = (endpoint) =>
 	readFileSync(`./data/${endpoint}.json`)
 
@@ -18,11 +20,16 @@ export default (req, res) => {
 			console.log('requesting president')
 
 			result = {
-				'president-us-states': readJson('president-us-states'),
+				'president-us-states': readJson(`president-us-states-${counter}`),
 				'president-ma-towns': readJson('president-ma-towns'),
 			}
 
 			console.log('about to send president data')
+
+			++counter
+			if (counter > 1) {
+				counter = 0
+			}
 
 			setTimeout(() => res.json(result), 0)
 			break

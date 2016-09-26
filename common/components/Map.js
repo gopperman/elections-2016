@@ -1,5 +1,6 @@
 /* eslint-disable no-return-assign */
 
+import deepEqual from 'deep-equal'
 import _ from 'lodash'
 import React, { Component, PropTypes } from 'react'
 import * as topojson from 'topojson'
@@ -7,17 +8,26 @@ import { geoPath } from 'd3-geo'
 import { select } from 'd3-selection'
 import chooseColorClass from './../utils/chooseColorClass.js'
 import compareStrings from './../utils/compareStrings.js'
+import createTooltip from './../utils/createTooltip.js'
 
 // TODO: draw tooltips
 // TODO: handle updating data and keeping tooltip+selected feature
 class Map extends Component {
 
 	static propTypes = {
+
+		// These will never change.
 		topoObject: PropTypes.object.isRequired,
 		projection: PropTypes.func.isRequired,
-		data: PropTypes.array.isRequired,
 		sortingDelegate: PropTypes.func.isRequired,
 		unitName: PropTypes.string.isRequired,
+
+		// This will change.
+		data: PropTypes.array.isRequired,
+	}
+
+	state = {
+		selectionId: null,
 	}
 
 	// This lifecycle event gets called once, immediately after the initial
@@ -54,9 +64,47 @@ class Map extends Component {
 
 	}
 
-	drawFeatures() {
+	// This is invoked before rendering when new props or state are being
+	// received. This method is not called for the initial render or when
+	// `forceUpdate` is used.
+	shouldComponentUpdate(nextProps) {
 
+		// Update component if the `data` has changed.
+		return !deepEqual(this.props.data, nextProps.data)
+
+	}
+
+	// This is invoked immediately after the component's updates are flushed
+	// to the DOM. This method is not called for the initial render.
+	componentDidUpdate() {
+
+		// After the component updates, draw map features.
+		this.drawFeatures()
+
+	}
+
+	// This draws the tooltip and gets called either by mousing or
+	// when new data comes in and we're on a feature.
+	drawTooltip = (subunit) => {
+
+		const { unitName, sortingDelegate } = this.props
+
+		this._tooltip.innerHTML = createTooltip({
+			subunit, unitName, sortingDelegate })
+
+	}
+
+	drawFeatures = () => {
+
+		const { drawTooltip } = this
 		const { data, sortingDelegate, unitName } = this.props
+		const { selectionId } = this.state
+
+		// Create a `setState` function and bind `this` so we can call it
+		// inside d3 functions with their own `this`.
+		const setState = function setState(state) {
+			this.setState(state)
+		}.bind(this)
 
 		// Bind AP data to GeoJSON features.
 		const features = _(this._geoFeatures)
@@ -65,6 +113,7 @@ class Map extends Component {
 				subunit: _.find(data, f =>
 					compareStrings(f[unitName], v.id)),
 			}))
+			.filter('subunit')
 			.value()
 
 		// Select the svg node.
@@ -77,18 +126,57 @@ class Map extends Component {
 		// ENTER + UPDATE (d3 pattern)
 		paths.enter().append('path')
 			.attr('d', this._path)
-			.attr('class', d =>
-				chooseColorClass({
-					candidates: d.subunit.candidates,
+		.merge(paths)
+			.attr('class', d => {
+
+				let selectedClass = ''
+
+				// Get this feature's color class based on who's winning.
+				const colorClass = chooseColorClass({
+					candidates: d.subunit && d.subunit.candidates,
 					sortingDelegate,
 				})
-			)
-			.on('mousemove', function mousemove() {
+
+				// If this feature is selected (if the `selectionId` is in
+				// local state),
+				if (compareStrings(d.id, selectionId)) {
+
+					// give it a selected class,
+					selectedClass = 'selected'
+
+					// and draw the tooltip.
+					drawTooltip(d.subunit)
+
+				}
+
+				return [colorClass, selectedClass].join(' ')
+
+			})
+			.on('mousemove', function mousemove(d) {
+
+				// Set this feature's `id` to local state on mousemove.
+				setState({ selectionId: d.id })
+
 				select(this)
+					// Select the feature,
 					.classed('selected', true)
+					// and `raise` it - move it above other features so the borders
+					// are on top.
 					.raise()
+
+				// Update the tooltip.
+				drawTooltip(d.subunit)
+
 			})
 			.on('mouseleave', function mouseleave() {
+
+				// Clear out local state,
+				setState({ selectionId: null })
+
+				// clear out the tooltip,
+				drawTooltip()
+
+				// and deselect the feature.
 				select(this).classed('selected', false)
 			})
 
@@ -102,6 +190,7 @@ class Map extends Component {
 		return (
 			<div className='map'>
 				<svg ref={(c) => this._svg = c} />
+				<div ref={(c) => this._tooltip = c} />
 			</div>
 		)
 

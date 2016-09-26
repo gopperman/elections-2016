@@ -14,6 +14,7 @@ import StateResultsTable from './../components/StateResultsTable.js'
 import Map from './../components/Map.js'
 import STATES from './../../data/output/STATES.json'
 import TOWNS from './../../data/output/TOWNS.json'
+
 import {
 	sortByElectoralCount,
 	sortByVoteCount,
@@ -74,30 +75,37 @@ class President extends Component {
 	// This gets called once after the component's updates are flushed to DOM.
 	// At the moment we will use it to determine whether to stop the clock.
 	// NOTE: the switcher triggers this.
-	// componentDidUpdate = (prevProps) => {
 
-// 		const { props } = this
-// 		const { cancelTimer } = props.actions
+	componentDidUpdate = (prevProps) => {
 
-// 		// Did we stop fetching - that is, did we go from `isFetching == true`
-// 		// to `isFetching == false`? If so,
-// 		if (prevProps.results.isFetching && !props.results.isFetching) {
+		const { props } = this
+		const { startTimer } = props.actions
 
-// 			// check to see if all results are in so we can stop the clock.
+		// Did we stop fetching - that is, did we go from `isFetching == true`
+		// to `isFetching == false`? If so,
+		if (prevProps.results.isFetching && !props.results.isFetching) {
 
-// 			cancelTimer()
+			// check to see if all results are in so we can stop the clock.
 
-// 			// if (true) {
-// 			// 	cancelTimer()
-// 			// } else {
-// 			// 	startTimer()
-// 			// }
+			startTimer()
 
-// 		}
+			// cancelTimer()
 
-	// }
+			// if (true) {
+			// 	cancelTimer()
+			// } else {
+			// 	startTimer()
+			// }
+
+		}
+
+	}
 
 	// Wrap the `fetch` call in a simpler `fetchData` function.
+	onClick = () => {
+		setTimeout(() => this.fetchData(), 1000)
+	}
+
 	fetchData = () => {
 		hooks.fetch({ dispatch: this.props.dispatch })
 	}
@@ -111,7 +119,6 @@ class President extends Component {
 		const { props, fetchData } = this
 		const { timer, results } = props
 		const { stopTimer } = props.actions
-		// const { showUS } = this.state
 
 		// Prepare `Timer` props, including
 		const timerProps = {
@@ -194,9 +201,17 @@ class President extends Component {
 		return (
 			<div className='President'>
 				<h1>President</h1>
-				<Timer {...timerProps} />
 
 				<ElectoralCollegeBar {...summaryState} />
+
+				<Timer {...timerProps} />
+
+				<Map
+					topoObject={TOWNS}
+					data={towns}
+					sortingDelegate={sortByVoteCount}
+					projection={massProjection}
+					unitName='reportingunitName' />
 
 				<Map
 					topoObject={STATES}
@@ -205,12 +220,7 @@ class President extends Component {
 					projection={geoAlbersUsa()}
 					unitName='statePostal' />
 
-				<Map
-					topoObject={TOWNS}
-					data={towns}
-					sortingDelegate={sortByVoteCount}
-					projection={massProjection}
-					unitName='reportingunitName' />
+				<button onClick={this.onClick}>Refresh</button>
 
 				<StateResultsTable
 					{...{ states, summaryCandidates: summaryStateCandidates }} />
