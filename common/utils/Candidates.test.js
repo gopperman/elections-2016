@@ -18,14 +18,14 @@ describe('Candidates', () => {
 
 			const input = [
 				{ voteCount: 1 },
-				{ voteCount: 0, winner: 'X' },
+				{ voteCount: 0 },
 			]
 
 			const output = sortByVoteCount(input)
 
 			const expected = [
-				{ voteCount: 0, winner: 'X' },
 				{ voteCount: 1 },
+				{ voteCount: 0 },
 			]
 
 			assert.deepEqual(output, expected)
@@ -40,14 +40,14 @@ describe('Candidates', () => {
 
 			const input = [
 				{ electWon: 1 },
-				{ electWon: 0, winner: 'X' },
+				{ electWon: 0 },
 			]
 
 			const output = sortByElectoralCount(input)
 
 			const expected = [
-				{ electWon: 0, winner: 'X' },
 				{ electWon: 1 },
+				{ electWon: 0 },
 			]
 
 			assert.deepEqual(output, expected)
