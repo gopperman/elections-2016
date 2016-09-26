@@ -1,28 +1,23 @@
-// The `President` class displays presidential results for both US and MA.
+// The `PresidentUS` class displays presidential results for US.
 
 // TODO: figure out how best to display test data status
-import { geoAlbersUsa, geoConicConformal } from 'd3-geo'
+import { geoAlbersUsa } from 'd3-geo'
 import _ from 'lodash'
 import React, { Component, PropTypes } from 'react'
 import { provideHooks } from 'redial'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actions from './../actions/actionCreators.js'
-import { getPresidentSummary } from './../utils/dataUtil.js'
-import Header from './../components/templates/Header.js'
 import Timer from './../components/Timer.js'
-import TownResultsTable from './../components/TownResultsTable.js'
 import StateResultsTable from './../components/StateResultsTable.js'
 import Map from './../components/Map.js'
 import STATES from './../../data/output/STATES.json'
-import TOWNS from './../../data/output/TOWNS.json'
 
 import {
 	sortByElectoralCount,
-	sortByVoteCount,
 	sortByPolIDs,
-	sortByCandidateIDs,
 } from './../utils/Candidates.js'
+import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 
 // This object, used by the `@provideHooks` decorator, defines our custom
 // data loading dependencies. At the moment we just have one: `fetch`. It
@@ -50,11 +45,11 @@ const mapDispatchToProps = (dispatch) => ({
 
 })
 
-// Decorate the `President` class with `connect` and `provideHooks`, in that
-// order (it matters).
+// Decorate the `PresidentUS` class with `connect` and `provideHooks`,
+// in that order (it matters).
 @provideHooks(hooks)
 @connect(s => s, mapDispatchToProps)
-class President extends Component {
+class PresidentUS extends Component {
 
 	static propTypes = {
 		actions: PropTypes.object.isRequired,
@@ -167,51 +162,14 @@ class President extends Component {
 			}))
 			.value()
 
-		// Get MA presidential race.
-		const massRace = results.data['president-ma-towns']
-			.races[0].reportingUnits
-
-		// Get summary MA race.
-		const summaryTown = _.find(massRace, { level: 'national' })
-
-		// Get summary MA candidates, so we can sort by them.
-		const summaryTownCandidates = sortByVoteCount(summaryTown.candidates)
-
-		// Prepare the MA race so it can be easily ingested by sub-components:
-		const towns = _(massRace)
-			// don't include summary town,
-			.reject({ level: 'national' })
-			// sort towns by their full name,
-			.sortBy('reportingunitName')
-			.map(v => ({
-				...v,
-				// and sort candidates by overall candidates.
-				candidates: sortByCandidateIDs({
-					candidates: v.candidates,
-					candidateIDs: _.map(summaryTownCandidates, 'candidateID'),
-				}),
-			}))
-			.value()
-
-		// Setup a MA-centric projection.
-		const massProjection = geoConicConformal()
-			.parallels([41 + (43 / 60), 42 + (41 / 60)])
-			.rotate([71 + (30 / 60), -41])
-
 		// Finally we can render all the components!
 		return (
-			<div className='President'>
-				<Header summaryState={summaryState} />
-				<h1>President</h1>
+			<div className='PresidentUS'>
+				<h1>PresidentUS</h1>
+
+				<ElectoralCollegeBar {...summaryState} />
 
 				<Timer {...timerProps} />
-
-				<Map
-					topoObject={TOWNS}
-					data={towns}
-					sortingDelegate={sortByVoteCount}
-					projection={massProjection}
-					unitName='reportingunitName' />
 
 				<Map
 					topoObject={STATES}
@@ -225,9 +183,6 @@ class President extends Component {
 				<StateResultsTable
 					{...{ states, summaryCandidates: summaryStateCandidates }} />
 
-				<TownResultsTable
-					{...{ towns, summaryCandidates: summaryTownCandidates }} />
-
 			</div>
 		)
 
@@ -235,4 +190,4 @@ class President extends Component {
 
 }
 
-export default President
+export default PresidentUS
