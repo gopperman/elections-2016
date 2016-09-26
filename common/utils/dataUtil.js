@@ -1,3 +1,4 @@
+import _ from 'lodash'
 const getRaceUnits = (data) => {
 
 	// Grab the `data.races` property.
@@ -11,7 +12,15 @@ const getRaceUnits = (data) => {
 	return subunits
 }
 
+const getPresidentSummary = (data) => {
+	const usRace = data.races
+	
+	// Get summary US race.
+	return _.find(usRace, v =>
+		v.reportingUnits[0].statePostal === 'US')
+}
+
 export {
 	// eslint-disable-next-line import/prefer-default-export
-	getRaceUnits,
+	getRaceUnits, getPresidentSummary
 }

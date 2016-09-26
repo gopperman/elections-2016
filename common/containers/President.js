@@ -6,6 +6,8 @@ import { provideHooks } from 'redial'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actions from './../actions/actionCreators.js'
+import { getPresidentSummary } from './../utils/dataUtil.js'
+import Header from './../components/templates/Header.js'
 import Timer from './../components/Timer.js'
 import TownResultsTable from './../components/TownResultsTable.js'
 import StateResultsTable from './../components/StateResultsTable.js'
@@ -140,8 +142,7 @@ class President extends Component {
 		const usRace = results.data['president-us-states'].races
 
 		// Get summary US race.
-		const summaryState = _.find(usRace, v =>
-			v.reportingUnits[0].statePostal === 'US')
+		const summaryState = getPresidentSummary(results.data['president-us-states'])
 
 		// Get summary US candidates, so we can sort by them.
 		const summaryStateCandidates = sortByElectoralCount(
@@ -232,9 +233,9 @@ class President extends Component {
 
 		return (
 			<div className='President'>
+				<Header summaryState={summaryState} />
 				<h1>President</h1>
 				<Timer {...timerProps} />
-				<ElectoralCollegeBar {...summaryState} />
 				<StateResultsTable
 					{...{ states, summaryCandidates: summaryStateCandidates }} />
 				<TownResultsTable
