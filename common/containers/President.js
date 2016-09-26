@@ -204,8 +204,6 @@ class President extends Component {
 				<Header summaryState={summaryState} />
 				<h1>President</h1>
 
-				<ElectoralCollegeBar {...summaryState} />
-
 				<Timer {...timerProps} />
 
 				<Map
