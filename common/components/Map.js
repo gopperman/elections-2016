@@ -87,9 +87,10 @@ class Map extends Component {
 	// when new data comes in and we're on a feature.
 	drawTooltip = (subunit) => {
 
-		const { unitName } = this.props
+		const { unitName, sortingDelegate } = this.props
 
-		this._tooltip.innerHTML = createTooltip({ subunit, unitName })
+		this._tooltip.innerHTML = createTooltip({
+			subunit, unitName, sortingDelegate })
 
 	}
 

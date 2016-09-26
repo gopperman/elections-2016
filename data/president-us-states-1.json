@@ -22,7 +22,7 @@
               "first": "Donald",
               "last": "Trump",
               "polID": "8639",
-              "electWon": 0,
+              "electWon": 3,
               "ballotOrder": 6,
               "voteCount": 114946,
               "winner": "X",
@@ -34,7 +34,7 @@
               "first": "Hillary",
               "last": "Clinton",
               "polID": "1746",
-              "electWon": 3,
+              "electWon": 0,
               "ballotOrder": 2,
               "voteCount": 102150,
               "party": "Dem"
