@@ -63,14 +63,21 @@ class Map extends Component {
 
 	}
 
+	// This is invoked before rendering when new props or state are being
+	// received. This method is not called for the initial render or when
+	// `forceUpdate` is used.
 	shouldComponentUpdate(nextProps) {
 
+		// Update component if the `data` has changed.
 		return !deepEqual(this.props.data, nextProps.data)
 
 	}
 
+	// This is invoked immediately after the component's updates are flushed
+	// to the DOM. This method is not called for the initial render.
 	componentDidUpdate() {
 
+		// After the component updates, draw map features.
 		this.drawFeatures()
 
 	}
@@ -80,6 +87,8 @@ class Map extends Component {
 		const { data, sortingDelegate, unitName } = this.props
 		const { selectionId } = this.state
 
+		// Create a `setState` function and bind `this` so we can call it
+		// inside d3 functions with their own `this`.
 		const setState = function setState(state) {
 			this.setState(state)
 		}.bind(this)
@@ -107,11 +116,14 @@ class Map extends Component {
 		.merge(paths)
 			.attr('class', d => {
 
+				// Get this feature's color class based on who's winning.
 				const colorClass = chooseColorClass({
 					candidates: d.subunit && d.subunit.candidates,
 					sortingDelegate,
 				})
 
+				// If this feature is selected (if the `selectionId` is in
+				// local state), give it a selected class.
 				const selectedClass = compareStrings(d.id, selectionId) ?
 					'selected' : ''
 
@@ -120,15 +132,23 @@ class Map extends Component {
 			})
 			.on('mousemove', function mousemove(d) {
 
+				// Set this feature's `id` to local state on mousemove.
 				setState({ selectionId: d.id })
 
 				select(this)
+					// Select the feature,
 					.classed('selected', true)
+					// and `raise` it - move it above other features so the borders
+					// are on top.
 					.raise()
 
 			})
 			.on('mouseleave', function mouseleave() {
+
+				// Clear out local state,
 				setState({ selectionId: null })
+
+				// and deselect the feature.
 				select(this).classed('selected', false)
 			})
 
@@ -141,6 +161,7 @@ class Map extends Component {
 
 		return (
 			<div className='map'>
+				<div ref={(c) => this._tooltip = c} />
 				<svg ref={(c) => this._svg = c} />
 			</div>
 		)
