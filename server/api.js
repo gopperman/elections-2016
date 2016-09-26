@@ -17,7 +17,7 @@ export default (req, res) => {
 
 		case 'election': {
 			result = {
-				'president-us-states': readJson('president-us-states'),
+				'president-us-states': readJson('president-us-states-0'),
 			}
 			console.log('about to send election home data')
 
@@ -50,7 +50,7 @@ export default (req, res) => {
 			console.log('requesting race')
 
 			result = {
-				'president-us-states': readJson('president-us-states'),
+				'president-us-states': readJson('president-us-states-0'),
 				'senate-ma-towns': readJson('senate-ma-towns'),
 			}
 
@@ -62,7 +62,7 @@ export default (req, res) => {
 
 		case 'town': {
 			result = {
-				'president-us-states': readJson('president-us-states'),
+				'president-us-states': readJson('president-us-states-0'),
 				'town-abington': readJson('town-abington'),
 			}
 			console.log('about to send town data')

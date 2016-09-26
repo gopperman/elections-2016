@@ -14,11 +14,12 @@ const getRaceUnits = (data) => {
 }
 
 const getPresidentSummary = (data) => {
-	const usRace = data.races
+	const usRace = data.races.map(v => ({
+		...v.reportingUnits[0],
+	}))
 
 	// Get summary US race.
-	return _.find(usRace, v =>
-		v.reportingUnits[0].statePostal === 'US')
+	return _.find(usRace, { statePostal: 'US' })
 }
 
 export {
