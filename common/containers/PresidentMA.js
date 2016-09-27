@@ -8,7 +8,7 @@ import { provideHooks } from 'redial'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actions from './../actions/actionCreators.js'
-import { getPresidentSummary } from './../utils/dataUtil.js'
+import { getPresidentSummaryState } from './../utils/dataUtil.js'
 import Header from './../components/templates/Header.js'
 import Timer from './../components/Timer.js'
 import TownResultsTable from './../components/TownResultsTable.js'
@@ -134,14 +134,10 @@ class PresidentMA extends Component {
 		}
 
 		// Get API results.
+		const usRace = results.data['president-us-states']
 
-		// Get US presidential race.
-		const usRace = results.data['president-us-states'].races.map(v => ({
-			...v.reportingUnits[0],
-		}))
-
-		// Get summary US race.
-		const summaryState = _.find(usRace, { statePostal: 'US' })
+		// Get US presidential race summary.
+		const summaryState = getPresidentSummaryState(usRace)
 
 		// Get MA presidential race.
 		const massRace = results.data['president-ma-towns']

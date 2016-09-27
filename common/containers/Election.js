@@ -3,7 +3,7 @@ import { provideHooks } from 'redial'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actions from './../actions/actionCreators.js'
-import { getPresidentSummary } from './../utils/dataUtil.js'
+import { getPresidentSummaryState } from './../utils/dataUtil.js'
 import Timer from './../components/Timer.js'
 import Header from './../components/templates/Header.js'
 import { toSentenceCase } from './../utils/standardize.js'
@@ -69,7 +69,7 @@ class Election extends Component {
 
 		return (
 			<div className='Election'>
-				<Header summaryState={getPresidentSummary(results.data['president-us-states'])} />
+				<Header summaryState={getPresidentSummaryState(results.data['president-us-states'])} />
 				<h1>Election Home</h1>
 			</div>
 		)

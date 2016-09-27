@@ -12,12 +12,16 @@ import Timer from './../components/Timer.js'
 import StateResultsTable from './../components/StateResultsTable.js'
 import Map from './../components/Map.js'
 import STATES from './../../data/output/STATES.json'
+import Header from './../components/templates/Header.js'
+import {
+	getPresidentStates,
+	getPresidentSummaryState,
+} from './../utils/dataUtil.js'
 
 import {
 	sortByElectoralCount,
 	sortByPolIDs,
 } from './../utils/Candidates.js'
-import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 
 // This object, used by the `@provideHooks` decorator, defines our custom
 // data loading dependencies. At the moment we just have one: `fetch`. It
@@ -133,21 +137,17 @@ class PresidentUS extends Component {
 		}
 
 		// Get API results.
-
-		// Get US presidential race.
-		const usRace = results.data['president-us-states'].races.map(v => ({
-			...v.reportingUnits[0],
-		}))
+		const usRace = results.data['president-us-states']
 
 		// Get summary US race.
-		const summaryState = _.find(usRace, { statePostal: 'US' })
+		const summaryState = getPresidentSummaryState(usRace)
 
 		// Get summary US candidates, so we can sort by them.
 		const summaryStateCandidates = sortByElectoralCount(
 			summaryState.candidates)
 
 		// Prepare the US race so it can be easily ingested by sub-components:
-		const states = _(usRace)
+		const states = _(getPresidentStates(usRace))
 			// don't include summary state,
 			.reject({ statePostal: 'US' })
 			// sort states by their full name,
@@ -165,9 +165,8 @@ class PresidentUS extends Component {
 		// Finally we can render all the components!
 		return (
 			<div className='PresidentUS'>
+				<Header summaryState={summaryState} />
 				<h1>PresidentUS</h1>
-
-				<ElectoralCollegeBar {...summaryState} />
 
 				<Timer {...timerProps} />
 

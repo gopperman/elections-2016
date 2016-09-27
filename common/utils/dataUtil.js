@@ -13,16 +13,16 @@ const getRaceUnits = (data) => {
 	return subunits
 }
 
-const getPresidentSummary = (data) => {
-	const usRace = data.races.map(v => ({
+const getPresidentStates = (data) =>
+	data.races.map(v => ({
 		...v.reportingUnits[0],
 	}))
 
-	// Get summary US race.
-	return _.find(usRace, { statePostal: 'US' })
-}
+const getPresidentSummaryState = (data) =>
+	_.find(getPresidentStates(data), { statePostal: 'US' })
 
 export {
-	// eslint-disable-next-line import/prefer-default-export
-	getRaceUnits, getPresidentSummary,
+	getRaceUnits,
+	getPresidentStates,
+	getPresidentSummaryState,
 }

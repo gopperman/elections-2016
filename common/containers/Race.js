@@ -6,7 +6,7 @@ import { provideHooks } from 'redial'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actions from './../actions/actionCreators.js'
-import { getRaceUnits, getPresidentSummary } from './../utils/dataUtil.js'
+import { getRaceUnits, getPresidentSummaryState } from './../utils/dataUtil.js'
 import Timer from './../components/Timer.js'
 import Header from './../components/templates/Header.js'
 // import RaceSummary from './../components/RaceSummary.js'
@@ -102,7 +102,7 @@ class Race extends Component {
 
 		return (
 			<div className='Race'>
-				<Header summaryState={getPresidentSummary(results.data['president-us-states'])} />
+				<Header summaryState={getPresidentSummaryState(results.data['president-us-states'])} />
 				<h1>{state.stateName} {raceTitle}</h1>
 				<Timer {...timerProps} />
 			</div>
