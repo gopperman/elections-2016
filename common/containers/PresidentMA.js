@@ -29,7 +29,7 @@ const hooks = {
 	// our custom data loading actions. In this case, we dispatch the
 	// `fetchResults` action.
 	fetch: ({ dispatch }) =>
-		dispatch(actions.fetchResults({ url: 'president/massachusetts' })),
+		dispatch(actions.fetchResults({ url: 'president-massachusetts' })),
 }
 
 // This object maps various properties as React `props`:
@@ -59,10 +59,6 @@ class PresidentMA extends Component {
 		dispatch: PropTypes.func.isRequired,
 	}
 
-	state = {
-		showUS: true,
-	}
-
 	// This lifecycle event gets called once, immediately after the initial
 	// rendering occurs. We will use it to fire the `fetch` hook.
 	componentDidMount = () => {
@@ -76,23 +72,35 @@ class PresidentMA extends Component {
 	componentDidUpdate = (prevProps) => {
 
 		const { props } = this
-		const { startTimer } = props.actions
+		const { startTimer, cancelTimer } = props.actions
+		const { results } = props
 
 		// Did we stop fetching - that is, did we go from `isFetching == true`
 		// to `isFetching == false`? If so,
 		if (prevProps.results.isFetching && !props.results.isFetching) {
 
-			// check to see if all results are in so we can stop the clock.
+			// Get API results.
+			const usRace = results.data['president-us-state-US']
 
-			startTimer()
+			// Get summary US race.
+			const summaryState = getPresidentSummaryState(usRace)
 
-			// cancelTimer()
+			// Get MA presidential race.
+			const massRace = results.data['president-ma-towns']
+				.races[0].reportingUnits
 
-			// if (true) {
-			// 	cancelTimer()
-			// } else {
-			// 	startTimer()
-			// }
+			// Get summary MA race.
+			const summaryTown = _.find(massRace, { level: 'national' })
+
+			// Check if all results are in.
+			const isFinished = +summaryState.precinctsReportingPct === 100 &&
+				+summaryTown.precinctsReportingPct === 100
+
+			if (isFinished) {
+				cancelTimer()
+			} else {
+				startTimer()
+			}
 
 		}
 
@@ -105,10 +113,6 @@ class PresidentMA extends Component {
 
 	fetchData = () => {
 		hooks.fetch({ dispatch: this.props.dispatch })
-	}
-
-	handleSwitcher = () => {
-		this.setState({ showUS: !this.state.showUS })
 	}
 
 	render() {
@@ -134,7 +138,7 @@ class PresidentMA extends Component {
 		}
 
 		// Get API results.
-		const usRace = results.data['president-us-states']
+		const usRace = results.data['president-us-state-US']
 
 		// Get US presidential race summary.
 		const summaryState = getPresidentSummaryState(usRace)

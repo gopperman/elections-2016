@@ -62,10 +62,6 @@ class PresidentUS extends Component {
 		dispatch: PropTypes.func.isRequired,
 	}
 
-	state = {
-		showUS: true,
-	}
-
 	// This lifecycle event gets called once, immediately after the initial
 	// rendering occurs. We will use it to fire the `fetch` hook.
 	componentDidMount = () => {
@@ -112,10 +108,6 @@ class PresidentUS extends Component {
 
 	fetchData = () => {
 		hooks.fetch({ dispatch: this.props.dispatch })
-	}
-
-	handleSwitcher = () => {
-		this.setState({ showUS: !this.state.showUS })
 	}
 
 	render() {

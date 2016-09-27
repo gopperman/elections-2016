@@ -1,0 +1,389 @@
+{
+  "electionDate": "2016-11-08",
+  "timestamp": "2016-09-27T20:41:52Z",
+  "races": [
+    {
+      "test": true,
+      "raceID": "0",
+      "countyNumber": "1",
+      "officeID": "P",
+      "raceTypeID": "G",
+      "officeName": "President",
+      "raceType": "General",
+      "national": true,
+      "reportingUnits": [
+        {
+          "precinctsReporting": 168269,
+          "precinctsTotal": 168269,
+          "candidates": [
+            {
+              "candidateID": "1746",
+              "polNum": "1746",
+              "first": "Hillary",
+              "last": "Clinton",
+              "polID": "1746",
+              "electWon": 361,
+              "ballotOrder": 1,
+              "voteCount": 41994760,
+              "winner": "X",
+              "party": "Dem"
+            },
+            {
+              "candidateID": "8639",
+              "polNum": "8639",
+              "first": "Donald",
+              "last": "Trump",
+              "polID": "8639",
+              "electWon": 110,
+              "ballotOrder": 2,
+              "voteCount": 39688066,
+              "party": "GOP"
+            },
+            {
+              "candidateID": "31708",
+              "polNum": "31708",
+              "first": "Gary",
+              "last": "Johnson",
+              "polID": "31708",
+              "electWon": 0,
+              "ballotOrder": 12,
+              "voteCount": 6910699,
+              "party": "Ind"
+            },
+            {
+              "candidateID": "895",
+              "polNum": "895",
+              "first": "Jill",
+              "last": "Stein",
+              "polID": "895",
+              "electWon": 0,
+              "ballotOrder": 29,
+              "voteCount": 4949290,
+              "party": "Ind"
+            },
+            {
+              "candidateID": "59414",
+              "polNum": "59414",
+              "first": "Darrell",
+              "last": "Castle",
+              "polID": "59414",
+              "electWon": 0,
+              "ballotOrder": 4,
+              "voteCount": 1499845,
+              "party": "CST"
+            },
+            {
+              "candidateID": "64542",
+              "polNum": "64542",
+              "first": "Rocky",
+              "last": "De La Fuente",
+              "abbrv": "DeLaFnt",
+              "polID": "64542",
+              "electWon": 0,
+              "ballotOrder": 6,
+              "voteCount": 886191,
+              "party": "NPA"
+            },
+            {
+              "candidateID": "65775",
+              "polNum": "65775",
+              "first": "Evan",
+              "last": "McMullin",
+              "abbrv": "McMulln",
+              "polID": "65775",
+              "electWon": 0,
+              "ballotOrder": 22,
+              "voteCount": 498628,
+              "party": "BFA"
+            },
+            {
+              "candidateID": "7623",
+              "polNum": "7623",
+              "first": "Gloria",
+              "last": "La Riva",
+              "abbrv": "LaRiva",
+              "polID": "7623",
+              "electWon": 0,
+              "ballotOrder": 18,
+              "voteCount": 447898,
+              "party": "PFP"
+            },
+            {
+              "candidateID": "65352",
+              "polNum": "65352",
+              "first": "Alyson",
+              "last": "Kennedy",
+              "polID": "65352",
+              "electWon": 0,
+              "ballotOrder": 15,
+              "voteCount": 349841,
+              "party": "SWP"
+            },
+            {
+              "candidateID": "11076",
+              "polNum": "11076",
+              "first": "Monica",
+              "last": "Moorehead",
+              "abbrv": "Moorehd",
+              "polID": "11076",
+              "electWon": 0,
+              "ballotOrder": 23,
+              "voteCount": 140578,
+              "party": "WW"
+            },
+            {
+              "candidateID": "56224",
+              "polNum": "56224",
+              "first": "Richard",
+              "last": "Duncan",
+              "polID": "56224",
+              "electWon": 0,
+              "ballotOrder": 7,
+              "voteCount": 150601,
+              "party": "Ind"
+            },
+            {
+              "candidateID": "64977",
+              "polNum": "64977",
+              "first": "Jim",
+              "last": "Hedges",
+              "polID": "64977",
+              "electWon": 0,
+              "ballotOrder": 9,
+              "voteCount": 125366,
+              "party": "Ind"
+            },
+            {
+              "candidateID": "65624",
+              "polNum": "65624",
+              "first": "Laurence",
+              "last": "Kotlikoff",
+              "polID": "65624",
+              "electWon": 0,
+              "ballotOrder": 17,
+              "voteCount": 92732,
+              "party": "Una"
+            },
+            {
+              "candidateID": "64983",
+              "polNum": "64983",
+              "first": "Lynn",
+              "last": "Kahn",
+              "polID": "64983",
+              "electWon": 0,
+              "ballotOrder": 13,
+              "voteCount": 46789,
+              "party": "Ind"
+            },
+            {
+              "candidateID": "65500",
+              "polNum": "65500",
+              "first": "Chris",
+              "last": "Keniston",
+              "polID": "65500",
+              "electWon": 0,
+              "ballotOrder": 14,
+              "voteCount": 61565,
+              "party": "VET"
+            },
+            {
+              "candidateID": "65684",
+              "polNum": "65684",
+              "first": "Emidio",
+              "last": "Soltysik",
+              "polID": "65684",
+              "electWon": 0,
+              "ballotOrder": 28,
+              "voteCount": 123996,
+              "party": "SPU"
+            },
+            {
+              "candidateID": "25743",
+              "polNum": "25743",
+              "first": "Jerry",
+              "last": "White",
+              "polID": "25743",
+              "electWon": 0,
+              "ballotOrder": 31,
+              "voteCount": 27992,
+              "party": "Oth"
+            },
+            {
+              "candidateID": "26924",
+              "polNum": "26924",
+              "first": "Dan",
+              "last": "Vacek",
+              "polID": "26924",
+              "electWon": 0,
+              "ballotOrder": 30,
+              "voteCount": 57763,
+              "party": "LMN"
+            },
+            {
+              "candidateID": "62535",
+              "polNum": "62535",
+              "first": "Tom",
+              "last": "Hoefling",
+              "polID": "62535",
+              "electWon": 0,
+              "ballotOrder": 10,
+              "voteCount": 63935,
+              "party": "AmP"
+            },
+            {
+              "candidateID": "65774",
+              "polNum": "65774",
+              "first": "Michael",
+              "last": "Maturen",
+              "polID": "65774",
+              "electWon": 0,
+              "ballotOrder": 21,
+              "voteCount": 46936,
+              "party": "Oth"
+            },
+            {
+              "candidateID": "65639",
+              "polNum": "65639",
+              "first": "Ryan",
+              "last": "Scott",
+              "polID": "65639",
+              "electWon": 0,
+              "ballotOrder": 24,
+              "voteCount": 46026,
+              "party": "Una"
+            },
+            {
+              "candidateID": "65818",
+              "polNum": "65818",
+              "first": "Mike",
+              "last": "Smith",
+              "polID": "65818",
+              "electWon": 0,
+              "ballotOrder": 27,
+              "voteCount": 52492,
+              "party": "Una"
+            },
+            {
+              "candidateID": "65809",
+              "polNum": "65809",
+              "first": "Princess",
+              "last": "Jacob",
+              "polID": "65809",
+              "electWon": 0,
+              "ballotOrder": 11,
+              "voteCount": 13996,
+              "party": "Oth"
+            },
+            {
+              "candidateID": "65505",
+              "polNum": "65505",
+              "first": "Peter",
+              "last": "Skewes",
+              "polID": "65505",
+              "electWon": 0,
+              "ballotOrder": 26,
+              "voteCount": 54078,
+              "party": "Amr"
+            },
+            {
+              "candidateID": "65625",
+              "polNum": "65625",
+              "first": "Joseph",
+              "last": "Maldonado",
+              "abbrv": "Maldond",
+              "polID": "65625",
+              "electWon": 0,
+              "ballotOrder": 20,
+              "voteCount": 38385,
+              "party": "Una"
+            },
+            {
+              "candidateID": "65626",
+              "polNum": "65626",
+              "first": "Rod",
+              "last": "Silva",
+              "polID": "65626",
+              "electWon": 0,
+              "ballotOrder": 25,
+              "voteCount": 36202,
+              "party": "Oth"
+            },
+            {
+              "candidateID": "65819",
+              "polNum": "65819",
+              "first": "Rocky",
+              "last": "Giordani",
+              "polID": "65819",
+              "electWon": 0,
+              "ballotOrder": 8,
+              "voteCount": 18965,
+              "party": "IAP"
+            },
+            {
+              "candidateID": "100013",
+              "polNum": "100013",
+              "last": "None of these candidates",
+              "abbrv": "None",
+              "polID": "100013",
+              "electWon": 0,
+              "ballotOrder": 32,
+              "voteCount": 25447,
+              "party": "NPD"
+            },
+            {
+              "candidateID": "62539",
+              "polNum": "62539",
+              "first": "Frank",
+              "last": "Atwood",
+              "polID": "62539",
+              "electWon": 0,
+              "ballotOrder": 3,
+              "voteCount": 26743,
+              "party": "Oth"
+            },
+            {
+              "candidateID": "14237",
+              "polNum": "14237",
+              "first": "Kyle",
+              "last": "Kopitke",
+              "polID": "14237",
+              "electWon": 0,
+              "ballotOrder": 16,
+              "voteCount": 21285,
+              "party": "IAP"
+            },
+            {
+              "candidateID": "59661",
+              "polNum": "59661",
+              "first": "Bradford",
+              "last": "Lyttle",
+              "polID": "59661",
+              "electWon": 0,
+              "ballotOrder": 19,
+              "voteCount": 12734,
+              "party": "PCF"
+            },
+            {
+              "candidateID": "64568",
+              "polNum": "64568",
+              "first": "Scott",
+              "last": "Copeland",
+              "polID": "64568",
+              "electWon": 0,
+              "ballotOrder": 5,
+              "voteCount": 4402,
+              "party": "CST"
+            }
+          ],
+          "statePostal": "US",
+          "stateName": "United States",
+          "level": "national",
+          "lastUpdated": "2016-09-26T18:32:20Z",
+          "reportingunitID": "1",
+          "electTotal": 538,
+          "precinctsReportingPct": "100.0"
+        }
+      ]
+    }
+  ]
+}
