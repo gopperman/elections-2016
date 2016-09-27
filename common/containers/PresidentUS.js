@@ -79,23 +79,27 @@ class PresidentUS extends Component {
 	componentDidUpdate = (prevProps) => {
 
 		const { props } = this
-		const { startTimer } = props.actions
+		const { startTimer, cancelTimer } = props.actions
+		const { results } = props
 
 		// Did we stop fetching - that is, did we go from `isFetching == true`
-		// to `isFetching == false`? If so,
+		// to `isFetching == false`? If so:
 		if (prevProps.results.isFetching && !props.results.isFetching) {
 
-			// check to see if all results are in so we can stop the clock.
+			// Get API results.
+			const usRace = results.data['president-us-states']
 
-			startTimer()
+			// Get summary US race.
+			const summaryState = getPresidentSummaryState(usRace)
 
-			// cancelTimer()
+			// Check if all results are in.
+			const isFinished = +summaryState.precinctsReportingPct === 100
 
-			// if (true) {
-			// 	cancelTimer()
-			// } else {
-			// 	startTimer()
-			// }
+			if (isFinished) {
+				cancelTimer()
+			} else {
+				startTimer()
+			}
 
 		}
 

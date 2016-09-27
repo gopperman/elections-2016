@@ -29,7 +29,7 @@ const hooks = {
 	// our custom data loading actions. In this case, we dispatch the
 	// `fetchResults` action.
 	fetch: ({ dispatch }) =>
-		dispatch(actions.fetchResults({ url: 'president' })),
+		dispatch(actions.fetchResults({ url: 'president/massachusetts' })),
 }
 
 // This object maps various properties as React `props`:
