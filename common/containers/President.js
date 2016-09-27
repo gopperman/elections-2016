@@ -10,6 +10,7 @@ import { connect } from 'react-redux'
 import * as actions from './../actions/actionCreators.js'
 import { getPresidentSummary } from './../utils/dataUtil.js'
 import Header from './../components/templates/Header.js'
+import Footer from './../components/templates/Footer.js'
 import Timer from './../components/Timer.js'
 import TownResultsTable from './../components/TownResultsTable.js'
 import StateResultsTable from './../components/StateResultsTable.js'
@@ -228,6 +229,7 @@ class President extends Component {
 				<TownResultsTable
 					{...{ towns, summaryCandidates: summaryTownCandidates }} />
 
+				<Footer />
 			</div>
 		)
 

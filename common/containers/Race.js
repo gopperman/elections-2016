@@ -9,6 +9,7 @@ import * as actions from './../actions/actionCreators.js'
 import { getRaceUnits, getPresidentSummary } from './../utils/dataUtil.js'
 import Timer from './../components/Timer.js'
 import Header from './../components/templates/Header.js'
+import Footer from './../components/templates/Footer.js'
 // import RaceSummary from './../components/RaceSummary.js'
 // import MassMap from './../components/MassMap.js'
 // import TownResultsTable from './../components/TownResultsTable.js'
@@ -105,6 +106,7 @@ class Race extends Component {
 				<Header summaryState={getPresidentSummary(results.data['president-us-states'])} />
 				<h1>{state.stateName} {raceTitle}</h1>
 				<Timer {...timerProps} />
+				<Footer />
 			</div>
 		)
 

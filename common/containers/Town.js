@@ -6,6 +6,7 @@ import * as actions from './../actions/actionCreators.js'
 import { getPresidentSummary } from './../utils/dataUtil.js'
 import { toSentenceCase } from './../utils/standardize.js'
 import Header from './../components/templates/Header.js'
+import Footer from './../components/templates/Footer.js'
 import Timer from './../components/Timer.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 
@@ -91,6 +92,7 @@ class Town extends Component {
 				<ul>
 					{races}
 				</ul>
+				<Footer />
 			</div>
 		)
 
