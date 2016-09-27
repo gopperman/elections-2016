@@ -25,16 +25,21 @@ export default (req, res) => {
 			break
 		}
 
-		case 'president': {
-
-			console.log('requesting president')
+		case 'president-massachusetts': {
 
 			result = {
-				'president-us-states': readJson(`president-us-states-${counter}`),
+				'president-us-state-US': readJson('president-us-state-US'),
 				'president-ma-towns': readJson('president-ma-towns'),
 			}
 
-			console.log('about to send president data')
+			setTimeout(() => res.json(result), 0)
+			break
+		}
+		case 'president': {
+
+			result = {
+				'president-us-states': readJson(`president-us-states-${counter}`),
+			}
 
 			++counter
 			if (counter > 1) {
