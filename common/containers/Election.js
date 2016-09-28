@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import { geoAlbersUsa } from 'd3-geo'
 import React, { Component, PropTypes } from 'react'
 import { provideHooks } from 'redial'
@@ -12,7 +13,8 @@ import { toSentenceCase } from './../utils/standardize.js'
 import STATES from './../../data/output/STATES.json'
 import { 
 	getPresidentStates, 
-	getPresidentSummaryState 
+	getPresidentSummaryState, 
+	getUSMapArguments,
 } from './../utils/dataUtil.js'
 import {
 	sortByElectoralCount,
@@ -96,40 +98,17 @@ class Election extends Component {
 		// Prepare the US race so it can be easily ingested by sub-components:
 		const usRace = results.data['president-us-states']
 
+		const mapArgs = getUSMapArguments(usRace)
 
 		// Get summary US race.
 		const summaryState = getPresidentSummaryState(usRace)
-
-		// Get summary US candidates, so we can sort by them.
-		const summaryStateCandidates = sortByElectoralCount(
-			summaryState.candidates)
-
-		const states = _(getPresidentStates(usRace))
-			// don't include summary state,
-			.reject({ statePostal: 'US' })
-			// sort states by their full name,
-			.sortBy('stateName')
-			.map(v => ({
-				...v,
-				// and sort candidates by overall candidates.
-				candidates: sortByPolIDs({
-					candidates: v.candidates,
-					polIDs: _.map(summaryStateCandidates, 'polID'),
-				}),
-			}))
-			.value()
 
 		return (
 			<div className='Election'>
 				<Header summaryState={summaryState} />
 				<h1>Election Home</h1>
 
-				<Map
-					topoObject={STATES}
-					data={states}
-					sortingDelegate={sortByElectoralCount}
-					projection={geoAlbersUsa()}
-					unitName='statePostal' />
+				<Map {...mapArgs} />
 
 				<Footer />
 			</div>
