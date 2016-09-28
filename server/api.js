@@ -1,7 +1,7 @@
 // TODO: remove this file
 import { readFileSync } from 'jsonfile'
 
-let counter = 0
+const { fetch } = require('fetch-ponyfill')()
 
 const readJson = (endpoint) =>
 	readFileSync(`./data/${endpoint}.json`)
@@ -20,31 +20,6 @@ export default (req, res) => {
 				'president-us-states': readJson('president-us-states-0'),
 			}
 			console.log('about to send election home data')
-
-			setTimeout(() => res.json(result), 0)
-			break
-		}
-
-		case 'president-massachusetts': {
-
-			result = {
-				'president-us-state-US': readJson('president-us-state-US'),
-				'president-ma-towns': readJson('president-ma-towns'),
-			}
-
-			setTimeout(() => res.json(result), 0)
-			break
-		}
-		case 'president': {
-
-			result = {
-				'president-us-states': readJson(`president-us-states-${counter}`),
-			}
-
-			++counter
-			if (counter > 1) {
-				counter = 0
-			}
 
 			setTimeout(() => res.json(result), 0)
 			break
@@ -76,9 +51,24 @@ export default (req, res) => {
 			break
 		}
 
-		default:
+		default: {
 
-			res.sendStatus(500)
+			// Remove first bit
+			const baseUrl = req.originalUrl.replace(/\/api\//, '')
+
+			const url =
+				`http://devweb.bostonglobe.com/electionapi/elections/${baseUrl}`
+
+			console.log(`requesting ${url}`)
+
+			fetch(url)
+				.then(response => response.json())
+				.then(json => res.json(json))
+				.catch(e => console.error(e))
+
+			break
+
+		}
 
 	}
 

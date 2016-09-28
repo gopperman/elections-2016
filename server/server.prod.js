@@ -1,7 +1,6 @@
 import express from 'express'
 import compression from 'compression'
 import handleRender from './handleRender.js'
-import api from './api.js'
 import config from './../config.json'
 
 const app = express()
@@ -19,8 +18,6 @@ app.use('/static', express.static('static'))
 // We'll only use this to render the top-level html wrapper
 app.set('views', './common')
 app.set('view engine', 'pug')
-
-app.get('/api/:endpoint', api)
 
 // This is fired every time the server side receives a request
 app.get('*', handleRender)
