@@ -146,9 +146,16 @@ class PresidentUS extends Component {
 		// Get US presidential race summary.
 		const summaryState = _.find(allStates, { statePostal: 'US' })
 
+		// Define the candidates we're interested in
+		const mainCandidatePolIDs = ['1746', '8639', '31708', '895']
+
 		// Get summary US candidates, so we can sort by them.
-		const summaryStateCandidates = sortByElectoralCount(
-			summaryState.candidates)
+		const summaryStateCandidates =
+			sortByElectoralCount(summaryState.candidates)
+			.map(v => ({
+				...v,
+				isMainCandidate: _.includes(mainCandidatePolIDs, v.polID),
+			}))
 
 		// Prepare the US race so it can be easily ingested by sub-components:
 		const states = _(allStates)
