@@ -48,7 +48,7 @@ const sortByPolIDs = ({ candidates, polIDs }) => _(candidates)
 			_.indexOf(polIDs, v.polID) : candidates.length,
 	}))
 	.orderBy(['polIDIndex', 'index'])
-	.map(v => _.omit(v, ['polIDIndex', 'index']))
+	.map(v => _.omit(v, ['index']))
 	.value()
 
 /**

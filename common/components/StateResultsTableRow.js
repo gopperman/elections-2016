@@ -2,28 +2,41 @@
 // row within a `StateResultsTableRow`.
 
 import React, { PropTypes } from 'react'
+import _ from 'lodash'
+
 import addCommas from 'add-commas'
 import { percent } from './../utils/Candidate.js'
 import { percentForDisplay } from './../utils/standardize.js'
 
 const StateResultsTableRow = ({ statePostal, precinctsReportingPct,
-candidates }) =>
+candidates, summaryCandidates }) =>
 	<tr>
 		<td>
 			<div>{statePostal}</div>
 			<div>{precinctsReportingPct}%</div>
 		</td>
-		{ candidates.map((v, i) => (
-			<td key={i}>
-				<div>{percentForDisplay(percent({
-					candidates, candidateID: v.candidateID }))}%</div>
-				<div>{addCommas(v.voteCount)}</div>
-				<div>{v.last}</div>
-			</td>
-		))}
+		{ summaryCandidates
+			.filter(v => v.isMainCandidate)
+			.map((v, i) => {
+
+				// Find this summary candidate in this state.
+				const candidate = _.find(candidates, { polID: v.polID })
+
+				return candidate ? (
+					<td key={i}>
+						<div>{candidate.last}</div>
+						<div>{percentForDisplay(percent({
+							candidates, candidateID: candidate.candidateID }))}%</div>
+						<div>{addCommas(candidate.voteCount)}</div>
+					</td>
+				) : (<td key={i} />)
+
+			})}
+
 	</tr>
 
 StateResultsTableRow.propTypes = {
+	summaryCandidates: PropTypes.array.isRequired,
 	candidates: PropTypes.array.isRequired,
 	statePostal: PropTypes.string.isRequired,
 	precinctsReportingPct: PropTypes.string.isRequired,

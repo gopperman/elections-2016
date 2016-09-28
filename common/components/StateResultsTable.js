@@ -19,17 +19,21 @@ const StateResultsTable = ({ states, summaryCandidates }) =>
 						<div>State</div>
 						<div>Precincts reporting</div>
 					</th>
-					{ summaryCandidates.map((v, i) => (
-						<th scope='col' key={i}>
-							<div>{v.last}</div>
-							<div>{i === 0 ? 'Votes' : ''}</div>
-						</th>
+					{ summaryCandidates
+						.filter(v => v.isMainCandidate)
+						.map((v, i) => (
+							<th scope='col' key={i}>
+								<div>{v.last}</div>
+								<div>{i === 0 ? 'Votes' : ''}</div>
+								<div>{v.polID}</div>
+							</th>
 					))}
 				</tr>
 			</thead>
 			<tbody>
 				{ states.map((state, key) => (
-					<StateResultsTableRow key={key} {...state} />
+					<StateResultsTableRow
+						{...{ key, ...state, summaryCandidates }} />
 				))}
 			</tbody>
 		</table>
