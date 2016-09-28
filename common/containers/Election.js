@@ -3,11 +3,16 @@ import { provideHooks } from 'redial'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actions from './../actions/actionCreators.js'
-import { getPresidentSummaryState } from './../utils/dataUtil.js'
 import Timer from './../components/Timer.js'
+import Map from './../components/Map.js'
 import Header from './../components/templates/Header.js'
 import Footer from './../components/templates/Footer.js'
-import { toSentenceCase } from './../utils/standardize.js'
+import {
+	getPresidentSummaryState,
+} from './../utils/dataUtil.js'
+import {
+	getUSMapArguments,
+} from './../utils/Map.js'
 
 const hooks = {
 	fetch: ({ dispatch }) =>
@@ -30,24 +35,36 @@ class Election extends Component {
 		dispatch: PropTypes.func.isRequired,
 	}
 
-	// when component is initially mounted onto DOM, fire its 'fetch' hook
+	// This lifecycle event gets called once, immediately after the initial
+	// rendering occurs. We will use it to fire the `fetch` hook.
 	componentDidMount = () => {
 		this.fetchData()
 	}
+
+	// This gets called once after the component's updates are flushed to DOM.
+	// At the moment we will use it to determine whether to stop the clock.
+	// NOTE: the switcher triggers this.
 
 	componentDidUpdate = (prevProps) => {
 
 		const { props } = this
 		const { startTimer, cancelTimer } = props.actions
+		const { results } = props
 
-		// did we stop fetching?
+		// Did we stop fetching - that is, did we go from `isFetching == true`
+		// to `isFetching == false`? If so:
 		if (prevProps.results.isFetching && !props.results.isFetching) {
 
-			// TODO: add data completeness check
-			++this.count
+			// Get API results.
+			const usRace = results.data['president-us-states']
 
-			// is the race over?
-			if (this.count > 0) {
+			// Get summary US race.
+			const summaryState = getPresidentSummaryState(usRace)
+
+			// Check if all results are in.
+			const isFinished = +summaryState.precinctsReportingPct === 100
+
+			if (isFinished) {
 				cancelTimer()
 			} else {
 				startTimer()
@@ -57,21 +74,35 @@ class Election extends Component {
 
 	}
 
+	// Wrap the `fetch` call in a simpler `fetchData` function.
+	onClick = () => {
+		setTimeout(() => this.fetchData(), 1000)
+	}
+
 	fetchData = () => {
 		hooks.fetch({ dispatch: this.props.dispatch })
 	}
-
-	count = 0
 
 	render() {
 		const { props, fetchData } = this
 		const { timer, results } = props
 		const { stopTimer } = props.actions
 
+		// Prepare the US race so it can be easily ingested by sub-components:
+		const usRace = results.data['president-us-states']
+
+		// Get summary US race.
+		const summaryState = getPresidentSummaryState(usRace)
+
+		const mapArgs = getUSMapArguments(usRace)
+
 		return (
 			<div className='Election'>
-				<Header summaryState={getPresidentSummaryState(results.data['president-us-states'])} />
+				<Header summaryState={summaryState} />
 				<h1>Election Home</h1>
+
+				<Map {...mapArgs} />
+
 				<Footer />
 			</div>
 		)
