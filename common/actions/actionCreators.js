@@ -15,7 +15,7 @@ const config = process.env.NODE_ENV === 'production' ?
 	configRoot.prod :
 	configRoot.dev
 
-const fetch = require('fetch-ponyfill')()
+const { fetch } = require('fetch-ponyfill')()
 
 const startTimer = (now = Date.now()) => ({
 	type: START_TIMER,

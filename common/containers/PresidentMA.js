@@ -8,7 +8,6 @@ import { provideHooks } from 'redial'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actions from './../actions/actionCreators.js'
-import { getPresidentSummaryState } from './../utils/dataUtil.js'
 import Header from './../components/templates/Header.js'
 import Timer from './../components/Timer.js'
 import TownResultsTable from './../components/TownResultsTable.js'
@@ -20,6 +19,8 @@ import {
 	sortByCandidateIDs,
 } from './../utils/Candidates.js'
 
+const url = '2016-11-08?officeID=P&statePostal=US,MA&level=ru'
+
 // This object, used by the `@provideHooks` decorator, defines our custom
 // data loading dependencies. At the moment we just have one: `fetch`. It
 // gets triggered on both server and client.
@@ -29,7 +30,7 @@ const hooks = {
 	// our custom data loading actions. In this case, we dispatch the
 	// `fetchResults` action.
 	fetch: ({ dispatch }) =>
-		dispatch(actions.fetchResults({ url: 'president-massachusetts' })),
+		dispatch(actions.fetchResults({ url })),
 }
 
 // This object maps various properties as React `props`:
@@ -80,14 +81,19 @@ class PresidentMA extends Component {
 		if (prevProps.results.isFetching && !props.results.isFetching) {
 
 			// Get API results.
-			const usRace = results.data['president-us-state-US']
+			const { races } = results.data
 
-			// Get summary US race.
-			const summaryState = getPresidentSummaryState(usRace)
+			// Get US race.
+			// TODO: get this a different way, when John adds it to the API
+			const allStates = _.find(races, v =>
+				v.reportingUnits[0].statePostal === 'US').reportingUnits
+
+			// Get US presidential race summary.
+			const summaryState = _.find(allStates, { statePostal: 'US' })
 
 			// Get MA presidential race.
-			const massRace = results.data['president-ma-towns']
-				.races[0].reportingUnits
+			const massRace = _.find(races, v =>
+				v.reportingUnits[0].statePostal !== 'US').reportingUnits
 
 			// Get summary MA race.
 			const summaryTown = _.find(massRace, { level: 'national' })
@@ -138,14 +144,19 @@ class PresidentMA extends Component {
 		}
 
 		// Get API results.
-		const usRace = results.data['president-us-state-US']
+		const { races } = results.data
+
+		// Get US race.
+		// TODO: get this a different way, when John adds it to the API
+		const allStates = _.find(races, v =>
+			v.reportingUnits[0].statePostal === 'US').reportingUnits
 
 		// Get US presidential race summary.
-		const summaryState = getPresidentSummaryState(usRace)
+		const summaryState = _.find(allStates, { statePostal: 'US' })
 
 		// Get MA presidential race.
-		const massRace = results.data['president-ma-towns']
-			.races[0].reportingUnits
+		const massRace = _.find(races, v =>
+			v.reportingUnits[0].statePostal !== 'US').reportingUnits
 
 		// Get summary MA race.
 		const summaryTown = _.find(massRace, { level: 'national' })
@@ -177,10 +188,13 @@ class PresidentMA extends Component {
 		// Finally we can render all the components!
 		return (
 			<div className='PresidentMA'>
+
 				<Header summaryState={summaryState} />
 				<h1>PresidentMA</h1>
 
 				<Timer {...timerProps} />
+
+				<button onClick={this.onClick}>Refresh</button>
 
 				<Map
 					topoObject={TOWNS}
@@ -188,8 +202,6 @@ class PresidentMA extends Component {
 					sortingDelegate={sortByVoteCount}
 					projection={massProjection}
 					unitName='reportingunitName' />
-
-				<button onClick={this.onClick}>Refresh</button>
 
 				<TownResultsTable
 					{...{ towns, summaryCandidates: summaryTownCandidates }} />
