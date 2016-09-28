@@ -11,7 +11,7 @@ export default ({ subunit = {}, unitName, sortingDelegate }) => {
 	const summary = ''
 	const candidates = sortingDelegate(subunit.candidates || [])
 
-	const rows = candidates.map(v => {
+	const rows = candidates.slice(0, 4).map(v => {
 
 		const { candidateID, voteCount } = v
 
