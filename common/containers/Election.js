@@ -91,10 +91,10 @@ class Election extends Component {
 		// Prepare the US race so it can be easily ingested by sub-components:
 		const usRace = results.data['president-us-states']
 
-		const mapArgs = getUSMapArguments(usRace)
-
 		// Get summary US race.
 		const summaryState = getPresidentSummaryState(usRace)
+
+		const mapArgs = getUSMapArguments(usRace)
 
 		return (
 			<div className='Election'>
