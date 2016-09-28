@@ -6,6 +6,7 @@ import * as actions from './../actions/actionCreators.js'
 import { getPresidentSummaryState } from './../utils/dataUtil.js'
 import Timer from './../components/Timer.js'
 import Header from './../components/templates/Header.js'
+import Footer from './../components/templates/Footer.js'
 import { toSentenceCase } from './../utils/standardize.js'
 
 const hooks = {
@@ -71,6 +72,7 @@ class Election extends Component {
 			<div className='Election'>
 				<Header summaryState={getPresidentSummaryState(results.data['president-us-states'])} />
 				<h1>Election Home</h1>
+				<Footer />
 			</div>
 		)
 
