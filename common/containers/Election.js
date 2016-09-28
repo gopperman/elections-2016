@@ -9,8 +9,10 @@ import Header from './../components/templates/Header.js'
 import Footer from './../components/templates/Footer.js'
 import {
 	getPresidentSummaryState,
-	getUSMapArguments,
 } from './../utils/dataUtil.js'
+import {
+	getUSMapArguments,
+} from './../utils/Map.js'
 
 const hooks = {
 	fetch: ({ dispatch }) =>
