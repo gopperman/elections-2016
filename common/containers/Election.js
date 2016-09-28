@@ -1,5 +1,3 @@
-import _ from 'lodash'
-import { geoAlbersUsa } from 'd3-geo'
 import React, { Component, PropTypes } from 'react'
 import { provideHooks } from 'redial'
 import { bindActionCreators } from 'redux'
@@ -9,17 +7,10 @@ import Timer from './../components/Timer.js'
 import Map from './../components/Map.js'
 import Header from './../components/templates/Header.js'
 import Footer from './../components/templates/Footer.js'
-import { toSentenceCase } from './../utils/standardize.js'
-import STATES from './../../data/output/STATES.json'
-import { 
-	getPresidentStates, 
-	getPresidentSummaryState, 
+import {
+	getPresidentSummaryState,
 	getUSMapArguments,
 } from './../utils/dataUtil.js'
-import {
-	sortByElectoralCount,
-	sortByPolIDs,
-} from './../utils/Candidates.js'
 
 const hooks = {
 	fetch: ({ dispatch }) =>
