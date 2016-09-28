@@ -13,15 +13,13 @@ import StateResultsTable from './../components/StateResultsTable.js'
 import Map from './../components/Map.js'
 import STATES from './../../data/output/STATES.json'
 import Header from './../components/templates/Header.js'
-import {
-	getPresidentStates,
-	getPresidentSummaryState,
-} from './../utils/dataUtil.js'
 
 import {
 	sortByElectoralCount,
 	sortByPolIDs,
 } from './../utils/Candidates.js'
+
+const url = '2016-11-08?officeID=P'
 
 // This object, used by the `@provideHooks` decorator, defines our custom
 // data loading dependencies. At the moment we just have one: `fetch`. It
@@ -32,7 +30,7 @@ const hooks = {
 	// our custom data loading actions. In this case, we dispatch the
 	// `fetchResults` action.
 	fetch: ({ dispatch }) =>
-		dispatch(actions.fetchResults({ url: 'president' })),
+		dispatch(actions.fetchResults({ url })),
 }
 
 // This object maps various properties as React `props`:
@@ -83,10 +81,15 @@ class PresidentUS extends Component {
 		if (prevProps.results.isFetching && !props.results.isFetching) {
 
 			// Get API results.
-			const usRace = results.data['president-us-states']
+			const { races } = results.data
 
-			// Get summary US race.
-			const summaryState = getPresidentSummaryState(usRace)
+			// Get US race.
+			const allStates = races.map(v => ({
+				...v.reportingUnits[0],
+			}))
+
+			// Get US presidential race summary.
+			const summaryState = _.find(allStates, { statePostal: 'US' })
 
 			// Check if all results are in.
 			const isFinished = +summaryState.precinctsReportingPct === 100
@@ -133,17 +136,22 @@ class PresidentUS extends Component {
 		}
 
 		// Get API results.
-		const usRace = results.data['president-us-states']
+		const { races } = results.data
 
-		// Get summary US race.
-		const summaryState = getPresidentSummaryState(usRace)
+		// Get US race.
+		const allStates = races.map(v => ({
+			...v.reportingUnits[0],
+		}))
+
+		// Get US presidential race summary.
+		const summaryState = _.find(allStates, { statePostal: 'US' })
 
 		// Get summary US candidates, so we can sort by them.
 		const summaryStateCandidates = sortByElectoralCount(
 			summaryState.candidates)
 
 		// Prepare the US race so it can be easily ingested by sub-components:
-		const states = _(getPresidentStates(usRace))
+		const states = _(allStates)
 			// don't include summary state,
 			.reject({ statePostal: 'US' })
 			// sort states by their full name,
@@ -161,6 +169,7 @@ class PresidentUS extends Component {
 		// Finally we can render all the components!
 		return (
 			<div className='PresidentUS'>
+
 				<Header summaryState={summaryState} />
 				<h1>PresidentUS</h1>
 
