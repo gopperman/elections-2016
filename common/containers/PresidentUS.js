@@ -13,6 +13,7 @@ import StateResultsTable from './../components/StateResultsTable.js'
 import Map from './../components/Map.js'
 import STATES from './../../data/output/STATES.json'
 import Header from './../components/templates/Header.js'
+import Footer from './../components/templates/Footer.js'
 
 import {
 	sortByElectoralCount,
@@ -68,9 +69,9 @@ class PresidentUS extends Component {
 
 	// This gets called once after the component's updates are flushed to DOM.
 	// At the moment we will use it to determine whether to stop the clock.
-	// NOTE: the switcher triggers this.
-
 	componentDidUpdate = (prevProps) => {
+
+		console.log('did update')
 
 		const { props } = this
 		const { startTimer, cancelTimer } = props.actions
@@ -105,15 +106,13 @@ class PresidentUS extends Component {
 	}
 
 	// Wrap the `fetch` call in a simpler `fetchData` function.
-	onClick = () => {
-		setTimeout(() => this.fetchData(), 1000)
-	}
-
 	fetchData = () => {
 		hooks.fetch({ dispatch: this.props.dispatch })
 	}
 
 	render() {
+
+		console.log('render')
 
 		const { props, fetchData } = this
 		const { timer, results } = props
@@ -189,10 +188,10 @@ class PresidentUS extends Component {
 					projection={geoAlbersUsa()}
 					unitName='statePostal' />
 
-				<button onClick={this.onClick}>Refresh</button>
-
 				<StateResultsTable
 					{...{ states, summaryCandidates: summaryStateCandidates }} />
+
+				<Footer />
 
 			</div>
 		)

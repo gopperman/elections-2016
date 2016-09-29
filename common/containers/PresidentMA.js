@@ -69,8 +69,6 @@ class PresidentMA extends Component {
 
 	// This gets called once after the component's updates are flushed to DOM.
 	// At the moment we will use it to determine whether to stop the clock.
-	// NOTE: the switcher triggers this.
-
 	componentDidUpdate = (prevProps) => {
 
 		const { props } = this
@@ -114,10 +112,6 @@ class PresidentMA extends Component {
 	}
 
 	// Wrap the `fetch` call in a simpler `fetchData` function.
-	onClick = () => {
-		setTimeout(() => this.fetchData(), 1000)
-	}
-
 	fetchData = () => {
 		hooks.fetch({ dispatch: this.props.dispatch })
 	}
@@ -195,8 +189,6 @@ class PresidentMA extends Component {
 
 				<Timer {...timerProps} />
 
-				<button onClick={this.onClick}>Refresh</button>
-
 				<Map
 					topoObject={TOWNS}
 					data={towns}
@@ -208,6 +200,7 @@ class PresidentMA extends Component {
 					{...{ towns, summaryCandidates: summaryTownCandidates }} />
 
 				<Footer />
+
 			</div>
 		)
 
