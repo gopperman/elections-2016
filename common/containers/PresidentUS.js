@@ -20,7 +20,7 @@ import {
 	sortByPolIDs,
 } from './../utils/Candidates.js'
 
-const url = '2016-11-08?officeID=P'
+const url = 'NO'
 
 // This object, used by the `@provideHooks` decorator, defines our custom
 // data loading dependencies. At the moment we just have one: `fetch`. It
@@ -81,8 +81,11 @@ class PresidentUS extends Component {
 		// to `isFetching == false`? If so:
 		if (prevProps.results.isFetching && !props.results.isFetching) {
 
+			// Get the data - or an empty object.
+			const data = results.data || {}
+
 			// Get API results.
-			const { races } = results.data
+			const races = data.races || []
 
 			// Get US race.
 			const allStates = races.map(v => ({
@@ -90,7 +93,7 @@ class PresidentUS extends Component {
 			}))
 
 			// Get US presidential race summary.
-			const summaryState = _.find(allStates, { statePostal: 'US' })
+			const summaryState = _.find(allStates, { statePostal: 'US' }) || {}
 
 			// Check if all results are in.
 			const isFinished = +summaryState.precinctsReportingPct === 100
@@ -134,8 +137,11 @@ class PresidentUS extends Component {
 			},
 		}
 
+		// Get the data - or an empty object.
+		const data = results.data || {}
+
 		// Get API results.
-		const { races } = results.data
+		const races = data.races || []
 
 		// Get US race.
 		const allStates = races.map(v => ({
@@ -149,12 +155,12 @@ class PresidentUS extends Component {
 		const mainCandidatePolIDs = ['1746', '8639', '31708', '895']
 
 		// Get summary US candidates, so we can sort by them.
-		const summaryStateCandidates =
+		const summaryStateCandidates = summaryState ?
 			sortByElectoralCount(summaryState.candidates)
 			.map(v => ({
 				...v,
 				isMainCandidate: _.includes(mainCandidatePolIDs, v.polID),
-			}))
+			})) : []
 
 		// Prepare the US race so it can be easily ingested by sub-components:
 		const states = _(allStates)

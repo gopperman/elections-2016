@@ -1,11 +1,13 @@
 import React, { PropTypes } from 'react'
 import _ from 'lodash'
 
-// TODO: sanitize data (cast strings to numbers)
-const ElectoralCollegeBar = ({ candidates, precinctsReportingPct }) => {
+const ElectoralCollegeBar = ({
+	candidates = [],
+	precinctsReportingPct = '',
+}) => {
 
-	const dem = _.find(candidates, { party: 'Dem' })
-	const gop = _.find(candidates, { party: 'GOP' })
+	const dem = _.find(candidates, { party: 'Dem' }) || {}
+	const gop = _.find(candidates, { party: 'GOP' }) || {}
 	const totalWon = _.sumBy(candidates, v => +v.electWon)
 	const undecided = 538 - totalWon
 
@@ -47,8 +49,8 @@ const ElectoralCollegeBar = ({ candidates, precinctsReportingPct }) => {
 }
 
 ElectoralCollegeBar.propTypes = {
-	candidates: PropTypes.array.isRequired,
-	precinctsReportingPct: PropTypes.string.isRequired,
+	candidates: PropTypes.array,
+	precinctsReportingPct: PropTypes.string,
 }
 
 export default ElectoralCollegeBar
