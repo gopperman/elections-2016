@@ -20,7 +20,7 @@ import {
 	sortByPolIDs,
 } from './../utils/Candidates.js'
 
-const url = 'NO'
+const url = '2016-11-08?officeID=P'
 
 // This object, used by the `@provideHooks` decorator, defines our custom
 // data loading dependencies. At the moment we just have one: `fetch`. It

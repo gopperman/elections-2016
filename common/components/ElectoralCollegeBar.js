@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react'
+import addCommas from 'add-commas'
 import _ from 'lodash'
 
 const ElectoralCollegeBar = ({
@@ -21,7 +22,7 @@ const ElectoralCollegeBar = ({
 					<li>Name: {dem.last}</li>
 					<li>Is winner: {dem.winner}</li>
 					<li>Electoral votes won: {dem.electWon}</li>
-					<li>Popular votes: {dem.voteCount}</li>
+					<li>Popular votes: {addCommas(dem.voteCount || '')}</li>
 				</ul>
 			</div>
 
@@ -31,7 +32,7 @@ const ElectoralCollegeBar = ({
 					<li>Name: {gop.last}</li>
 					<li>Is winner: {gop.winner}</li>
 					<li>Electoral votes won: {gop.electWon}</li>
-					<li>Popular votes: {gop.voteCount}</li>
+					<li>Popular votes: {addCommas(gop.voteCount || '')}</li>
 				</ul>
 			</div>
 
