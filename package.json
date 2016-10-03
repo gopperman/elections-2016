@@ -1,8 +1,10 @@
 {
   "scripts": {
     "start": "webpack-dashboard -- node server/index.js",
+    "start:prod": "node server/index.js",
     "build": "npm run lint && webpack --config webpack.config.prod.js --progress",
-    "prod": "NODE_ENV=production npm run start",
+    "build:nolint": "webpack --config webpack.config.prod.js --progress",
+    "prod": "NODE_ENV=production npm run start:prod",
     "lint": "eslint .",
     "test": "mocha --compilers js:babel-core/register \"./{,!(docs|node_modules)/**/}*.test.js\"",
     "doc:user": "indoc -c indoc.json",

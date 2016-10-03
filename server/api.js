@@ -10,8 +10,6 @@ export default (req, res) => {
 
 	const { endpoint } = req.params
 
-	console.log(`requesting ${endpoint}`)
-
 	let result
 	switch (endpoint) {
 
