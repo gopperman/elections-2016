@@ -100,7 +100,7 @@ class PresidentMA extends Component {
 
 			// Get the overall units.
 			const usUnit = _.find(usRace.reportingUnits, { level: 'national' }) || {}
-			const maUnit = _.find(usRace.reportingUnits, { level: 'national' }) || {}
+			const maUnit = _.find(maRace.reportingUnits, { level: 'national' }) || {}
 
 			// Check if all results are in.
 			const isFinished = +usUnit.precinctsReportingPct === 100 &&
@@ -155,7 +155,7 @@ class PresidentMA extends Component {
 
 		// Get the overall units.
 		const usUnit = _.find(usRace.reportingUnits, { level: 'national' }) || {}
-		const maUnit = _.find(usRace.reportingUnits, { level: 'national' }) || {}
+		const maUnit = _.find(maRace.reportingUnits, { level: 'national' }) || {}
 
 		// Get summary MA candidates, so we can sort by them.
 		const summaryTownCandidates = sortByVoteCount(maUnit.candidates)
