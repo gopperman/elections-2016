@@ -1,6 +1,7 @@
 import {
 	FETCH_RESULTS_REQUEST,
 	FETCH_RESULTS_SUCCESS,
+	FETCH_RESULTS_FAILURE,
 } from './../actions/actionTypes.js'
 
 const initialState = {
@@ -9,9 +10,8 @@ const initialState = {
 
 export default(state = initialState, action) => {
 
-	const { type, data, url } = action
+	const { type, data, url, error } = action
 
-	// TODO: consider switching to something like updeep
 	switch (type) {
 
 		case FETCH_RESULTS_REQUEST:
@@ -29,6 +29,14 @@ export default(state = initialState, action) => {
 				url,
 				data,
 				isFetching: false,
+			}
+
+		case FETCH_RESULTS_FAILURE:
+
+			return {
+				...state,
+				isFetching: false,
+				error,
 			}
 
 		default:

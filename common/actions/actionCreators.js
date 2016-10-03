@@ -7,7 +7,7 @@ import {
 
 	FETCH_RESULTS_REQUEST,
 	FETCH_RESULTS_SUCCESS,
-	// FETCH_RESULTS_FAILURE,
+	FETCH_RESULTS_FAILURE,
 
 } from './actionTypes.js'
 
@@ -41,9 +41,10 @@ const fetchResultsSuccess = ({ url, data }) => ({
 	data,
 })
 
-// const fetchResultsFailure = () => ({
-// 	type: FETCH_RESULTS_FAILURE,
-// })
+const fetchResultsFailure = ({ error }) => ({
+	type: FETCH_RESULTS_FAILURE,
+	error,
+})
 
 const fetchResults = ({ url }) =>
 
@@ -66,8 +67,10 @@ const fetchResults = ({ url }) =>
 			})
 			.then(response => response.json())
 			.then(data => dispatch(fetchResultsSuccess({ url, data })))
-			// TODO: add error handling
-			.catch(e => console.log(e))
+			.catch(({ message }) => {
+				console.log('caught error and going to rethrow it')
+				dispatch(fetchResultsFailure({ error: message }))
+			})
 	}
 
 export {

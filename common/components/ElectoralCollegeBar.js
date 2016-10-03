@@ -1,11 +1,14 @@
 import React, { PropTypes } from 'react'
+import addCommas from 'add-commas'
 import _ from 'lodash'
 
-// TODO: sanitize data (cast strings to numbers)
-const ElectoralCollegeBar = ({ candidates, precinctsReportingPct }) => {
+const ElectoralCollegeBar = ({
+	candidates = [],
+	precinctsReportingPct = '',
+}) => {
 
-	const dem = _.find(candidates, { party: 'Dem' })
-	const gop = _.find(candidates, { party: 'GOP' })
+	const dem = _.find(candidates, { party: 'Dem' }) || {}
+	const gop = _.find(candidates, { party: 'GOP' }) || {}
 	const totalWon = _.sumBy(candidates, v => +v.electWon)
 	const undecided = 538 - totalWon
 
@@ -19,7 +22,7 @@ const ElectoralCollegeBar = ({ candidates, precinctsReportingPct }) => {
 					<li>Name: {dem.last}</li>
 					<li>Is winner: {dem.winner}</li>
 					<li>Electoral votes won: {dem.electWon}</li>
-					<li>Popular votes: {dem.voteCount}</li>
+					<li>Popular votes: {addCommas(dem.voteCount || '')}</li>
 				</ul>
 			</div>
 
@@ -29,7 +32,7 @@ const ElectoralCollegeBar = ({ candidates, precinctsReportingPct }) => {
 					<li>Name: {gop.last}</li>
 					<li>Is winner: {gop.winner}</li>
 					<li>Electoral votes won: {gop.electWon}</li>
-					<li>Popular votes: {gop.voteCount}</li>
+					<li>Popular votes: {addCommas(gop.voteCount || '')}</li>
 				</ul>
 			</div>
 
@@ -47,8 +50,8 @@ const ElectoralCollegeBar = ({ candidates, precinctsReportingPct }) => {
 }
 
 ElectoralCollegeBar.propTypes = {
-	candidates: PropTypes.array.isRequired,
-	precinctsReportingPct: PropTypes.string.isRequired,
+	candidates: PropTypes.array,
+	precinctsReportingPct: PropTypes.string,
 }
 
 export default ElectoralCollegeBar

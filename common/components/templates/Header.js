@@ -12,7 +12,7 @@ const Header = ({ summaryState }) => (
 )
 
 Header.propTypes = {
-	summaryState: PropTypes.object.isRequired,
+	summaryState: PropTypes.object,
 }
 
 export default Header

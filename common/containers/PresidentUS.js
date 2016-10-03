@@ -13,12 +13,22 @@ import StateResultsTable from './../components/StateResultsTable.js'
 import Map from './../components/Map.js'
 import STATES from './../../data/output/STATES.json'
 import Header from './../components/templates/Header.js'
+import Footer from './../components/templates/Footer.js'
 
 import {
 	sortByElectoralCount,
 	sortByPolIDs,
 } from './../utils/Candidates.js'
 
+// We'll keep these urls here for testing. A description:
+
+// this one returns a 500,
+// const url = 'NO'
+
+// this one returns json but the data is incomplete,
+// const url = '016-11-08?officeID=P'
+
+// and this one is the correct url - it returns everything.
 const url = '2016-11-08?officeID=P'
 
 // This object, used by the `@provideHooks` decorator, defines our custom
@@ -68,8 +78,6 @@ class PresidentUS extends Component {
 
 	// This gets called once after the component's updates are flushed to DOM.
 	// At the moment we will use it to determine whether to stop the clock.
-	// NOTE: the switcher triggers this.
-
 	componentDidUpdate = (prevProps) => {
 
 		const { props } = this
@@ -80,8 +88,11 @@ class PresidentUS extends Component {
 		// to `isFetching == false`? If so:
 		if (prevProps.results.isFetching && !props.results.isFetching) {
 
+			// Get the data - or an empty object.
+			const data = results.data || {}
+
 			// Get API results.
-			const { races } = results.data
+			const races = data.races || []
 
 			// Get US race.
 			const allStates = races.map(v => ({
@@ -89,7 +100,7 @@ class PresidentUS extends Component {
 			}))
 
 			// Get US presidential race summary.
-			const summaryState = _.find(allStates, { statePostal: 'US' })
+			const summaryState = _.find(allStates, { statePostal: 'US' }) || {}
 
 			// Check if all results are in.
 			const isFinished = +summaryState.precinctsReportingPct === 100
@@ -105,10 +116,6 @@ class PresidentUS extends Component {
 	}
 
 	// Wrap the `fetch` call in a simpler `fetchData` function.
-	onClick = () => {
-		setTimeout(() => this.fetchData(), 1000)
-	}
-
 	fetchData = () => {
 		hooks.fetch({ dispatch: this.props.dispatch })
 	}
@@ -135,8 +142,11 @@ class PresidentUS extends Component {
 			},
 		}
 
+		// Get the data - or an empty object.
+		const data = results.data || {}
+
 		// Get API results.
-		const { races } = results.data
+		const races = data.races || []
 
 		// Get US race.
 		const allStates = races.map(v => ({
@@ -150,12 +160,12 @@ class PresidentUS extends Component {
 		const mainCandidatePolIDs = ['1746', '8639', '31708', '895']
 
 		// Get summary US candidates, so we can sort by them.
-		const summaryStateCandidates =
+		const summaryStateCandidates = summaryState ?
 			sortByElectoralCount(summaryState.candidates)
 			.map(v => ({
 				...v,
 				isMainCandidate: _.includes(mainCandidatePolIDs, v.polID),
-			}))
+			})) : []
 
 		// Prepare the US race so it can be easily ingested by sub-components:
 		const states = _(allStates)
@@ -189,10 +199,10 @@ class PresidentUS extends Component {
 					projection={geoAlbersUsa()}
 					unitName='statePostal' />
 
-				<button onClick={this.onClick}>Refresh</button>
-
 				<StateResultsTable
 					{...{ states, summaryCandidates: summaryStateCandidates }} />
+
+				<Footer />
 
 			</div>
 		)

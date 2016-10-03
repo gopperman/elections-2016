@@ -64,7 +64,13 @@ export default (req, res) => {
 			fetch(url)
 				.then(response => response.json())
 				.then(json => res.json(json))
-				.catch(e => console.error(e))
+				.catch(e => {
+
+					console.error(e)
+					console.log('about to send 500')
+					res.sendStatus(500)
+
+				})
 
 			break
 

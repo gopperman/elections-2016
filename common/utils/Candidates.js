@@ -14,9 +14,7 @@ import _ from 'lodash'
  * sortByElectoralCount(candidate) //=> sortedCandidates
  */
 const sortByElectoralCount = (candidates) =>
-	_.orderBy(candidates,
-		['electWon', 'voteCount'],
-		['desc', 'desc'])
+	_.orderBy(candidates, ['electWon', 'voteCount'], ['desc', 'desc'])
 
 /**
  * Sort candidates by total vote count.
