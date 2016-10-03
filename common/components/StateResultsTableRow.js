@@ -32,7 +32,6 @@ candidates, summaryCandidates }) =>
 				) : (<td key={i} />)
 
 			})}
-
 	</tr>
 
 StateResultsTableRow.propTypes = {

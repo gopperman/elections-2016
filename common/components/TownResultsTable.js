@@ -29,7 +29,8 @@ const TownResultsTable = ({ towns, summaryCandidates }) =>
 			</thead>
 			<tbody>
 				{ towns.map((town, key) => (
-					<TownResultsTableRow key={key} {...town} />
+					<TownResultsTableRow
+						{...{ key, ...town, summaryCandidates }} />
 				))}
 			</tbody>
 		</table>
