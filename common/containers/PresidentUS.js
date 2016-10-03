@@ -20,6 +20,15 @@ import {
 	sortByPolIDs,
 } from './../utils/Candidates.js'
 
+// We'll keep these urls here for testing. A description:
+
+// this one returns a 500,
+// const url = 'NO'
+
+// this one returns json but the data is incomplete,
+// const url = '016-11-08?officeID=P'
+
+// and this one is the correct url - it returns everything.
 const url = '2016-11-08?officeID=P'
 
 // This object, used by the `@provideHooks` decorator, defines our custom
@@ -71,8 +80,6 @@ class PresidentUS extends Component {
 	// At the moment we will use it to determine whether to stop the clock.
 	componentDidUpdate = (prevProps) => {
 
-		console.log('did update')
-
 		const { props } = this
 		const { startTimer, cancelTimer } = props.actions
 		const { results } = props
@@ -114,8 +121,6 @@ class PresidentUS extends Component {
 	}
 
 	render() {
-
-		console.log('render')
 
 		const { props, fetchData } = this
 		const { timer, results } = props

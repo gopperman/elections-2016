@@ -20,6 +20,15 @@ import {
 	sortByCandidateIDs,
 } from './../utils/Candidates.js'
 
+// We'll keep these urls here for testing. A description:
+
+// this one returns a 500,
+// const url = 'NO'
+
+// this one returns json but the data is incomplete,
+// const url = '016-11-08?officeID=P&statePostal=US,MA&level=ru'
+
+// and this one is the correct url - it returns everything.
 const url = '2016-11-08?officeID=P&statePostal=US,MA&level=ru'
 
 // This object, used by the `@provideHooks` decorator, defines our custom
@@ -79,27 +88,23 @@ class PresidentMA extends Component {
 		// to `isFetching == false`? If so,
 		if (prevProps.results.isFetching && !props.results.isFetching) {
 
+			// Get the data - or an empty object.
+			const data = results.data || {}
+
 			// Get API results.
-			const { races } = results.data
+			const races = data.races || []
 
-			// Get US race.
-			// TODO: get this a different way, when John adds it to the API
-			const allStates = _.find(races, v =>
-				v.reportingUnits[0].statePostal === 'US').reportingUnits
+			// Get the US and MA races.
+			const usRace = _.find(races, { statePostal: 'US' }) || {}
+			const maRace = _.find(races, { statePostal: 'MA' }) || {}
 
-			// Get US presidential race summary.
-			const summaryState = _.find(allStates, { statePostal: 'US' })
-
-			// Get MA presidential race.
-			const massRace = _.find(races, v =>
-				v.reportingUnits[0].statePostal !== 'US').reportingUnits
-
-			// Get summary MA race.
-			const summaryTown = _.find(massRace, { level: 'national' })
+			// Get the overall units.
+			const usUnit = _.find(usRace.reportingUnits, { level: 'national' }) || {}
+			const maUnit = _.find(usRace.reportingUnits, { level: 'national' }) || {}
 
 			// Check if all results are in.
-			const isFinished = +summaryState.precinctsReportingPct === 100 &&
-				+summaryTown.precinctsReportingPct === 100
+			const isFinished = +usUnit.precinctsReportingPct === 100 &&
+				+maUnit.precinctsReportingPct === 100
 
 			if (isFinished) {
 				cancelTimer()
@@ -138,29 +143,25 @@ class PresidentMA extends Component {
 			},
 		}
 
+		// Get the data - or an empty object.
+		const data = results.data || {}
+
 		// Get API results.
-		const { races } = results.data
+		const races = data.races || []
 
-		// Get US race.
-		// TODO: get this a different way, when John adds it to the API
-		const allStates = _.find(races, v =>
-			v.reportingUnits[0].statePostal === 'US').reportingUnits
+		// Get the US and MA races.
+		const usRace = _.find(races, { statePostal: 'US' }) || {}
+		const maRace = _.find(races, { statePostal: 'MA' }) || {}
 
-		// Get US presidential race summary.
-		const summaryState = _.find(allStates, { statePostal: 'US' })
-
-		// Get MA presidential race.
-		const massRace = _.find(races, v =>
-			v.reportingUnits[0].statePostal !== 'US').reportingUnits
-
-		// Get summary MA race.
-		const summaryTown = _.find(massRace, { level: 'national' })
+		// Get the overall units.
+		const usUnit = _.find(usRace.reportingUnits, { level: 'national' }) || {}
+		const maUnit = _.find(usRace.reportingUnits, { level: 'national' }) || {}
 
 		// Get summary MA candidates, so we can sort by them.
-		const summaryTownCandidates = sortByVoteCount(summaryTown.candidates)
+		const summaryTownCandidates = sortByVoteCount(maUnit.candidates)
 
 		// Prepare the MA race so it can be easily ingested by sub-components:
-		const towns = _(massRace)
+		const towns = _(maRace.reportingUnits)
 			// don't include summary town,
 			.reject({ level: 'national' })
 			// sort towns by their full name,
@@ -184,7 +185,7 @@ class PresidentMA extends Component {
 		return (
 			<div className='PresidentMA'>
 
-				<Header summaryState={summaryState} />
+				<Header summaryState={usUnit} />
 				<h1>PresidentMA</h1>
 
 				<Timer {...timerProps} />
