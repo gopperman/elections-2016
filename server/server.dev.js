@@ -6,10 +6,9 @@ import DashboardPlugin from 'webpack-dashboard/plugin'
 import handleRender from './handleRender.js'
 import api from './api.js'
 import webpackConfig from './../webpack.config.dev.js'
-import config from './../config.json'
 
 const app = express()
-const { port } = config.dev
+const port = 3001
 
 // Get webpack config
 const compiler = webpack(webpackConfig)

@@ -1,10 +1,9 @@
 import express from 'express'
 import compression from 'compression'
 import handleRender from './handleRender.js'
-import config from './../config.json'
 
 const app = express()
-const { port } = config.prod
+const port = process.env.PORT
 
 // enable compression
 app.use(compression())
