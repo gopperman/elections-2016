@@ -4,7 +4,7 @@
 		"port": 3001
 	},
 	"prod": {
-		"apiUrl": "http://elections.dev.passenger.bostonglobe.com/",
+		"apiUrl": "http://devweb.bostonglobe.com/electionapi/elections",
 		"port": 3001
 	}
 }
