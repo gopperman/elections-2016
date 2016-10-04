@@ -1,4 +1,3 @@
-
 // Builds an array of objects for a single row of the
 // Senate balance of power visualization
 const buildRow = (dem, gop, undecided ) => {
