@@ -11,11 +11,12 @@ class BalanceOfPower extends Component {
 
 	componentDidMount() {
 		// Create margins.
-		const margin = { top: 30, right: 30, bottom: 30, left: 30 }
-		const outerWidth = window.outerWidth
+		const margin = { top: 10, right: 10, bottom: 10, left: 10 }
+		const outerWidth = ( window.innerWidth < 480 ) ? (window.innerWidth - 64) : 480
 		const outerHeight = outerWidth
 		const width = outerWidth - margin.left - margin.right
 		const height = outerHeight - margin.top - margin.bottom
+		const baseRadius = 80
 
 		const senate = buildSeats(this.props.dem, this.props.gop, 100, 4)
 
@@ -34,12 +35,12 @@ class BalanceOfPower extends Component {
 						.data(d)
 					.enter().append('circle')
 						.attr('cx', (d, j) => 
-							( 100 + (i+1) * 20 ) * Math.cos(Math.PI/(senate[0].length - 1) * j)
+							(baseRadius + (i+1) * 16) * Math.cos(Math.PI/(senate[0].length - 1) * j)
 						)
 						.attr('cy', (d, j) => 
-							-(( 100 + (i+1) * 20) * Math.sin(Math.PI/(senate[0].length - 1) * j))
+							-((baseRadius + (i+1) * 16) * Math.sin(Math.PI/(senate[0].length - 1) * j))
 						)
-						.attr('r', 6)
+						.attr('r', 5)
 						.style('fill', d => {
 							switch(d.party) {
 								case 'gop':
