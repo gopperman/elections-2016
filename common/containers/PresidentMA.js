@@ -14,6 +14,7 @@ import Timer from './../components/Timer.js'
 import TownResultsTable from './../components/TownResultsTable.js'
 import Map from './../components/Map.js'
 import TOWNS from './../../data/output/TOWNS.json'
+import TestStatus from './../components/TestStatus.js'
 
 import {
 	sortByVoteCount,
@@ -151,6 +152,9 @@ class PresidentMA extends Component {
 		// Get API results.
 		const races = data.races || []
 
+		// Get test status.
+		const isTest = _.some(races, 'test')
+
 		// Get the US and MA races.
 		const usRace = _.find(races, { statePostal: 'US' }) || {}
 		const maRace = _.find(races, { statePostal: 'MA' }) || {}
@@ -188,6 +192,8 @@ class PresidentMA extends Component {
 		// Finally we can render all the components!
 		return (
 			<div className='PresidentMA'>
+
+				<TestStatus isTest={isTest} />
 
 				<Header summaryState={usUnit} />
 				<h1>PresidentMA</h1>

@@ -14,6 +14,7 @@ import Map from './../components/Map.js'
 import STATES from './../../data/output/STATES.json'
 import Header from './../components/templates/Header.js'
 import Footer from './../components/templates/Footer.js'
+import TestStatus from './../components/TestStatus.js'
 
 import {
 	sortByElectoralCount,
@@ -153,6 +154,9 @@ class PresidentUS extends Component {
 			...v.reportingUnits[0],
 		}))
 
+		// Get test status.
+		const isTest = _.some(races, 'test')
+
 		// Get US presidential race summary.
 		const summaryState = _.find(allStates, { statePostal: 'US' })
 
@@ -186,6 +190,8 @@ class PresidentUS extends Component {
 		// Finally we can render all the components!
 		return (
 			<div className='PresidentUS'>
+
+				<TestStatus isTest={isTest} />
 
 				<Header summaryState={summaryState} />
 				<h1>PresidentUS</h1>
