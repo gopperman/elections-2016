@@ -37,12 +37,23 @@ const buildSeats = (dem, gop, total, rows) => {
 	let gopRemainder = gop % rows
 
 	while(rows--) {
-		d = demPerRow + (( --demRemainder >= 0 ) ? 1 : 0)
-		r = gopPerRow + (( --gopRemainder >= 0) ? 1 : 0)
-		u = seatsPerRow - d - r 
-		if ( u < 0 ) {
-			u = 0
+		let seatsTaken = demPerRow + gopPerRow
+		d = demPerRow
+		r = gopPerRow
+
+		if (demRemainder > 0 && seatsTaken < seatsPerRow) {
+			d++
+			demRemainder--
+			seatsTaken++
 		}
+		if (gopRemainder > 0 && seatsTaken < seatsPerRow) {
+			r++
+			gopRemainder--
+			seatsTaken++
+		}
+
+		u = (seatsTaken >= seatsPerRow) ? 0 : seatsPerRow - d - r 
+
 		seats.push(buildRow(d,r,u))
 	}
 

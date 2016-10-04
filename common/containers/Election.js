@@ -98,8 +98,8 @@ class Election extends Component {
 		const mapArgs = getUSMapArguments(usRace)
 
 		const senateBalance = {
-			dem: 48,
-			gop: 44,
+			dem: 43,
+			gop: 49,
 		}
 
 		return (
