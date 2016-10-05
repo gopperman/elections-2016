@@ -33,6 +33,16 @@ app.use(webpackHotMiddleware(compiler, {
 app.set('views', './common')
 app.set('view engine', 'pug')
 
+app.get('/homepage', (req, res) => {
+
+	res.render('homepage', {
+		pretty: true,
+		appHtml: 'apphtml',
+		isProduction: process.env.NODE_ENV === 'production',
+	})
+
+})
+
 app.get('/api/:endpoint', api)
 
 // This is fired every time the server side receives a request
