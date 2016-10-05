@@ -12,11 +12,12 @@ module.exports = {
 		filename: 'bundle.js',
 	},
 	plugins: [
+		new webpack.EnvironmentPlugin([
+			'API_URL',
+			'PORT',
+		]),
 		new webpack.DefinePlugin({
-			'process.env': {
-				NODE_ENV: JSON.stringify('production'),
-				API_URL: JSON.stringify(process.env.API_URL),
-			},
+			'process.env.NODE_ENV': JSON.stringify('production'),
 		}),
 		new webpack.optimize.OccurrenceOrderPlugin(),
 		new webpack.optimize.DedupePlugin(),

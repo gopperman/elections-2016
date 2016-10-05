@@ -13,11 +13,7 @@ module.exports = {
 		publicPath: '/static/',
 	},
 	plugins: [
-		new webpack.DefinePlugin({
-			'process.env': {
-				API_URL: JSON.stringify(process.env.API_URL),
-			},
-		}),
+		new webpack.EnvironmentPlugin(['API_URL']),
 		new webpack.optimize.OccurrenceOrderPlugin(),
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.ProvidePlugin({
