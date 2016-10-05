@@ -42,30 +42,7 @@ class BalanceOfPower extends Component {
 							-((baseRadius + (i+1) * 16) * Math.sin(Math.PI/(senate[0].length - 1) * j))
 						)
 						.attr('r', 5)
-						.style('fill', d => {
-							switch(d.party) {
-								case 'gop':
-									return 'red'
-									break
-								case 'dem': 
-									return 'blue'
-									break
-								default: 
-									return 'white'
-							}
-						})
-						.style('stroke', d=> {
-							switch(d.party) {
-								case 'gop':
-									return 'red'
-									break
-								case 'dem': 
-									return 'blue'
-									break
-								default: 
-									return 'black'
-							}			
-						})
+						.attr("class", (d) => ('.balance__circle--' + d.party))
 				})
 	}
 
