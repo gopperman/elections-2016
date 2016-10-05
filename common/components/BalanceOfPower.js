@@ -11,8 +11,9 @@ class BalanceOfPower extends Component {
 
 	componentDidMount() {
 		// Create margins.
+		const container = document.getElementById('root')
 		const margin = { top: 10, right: 10, bottom: 10, left: 10 }
-		const outerWidth = ( window.innerWidth < 480 ) ? (window.innerWidth - 64) : 480
+		const outerWidth = container.offsetWidth
 		const outerHeight = outerWidth
 		const width = outerWidth - margin.left - margin.right
 		const height = outerHeight - margin.top - margin.bottom
