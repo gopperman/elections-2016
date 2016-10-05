@@ -47,11 +47,9 @@ const fetchResults = ({ url }) =>
 
 		dispatch(fetchResultsRequest({ url }))
 
-		const apiUrl = process.env.API_URL
-
 		// TODO: delete this
 		const fullUrl = process.env.NODE_ENV === 'production' ?
-			`${apiUrl}/${url}` :
+			`${process.env.API_URL}/${url}` :
 			`http://localhost:3001/api/${url}`
 
 		return fetch(fullUrl)
