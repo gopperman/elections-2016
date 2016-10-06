@@ -10,8 +10,6 @@ import chooseColorClass from './../utils/chooseColorClass.js'
 import compareStrings from './../utils/compareStrings.js'
 import createTooltip from './../utils/createTooltip.js'
 
-// TODO: draw tooltips
-// TODO: handle updating data and keeping tooltip+selected feature
 class Map extends Component {
 
 	static propTypes = {
