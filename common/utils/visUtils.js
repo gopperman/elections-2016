@@ -1,6 +1,11 @@
+import * as d3 from 'd3'
+
 // Builds an array of objects for a single row of the
 // Senate balance of power visualization
 const buildRow = (dem, gop, undecided ) => {
+
+	const demArray = d3.range(0, dem) // [0, 1, 2, 3, 4]
+
 	let row = [];
 	let seatNum = 1;
 	while (dem--) {
@@ -13,13 +18,13 @@ const buildRow = (dem, gop, undecided ) => {
 		row.push({
 			seat: seatNum++,
 			party: 'undecided',
-		})	
+		})
 	}
 	while (gop--) {
 		row.push({
 			seat: seatNum++,
 			party: 'gop',
-		})	
+		})
 	}
 	return row
 }
