@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route } from 'react-router'
+import { Route, IndexRoute } from 'react-router'
 import App from './components/App.js'
 import Election from './containers/Election.js'
 import Homepage from './containers/Homepage.js'
@@ -10,11 +10,11 @@ import Town from './containers/Town.js'
 
 export default (
 	<Route path='/' component={App}>
-		<Route path='homepage' component={Homepage} />
-		<Route path='election' component={Election} />
-		<Route path='president' component={PresidentUS} />
-		<Route path='president/massachusetts' component={PresidentMA} />
-		<Route path='race' component={Race} />
-		<Route path='town/:townName' component={Town} />
+		<IndexRoute component={Homepage} />
+		<Route path='2016/election' component={Election} />
+		<Route path='2016/president' component={PresidentUS} />
+		<Route path='2016/president/massachusetts' component={PresidentMA} />
+		<Route path='2016/race' component={Race} />
+		<Route path='2016/town/:townName' component={Town} />
 	</Route>
 )
