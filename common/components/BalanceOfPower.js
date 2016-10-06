@@ -4,8 +4,7 @@
 
 import React, { Component, PropTypes } from 'react'
 import * as d3 from 'd3'
-
-// import { buildSeats } from './../utils/visUtils.js'
+import { buildSeats } from './../utils/visUtils.js'
 
 class BalanceOfPower extends Component {
 
@@ -34,6 +33,63 @@ class BalanceOfPower extends Component {
 
 		// Draw chart (although at this point we might not have data).
 		this.drawChart()
+	}
+
+	// This is invoked before rendering when new props or state are being
+	// received. This method is not called for the initial render or when
+	// `forceUpdate` is used.
+	shouldComponentUpdate(nextProps) {
+
+		// // Update component if `dem` or `gop` has changed.
+		// const { dem, gop } = this.props
+		// const newDem = nextProps.dem
+		// const newGop = nextProps.gop
+
+		// TODO: implement
+		return false
+
+	}
+
+	// This is invoked immediately after the component's updates are flushed
+	// to the DOM. This method is not called for the initial render.
+	componentDidUpdate() {
+
+		// After the component updates, draw chart.
+		this.drawChart()
+
+	}
+
+	drawChart = () => {
+
+		// Get the data.
+		const senate = buildSeats(this.props.dem, this.props.gop, 100, 4)
+
+		// Select the svg node.
+		const svg = d3.select(this._svg)
+
+		// Select all `g` and join them to a senate row.
+		const row = svg.selectAll('g')
+				.data(senate)
+
+		// Append `g` and set its ENTER attributes (in this case only `transform`).
+		const rowEnter = row.enter().append('g')
+				.attr('transform', (d, i) => `translate(0, ${i * 20})`)
+
+		// Select all `circles` of `g` and join to the row's seats.
+		const circle = rowEnter.selectAll('circle')
+				.data(d => d)
+
+		// The previous `data` function returns a UPDATE lifecycle.
+		// Use it to set the UPDATE attributes.
+		circle
+				.attr('class', d => d.party)
+
+		// Append `circle` and set its ENTER attributes.
+		circle.enter().append('circle')
+				.attr('r', 10)
+				.attr('cx', (d, i) => i * 20)
+				.attr('cy', 0)
+				.attr('class', d => d.party)
 
 // 		// Create margins.
 // 		const container = document.getElementById('root')
@@ -44,7 +100,6 @@ class BalanceOfPower extends Component {
 // 		const height = outerHeight - margin.top - margin.bottom
 // 		const baseRadius = 80
 
-// 		const senate = buildSeats(this.props.dem, this.props.gop, 100, 4)
 
 // 		// Create svg.
 // 		const svg = d3.select('.balanceOfPower').append('svg')
@@ -70,39 +125,13 @@ class BalanceOfPower extends Component {
 // 						.attr("class", (d) => ('.balance__circle--' + d.party))
 // 				})
 
-	}
-
-	// This is invoked before rendering when new props or state are being
-	// received. This method is not called for the initial render or when
-	// `forceUpdate` is used.
-	shouldComponentUpdate(nextProps) {
-
-		// Update component if `dem` or `gop` has changed.
-		const { dem, gop } = this.props
-		const newDem = nextProps.dem
-		const newGop = nextProps.gop
-
-		// TODO: implement
-		return false
-
-	}
-
-	// This is invoked immediately after the component's updates are flushed
-	// to the DOM. This method is not called for the initial render.
-	componentDidUpdate() {
-
-		// After the component updates, draw chart.
-		this.drawChart()
-
-	}
-
-	drawChart = () => {
 
 		console.log('here we will draw the chart')
 
 	}
 
 	render() {
+
 		return (
 			<div className='balanceOfPower'>
 				<h1>Balance of Power</h1>
