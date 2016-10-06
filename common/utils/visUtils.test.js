@@ -1,15 +1,34 @@
+/* global describe, it, afterEach */
+
 import assert from 'assert'
 import { buildSeats, buildRow } from './visUtils.js'
 
 describe('visUtils', () => {
 	describe('buildSeats', () => {
 		it('should return empty when no rows', () => {
-			assert.deepEqual(buildSeats(0,0,0,0),[])
+
+			const props = {
+				dem: 0,
+				gop: 0,
+				total: 0,
+				rows: 0,
+			}
+
+			assert.deepEqual(buildSeats(props), [])
 		})
 
 		it('should return the correct number of rows', () => {
-			const rows = buildSeats(20,20,40,4)
-			assert.equal(rows.length, 4)
+
+			const props = {
+				dem: 20,
+				gop: 20,
+				total: 40,
+				rows: 4,
+			}
+
+			const seats = buildSeats(props)
+
+			assert.equal(seats.length, 4)
 		})
 
 		it('should return a well-formed "seating chart"', () => {
@@ -51,17 +70,19 @@ describe('visUtils', () => {
 					},
 				],
 			]
-			assert.deepEqual(buildSeats(2,2,8,2), expected)
+
+			const seats = buildSeats({ dem: 2, gop: 2, total: 8, rows: 2})
+			assert.deepEqual(seats, expected)
 		})
 	})
 
 	describe('buildRow', () => {
 		it('should return empty when no results', () => {
-			assert.deepEqual(buildRow(0,0,0), [])
+			assert.deepEqual(buildRow({ dem: 0, gop: 0, undecided: 0 }), [])
 		})
 
 		it('should build a row of dems, undecideds, then gop', () => {
-			assert.deepEqual(buildRow(2,0,0), [
+			assert.deepEqual(buildRow({ dem: 2, gop: 0, undecided: 0 }), [
 				{
 					seat: 1,
 					party: 'dem',
@@ -71,7 +92,7 @@ describe('visUtils', () => {
 					party: 'dem',
 				},
 			])
-			assert.deepEqual(buildRow(0,2,0), [
+			assert.deepEqual(buildRow({ dem: 0, gop: 2, undecided: 0 }), [
 				{
 					seat: 1,
 					party: 'gop',
@@ -81,7 +102,7 @@ describe('visUtils', () => {
 					party: 'gop',
 				},
 			])
-			assert.deepEqual(buildRow(1,1,2), [
+			assert.deepEqual(buildRow({ dem: 1, gop: 1, undecided: 2 }), [
 				{
 					seat: 1,
 					party: 'dem',

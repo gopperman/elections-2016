@@ -2,7 +2,7 @@ import * as d3 from 'd3'
 
 // Builds an array of objects for a single row of the
 // Senate balance of power visualization
-const buildRow = (dem, gop, undecided ) => {
+const buildRow = ({ dem, gop, undecided }) => {
 
 	const demArray = d3.range(0, dem) // [0, 1, 2, 3, 4]
 
@@ -30,7 +30,7 @@ const buildRow = (dem, gop, undecided ) => {
 }
 
 // Builds a seating chart for the Senate balance of power visualization
-const buildSeats = (dem, gop, total, rows) => {
+const buildSeats = ({dem, gop, total, rows}) => {
 
 	let d, r, u, seats = []
 	const seatsPerRow = Math.floor(total / rows)
@@ -59,7 +59,7 @@ const buildSeats = (dem, gop, total, rows) => {
 
 		u = (seatsTaken >= seatsPerRow) ? 0 : seatsPerRow - d - r 
 
-		seats.push(buildRow(d,r,u))
+		seats.push(buildRow({dem: d, gop: r, undecided: u }))
 	}
 
 	return seats
