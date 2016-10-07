@@ -4,8 +4,7 @@
 import React, { Component, PropTypes } from 'react'
 import { interval } from 'd3-timer'
 
-// Hardcode duration to `3` for now.
-const DURATION = 3 * 1000
+const DURATION = 15 * 1000
 
 class Timer extends Component {
 
