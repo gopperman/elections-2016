@@ -57,13 +57,13 @@ const fetchResults = ({ url }) =>
 			if (location) {
 
 				// use the window location to construct the full url.
-				fullUrl = `${window.location.origin}/${url}`
+				fullUrl = `${window.location.origin}/electionapi/elections/${url}`
 
 			} else {
 
 				// But if we're on the server,
 				// use an env variable to construct the full url.
-				fullUrl = `${process.env.API_URL}/${url}`
+				fullUrl = `${process.env.API_URL}/electionapi/elections/${url}`
 
 			}
 
