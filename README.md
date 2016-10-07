@@ -18,8 +18,8 @@ Please note: do not reproduce Boston Globe logos or fonts without written permis
 
 ## prod
 
--   `API_URL=<API_URL> npm run build`
--   `API_URL=<API_URL> PORT=<PORT> npm run prod`
+-   `npm run build`
+-   `API_URL=<API_URL> npm run prod`
 
 ## License
 

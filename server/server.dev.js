@@ -8,7 +8,7 @@ import api from './api.js'
 import webpackConfig from './../webpack.config.dev.js'
 
 const app = express()
-const port = 3001
+const port = process.env.PORT || 3001
 
 // Get webpack config
 const compiler = webpack(webpackConfig)

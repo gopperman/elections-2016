@@ -3,7 +3,7 @@ import compression from 'compression'
 import handleRender from './handleRender.js'
 
 const app = express()
-const port = process.env.PORT
+const port = process.env.PORT || 3001
 
 // enable compression
 app.use(compression())
