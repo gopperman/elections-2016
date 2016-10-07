@@ -113,30 +113,6 @@ class BalanceOfPower extends Component {
 				.attr('class', d => d.party)
 	}
 
-// 		// Create svg.
-// 		const svg = d3.select('.balanceOfPower').append('svg')
-// 				.attr('width', width + margin.left + margin.right)
-// 				.attr('height', height + margin.top + margin.bottom)
-// 			.append('g')
-// 				.attr('transform', `translate(${outerWidth/2}, ${outerHeight/2})`)
-
-// 		svg.selectAll('.seat')
-// 				.data(senate)
-// 			.enter().append('g')
-// 				.each(function(d, i) {
-// 						d3.select(this).selectAll('.seat')
-// 						.data(d)
-// 					.enter().append('circle')
-// 						.attr('cx', (d, j) =>
-// 							(baseRadius + (i+1) * 16) * Math.cos(Math.PI/(senate[0].length - 1) * j)
-// 						)
-// 						.attr('cy', (d, j) =>
-// 							-((baseRadius + (i+1) * 16) * Math.sin(Math.PI/(senate[0].length - 1) * j))
-// 						)
-// 						.attr('r', 5)
-// 						.attr("class", (d) => ('.balance__circle--' + d.party))
-// 				})
-
 	render() {
 
 		return (
