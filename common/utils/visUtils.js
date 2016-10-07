@@ -30,7 +30,7 @@ const buildRow = ({ dem, gop, undecided }) => {
 }
 
 // Builds a seating chart for the Senate balance of power visualization
-const buildSeats = ({dem, gop, total, rows}) => {
+const buildSeats = (dem, gop, total, rows) => {
 
 	let d, r, u, seats = []
 	const seatsPerRow = Math.floor(total / rows)

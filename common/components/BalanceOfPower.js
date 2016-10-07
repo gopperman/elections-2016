@@ -4,6 +4,7 @@
 
 import React, { Component, PropTypes } from 'react'
 import * as d3 from 'd3'
+import deepEqual from 'deep-equal'
 import { buildSeats } from './../utils/visUtils.js'
 
 class BalanceOfPower extends Component {
@@ -12,6 +13,8 @@ class BalanceOfPower extends Component {
 		dem: PropTypes.number.isRequired,
 		gop: PropTypes.number.isRequired,
 	}
+
+	
 
 	// This lifecycle event gets called once, immediately after the initial
 	// rendering occurs.
@@ -29,7 +32,8 @@ class BalanceOfPower extends Component {
 		const height = outerHeight - margin.top - margin.bottom
 
 		// Set viewBox on svg.
-		d3.select(this._svg).attr('viewBox', `0 0 ${width} ${height}`)
+		d3.select(this._svg)
+			.attr('viewBox', `0 0 ${width} ${height}`)
 
 		// Draw chart (although at this point we might not have data).
 		this.drawChart()
@@ -45,8 +49,8 @@ class BalanceOfPower extends Component {
 		// const newDem = nextProps.dem
 		// const newGop = nextProps.gop
 
-		// TODO: implement
-		return false
+		// If dem or gop numbers change, update
+		return !(deepEqual(this.props.dem, nextProps.dem) && deepEqual(this.props.gop, nextProps.gop))
 
 	}
 
@@ -60,6 +64,14 @@ class BalanceOfPower extends Component {
 	}
 
 	drawChart = () => {
+		// Create outer width from container.
+		const outerWidth = this._svg.parentNode.offsetWidth
+
+		// Set outer height from outer width.
+		const outerHeight = outerWidth
+
+		// Set baseline radius of each row
+		const baseRadius = 80
 
 		// Get the data.
 		const senate = buildSeats(this.props.dem, this.props.gop, 100, 4)
@@ -73,11 +85,16 @@ class BalanceOfPower extends Component {
 
 		// Append `g` and set its ENTER attributes (in this case only `transform`).
 		const rowEnter = row.enter().append('g')
-				.attr('transform', (d, i) => `translate(0, ${i * 20})`)
+				.attr('transform', (d, i) => `translate(${outerWidth/2}, ${outerHeight/2})`)
 
 		// Select all `circles` of `g` and join to the row's seats.
 		const circle = rowEnter.selectAll('circle')
-				.data(d => d)
+				.data((d, row) => 
+					d.map(e => ({
+						...e,
+						row,
+					}))
+				)
 
 		// The previous `data` function returns a UPDATE lifecycle.
 		// Use it to set the UPDATE attributes.
@@ -86,20 +103,15 @@ class BalanceOfPower extends Component {
 
 		// Append `circle` and set its ENTER attributes.
 		circle.enter().append('circle')
-				.attr('r', 10)
-				.attr('cx', (d, i) => i * 20)
-				.attr('cy', 0)
+				.attr('r', 5)
+				.attr('cx', (d, i) => 
+					((baseRadius + (d.row + 1) * 16) * Math.cos(Math.PI/(senate[0].length - 1) * i))
+				)
+				.attr('cy', (d, i) =>
+					-((baseRadius + (d.row + 1) * 16) * Math.sin(Math.PI/(senate[0].length - 1) * i))
+				)
 				.attr('class', d => d.party)
-
-// 		// Create margins.
-// 		const container = document.getElementById('root')
-// 		const outerWidth = container.offsetWidth
-// 		const outerHeight = outerWidth
-
-// 		const width = outerWidth - margin.left - margin.right
-// 		const height = outerHeight - margin.top - margin.bottom
-// 		const baseRadius = 80
-
+	}
 
 // 		// Create svg.
 // 		const svg = d3.select('.balanceOfPower').append('svg')
@@ -124,11 +136,6 @@ class BalanceOfPower extends Component {
 // 						.attr('r', 5)
 // 						.attr("class", (d) => ('.balance__circle--' + d.party))
 // 				})
-
-
-		console.log('here we will draw the chart')
-
-	}
 
 	render() {
 
