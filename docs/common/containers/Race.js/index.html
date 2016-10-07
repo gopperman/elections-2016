@@ -48,19 +48,6 @@
 <li class="file separator">
   
   
-<a href="../../components/MassMap.js" title="common/components/MassMap.js">
-    
-<span class="language" style="background-color: #f1e05a">js</span>
-
-
-<span class="filename">common/components/MassMap.js</span>
-
-</a>
-
-</li>
-  
-<li class="file">
-  
 <a href="../../components/RaceSummary.js" title="common/components/RaceSummary.js">
     
 <span class="language" style="background-color: #f1e05a">js</span>
@@ -113,19 +100,6 @@
   
 <li class="file">
   
-<a href="../../components/Tooltip.js" title="common/components/Tooltip.js">
-    
-<span class="language" style="background-color: #f1e05a">js</span>
-
-
-<span class="filename">common/components/Tooltip.js</span>
-
-</a>
-
-</li>
-  
-<li class="file">
-  
 <a href="../../components/TownResultsTable.js" title="common/components/TownResultsTable.js">
     
 <span class="language" style="background-color: #f1e05a">js</span>
@@ -145,19 +119,6 @@
 
 
 <span class="filename">common/components/TownResultsTableRow.js</span>
-
-</a>
-
-</li>
-<li class="file separator">
-  
-  
-<a href="../President.js" title="common/containers/President.js">
-    
-<span class="language" style="background-color: #f1e05a">js</span>
-
-
-<span class="filename">common/containers/President.js</span>
 
 </a>
 
@@ -200,31 +161,44 @@
 <span class="hljs-keyword">import</span> { bindActionCreators } <span class="hljs-keyword">from</span> <span class="hljs-string">'redux'</span>
 <span class="hljs-keyword">import</span> { connect } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-redux'</span>
 <span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> actions <span class="hljs-keyword">from</span> <span class="hljs-string">'./../actions/actionCreators.js'</span>
-<span class="hljs-keyword">import</span> { getRaceUnits } <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/dataUtil.js'</span>
+<span class="hljs-keyword">import</span> { getRaceUnits, getPresidentSummaryState } <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/dataUtil.js'</span>
 <span class="hljs-keyword">import</span> Timer <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/Timer.js'</span>
-<span class="hljs-keyword">import</span> RaceSummary <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/RaceSummary.js'</span>
-<span class="hljs-keyword">import</span> MassMap <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/MassMap.js'</span>
-<span class="hljs-keyword">import</span> TownResultsTable <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/TownResultsTable.js'</span>
+<span class="hljs-keyword">import</span> Header <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/templates/Header.js'</span>
+<span class="hljs-keyword">import</span> Footer <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/templates/Footer.js'</span></code></pre>
+  </div>
 
-<span class="hljs-keyword">const</span> hooks = {
-	fetch: ({ dispatch }) =&gt;
-		dispatch(actions.fetchResults({ url: <span class="hljs-string">'race'</span> })),
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>import RaceSummary from &#39;./../components/RaceSummary.js&#39;
+import MassMap from &#39;./../components/MassMap.js&#39;
+import TownResultsTable from &#39;./../components/TownResultsTable.js&#39;</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code><span class="hljs-keyword">const</span> hooks = {
+	<span class="hljs-attr">fetch</span>: <span class="hljs-function">(<span class="hljs-params">{ dispatch }</span>) =&gt;</span>
+		dispatch(actions.fetchResults({ <span class="hljs-attr">url</span>: <span class="hljs-string">'race'</span> })),
 }
 
-<span class="hljs-keyword">const</span> mapDispatchToProps = (dispatch) =&gt; ({
+<span class="hljs-keyword">const</span> mapDispatchToProps = <span class="hljs-function">(<span class="hljs-params">dispatch</span>) =&gt;</span> ({
 	dispatch,
-	actions: bindActionCreators(actions, dispatch),
+	<span class="hljs-attr">actions</span>: bindActionCreators(actions, dispatch),
 })
 
 @provideHooks(hooks)
-@connect(s =&gt; s, mapDispatchToProps)
+@connect(<span class="hljs-function"><span class="hljs-params">s</span> =&gt;</span> s, mapDispatchToProps)
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Race</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
 
 	<span class="hljs-keyword">static</span> propTypes = {
-		actions: PropTypes.object.isRequired,
-		timer: PropTypes.object.isRequired,
-		results: PropTypes.object.isRequired,
-		dispatch: PropTypes.func.isRequired,
+		<span class="hljs-attr">actions</span>: PropTypes.object.isRequired,
+		<span class="hljs-attr">timer</span>: PropTypes.object.isRequired,
+		<span class="hljs-attr">results</span>: PropTypes.object.isRequired,
+		<span class="hljs-attr">dispatch</span>: PropTypes.func.isRequired,
 	}</code></pre>
   </div>
 
@@ -239,11 +213,11 @@
   
 
   <div class="code">
-    <pre><code>	componentDidMount = () =&gt; {
+    <pre><code>	componentDidMount = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
 		<span class="hljs-keyword">this</span>.fetchData()
 	}
 
-	componentDidUpdate = (prevProps) =&gt; {
+	componentDidUpdate = <span class="hljs-function">(<span class="hljs-params">prevProps</span>) =&gt;</span> {
 
 		<span class="hljs-keyword">const</span> { props } = <span class="hljs-keyword">this</span>
 		<span class="hljs-keyword">const</span> { startTimer, cancelTimer } = props.actions</code></pre>
@@ -298,8 +272,8 @@
 
 	}
 
-	fetchData = () =&gt; {
-		hooks.fetch({ dispatch: <span class="hljs-keyword">this</span>.props.dispatch })
+	fetchData = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+		hooks.fetch({ <span class="hljs-attr">dispatch</span>: <span class="hljs-keyword">this</span>.props.dispatch })
 	}
 
 	count = <span class="hljs-number">0</span>
@@ -307,18 +281,7 @@
 	render() {
 
 		<span class="hljs-keyword">const</span> { props, fetchData } = <span class="hljs-keyword">this</span>
-		<span class="hljs-keyword">const</span> { timer, results, selection } = props
-		<span class="hljs-keyword">const</span> { stopTimer, selectFeature } = props.actions
-
-		<span class="hljs-keyword">const</span> timerProps = {
-			...timer,
-			callback: () =&gt; {
-				stopTimer()
-				fetchData()
-			},
-		}
-
-		<span class="hljs-keyword">const</span> race = results.data[<span class="hljs-string">'senate-ma-towns'</span>]</code></pre>
+		<span class="hljs-keyword">const</span> { timer, results } = props</code></pre>
   </div>
 
   
@@ -326,7 +289,55 @@
 <section class="section">
 
   <aside class="comment">
-    <div class="text markdown"><p>Let&#39;s get the name of the office we&#39;re reporting on</p>
+    <div class="text markdown"><p>const { timer, results, selection } = props</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">const</span> { stopTimer } = props.actions</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>const { stopTimer, selectFeature } = props.actions</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">const</span> timerProps = {
+			...timer,
+			<span class="hljs-attr">callback</span>: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+				stopTimer()
+				fetchData()
+			},
+		}</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Get API results.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">const</span> race = results.data[<span class="hljs-string">'senate-ma-towns'</span>]</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Let&#39;s get the name of the office we&#39;re reporting on.</p>
 </div>
   </aside>
   
@@ -360,15 +371,41 @@
   
 
   <div class="code">
-    <pre><code>		<span class="hljs-keyword">const</span> state = _.find(units, { level: <span class="hljs-string">'state'</span> })
+    <pre><code>		<span class="hljs-keyword">const</span> state = _.find(units, { <span class="hljs-attr">level</span>: <span class="hljs-string">'state'</span> })</code></pre>
+  </div>
 
-		<span class="hljs-keyword">return</span> (
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>&lt;MassMap {...{ selection, selectFeature, race }} /&gt;</p>
+</div>
+  </aside>
+  
+
+
+  <div class="code empty">
+    <pre><code></code></pre>
+  </div>
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>&lt;TownResultsTable {...{ race }} /&gt;</p>
+<p>&lt;RaceSummary unit={state} raceTitle /&gt;</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">return</span> (
 			&lt;div className='Race'&gt;
+				&lt;Header summaryState={getPresidentSummaryState(results.data['president-us-states'])} /&gt;
 				&lt;h1&gt;{state.stateName} {raceTitle}&lt;/h1&gt;
 				&lt;Timer {...timerProps} /&gt;
-				&lt;RaceSummary {...{ race }} /&gt;
-				&lt;MassMap {...{ selection, selectFeature, race }} /&gt;
-				&lt;TownResultsTable {...{ race }} /&gt;
+				&lt;Footer /&gt;
 			&lt;/div&gt;
 		)
 
@@ -391,7 +428,7 @@ export default Race</code></pre>
         </aside>
 
         <div class="code">
-          <span class="content page-generation-time">Generated Fri, 16 Sep 2016 22:37:10 GMT</span>
+          <span class="content page-generation-time">Generated Fri, 07 Oct 2016 18:36:13 GMT</span>
         </div>
         
       </section>

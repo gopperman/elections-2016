@@ -48,19 +48,6 @@
 <li class="file separator">
   
   
-<a href="../MassMap.js" title="common/components/MassMap.js">
-    
-<span class="language" style="background-color: #f1e05a">js</span>
-
-
-<span class="filename">common/components/MassMap.js</span>
-
-</a>
-
-</li>
-  
-<li class="file">
-  
 <a href="../RaceSummary.js" title="common/components/RaceSummary.js">
     
 <span class="language" style="background-color: #f1e05a">js</span>
@@ -100,19 +87,6 @@
   
 <li class="file">
   
-<a href="../Tooltip.js" title="common/components/Tooltip.js">
-    
-<span class="language" style="background-color: #f1e05a">js</span>
-
-
-<span class="filename">common/components/Tooltip.js</span>
-
-</a>
-
-</li>
-  
-<li class="file">
-  
 <a href="../TownResultsTable.js" title="common/components/TownResultsTable.js">
     
 <span class="language" style="background-color: #f1e05a">js</span>
@@ -138,19 +112,6 @@
 </li>
 <li class="file separator">
   
-  
-<a href="../../containers/President.js" title="common/containers/President.js">
-    
-<span class="language" style="background-color: #f1e05a">js</span>
-
-
-<span class="filename">common/containers/President.js</span>
-
-</a>
-
-</li>
-  
-<li class="file">
   
 <a href="../../containers/Race.js" title="common/containers/Race.js">
     
@@ -215,9 +176,9 @@ until next action (whatever that may be).</p>
 <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Timer</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
 
 	<span class="hljs-keyword">static</span> propTypes = {
-		status: PropTypes.string.isRequired,
-		startedAt: PropTypes.number,
-		callback: PropTypes.func.isRequired,
+		<span class="hljs-attr">status</span>: PropTypes.string.isRequired,
+		<span class="hljs-attr">startedAt</span>: PropTypes.number,
+		<span class="hljs-attr">callback</span>: PropTypes.func.isRequired,
 	}</code></pre>
   </div>
 
@@ -234,8 +195,8 @@ will call <code>this.forceUpdate</code> every 100ms.</p>
   
 
   <div class="code">
-    <pre><code>	componentDidMount = () =&gt; {
-		<span class="hljs-keyword">this</span>.interval = interval(() =&gt; {
+    <pre><code>	componentDidMount = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+		<span class="hljs-keyword">this</span>.interval = interval(<span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
 			<span class="hljs-keyword">this</span>.forceUpdate()
 		}, <span class="hljs-number">100</span>)
 	}</code></pre>
@@ -253,7 +214,7 @@ We will use it to determine if we ran out of time.</p>
   
 
   <div class="code">
-    <pre><code>	componentDidUpdate = () =&gt; {
+    <pre><code>	componentDidUpdate = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
 
 		<span class="hljs-keyword">const</span> { status, startedAt, callback } = <span class="hljs-keyword">this</span>.props</code></pre>
   </div>
@@ -302,7 +263,7 @@ from the DOM. This is a good place to stop the <code>interval</code> timer.</p>
   
 
   <div class="code">
-    <pre><code>	componentWillUnmount = () =&gt; {
+    <pre><code>	componentWillUnmount = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
 		<span class="hljs-keyword">this</span>.interval.stop()
 	}
 
@@ -424,9 +385,9 @@ on the <code>Timer</code> state.</p>
 
   <div class="code">
     <pre><code>Timer.status = {
-	CANCELED: <span class="hljs-string">'canceled'</span>,
-	RUNNING: <span class="hljs-string">'running'</span>,
-	STOPPED: <span class="hljs-string">'stopped'</span>,
+	<span class="hljs-attr">CANCELED</span>: <span class="hljs-string">'canceled'</span>,
+	<span class="hljs-attr">RUNNING</span>: <span class="hljs-string">'running'</span>,
+	<span class="hljs-attr">STOPPED</span>: <span class="hljs-string">'stopped'</span>,
 }
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Timer</code></pre>
@@ -444,7 +405,7 @@ on the <code>Timer</code> state.</p>
         </aside>
 
         <div class="code">
-          <span class="content page-generation-time">Generated Fri, 16 Sep 2016 22:37:10 GMT</span>
+          <span class="content page-generation-time">Generated Fri, 07 Oct 2016 18:36:13 GMT</span>
         </div>
         
       </section>

@@ -82,9 +82,15 @@
                       </a></li>
                     
                       <li><a
-                        href='#CandidatessortByIDs'
+                        href='#CandidatessortByPolIDs'
                         class='regular pre-open'>
-                        .sortByIDs
+                        .sortByPolIDs
+                      </a></li>
+                    
+                      <li><a
+                        href='#CandidatessortByCandidateIDs'
+                        class='regular pre-open'>
+                        .sortByCandidateIDs
                       </a></li>
                     
                       <li><a
@@ -119,7 +125,7 @@
       Candidate
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/BostonGlobe/elections-2016/blob/a65d2c652594679059d9edb4c39029c1a1e4bb0f/common/utils/Candidate.js#L3-L3'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/BostonGlobe/elections-2016/blob/1ef5eb43b4032d18a6dcc3253f071dbdb50094a3/common/utils/Candidate.js#L3-L3'>
       <span>common/utils/Candidate.js</span>
       </a>
     
@@ -345,7 +351,7 @@
       Candidates
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/BostonGlobe/elections-2016/blob/a65d2c652594679059d9edb4c39029c1a1e4bb0f/common/utils/Candidates.js#L3-L3'>
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/BostonGlobe/elections-2016/blob/1ef5eb43b4032d18a6dcc3253f071dbdb50094a3/common/utils/Candidates.js#L5-L5'>
       <span>common/utils/Candidates.js</span>
       </a>
     
@@ -390,7 +396,7 @@
 
   
 
-  <p>Sort candidates by electoral votes won and leading, in that order.</p>
+  <p>Sort candidates by electoral votes won and voteCount, in that order.</p>
 
 
   <div class='pre p1 fill-light mt0'>sortByElectoralCount(candidates: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></div>
@@ -522,11 +528,112 @@
       </div>
     </div>
   
-    <div class='border-bottom' id='CandidatessortByIDs'>
+    <div class='border-bottom' id='CandidatessortByPolIDs'>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
             <a class='icon pin-right py1 dark-link caret-right'>▸</a>
-            <span class='code strong strong truncate'>sortByIDs($0)</span>
+            <span class='code strong strong truncate'>sortByPolIDs($0)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+
+  <p>Sort candidates by an external array of polIDs.</p>
+
+
+  <div class='pre p1 fill-light mt0'>sortByPolIDs($0: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></div>
+
+  
+
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>$0</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code> 
+          </div>
+          
+          <table class='mt1 mb2 fixed-table h5 col-12'>
+            <colgroup>
+              <col width='30%' />
+              <col width='70%' />
+            </colgroup>
+            <thead>
+              <tr class='bold fill-light'>
+                <th>Name</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody class='mt1'>
+              
+                <tr>
+                  <td class='break-word'><span class='code bold'>$0.candidates</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></code>
+                  </td>
+                  <td class='break-word'><span>an array of candidates
+</span></td>
+                </tr>
+              
+                <tr>
+                  <td class='break-word'><span class='code bold'>$0.polIDs</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></code>
+                  </td>
+                  <td class='break-word'><span>an array of candidate politician IDs, which are unique across all states and races (only for politicians who have run in a national race).
+</span></td>
+                </tr>
+              
+            </tbody>
+          </table>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></code>:
+        a new array of candidates, sorted. Does not mutate original array.
+
+      
+    
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'>sortByPolIDs({ candidates, polIDs }) <span class="hljs-comment">//=&gt; sortedCandidates</span></pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
+    <div class='border-bottom' id='CandidatessortByCandidateIDs'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>sortByCandidateIDs($0)</span>
         </div>
       </div>
       <div class="clearfix display-none toggle-target">
@@ -537,7 +644,7 @@
   <p>Sort candidates by an external array of candidateIDs.</p>
 
 
-  <div class='pre p1 fill-light mt0'>sortByIDs($0: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></div>
+  <div class='pre p1 fill-light mt0'>sortByCandidateIDs($0: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></div>
 
   
 
@@ -579,7 +686,7 @@
                 <tr>
                   <td class='break-word'><span class='code bold'>$0.candidateIDs</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></code>
                   </td>
-                  <td class='break-word'><span>an array of candidate IDs
+                  <td class='break-word'><span>an array of candidate IDs, which are unique for this candidate in a state&#x27;s race.
 </span></td>
                 </tr>
               
@@ -609,7 +716,7 @@
     <div class='py1 quiet mt1 prose-big'>Example</div>
     
       
-      <pre class='p1 overflow-auto round fill-light'>sortByIDs({ candidates, candidateIDs }) <span class="hljs-comment">//=&gt; sortedCandidates</span></pre>
+      <pre class='p1 overflow-auto round fill-light'>sortByCandidateIDs({ candidates, candidateIds }) <span class="hljs-comment">//=&gt; sortedCandidates</span></pre>
     
   
 

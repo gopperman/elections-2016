@@ -48,19 +48,6 @@
 <li class="file separator">
   
   
-<a href="../MassMap.js" title="common/components/MassMap.js">
-    
-<span class="language" style="background-color: #f1e05a">js</span>
-
-
-<span class="filename">common/components/MassMap.js</span>
-
-</a>
-
-</li>
-  
-<li class="file">
-  
 <a href="../StateResultsTable.js" title="common/components/StateResultsTable.js">
     
 <span class="language" style="background-color: #f1e05a">js</span>
@@ -100,19 +87,6 @@
   
 <li class="file">
   
-<a href="../Tooltip.js" title="common/components/Tooltip.js">
-    
-<span class="language" style="background-color: #f1e05a">js</span>
-
-
-<span class="filename">common/components/Tooltip.js</span>
-
-</a>
-
-</li>
-  
-<li class="file">
-  
 <a href="../TownResultsTable.js" title="common/components/TownResultsTable.js">
     
 <span class="language" style="background-color: #f1e05a">js</span>
@@ -138,19 +112,6 @@
 </li>
 <li class="file separator">
   
-  
-<a href="../../containers/President.js" title="common/containers/President.js">
-    
-<span class="language" style="background-color: #f1e05a">js</span>
-
-
-<span class="filename">common/containers/President.js</span>
-
-</a>
-
-</li>
-  
-<li class="file">
   
 <a href="../../containers/Race.js" title="common/containers/Race.js">
     
@@ -194,27 +155,14 @@
   
 
   <div class="code">
-    <pre><code><span class="hljs-keyword">import</span> _ <span class="hljs-keyword">from</span> <span class="hljs-string">'lodash'</span>
-<span class="hljs-keyword">import</span> React, { PropTypes } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
+    <pre><code><span class="hljs-keyword">import</span> React, { PropTypes } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
 <span class="hljs-keyword">import</span> addCommas <span class="hljs-keyword">from</span> <span class="hljs-string">'add-commas'</span>
 <span class="hljs-keyword">import</span> { fullName, percent } <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/Candidate.js'</span>
 <span class="hljs-keyword">import</span> { sortByVoteCount, totalVotes } <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/Candidates.js'</span>
-<span class="hljs-keyword">import</span> { getRaceUnits } <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/dataUtil.js'</span>
-<span class="hljs-keyword">import</span> { percentForDisplay } <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/standardize.js'</span></code></pre>
-  </div>
+<span class="hljs-keyword">import</span> { percentForDisplay } <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/standardize.js'</span>
+<span class="hljs-keyword">import</span> RaceSummaryRow <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/templates/RaceSummaryRow'</span>
 
-  
-</section>
-<section class="section">
-
-  <aside class="comment">
-    <div class="text markdown"><p>TODO: implement</p>
-</div>
-  </aside>
-  
-
-  <div class="code">
-    <pre><code><span class="hljs-keyword">const</span> createSummary = (raceName) =&gt;</code></pre>
+<span class="hljs-keyword">const</span> createSummary = <span class="hljs-function">(<span class="hljs-params">raceName</span>) =&gt;</span></code></pre>
   </div>
 
   
@@ -228,37 +176,9 @@
   
 
   <div class="code">
-    <pre><code>	<span class="hljs-string">`A table that has the candidate percent and vote count across the top and the town down the left hand side for the <span class="hljs-subst">${raceName}</span>.`</span>
+    <pre><code>	<span class="hljs-string">`A table that has the candidate, percent, and vote count across the top and the candidates down the left hand side for the <span class="hljs-subst">${raceName}</span>.`</span>
 
-<span class="hljs-keyword">const</span> RaceSummary = ({ race }) =&gt; {</code></pre>
-  </div>
-
-  
-</section>
-<section class="section">
-
-  <aside class="comment">
-    <div class="text markdown"><p>Get this race&#39;s reporting units.</p>
-</div>
-  </aside>
-  
-
-  <div class="code">
-    <pre><code>	<span class="hljs-keyword">const</span> units = getRaceUnits(race)</code></pre>
-  </div>
-
-  
-</section>
-<section class="section">
-
-  <aside class="comment">
-    <div class="text markdown"><p>Get the statewide unit.</p>
-</div>
-  </aside>
-  
-
-  <div class="code">
-    <pre><code>	<span class="hljs-keyword">const</span> state = _.find(units, { level: <span class="hljs-string">'state'</span> })</code></pre>
+<span class="hljs-keyword">const</span> RaceSummary = <span class="hljs-function">(<span class="hljs-params">{ unit, raceTitle }</span>) =&gt;</span> {</code></pre>
   </div>
 
   
@@ -272,7 +192,7 @@
   
 
   <div class="code">
-    <pre><code>	<span class="hljs-keyword">const</span> summaryCandidates = sortByVoteCount(state.candidates)</code></pre>
+    <pre><code>	<span class="hljs-keyword">const</span> summaryCandidates = sortByVoteCount(unit.candidates)</code></pre>
   </div>
 
   
@@ -280,16 +200,19 @@
 <section class="section">
 
   <aside class="comment">
-    <div class="text markdown"><p>Get total votes.</p>
+    <div class="text markdown"><p>Get total votes, with commas.</p>
 </div>
   </aside>
   
 
   <div class="code">
-    <pre><code>	<span class="hljs-keyword">const</span> votesCast = addCommas(totalVotes(state.candidates))
+    <pre><code>	<span class="hljs-keyword">const</span> votesCast = addCommas(totalVotes(unit.candidates))
 
-	<span class="hljs-keyword">const</span> rows = summaryCandidates.map((candidate, i, array) =&gt; {
-		<span class="hljs-keyword">const</span> { candidateID, voteCount } = candidate</code></pre>
+	<span class="hljs-keyword">const</span> rows = summaryCandidates.map(<span class="hljs-function">(<span class="hljs-params">candidate, i, array</span>) =&gt;</span> {
+
+		<span class="hljs-keyword">const</span> { candidateID, voteCount } = candidate
+
+		<span class="hljs-keyword">const</span> candidateName = fullName(candidate)</code></pre>
   </div>
 
   
@@ -317,7 +240,7 @@
   
 
   <div class="code">
-    <pre><code>		<span class="hljs-keyword">const</span> pct = percent({ candidates: array, candidateID })</code></pre>
+    <pre><code>		<span class="hljs-keyword">const</span> pct = percent({ <span class="hljs-attr">candidates</span>: array, candidateID })</code></pre>
   </div>
 
   
@@ -334,30 +257,19 @@
     <pre><code>		<span class="hljs-keyword">const</span> pctForDisplay = percentForDisplay(pct)
 
 		<span class="hljs-keyword">const</span> barStyle = {
-			width: <span class="hljs-string">`<span class="hljs-subst">${pctForDisplay}</span>%`</span>,
+			<span class="hljs-attr">width</span>: <span class="hljs-string">`<span class="hljs-subst">${pctForDisplay}</span>%`</span>,
 		}
 
-		<span class="hljs-keyword">const</span> barClass = <span class="hljs-string">`fill--<span class="hljs-subst">${i}</span>`</span>
-
 		<span class="hljs-keyword">return</span> (
-			<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">tr</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'state-t--row'</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{i}</span>&gt;</span>
-				<span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">scope</span>=<span class="hljs-string">'row'</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'state-t--candidate'</span>&gt;</span>
-					<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'state-t--meta'</span>&gt;</span>
-						<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'state-t--name'</span>&gt;</span>{fullName(candidate)}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-						<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'state-t--bar'</span>&gt;</span>
-							<span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{barClass}</span> <span class="hljs-attr">style</span>=<span class="hljs-string">{barStyle}</span> /&gt;</span>
-						<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-					<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-
-				<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
-
-				<span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'state-t--pct'</span>&gt;</span>{pctForDisplay}%<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
-
-				<span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'state-t--votes'</span>&gt;</span>
-					<span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'value'</span>&gt;</span>{vote}<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
-					<span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'suffix'</span>&gt;</span> votes<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>
-				<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
-			<span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+			<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">RaceSummaryRow</span>
+				{<span class="hljs-attr">...</span>{
+					<span class="hljs-attr">key:</span> <span class="hljs-attr">candidateID</span>,
+					<span class="hljs-attr">name:</span> <span class="hljs-attr">candidateName</span>,
+					<span class="hljs-attr">barStyle</span>,
+					<span class="hljs-attr">pctForDisplay</span>,
+					<span class="hljs-attr">vote</span>,
+				}}
+			/&gt;</span>
 		)
 	})</span></code></pre>
   </div>
@@ -374,14 +286,14 @@
 
   <div class="code">
     <pre><code>	<span class="hljs-keyword">return</span> (
-		<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'container'</span>&gt;</span>
-			<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'precincts-overall flex-item'</span> <span class="hljs-attr">aria-live</span>=<span class="hljs-string">{</span>'<span class="hljs-attr">polite</span>'}&gt;</span>{state.precinctsReportingPct}% precincts reporting ({votesCast} votes total)<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-			<span class="hljs-tag">&lt;<span class="hljs-name">table</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'state-t'</span> <span class="hljs-attr">summary</span>=<span class="hljs-string">{createSummary()}</span>&gt;</span>
-				<span class="hljs-tag">&lt;<span class="hljs-name">thead</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'state-t--hed'</span>&gt;</span>
+		<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{</span>`${<span class="hljs-attr">raceTitle</span>} <span class="hljs-attr">Summary</span>`}&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{unit.precinctsReportingPct}% precincts reporting ({votesCast} votes total)<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">table</span> <span class="hljs-attr">summary</span>=<span class="hljs-string">{createSummary(raceTitle)}</span>&gt;</span>
+				<span class="hljs-tag">&lt;<span class="hljs-name">thead</span>&gt;</span>
 					<span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
-						<span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">scope</span>=<span class="hljs-string">'col'</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'candidate'</span>&gt;</span>Candidate<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
-						<span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">scope</span>=<span class="hljs-string">'col'</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'percent'</span>&gt;</span>Percent<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
-						<span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">scope</span>=<span class="hljs-string">'col'</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'votes'</span>&gt;</span>Votes<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+						<span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">scope</span>=<span class="hljs-string">'col'</span>&gt;</span>Candidate<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+						<span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">scope</span>=<span class="hljs-string">'col'</span>&gt;</span>Percent<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+						<span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">scope</span>=<span class="hljs-string">'col'</span>&gt;</span>Votes<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
 					<span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
 				<span class="hljs-tag">&lt;/<span class="hljs-name">thead</span>&gt;</span>
 				<span class="hljs-tag">&lt;<span class="hljs-name">tbody</span>&gt;</span>
@@ -393,7 +305,8 @@
 }
 
 RaceSummary.propTypes = {
-	race: PropTypes.object.isRequired,
+	<span class="hljs-attr">unit</span>: PropTypes.object.isRequired,
+	<span class="hljs-attr">raceTitle</span>: PropTypes.string.isRequired,
 }
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> RaceSummary</code></pre>
@@ -411,7 +324,7 @@ RaceSummary.propTypes = {
         </aside>
 
         <div class="code">
-          <span class="content page-generation-time">Generated Fri, 16 Sep 2016 22:37:10 GMT</span>
+          <span class="content page-generation-time">Generated Fri, 07 Oct 2016 18:36:13 GMT</span>
         </div>
         
       </section>

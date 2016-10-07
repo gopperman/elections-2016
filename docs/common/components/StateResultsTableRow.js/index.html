@@ -48,19 +48,6 @@
 <li class="file separator">
   
   
-<a href="../MassMap.js" title="common/components/MassMap.js">
-    
-<span class="language" style="background-color: #f1e05a">js</span>
-
-
-<span class="filename">common/components/MassMap.js</span>
-
-</a>
-
-</li>
-  
-<li class="file">
-  
 <a href="../RaceSummary.js" title="common/components/RaceSummary.js">
     
 <span class="language" style="background-color: #f1e05a">js</span>
@@ -100,19 +87,6 @@
   
 <li class="file">
   
-<a href="../Tooltip.js" title="common/components/Tooltip.js">
-    
-<span class="language" style="background-color: #f1e05a">js</span>
-
-
-<span class="filename">common/components/Tooltip.js</span>
-
-</a>
-
-</li>
-  
-<li class="file">
-  
 <a href="../TownResultsTable.js" title="common/components/TownResultsTable.js">
     
 <span class="language" style="background-color: #f1e05a">js</span>
@@ -138,19 +112,6 @@
 </li>
 <li class="file separator">
   
-  
-<a href="../../containers/President.js" title="common/containers/President.js">
-    
-<span class="language" style="background-color: #f1e05a">js</span>
-
-
-<span class="filename">common/containers/President.js</span>
-
-</a>
-
-</li>
-  
-<li class="file">
   
 <a href="../../containers/Race.js" title="common/containers/Race.js">
     
@@ -188,21 +149,30 @@
       <section class="section">
 
   <aside class="comment">
-    <div class="text markdown"><p>The <code>StateResultsTableRow</code> class displays detailed results for a state row
-within a <code>StateResultsTable</code>.</p>
+    <div class="text markdown"><p>The <code>StateResultsTableRow</code> class displays detailed results for a state
+row within a <code>StateResultsTableRow</code>.</p>
 </div>
   </aside>
   
 
   <div class="code">
-    <pre><code><span class="hljs-keyword">import</span> _ <span class="hljs-keyword">from</span> <span class="hljs-string">'lodash'</span>
-<span class="hljs-keyword">import</span> React, { PropTypes } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
+    <pre><code><span class="hljs-keyword">import</span> React, { PropTypes } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
+<span class="hljs-keyword">import</span> _ <span class="hljs-keyword">from</span> <span class="hljs-string">'lodash'</span>
+
 <span class="hljs-keyword">import</span> addCommas <span class="hljs-keyword">from</span> <span class="hljs-string">'add-commas'</span>
 <span class="hljs-keyword">import</span> { percent } <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/Candidate.js'</span>
 <span class="hljs-keyword">import</span> { percentForDisplay } <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/standardize.js'</span>
-<span class="hljs-keyword">import</span> { sortByIDs } <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/Candidates.js'</span>
 
-<span class="hljs-keyword">const</span> StateResultsTableRow = ({ state, summaryCandidates }) =&gt; {</code></pre>
+<span class="hljs-keyword">const</span> StateResultsTableRow = ({ statePostal, precinctsReportingPct,
+candidates, summaryCandidates }) =&gt;
+	<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{statePostal}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{precinctsReportingPct}%<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+		{ summaryCandidates
+			.filter(v =&gt; v.isMainCandidate)
+			.map((v, i) =&gt; {</span></code></pre>
   </div>
 
   
@@ -210,135 +180,31 @@ within a <code>StateResultsTable</code>.</p>
 <section class="section">
 
   <aside class="comment">
-    <div class="text markdown"><p>Get this state&#39;s candidates</p>
+    <div class="text markdown"><p>Find this summary candidate in this state.</p>
 </div>
   </aside>
   
 
   <div class="code">
-    <pre><code>	<span class="hljs-keyword">const</span> { candidates } = state</code></pre>
-  </div>
+    <pre><code>				<span class="hljs-keyword">const</span> candidate = _.find(candidates, { <span class="hljs-attr">polID</span>: v.polID })
 
-  
-</section>
-<section class="section">
+				<span class="hljs-keyword">return</span> candidate ? (
+					<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{i}</span>&gt;</span>
+						<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{candidate.last}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+						<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{percentForDisplay(percent({
+							candidates, candidateID: candidate.candidateID }))}%<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+						<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{addCommas(candidate.voteCount)}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+					<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span></span>
+				) : (<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{i}</span> /&gt;</span>)
 
-  <aside class="comment">
-    <div class="text markdown"><p>Get candidate ids for the overall candidates (winner order).</p>
-</div>
-  </aside>
-  
-
-  <div class="code">
-    <pre><code>	<span class="hljs-keyword">const</span> candidateIDs = _.map(summaryCandidates, <span class="hljs-string">'candidateID'</span>)</code></pre>
-  </div>
-
-  
-</section>
-<section class="section">
-
-  <aside class="comment">
-    <div class="text markdown"><p>Sort the state candidates by overall order.</p>
-</div>
-  </aside>
-  
-
-  <div class="code">
-    <pre><code>	<span class="hljs-keyword">const</span> sortedCandidates = sortByIDs({ candidates, candidateIDs })</code></pre>
-  </div>
-
-  
-</section>
-<section class="section">
-
-  <aside class="comment">
-    <div class="text markdown"><p>Create the candidate tds.</p>
-</div>
-  </aside>
-  
-
-  <div class="code">
-    <pre><code>	<span class="hljs-keyword">const</span> tds = sortedCandidates.map((candidate, i, array) =&gt; {
-
-		<span class="hljs-keyword">const</span> { candidateID, voteCount } = candidate</code></pre>
-  </div>
-
-  
-</section>
-<section class="section">
-
-  <aside class="comment">
-    <div class="text markdown"><p>Add appropriate commas to the candidate&#39;s vote count.</p>
-</div>
-  </aside>
-  
-
-  <div class="code">
-    <pre><code>		<span class="hljs-keyword">const</span> vote = addCommas(voteCount)</code></pre>
-  </div>
-
-  
-</section>
-<section class="section">
-
-  <aside class="comment">
-    <div class="text markdown"><p>Get the candidate&#39;s vote percent.</p>
-</div>
-  </aside>
-  
-
-  <div class="code">
-    <pre><code>		<span class="hljs-keyword">const</span> pct = percent({ candidates: array, candidateID })</code></pre>
-  </div>
-
-  
-</section>
-<section class="section">
-
-  <aside class="comment">
-    <div class="text markdown"><p>Get the display-ready version of the percent.</p>
-</div>
-  </aside>
-  
-
-  <div class="code">
-    <pre><code>		<span class="hljs-keyword">const</span> pctForDisplay = percentForDisplay(pct)
-
-		<span class="hljs-keyword">return</span> (
-			<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{i}</span>&gt;</span>
-				<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{pctForDisplay}%<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-				<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{vote}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-			<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span></span>
-		)
-
-	})</code></pre>
-  </div>
-
-  
-</section>
-<section class="section">
-
-  <aside class="comment">
-    <div class="text markdown"><p>Create the entire row.</p>
-</div>
-  </aside>
-  
-
-  <div class="code">
-    <pre><code>	<span class="hljs-keyword">return</span> (
-		<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
-			<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>
-				<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{state.statePostal}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-				<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{state.precinctsReportingPct}%<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-			<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
-			{tds}
-		<span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span></span>
-	)
-}
+			})}
+	<span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span></span>
 
 StateResultsTableRow.propTypes = {
-	state: PropTypes.object.isRequired,
-	summaryCandidates: PropTypes.array.isRequired,
+	<span class="hljs-attr">summaryCandidates</span>: PropTypes.array.isRequired,
+	<span class="hljs-attr">candidates</span>: PropTypes.array.isRequired,
+	<span class="hljs-attr">statePostal</span>: PropTypes.string.isRequired,
+	<span class="hljs-attr">precinctsReportingPct</span>: PropTypes.string.isRequired,
 }
 
 <span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> StateResultsTableRow</code></pre>
@@ -356,7 +222,7 @@ StateResultsTableRow.propTypes = {
         </aside>
 
         <div class="code">
-          <span class="content page-generation-time">Generated Fri, 16 Sep 2016 22:37:10 GMT</span>
+          <span class="content page-generation-time">Generated Fri, 07 Oct 2016 18:36:13 GMT</span>
         </div>
         
       </section>

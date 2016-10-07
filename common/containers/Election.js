@@ -7,6 +7,7 @@ import Timer from './../components/Timer.js'
 import Map from './../components/Map.js'
 import Header from './../components/templates/Header.js'
 import Footer from './../components/templates/Footer.js'
+import BalanceOfPower from './../components/BalanceOfPower.js'
 import {
 	getPresidentSummaryState,
 } from './../utils/dataUtil.js'
@@ -96,13 +97,17 @@ class Election extends Component {
 
 		const mapArgs = getUSMapArguments(usRace)
 
+		const senateBalance = {
+			dem: 43,
+			gop: 49,
+		}
+
 		return (
 			<div className='Election'>
 				<Header summaryState={summaryState} />
 				<h1>Election Home</h1>
-
+				<BalanceOfPower {...senateBalance} />
 				<Map {...mapArgs} />
-
 				<Footer />
 			</div>
 		)
