@@ -1,4 +1,3 @@
-import configRoot from './../../config.json'
 import {
 
 	START_TIMER,
@@ -10,10 +9,6 @@ import {
 	FETCH_RESULTS_FAILURE,
 
 } from './actionTypes.js'
-
-const config = process.env.NODE_ENV === 'production' ?
-	configRoot.prod :
-	configRoot.dev
 
 const { fetch } = require('fetch-ponyfill')()
 
@@ -52,9 +47,32 @@ const fetchResults = ({ url }) =>
 
 		dispatch(fetchResultsRequest({ url }))
 
-		const { apiUrl } = config
+		let fullUrl
+		const location = typeof window !== 'undefined' && window.location
 
-		const fullUrl = `${apiUrl}/${url}`
+		// If we're on prod,
+		if (process.env.NODE_ENV === 'production') {
+
+			// and we're on the client,
+			if (location) {
+
+				// use the window location to construct the full url.
+				fullUrl = `${window.location.origin}/${url}`
+
+			} else {
+
+				// But if we're on the server,
+				// use an env variable to construct the full url.
+				fullUrl = `${process.env.API_URL}/${url}`
+
+			}
+
+		} else {
+
+			// Finally, if we're on dev, use localhost:3001/api.
+			fullUrl = `http://localhost:3001/api/${url}`
+
+		}
 
 		return fetch(fullUrl)
 			.then(response => {

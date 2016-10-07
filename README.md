@@ -13,13 +13,13 @@ Please note: do not reproduce Boston Globe logos or fonts without written permis
 
 ## dev
 
--   `npm start` - start the app
+-   `API_URL=<API_URL> npm start` - start the app
 -   `npm run doc` - generate documentation
 
 ## prod
 
 -   `npm run build`
--   `npm run prod`
+-   `API_URL=<API_URL> npm run prod`
 
 ## License
 

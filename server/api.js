@@ -55,7 +55,7 @@ export default (req, res) => {
 			const baseUrl = req.originalUrl.replace(/\/api\//, '')
 
 			const url =
-				`http://devweb.bostonglobe.com/electionapi/elections/${baseUrl}`
+				`${process.env.API_URL}/${baseUrl}`
 
 			console.log(`requesting ${url}`)
 
