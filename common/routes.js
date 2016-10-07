@@ -9,12 +9,14 @@ import Race from './containers/Race.js'
 import Town from './containers/Town.js'
 
 export default (
-	<Route path='/elections' component={App}>
+	<Route path='/' component={App}>
 		<IndexRoute component={Homepage} />
-		<Route path='2016/election' component={Election} />
-		<Route path='2016/president' component={PresidentUS} />
-		<Route path='2016/president/massachusetts' component={PresidentMA} />
-		<Route path='2016/race' component={Race} />
-		<Route path='2016/town/:townName' component={Town} />
+		<Route path='elections/2016/election' component={Election} />
+		<Route path='elections/2016/president' component={PresidentUS} />
+		<Route
+			path='elections/2016/president/massachusetts'
+			component={PresidentMA} />
+		<Route path='elections/2016/race' component={Race} />
+		<Route path='elections/2016/town/:townName' component={Town} />
 	</Route>
 )
