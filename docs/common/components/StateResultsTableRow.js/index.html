@@ -1,0 +1,234 @@
+<!doctype html>
+<html>
+  <head>
+    <title>common/components/StateResultsTableRow.js</title>
+    <link rel="stylesheet" href="./../../../public/style.css" />
+    <link rel="icon" type="image/png" href="./../../../public/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./../../../public/jquery.min.js"></script>
+    <script src="./../../../public/script.js"></script>
+  </head>
+  <body class="code">
+    
+    <main id="sections">
+
+      <!-- The header -->
+
+        
+      <section class="section header files-hidden" id="header">
+
+        <aside class="comment">
+
+          <header>
+
+            <div class="file-path">
+              
+              
+              <a id="project-overview" href="./../../.." title="Project Overview">elections-2016<span id="version"></span></a>
+              
+              <div class="files-menu">
+                <span id="filename" title="common/components/StateResultsTableRow.js">common/components/StateResultsTableRow.js</span>
+                
+              
+                <ul class="files hidable">
+                  
+                  
+<li class="file">
+  
+<a href="../../../client/index.js" title="client/index.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">client/index.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../RaceSummary.js" title="common/components/RaceSummary.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/RaceSummary.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../StateResultsTable.js" title="common/components/StateResultsTable.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/StateResultsTable.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../Timer.js" title="common/components/Timer.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/Timer.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../TownResultsTable.js" title="common/components/TownResultsTable.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/TownResultsTable.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../TownResultsTableRow.js" title="common/components/TownResultsTableRow.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/TownResultsTableRow.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../../containers/Race.js" title="common/containers/Race.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/containers/Race.js</span>
+
+</a>
+
+</li>
+
+                  
+                </ul>
+                
+              </div>
+                
+            </div>
+
+            <div class="spacer"></div>
+            
+            
+          </header>
+            
+        </aside>
+
+        
+        <div class="code empty">
+        </div>
+
+      </section>
+
+      <!-- The main code section -->
+      
+      <section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>The <code>StateResultsTableRow</code> class displays detailed results for a state
+row within a <code>StateResultsTableRow</code>.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code><span class="hljs-keyword">import</span> React, { PropTypes } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
+<span class="hljs-keyword">import</span> _ <span class="hljs-keyword">from</span> <span class="hljs-string">'lodash'</span>
+
+<span class="hljs-keyword">import</span> addCommas <span class="hljs-keyword">from</span> <span class="hljs-string">'add-commas'</span>
+<span class="hljs-keyword">import</span> { percent } <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/Candidate.js'</span>
+<span class="hljs-keyword">import</span> { percentForDisplay } <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/standardize.js'</span>
+
+<span class="hljs-keyword">const</span> StateResultsTableRow = ({ statePostal, precinctsReportingPct,
+candidates, summaryCandidates }) =&gt;
+	<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{statePostal}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{precinctsReportingPct}%<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+		<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
+		{ summaryCandidates
+			.filter(v =&gt; v.isMainCandidate)
+			.map((v, i) =&gt; {</span></code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Find this summary candidate in this state.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>				<span class="hljs-keyword">const</span> candidate = _.find(candidates, { <span class="hljs-attr">polID</span>: v.polID })
+
+				<span class="hljs-keyword">return</span> candidate ? (
+					<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{i}</span>&gt;</span>
+						<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{candidate.last}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+						<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{percentForDisplay(percent({
+							candidates, candidateID: candidate.candidateID }))}%<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+						<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{addCommas(candidate.voteCount)}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+					<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span></span>
+				) : (<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{i}</span> /&gt;</span>)
+
+			})}
+	<span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span></span>
+
+StateResultsTableRow.propTypes = {
+	<span class="hljs-attr">summaryCandidates</span>: PropTypes.array.isRequired,
+	<span class="hljs-attr">candidates</span>: PropTypes.array.isRequired,
+	<span class="hljs-attr">statePostal</span>: PropTypes.string.isRequired,
+	<span class="hljs-attr">precinctsReportingPct</span>: PropTypes.string.isRequired,
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> StateResultsTableRow</code></pre>
+  </div>
+
+  
+</section>
+
+      
+      
+      <section class="section footer" id="footer">
+        
+        <aside class="comment">
+          <span class="content project-copyright">&copy; Copyright 2016 The Boston Globe.</span>
+        </aside>
+
+        <div class="code">
+          <span class="content page-generation-time">Generated Fri, 07 Oct 2016 18:36:13 GMT</span>
+        </div>
+        
+      </section>
+      
+    </main>
+
+  </body>
+</html>
+
