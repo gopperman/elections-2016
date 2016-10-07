@@ -95,10 +95,12 @@ class PresidentUS extends Component {
 			// Get API results.
 			const races = data.races || []
 
-			// Get US race.
-			const allStates = races.map(v => ({
-				...v.reportingUnits[0],
-			}))
+			// Get US race:
+			const allStates = races
+				// return the first item of reportingUnits,
+				.map(v => (v.reportingUnits || [])[0])
+				// and don't include null items.
+				.filter(v => v)
 
 			// Get US presidential race summary.
 			const summaryState = _.find(allStates, { statePostal: 'US' }) || {}
@@ -149,10 +151,12 @@ class PresidentUS extends Component {
 		// Get API results.
 		const races = data.races || []
 
-		// Get US race.
-		const allStates = races.map(v => ({
-			...v.reportingUnits[0],
-		}))
+		// Get US race:
+		const allStates = races
+			// return the first item of reportingUnits,
+			.map(v => (v.reportingUnits || [])[0])
+			// and don't include null items.
+			.filter(v => v)
 
 		// Get test status.
 		const isTest = _.some(races, 'test')
