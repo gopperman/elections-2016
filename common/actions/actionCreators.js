@@ -57,7 +57,7 @@ const fetchResults = ({ url }) =>
 			if (location) {
 
 				// use the window location to construct the full url.
-				fullUrl = `${window.location.origin}/electionapi/elections/${url}`
+				fullUrl = `${location.origin}/electionapi/elections/${url}`
 
 			} else {
 
