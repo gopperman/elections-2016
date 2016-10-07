@@ -1,6 +1,7 @@
 import { sortByVoteCount } from './Candidates.js'
 
 // TODO: add 'winner' class
+// TODO: handle places like Maine, where voteCount isn't the final decider
 export default ({ candidates = [], sortingDelegate = sortByVoteCount }) => {
 
 	let klass
