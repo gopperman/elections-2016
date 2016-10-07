@@ -55,7 +55,7 @@ export default (req, res) => {
 			const baseUrl = req.originalUrl.replace(/\/api\//, '')
 
 			const url =
-				`${process.env.API_URL}/${baseUrl}`
+				`${process.env.API_URL}/electionapi/elections/${baseUrl}`
 
 			console.log(`requesting ${url}`)
 
