@@ -71,18 +71,18 @@ class Homepage extends Component {
 			// Get API results.
 			const races = data.races || []
 
-			// // Get US race.
-			// const allStates = races.map(v => ({
-			// 	...v.reportingUnits[0],
-			// }))
+			// Get US race:
+			const allStates = races
+				// return the first item of reportingUnits,
+				.map(v => (v.reportingUnits || [])[0])
+				// and don't include null items.
+				.filter(v => v)
 
-			// // Get US presidential race summary.
-			// const summaryState = _.find(allStates, { statePostal: 'US' }) || {}
+			// Get US presidential race summary.
+			const summaryState = _.find(allStates, { statePostal: 'US' }) || {}
 
-			// // Check if all results are in.
-			// const isFinished = +summaryState.precinctsReportingPct === 100
-
-			const isFinished = true
+			// Check if all results are in.
+			const isFinished = +summaryState.precinctsReportingPct === 100
 
 			if (isFinished) {
 				cancelTimer()
@@ -127,69 +127,71 @@ class Homepage extends Component {
 		// Get API results.
 		const races = data.races || []
 
-		// // Get US race.
-		// const allStates = races.map(v => ({
-		// 	...v.reportingUnits[0],
-		// }))
+		// Get US race:
+		const allStates = races
+			// return the first item of reportingUnits,
+			.map(v => (v.reportingUnits || [])[0])
+			// and don't include null items.
+			.filter(v => v)
 
-		// // Get test status.
-		// const isTest = _.some(races, 'test')
+		// Get test status.
+		const isTest = _.some(races, 'test')
 
-		// // Get US presidential race summary.
-		// const summaryState = _.find(allStates, { statePostal: 'US' })
+		// Get US presidential race summary.
+		const summaryState = _.find(allStates, { statePostal: 'US' })
 
-		// // Define the candidates we're interested in.
-		// const mainCandidatePolIDs = ['1746', '8639', '31708', '895']
+		// Define the candidates we're interested in.
+		const mainCandidatePolIDs = ['1746', '8639', '31708', '895']
 
-		// // Get summary US candidates, so we can sort by them.
-		// const summaryStateCandidates = summaryState ?
-		// 	sortByElectoralCount(summaryState.candidates)
-		// 	.map(v => ({
-		// 		...v,
-		// 		isMainCandidate: _.includes(mainCandidatePolIDs, v.polID),
-		// 	})) : []
+		// Get summary US candidates, so we can sort by them.
+		const summaryStateCandidates = summaryState ?
+			sortByElectoralCount(summaryState.candidates)
+			.map(v => ({
+				...v,
+				isMainCandidate: _.includes(mainCandidatePolIDs, v.polID),
+			})) : []
 
-		// // Prepare the US race so it can be easily ingested by sub-components:
-		// const states = _(allStates)
-		// 	// don't include summary state,
-		// 	.reject({ statePostal: 'US' })
-		// 	// sort states by their full name,
-		// 	.sortBy('stateName')
-		// 	.map(v => ({
-		// 		...v,
-		// 		// and sort candidates by overall candidates.
-		// 		candidates: sortByPolIDs({
-		// 			candidates: v.candidates,
-		// 			polIDs: _.map(summaryStateCandidates, 'polID'),
-		// 		}),
-		// 	}))
-		// 	.value()
-
-				// <TestStatus isTest={isTest} />
-
-				// <Header summaryState={summaryState} />
-				// <h1>PresidentUS</h1>
-
-				// <Timer {...timerProps} />
-
-				// <Map
-				// 	topoObject={STATES}
-				// 	data={states}
-				// 	sortingDelegate={sortByElectoralCount}
-				// 	projection={geoAlbersUsa()}
-				// 	unitName='statePostal' />
+		// Prepare the US race so it can be easily ingested by sub-components:
+		const states = _(allStates)
+			// don't include summary state,
+			.reject({ statePostal: 'US' })
+			// sort states by their full name,
+			.sortBy('stateName')
+			.map(v => ({
+				...v,
+				// and sort candidates by overall candidates.
+				candidates: sortByPolIDs({
+					candidates: v.candidates,
+					polIDs: _.map(summaryStateCandidates, 'polID'),
+				}),
+			}))
+			.value()
 
 		return (
 			<div className='Homepage'>
 
+				<TestStatus isTest={isTest} />
+
+				<Header summaryState={summaryState} />
+
 				<h1>Ohio hangs in balance</h1>
 				<h2>subhed</h2>
-				<p>nav</p>
-				<p>swing states</p>
-				<p>us map</p>
+
+				<Timer {...timerProps} />
+
+				<Map
+					topoObject={STATES}
+					data={states}
+					sortingDelegate={sortByElectoralCount}
+					projection={geoAlbersUsa()}
+					unitName='statePostal' />
+
 				<p>or big photo</p>
+
+				<p>swing states</p>
 				<p>summaries</p>
 				<p>selected races</p>
+
 			</div>
 		)
 
