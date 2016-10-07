@@ -1,9 +1,3 @@
-/* RaceSummaryRow expects the following data:
- * name
- * barStyle
- * pctForDisplay
- * vote
- */
 import React, { PropTypes } from 'react'
 
 const RaceSummaryRow = ({ name, barStyle, pctForDisplay, vote }) => (

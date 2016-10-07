@@ -5,13 +5,14 @@ import _ from 'lodash'
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import * as actions from './../actions/actionCreators.js'
 
+import * as actions from './../actions/actionCreators.js'
 import Timer from './../components/Timer.js'
 import Map from './../components/Map.js'
 import STATES from './../../data/output/STATES.json'
 import Header from './../components/templates/Header.js'
 import TestStatus from './../components/TestStatus.js'
+import SwingStates from './../components/SwingStates.js'
 
 import {
 	sortByElectoralCount,
@@ -167,6 +168,11 @@ class Homepage extends Component {
 			}))
 			.value()
 
+		const swingStateList = ['AZ', 'CO', 'FL', 'GA', 'IA', 'ME', 'MI']
+
+		const swingStates = _.filter(states, state =>
+			_.includes(swingStateList, state.statePostal))
+
 		return (
 			<div className='Homepage'>
 
@@ -179,6 +185,8 @@ class Homepage extends Component {
 
 				<Timer {...timerProps} />
 
+				<SwingStates states={swingStates} />
+
 				<Map
 					topoObject={STATES}
 					data={states}
@@ -188,7 +196,6 @@ class Homepage extends Component {
 
 				<p>or big photo</p>
 
-				<p>swing states</p>
 				<p>summaries</p>
 				<p>selected races</p>
 
