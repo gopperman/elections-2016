@@ -26,8 +26,12 @@ const buildRow = ({ dem, gop, undecided }) =>
 // Builds a seating chart for the Senate balance of power visualization
 const buildSeats = ({ dem, gop, total, rows }) => {
 
-	let d, r, u, seats = []
+	let d
+	let r
+	let u
+	const seats = []
 	const seatsPerRow = Math.floor(total / rows)
+	let rowsLength = rows
 
 	const demPerRow = Math.floor(dem / rows)
 	let demRemainder = dem % rows
@@ -35,7 +39,7 @@ const buildSeats = ({ dem, gop, total, rows }) => {
 	const gopPerRow = Math.floor(gop / rows)
 	let gopRemainder = gop % rows
 
-	while(rows--) {
+	while (rowsLength--) {
 		let seatsTaken = demPerRow + gopPerRow
 		d = demPerRow
 		r = gopPerRow
@@ -53,7 +57,7 @@ const buildSeats = ({ dem, gop, total, rows }) => {
 
 		u = (seatsTaken >= seatsPerRow) ? 0 : seatsPerRow - d - r
 
-		seats.push(buildRow({dem: d, gop: r, undecided: u }))
+		seats.push(buildRow({ dem: d, gop: r, undecided: u }))
 	}
 
 	return seats
