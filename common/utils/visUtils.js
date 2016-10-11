@@ -1,36 +1,30 @@
+/** @module */
+
 import * as d3 from 'd3'
 
-// Builds an array of objects for a single row of the
-// Senate balance of power visualization
-const buildRow = ({ dem, gop, undecided }) => {
-
-	const demArray = d3.range(0, dem) // [0, 1, 2, 3, 4]
-
-	let row = [];
-	let seatNum = 1;
-	while (dem--) {
-		row.push({
-			seat: seatNum++,
-			party: 'dem',
-		})
-	}
-	while (undecided--) {
-		row.push({
-			seat: seatNum++,
-			party: 'undecided',
-		})
-	}
-	while (gop--) {
-		row.push({
-			seat: seatNum++,
-			party: 'gop',
-		})
-	}
-	return row
-}
+/**
+ * Build a row of `balance of power` seats.
+ * @memberof visUtils
+ * @function
+ * @param {Array} $0.dem the number of democratic seats
+ * @param {Array} $0.gop the number of gop seats
+ * @param {Array} $0.undecided the number of undecided seats
+ * @returns {Array} a row of seats
+ * @example
+ * buildRow({ dem: 1, gop: 1, undecided: 0 }) //=> [{ party: 'dem'...
+ */
+const buildRow = ({ dem, gop, undecided }) =>
+	d3.merge([
+		d3.range(dem).map(() => ({ party: 'dem' })),
+		d3.range(undecided).map(() => ({ party: 'undecided' })),
+		d3.range(gop).map(() => ({ party: 'gop' })),
+	]).map((v, i) => ({
+		...v,
+		seat: i + 1,
+	}))
 
 // Builds a seating chart for the Senate balance of power visualization
-const buildSeats = (dem, gop, total, rows) => {
+const buildSeats = ({ dem, gop, total, rows }) => {
 
 	let d, r, u, seats = []
 	const seatsPerRow = Math.floor(total / rows)
@@ -57,7 +51,7 @@ const buildSeats = (dem, gop, total, rows) => {
 			seatsTaken++
 		}
 
-		u = (seatsTaken >= seatsPerRow) ? 0 : seatsPerRow - d - r 
+		u = (seatsTaken >= seatsPerRow) ? 0 : seatsPerRow - d - r
 
 		seats.push(buildRow({dem: d, gop: r, undecided: u }))
 	}
