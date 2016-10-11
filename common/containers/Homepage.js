@@ -168,7 +168,7 @@ class Homepage extends Component {
 			}))
 			.value()
 
-		const swingStateList = ['AZ', 'CO', 'FL', 'GA', 'IA', 'ME', 'MI']
+		const swingStateList = ['AZ', 'CO', 'IA']
 
 		const swingStates = _.filter(states, state =>
 			_.includes(swingStateList, state.statePostal))

@@ -6,7 +6,7 @@ import { percentForDisplay } from './../utils/standardize.js'
 
 const SwingStates = ({ states }) => {
 
-	const circles = states.map(state => {
+	const circles = states.map((state, i) => {
 
 		const { statePostal } = state
 		const candidates = sortByElectoralCount(state.candidates)
@@ -21,19 +21,17 @@ const SwingStates = ({ states }) => {
 		const margin = percentForDisplay(percents[0] - percents[1], true)
 
 		return (
-
-			<li>
+			<li key={i}>
 				<div>State: {statePostal}</div>
 				<div>Party: {klass}</div>
 				<div>Won: {candidates[0].party}</div>
 				<div>Margin: +{margin}%</div>
 			</li>
-
 		)
 	})
 
 	return (
-		<div>
+		<div className='SwingStates'>
 			<h1>Swing states</h1>
 			<ul>{ circles }</ul>
 		</div>
