@@ -49,6 +49,13 @@ export default (req, res) => {
 			break
 		}
 
+		case 'homepage': {
+			console.log('about to send homepage data')
+
+			setTimeout(() => res.json(readJson('homepage')), 0)
+			break
+		}
+
 		default: {
 
 			// Remove first bit
