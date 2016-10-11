@@ -6,9 +6,9 @@ import * as d3 from 'd3'
  * Build a row of `balance of power` seats.
  * @memberof visUtils
  * @function
- * @param {Array} $0.dem the number of democratic seats
- * @param {Array} $0.gop the number of gop seats
- * @param {Array} $0.undecided the number of undecided seats
+ * @param {number} $0.dem the number of democratic seats
+ * @param {number} $0.gop the number of gop seats
+ * @param {number} $0.undecided the number of undecided seats
  * @returns {Array} a row of seats
  * @example
  * buildRow({ dem: 1, gop: 1, undecided: 0 }) //=> [{ party: 'dem'...
