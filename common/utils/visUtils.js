@@ -51,7 +51,7 @@ const buildSeats = ({ dem, gop, total, rows }) => {
 	let u
 	const seats = []
 	const seatsPerRow = Math.floor(total / rows)
-	let rowsLength = rows
+	let rowsCount = rows
 
 	const demPerRow = Math.floor(dem / rows)
 	let demRemainder = dem % rows
@@ -59,7 +59,7 @@ const buildSeats = ({ dem, gop, total, rows }) => {
 	const gopPerRow = Math.floor(gop / rows)
 	let gopRemainder = gop % rows
 
-	while (rowsLength--) {
+	while (rowsCount--) {
 		let seatsTaken = demPerRow + gopPerRow
 		d = demPerRow
 		r = gopPerRow
