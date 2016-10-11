@@ -1,7 +1,5 @@
 /** @module */
 
-import * as d3 from 'd3'
-
 /**
  * Build a row of `balance of power` seats.
  * @memberof visUtils
@@ -13,15 +11,37 @@ import * as d3 from 'd3'
  * @example
  * buildRow({ dem: 1, gop: 1, undecided: 0 }) //=> [{ party: 'dem'...
  */
-const buildRow = ({ dem, gop, undecided }) =>
-	d3.merge([
-		d3.range(dem).map(() => ({ party: 'dem' })),
-		d3.range(undecided).map(() => ({ party: 'undecided' })),
-		d3.range(gop).map(() => ({ party: 'gop' })),
-	]).map((v, i) => ({
-		...v,
-		seat: i + 1,
-	}))
+const buildRow = ({ dem, gop, undecided }) => {
+
+	// Declare new variables so we don't mutate the incoming object.
+	let demCount = dem
+	let gopCount = gop
+	let undecidedCount = undecided
+
+	const row = []
+	let seatNum = 1
+
+	while (demCount--) {
+		row.push({
+			seat: seatNum++,
+			party: 'dem',
+		})
+	}
+	while (undecidedCount--) {
+		row.push({
+			seat: seatNum++,
+			party: 'undecided',
+		})
+	}
+	while (gopCount--) {
+		row.push({
+			seat: seatNum++,
+			party: 'gop',
+		})
+	}
+
+	return row
+}
 
 // Builds a seating chart for the Senate balance of power visualization
 const buildSeats = ({ dem, gop, total, rows }) => {
