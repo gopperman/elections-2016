@@ -2,15 +2,15 @@
 // Breakpoints
 //========================
 $mq_vars = {
-    bp-1: '(min-width: 25em)'
-    bp-2: '(min-width: 40em)'
+    bp-1: '(min-width: 40em)'
+    bp-2: '(min-width: 50em)'
     bp-3: '(min-width: 60em)'
 }
 
 //========================
 // Type Scale
 //========================
-$root-size = 20px
+$root-size = 18px
 $root-lh = 2
 
 $type-scale = {
@@ -20,6 +20,16 @@ $type-scale = {
     medium: 24px
     large: 32px
     x-large: 48px
+}
+
+//========================
+// Z-index
+//========================
+$z-index = {
+	bottom: -100
+	middle: 0
+	top: 100
+	overlay: 200
 }
 
 //========================
@@ -34,3 +44,44 @@ $miller-banner = Miller-Banner, Georgia, Times, serif
 
 $regular = 400
 $bold = 700
+
+//========================
+// Project Colors
+//========================
+$colors = {
+	red: #ab5748
+	blue: #6993a6 
+	green: #67ba76
+	gold: #d8a148
+}
+
+$grayscale = {
+	lightest: #efefef
+	light:#ccc
+	medium: #999
+	dark:#555
+	darkest: #333
+}
+
+set-color(color, variant = null)
+	if color in $colors
+		if variant == light
+			return lighten($colors[color], 15%)
+		if variant == dark
+			return darken($colors[color], 20%)
+		else
+			return $colors[color]
+	else
+		error('Not a defined color')
+
+set-gray(color)
+	if color in $grayscale
+		return $grayscale[color]
+	else
+		error('Not a defined gray')
+
+
+//========================
+// Project Misc
+//========================
+$transition = 0.3s ease-in-out all
