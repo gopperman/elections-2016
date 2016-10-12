@@ -7,12 +7,22 @@ describe('Race', () => {
 
 	describe('getName', () => {
 
-		it('should work', () => {
+		it('should work with general races', () => {
 
 			assert.equal(getName({
-				statePostal: 'NH',
-				officeName: 'Governor',
-			}), 'NH Governor')
+				statePostal: 'MA',
+				officeName: 'Question',
+				seatName: '4 - Legalize Marijuana',
+			}), 'MA Question 4 - Legalize Marijuana')
+
+		})
+
+		it('should work with ballot questions', () => {
+
+			assert.equal(getName({
+				statePostal: 'MA',
+				officeName: 'President',
+			}), 'MA President')
 
 		})
 

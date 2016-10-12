@@ -10,7 +10,7 @@
  * getName(race) //=> 'NH Governor'
  */
 const getName = (race) =>
-	[race.statePostal, race.officeName].join(' ')
+	[race.statePostal, race.officeName, race.seatName].join(' ').trim()
 
 export {
 	getName,
