@@ -10,10 +10,10 @@ import { percentForDisplay } from './../utils/standardize.js'
 
 const StateResultsTableRow = ({ statePostal, precinctsReportingPct,
 candidates, summaryCandidates }) =>
-	<tr>
-		<td>
-			<div>{statePostal}</div>
-			<div>{precinctsReportingPct}%</div>
+	<tr className='r-table__row'>
+		<td className='r-table__cell'>
+			<p className='benton-bold'>{statePostal}</p>
+			<p className='benton-regular'>{precinctsReportingPct}%</p>
 		</td>
 		{ summaryCandidates
 			.filter(v => v.isMainCandidate)
@@ -23,11 +23,11 @@ candidates, summaryCandidates }) =>
 				const candidate = _.find(candidates, { polID: v.polID })
 
 				return candidate ? (
-					<td key={i}>
-						<div>{candidate.last}</div>
-						<div>{percentForDisplay(percent({
-							candidates, candidateID: candidate.candidateID }))}%</div>
-						<div>{addCommas(candidate.voteCount)}</div>
+					<td className='r-table__cell' key={i}>
+						<p className='hide-accessible'>{candidate.last}</p>
+						<p className='benton-bold'>{percentForDisplay(percent({
+							candidates, candidateID: candidate.candidateID }))}%</p>
+						<p className='benton-regular'>{addCommas(candidate.voteCount)}</p>
 					</td>
 				) : (<td key={i} />)
 

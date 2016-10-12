@@ -10,22 +10,20 @@ const createSummary = (raceName) =>
 	`A table that has the candidate percent and vote count across the top and the states down the left hand side for the ${raceName}.`
 
 const StateResultsTable = ({ states, summaryCandidates }) =>
-	<div>
-		<h1>State by state results</h1>
-		<table summary={createSummary()}>
-			<thead>
-				<tr>
-					<th scope='col'>
-						<div>State</div>
-						<div>Precincts reporting</div>
+	<div className='r-block'>
+		<table className='r-table' summary={createSummary()}>
+			<thead className='r-table__head'>
+				<tr className='r-table__row'>
+					<th className='r-table__cell'>
+						<p className='benton-bold'>State</p>
+						<p className='benton-regular'>Pcnts. reporting</p>
 					</th>
 					{ summaryCandidates
 						.filter(v => v.isMainCandidate)
 						.map((v, i) => (
-							<th scope='col' key={i}>
-								<div>{v.last}</div>
-								<div>{i === 0 ? 'Votes' : ''}</div>
-								<div>{v.polID}</div>
+							<th scope='col' className='r-table__cell' key={i}>
+								<p className='benton-bold'>{v.last}</p>
+								<p className='benton-regular'>{i === 0 ? 'Votes' : ''}</p>
 							</th>
 					))}
 				</tr>
