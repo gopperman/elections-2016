@@ -191,7 +191,7 @@ class Homepage extends Component {
 				reportingUnits: v.reportingUnits.map(w => ({
 					...w,
 					level: 'state',
-				}))
+				})),
 			}))
 			.head()
 
