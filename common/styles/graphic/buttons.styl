@@ -1,0 +1,24 @@
+//========================
+// Buttons
+//========================
+.btn--primary
+	@extends $btn
+	border none
+	background-color set-gray('darkest')
+	color white
+	padding 1em
+	box-shadow 7px 7px 0px 1px set-gray('light')
+	&:hover
+		color white
+		box-shadow none
+
+.btn--secondary
+	@extends $btn
+	border 1px solid set-gray('lightest')
+	background-color white
+	color set-gray('darkest')
+	padding 1em
+	box-shadow 7px 7px 0px 1px set-gray('lightest')
+	&:hover
+		color set-gray('darkest')
+		box-shadow none

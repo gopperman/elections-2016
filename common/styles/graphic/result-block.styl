@@ -1,0 +1,48 @@
+//========================
+// Result Blocks
+//========================
+
+// Summary
+.r-block
+	position relative
+	clearfix()
+	&__name
+		font-size 1.1em
+		line-height 1.2
+		margin-bottom 0.25em
+		+mq('bp-1')
+			font-size 1.2em
+		&--small
+			font-size 0.9em
+			margin-bottom 0.25em
+	&__results
+		display flex
+		align-items flex-end
+		justify-content space-between
+	&__duo-results
+		position relative
+	&__bar
+		-ms-flex 0 1 auto
+	&__meta
+		font-size 0.8em
+		/.results-circle &
+			background-color rgba(white, 0.8)
+			padding 0.05em
+			border-radius 3px
+		/.r-block__results &
+			margin-left 1em
+			align-self flex-end
+			&:only-of-type
+				text-align right
+			&:nth-of-type(2)
+				text-align right
+				width 35%
+		/.r-block__duo-results &
+			display inline-block
+			margin-top 0.5em
+			&:nth-of-type(2)
+				position absolute
+				right 0
+	&__img
+		float left
+		margin-right 0.5em

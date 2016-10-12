@@ -1,0 +1,27 @@
+//========================
+// Result Tables
+//========================
+
+.r-table
+	width 100%
+	position relative
+	border-bottom 3px solid set-gray('light')
+	&__head
+		border-bottom 3px solid set-gray('lightest')
+	&__row:nth-of-type(even)
+		background-color set-gray('lightest')
+	&__cell
+		vertical-align top
+		padding 0.5em
+		&::first-of-type
+			padding-top 0
+		p
+			line-height 1.5
+			&:first-of-type
+				font-size 0.8em
+				+mq('bp-1')
+					font-size 0.9em
+			&:last-of-type
+				font-size 0.7em
+				+mq('bp-1')
+					font-size 0.8em
