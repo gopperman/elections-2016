@@ -13,7 +13,7 @@ import STATES from './../../data/output/STATES.json'
 import Header from './../components/templates/Header.js'
 import TestStatus from './../components/TestStatus.js'
 import SwingStates from './../components/SwingStates.js'
-import RaceSummary from './../components/RaceSummary.js'
+import FeaturedRace from './../components/FeaturedRace.js'
 
 import {
 	sortByElectoralCount,
@@ -184,16 +184,12 @@ class Homepage extends Component {
 			_.includes(swingStateList, state.statePostal))
 
 		const otherRaces = _.difference(races, presidentRaces)
-			.map((race, key) => <RaceSummary {...{ race, key }} />)
+			.map((race, key) => <FeaturedRace {...{ race, key }} />)
 
 		return (
 			<div className='Homepage'>
 
 				{ otherRaces }
-
-				<pre>
-					{ JSON.stringify(otherRaces, null, 4) }
-				</pre>
 
 				<TestStatus isTest={isTest} />
 
