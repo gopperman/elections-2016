@@ -29,26 +29,34 @@ export default ({ subunit = {}, unitName, sortingDelegate }) => {
 
 		// Create this candidate's table row.
 		return `
-			<tr>
-				<th scope='row'><span>&nbsp;</span>${name}</th>
-				<td>${pctForDisplay}<span>%</span></td>
-				<td><span>${vote}</span></td>
+			<tr class='r-table__row'>
+				<td class='r-table__cell' scope='row'>
+					<p class='benton-bold'>${name}</p>
+				</td>
+				<td class='r-table__cell' scope='row'>
+					<p class='benton-bold'>${pctForDisplay}</p>
+				</td>
+				<td class='r-table__cell' scope='row'>
+					<p class='benton-bold'>${vote}</p>
+				</td>
 			</tr>
 			`
 	})
 
 	return candidates.length ? `
-		<div className='tooltip'>
-			<table summary='${summary}'>
-				<caption>
-					<div><span>${title}</span></div>
-					<div><span>${precinctsReportingPct}% reporting</span></div>
-				</caption>
-				<thead>
-					<tr>
-						<th scope='col'>Candidate</th>
-						<th scope='col'>Percent</th>
-						<th scope='col'>Votes</th>
+		<div class='r-block'>
+			<table class='r-table' summary='${summary}'>
+				<thead class='r-table__head'>
+					<tr class='r-table__row'>
+						<th class='r-table__cell' scope='col'>
+							<p class='benton-regular'>Candidate</p>
+						</th>
+						<th class='r-table__cell' scope='col'>
+							<p class='benton-regular'>Percent</p>
+						</th>
+						<th class='r-table__cell' scope='col'>
+							<p class='benton-regular'>Votes</p>
+						</th>
 					</tr>
 				</thead>
 				<tbody>${rows.join('')}</tbody>
