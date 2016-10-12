@@ -13,6 +13,7 @@ import STATES from './../../data/output/STATES.json'
 import Header from './../components/templates/Header.js'
 import TestStatus from './../components/TestStatus.js'
 import SwingStates from './../components/SwingStates.js'
+import FeaturedRace from './../components/FeaturedRace.js'
 
 import {
 	sortByElectoralCount,
@@ -37,7 +38,8 @@ const mapDispatchToProps = (dispatch) => ({
 // const url = '016-11-08?officeID=P'
 
 // and this one is the correct url - it returns everything.
-const url = '2016-11-08?officeID=P'
+// const url = '2016-11-08?officeID=P'
+const url = 'homepage'
 
 @connect(s => s, mapDispatchToProps)
 class Homepage extends Component {
@@ -73,14 +75,17 @@ class Homepage extends Component {
 			const races = data.races || []
 
 			// Get US race:
-			const allStates = races
+			const presidentRaceStates = races
+				// only include 'P' (President) races,
+				.filter(v => v.officeID === 'P')
 				// return the first item of reportingUnits,
 				.map(v => (v.reportingUnits || [])[0])
 				// and don't include null items.
 				.filter(v => v)
 
 			// Get US presidential race summary.
-			const summaryState = _.find(allStates, { statePostal: 'US' }) || {}
+			const summaryState =
+				_.find(presidentRaceStates, { statePostal: 'US' })
 
 			// Check if all results are in.
 			const isFinished = +summaryState.precinctsReportingPct === 100
@@ -128,8 +133,11 @@ class Homepage extends Component {
 		// Get API results.
 		const races = data.races || []
 
-		// Get US race:
-		const allStates = races
+		// Get president races.
+		const presidentRaces = races.filter(v => v.officeID === 'P')
+
+		// Get president race states.
+		const presidentRaceStates = presidentRaces
 			// return the first item of reportingUnits,
 			.map(v => (v.reportingUnits || [])[0])
 			// and don't include null items.
@@ -139,7 +147,8 @@ class Homepage extends Component {
 		const isTest = _.some(races, 'test')
 
 		// Get US presidential race summary.
-		const summaryState = _.find(allStates, { statePostal: 'US' })
+		const summaryState =
+			_.find(presidentRaceStates, { statePostal: 'US' })
 
 		// Define the candidates we're interested in.
 		const mainCandidatePolIDs = ['1746', '8639', '31708', '895']
@@ -153,7 +162,7 @@ class Homepage extends Component {
 			})) : []
 
 		// Prepare the US race so it can be easily ingested by sub-components:
-		const states = _(allStates)
+		const states = _(presidentRaceStates)
 			// don't include summary state,
 			.reject({ statePostal: 'US' })
 			// sort states by their full name,
@@ -168,13 +177,19 @@ class Homepage extends Component {
 			}))
 			.value()
 
+		// Get swing states
 		const swingStateList = ['AZ', 'CO', 'IA']
 
 		const swingStates = _.filter(states, state =>
 			_.includes(swingStateList, state.statePostal))
 
+		const otherRaces = _.difference(races, presidentRaces)
+			.map((race, key) => <FeaturedRace {...{ race, key }} />)
+
 		return (
 			<div className='Homepage'>
+
+				{ otherRaces }
 
 				<TestStatus isTest={isTest} />
 
