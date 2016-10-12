@@ -183,13 +183,25 @@ class Homepage extends Component {
 		const swingStates = _.filter(states, state =>
 			_.includes(swingStateList, state.statePostal))
 
-		const otherRaces = _.difference(races, presidentRaces)
+		// TODO: delete this when the API returns level: 'state' data
+		const massPresident = _(presidentRaces)
+			.filter({ statePostal: 'MA' })
+			.map(v => ({
+				...v,
+				reportingUnits: v.reportingUnits.map(w => ({
+					...w,
+					level: 'state',
+				})),
+			}))
+			.head()
+
+		const featuredRaces = _.difference(races, presidentRaces)
+			.concat(massPresident)
+			.filter(v => v)
 			.map((race, key) => <FeaturedRace {...{ race, key }} />)
 
 		return (
 			<div className='Homepage'>
-
-				{ otherRaces }
 
 				<TestStatus isTest={isTest} />
 
@@ -208,6 +220,8 @@ class Homepage extends Component {
 					sortingDelegate={sortByElectoralCount}
 					projection={geoAlbersUsa()}
 					unitName='statePostal' />
+
+				{featuredRaces}
 
 				<p>or big photo</p>
 

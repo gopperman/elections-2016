@@ -28,7 +28,7 @@ const percent = ({ candidateID, candidates }) => {
 
 	const total = _.sumBy(candidates, 'voteCount')
 
-	const { voteCount } = _.find(candidates, { candidateID })
+	const { voteCount } = _.find(candidates, { candidateID }) || {}
 
 	return total ? voteCount / total : 0
 

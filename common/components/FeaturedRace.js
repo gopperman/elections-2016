@@ -1,12 +1,15 @@
 import _ from 'lodash'
 import React, { PropTypes } from 'react'
+import classNames from 'classnames'
 import { sortByVoteCount } from './../utils/Candidates.js'
 import { percent } from './../utils/Candidate.js'
 import { percentForDisplay } from './../utils/standardize.js'
 import { getName } from './../utils/Race.js'
 
 // TODO: at the moment this assumes that:
-// - we are only dealing with a dem/gop race
+// - we are only dealing with either:
+// 		a ballot question or other similar, officeID == I
+//		a race where the only candidates we care about are blue or red
 // - the summary reporting unit is level: 'state'
 const FeaturedRace = ({ race }) => {
 
@@ -19,24 +22,36 @@ const FeaturedRace = ({ race }) => {
 	// everywhere else.
 	const summaryUnit = _.find(reportingUnits, { level: 'state' }) || {}
 
-	const { precinctsReportingPct } = summaryUnit
+	const precincts = +(summaryUnit.precinctsReportingPct || 0)
 	const candidates = sortByVoteCount(summaryUnit.candidates || [])
 
-	const dem = _.find(candidates, { party: 'Dem' }) || {}
-	const gop = _.find(candidates, { party: 'GOP' }) || {}
+	let left
+	let right
 
-	const demPct = percentForDisplay(
-		percent({ candidates, candidateID: dem.candidateID }))
+	if (race.officeID === 'I') {
 
-	const gopPct = percentForDisplay(
-		percent({ candidates, candidateID: gop.candidateID }))
+		left = _.find(candidates, { party: 'Yes' }) || {}
+		right = _.find(candidates, { party: 'No' }) || {}
 
-	const demStyle = { width: `${demPct}%` }
-	const gopStyle = { width: `${gopPct}%` }
+	} else {
+
+		left = _.find(candidates, { party: 'Dem' }) || {}
+		right = _.find(candidates, { party: 'GOP' }) || {}
+
+	}
+
+	const leftPct = percentForDisplay(
+		percent({ candidates, candidateID: left.candidateID }))
+	const rightPct = percentForDisplay(
+		percent({ candidates, candidateID: right.candidateID }))
+
+	const leftStyle = { width: `${leftPct}%` }
+	const rightStyle = { width: `${rightPct}%` }
 
 	return (
 
 		<div className='r-block'>
+
 			<p className='r-block__name benton-bold'>{raceName}</p>
 
 			<div className='r-block__duo-results'>
@@ -45,32 +60,35 @@ const FeaturedRace = ({ race }) => {
 					<span
 						className='fill-dem'
 						role='progressbar'
-						aria-valuenow={demPct}
+						aria-valuenow={leftPct}
 						aria-valuemin='0'
 						aria-valuemax='100'
-						style={demStyle} />
+						style={leftStyle} />
 					<span
 						className='fill-gop'
 						role='progressbar'
-						aria-valuenow={gopPct}
+						aria-valuenow={rightPct}
 						aria-valuemin='0'
 						aria-valuemax='100'
-						style={gopStyle} />
+						style={rightStyle} />
 				</div>
 
 				<p className='r-block__meta'>
-					<span className='benton-bold'>{demPct}%</span>
-					<span className='benton-regular'>{dem.last}</span>
+					<span className={classNames('benton-bold', { 'is-winner': !!left.winner })}>{leftPct}%</span>
+					<span className='benton-regular'>{left.last}</span>
 				</p>
 
 				<p className='r-block__meta'>
-					<span className='benton-bold'>{gopPct}%</span>
-					<span className='benton-regular'>{gop.last}</span>
+					<span className={classNames('benton-bold', { 'is-winner': !!right.winner })}>{rightPct}%</span>
+					<span className='benton-regular'>{right.last}</span>
 				</p>
 
 			</div>
 
-			<p className='note benton-regular'><span>{+precinctsReportingPct}% reporting</span></p>
+			<p className='note benton-regular'>
+				<span>{precincts}% reporting</span>
+			</p>
+
 		</div>
 
 	)

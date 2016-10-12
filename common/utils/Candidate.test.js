@@ -7,6 +7,15 @@ describe('Candidate', () => {
 
 	describe('percent', () => {
 
+		it('should work with no candidates', () => {
+
+			const candidates = null
+			const candidateID = null
+
+			assert.equal(percent({ candidates, candidateID }), 0)
+
+		})
+
 		it('should work with zero votes', () => {
 
 			const candidates = [
