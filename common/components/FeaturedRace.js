@@ -19,7 +19,7 @@ const FeaturedRace = ({ race }) => {
 	// everywhere else.
 	const summaryUnit = _.find(reportingUnits, { level: 'state' }) || {}
 
-	const { precinctsReportingPct } = summaryUnit
+	const precincts = +(summaryUnit.precinctsReportingPct || 0)
 	const candidates = sortByVoteCount(summaryUnit.candidates || [])
 
 	const dem = _.find(candidates, { party: 'Dem' }) || {}
@@ -37,6 +37,7 @@ const FeaturedRace = ({ race }) => {
 	return (
 
 		<div className='r-block'>
+
 			<p className='r-block__name benton-bold'>{raceName}</p>
 
 			<div className='r-block__duo-results'>
@@ -70,7 +71,10 @@ const FeaturedRace = ({ race }) => {
 
 			</div>
 
-			<p className='note benton-regular'><span>{+precinctsReportingPct}% reporting</span></p>
+			<p className='note benton-regular'>
+				<span>{precincts}% reporting</span>
+			</p>
+
 		</div>
 
 	)

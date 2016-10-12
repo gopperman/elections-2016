@@ -183,13 +183,28 @@ class Homepage extends Component {
 		const swingStates = _.filter(states, state =>
 			_.includes(swingStateList, state.statePostal))
 
-		const otherRaces = _.difference(races, presidentRaces)
+		// TODO: delete this when the API returns level: 'state' data
+		const massPresident = _(presidentRaces)
+			.filter({ statePostal: 'MA' })
+			.map(v => ({
+				...v,
+				reportingUnits: v.reportingUnits.map(w => ({
+					...w,
+					level: 'state',
+				}))
+			}))
+			.head()
+
+		const featuredRaces = [
+				massPresident
+			]
+			.filter(v => v)
 			.map((race, key) => <FeaturedRace {...{ race, key }} />)
 
 		return (
 			<div className='Homepage'>
 
-				{ otherRaces }
+				{featuredRaces}
 
 				<TestStatus isTest={isTest} />
 
