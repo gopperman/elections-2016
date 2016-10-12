@@ -44,7 +44,7 @@ export default ({ subunit = {}, unitName, sortingDelegate }) => {
 	})
 
 	return candidates.length ? `
-		<div class='r-block'>
+		<div class='r-block tooltip'>
 			<table class='r-table' summary='${summary}'>
 				<thead class='r-table__head'>
 					<tr class='r-table__row'>
