@@ -4,6 +4,56 @@
   "races": [
     {
       "test": true,
+      "raceID": "24805",
+      "statePostal": "MA",
+      "countyNumber": "1",
+      "officeID": "I",
+      "raceTypeID": "G",
+      "seatNum": 1,
+      "officeName": "Question",
+      "seatName": "4 - Legalize Marijuana",
+      "raceType": "Ballot Issue",
+      "description": "Regulate and tax",
+      "national": true,
+      "uncontested": false,
+      "reportingUnits": [
+        {
+          "precinctsReporting": 2173,
+          "precinctsTotal": 2173,
+          "candidates": [
+            {
+              "candidateID": "33868",
+              "polNum": "25625",
+              "last": "No",
+              "polID": "3",
+              "ballotOrder": 2,
+              "voteCount": 1174704,
+              "winner": "X",
+              "party": "No",
+              "incumbent": false
+            },
+            {
+              "candidateID": "33869",
+              "polNum": "25624",
+              "last": "Yes",
+              "polID": "2",
+              "ballotOrder": 1,
+              "voteCount": 961123,
+              "party": "Yes",
+              "incumbent": false
+            }
+          ],
+          "statePostal": "MA",
+          "stateName": "Massachusetts",
+          "level": "national",
+          "lastUpdated": "2016-10-12T19:08:26Z",
+          "reportingunitID": "1",
+          "precinctsReportingPct": "100.0"
+        }
+      ]
+    },
+    {
+      "test": true,
       "raceID": "0",
       "statePostal": "AK",
       "countyNumber": "1",

@@ -195,16 +195,13 @@ class Homepage extends Component {
 			}))
 			.head()
 
-		const featuredRaces = [
-				massPresident
-			]
+		const featuredRaces = _.difference(races, presidentRaces)
+			.concat(massPresident)
 			.filter(v => v)
 			.map((race, key) => <FeaturedRace {...{ race, key }} />)
 
 		return (
 			<div className='Homepage'>
-
-				{featuredRaces}
 
 				<TestStatus isTest={isTest} />
 
@@ -223,6 +220,8 @@ class Homepage extends Component {
 					sortingDelegate={sortByElectoralCount}
 					projection={geoAlbersUsa()}
 					unitName='statePostal' />
+
+				{featuredRaces}
 
 				<p>or big photo</p>
 
