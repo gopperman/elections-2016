@@ -18,13 +18,13 @@ export default ({ candidates = [], sortingDelegate = sortByVoteCount }) => {
 			if (cands[0].voteCount === cands[1].voteCount) {
 
 				// we have a tie
-				klass = 'tie'
+				klass = 'fill-tie'
 
 			} else {
 
 				// we don't have a tie, we have a leading candidate
 				// return candidate party color
-				klass = cands[0].party.toLowerCase()
+				klass = 'fill-' + cands[0].party.toLowerCase()
 
 			}
 
@@ -32,7 +32,7 @@ export default ({ candidates = [], sortingDelegate = sortByVoteCount }) => {
 
 			// we only have one candidate
 			// return candidate party color
-			klass = cands[0].party.toLowerCase()
+			klass = 'fill-' + cands[0].party.toLowerCase()
 
 		}
 

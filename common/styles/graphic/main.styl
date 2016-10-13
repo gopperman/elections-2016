@@ -18,9 +18,6 @@
 		float left
 		margin 1em
 
-td
-	padding 0.25em
-
 .columns
 	border solid red 1px
 	width 100%
@@ -32,23 +29,12 @@ td
 
 .map
 	position relative
-
-svg
-	display block
-	border solid red 1px
-	width 100%
-	fill none
-	stroke black
-	stroke-width 1px
-
-	.gop
-		fill rgba(255, 0, 0, 0.5)
-
-	.dem
-		fill rgba(0, 0, 255, 0.5)
-
+	svg
+		display block
+		stroke white
+		stroke-width 0.5px
 	.tie
-		fill grey
+		fill set-gray('light')
 
 	.none
 		fill yellow
