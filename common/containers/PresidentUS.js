@@ -15,6 +15,7 @@ import STATES from './../../data/output/STATES.json'
 import Header from './../components/templates/Header.js'
 import Footer from './../components/templates/Footer.js'
 import TestStatus from './../components/TestStatus.js'
+import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 
 import {
 	sortByElectoralCount,
@@ -197,8 +198,9 @@ class PresidentUS extends Component {
 
 				<TestStatus isTest={isTest} />
 
-				<Header summaryState={summaryState} />
+				<Header />
 				<main id='content'>
+					<ElectoralCollegeBar {...summaryState} />
 					<h1 className='hed benton-bold'>US Presidential Results</h1>
 
 					<Timer {...timerProps} />
