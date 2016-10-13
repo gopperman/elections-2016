@@ -5,19 +5,17 @@ import { percentForDisplay } from './standardize.js'
 // TODO: create summary
 // TODO: format 100.0% precincts reporting as 100 pre...
 export default ({ subunit = {}, unitName, sortingDelegate }) => {
-
 	const title = subunit[unitName]
-	const { precinctsReportingPct } = subunit
+	const { precinctsReportingPct, stateName } = subunit
 	const summary = ''
 	const candidates = sortingDelegate(subunit.candidates || [])
 
-	const rows = candidates.slice(0, 4).map(v => {
+	const rows = candidates.slice(0, 4).map(candidate => {
 
-		const { candidateID, voteCount } = v
+		const { candidateID, voteCount } = candidate
 
 		// Create the candidate's full name, e.g. 'First Name'.
-		const name = fullName(v)
-
+		const { last } = candidate
 		// Add appropriate commas to the candidate's vote count.
 		const vote = addCommas(voteCount)
 
@@ -31,7 +29,7 @@ export default ({ subunit = {}, unitName, sortingDelegate }) => {
 		return `
 			<tr class='r-table__row'>
 				<td class='r-table__cell' scope='row'>
-					<p class='benton-bold'>${name}</p>
+					<p class='benton-bold'>${last}</p>
 				</td>
 				<td class='r-table__cell' scope='row'>
 					<p class='benton-bold'>${pctForDisplay}%</p>
@@ -45,6 +43,7 @@ export default ({ subunit = {}, unitName, sortingDelegate }) => {
 
 	return candidates.length ? `
 		<div class='r-block tooltip'>
+			<p class='r-block__name benton-bold'>${stateName}</p>
 			<table class='r-table' summary='${summary}'>
 				<thead class='r-table__head'>
 					<tr class='r-table__row'>
