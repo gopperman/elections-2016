@@ -200,8 +200,8 @@ class PresidentUS extends Component {
 
 				<Header />
 				<main id='content'>
-					<ElectoralCollegeBar {...summaryState} />
 					<h1 className='hed benton-bold'>US Presidential Results</h1>
+					<ElectoralCollegeBar {...summaryState} />
 
 					<Timer {...timerProps} />
 
