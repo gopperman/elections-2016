@@ -34,7 +34,7 @@ export default ({ subunit = {}, unitName, sortingDelegate }) => {
 					<p class='benton-bold'>${name}</p>
 				</td>
 				<td class='r-table__cell' scope='row'>
-					<p class='benton-bold'>${pctForDisplay}</p>
+					<p class='benton-bold'>${pctForDisplay}%</p>
 				</td>
 				<td class='r-table__cell' scope='row'>
 					<p class='benton-bold'>${vote}</p>
