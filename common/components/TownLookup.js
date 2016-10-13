@@ -1,7 +1,18 @@
 import React from 'react';
 import Select from 'react-select';
+import TOWNS from './../../data/output/TOWNS.json'
+import * as topojson from 'topojson'
+import { toSentenceCase } from './../utils/standardize.js'
 
-const STATES = require('../../data/states');
+const geoJSON = topojson.feature(TOWNS, TOWNS.objects.UNITS)
+
+const townList = geoJSON.features.map(v => {
+	const town = v.id.toLowerCase()
+	return {
+		value: town,
+		label: toSentenceCase(town),
+	}
+})
 
 var TownLookup = React.createClass({
 	propTypes: {
@@ -24,15 +35,11 @@ var TownLookup = React.createClass({
 	},
 
 	updateValue (newValue) {
-		console.log('State changed to ' + newValue);
-		this.setState({
-			selectValue: newValue
-		});
 		window.location.href = '/elections/2016/town/' + newValue
 	},
 
 	render () {
-		var options = STATES['US'];
+		var options = townList;
 		return (
 			<div className="section">
 				<h3 className="section-heading">{this.props.label}</h3>
