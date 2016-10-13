@@ -7,6 +7,7 @@ import ReactDOM from 'react-dom'
 import { browserHistory } from 'react-router'
 import configureStore from './../common/store/configureStore.js'
 import css from './../common/styles/config.styl'
+import critical from './../common/appUtils/critical.js'
 
 // Grab the initial Redux state (a json string created by the server).
 const initialState = window.REDUX__INITIALSTATE
