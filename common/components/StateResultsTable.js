@@ -11,6 +11,7 @@ const createSummary = (raceName) =>
 
 const StateResultsTable = ({ states, summaryCandidates }) =>
 	<div className='r-block'>
+		<h3 className='subhed benton-bold'>State Results</h3>
 		<table className='r-table' summary={createSummary()}>
 			<thead className='r-table__head'>
 				<tr className='r-table__row'>
