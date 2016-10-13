@@ -198,19 +198,21 @@ class PresidentUS extends Component {
 				<TestStatus isTest={isTest} />
 
 				<Header summaryState={summaryState} />
-				<h1>PresidentUS</h1>
+				<main id='content'>
+					<h1>PresidentUS</h1>
 
-				<Timer {...timerProps} />
+					<Timer {...timerProps} />
 
-				<Map
-					topoObject={STATES}
-					data={states}
-					sortingDelegate={sortByElectoralCount}
-					projection={geoAlbersUsa()}
-					unitName='statePostal' />
+					<Map
+						topoObject={STATES}
+						data={states}
+						sortingDelegate={sortByElectoralCount}
+						projection={geoAlbersUsa()}
+						unitName='statePostal' />
 
-				<StateResultsTable
-					{...{ states, summaryCandidates: summaryStateCandidates }} />
+					<StateResultsTable
+						{...{ states, summaryCandidates: summaryStateCandidates }} />
+				</main>
 
 				<Footer />
 
