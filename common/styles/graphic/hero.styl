@@ -7,6 +7,7 @@
 	justify-content center
 	overflow hidden
 	position relative
+	min-height 13em
 	&__hed
 		color set-gray('lightest')
 		order 2
@@ -31,7 +32,6 @@
 						&:nth-of-type({i})
 							// animation-duration i * 0.55s
 							animation-delay 2 + (i * 0.25s)
-
 @keyframes appear-hed
 	from
 		opacity 0

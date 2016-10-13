@@ -200,21 +200,24 @@ class PresidentUS extends Component {
 
 				<Header />
 				<main id='content'>
-					<h1 className='hed benton-bold'>US Presidential Results</h1>
-					<ElectoralCollegeBar {...summaryState} />
+					<div className='hero'>
+						<h1 className='hed benton-bold'>US Presidential Results</h1>
+					</div>
 
-					<Timer {...timerProps} />
+					<div className='container'>
+						<Timer {...timerProps} />
+						<ElectoralCollegeBar {...summaryState} />
+						<Map
+							topoObject={STATES}
+							data={states}
+							sortingDelegate={sortByElectoralCount}
+							projection={geoAlbersUsa()}
+							unitName='statePostal'
+							displayName='stateName' />
 
-					<Map
-						topoObject={STATES}
-						data={states}
-						sortingDelegate={sortByElectoralCount}
-						projection={geoAlbersUsa()}
-						unitName='statePostal'
-						displayName='stateName' />
-
-					<StateResultsTable
-						{...{ states, summaryCandidates: summaryStateCandidates }} />
+						<StateResultsTable
+							{...{ states, summaryCandidates: summaryStateCandidates }} />
+					</div>
 				</main>
 
 				<Footer />
