@@ -4,17 +4,7 @@ import TOWNS from './../../data/output/TOWNS.json'
 import * as topojson from 'topojson'
 import { toSentenceCase } from './../utils/standardize.js'
 
-const geoJSON = topojson.feature(TOWNS, TOWNS.objects.UNITS)
-
-const townList = geoJSON.features.map(v => {
-	const town = v.id.toLowerCase()
-	return {
-		value: town,
-		label: toSentenceCase(town),
-	}
-})
-
-var TownLookup = React.createClass({
+const TownLookup = React.createClass({
 	propTypes: {
 		label: React.PropTypes.string,
 		searchable: React.PropTypes.bool,
@@ -39,11 +29,20 @@ var TownLookup = React.createClass({
 	},
 
 	render () {
-		var options = townList;
+		const geoJSON = topojson.feature(TOWNS, TOWNS.objects.UNITS)
+
+		const townList = geoJSON.features.map(v => {
+			const town = v.id.toLowerCase()
+			return {
+				value: town,
+				label: toSentenceCase(town),
+			}
+		})
+
 		return (
 			<div className="section">
 				<h3 className="section-heading">{this.props.label}</h3>
-				<Select ref="stateSelect" options={options} simpleValue clearable={this.state.clearable} name="selected-state" disabled={this.state.disabled} value={this.state.selectValue} onChange={this.updateValue} searchable={this.state.searchable} />
+				<Select ref="stateSelect" options={townList} simpleValue clearable={this.state.clearable} name="selected-state" disabled={this.state.disabled} value={this.state.selectValue} onChange={this.updateValue} searchable={this.state.searchable} />
 			</div>
 		);
 	}
