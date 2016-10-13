@@ -1,12 +1,12 @@
 import addCommas from 'add-commas'
-import { percent, fullName } from './Candidate.js'
+import { percent } from './Candidate.js'
 import { percentForDisplay } from './standardize.js'
 
 // TODO: create summary
-// TODO: format 100.0% precincts reporting as 100 pre...
-export default ({ subunit = {}, unitName, sortingDelegate }) => {
-	const title = subunit[unitName]
-	const { precinctsReportingPct, stateName } = subunit
+export default ({ subunit = {}, displayName, sortingDelegate }) => {
+
+	const title = subunit[displayName]
+	const { precinctsReportingPct } = subunit
 	const summary = ''
 	const candidates = sortingDelegate(subunit.candidates || [])
 
@@ -32,7 +32,7 @@ export default ({ subunit = {}, unitName, sortingDelegate }) => {
 					<p class='benton-bold'>${last}</p>
 				</td>
 				<td class='r-table__cell' scope='row'>
-					<p class='benton-bold'>${pctForDisplay}%</p>
+					<p class='benton-bold'>${+pctForDisplay}%</p>
 				</td>
 				<td class='r-table__cell' scope='row'>
 					<p class='benton-bold'>${vote}</p>
@@ -43,7 +43,7 @@ export default ({ subunit = {}, unitName, sortingDelegate }) => {
 
 	return candidates.length ? `
 		<div class='r-block tooltip'>
-			<p class='r-block__name benton-bold'>${stateName}</p>
+			<p class='r-block__name benton-bold'>${title}</p>
 			<table class='r-table' summary='${summary}'>
 				<thead class='r-table__head'>
 					<tr class='r-table__row'>
@@ -60,6 +60,9 @@ export default ({ subunit = {}, unitName, sortingDelegate }) => {
 				</thead>
 				<tbody>${rows.join('')}</tbody>
 			</table>
-		</div>` : ''
+			<p class='note benton-regular'>
+				<span>${+precinctsReportingPct}% reporting</span>
+			</p>
+		</div>` : null
 
 }
