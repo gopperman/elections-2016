@@ -199,7 +199,7 @@ class PresidentUS extends Component {
 
 				<Header summaryState={summaryState} />
 				<main id='content'>
-					<h1>PresidentUS</h1>
+					<h1 className='hed benton-bold'>US Presidential Results</h1>
 
 					<Timer {...timerProps} />
 
