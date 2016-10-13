@@ -1,5 +1,5 @@
 import React from 'react'
-import TownLookup from '../TownLookup.js';
+import TownLookup from '../TownLookup.js'
 
 const Navigation = () => (
 	<div className='nav' key='nav'>
@@ -9,7 +9,7 @@ const Navigation = () => (
 			<li><a href='/race'>By Race</a></li>
 			<li><a href='/president'>President</a></li>
 		</ul>
-		<TownLookup label="Towns" searchable />
+		<TownLookup label='Towns' searchable />
 	</div>
 )
 
