@@ -210,7 +210,8 @@ class PresidentUS extends Component {
 						data={states}
 						sortingDelegate={sortByElectoralCount}
 						projection={geoAlbersUsa()}
-						unitName='statePostal' />
+						unitName='statePostal'
+						displayName='stateName' />
 
 					<StateResultsTable
 						{...{ states, summaryCandidates: summaryStateCandidates }} />

@@ -19,6 +19,7 @@ class Map extends Component {
 		projection: PropTypes.func.isRequired,
 		sortingDelegate: PropTypes.func.isRequired,
 		unitName: PropTypes.string.isRequired,
+		displayName: PropTypes.string,
 
 		// This will change.
 		data: PropTypes.array.isRequired,
@@ -85,10 +86,10 @@ class Map extends Component {
 	// when new data comes in and we're on a feature.
 	drawTooltip = (subunit) => {
 
-		const { unitName, sortingDelegate } = this.props
+		const { unitName, displayName, sortingDelegate } = this.props
 
 		this._tooltip.innerHTML = createTooltip({
-			subunit, unitName, sortingDelegate })
+			subunit, displayName: displayName || unitName, sortingDelegate })
 
 	}
 
