@@ -19,12 +19,24 @@ const ElectoralCollegeBar = ({
 
 	return (
 		<div className='r-block'>
-				<p className={classnames('r-block__special', { 'is-winner': dem.winner })}><span className='benton-bold'>{dem.electWon}</span> <span className='benton-regular'>{dem.last}</span></p>
-				<p className={classnames('r-block__special', { 'is-winner': gop.winner })}><span className='benton-bold'>{gop.electWon}</span> <span className='benton-regular'>{gop.last}</span></p>
+			<p className={classnames('r-block__special', { 'is-winner': dem.winner })}><span className='benton-bold'>{dem.electWon}</span> <span className='benton-regular'>{dem.last}</span></p>
+			<p className={classnames('r-block__special', { 'is-winner': gop.winner })}><span className='benton-bold'>{gop.electWon}</span> <span className='benton-regular'>{gop.last}</span></p>
 			<div className='r-block__duo-results r-block--electoral'>
 				<div className='results-bar'>
-					<span className='fill-dem' role='progressbar' aria-valuenow={`${demElectPct}%`} aria-valuemin='0' aria-valuemax='100' style={{width: `${demElectPct}%`}}></span>
-					<span className='fill-gop' role='progressbar' aria-valuenow={`${gopElectPct}%`} aria-valuemin='0' aria-valuemax='100' style={{width: `${gopElectPct}%`}}></span>
+					<span
+						className='fill-dem'
+						role='progressbar'
+						aria-valuenow={demElectPct}
+						aria-valuemin='0'
+						aria-valuemax='100'
+						style={{ width: `${demElectPct}%` }} />
+					<span
+						className='fill-gop'
+						role='progressbar'
+						aria-valuenow={gopElectPct}
+						aria-valuemin='0'
+						aria-valuemax='100'
+						style={{ width: `${gopElectPct}%` }} />
 				</div>
 				<p className='r-block__meta benton-regular'>{addCommas(dem.voteCount || '')} votes</p>
 				<p className='r-block__meta benton-regular'>{addCommas(gop.voteCount || '')} votes</p>
