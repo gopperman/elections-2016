@@ -21,7 +21,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 @provideHooks(hooks)
 @connect(s => s, mapDispatchToProps)
-class Town extends Component {
+class Office extends Component {
 
 	static propTypes = {
 		actions: PropTypes.object.isRequired,
@@ -68,7 +68,7 @@ class Town extends Component {
 		const { timer, results } = props
 		const { stopTimer } = props.actions
 
-		const townName = toSentenceCase(props.params.townName)
+		const officeName = toSentenceCase(props.params.officeName)
 
 		const races = results.data['town-abington'].map((race) => {
 			const raceTitle = `${race.office_name} ${race.seat_name}`
@@ -85,12 +85,9 @@ class Town extends Component {
 		})
 		
 		return (
-			<div className='Town'>
+			<div className='Office'>
 				<Header summaryState={getPresidentSummaryState(results.data['president-us-states'])} />
-				<h1>{townName}, MA</h1>
-				<ul>
-					{races}
-				</ul>
+				<h1>{officeName}</h1>
 				<Footer />
 			</div>
 		)
@@ -99,4 +96,4 @@ class Town extends Component {
 
 }
 
-export default Town
+export default Office
