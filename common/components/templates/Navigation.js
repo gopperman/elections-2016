@@ -9,7 +9,7 @@ const Navigation = () => (
 			<li><a href='/race'>By Race</a></li>
 			<li><a href='/president'>President</a></li>
 		</ul>
-		<TownLookup label='Towns' searchable />
+		<TownLookup />
 	</div>
 )
 
