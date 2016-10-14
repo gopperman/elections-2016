@@ -3,15 +3,12 @@ import { percent } from './Candidate.js'
 import { percentForDisplay } from './standardize.js'
 
 // TODO: create summary
-export default ({ subunit = {}, displayName, sortingDelegate,
-position = { x: 0, y: 0 } }) => {
+export default ({ subunit = {}, displayName, sortingDelegate }) => {
 
 	const title = subunit[displayName]
 	const { precinctsReportingPct } = subunit
 	const summary = ''
 	const candidates = sortingDelegate(subunit.candidates || [])
-
-	const { x, y } = position
 
 	const rows = candidates.slice(0, 4).map(candidate => {
 
@@ -45,30 +42,26 @@ position = { x: 0, y: 0 } }) => {
 	})
 
 	return candidates.length ? `
-		<div class='tooltip-wrapper' style='top: ${y}%; left: ${x}%;'>
-			<div class='r-block tooltip' style='left: ${-x}%;'>
-				<button class='tooltip__button js-tooltip-btn'>✕</button>
-				<p class='r-block__name benton-bold'>${title}</p>
-				<table class='r-table' summary='${summary}'>
-					<thead class='r-table__head'>
-						<tr class='r-table__row'>
-							<th class='r-table__cell' scope='col'>
-								<p class='benton-regular'>Candidate</p>
-							</th>
-							<th class='r-table__cell' scope='col'>
-								<p class='benton-regular'>Percent</p>
-							</th>
-							<th class='r-table__cell' scope='col'>
-								<p class='benton-regular'>Votes</p>
-							</th>
-						</tr>
-					</thead>
-					<tbody>${rows.join('')}</tbody>
-				</table>
-				<p class='note benton-regular'>
-					<span>${+precinctsReportingPct}% reporting</span>
-				</p>
-			</div>
-		</div>` : null
+		<p class='r-block__name benton-bold'>${title}</p>
+		<table class='r-table' summary='${summary}'>
+			<thead class='r-table__head'>
+				<tr class='r-table__row'>
+					<th class='r-table__cell' scope='col'>
+						<p class='benton-regular'>Candidate</p>
+					</th>
+					<th class='r-table__cell' scope='col'>
+						<p class='benton-regular'>Percent</p>
+					</th>
+					<th class='r-table__cell' scope='col'>
+						<p class='benton-regular'>Votes</p>
+					</th>
+				</tr>
+			</thead>
+			<tbody>${rows.join('')}</tbody>
+		</table>
+		<p class='note benton-regular'>
+			<span>${+precinctsReportingPct}% reporting</span>
+		</p>
+	` : ''
 
 }
