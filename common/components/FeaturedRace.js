@@ -76,14 +76,14 @@ const FeaturedRace = ({ race }) => {
 				<p className='r-block__meta'>
 					<span
 						className={classNames('benton-bold',
-							{ 'is-winner': !!left.winner })}>{leftPct}%</span>
+							{ 'is-winner': !!left.winner })}>{+leftPct}%</span>
 					<span className='benton-regular'>{left.last}</span>
 				</p>
 
 				<p className='r-block__meta'>
 					<span
 						className={classNames('benton-bold',
-							{ 'is-winner': !!right.winner })}>{rightPct}%</span>
+							{ 'is-winner': !!right.winner })}>{+rightPct}%</span>
 					<span className='benton-regular'>{right.last}</span>
 				</p>
 

@@ -13,7 +13,7 @@ candidates, summaryCandidates }) =>
 	<tr className='r-table__row'>
 		<td className='r-table__cell'>
 			<p className='benton-bold'>{statePostal}</p>
-			<p className='benton-regular'>{precinctsReportingPct}%</p>
+			<p className='benton-regular'>{+precinctsReportingPct}%</p>
 		</td>
 		{ summaryCandidates
 			.filter(v => v.isMainCandidate)
@@ -25,7 +25,7 @@ candidates, summaryCandidates }) =>
 				return candidate ? (
 					<td className='r-table__cell' key={i}>
 						<p className='hide-accessible'>{candidate.last}</p>
-						<p className='benton-bold'>{percentForDisplay(percent({
+						<p className='benton-bold'>{+percentForDisplay(percent({
 							candidates, candidateID: candidate.candidateID }))}%</p>
 						<p className='benton-regular'>{addCommas(candidate.voteCount)}</p>
 					</td>

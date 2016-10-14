@@ -44,7 +44,7 @@ const ElectoralCollegeBar = ({
 				<p className='r-block__meta benton-regular'>{addCommas(dem.voteCount || '')} votes</p>
 				<p className='r-block__meta benton-regular'>{addCommas(gop.voteCount || '')} votes</p>
 			</div>
-			<p className='note benton-regular'><span>{precinctsReportingPct}% reporting</span></p>
+			<p className='note benton-regular'><span>{+precinctsReportingPct}% reporting</span></p>
 		</div>
 	)
 

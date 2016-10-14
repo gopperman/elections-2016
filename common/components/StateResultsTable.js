@@ -17,7 +17,7 @@ const StateResultsTable = ({ states, summaryCandidates }) =>
 				<tr className='r-table__row'>
 					<th className='r-table__cell'>
 						<p className='benton-bold'>State</p>
-						<p className='benton-regular'>Pcnts. reporting</p>
+						<p className='benton-regular'>Precincts reporting</p>
 					</th>
 					{ summaryCandidates
 						.filter(v => v.isMainCandidate)
