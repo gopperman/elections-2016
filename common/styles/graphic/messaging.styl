@@ -77,6 +77,9 @@
 	z-index 10000
 	pointer-events none
 
+	@media (max-width: 40em)
+		pointer-events auto
+
 	.tooltip
 		box-shadow 0 0 5px set-gray('medium')
 		border-radius 3px
@@ -86,12 +89,21 @@
 		position relative
 		width auto
 
+		&__button
+			display none
+
 		@media (max-width: 40em)
 			// pin to bottom
 			position fixed
 			bottom 0
 			left 0 !important
 			width 100%
+
+			&__button
+				display block
+				position absolute
+				font-size 2em
+				right 0.5em
 
 // Find a home for this
 .share-tw

@@ -47,6 +47,7 @@ position = { x: 0, y: 0 } }) => {
 	return candidates.length ? `
 		<div class='tooltip-wrapper' style='top: ${y}%; left: ${x}%;'>
 			<div class='r-block tooltip' style='left: ${-x}%;'>
+				<button class='tooltip__button js-tooltip-btn'>✕</button>
 				<p class='r-block__name benton-bold'>${title}</p>
 				<table class='r-table' summary='${summary}'>
 					<thead class='r-table__head'>
