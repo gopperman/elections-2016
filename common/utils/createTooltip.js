@@ -42,27 +42,26 @@ export default ({ subunit = {}, displayName, sortingDelegate }) => {
 	})
 
 	return candidates.length ? `
-		<div class='r-block tooltip'>
-			<p class='r-block__name benton-bold'>${title}</p>
-			<table class='r-table' summary='${summary}'>
-				<thead class='r-table__head'>
-					<tr class='r-table__row'>
-						<th class='r-table__cell' scope='col'>
-							<p class='benton-regular'>Candidate</p>
-						</th>
-						<th class='r-table__cell' scope='col'>
-							<p class='benton-regular'>Percent</p>
-						</th>
-						<th class='r-table__cell' scope='col'>
-							<p class='benton-regular'>Votes</p>
-						</th>
-					</tr>
-				</thead>
-				<tbody>${rows.join('')}</tbody>
-			</table>
-			<p class='note benton-regular'>
-				<span>${+precinctsReportingPct}% reporting</span>
-			</p>
-		</div>` : null
+		<p class='r-block__name benton-bold'>${title}</p>
+		<table class='r-table' summary='${summary}'>
+			<thead class='r-table__head'>
+				<tr class='r-table__row'>
+					<th class='r-table__cell' scope='col'>
+						<p class='benton-regular'>Candidate</p>
+					</th>
+					<th class='r-table__cell' scope='col'>
+						<p class='benton-regular'>Percent</p>
+					</th>
+					<th class='r-table__cell' scope='col'>
+						<p class='benton-regular'>Votes</p>
+					</th>
+				</tr>
+			</thead>
+			<tbody>${rows.join('')}</tbody>
+		</table>
+		<p class='note benton-regular'>
+			<span>${+precinctsReportingPct}% reporting</span>
+		</p>
+	` : ''
 
 }

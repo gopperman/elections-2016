@@ -5,7 +5,7 @@ import _ from 'lodash'
 import React, { Component, PropTypes } from 'react'
 import * as topojson from 'topojson'
 import { geoPath } from 'd3-geo'
-import { select } from 'd3-selection'
+import { select, mouse } from 'd3-selection'
 import chooseColorClass from './../utils/chooseColorClass.js'
 import compareStrings from './../utils/compareStrings.js'
 import createTooltip from './../utils/createTooltip.js'
@@ -82,20 +82,45 @@ class Map extends Component {
 
 	}
 
+	getViewBoxDimensions = () => {
+		const [,, width, height] = select(this._svg).attr('viewBox').split(' ')
+		return { width, height }
+	}
+
 	// This draws the tooltip and gets called either by mousing or
 	// when new data comes in and we're on a feature.
-	drawTooltip = (subunit) => {
+	drawTooltip = ({ subunit, position }) => {
 
 		const { unitName, displayName, sortingDelegate } = this.props
 
-		this._tooltip.innerHTML = createTooltip({
-			subunit, displayName: displayName || unitName, sortingDelegate })
+		// Position tooltip.
+		if (position) {
+			this._tooltip.style.top = `${position.y}%`
+			this._tooltip.style.left = `${position.x}%`
+			this._tooltip.querySelector('.js-tooltip').style.left = `-${position.x}%`
+		}
+
+		// Set tooltip content.
+		this._tooltip.querySelector('.js-tooltip-content').innerHTML =
+			createTooltip({
+				subunit,
+				displayName: displayName || unitName,
+				sortingDelegate,
+			})
+
+		// If we have a valid subunit, show the tooltip;
+		if (subunit) {
+			this._tooltip.classList.add('show')
+		} else {
+			// otherwise hide it.
+			this._tooltip.classList.remove('show')
+		}
 
 	}
 
 	drawFeatures = () => {
 
-		const { drawTooltip } = this
+		const { drawTooltip, getViewBoxDimensions } = this
 		const { data, sortingDelegate, unitName } = this.props
 		const { selectionId } = this.state
 
@@ -126,7 +151,7 @@ class Map extends Component {
 		paths.enter().append('path')
 			.attr('d', this._path)
 		.merge(paths)
-			.attr('class', d => {
+			.attr('class', function getClass(d) {
 
 				let selectedClass = ''
 
@@ -143,8 +168,16 @@ class Map extends Component {
 					// give it a selected class,
 					selectedClass = 'selected'
 
+					// get the mouse position,
+					const { width, height } = getViewBoxDimensions()
+					const [x, y] = mouse(this)
+					const position = {
+						x: 100 * (x / width),
+						y: 100 * (y / height),
+					}
+
 					// and draw the tooltip.
-					drawTooltip(d.subunit)
+					drawTooltip({ subunit: d.subunit, position })
 
 				}
 
@@ -163,8 +196,16 @@ class Map extends Component {
 					// are on top.
 					.raise()
 
+				// Get the mouse position.
+				const { width, height } = getViewBoxDimensions()
+				const [x, y] = mouse(this)
+				const position = {
+					x: 100 * (x / width),
+					y: 100 * (y / height),
+				}
+
 				// Update the tooltip.
-				drawTooltip(d.subunit)
+				drawTooltip({ subunit: d.subunit, position })
 
 			})
 			.on('mouseleave', function mouseleave() {
@@ -173,7 +214,7 @@ class Map extends Component {
 				setState({ selectionId: null })
 
 				// clear out the tooltip,
-				drawTooltip()
+				drawTooltip({})
 
 				// and deselect the feature.
 				select(this).classed('selected', false)
@@ -189,7 +230,14 @@ class Map extends Component {
 		return (
 			<div className='map'>
 				<svg ref={(c) => this._svg = c} />
-				<div ref={(c) => this._tooltip = c} />
+				<div className='tooltip-wrapper' ref={(c) => this._tooltip = c}>
+					<div className='r-block tooltip js-tooltip'>
+						<button
+							className='tooltip__button'
+							onClick={this.drawTooltip}>✕</button>
+						<div className='js-tooltip-content'>actual content</div>
+					</div>
+				</div>
 			</div>
 		)
 
