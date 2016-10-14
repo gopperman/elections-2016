@@ -66,17 +66,32 @@
 		margin-left 1em
 
 // Tooltip
-.tooltip
-	max-width 20rem
-	box-shadow 0 0 5px set-gray('medium')
-	border-radius 3px
-	padding 1em
+.map .tooltip-wrapper
+	cursor default
+	width 20em
 	position absolute
 	top 0
 	left 0
+	margin-top 1.5rem
+	padding 0
 	z-index 10000
-	background-color white
 	pointer-events none
+
+	.tooltip
+		box-shadow 0 0 5px set-gray('medium')
+		border-radius 3px
+		padding 1em
+		margin 0
+		background-color white
+		position relative
+		width auto
+
+		@media (max-width: 40em)
+			// pin to bottom
+			position fixed
+			bottom 0
+			left 0 !important
+			width 100%
 
 // Find a home for this
 .share-tw
