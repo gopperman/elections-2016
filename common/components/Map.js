@@ -108,9 +108,11 @@ class Map extends Component {
 				sortingDelegate,
 			})
 
+		// If we have a valid subunit, show the tooltip;
 		if (subunit) {
 			this._tooltip.classList.add('show')
 		} else {
+			// otherwise hide it.
 			this._tooltip.classList.remove('show')
 		}
 
@@ -230,7 +232,9 @@ class Map extends Component {
 				<svg ref={(c) => this._svg = c} />
 				<div className='tooltip-wrapper' ref={(c) => this._tooltip = c}>
 					<div className='r-block tooltip js-tooltip'>
-						<button className='tooltip__button js-tooltip-btn'>✕</button>
+						<button
+							className='tooltip__button'
+							onClick={this.drawTooltip}>✕</button>
 						<div className='js-tooltip-content'>actual content</div>
 					</div>
 				</div>
