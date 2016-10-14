@@ -93,12 +93,26 @@ class Map extends Component {
 
 		const { unitName, displayName, sortingDelegate } = this.props
 
-		this._tooltip.innerHTML = createTooltip({
-			subunit,
-			displayName: displayName || unitName,
-			position,
-			sortingDelegate,
-		})
+		// Position tooltip.
+		if (position) {
+			this._tooltip.style.top = `${position.y}%`
+			this._tooltip.style.left = `${position.x}%`
+			this._tooltip.querySelector('.js-tooltip').style.left = `-${position.x}%`
+		}
+
+		// Set tooltip content.
+		this._tooltip.querySelector('.js-tooltip-content').innerHTML =
+			createTooltip({
+				subunit,
+				displayName: displayName || unitName,
+				sortingDelegate,
+			})
+
+		if (subunit) {
+			this._tooltip.classList.add('show')
+		} else {
+			this._tooltip.classList.remove('show')
+		}
 
 	}
 
@@ -135,7 +149,7 @@ class Map extends Component {
 		paths.enter().append('path')
 			.attr('d', this._path)
 		.merge(paths)
-			.attr('class', d => {
+			.attr('class', function getClass(d) {
 
 				let selectedClass = ''
 
@@ -152,8 +166,16 @@ class Map extends Component {
 					// give it a selected class,
 					selectedClass = 'selected'
 
+					// get the mouse position,
+					const { width, height } = getViewBoxDimensions()
+					const [x, y] = mouse(this)
+					const position = {
+						x: 100 * (x / width),
+						y: 100 * (y / height),
+					}
+
 					// and draw the tooltip.
-					drawTooltip(d.subunit)
+					drawTooltip({ subunit: d.subunit, position })
 
 				}
 
@@ -206,7 +228,12 @@ class Map extends Component {
 		return (
 			<div className='map'>
 				<svg ref={(c) => this._svg = c} />
-				<div ref={(c) => this._tooltip = c} />
+				<div className='tooltip-wrapper' ref={(c) => this._tooltip = c}>
+					<div className='r-block tooltip js-tooltip'>
+						<button className='tooltip__button js-tooltip-btn'>✕</button>
+						<div className='js-tooltip-content'>actual content</div>
+					</div>
+				</div>
 			</div>
 		)
 
