@@ -3,7 +3,7 @@
 /* eslint-disable no-return-assign */
 
 import React, { Component, PropTypes } from 'react'
-import * as d3 from 'd3'
+import { select } from 'd3-selection'
 import deepEqual from 'deep-equal'
 import { buildSeats } from './../utils/visUtils.js'
 
@@ -30,7 +30,7 @@ class BalanceOfPower extends Component {
 		const height = outerHeight - margin.top - margin.bottom
 
 		// Set viewBox on svg.
-		d3.select(this._svg)
+		select(this._svg)
 			.attr('viewBox', `0 0 ${width} ${height}`)
 
 		// Draw chart (although at this point we might not have data).
@@ -78,7 +78,7 @@ class BalanceOfPower extends Component {
 		const senate = buildSeats({ dem, gop, total: 100, rows: 4 })
 
 		// Select the svg node.
-		const svg = d3.select(this._svg)
+		const svg = select(this._svg)
 
 		// Select all `g` and join them to a senate row.
 		const row = svg.selectAll('g')
