@@ -35,14 +35,18 @@ class Map extends Component {
 
 		const { topoObject, projection } = this.props
 
-		// Convert `topoObject` to a GeoJSON object (via topojson).
-		const geoJSON = topojson.feature(topoObject, topoObject.objects.UNITS)
+		// Convert `topoObject` to GeoJSON objects (via topojson).
+		const featuresGeoJSON =
+			topojson.feature(topoObject, topoObject.objects.UNITS)
+
+		// const outlineGeoJSON =
+		// 	topojson.merge(topoObject, topoObject.objects.UNITS.geometries)
 
 		// Create `this._path` and save it for convenience.
 		this._path = geoPath().projection(projection)
 
 		// Find bounds and aspect ratio for this projection.
-		const b = this._path.bounds(geoJSON)
+		const b = this._path.bounds(featuresGeoJSON)
 		const aspect = (b[1][0] - b[0][0]) / (b[1][1] - b[0][1])
 
 		// Create width and height.
@@ -50,13 +54,22 @@ class Map extends Component {
 		const height = Math.round(width / aspect)
 
 		// Fit this projection to the newly-calculated aspect ratio.
-		projection.fitSize([width, height], geoJSON)
+		projection.fitSize([width, height], featuresGeoJSON)
 
 		// Set viewBox on svg.
-		select(this._svg).attr('viewBox', `0 0 ${width} ${height}`)
+		const svg = select(this._svg).attr('viewBox', `0 0 ${width} ${height}`)
+
+		// Create features group.
+		svg.append('g').attr('class', 'features')
+
+		// // Draw outline.
+		// svg.append('g').attr('class', 'outline')
+		// 	.append('path')
+		// 		.datum(outlineGeoJSON)
+		// 		.attr('d', this._path)
 
 		// Set features for convenience, so we don't keep topojsoning.
-		this._geoFeatures = geoJSON.features
+		this._geoFeatures = featuresGeoJSON.features
 
 		// Draw features (although at this point we might not have data).
 		this.drawFeatures()
@@ -141,7 +154,7 @@ class Map extends Component {
 			.value()
 
 		// Select the svg node.
-		const svg = select(this._svg)
+		const svg = select(this._svg).select('g.features')
 
 		// DATA JOIN (d3 pattern)
 		const paths = svg.selectAll('path')

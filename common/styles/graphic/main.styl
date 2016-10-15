@@ -32,8 +32,13 @@
 	svg
 		cursor default
 		display block
-		stroke white
-		stroke-width 1.5px
+		stroke-linecap round
+		stroke-linejoin round
+
+		g.features
+			stroke white
+			stroke-width 1px
+
 	.tie
 		fill set-gray('light')
 
@@ -41,7 +46,8 @@
 		fill yellow
 
 	.selected
-		stroke-width 3px
+		stroke set-gray('darkest')
+		stroke-width 1px
 
 .Timer
 	border solid black 1px
