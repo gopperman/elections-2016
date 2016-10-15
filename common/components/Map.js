@@ -20,6 +20,7 @@ class Map extends Component {
 		sortingDelegate: PropTypes.func.isRequired,
 		unitName: PropTypes.string.isRequired,
 		displayName: PropTypes.string,
+		displayUnitLabels: PropTypes.bool,
 
 		// This will change.
 		data: PropTypes.array.isRequired,
@@ -33,14 +34,11 @@ class Map extends Component {
 	// rendering occurs.
 	componentDidMount() {
 
-		const { topoObject, projection } = this.props
+		const { topoObject, projection, displayUnitLabels } = this.props
 
 		// Convert `topoObject` to GeoJSON objects (via topojson).
 		const featuresGeoJSON =
 			topojson.feature(topoObject, topoObject.objects.UNITS)
-
-		// const outlineGeoJSON =
-		// 	topojson.merge(topoObject, topoObject.objects.UNITS.geometries)
 
 		// Create `this._path` and save it for convenience.
 		this._path = geoPath().projection(projection)
@@ -62,14 +60,29 @@ class Map extends Component {
 		// Create features group.
 		svg.append('g').attr('class', 'features')
 
-		// // Draw outline.
-		// svg.append('g').attr('class', 'outline')
-		// 	.append('path')
-		// 		.datum(outlineGeoJSON)
-		// 		.attr('d', this._path)
-
 		// Set features for convenience, so we don't keep topojsoning.
 		this._geoFeatures = featuresGeoJSON.features
+
+		// Calculate feature centroids.
+		if (displayUnitLabels) {
+
+			const centroids = this._geoFeatures
+				.map(d => ({
+					centroid: this._path.centroid(d),
+					id: d.id,
+				}))
+
+			// Draw labels.
+			svg.append('g').attr('class', 'labels').selectAll('text')
+					.data(centroids, d => d.id)
+				.enter().append('text')
+					.attr('class', d => [d.id, 'benton-regular'].join(' '))
+					.attr('x', d => d.centroid[0])
+					.attr('y', d => d.centroid[1])
+					.attr('dy', 4)
+					.text(d => d.id)
+
+		}
 
 		// Draw features (although at this point we might not have data).
 		this.drawFeatures()
