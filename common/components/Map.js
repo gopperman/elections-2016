@@ -39,7 +39,7 @@ class Map extends Component {
 		const featuresGeoJSON =
 			topojson.feature(topoObject, topoObject.objects.UNITS)
 
-		// const outlineGeoJSON =
+		// const labelsGeoJSON =
 		// 	topojson.merge(topoObject, topoObject.objects.UNITS.geometries)
 
 		// Create `this._path` and save it for convenience.
@@ -62,14 +62,23 @@ class Map extends Component {
 		// Create features group.
 		svg.append('g').attr('class', 'features')
 
-		// // Draw outline.
-		// svg.append('g').attr('class', 'outline')
-		// 	.append('path')
-		// 		.datum(outlineGeoJSON)
-		// 		.attr('d', this._path)
-
 		// Set features for convenience, so we don't keep topojsoning.
 		this._geoFeatures = featuresGeoJSON.features
+
+		// Calculate feature centroids.
+		const centroids = this._geoFeatures.map(d => ({
+			centroid: this._path.centroid(d),
+			...d,
+		}))
+
+		// Draw labels.
+		svg.append('g').attr('class', 'labels').selectAll('text')
+				.data(centroids, d => d.id)
+			.enter().append('text')
+				.attr('class', 'benton-regular')
+				.attr('x', d => d.centroid[0])
+				.attr('y', d => d.centroid[1])
+				.text(d => d.id)
 
 		// Draw features (although at this point we might not have data).
 		this.drawFeatures()
@@ -91,7 +100,7 @@ class Map extends Component {
 	componentDidUpdate() {
 
 		// After the component updates, draw map features.
-		this.drawFeatures()
+		// this.drawFeatures()
 
 	}
 
