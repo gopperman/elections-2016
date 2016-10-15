@@ -3,7 +3,7 @@
 /* eslint-disable no-return-assign */
 
 import React, { Component, PropTypes } from 'react'
-import * as d3 from 'd3'
+import { select } from 'd3-selection'
 import deepEqual from 'deep-equal'
 import { buildSeats } from './../utils/visUtils.js'
 
@@ -13,8 +13,6 @@ class BalanceOfPower extends Component {
 		dem: PropTypes.number.isRequired,
 		gop: PropTypes.number.isRequired,
 	}
-
-	
 
 	// This lifecycle event gets called once, immediately after the initial
 	// rendering occurs.
@@ -32,7 +30,7 @@ class BalanceOfPower extends Component {
 		const height = outerHeight - margin.top - margin.bottom
 
 		// Set viewBox on svg.
-		d3.select(this._svg)
+		select(this._svg)
 			.attr('viewBox', `0 0 ${width} ${height}`)
 
 		// Draw chart (although at this point we might not have data).
@@ -64,6 +62,9 @@ class BalanceOfPower extends Component {
 	}
 
 	drawChart = () => {
+
+		const { dem, gop } = this.props
+
 		// Create outer width from container.
 		const outerWidth = this._svg.parentNode.offsetWidth
 
@@ -74,10 +75,10 @@ class BalanceOfPower extends Component {
 		const baseRadius = 80
 
 		// Get the data.
-		const senate = buildSeats(this.props.dem, this.props.gop, 100, 4)
+		const senate = buildSeats({ dem, gop, total: 100, rows: 4 })
 
 		// Select the svg node.
-		const svg = d3.select(this._svg)
+		const svg = select(this._svg)
 
 		// Select all `g` and join them to a senate row.
 		const row = svg.selectAll('g')
@@ -85,14 +86,14 @@ class BalanceOfPower extends Component {
 
 		// Append `g` and set its ENTER attributes (in this case only `transform`).
 		const rowEnter = row.enter().append('g')
-				.attr('transform', (d, i) => `translate(${outerWidth/2}, ${outerHeight/2})`)
+				.attr('transform', `translate(${outerWidth / 2}, ${outerHeight / 2})`)
 
 		// Select all `circles` of `g` and join to the row's seats.
 		const circle = rowEnter.selectAll('circle')
-				.data((d, row) => 
+				.data((d, seatsRow) =>
 					d.map(e => ({
 						...e,
-						row,
+						row: seatsRow,
 					}))
 				)
 
@@ -104,11 +105,11 @@ class BalanceOfPower extends Component {
 		// Append `circle` and set its ENTER attributes.
 		circle.enter().append('circle')
 				.attr('r', 5)
-				.attr('cx', (d, i) => 
-					((baseRadius + (d.row + 1) * 16) * Math.cos(Math.PI/(senate[0].length - 1) * i))
+				.attr('cx', (d, i) =>
+					((baseRadius + ((d.row + 1) * 16)) * Math.cos((Math.PI / (senate[0].length - 1)) * i))
 				)
 				.attr('cy', (d, i) =>
-					-((baseRadius + (d.row + 1) * 16) * Math.sin(Math.PI/(senate[0].length - 1) * i))
+					-((baseRadius + ((d.row + 1) * 16)) * Math.sin((Math.PI / (senate[0].length - 1)) * i))
 				)
 				.attr('class', d => d.party)
 	}
