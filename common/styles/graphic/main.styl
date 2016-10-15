@@ -42,13 +42,22 @@
 		g.labels
 			stroke none
 			fill set-gray('darkest')
-			font-size 0.6em
+			font-size 0.65em
+			text-anchor middle
+			pointer-events none
+
+			.DC,.NH,.CT,.RI,.DE,.MD,.NJ,.MS,.KY,.WV,.VT,.MA,.NC
+				display none
 
 			@media (min-width: 40em)
-				font-size 0.7em
+				font-size 0.75em
+				.MS,.KY,.WV,.VT,.MA,.NC
+					display block
 
 			@media (min-width: 50em)
-				font-size 0.8em
+				font-size 0.85em
+				.NJ
+					display block
 
 			@media (min-width: 60em)
 				font-size 0.9em

@@ -66,18 +66,20 @@ class Map extends Component {
 		this._geoFeatures = featuresGeoJSON.features
 
 		// Calculate feature centroids.
-		const centroids = this._geoFeatures.map(d => ({
-			centroid: this._path.centroid(d),
-			...d,
-		}))
+		const centroids = this._geoFeatures
+			.map(d => ({
+				centroid: this._path.centroid(d),
+				id: d.id,
+			}))
 
 		// Draw labels.
 		svg.append('g').attr('class', 'labels').selectAll('text')
 				.data(centroids, d => d.id)
 			.enter().append('text')
-				.attr('class', 'benton-regular')
+				.attr('class', d => [d.id, 'benton-regular'].join(' '))
 				.attr('x', d => d.centroid[0])
 				.attr('y', d => d.centroid[1])
+				.attr('dy', 4)
 				.text(d => d.id)
 
 		// Draw features (although at this point we might not have data).
@@ -100,7 +102,7 @@ class Map extends Component {
 	componentDidUpdate() {
 
 		// After the component updates, draw map features.
-		// this.drawFeatures()
+		this.drawFeatures()
 
 	}
 
