@@ -12,7 +12,9 @@ const SwingStates = ({ states }) => {
 		const candidates = sortByElectoralCount(state.candidates)
 
 		const klass = chooseColorClass({
-			candidates, sortingDelegate: sortByElectoralCount })
+			candidates,
+			sortingDelegate: sortByElectoralCount,
+		})
 
 		// Get the vote pct. margin by looking at the first two candidates.
 		const percents = candidates.map(candidate =>
