@@ -10,7 +10,7 @@ export default ({ candidates, isPresidential, precinctsReportingPct }) => {
 	const TIE = 'fill-tie'
 	const PCT_THRESHOLD = 1
 
-	let result
+	let result = NO_DATA
 
 	// First of all: do we have candidates?
 	if (candidates.length) {
@@ -31,50 +31,38 @@ export default ({ candidates, isPresidential, precinctsReportingPct }) => {
 				// We have a winner.
 				result = `${WINNER} fill-party party-${first.party}`
 
-			} else {
+			// We don't have a winner.
+			// Do we have data? (electWon OR voteCount)
+			} else if (first.electWon || first.voteCount) {
 
-				// We don't have a winner.
-				// Do we have data? (electWon OR voteCount)
-				if (first.electWon || first.voteCount) {
+				// We do have data.
+				// Do we have enough precincts reporting?
+				if (+precinctsReportingPct >= PCT_THRESHOLD) {
 
-					// We do have data.
-					// Do we have enough precincts reporting?
-					if (+precinctsReportingPct >= PCT_THRESHOLD) {
+					// We do have enough precincts reporting.
+					// Do we have a tie?
+					if ((first.electWon === second.electWon) &&
+						(first.voteCount === second.voteCount)) {
 
-						// We do have enough precincts reporting.
-						// Do we have a tie?
-						if ((first.electWon === second.electWon) &&
-							(first.voteCount === second.voteCount)) {
+						// We have a tie.
+						result = TIE
 
-							// We have a tie.
-							result = TIE
-
-						} else {
-
-							// We do not have a tie.
-							result = `fill-party party-${first.party}`
-
-						}
-
+					// We do not have a tie.
 					} else {
 
-						// We don't have enough precincts reporting.
-						result = NO_DATA
+						result = `fill-party party-${first.party}`
 
 					}
 
-				} else {
-
-					// We don't have data.
-					result = NO_DATA
-
+				// We don't have enough precincts reporting.
 				}
 
+			// We don't have data.
 			}
 
+		// We do have candidates, and they are NOT presidential.
 		} else {
 
-			// We do have candidates, and they are NOT presidential.
 			// Sort candidates by vote count.
 			const sortedCandidates = sortByVoteCount(candidates)
 
@@ -88,53 +76,37 @@ export default ({ candidates, isPresidential, precinctsReportingPct }) => {
 				// We have a winner.
 				result = `${WINNER} fill-party party-${first.party}`
 
-			} else {
+			// We don't have a winner.
+			// Do we have data? (voteCount)
+			} else if (first.voteCount) {
 
-				// We don't have a winner.
-				// Do we have data? (voteCount)
-				if (first.voteCount) {
+				// We do have data.
+				// Do we have enough precincts reporting?
+				if (+precinctsReportingPct >= PCT_THRESHOLD) {
 
-					// We do have data.
-					// Do we have enough precincts reporting?
-					if (+precinctsReportingPct >= PCT_THRESHOLD) {
+					// We do have enough precincts reporting.
+					// Do we have a tie?
+					if (first.voteCount === second.voteCount) {
 
-						// We do have enough precincts reporting.
-						// Do we have a tie?
-						if (first.voteCount === second.voteCount) {
+						// We have a tie.
+						result = TIE
 
-							// We have a tie.
-							result = TIE
-
-						} else {
-
-							// We do not have a tie.
-							result = `fill-party party-${first.party}`
-
-						}
-
+					// We do not have a tie.
 					} else {
 
-						// We don't have enough precincts reporting.
-						result = NO_DATA
+						result = `fill-party party-${first.party}`
 
 					}
 
-				} else {
-
-					// We don't have data.
-					result = NO_DATA
-
+				// We don't have enough precincts reporting.
 				}
 
+			// We don't have data.
 			}
 
 		}
 
-	} else {
-
-		// We don't have any candidates!
-		result = NO_DATA
-
+	// We don't have any candidates!
 	}
 
 	return result
