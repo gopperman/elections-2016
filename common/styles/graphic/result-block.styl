@@ -53,10 +53,15 @@
 	justify-content space-between
 	padding-bottom 0.5em
 	align-items flex-end
+	position relative
 	&__name
 		font-size 1em
 		&--number
 			font-size 1.3em
-		&--small
+		&--center
+			text-align center
 			font-size 0.8em
 			color set-gray('medium')
+			padding 0 0.5em
+		&:last-of-type
+			text-align right
