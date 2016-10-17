@@ -1,7 +1,6 @@
 import _ from 'lodash'
 
 const getRaceUnits = (data) => {
-
 	// Grab the `data.races` property.
 	const { races } = data
 

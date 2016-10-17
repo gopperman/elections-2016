@@ -4,14 +4,16 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actions from './../actions/actionCreators.js'
 import { getPresidentSummaryState } from './../utils/dataUtil.js'
-import { toSentenceCase } from './../utils/standardize.js'
+import RaceSummary from './../components/RaceSummary.js'
 import Header from './../components/templates/Header.js'
 import Footer from './../components/templates/Footer.js'
 import Timer from './../components/Timer.js'
 
+const url = '2016-11-08?officeName=U.S.%20House'
+
 const hooks = {
 	fetch: ({ dispatch }) =>
-		dispatch(actions.fetchResults({ url: 'town' })),
+		dispatch(actions.fetchResults({url})),
 }
 
 const mapDispatchToProps = (dispatch) => ({
@@ -68,32 +70,34 @@ class Office extends Component {
 		const { timer, results } = props
 		const { stopTimer } = props.actions
 
-		const officeName = toSentenceCase(props.params.officeName)
+		const officeName = props.params.officeName
+		const races = props.results.data.races.map((race) => {
+			const raceTitle = `${race.officeName}, ${race.seatName}`
 
-		const races = results.data['town-abington'].map((race) => {
-			const raceTitle = `${race.office_name} ${race.seat_name}`
-			
-			// TO-DO: We're waiting on consistent test data so we can use RaceSummary
-			const unit = (race.reporting_units && race.reporting_units[0]) || []
+			// Get this race's reporting units.
+			//console.log(race)
+			const unit = (race.reportingUnits && race.reportingUnits[0]) || []
 
 			return (
-				<li key={race.race_number}>
+				<li key={race.raceID}>
 					{raceTitle}
-					(Race Summary goes here)
+					<RaceSummary unit={unit} raceTitle={raceTitle} />
 				</li>
 			)
-		})
-		
+		});
+
+		//TODO: Get the president data for the header
+		//<Header summaryState={getPresidentSummaryState(results.data['president-us-states'])} />
 		return (
 			<div className='Office'>
-				<Header summaryState={getPresidentSummaryState(results.data['president-us-states'])} />
 				<h1>{officeName}</h1>
+				<ul>
+					{races}
+				</ul>
 				<Footer />
 			</div>
 		)
-
 	}
-
 }
 
 export default Office
