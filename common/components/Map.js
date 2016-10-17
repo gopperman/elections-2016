@@ -84,7 +84,7 @@ class Map extends Component {
 					.data(centroids, d => d.id)
 				.enter()
 				.append('text')
-					.attr('class', d => [d.id, 'benton-regular'].join(' '))
+					.attr('class', d => [d.id, 'benton-bold'].join(' '))
 					.attr('x', d => d.centroid[0])
 					.attr('y', d => d.centroid[1])
 					.attr('dy', 4)
