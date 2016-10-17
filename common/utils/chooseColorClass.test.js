@@ -1,8 +1,6 @@
 /* global describe, it */
 
-// import _ from 'lodash'
 import assert from 'assert'
-// import { readFileSync } from 'jsonfile'
 import chooseColorClass from './chooseColorClass.js'
 
 describe('chooseColorClass', () => {
@@ -168,35 +166,124 @@ describe('chooseColorClass', () => {
 
 	describe('for non-presidential results', () => {
 
-		// it('should work with no data', () => {
+		it('should work with a winner', () => {
 
-		// 	assert.equal(true, false)
+			assert.equal(
+				chooseColorClass({
+					candidates: [
+						{ voteCount: 0 },
+						{ voteCount: 0, winner: 'X', party: 'ABC' },
+					],
+				}),
+				'winner fill-party party-ABC',
+			)
 
-		// })
+		})
 
-		// it('should work with a winner', () => {
+		it('should work with no data', () => {
 
-		// 	assert.equal(true, false)
+			// no data means no winner AND no voteCount
+			assert.equal(
+				chooseColorClass({
+					candidates: [],
+				}),
+				'fill-none',
+			)
 
-		// })
+			assert.equal(
+				chooseColorClass({
+					candidates: [
+						{ voteCount: 0 },
+						{ voteCount: 0 },
+					],
+				}),
+				'fill-none',
+			)
 
-		// it('should work with some data but less than 1%', () => {
+			assert.notEqual(
+				chooseColorClass({
+					candidates: [
+						{ voteCount: 1 },
+						{ voteCount: 0 },
+					],
+					precinctsReportingPct: '1',
+				}),
+				'fill-none',
+			)
 
-		// 	assert.equal(true, false)
+			assert.notEqual(
+				chooseColorClass({
+					candidates: [
+						{ voteCount: 0, winner: 'X' },
+						{ voteCount: 0 },
+					],
+					precinctsReportingPct: '1',
+				}),
+				'fill-none',
+			)
 
-		// })
+		})
 
-		// it('should work with enough data to color a tie', () => {
+		it('should work with some data but less than 1%', () => {
 
-		// 	assert.equal(true, false)
+			assert.equal(
+				chooseColorClass({
+					candidates: [
+						{ voteCount: 1 },
+						{ voteCount: 1 },
+					],
+					precinctsReportingPct: '0.5',
+				}),
+				'fill-none',
+			)
 
-		// })
+		})
 
-		// it('should work with enough data to color leading', () => {
+		it('should work with at least 1% and a tie', () => {
 
-		// 	assert.equal(true, false)
+			// tie (voteCount are equal)
+			assert.equal(
+				chooseColorClass({
+					candidates: [
+						{ voteCount: 1 },
+						{ voteCount: 1 },
+						{ voteCount: 1 },
+					],
+					precinctsReportingPct: '1',
+				}),
+				'fill-tie',
+			)
 
-		// })
+			// not tie (not voteCount are equal)
+			assert.notEqual(
+				chooseColorClass({
+					candidates: [
+						{ voteCount: 0 },
+						{ voteCount: 1 },
+						{ voteCount: 2 },
+					],
+					precinctsReportingPct: '1',
+				}),
+				'fill-tie',
+			)
+
+		})
+
+		it('should work with at least 1% and leading', () => {
+
+			assert.equal(
+				chooseColorClass({
+					candidates: [
+						{ voteCount: 3, party: 'CA' },
+						{ voteCount: 2, party: 'BB' },
+						{ voteCount: 1, party: 'AC' },
+					],
+					precinctsReportingPct: '1',
+				}),
+				'fill-party party-CA',
+			)
+
+		})
 
 	})
 
