@@ -4,6 +4,7 @@ import { sortByElectoralCount } from './../utils/Candidates.js'
 import { percent } from './../utils/Candidate.js'
 import { percentForDisplay } from './../utils/standardize.js'
 
+// TODO: add leading vs winner precincts reporting
 const SwingStates = ({ states }) => {
 
 	const circles = states.map((state, i) => {

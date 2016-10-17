@@ -1,9 +1,14 @@
 import { candidatesAreEqual } from './Candidates.js'
 
+const normalizeParty = (party) =>
+	_.includes(['dem', 'gop'], party.toLowerCase()) ?
+		party.toLowerCase() :
+		'ind'
+
 export default ({ candidates, precinctsReportingPct, sortingDelegate }) => {
 
 	const NO_DATA = 'fill-none'
-	const WINNER = 'winner'
+	const WINNER = 'fill-is-winner'
 	const TIE = 'fill-tie'
 	const PCT_THRESHOLD = 1
 
@@ -23,7 +28,7 @@ export default ({ candidates, precinctsReportingPct, sortingDelegate }) => {
 		if (first.winner === 'X') {
 
 			// We have a winner.
-			result = `${WINNER} fill-party party-${first.party}`
+			result = `${WINNER} fill-${normalizeParty(first.party)}`
 
 		// We don't have a winner.
 		// Do we have data? (electWon OR voteCount)
@@ -43,7 +48,7 @@ export default ({ candidates, precinctsReportingPct, sortingDelegate }) => {
 				// We do not have a tie.
 				} else {
 
-					result = `fill-party party-${first.party}`
+					result = `fill-${normalizeParty(first.party)}`
 
 				}
 
