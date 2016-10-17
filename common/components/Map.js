@@ -190,13 +190,11 @@ class Map extends Component {
 
 				let selectedClass = ''
 
-				const { precinctsReportingPct } = d
-
 				// Get this feature's color class based on who's winning.
 				const colorClass = chooseColorClass({
 					candidates: d.subunit && d.subunit.candidates,
 					sortingDelegate,
-					precinctsReportingPct,
+					precinctsReportingPct: d.subunit && d.subunit.precinctsReportingPct,
 				})
 
 				// If this feature is selected (if the `selectionId` is in

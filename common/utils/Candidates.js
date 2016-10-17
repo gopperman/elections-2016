@@ -20,7 +20,7 @@ const candidatesAreEqual = (left, right) =>
 		(left.electWon === right.electWon))
 
 /**
- * Sort candidates by winner, electoral votes won, and voteCount, in that order.
+ * Sort candidates by electoral votes won and voteCount, in that order.
  * @memberof Candidates
  * @function
  * @param {Array} candidates an array of candidates
@@ -29,10 +29,10 @@ const candidatesAreEqual = (left, right) =>
  * sortByElectoralCount(candidate) //=> sortedCandidates
  */
 const sortByElectoralCount = (candidates) =>
-	_.orderBy(candidates, ['winner', 'electWon', 'voteCount'], ['asc', 'desc', 'desc'])
+	_.orderBy(candidates, ['electWon', 'voteCount'], ['desc', 'desc'])
 
 /**
- * Sort candidates by winner and total vote count, in that order.
+ * Sort candidates by total vote count.
  * @memberof Candidates
  * @function
  * @param {Array} candidates an array of candidates
@@ -41,7 +41,7 @@ const sortByElectoralCount = (candidates) =>
  * sortByVoteCount(candidates) //=> sortedCandidates
  */
 const sortByVoteCount = (candidates) =>
-	_.orderBy(candidates, ['winner', 'voteCount'], ['asc', 'desc'])
+	_.orderBy(candidates, ['voteCount'], ['desc'])
 
 /**
  * Sort candidates by an external array of polIDs.
