@@ -50,15 +50,15 @@ describe('Candidates', () => {
 		it('should work', () => {
 
 			const input = [
+				{ voteCount: 0 },
 				{ voteCount: 1 },
-				{ voteCount: 0, winner: 'X' },
 			]
 
 			const output = sortByVoteCount(input)
 
 			const expected = [
-				{ voteCount: 0, winner: 'X' },
 				{ voteCount: 1 },
+				{ voteCount: 0 },
 			]
 
 			assert.deepEqual(output, expected)
@@ -72,15 +72,15 @@ describe('Candidates', () => {
 		it('should work', () => {
 
 			const input = [
+				{ electWon: 0 },
 				{ electWon: 1 },
-				{ electWon: 0, winner: 'X' },
 			]
 
 			const output = sortByElectoralCount(input)
 
 			const expected = [
-				{ electWon: 0, winner: 'X' },
 				{ electWon: 1 },
+				{ electWon: 0 },
 			]
 
 			assert.deepEqual(output, expected)

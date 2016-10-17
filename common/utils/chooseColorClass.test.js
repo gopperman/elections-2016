@@ -23,7 +23,7 @@ describe('chooseColorClass', () => {
 					],
 					sortingDelegate,
 				}),
-				'winner fill-party party-ABC',
+				'fill-is-winner fill-ind',
 			)
 
 		})
@@ -141,27 +141,27 @@ describe('chooseColorClass', () => {
 			assert.equal(
 				chooseColorClass({
 					candidates: [
-						{ electWon: 1, voteCount: 1, party: 'CA' },
-						{ electWon: 2, voteCount: 1, party: 'BB' },
+						{ electWon: 1, voteCount: 1, party: 'dem' },
+						{ electWon: 2, voteCount: 1, party: 'gop' },
 						{ electWon: 3, voteCount: 1, party: 'AC' },
 					],
 					precinctsReportingPct: '1',
 					sortingDelegate,
 				}),
-				'fill-party party-AC',
+				'fill-ind',
 			)
 
 			assert.equal(
 				chooseColorClass({
 					candidates: [
-						{ electWon: 1, voteCount: 3, party: 'CA' },
-						{ electWon: 1, voteCount: 2, party: 'BB' },
-						{ electWon: 1, voteCount: 1, party: 'AC' },
+						{ electWon: 1, voteCount: 3, party: 'dem' },
+						{ electWon: 1, voteCount: 2, party: 'ind' },
+						{ electWon: 1, voteCount: 1, party: 'gop' },
 					],
 					precinctsReportingPct: '1',
 					sortingDelegate,
 				}),
-				'fill-party party-CA',
+				'fill-dem',
 			)
 
 		})
@@ -177,12 +177,13 @@ describe('chooseColorClass', () => {
 			assert.equal(
 				chooseColorClass({
 					candidates: [
-						{ voteCount: 0 },
+						{ voteCount: 1, party: 'dem' },
 						{ voteCount: 0, winner: 'X', party: 'ABC' },
 					],
 					sortingDelegate,
+					precinctsReportingPct: '1',
 				}),
-				'winner fill-party party-ABC',
+				'fill-dem',
 			)
 
 		})
@@ -221,7 +222,7 @@ describe('chooseColorClass', () => {
 				'fill-none',
 			)
 
-			assert.notEqual(
+			assert.equal(
 				chooseColorClass({
 					candidates: [
 						{ voteCount: 0, winner: 'X' },
@@ -289,13 +290,13 @@ describe('chooseColorClass', () => {
 				chooseColorClass({
 					candidates: [
 						{ voteCount: 3, party: 'CA' },
-						{ voteCount: 2, party: 'BB' },
-						{ voteCount: 1, party: 'AC' },
+						{ voteCount: 2, party: 'dem' },
+						{ voteCount: 1, party: 'gop' },
 					],
 					precinctsReportingPct: '1',
 					sortingDelegate,
 				}),
-				'fill-party party-CA',
+				'fill-ind',
 			)
 
 		})
