@@ -75,7 +75,8 @@ class Map extends Component {
 			// Draw labels.
 			svg.append('g').attr('class', 'labels').selectAll('text')
 					.data(centroids, d => d.id)
-				.enter().append('text')
+				.enter()
+				.append('text')
 					.attr('class', d => [d.id, 'benton-regular'].join(' '))
 					.attr('x', d => d.centroid[0])
 					.attr('y', d => d.centroid[1])
@@ -108,6 +109,7 @@ class Map extends Component {
 
 	}
 
+	// Extract svg's `viewBox` width and height.
 	getViewBoxDimensions = () => {
 		const [,, width, height] = select(this._svg).attr('viewBox').split(' ')
 		return { width, height }
