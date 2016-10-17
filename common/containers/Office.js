@@ -13,7 +13,7 @@ const url = '2016-11-08?officeName=U.S.%20House'
 
 const hooks = {
 	fetch: ({ dispatch }) =>
-		dispatch(actions.fetchResults({url})),
+		dispatch(actions.fetchResults({ url })),
 }
 
 const mapDispatchToProps = (dispatch) => ({
@@ -83,10 +83,10 @@ class Office extends Component {
 					<RaceSummary unit={unit} raceTitle={raceTitle} />
 				</li>
 			)
-		});
+		})
 
-		//TODO: Get the president data for the header
-		//<Header summaryState={getPresidentSummaryState(results.data['president-us-states'])} />
+		// TODO: Get the president data for the header
+		// <Header summaryState={getPresidentSummaryState(results.data['president-us-states'])} />
 		return (
 			<div className='Office'>
 				<h1>{officeName}</h1>
