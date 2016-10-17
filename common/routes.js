@@ -10,7 +10,6 @@ import Race from './containers/Race.js'
 import Town from './containers/Town.js'
 
 // TODO:
-//		<Route path='elections/2016/office/:officeName' component={Town} />
 //		<Route path='elections/2016/ballot-questions/:race' component={Race} />
 //		<Route path='elections/2016/ballot-questions' component={()} />
 export default (
