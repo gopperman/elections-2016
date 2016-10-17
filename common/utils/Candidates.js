@@ -5,7 +5,22 @@
 import _ from 'lodash'
 
 /**
- * Sort candidates by electoral votes won and voteCount, in that order.
+ * Determine candidate equality by winner, electWon, and voteCount.
+ * @memberof Candidates
+ * @function
+ * @param {Object} left a candidate
+ * @param {Object} right a candidate
+ * @returns {Boolean} whether candidates are equal
+ * @example
+ * candidatesAreEqual(left, right) //=> false
+ */
+const candidatesAreEqual = (left, right) =>
+	((left.winner === right.winner) &&
+		(left.voteCount === right.voteCount) &&
+		(left.electWon === right.electWon))
+
+/**
+ * Sort candidates by winner, electoral votes won, and voteCount, in that order.
  * @memberof Candidates
  * @function
  * @param {Array} candidates an array of candidates
@@ -14,10 +29,10 @@ import _ from 'lodash'
  * sortByElectoralCount(candidate) //=> sortedCandidates
  */
 const sortByElectoralCount = (candidates) =>
-	_.orderBy(candidates, ['electWon', 'voteCount'], ['desc', 'desc'])
+	_.orderBy(candidates, ['winner', 'electWon', 'voteCount'], ['asc', 'desc', 'desc'])
 
 /**
- * Sort candidates by total vote count.
+ * Sort candidates by winner and total vote count, in that order.
  * @memberof Candidates
  * @function
  * @param {Array} candidates an array of candidates
@@ -26,7 +41,7 @@ const sortByElectoralCount = (candidates) =>
  * sortByVoteCount(candidates) //=> sortedCandidates
  */
 const sortByVoteCount = (candidates) =>
-	_.orderBy(candidates, ['voteCount'], ['desc'])
+	_.orderBy(candidates, ['winner', 'voteCount'], ['asc', 'desc'])
 
 /**
  * Sort candidates by an external array of polIDs.
@@ -88,4 +103,5 @@ export {
 	sortByPolIDs,
 	sortByCandidateIDs,
 	totalVotes,
+	candidatesAreEqual,
 }

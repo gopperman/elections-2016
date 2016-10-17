@@ -4,6 +4,7 @@ import { sortByElectoralCount } from './../utils/Candidates.js'
 import { percent } from './../utils/Candidate.js'
 import { percentForDisplay } from './../utils/standardize.js'
 
+// TODO: add leading vs winner precincts reporting
 const SwingStates = ({ states }) => {
 
 	const circles = states.map((state, i) => {
@@ -12,7 +13,9 @@ const SwingStates = ({ states }) => {
 		const candidates = sortByElectoralCount(state.candidates)
 
 		const klass = chooseColorClass({
-			candidates, sortingDelegate: sortByElectoralCount })
+			candidates,
+			sortingDelegate: sortByElectoralCount,
+		})
 
 		// Get the vote pct. margin by looking at the first two candidates.
 		const percents = candidates.map(candidate =>
