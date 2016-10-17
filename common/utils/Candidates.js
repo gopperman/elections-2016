@@ -5,6 +5,21 @@
 import _ from 'lodash'
 
 /**
+ * Determine candidate equality by winner, electWon, and voteCount.
+ * @memberof Candidates
+ * @function
+ * @param {Object} left a candidate
+ * @param {Object} right a candidate
+ * @returns {Boolean} whether candidates are equal
+ * @example
+ * candidatesAreEqual(left, right) //=> false
+ */
+const candidatesAreEqual = (left, right) =>
+	((left.winner === right.winner) &&
+		(left.voteCount === right.voteCount) &&
+		(left.electWon === right.electWon))
+
+/**
  * Sort candidates by winner, electoral votes won, and voteCount, in that order.
  * @memberof Candidates
  * @function
@@ -17,7 +32,7 @@ const sortByElectoralCount = (candidates) =>
 	_.orderBy(candidates, ['winner', 'electWon', 'voteCount'], ['asc', 'desc', 'desc'])
 
 /**
- * Sort candidates by winner and total vote count, in that order..
+ * Sort candidates by winner and total vote count, in that order.
  * @memberof Candidates
  * @function
  * @param {Array} candidates an array of candidates
@@ -88,4 +103,5 @@ export {
 	sortByPolIDs,
 	sortByCandidateIDs,
 	totalVotes,
+	candidatesAreEqual,
 }

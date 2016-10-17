@@ -8,9 +8,42 @@ import {
 	sortByCandidateIDs,
 	sortByElectoralCount,
 	sortByVoteCount,
+	candidatesAreEqual,
 } from './Candidates.js'
 
 describe('Candidates', () => {
+
+	describe('compareCandidates', () => {
+
+		it('should work with presidential candidates', () => {
+
+			assert.equal(candidatesAreEqual(
+				{ winner: 'X', electWon: 1, voteCount: 1 },
+				{ winner: 'X', electWon: 1, voteCount: 1 },
+			), true)
+
+			assert.equal(candidatesAreEqual(
+				{ winner: 'X', electWon: 1, voteCount: 0 },
+				{ electWon: 0, voteCount: 0 },
+			), false)
+
+		})
+
+		it('should work with non-presidential candidates', () => {
+
+			assert.equal(candidatesAreEqual(
+				{ winner: 'X', voteCount: 1 },
+				{ winner: 'X', voteCount: 1 },
+			), true)
+
+			assert.equal(candidatesAreEqual(
+				{ winner: 'X', voteCount: 0 },
+				{ voteCount: 1 },
+			), false)
+
+		})
+
+	})
 
 	describe('sortByVoteCount', () => {
 

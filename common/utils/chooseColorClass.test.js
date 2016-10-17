@@ -2,12 +2,16 @@
 
 import assert from 'assert'
 import chooseColorClass from './chooseColorClass.js'
+import {
+	sortByElectoralCount,
+	sortByVoteCount,
+} from './Candidates.js'
 
 describe('chooseColorClass', () => {
 
 	describe('for presidential results', () => {
 
-		const isPresidential = true
+		const sortingDelegate = sortByElectoralCount
 
 		it('should work with a winner', () => {
 
@@ -17,7 +21,7 @@ describe('chooseColorClass', () => {
 						{ electWon: 0, voteCount: 0 },
 						{ electWon: 0, voteCount: 0, winner: 'X', party: 'ABC' },
 					],
-					isPresidential,
+					sortingDelegate,
 				}),
 				'winner fill-party party-ABC',
 			)
@@ -30,7 +34,7 @@ describe('chooseColorClass', () => {
 			assert.equal(
 				chooseColorClass({
 					candidates: [],
-					isPresidential,
+					sortingDelegate,
 				}),
 				'fill-none',
 			)
@@ -41,7 +45,7 @@ describe('chooseColorClass', () => {
 						{ electWon: 0, voteCount: 0 },
 						{ electWon: 0, voteCount: 0 },
 					],
-					isPresidential,
+					sortingDelegate,
 				}),
 				'fill-none',
 			)
@@ -52,7 +56,7 @@ describe('chooseColorClass', () => {
 						{ electWon: 0, voteCount: 1 },
 						{ electWon: 0, voteCount: 0 },
 					],
-					isPresidential,
+					sortingDelegate,
 					precinctsReportingPct: '1',
 				}),
 				'fill-none',
@@ -64,7 +68,7 @@ describe('chooseColorClass', () => {
 						{ electWon: 1, voteCount: 0 },
 						{ electWon: 0, voteCount: 0 },
 					],
-					isPresidential,
+					sortingDelegate,
 					precinctsReportingPct: '1',
 				}),
 				'fill-none',
@@ -76,7 +80,7 @@ describe('chooseColorClass', () => {
 						{ electWon: 0, voteCount: 0, winner: 'X' },
 						{ electWon: 0, voteCount: 0 },
 					],
-					isPresidential,
+					sortingDelegate,
 					precinctsReportingPct: '1',
 				}),
 				'fill-none',
@@ -93,7 +97,7 @@ describe('chooseColorClass', () => {
 						{ electWon: 1, voteCount: 1 },
 					],
 					precinctsReportingPct: '0.5',
-					isPresidential,
+					sortingDelegate,
 				}),
 				'fill-none',
 			)
@@ -111,7 +115,7 @@ describe('chooseColorClass', () => {
 						{ electWon: 1, voteCount: 1 },
 					],
 					precinctsReportingPct: '1',
-					isPresidential,
+					sortingDelegate,
 				}),
 				'fill-tie',
 			)
@@ -125,7 +129,7 @@ describe('chooseColorClass', () => {
 						{ electWon: 1, voteCount: 2 },
 					],
 					precinctsReportingPct: '1',
-					isPresidential,
+					sortingDelegate,
 				}),
 				'fill-tie',
 			)
@@ -142,7 +146,7 @@ describe('chooseColorClass', () => {
 						{ electWon: 3, voteCount: 1, party: 'AC' },
 					],
 					precinctsReportingPct: '1',
-					isPresidential,
+					sortingDelegate,
 				}),
 				'fill-party party-AC',
 			)
@@ -155,7 +159,7 @@ describe('chooseColorClass', () => {
 						{ electWon: 1, voteCount: 1, party: 'AC' },
 					],
 					precinctsReportingPct: '1',
-					isPresidential,
+					sortingDelegate,
 				}),
 				'fill-party party-CA',
 			)
@@ -166,6 +170,8 @@ describe('chooseColorClass', () => {
 
 	describe('for non-presidential results', () => {
 
+		const sortingDelegate = sortByVoteCount
+
 		it('should work with a winner', () => {
 
 			assert.equal(
@@ -174,6 +180,7 @@ describe('chooseColorClass', () => {
 						{ voteCount: 0 },
 						{ voteCount: 0, winner: 'X', party: 'ABC' },
 					],
+					sortingDelegate,
 				}),
 				'winner fill-party party-ABC',
 			)
@@ -186,6 +193,7 @@ describe('chooseColorClass', () => {
 			assert.equal(
 				chooseColorClass({
 					candidates: [],
+					sortingDelegate,
 				}),
 				'fill-none',
 			)
@@ -196,6 +204,7 @@ describe('chooseColorClass', () => {
 						{ voteCount: 0 },
 						{ voteCount: 0 },
 					],
+					sortingDelegate,
 				}),
 				'fill-none',
 			)
@@ -207,6 +216,7 @@ describe('chooseColorClass', () => {
 						{ voteCount: 0 },
 					],
 					precinctsReportingPct: '1',
+					sortingDelegate,
 				}),
 				'fill-none',
 			)
@@ -218,6 +228,7 @@ describe('chooseColorClass', () => {
 						{ voteCount: 0 },
 					],
 					precinctsReportingPct: '1',
+					sortingDelegate,
 				}),
 				'fill-none',
 			)
@@ -233,6 +244,7 @@ describe('chooseColorClass', () => {
 						{ voteCount: 1 },
 					],
 					precinctsReportingPct: '0.5',
+					sortingDelegate,
 				}),
 				'fill-none',
 			)
@@ -250,6 +262,7 @@ describe('chooseColorClass', () => {
 						{ voteCount: 1 },
 					],
 					precinctsReportingPct: '1',
+					sortingDelegate,
 				}),
 				'fill-tie',
 			)
@@ -263,6 +276,7 @@ describe('chooseColorClass', () => {
 						{ voteCount: 2 },
 					],
 					precinctsReportingPct: '1',
+					sortingDelegate,
 				}),
 				'fill-tie',
 			)
@@ -279,6 +293,7 @@ describe('chooseColorClass', () => {
 						{ voteCount: 1, party: 'AC' },
 					],
 					precinctsReportingPct: '1',
+					sortingDelegate,
 				}),
 				'fill-party party-CA',
 			)
