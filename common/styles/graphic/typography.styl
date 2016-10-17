@@ -3,14 +3,20 @@
 	line-height 1.2
 	margin-bottom 0.5em
 	text-align center
-	+mq('bp-1')
+	+mq('bp-2')
 		font-size 2.8em
 
 .subhed
 	font-size 1.3em
 	line-height 1.2
-	margin-bottom 0.5em
-	+mq('bp-1')
+	margin-bottom 1.5em
+	text-align center
+	span
+		padding 0.25em
+		border 8px solid transparent
+		border-image linear-gradient(to top,set-color('blue') 0,set-color('red') 100%)
+		border-image-slice 1
+	+mq('bp-2')
 		font-size 1.8em
 
 .overline
