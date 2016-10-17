@@ -9,6 +9,13 @@ import { select, mouse } from 'd3-selection'
 import chooseColorClass from './../utils/chooseColorClass.js'
 import compareStrings from './../utils/compareStrings.js'
 import createTooltip from './../utils/createTooltip.js'
+const close = `
+	<svg version="1.1" id="icon-close" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16.641px" height="16.643px" viewBox="243.576 202.087 16.641 16.643" enable-background="new 243.576 202.087 16.641 16.643" xml:space="preserve" aria-labelledby="close-title">
+		<title  id="close-title">Close</title>
+		<line fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="244.826" y1="203.338" x2="258.967" y2="217.479"/>
+		<line fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="244.826" y1="217.479" x2="258.967" y2="203.337"/>
+	</svg>
+`
 
 class Map extends Component {
 
@@ -260,7 +267,7 @@ class Map extends Component {
 					<div className='r-block tooltip js-tooltip'>
 						<button
 							className='tooltip__button'
-							onClick={this.drawTooltip}>✕</button>
+							onClick={this.drawTooltip} dangerouslySetInnerHTML={{__html: close}} />
 						<div className='js-tooltip-content'>actual content</div>
 					</div>
 				</div>
