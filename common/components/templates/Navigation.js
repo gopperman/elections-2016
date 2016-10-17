@@ -2,6 +2,7 @@ import React from 'react'
 import RaceNavigationLinks from './RaceNavigationLinks.js'
 import TownLookup from '../TownLookup.js'
 
+
 const Navigation = () => (
 	<div className='nav' key='nav'>
 		<ul className='nav__links'>
