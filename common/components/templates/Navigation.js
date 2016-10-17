@@ -4,17 +4,17 @@ import TownLookup from '../TownLookup.js'
 
 
 const Navigation = () => (
-	<div className='nav' key='nav'>
-		<ul className='nav__links'>
-			<li><a href='/election'>Elections</a></li>
-			<li><a href='#'>By Town</a></li>
-			<li>
-				<a href='/race'>By Race</a>
-				<RaceNavigationLinks />
+	<nav className='g-nav' key='nav'>
+		<ul className='g-nav__list'>
+			<li className='g-nav__item'><a className='g-nav__link benton-bold' href='/election'>Elections 2016</a></li>
+			<li className='g-nav__item'><a className='g-nav__link benton-bold' href='#'>Town results</a></li>
+			<li className='g-nav__item g-nav__item--subnav'>
+				<a className='g-nav__link benton-bold' href='/race'>Find a race</a>
+				{/* <RaceNavigationLinks /> */}
 			</li>
-			<li><a href='/president'>President</a></li>
+			<li className='g-nav__item'><a className='g-nav__link benton-bold' href='/president'>Presidential race</a></li>
 		</ul>
-	</div>
+	</nav>
 )
 
 export default Navigation

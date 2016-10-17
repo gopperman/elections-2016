@@ -5,32 +5,7 @@
 	background-color set-gray('darkest')
 	color white
 	padding 3em 0
-
-// Footer nav
-.f-nav
-	position relative
-	width 90%
-	max-width 50em
-	margin 0 auto
-	&__list
-		text-align center
-		+mq('bp-2')
-			text-align left
-			display flex
-			flex-flow column wrap
-			align-content space-between
-			height 10em
-	&__item
-		flex 1
-		font-size 0.85em
-		line-height 1.2
-		&:not(:last-of-type)
-			margin-bottom 1.5em
-		&:first-of-type
-			font-size 1em
-			+mq('bp-2')
-				flex 1 0 100%
-	&__link
+	a
 		color set-gray('lightest')
 		&:hover
 			color set-gray('medium')

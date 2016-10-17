@@ -1,0 +1,42 @@
+//========================
+// Nav
+//========================
+
+// Global nav
+.g-nav
+	position relative
+	&__list
+		width 90%
+		max-width 50em
+		margin 0 auto
+		display flex
+		justify-content space-between
+	&__item
+		font-size 0.8em
+
+// Sub nav
+.subnav
+	width 90%
+	max-width 50em
+	margin 0 auto
+	&__list
+		text-align center
+		+mq('bp-2')
+			text-align left
+			display flex
+			flex-flow column wrap
+			align-content space-between
+			height 10em
+	&__item
+		flex 1
+		font-size 0.85em
+		line-height 1.2
+		&:not(:last-of-type)
+			margin-bottom 1.5em
+		&:first-of-type
+			font-size 1em
+			+mq('bp-2')
+				flex 1 0 100%
+			// If in the header, hide the elections-home link
+			/.header &
+				display none
