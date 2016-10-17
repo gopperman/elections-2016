@@ -3,11 +3,9 @@ import FooterNav from './FooterNav.js'
 import RaceNavigationLinks from './RaceNavigationLinks.js'
 
 const Footer = () => (
-	<div className='footer' key='footer'>
-		<FooterNav />
-		<h1>Election 2016</h1>
+	<footer className='footer' key='footer'>
 		<RaceNavigationLinks />
-	</div>
+	</footer>
 )
 
 export default Footer
