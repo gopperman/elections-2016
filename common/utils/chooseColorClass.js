@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import { sortByVoteCount } from './Candidates.js'
 
 // TODO: add 'winner' class
@@ -5,6 +6,9 @@ import { sortByVoteCount } from './Candidates.js'
 export default ({ candidates = [], sortingDelegate = sortByVoteCount }) => {
 
 	let klass
+	let party
+	let partyIsMain
+	let partyToReturn
 
 	const cands = sortingDelegate(candidates)
 
@@ -23,16 +27,22 @@ export default ({ candidates = [], sortingDelegate = sortByVoteCount }) => {
 			} else {
 
 				// we don't have a tie, we have a leading candidate
-				// return candidate party color
-				klass = `fill-${cands[0].party.toLowerCase()}`
+				// return candidate party color if dem or gop, otherwise return ind
+				party = cands[0].party.toLowerCase()
+				partyIsMain = _.includes(['dem', 'gop'], party)
+				partyToReturn = partyIsMain ? party : 'ind'
+				klass = `fill-${partyToReturn}`
 
 			}
 
 		} else {
 
 			// we only have one candidate
-			// return candidate party color
-			klass = `fill-${cands[0].party.toLowerCase()}`
+			// return candidate party color if dem or gop, otherwise return ind
+			party = cands[0].party.toLowerCase()
+			partyIsMain = _.includes(['dem', 'gop'], party)
+			partyToReturn = partyIsMain ? party : 'ind'
+			klass = `fill-${partyToReturn}`
 
 		}
 
