@@ -75,7 +75,6 @@ class Office extends Component {
 			const raceTitle = `${race.officeName}, ${race.seatName}`
 
 			// Get this race's reporting units.
-			//console.log(race)
 			const unit = (race.reportingUnits && race.reportingUnits[0]) || []
 
 			return (
