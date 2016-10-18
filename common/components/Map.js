@@ -142,6 +142,30 @@ class Map extends Component {
 
 	}
 
+	// TODO: try selecting something with no data, or the placeholder.
+	onSelectChange = (e) => {
+
+		// Save this selection to state so it doesn't get cleared out
+		// with new data.
+		this.setState({ selectionId: e.target.value })
+
+		// Select all paths,
+		const paths = select(this._svg).select('g.features').selectAll('path')
+
+		// and deselect them.
+		paths.classed('selected', false)
+
+		// Find the feature that matches the dropdown option,
+		const match = paths.filter(d => d.id === e.target.value)
+
+		// select it, and raise it.
+		match.classed('selected', true).raise()
+
+		// Draw the tooltip for this subunit.
+		this.drawTooltip({ subunit: match.datum().subunit })
+
+	}
+
 	// Extract svg's `viewBox` width and height.
 	getViewBoxDimensions = () => {
 		const [,, width, height] = select(this._svg).attr('viewBox').split(' ')
@@ -245,12 +269,12 @@ class Map extends Component {
 				// Set this feature's `id` to local state on mousemove.
 				setState({ selectionId: d.id })
 
-				select(this)
-					// Select the feature,
-					.classed('selected', true)
-					// and `raise` it - move it above other features so the borders
-					// are on top.
-					.raise()
+				// Deselect all other features.
+				// We need this because of the dropdown.
+				svg.selectAll('path').classed('selected', false)
+
+				// Select the feature and raise it.
+				select(this).classed('selected', true).raise()
 
 				// Get the mouse position.
 				const { width, height } = getViewBoxDimensions()
@@ -283,8 +307,23 @@ class Map extends Component {
 
 	render() {
 
+		const { data, displayName, unitName } = this.props
+
+		const unitNames = ['(select a state)'].concat(
+			data.map(v => ({
+				displayName: v[displayName],
+				unitName: v[unitName],
+			})))
+
 		return (
 			<div className='map'>
+				<label
+					htmlFor='map-select'
+					className='benton-regular'>State results:</label>
+				<select id='map-select' onChange={this.onSelectChange}>
+					{ unitNames.map((v, i) =>
+						<option value={v.unitName} key={i}>{v.displayName}</option>) }
+				</select>
 				<svg
 					ref={(c) => this._svg = c}
 					dangerouslySetInnerHTML={{ __html: crossHatchesDefs }} />
