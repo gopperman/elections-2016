@@ -151,9 +151,11 @@ class Homepage extends Component {
 			_.find(presidentRaceStates, { statePostal: 'US' })
 
 		// Define the candidates we're interested in.
+		// TODO: is this necessary?
 		const mainCandidatePolIDs = ['1746', '8639', '31708', '895']
 
 		// Get summary US candidates, so we can sort by them.
+		// TODO: is this necessary?
 		const summaryStateCandidates = summaryState ?
 			sortByElectoralCount(summaryState.candidates)
 			.map(v => ({
