@@ -82,15 +82,19 @@ class Map extends Component {
 		// Create features group.
 		svg.append('g').attr('class', 'features')
 
-		// Set features for convenience, so we don't keep topojsoning.
+		// Calculate feature centroids,
+		// and set features for convenience, so we don't keep topojsoning.
 		this._geoFeatures = featuresGeoJSON.features
+			.map(d => ({
+				...d,
+				centroid: this._path.centroid(d),
+			}))
 
-		// Calculate feature centroids.
 		if (displayUnitLabels) {
 
 			const centroids = this._geoFeatures
 				.map(d => ({
-					centroid: this._path.centroid(d),
+					centroid: d.centroid,
 					id: d.id,
 				}))
 
@@ -139,6 +143,40 @@ class Map extends Component {
 
 		// After the component updates, draw map features.
 		this.drawFeatures()
+
+	}
+
+	// TODO: try selecting something with no data, or the placeholder.
+	onSelectChange = (e) => {
+
+		// Save this selection to state so it doesn't get cleared out
+		// with new data.
+		this.setState({ selectionId: e.target.value })
+
+		// Select all paths,
+		const paths = select(this._svg).select('g.features').selectAll('path')
+
+		// and deselect them.
+		paths.classed('selected', false)
+
+		// Find the feature that matches the dropdown option,
+		const match = paths.filter(d => d.id === e.target.value)
+
+		// select it, and raise it.
+		match.classed('selected', true).raise()
+
+		const datum = match.datum()
+
+		// Get the mouse position.
+		const { width, height } = this.getViewBoxDimensions()
+		const [x, y] = datum.centroid
+		const position = {
+			x: 100 * (x / width),
+			y: 100 * (y / height),
+		}
+
+		// Draw the tooltip for this subunit.
+		this.drawTooltip({ subunit: datum.subunit, position })
 
 	}
 
@@ -222,7 +260,7 @@ class Map extends Component {
 		paths.enter().append('path')
 			.attr('d', this._path)
 		.merge(paths)
-			.attr('class', function getClass(d) {
+			.attr('class', d => {
 
 				let selectedClass = ''
 
@@ -232,19 +270,8 @@ class Map extends Component {
 				// local state),
 				if (compareStrings(d.id, selectionId)) {
 
-					// give it a selected class,
+					// give it a selected class.
 					selectedClass = 'selected'
-
-					// get the mouse position,
-					const { width, height } = getViewBoxDimensions()
-					const [x, y] = mouse(this)
-					const position = {
-						x: 100 * (x / width),
-						y: 100 * (y / height),
-					}
-
-					// and draw the tooltip.
-					drawTooltip({ subunit: d.subunit, position })
 
 				}
 
@@ -256,12 +283,12 @@ class Map extends Component {
 				// Set this feature's `id` to local state on mousemove.
 				setState({ selectionId: d.id })
 
-				select(this)
-					// Select the feature,
-					.classed('selected', true)
-					// and `raise` it - move it above other features so the borders
-					// are on top.
-					.raise()
+				// Deselect all other features.
+				// We need this because of the dropdown.
+				svg.selectAll('path').classed('selected', false)
+
+				// Select the feature and raise it.
+				select(this).classed('selected', true).raise()
 
 				// Get the mouse position.
 				const { width, height } = getViewBoxDimensions()
@@ -294,8 +321,23 @@ class Map extends Component {
 
 	render() {
 
+		const { data, displayName, unitName } = this.props
+
+		const unitNames = ['(select a state)'].concat(
+			data.map(v => ({
+				displayName: v[displayName],
+				unitName: v[unitName],
+			})))
+
 		return (
 			<div className='map'>
+				<label
+					htmlFor='map-select'
+					className='benton-regular'>State results:</label>
+				<select id='map-select' onChange={this.onSelectChange}>
+					{ unitNames.map((v, i) =>
+						<option value={v.unitName} key={i}>{v.displayName}</option>) }
+				</select>
 				<svg
 					ref={(c) => this._svg = c}
 					dangerouslySetInnerHTML={{ __html: crossHatchesDefs }} />
