@@ -173,6 +173,16 @@ class Map extends Component {
 					compareStrings(f[unitName], v.id)),
 			}))
 			.filter('subunit')
+			.map(v => ({
+				...v,
+
+				// Get this feature's color class based on who's winning.
+				colorClass: chooseColorClass({
+					sortingDelegate,
+					candidates: v.subunit.candidates,
+					precinctsReportingPct: v.subunit.precinctsReportingPct,
+				}),
+			}))
 			.value()
 
 		// Select the svg node.
@@ -190,12 +200,7 @@ class Map extends Component {
 
 				let selectedClass = ''
 
-				// Get this feature's color class based on who's winning.
-				const colorClass = chooseColorClass({
-					candidates: d.subunit && d.subunit.candidates,
-					sortingDelegate,
-					precinctsReportingPct: d.subunit && d.subunit.precinctsReportingPct,
-				})
+				const { colorClass } = d
 
 				// If this feature is selected (if the `selectionId` is in
 				// local state),
