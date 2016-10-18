@@ -223,6 +223,7 @@ class Homepage extends Component {
 					sortingDelegate={sortByElectoralCount}
 					projection={geoAlbersUsa()}
 					unitName='statePostal'
+					dropdownName='state'
 					displayUnitLabels
 					displayName='stateName' />
 

@@ -19,7 +19,6 @@ const percentForDisplay = (x, shorten) => {
 }
 
 export {
-	// eslint-disable-next-line import/prefer-default-export
 	percentForDisplay,
 	toSentenceCase,
 }

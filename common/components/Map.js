@@ -9,6 +9,7 @@ import { select, mouse } from 'd3-selection'
 import chooseColorClass from './../utils/chooseColorClass.js'
 import compareStrings from './../utils/compareStrings.js'
 import createTooltip from './../utils/createTooltip.js'
+import { toSentenceCase } from './../utils/standardize.js'
 
 const closeSvg = `
 	<svg version="1.1" id="icon-close" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16.641px" height="16.643px" viewBox="243.576 202.087 16.641 16.643" enable-background="new 243.576 202.087 16.641 16.643" xml:space="preserve" aria-labelledby="close-title">
@@ -41,7 +42,8 @@ class Map extends Component {
 		projection: PropTypes.func.isRequired,
 		sortingDelegate: PropTypes.func.isRequired,
 		unitName: PropTypes.string.isRequired,
-		displayName: PropTypes.string,
+		displayName: PropTypes.string.isRequired,
+		dropdownName: PropTypes.string.isRequired,
 		displayUnitLabels: PropTypes.bool,
 
 		// This will change.
@@ -321,23 +323,33 @@ class Map extends Component {
 
 	render() {
 
-		const { data, displayName, unitName } = this.props
+		const { data, displayName, unitName, dropdownName } = this.props
 
-		const unitNames = ['(select a state)'].concat(
+		const firstOption = {
+			displayName: `select a ${dropdownName}`,
+			unitName: '',
+		}
+
+		const options = [firstOption].concat(
 			data.map(v => ({
 				displayName: v[displayName],
 				unitName: v[unitName],
 			})))
+			.map((v, i) =>
+				<option value={v.unitName} key={i}>{v.displayName}</option>
+			)
+
+		const dropdownLabel = toSentenceCase(`${dropdownName} results:`)
 
 		return (
 			<div className='map'>
 				<label
 					htmlFor='map-select'
-					className='benton-regular'>State results:</label>
-				<select id='map-select' onChange={this.onSelectChange}>
-					{ unitNames.map((v, i) =>
-						<option value={v.unitName} key={i}>{v.displayName}</option>) }
-				</select>
+					className='benton-regular'>{dropdownLabel}</label>
+				<select
+					id='map-select'
+					onChange={this.onSelectChange}
+					defaultValue=''>{options}</select>
 				<svg
 					ref={(c) => this._svg = c}
 					dangerouslySetInnerHTML={{ __html: crossHatchesDefs }} />
