@@ -227,7 +227,7 @@ class PresidentUS extends Component {
 							projection={geoAlbersUsa()}
 							unitName='statePostal'
 							dropdownName='state'
-							displayUnitLabels
+							displayFeatureLabels
 							displayName='stateName' />
 
 						<StateResultsTable

@@ -224,7 +224,7 @@ class Homepage extends Component {
 					projection={geoAlbersUsa()}
 					unitName='statePostal'
 					dropdownName='state'
-					displayUnitLabels
+					displayFeatureLabels
 					displayName='stateName' />
 
 				{featuredRaces}

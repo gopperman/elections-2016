@@ -204,8 +204,9 @@ class PresidentMA extends Component {
 					data={towns}
 					sortingDelegate={sortByVoteCount}
 					projection={massProjection}
+					unitName='reportingunitName'
 					dropdownName='town'
-					unitName='reportingunitName' />
+					displayName='reportingunitName' />
 
 				<TownResultsTable
 					{...{ towns, summaryCandidates: summaryTownCandidates }} />

@@ -44,7 +44,7 @@ class Map extends Component {
 		unitName: PropTypes.string.isRequired,
 		displayName: PropTypes.string.isRequired,
 		dropdownName: PropTypes.string.isRequired,
-		displayUnitLabels: PropTypes.bool,
+		displayFeatureLabels: PropTypes.bool,
 
 		// This will change.
 		data: PropTypes.array.isRequired,
@@ -58,7 +58,7 @@ class Map extends Component {
 	// rendering occurs.
 	componentDidMount() {
 
-		const { topoObject, projection, displayUnitLabels } = this.props
+		const { topoObject, projection, displayFeatureLabels } = this.props
 
 		// Convert `topoObject` to GeoJSON objects (via topojson).
 		const featuresGeoJSON =
@@ -92,7 +92,7 @@ class Map extends Component {
 				centroid: this._path.centroid(d),
 			}))
 
-		if (displayUnitLabels) {
+		if (displayFeatureLabels) {
 
 			const centroids = this._geoFeatures
 				.map(d => ({
@@ -333,17 +333,22 @@ class Map extends Component {
 		const { data, displayName, unitName, dropdownName } = this.props
 
 		const firstOption = {
-			displayName: `select a ${dropdownName}`,
-			unitName: '',
+			display: `select a ${dropdownName}`,
+			value: '',
 		}
 
+		// TODO: maybe we should use the map features to draw the dropdown,
+		// instead of the data, because:
+		// 1) it means we don't have a dropdown initially,
+		// 2) the data might not look the same as the features
+		// 		(e.g. data towns are in lower case, shapefile towns are upper)
 		const options = [firstOption].concat(
 			data.map(v => ({
-				displayName: v[displayName],
-				unitName: v[unitName],
+				display: v[displayName],
+				value: v[unitName].toUpperCase(),
 			})))
 			.map((v, i) =>
-				<option value={v.unitName} key={i}>{v.displayName}</option>
+				<option value={v.value} key={i}>{v.display}</option>
 			)
 
 		const dropdownLabel = toSentenceCase(`${dropdownName} results:`)
