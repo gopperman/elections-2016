@@ -308,6 +308,30 @@ class Map extends Component {
 						<div className='js-tooltip-content'>actual content</div>
 					</div>
 				</div>
+				<div className='legend'>
+					<ul className='benton-regular'>
+
+						<li>
+							<span className='label'>No data</span>
+							<span className='square fill-none'>&nbsp;</span>
+						</li>
+
+						<li>
+							<span className='label'>Lead</span>
+							<span className='square stripe-dem'>&nbsp;</span>
+							<span className='square stripe-gop'>&nbsp;</span>
+							<span className='square stripe-gop'>&nbsp;</span>
+						</li>
+
+						<li>
+							<span className='label'>Win</span>
+							<span className='square fill-dem'>&nbsp;</span>
+							<span className='square fill-gop'>&nbsp;</span>
+							<span className='square fill-ind'>&nbsp;</span>
+						</li>
+
+					</ul>
+				</div>
 			</div>
 		)
 
