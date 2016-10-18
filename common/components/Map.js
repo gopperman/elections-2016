@@ -222,7 +222,7 @@ class Map extends Component {
 		paths.enter().append('path')
 			.attr('d', this._path)
 		.merge(paths)
-			.attr('class', function getClass(d) {
+			.attr('class', d => {
 
 				let selectedClass = ''
 
@@ -232,19 +232,8 @@ class Map extends Component {
 				// local state),
 				if (compareStrings(d.id, selectionId)) {
 
-					// give it a selected class,
+					// give it a selected class.
 					selectedClass = 'selected'
-
-					// get the mouse position,
-					const { width, height } = getViewBoxDimensions()
-					const [x, y] = mouse(this)
-					const position = {
-						x: 100 * (x / width),
-						y: 100 * (y / height),
-					}
-
-					// and draw the tooltip.
-					drawTooltip({ subunit: d.subunit, position })
 
 				}
 
