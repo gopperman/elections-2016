@@ -82,15 +82,19 @@ class Map extends Component {
 		// Create features group.
 		svg.append('g').attr('class', 'features')
 
-		// Set features for convenience, so we don't keep topojsoning.
+		// Calculate feature centroids,
+		// and set features for convenience, so we don't keep topojsoning.
 		this._geoFeatures = featuresGeoJSON.features
+			.map(d => ({
+				...d,
+				centroid: this._path.centroid(d),
+			}))
 
-		// Calculate feature centroids.
 		if (displayUnitLabels) {
 
 			const centroids = this._geoFeatures
 				.map(d => ({
-					centroid: this._path.centroid(d),
+					centroid: d.centroid,
 					id: d.id,
 				}))
 
@@ -161,8 +165,18 @@ class Map extends Component {
 		// select it, and raise it.
 		match.classed('selected', true).raise()
 
+		const datum = match.datum()
+
+		// Get the mouse position.
+		const { width, height } = this.getViewBoxDimensions()
+		const [x, y] = datum.centroid
+		const position = {
+			x: 100 * (x / width),
+			y: 100 * (y / height),
+		}
+
 		// Draw the tooltip for this subunit.
-		this.drawTooltip({ subunit: match.datum().subunit })
+		this.drawTooltip({ subunit: datum.subunit, position })
 
 	}
 
