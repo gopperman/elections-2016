@@ -3,10 +3,16 @@
 //========================
 
 // Fills
-.fill-ind
+.fill-leading-dem
+	fill url('#crosshatch-dem')
+.fill-leading-gop
+	fill url('#crosshatch-gop')
+.fill-leading-ind
+	fill url('#crosshatch-ind')
+.fill-winner-ind, .fill-complete-ind
 	background-color set-color('green', dark)
 	fill set-color('green', dark)
-.fill-dem
+.fill-winner-dem, .fill-complete-dem
 	background-color set-color('blue')
 	fill set-color('blue')
 	&--light
@@ -15,7 +21,7 @@
 	&--dark
 		background-color set-color('blue', dark)
 		fill set-color('blue', dark)
-.fill-gop
+.fill-winner-gop, .fill-complete-gop
 	background-color set-color('red')
 	fill set-color('red')
 	&--light

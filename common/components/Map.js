@@ -1,4 +1,4 @@
-/* eslint-disable no-return-assign */
+/* eslint-disable no-return-assign, max-len */
 
 import deepEqual from 'deep-equal'
 import _ from 'lodash'
@@ -18,17 +18,17 @@ const closeSvg = `
 	</svg>`
 
 const crossHatchesDefs = `<defs>
-	<pattern id="fill-none" width="2" height="2" patternUnits="userSpaceOnUse" patternTransform="rotate(120)">
-		<rect class="fill-none" width="2" height="2" transform="translate(0,0)"></rect>
+	<pattern id="crosshatch-none" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(30)">
+		<rect class="fill-none" width="10" height="10" transform="translate(0,0)"></rect>
 	</pattern>
-	<pattern id="fill-dem" width="2" height="2" patternUnits="userSpaceOnUse" patternTransform="rotate(120)">
-		<rect class="fill-dem" width="1.35" height="2" transform="translate(0,0)"></rect>
+	<pattern id="crosshatch-dem" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(30)">
+		<rect class="fill-winner-dem" width="8" height="10" transform="translate(0,0)"></rect>
 	</pattern>
-	<pattern id="fill-gop" width="2" height="2" patternUnits="userSpaceOnUse" patternTransform="rotate(120)">
-		<rect class="fill-gop" width="1.35" height="2" transform="translate(0,0)"></rect>
+	<pattern id="crosshatch-gop" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(30)">
+		<rect class="fill-winner-gop" width="8" height="10" transform="translate(0,0)"></rect>
 	</pattern>
-	<pattern id="fill-ind" width="2" height="2" patternUnits="userSpaceOnUse" patternTransform="rotate(120)">
-		<rect class="fill-ind" width="1.35" height="2" transform="translate(0,0)"></rect>
+	<pattern id="crosshatch-ind" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(30)">
+		<rect class="fill-winner-ind" width="8" height="10" transform="translate(0,0)"></rect>
 	</pattern>
 </defs>`
 
@@ -94,12 +94,23 @@ class Map extends Component {
 					id: d.id,
 				}))
 
-			// Draw labels.
-			svg.append('g').attr('class', 'labels').selectAll('text')
+			// Draw labels background.
+			svg.append('g').attr('class', 'labels').selectAll('text.background')
 					.data(centroids, d => d.id)
 				.enter()
 				.append('text')
-					.attr('class', d => [d.id, 'benton-bold'].join(' '))
+					.attr('class', d => [d.id, 'benton-bold', 'background'].join(' '))
+					.attr('x', d => d.centroid[0])
+					.attr('y', d => d.centroid[1])
+					.attr('dy', 4)
+					.text(d => d.id)
+
+			// Draw labels foreground.
+			svg.append('g').attr('class', 'labels').selectAll('text.foreground')
+					.data(centroids, d => d.id)
+				.enter()
+				.append('text')
+					.attr('class', d => [d.id, 'benton-bold', 'foreground'].join(' '))
 					.attr('x', d => d.centroid[0])
 					.attr('y', d => d.centroid[1])
 					.attr('dy', 4)
@@ -147,7 +158,8 @@ class Map extends Component {
 		if (position) {
 			this._tooltip.style.top = `${position.y}%`
 			this._tooltip.style.left = `${position.x}%`
-			this._tooltip.querySelector('.js-tooltip').style.left = `-${position.x}%`
+			this._tooltip.querySelector('.js-tooltip').style.left =
+				`-${position.x}%`
 		}
 
 		// Set tooltip content.
@@ -171,7 +183,7 @@ class Map extends Component {
 	drawFeatures = () => {
 
 		const { drawTooltip, getViewBoxDimensions } = this
-		const { data, sortingDelegate, unitName } = this.props
+		const { data, unitName } = this.props
 		const { selectionId } = this.state
 
 		// Create a `setState` function and bind `this` so we can call it
@@ -193,7 +205,6 @@ class Map extends Component {
 
 				// Get this feature's color class based on who's winning.
 				colorClass: chooseColorClass({
-					sortingDelegate,
 					candidates: v.subunit.candidates,
 					precinctsReportingPct: v.subunit.precinctsReportingPct,
 				}),
@@ -287,13 +298,13 @@ class Map extends Component {
 			<div className='map'>
 				<svg
 					ref={(c) => this._svg = c}
-					dangerouslySetInnerHTML={{__html: crossHatchesDefs}} />
+					dangerouslySetInnerHTML={{ __html: crossHatchesDefs }} />
 				<div className='tooltip-wrapper' ref={(c) => this._tooltip = c}>
 					<div className='r-block tooltip js-tooltip'>
 						<button
 							className='tooltip__button'
 							onClick={this.drawTooltip}
-							dangerouslySetInnerHTML={{__html: closeSvg}} />
+							dangerouslySetInnerHTML={{ __html: closeSvg }} />
 						<div className='js-tooltip-content'>actual content</div>
 					</div>
 				</div>

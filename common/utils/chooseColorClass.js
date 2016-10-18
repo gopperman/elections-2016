@@ -1,22 +1,29 @@
 import _ from 'lodash'
-import { candidatesAreEqual } from './Candidates.js'
+import {
+	candidatesAreEqual,
+	sortByElectoralCount,
+	sortByVoteCount,
+} from './Candidates.js'
 
 const normalizeParty = (party = '') =>
-	_.includes(['dem', 'gop'], party.toLowerCase()) ?
+	(_.includes(['dem', 'gop'], party.toLowerCase()) ?
 		party.toLowerCase() :
-		'ind'
+		'ind')
 
-export default ({ candidates, precinctsReportingPct, sortingDelegate }) => {
+export default ({ candidates, precinctsReportingPct }) => {
 
 	const NO_DATA = 'fill-none'
-	const WINNER = 'fill-is-winner'
 	const TIE = 'fill-tie'
 	const PCT_THRESHOLD = 1
-
 	let result = NO_DATA
 
 	// First of all: do we have candidates?
 	if (candidates.length) {
+
+		// Are we dealing with candidates with electWon properties?
+		const isPresidential = _.has(candidates[0], 'electWon')
+		const sortingDelegate = isPresidential ?
+			sortByElectoralCount : sortByVoteCount
 
 		// Sort candidates by given sorting delegate.
 		const sortedCandidates = sortingDelegate(candidates)
@@ -25,21 +32,48 @@ export default ({ candidates, precinctsReportingPct, sortingDelegate }) => {
 		const first = sortedCandidates[0] || {}
 		const second = sortedCandidates[1] || {}
 
-		// Try to find a winner, only if we are dealing with candidates with
-		// electWon properties.
-		const winner = _(sortedCandidates)
-			.filter(v => _.has(v, 'electWon'))
-			.find({ winner: 'X' })
+		// Let's deal with presidential candidates first.
+		if (isPresidential) {
 
-		// Do we have a winner?
-		if (winner) {
+			// Do we have a winner?
+			const winner = _.find(sortedCandidates, { winner: 'X' })
 
 			// We have a winner.
-			result = `${WINNER} fill-${normalizeParty(winner.party)}`
+			if (winner) {
 
-		// We don't have a winner.
-		// Do we have data? (electWon OR voteCount)
-		} else if (first.electWon || first.voteCount) {
+				result = `fill-winner-${normalizeParty(winner.party)}`
+
+			// We don't have a winner.
+			// Do we have data? (electWon OR voteCount)
+			} else if (first.electWon || first.voteCount) {
+
+				// We do have data.
+				// Do we have enough precincts reporting?
+				if (+precinctsReportingPct >= PCT_THRESHOLD) {
+
+					// We do have enough precincts reporting.
+					// Do we have a tie?
+					if (candidatesAreEqual(first, second)) {
+
+						// We have a tie.
+						result = TIE
+
+					// We do not have a tie.
+					} else {
+
+						result = `fill-leading-${normalizeParty(first.party)}`
+
+					}
+
+				// We don't have enough precincts reporting.
+				}
+
+			// We don't have data.
+			}
+
+		// Next we'll deal with non-presidential candidates.
+		// Do we have data? (voteCount)
+		} else if (first.voteCount) {
 
 			// We do have data.
 			// Do we have enough precincts reporting?
@@ -53,9 +87,16 @@ export default ({ candidates, precinctsReportingPct, sortingDelegate }) => {
 					result = TIE
 
 				// We do not have a tie.
+				// Are the precincts at a 100%?
+				} else if (+precinctsReportingPct === 100) {
+
+					// Yes - so color it complete.
+					result = `fill-complete-${normalizeParty(first.party)}`
+
+				// No - color it leading.
 				} else {
 
-					result = `fill-${normalizeParty(first.party)}`
+					result = `fill-leading-${normalizeParty(first.party)}`
 
 				}
 
