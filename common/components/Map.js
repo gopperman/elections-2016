@@ -225,6 +225,7 @@ class Map extends Component {
 		const { drawTooltip, getViewBoxDimensions } = this
 		const { data, unitName } = this.props
 		const { selectionId } = this.state
+		const _dropdown = this._dropdown
 
 		// Create a `setState` function and bind `this` so we can call it
 		// inside d3 functions with their own `this`.
@@ -282,6 +283,9 @@ class Map extends Component {
 			})
 			.on('mousemove', function mousemove(d) {
 
+				// Set the dropdown.
+				_dropdown.value = d.id
+
 				// Set this feature's `id` to local state on mousemove.
 				setState({ selectionId: d.id })
 
@@ -308,6 +312,9 @@ class Map extends Component {
 
 				// Clear out local state,
 				setState({ selectionId: null })
+
+				// clear out the dropdown,
+				_dropdown.value = ''
 
 				// clear out the tooltip,
 				drawTooltip({})
@@ -349,7 +356,7 @@ class Map extends Component {
 				<select
 					id='map-select'
 					onChange={this.onSelectChange}
-					defaultValue=''>{options}</select>
+					ref={(c) => this._dropdown = c}>{options}</select>
 				<svg
 					ref={(c) => this._svg = c}
 					dangerouslySetInnerHTML={{ __html: crossHatchesDefs }} />
