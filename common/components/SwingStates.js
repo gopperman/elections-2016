@@ -14,7 +14,6 @@ const SwingStates = ({ states }) => {
 
 		const klass = chooseColorClass({
 			candidates,
-			sortingDelegate: sortByElectoralCount,
 		})
 
 		// Get the vote pct. margin by looking at the first two candidates.

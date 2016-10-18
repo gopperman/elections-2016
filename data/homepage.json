@@ -100,7 +100,6 @@
               "electWon": 3,
               "ballotOrder": 6,
               "voteCount": 112494,
-              "winner": "X",
               "party": "GOP",
               "incumbent": false
             },
@@ -3519,7 +3518,6 @@
               "electWon": 29,
               "ballotOrder": 1,
               "voteCount": 2890650,
-              "winner": "X",
               "party": "Dem",
               "incumbent": false
             },
@@ -4293,7 +4291,6 @@
               "electWon": 38,
               "ballotOrder": 1,
               "voteCount": 3061237,
-              "winner": "X",
               "party": "GOP",
               "incumbent": false
             },

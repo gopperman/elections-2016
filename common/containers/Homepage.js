@@ -182,6 +182,7 @@ class Homepage extends Component {
 		// Get swing states
 		const swingStateList = ['AZ', 'CO', 'IA']
 
+		// TODO: test that this works when swing state candidates are [] or null
 		const swingStates = _.filter(states, state =>
 			_.includes(swingStateList, state.statePostal))
 
