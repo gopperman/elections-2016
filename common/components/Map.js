@@ -9,6 +9,7 @@ import { select, mouse } from 'd3-selection'
 import chooseColorClass from './../utils/chooseColorClass.js'
 import compareStrings from './../utils/compareStrings.js'
 import createTooltip from './../utils/createTooltip.js'
+import { toSentenceCase } from './../utils/standardize.js'
 
 const closeSvg = `
 	<svg version="1.1" id="icon-close" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16.641px" height="16.643px" viewBox="243.576 202.087 16.641 16.643" enable-background="new 243.576 202.087 16.641 16.643" xml:space="preserve" aria-labelledby="close-title">
@@ -41,8 +42,9 @@ class Map extends Component {
 		projection: PropTypes.func.isRequired,
 		sortingDelegate: PropTypes.func.isRequired,
 		unitName: PropTypes.string.isRequired,
-		displayName: PropTypes.string,
-		displayUnitLabels: PropTypes.bool,
+		displayName: PropTypes.string.isRequired,
+		dropdownName: PropTypes.string.isRequired,
+		displayFeatureLabels: PropTypes.bool,
 
 		// This will change.
 		data: PropTypes.array.isRequired,
@@ -56,7 +58,7 @@ class Map extends Component {
 	// rendering occurs.
 	componentDidMount() {
 
-		const { topoObject, projection, displayUnitLabels } = this.props
+		const { topoObject, projection, displayFeatureLabels } = this.props
 
 		// Convert `topoObject` to GeoJSON objects (via topojson).
 		const featuresGeoJSON =
@@ -90,7 +92,7 @@ class Map extends Component {
 				centroid: this._path.centroid(d),
 			}))
 
-		if (displayUnitLabels) {
+		if (displayFeatureLabels) {
 
 			const centroids = this._geoFeatures
 				.map(d => ({
@@ -223,6 +225,7 @@ class Map extends Component {
 		const { drawTooltip, getViewBoxDimensions } = this
 		const { data, unitName } = this.props
 		const { selectionId } = this.state
+		const _dropdown = this._dropdown
 
 		// Create a `setState` function and bind `this` so we can call it
 		// inside d3 functions with their own `this`.
@@ -280,6 +283,9 @@ class Map extends Component {
 			})
 			.on('mousemove', function mousemove(d) {
 
+				// Set the dropdown.
+				_dropdown.value = d.id
+
 				// Set this feature's `id` to local state on mousemove.
 				setState({ selectionId: d.id })
 
@@ -307,6 +313,9 @@ class Map extends Component {
 				// Clear out local state,
 				setState({ selectionId: null })
 
+				// clear out the dropdown,
+				_dropdown.value = ''
+
 				// clear out the tooltip,
 				drawTooltip({})
 
@@ -321,23 +330,38 @@ class Map extends Component {
 
 	render() {
 
-		const { data, displayName, unitName } = this.props
+		const { data, displayName, unitName, dropdownName } = this.props
 
-		const unitNames = ['(select a state)'].concat(
+		const firstOption = {
+			display: `select a ${dropdownName}`,
+			value: '',
+		}
+
+		// TODO: maybe we should use the map features to draw the dropdown,
+		// instead of the data, because:
+		// 1) it means we don't have a dropdown initially,
+		// 2) the data might not look the same as the features
+		// 		(e.g. data towns are in lower case, shapefile towns are upper)
+		const options = [firstOption].concat(
 			data.map(v => ({
-				displayName: v[displayName],
-				unitName: v[unitName],
+				display: v[displayName],
+				value: v[unitName].toUpperCase(),
 			})))
+			.map((v, i) =>
+				<option value={v.value} key={i}>{v.display}</option>
+			)
+
+		const dropdownLabel = toSentenceCase(`${dropdownName} results:`)
 
 		return (
 			<div className='map'>
 				<label
 					htmlFor='map-select'
-					className='benton-regular'>State results:</label>
-				<select id='map-select' onChange={this.onSelectChange}>
-					{ unitNames.map((v, i) =>
-						<option value={v.unitName} key={i}>{v.displayName}</option>) }
-				</select>
+					className='benton-regular'>{dropdownLabel}</label>
+				<select
+					id='map-select'
+					onChange={this.onSelectChange}
+					ref={(c) => this._dropdown = c}>{options}</select>
 				<svg
 					ref={(c) => this._svg = c}
 					dangerouslySetInnerHTML={{ __html: crossHatchesDefs }} />

@@ -223,7 +223,8 @@ class Homepage extends Component {
 					sortingDelegate={sortByElectoralCount}
 					projection={geoAlbersUsa()}
 					unitName='statePostal'
-					displayUnitLabels
+					dropdownName='state'
+					displayFeatureLabels
 					displayName='stateName' />
 
 				{featuredRaces}

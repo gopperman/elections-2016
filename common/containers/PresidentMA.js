@@ -1,6 +1,5 @@
 // The `PresidentMA` class displays presidential results for MA.
 
-// TODO: figure out how best to display test data status
 import { geoConicConformal } from 'd3-geo'
 import _ from 'lodash'
 import React, { Component, PropTypes } from 'react'
@@ -205,7 +204,9 @@ class PresidentMA extends Component {
 					data={towns}
 					sortingDelegate={sortByVoteCount}
 					projection={massProjection}
-					unitName='reportingunitName' />
+					unitName='reportingunitName'
+					dropdownName='town'
+					displayName='reportingunitName' />
 
 				<TownResultsTable
 					{...{ towns, summaryCandidates: summaryTownCandidates }} />

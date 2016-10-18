@@ -1,6 +1,7 @@
+/* eslint-disable max-len */
+
 // The `PresidentUS` class displays presidential results for US.
 
-// TODO: figure out how best to display test data status
 import { geoAlbersUsa } from 'd3-geo'
 import _ from 'lodash'
 import React, { Component, PropTypes } from 'react'
@@ -17,6 +18,11 @@ import Footer from './../components/templates/Footer.js'
 import TestStatus from './../components/TestStatus.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 
+import {
+	sortByElectoralCount,
+	sortByPolIDs,
+} from './../utils/Candidates.js'
+
 const flourish = `
 	<svg version="1.1" id="icon-chart" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="46px" height="54px" viewBox="0 0 46 54" enable-background="new 0 0 46 54" xml:space="preserve" aria-labelledby="chart-title">
 		<title id="chart-title">Chart</title>
@@ -25,11 +31,6 @@ const flourish = `
 		<rect x="36" y="27" width="10" height="27"></rect>
 	</svg>
 `
-
-import {
-	sortByElectoralCount,
-	sortByPolIDs,
-} from './../utils/Candidates.js'
 
 // We'll keep these urls here for testing. A description:
 
@@ -211,7 +212,9 @@ class PresidentUS extends Component {
 				<main id='content'>
 					<div className='hero lead-bg'>
 						<h1 className='hed hero__hed benton-bold'>US Presidential Results</h1>
-						<div className='hero__flourish' dangerouslySetInnerHTML={{__html: flourish}} />
+						<div
+							className='hero__flourish'
+							dangerouslySetInnerHTML={{ __html: flourish }} />
 					</div>
 
 					<div className='container'>
@@ -223,7 +226,8 @@ class PresidentUS extends Component {
 							sortingDelegate={sortByElectoralCount}
 							projection={geoAlbersUsa()}
 							unitName='statePostal'
-							displayUnitLabels
+							dropdownName='state'
+							displayFeatureLabels
 							displayName='stateName' />
 
 						<StateResultsTable
