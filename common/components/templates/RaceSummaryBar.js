@@ -1,7 +1,7 @@
 // The `RaceSummaryTable` class displays a table of the race's summary results.
 import React, { PropTypes } from 'react'
 import addCommas from 'add-commas'
-import { fullName, percent } from './../../utils/Candidate.js'
+import { percent } from './../../utils/Candidate.js'
 import { sortByVoteCount, totalVotes } from './../../utils/Candidates.js'
 import { percentForDisplay } from './../../utils/standardize.js'
 import RaceSummaryBarRow from './RaceSummaryBarRow'
@@ -17,11 +17,6 @@ const RaceSummaryBar = ({ unit, raceTitle }) => {
 
 		const { candidateID, voteCount } = candidate
 
-		const candidateName = fullName(candidate)
-
-		// Add appropriate commas to the candidate's vote count.
-		const vote = addCommas(voteCount)
-
 		// Get the candidate's vote percent.
 		const pct = percent({ candidates: array, candidateID })
 
@@ -31,9 +26,8 @@ const RaceSummaryBar = ({ unit, raceTitle }) => {
 		return (
 			<RaceSummaryBarRow
 				{...{
-					name: candidateName,
+					candidate,
 					pctForDisplay,
-					vote,
 				}}
 			/>
 		)
