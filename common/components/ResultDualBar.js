@@ -11,7 +11,7 @@ import { getName } from './../utils/Race.js'
 // 		a ballot question or other similar, officeID == I
 //		a race where the only candidates we care about are blue or red
 // - the summary reporting unit is level: 'state'
-const FeaturedRace = ({ race }) => {
+const ResultDualBar = ({ race }) => {
 
 	const raceName = getName(race)
 
@@ -99,8 +99,8 @@ const FeaturedRace = ({ race }) => {
 
 }
 
-FeaturedRace.propTypes = {
+ResultDualBar.propTypes = {
 	race: PropTypes.object.isRequired,
 }
 
-export default FeaturedRace
+export default ResultDualBar
