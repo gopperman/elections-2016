@@ -219,7 +219,7 @@ class PresidentUS extends Component {
 							dangerouslySetInnerHTML={{ __html: flourish }} />
 					</div>
 
-					<div className='container'>
+					<div className='container-lg'>
 						<Timer {...timerProps} />
 						<ElectoralCollegeBar {...summaryState} />
 						<Map
@@ -231,7 +231,8 @@ class PresidentUS extends Component {
 							dropdownName='state'
 							labelsName='STUSPS'
 							displayName='stateName' />
-
+					</div>
+					<div className='container-downpage'>
 						<StateResultsTable
 							{...{ states, summaryCandidates: summaryStateCandidates }} />
 					</div>

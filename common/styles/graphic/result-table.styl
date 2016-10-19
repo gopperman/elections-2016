@@ -8,13 +8,19 @@
 	margin 0 auto
 	position relative
 	border-bottom 3px solid set-gray('light')
+	/.container-downpage &
+		box-shadow 0 0 10px #999
 	&__head
 		border-bottom 3px solid set-gray('lightest')
+		/.container-downpage &
+			background-color white
 	&__row:nth-of-type(even)
 		background-color set-gray('lightest')
+		/.container-downpage &
+			background-color white
 	&__cell
 		vertical-align top
-		padding 0.5em
+		padding 0.5em 1em
 		p
 			abbr
 				+mq('bp-2')

@@ -10,6 +10,7 @@ body
 	font-feature-settings 'kern' 1, 'onum' 1, 'liga' 1
 	font-family $serif
 	color $offblack
+	overflow-x hidden
 a
 	transition color 0.2s, background-color 0.2s
 	color $globe-blue
@@ -57,10 +58,16 @@ $btn
 		z-index 1
 
 // Global components
-.container
+.container-lg
 	width 90%
 	max-width 60rem
 	margin 0 auto
-	overflow hidden
 	> *
 		margin-bottom 4em
+
+.container-downpage
+	background-color set-gray('lightest')
+	border-top 1px solid set-gray('light')
+	padding-top 2em
+	> *
+		padding-bottom 4em

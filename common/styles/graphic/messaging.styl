@@ -73,7 +73,7 @@
 // Tooltip
 .map .tooltip-wrapper
 	cursor default
-	width 20em
+	width 22em
 	position absolute
 	top 0
 	left 0
@@ -82,6 +82,7 @@
 	z-index 10000
 	pointer-events none
 	display none
+	z-index set-index('top')
 
 	&.show
 		display block
@@ -94,6 +95,7 @@
 		background-color white
 		position relative
 		width auto
+		z-index set-index('top')
 
 		&__button
 			display none

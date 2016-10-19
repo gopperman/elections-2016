@@ -13,7 +13,7 @@ precinctsReportingPct, candidates, summaryCandidates }) =>
 	<tr className='r-table__row'>
 		<td className='r-table__cell'>
 			<p className='benton-bold'>
-				<abbr>{statePostal}</abbr>
+				<abbr title={stateName}>{statePostal}</abbr>
 				<span className='full'>{stateName}</span>
 			</p>
 			<p className='benton-regular'>{+precinctsReportingPct}%</p>
