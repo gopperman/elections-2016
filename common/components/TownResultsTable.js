@@ -11,14 +11,14 @@ const createSummary = (raceName) =>
 	`A table that has the candidate percent and vote count across the top and the towns down the left hand side for the ${raceName}.`
 
 const TownResultsTable = ({ towns, summaryCandidates }) =>
-	<div>
-		<h1>Town by town results</h1>
-		<table summary={createSummary()}>
-			<thead>
-				<tr>
-					<th scope='col'>
-						<div>Town</div>
-						<div>Precincts reporting</div>
+	<div className='r-block'>
+		<h3 className='subhed benton-bold'><span>Town Results</span></h3>
+		<table className='r-table' summary={createSummary()}>
+			<thead className='r-table__head'>
+				<tr className='r-table__row'>
+					<th className='r-table__cell'>
+						<p className='benton-bold'>Town</p>
+						<p className='benton-regular'>Precincts reporting</p>
 					</th>
 					{ summaryCandidates.map((candidate, i) => {
 
@@ -28,9 +28,9 @@ const TownResultsTable = ({ towns, summaryCandidates }) =>
 							classnames('benton-bold', { 'is-winner': !!winner })
 
 						return (
-							<th scope='col' key={i}>
-								<div className={candidateClass}>{last}</div>
-								<div>{i === 0 ? 'Votes' : ''}</div>
+							<th scope='col' className='r-table__cell' key={i}>
+								<p className={candidateClass}>{last}</p>
+								<p className='benton-regular'>{i === 0 ? 'Votes' : ''}</p>
 							</th>
 						)
 					})
