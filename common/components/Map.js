@@ -8,7 +8,7 @@ import { select, mouse } from 'd3-selection'
 import chooseColorClass from './../utils/chooseColorClass.js'
 import compareStrings from './../utils/compareStrings.js'
 import createTooltip from './../utils/createTooltip.js'
-import { toSentenceCase } from './../utils/standardize.js'
+import { toSentenceCase, toTitleCase } from './../utils/standardize.js'
 
 const closeSvg = `
 	<svg version="1.1" id="icon-close" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16.641px" height="16.643px" viewBox="243.576 202.087 16.641 16.643" enable-background="new 243.576 202.087 16.641 16.643" xml:space="preserve" aria-labelledby="close-title">
@@ -183,6 +183,13 @@ class Map extends Component {
 		return { width, height }
 	}
 
+	clearTooltip = () => {
+
+		// Hide the tooltip.
+		this._tooltip.classList.remove('show')
+
+	}
+
 	// This draws the tooltip and gets called either by mousing or
 	// when new data comes in and we're on a feature.
 	drawTooltip = ({ subunit, position }) => {
@@ -205,19 +212,14 @@ class Map extends Component {
 				sortingDelegate,
 			})
 
-		// If we have a valid subunit, show the tooltip;
-		if (subunit) {
-			this._tooltip.classList.add('show')
-		} else {
-			// otherwise hide it.
-			this._tooltip.classList.remove('show')
-		}
+		// Show the tooltip.
+		this._tooltip.classList.add('show')
 
 	}
 
 	drawFeatures = () => {
 
-		const { drawTooltip, getViewBoxDimensions } = this
+		const { drawTooltip, clearTooltip, getViewBoxDimensions } = this
 		const { data, unitName } = this.props
 		const { selectionId } = this.state
 		const _dropdown = this._dropdown
@@ -235,14 +237,14 @@ class Map extends Component {
 				subunit: _.find(data, f =>
 					compareStrings(f[unitName], v.id)),
 			}))
-			.filter('subunit')
 			.map(v => ({
 				...v,
 
 				// Get this feature's color class based on who's winning.
 				colorClass: chooseColorClass({
-					candidates: v.subunit.candidates,
-					precinctsReportingPct: v.subunit.precinctsReportingPct,
+					candidates: v.subunit ? v.subunit.candidates : [],
+					precinctsReportingPct: v.subunit ?
+						v.subunit.precinctsReportingPct : '',
 				}),
 			}))
 			.value()
@@ -312,7 +314,7 @@ class Map extends Component {
 				_dropdown.value = ''
 
 				// clear out the tooltip,
-				drawTooltip({})
+				clearTooltip()
 
 				// and deselect the feature.
 				select(this).classed('selected', false)
@@ -335,7 +337,7 @@ class Map extends Component {
 		const optionsList = _(geoJson.features)
 			.sortBy('id')
 			.map(v => ({
-				display: v.id,
+				display: toTitleCase(v.id),
 				value: v.id,
 			}))
 			.value()

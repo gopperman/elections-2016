@@ -70,6 +70,6 @@ export default ({ subunit = {}, displayName, sortingDelegate }) => {
 		<p class='note benton-regular'>
 			<span>${+precinctsReportingPct}% reporting</span>
 		</p>
-	` : ''
+		` : '<p class="r-block__name benton-bold">No data available</p>'
 
 }
