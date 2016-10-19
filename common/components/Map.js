@@ -330,7 +330,7 @@ class Map extends Component {
 		const { geoJson, dropdownName } = this.props
 
 		const firstOption = {
-			display: `select a ${dropdownName}`,
+			display: `Select a ${dropdownName}`,
 			value: '',
 		}
 
@@ -347,17 +347,20 @@ class Map extends Component {
 				<option value={v.value} key={i}>{v.display}</option>
 			)
 
-		const dropdownLabel = toSentenceCase(`${dropdownName} results:`)
+		const dropdownLabel = toSentenceCase(`${dropdownName} results`)
 
 		return (
 			<div className='map'>
-				<label
-					htmlFor='map-select'
-					className='benton-regular'>{dropdownLabel}</label>
-				<select
-					id='map-select'
-					onChange={this.onSelectChange}
-					ref={(c) => this._dropdown = c}>{options}</select>
+				<div className='map__select'>
+					<label
+						htmlFor='map-select'
+						className='benton-bold form__label form__label--overline'>{dropdownLabel}</label>
+					<select
+						id='map-select'
+						className='form__select'
+						onChange={this.onSelectChange}
+						ref={(c) => this._dropdown = c}>{options}</select>
+				</div>
 				<svg
 					ref={(c) => this._svg = c}
 					dangerouslySetInnerHTML={{ __html: crossHatchesDefs }} />
@@ -371,27 +374,23 @@ class Map extends Component {
 					</div>
 				</div>
 				<div className='legend'>
-					<ul className='benton-regular'>
-
-						<li>
-							<span className='label'>No data</span>
-							<span className='square fill-none'>&nbsp;</span>
+					<ul className='legend__list'>
+						<li className='legend__item'>
+							<p className='legend__label benton-regular'>No data</p>
+							<div className='legend__marker fill-none'></div>
 						</li>
-
-						<li>
-							<span className='label'>Lead</span>
-							<span className='square stripe-dem'>&nbsp;</span>
-							<span className='square stripe-gop'>&nbsp;</span>
-							<span className='square stripe-gop'>&nbsp;</span>
+						<li className='legend__item'>
+							<p className='legend__label benton-regular'>Lead</p>
+							<div className='legend__marker stripe-dem'></div>
+							<div className='legend__marker stripe-gop'></div>
+							<div className='legend__marker stripe-ind'></div>
 						</li>
-
-						<li>
-							<span className='label'>Win</span>
-							<span className='square fill-dem'>&nbsp;</span>
-							<span className='square fill-gop'>&nbsp;</span>
-							<span className='square fill-ind'>&nbsp;</span>
+						<li className='legend__item'>
+							<p className='legend__label benton-regular'>Win</p>
+							<div className='legend__marker fill-dem'></div>
+							<div className='legend__marker fill-gop'></div>
+							<div className='legend__marker fill-ind'></div>
 						</li>
-
 					</ul>
 				</div>
 			</div>
