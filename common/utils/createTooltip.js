@@ -1,4 +1,5 @@
 import addCommas from 'add-commas'
+import classnames from 'classnames'
 import { percent } from './Candidate.js'
 import { percentForDisplay } from './standardize.js'
 
@@ -25,11 +26,14 @@ export default ({ subunit = {}, displayName, sortingDelegate }) => {
 		// Get the display-ready version of the percent.
 		const pctForDisplay = percentForDisplay(pct)
 
+		const candidateClass =
+			classnames('benton-bold', { 'is-winner': !!candidate.winner })
+
 		// Create this candidate's table row.
 		return `
 			<tr class='r-table__row'>
 				<td class='r-table__cell' scope='row'>
-					<p class='benton-bold'>${last}</p>
+					<p class='${candidateClass}'>${last}</p>
 				</td>
 				<td class='r-table__cell' scope='row'>
 					<p class='benton-bold'>${+pctForDisplay}%</p>

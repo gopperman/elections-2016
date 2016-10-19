@@ -2,6 +2,7 @@
 // state in the race.
 
 import React, { PropTypes } from 'react'
+import classnames from 'classnames'
 import StateResultsTableRow from './StateResultsTableRow.js'
 
 // TODO: implement
@@ -21,12 +22,19 @@ const StateResultsTable = ({ states, summaryCandidates }) =>
 					</th>
 					{ summaryCandidates
 						.filter(v => v.isMainCandidate)
-						.map((v, i) => (
-							<th scope='col' className='r-table__cell' key={i}>
-								<p className='benton-bold'>{v.last}</p>
-								<p className='benton-regular'>{i === 0 ? 'Votes' : ''}</p>
-							</th>
-					))}
+						.map((v, i) => {
+
+							const candidateClass =
+								classnames('benton-bold', { 'is-winner': !!v.winner })
+
+							return (
+								<th scope='col' className='r-table__cell' key={i}>
+									<p className={candidateClass}>{v.last}</p>
+									<p className='benton-regular'>{i === 0 ? 'Votes' : ''}</p>
+								</th>
+							)
+						})
+					}
 				</tr>
 			</thead>
 			<tbody>
