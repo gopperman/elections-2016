@@ -71,7 +71,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 })
 
-// Decorate the `PresidentUS` class with `connect` and `provideHooks`,
+// Decorate the class with `connect` and `provideHooks`,
 // in that order (it matters).
 @provideHooks(hooks)
 @connect(s => s, mapDispatchToProps)
@@ -206,7 +206,7 @@ class PresidentUS extends Component {
 
 		// Finally we can render all the components!
 		return (
-			<div className='PresidentUS'>
+			<div>
 
 				<TestStatus isTest={isTest} />
 

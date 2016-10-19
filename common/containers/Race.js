@@ -203,7 +203,6 @@ class Race extends Component {
 
 				<Footer />
 
-
 			</div>
 		)
 
