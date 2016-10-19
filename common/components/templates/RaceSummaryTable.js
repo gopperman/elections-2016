@@ -1,10 +1,10 @@
 // The `RaceSummaryTable` class displays a table of the race's summary results.
 import React, { PropTypes } from 'react'
 import addCommas from 'add-commas'
-import { fullName, percent } from './../utils/Candidate.js'
-import { sortByVoteCount, totalVotes } from './../utils/Candidates.js'
-import { percentForDisplay } from './../utils/standardize.js'
-import RaceSummaryTableRow from './../components/templates/RaceSummaryTableRow'
+import { fullName, percent } from './../../utils/Candidate.js'
+import { sortByVoteCount, totalVotes } from './../../utils/Candidates.js'
+import { percentForDisplay } from './../../utils/standardize.js'
+import RaceSummaryTableRow from './RaceSummaryTableRow'
 
 const createSummary = (raceName) =>
 	// eslint-disable-next-line max-len
