@@ -6,6 +6,8 @@ import React, { Component, PropTypes } from 'react'
 import { provideHooks } from 'redial'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import * as topojson from 'topojson'
+
 import * as actions from './../actions/actionCreators.js'
 import Header from './../components/templates/Header.js'
 import Footer from './../components/templates/Footer.js'
@@ -200,7 +202,7 @@ class PresidentMA extends Component {
 				<Timer {...timerProps} />
 
 				<Map
-					topoObject={TOWNS}
+					geoJson={topojson.feature(TOWNS, TOWNS.objects.UNITS)}
 					data={towns}
 					sortingDelegate={sortByVoteCount}
 					projection={massProjection}

@@ -1,5 +1,6 @@
 import addCommas from 'add-commas'
 import classnames from 'classnames'
+import _ from 'lodash'
 import { percent } from './Candidate.js'
 import { percentForDisplay } from './standardize.js'
 
