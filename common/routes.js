@@ -20,7 +20,9 @@ export default (
 		<Route
 			path='elections/2016/president/massachusetts'
 			component={PresidentMA} />
-		<Route path='elections/2016/race' component={Race} />
+		<Route
+			path='elections/2016/race/:officeName/:seatName'
+			component={Race} />
 		<Route path='elections/2016/town/:townName' component={Town} />
 		<Route path='elections/2016/office/:officeName' component={Office} />
 	</Route>
