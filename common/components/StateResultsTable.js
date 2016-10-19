@@ -22,14 +22,16 @@ const StateResultsTable = ({ states, summaryCandidates }) =>
 					</th>
 					{ summaryCandidates
 						.filter(v => v.isMainCandidate)
-						.map((v, i) => {
+						.map((candidate, i) => {
+
+							const { winner, last } = candidate
 
 							const candidateClass =
-								classnames('benton-bold', { 'is-winner': !!v.winner })
+								classnames('benton-bold', { 'is-winner': !!winner })
 
 							return (
 								<th scope='col' className='r-table__cell' key={i}>
-									<p className={candidateClass}>{v.last}</p>
+									<p className={candidateClass}>{last}</p>
 									<p className='benton-regular'>{i === 0 ? 'Votes' : ''}</p>
 								</th>
 							)

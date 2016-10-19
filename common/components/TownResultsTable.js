@@ -2,6 +2,7 @@
 // town in the race.
 
 import React, { PropTypes } from 'react'
+import classnames from 'classnames'
 import TownResultsTableRow from './TownResultsTableRow.js'
 
 // TODO: implement
@@ -19,12 +20,21 @@ const TownResultsTable = ({ towns, summaryCandidates }) =>
 						<div>Town</div>
 						<div>Precincts reporting</div>
 					</th>
-					{ summaryCandidates.map((c, i) => (
-						<th scope='col' key={i}>
-							<div>{c.last}</div>
-							<div>{i === 0 ? 'Votes' : ''}</div>
-						</th>
-					))}
+					{ summaryCandidates.map((candidate, i) => {
+
+						const { winner, last } = candidate
+
+						const candidateClass =
+							classnames('benton-bold', { 'is-winner': !!winner })
+
+						return (
+							<th scope='col' key={i}>
+								<div className={candidateClass}>{last}</div>
+								<div>{i === 0 ? 'Votes' : ''}</div>
+							</th>
+						)
+					})
+				}
 				</tr>
 			</thead>
 			<tbody>

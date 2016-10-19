@@ -13,10 +13,8 @@ export default ({ subunit = {}, displayName, sortingDelegate }) => {
 
 	const rows = candidates.slice(0, 4).map(candidate => {
 
-		const { candidateID, voteCount } = candidate
+		const { candidateID, voteCount, last, winner } = candidate
 
-		// Create the candidate's full name, e.g. 'First Name'.
-		const { last } = candidate
 		// Add appropriate commas to the candidate's vote count.
 		const vote = addCommas(voteCount)
 
@@ -27,7 +25,7 @@ export default ({ subunit = {}, displayName, sortingDelegate }) => {
 		const pctForDisplay = percentForDisplay(pct)
 
 		const candidateClass =
-			classnames('benton-bold', { 'is-winner': !!candidate.winner })
+			classnames('benton-bold', { 'is-winner': !!winner })
 
 		// Create this candidate's table row.
 		return `
