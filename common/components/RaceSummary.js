@@ -11,7 +11,7 @@ const createSummary = (raceName) =>
 	`A table that has the candidate, percent, and vote count across the top and the candidates down the left hand side for the ${raceName}.`
 
 const RaceSummary = ({ unit, raceTitle }) => {
-
+	console.log(unit)
 	// Get statewide candidates.
 	const summaryCandidates = sortByVoteCount(unit.candidates)
 
@@ -52,21 +52,28 @@ const RaceSummary = ({ unit, raceTitle }) => {
 
 	// TODO: Add winner-tag class to candidates
 	return (
-		<div key={`${raceTitle} Summary`}>
-			<div>{unit.precinctsReportingPct}% precincts reporting ({votesCast} votes total)</div>
-			<table summary={createSummary(raceTitle)}>
-				<thead>
-					<tr>
-						<th scope='col'>Candidate</th>
-						<th scope='col'>Percent</th>
-						<th scope='col'>Votes</th>
+		<section key={`${raceTitle} Summary`}>
+			<h2 className='section-hed benton-bold'>{raceTitle}</h2>
+			<table className='r-table' summary={createSummary(raceTitle)}>
+				<thead className='r-table__head'>
+					<tr className='r-table__row'>
+						<th className='r-table__cell' scope='col'>
+							<p className='Benton-Regular'>Candidate</p>
+						</th>
+						<th className='r-table__cell' scope='col'>
+							<p className='Benton-Regular'>Percent</p>
+						</th>
+						<th className='r-table__cell' scope='col'>
+							<p className='Benton-Regular'>Votes</p>
+						</th>
 					</tr>
 				</thead>
 				<tbody>
 					{ rows }
 				</tbody>
 			</table>
-		</div>
+			<p className='note benton-regular'>{unit.precinctsReportingPct}% reporting ({votesCast} votes total)</p>
+		</section>
 	)
 }
 

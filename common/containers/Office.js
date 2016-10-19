@@ -80,7 +80,6 @@ class Office extends Component {
 
 			return (
 				<li key={race.raceID}>
-					{raceTitle}
 					<RaceSummary unit={unit} raceTitle={raceTitle} />
 				</li>
 			)

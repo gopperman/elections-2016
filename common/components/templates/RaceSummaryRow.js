@@ -1,19 +1,17 @@
 import React, { PropTypes } from 'react'
 
 const RaceSummaryRow = ({ name, barStyle, pctForDisplay, vote }) => (
-	<tr>
-		<th scope='row'>
-			<div>
-				<div>{name}</div>
-				<div>
-					<span style={barStyle} />
-				</div>
-			</div>
-		</th>
-		<td>{pctForDisplay}%</td>
-		<td>
-			<span>{vote}</span>
-			<span> votes</span>
+	<tr className='r-table__row'>
+		<td className='r-table__cell'>
+			<p className='benton-bold'>{name}</p>
+		</td>
+		<td className='r-table__cell'>
+			<p className='benton-bold'>{pctForDisplay}%</p>
+		</td>
+		<td className='r-table__cell'>
+			<p className='benton-bold'>
+				<span>{vote}</span>
+			</p>
 		</td>
 	</tr>
 )
