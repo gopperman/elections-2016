@@ -1,17 +1,16 @@
-// The `RaceSummary` class displays detailed the race's summary results.
+// The `RaceSummaryTable` class displays a table of the race's summary results.
 import React, { PropTypes } from 'react'
 import addCommas from 'add-commas'
 import { fullName, percent } from './../utils/Candidate.js'
 import { sortByVoteCount, totalVotes } from './../utils/Candidates.js'
 import { percentForDisplay } from './../utils/standardize.js'
-import RaceSummaryRow from './../components/templates/RaceSummaryRow'
+import RaceSummaryTableRow from './../components/templates/RaceSummaryTableRow'
 
 const createSummary = (raceName) =>
 	// eslint-disable-next-line max-len
 	`A table that has the candidate, percent, and vote count across the top and the candidates down the left hand side for the ${raceName}.`
 
-const RaceSummary = ({ unit, raceTitle }) => {
-	console.log(unit)
+const RaceSummaryTable = ({ unit, raceTitle }) => {
 	// Get statewide candidates.
 	const summaryCandidates = sortByVoteCount(unit.candidates)
 
@@ -33,16 +32,10 @@ const RaceSummary = ({ unit, raceTitle }) => {
 		// Get the display-ready version of the percent.
 		const pctForDisplay = percentForDisplay(pct)
 
-		const barStyle = {
-			width: `${pctForDisplay}%`,
-		}
-
 		return (
-			<RaceSummaryRow
+			<RaceSummaryTableRow
 				{...{
-					key: candidateID,
 					name: candidateName,
-					barStyle,
 					pctForDisplay,
 					vote,
 				}}
@@ -77,9 +70,9 @@ const RaceSummary = ({ unit, raceTitle }) => {
 	)
 }
 
-RaceSummary.propTypes = {
+RaceSummaryTable.propTypes = {
 	unit: PropTypes.object.isRequired,
 	raceTitle: PropTypes.string.isRequired,
 }
 
-export default RaceSummary
+export default RaceSummaryTable

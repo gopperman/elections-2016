@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 
-const RaceSummaryRow = ({ name, barStyle, pctForDisplay, vote }) => (
+const RaceSummaryTableRow = ({ name, barStyle, pctForDisplay, vote }) => (
 	<tr className='r-table__row'>
 		<td className='r-table__cell'>
 			<p className='benton-bold'>{name}</p>
@@ -17,11 +17,11 @@ const RaceSummaryRow = ({ name, barStyle, pctForDisplay, vote }) => (
 )
 
 
-RaceSummaryRow.propTypes = {
+RaceSummaryTableRow.propTypes = {
 	name: PropTypes.string.isRequired,
 	barStyle: PropTypes.object.isRequired,
 	pctForDisplay: PropTypes.string.isRequired,
 	vote: PropTypes.string.isRequired,
 }
 
-export default RaceSummaryRow
+export default RaceSummaryTableRow
