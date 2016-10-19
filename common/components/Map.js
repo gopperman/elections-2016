@@ -373,7 +373,7 @@ class Map extends Component {
 						<div className='js-tooltip-content'>actual content</div>
 					</div>
 				</div>
-				<div className='legend'>
+				<div className='legend' aria-hidden='true'>
 					<ul className='legend__list'>
 						<li className='legend__item'>
 							<p className='legend__label benton-regular'>No data</p>

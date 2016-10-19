@@ -35,9 +35,8 @@ export default ({ subunit = {}, displayName, sortingDelegate }) => {
 		return `
 			<tr class='r-table__row'>
 				<td class='r-table__cell' scope='row'>
-					<p class='${candidateClass}'>
-						<span class='color-square ${squareClass}'>&nbsp;</span>
-					${last}</p>
+					<div aria-hidden='true' class='r-table__square ${squareClass}'></div>
+					<p class='${candidateClass}'>${last}</p>
 				</td>
 				<td class='r-table__cell' scope='row'>
 					<p class='benton-bold'>${+pctForDisplay}%</p>
