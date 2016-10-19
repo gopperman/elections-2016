@@ -8,11 +8,14 @@ import addCommas from 'add-commas'
 import { percent } from './../utils/Candidate.js'
 import { percentForDisplay } from './../utils/standardize.js'
 
-const StateResultsTableRow = ({ statePostal, precinctsReportingPct,
-candidates, summaryCandidates }) =>
+const StateResultsTableRow = ({ statePostal, stateName,
+precinctsReportingPct, candidates, summaryCandidates }) =>
 	<tr className='r-table__row'>
 		<td className='r-table__cell'>
-			<p className='benton-bold'>{statePostal}</p>
+			<p className='benton-bold'>
+				<abbr>{statePostal}</abbr>
+				<span className='full'>{stateName}</span>
+			</p>
 			<p className='benton-regular'>{+precinctsReportingPct}%</p>
 		</td>
 		{ summaryCandidates
@@ -38,6 +41,7 @@ StateResultsTableRow.propTypes = {
 	summaryCandidates: PropTypes.array.isRequired,
 	candidates: PropTypes.array.isRequired,
 	statePostal: PropTypes.string.isRequired,
+	stateName: PropTypes.string.isRequired,
 	precinctsReportingPct: PropTypes.string.isRequired,
 }
 
