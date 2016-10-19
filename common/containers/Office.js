@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actions from './../actions/actionCreators.js'
 import { getPresidentSummaryState } from './../utils/dataUtil.js'
-import RaceSummaryTable from './../components/templates/RaceSummaryTable.js'
+import RaceSummaryBar from './../components/templates/RaceSummaryBar.js'
 import Header from './../components/templates/Header.js'
 import Footer from './../components/templates/Footer.js'
 import Timer from './../components/Timer.js'
@@ -80,7 +80,7 @@ class Office extends Component {
 
 			return (
 				<li key={race.raceID}>
-					<RaceSummaryTable unit={unit} raceTitle={raceTitle} />
+					<RaceSummaryBar unit={unit} raceTitle={raceTitle} />
 				</li>
 			)
 		})
@@ -88,13 +88,13 @@ class Office extends Component {
 		// TODO: Get the president data for the header
 		// <Header summaryState={getPresidentSummaryState(results.data['president-us-states'])} />
 		return (
-			<div className='Office'>
+			<main id='content' className='Office'>
 				<h1 className='hed benton-bold'>{officeName} Election Results</h1>
 				<ul>
 					{races}
 				</ul>
 				<Footer />
-			</div>
+			</main>
 		)
 	}
 }
