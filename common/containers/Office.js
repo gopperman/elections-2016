@@ -9,11 +9,11 @@ import Header from './../components/templates/Header.js'
 import Footer from './../components/templates/Footer.js'
 import Timer from './../components/Timer.js'
 
-const url = '2016-11-08?officeName=U.S.%20House'
-
 const hooks = {
-	fetch: ({ dispatch }) =>
-		dispatch(actions.fetchResults({ url })),
+	fetch: ({ dispatch, params }) => {
+		const url = `2016-11-08?officeName=${params.officeName}`
+		return dispatch(actions.fetchResults({ url }))
+	}
 }
 
 const mapDispatchToProps = (dispatch) => ({
@@ -60,7 +60,8 @@ class Office extends Component {
 	}
 
 	fetchData = () => {
-		hooks.fetch({ dispatch: this.props.dispatch })
+		const { dispatch, params } = this.props
+		hooks.fetch({dispatch, params})
 	}
 
 	count = 0
