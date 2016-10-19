@@ -5,6 +5,7 @@ import _ from 'lodash'
 import React, { Component, PropTypes } from 'react'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import * as topojson from 'topojson'
 
 import * as actions from './../actions/actionCreators.js'
 import Timer from './../components/Timer.js'
@@ -218,13 +219,13 @@ class Homepage extends Component {
 				<SwingStates states={swingStates} />
 
 				<Map
-					topoObject={STATES}
+					geoJson={topojson.feature(STATES, STATES.objects.UNITS)}
 					data={states}
 					sortingDelegate={sortByElectoralCount}
 					projection={geoAlbersUsa()}
-					unitName='statePostal'
+					unitName='stateName'
 					dropdownName='state'
-					displayFeatureLabels
+					labelsName='STUSPS'
 					displayName='stateName' />
 
 				{featuredRaces}

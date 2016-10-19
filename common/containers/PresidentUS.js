@@ -8,6 +8,8 @@ import React, { Component, PropTypes } from 'react'
 import { provideHooks } from 'redial'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import * as topojson from 'topojson'
+
 import * as actions from './../actions/actionCreators.js'
 import Timer from './../components/Timer.js'
 import StateResultsTable from './../components/StateResultsTable.js'
@@ -221,13 +223,13 @@ class PresidentUS extends Component {
 						<Timer {...timerProps} />
 						<ElectoralCollegeBar {...summaryState} />
 						<Map
-							topoObject={STATES}
+							geoJson={topojson.feature(STATES, STATES.objects.UNITS)}
 							data={states}
 							sortingDelegate={sortByElectoralCount}
 							projection={geoAlbersUsa()}
-							unitName='statePostal'
+							unitName='stateName'
 							dropdownName='state'
-							displayFeatureLabels
+							labelsName='STUSPS'
 							displayName='stateName' />
 
 						<StateResultsTable

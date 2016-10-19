@@ -1,3 +1,7 @@
+const toTitleCase = (str) =>
+	str.replace(/\w\S*/g, txt =>
+		txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase())
+
 const toSentenceCase = (s) =>
 	[s[0].toUpperCase(), s.slice(1)].join('')
 
@@ -21,4 +25,5 @@ const percentForDisplay = (x, shorten) => {
 export {
 	percentForDisplay,
 	toSentenceCase,
+	toTitleCase,
 }

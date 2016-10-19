@@ -3,13 +3,12 @@
 import deepEqual from 'deep-equal'
 import _ from 'lodash'
 import React, { Component, PropTypes } from 'react'
-import * as topojson from 'topojson'
 import { geoPath } from 'd3-geo'
 import { select, mouse } from 'd3-selection'
 import chooseColorClass from './../utils/chooseColorClass.js'
 import compareStrings from './../utils/compareStrings.js'
 import createTooltip from './../utils/createTooltip.js'
-import { toSentenceCase } from './../utils/standardize.js'
+import { toSentenceCase, toTitleCase } from './../utils/standardize.js'
 
 const closeSvg = `
 	<svg version="1.1" id="icon-close" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="16.641px" height="16.643px" viewBox="243.576 202.087 16.641 16.643" enable-background="new 243.576 202.087 16.641 16.643" xml:space="preserve" aria-labelledby="close-title">
@@ -38,13 +37,13 @@ class Map extends Component {
 	static propTypes = {
 
 		// These will never change.
-		topoObject: PropTypes.object.isRequired,
+		geoJson: PropTypes.object.isRequired,
 		projection: PropTypes.func.isRequired,
 		sortingDelegate: PropTypes.func.isRequired,
 		unitName: PropTypes.string.isRequired,
 		displayName: PropTypes.string.isRequired,
 		dropdownName: PropTypes.string.isRequired,
-		displayFeatureLabels: PropTypes.bool,
+		labelsName: PropTypes.string,
 
 		// This will change.
 		data: PropTypes.array.isRequired,
@@ -58,17 +57,13 @@ class Map extends Component {
 	// rendering occurs.
 	componentDidMount() {
 
-		const { topoObject, projection, displayFeatureLabels } = this.props
-
-		// Convert `topoObject` to GeoJSON objects (via topojson).
-		const featuresGeoJSON =
-			topojson.feature(topoObject, topoObject.objects.UNITS)
+		const { geoJson, projection, labelsName } = this.props
 
 		// Create `this._path` and save it for convenience.
 		this._path = geoPath().projection(projection)
 
 		// Find bounds and aspect ratio for this projection.
-		const b = this._path.bounds(featuresGeoJSON)
+		const b = this._path.bounds(geoJson)
 		const aspect = (b[1][0] - b[0][0]) / (b[1][1] - b[0][1])
 
 		// Create width and height.
@@ -76,7 +71,7 @@ class Map extends Component {
 		const height = Math.round(width / aspect)
 
 		// Fit this projection to the newly-calculated aspect ratio.
-		projection.fitSize([width, height], featuresGeoJSON)
+		projection.fitSize([width, height], geoJson)
 
 		// Set viewBox on svg.
 		const svg = select(this._svg).attr('viewBox', `0 0 ${width} ${height}`)
@@ -86,18 +81,18 @@ class Map extends Component {
 
 		// Calculate feature centroids,
 		// and set features for convenience, so we don't keep topojsoning.
-		this._geoFeatures = featuresGeoJSON.features
+		this._geoFeatures = geoJson.features
 			.map(d => ({
 				...d,
 				centroid: this._path.centroid(d),
 			}))
 
-		if (displayFeatureLabels) {
+		if (labelsName) {
 
 			const centroids = this._geoFeatures
 				.map(d => ({
 					centroid: d.centroid,
-					id: d.id,
+					id: d.properties[labelsName],
 				}))
 
 			// Draw labels background.
@@ -188,6 +183,13 @@ class Map extends Component {
 		return { width, height }
 	}
 
+	clearTooltip = () => {
+
+		// Hide the tooltip.
+		this._tooltip.classList.remove('show')
+
+	}
+
 	// This draws the tooltip and gets called either by mousing or
 	// when new data comes in and we're on a feature.
 	drawTooltip = ({ subunit, position }) => {
@@ -210,19 +212,14 @@ class Map extends Component {
 				sortingDelegate,
 			})
 
-		// If we have a valid subunit, show the tooltip;
-		if (subunit) {
-			this._tooltip.classList.add('show')
-		} else {
-			// otherwise hide it.
-			this._tooltip.classList.remove('show')
-		}
+		// Show the tooltip.
+		this._tooltip.classList.add('show')
 
 	}
 
 	drawFeatures = () => {
 
-		const { drawTooltip, getViewBoxDimensions } = this
+		const { drawTooltip, clearTooltip, getViewBoxDimensions } = this
 		const { data, unitName } = this.props
 		const { selectionId } = this.state
 		const _dropdown = this._dropdown
@@ -240,14 +237,14 @@ class Map extends Component {
 				subunit: _.find(data, f =>
 					compareStrings(f[unitName], v.id)),
 			}))
-			.filter('subunit')
 			.map(v => ({
 				...v,
 
 				// Get this feature's color class based on who's winning.
 				colorClass: chooseColorClass({
-					candidates: v.subunit.candidates,
-					precinctsReportingPct: v.subunit.precinctsReportingPct,
+					candidates: v.subunit ? v.subunit.candidates : [],
+					precinctsReportingPct: v.subunit ?
+						v.subunit.precinctsReportingPct : '',
 				}),
 			}))
 			.value()
@@ -317,7 +314,7 @@ class Map extends Component {
 				_dropdown.value = ''
 
 				// clear out the tooltip,
-				drawTooltip({})
+				clearTooltip()
 
 				// and deselect the feature.
 				select(this).classed('selected', false)
@@ -330,23 +327,22 @@ class Map extends Component {
 
 	render() {
 
-		const { data, displayName, unitName, dropdownName } = this.props
+		const { geoJson, dropdownName } = this.props
 
 		const firstOption = {
 			display: `select a ${dropdownName}`,
 			value: '',
 		}
 
-		// TODO: maybe we should use the map features to draw the dropdown,
-		// instead of the data, because:
-		// 1) it means we don't have a dropdown initially,
-		// 2) the data might not look the same as the features
-		// 		(e.g. data towns are in lower case, shapefile towns are upper)
-		const options = [firstOption].concat(
-			data.map(v => ({
-				display: v[displayName],
-				value: v[unitName].toUpperCase(),
-			})))
+		const optionsList = _(geoJson.features)
+			.sortBy('id')
+			.map(v => ({
+				display: toTitleCase(v.id),
+				value: v.id,
+			}))
+			.value()
+
+		const options = [firstOption].concat(optionsList)
 			.map((v, i) =>
 				<option value={v.value} key={i}>{v.display}</option>
 			)
