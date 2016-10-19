@@ -1,17 +1,16 @@
-// The `RaceSummary` class displays detailed the race's summary results.
+// The `RaceSummaryTable` class displays a table of the race's summary results.
 import React, { PropTypes } from 'react'
 import addCommas from 'add-commas'
-import { fullName, percent } from './../utils/Candidate.js'
-import { sortByVoteCount, totalVotes } from './../utils/Candidates.js'
-import { percentForDisplay } from './../utils/standardize.js'
-import RaceSummaryRow from './../components/templates/RaceSummaryRow'
+import { fullName, percent } from './../../utils/Candidate.js'
+import { sortByVoteCount, totalVotes } from './../../utils/Candidates.js'
+import { percentForDisplay } from './../../utils/standardize.js'
+import RaceSummaryTableRow from './RaceSummaryTableRow'
 
 const createSummary = (raceName) =>
 	// eslint-disable-next-line max-len
 	`A table that has the candidate, percent, and vote count across the top and the candidates down the left hand side for the ${raceName}.`
 
-const RaceSummary = ({ unit, raceTitle }) => {
-
+const RaceSummaryTable = ({ unit, raceTitle }) => {
 	// Get statewide candidates.
 	const summaryCandidates = sortByVoteCount(unit.candidates)
 
@@ -33,16 +32,10 @@ const RaceSummary = ({ unit, raceTitle }) => {
 		// Get the display-ready version of the percent.
 		const pctForDisplay = percentForDisplay(pct)
 
-		const barStyle = {
-			width: `${pctForDisplay}%`,
-		}
-
 		return (
-			<RaceSummaryRow
+			<RaceSummaryTableRow
 				{...{
-					key: candidateID,
 					name: candidateName,
-					barStyle,
 					pctForDisplay,
 					vote,
 				}}
@@ -52,27 +45,34 @@ const RaceSummary = ({ unit, raceTitle }) => {
 
 	// TODO: Add winner-tag class to candidates
 	return (
-		<div key={`${raceTitle} Summary`}>
-			<div>{unit.precinctsReportingPct}% precincts reporting ({votesCast} votes total)</div>
-			<table summary={createSummary(raceTitle)}>
-				<thead>
-					<tr>
-						<th scope='col'>Candidate</th>
-						<th scope='col'>Percent</th>
-						<th scope='col'>Votes</th>
+		<section key={`${raceTitle} Summary`}>
+			<h2 className='section-hed benton-bold'>{raceTitle}</h2>
+			<table className='r-table' summary={createSummary(raceTitle)}>
+				<thead className='r-table__head'>
+					<tr className='r-table__row'>
+						<th className='r-table__cell' scope='col'>
+							<p className='Benton-Regular'>Candidate</p>
+						</th>
+						<th className='r-table__cell' scope='col'>
+							<p className='Benton-Regular'>Percent</p>
+						</th>
+						<th className='r-table__cell' scope='col'>
+							<p className='Benton-Regular'>Votes</p>
+						</th>
 					</tr>
 				</thead>
 				<tbody>
 					{ rows }
 				</tbody>
 			</table>
-		</div>
+			<p className='note benton-regular'>{unit.precinctsReportingPct}% reporting ({votesCast} votes total)</p>
+		</section>
 	)
 }
 
-RaceSummary.propTypes = {
+RaceSummaryTable.propTypes = {
 	unit: PropTypes.object.isRequired,
 	raceTitle: PropTypes.string.isRequired,
 }
 
-export default RaceSummary
+export default RaceSummaryTable

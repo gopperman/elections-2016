@@ -4,16 +4,16 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actions from './../actions/actionCreators.js'
 import { getPresidentSummaryState } from './../utils/dataUtil.js'
-import RaceSummary from './../components/RaceSummary.js'
+import RaceSummaryBar from './../components/templates/RaceSummaryBar.js'
 import Header from './../components/templates/Header.js'
 import Footer from './../components/templates/Footer.js'
 import Timer from './../components/Timer.js'
 
-const url = '2016-11-08?officeName=U.S.%20House'
-
 const hooks = {
-	fetch: ({ dispatch }) =>
-		dispatch(actions.fetchResults({ url })),
+	fetch: ({ dispatch, params }) => {
+		const url = `2016-11-08?officeName=${params.officeName}`
+		return dispatch(actions.fetchResults({ url }))
+	}
 }
 
 const mapDispatchToProps = (dispatch) => ({
@@ -60,7 +60,8 @@ class Office extends Component {
 	}
 
 	fetchData = () => {
-		hooks.fetch({ dispatch: this.props.dispatch })
+		const { dispatch, params } = this.props
+		hooks.fetch({dispatch, params})
 	}
 
 	count = 0
@@ -79,8 +80,7 @@ class Office extends Component {
 
 			return (
 				<li key={race.raceID}>
-					{raceTitle}
-					<RaceSummary unit={unit} raceTitle={raceTitle} />
+					<RaceSummaryBar unit={unit} raceTitle={raceTitle} />
 				</li>
 			)
 		})
@@ -88,13 +88,13 @@ class Office extends Component {
 		// TODO: Get the president data for the header
 		// <Header summaryState={getPresidentSummaryState(results.data['president-us-states'])} />
 		return (
-			<div className='Office'>
-				<h1>{officeName}</h1>
+			<main id='content' className='Office'>
+				<h1 className='hed benton-bold'>{officeName} Election Results</h1>
 				<ul>
 					{races}
 				</ul>
 				<Footer />
-			</div>
+			</main>
 		)
 	}
 }
