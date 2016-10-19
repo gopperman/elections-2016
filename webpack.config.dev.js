@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+const autoprefixer = require('autoprefixer')
 
 module.exports = {
 	devtool: 'inline-source-map',
@@ -29,12 +30,17 @@ module.exports = {
 			},
 			{
 				test: /\.styl$/,
-				loader: 'style-loader!css-loader!stylus-loader',
+				loader: 'style-loader!css-loader!postcss-loader!stylus-loader',
 			},
 			{
 				test: /\.json$/,
 				loader: 'json-loader',
 			},
 		],
+	},
+	postcss() {
+		return [
+			autoprefixer,
+		]
 	},
 }

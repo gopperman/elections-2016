@@ -1,6 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const autoprefixer = require('autoprefixer')
 
 module.exports = {
 	devtool: 'source-map',
@@ -38,12 +39,18 @@ module.exports = {
 			},
 			{
 				test: /\.styl$/,
-				loader: ExtractTextPlugin.extract('style-loader', 'css-loader!stylus-loader'),
+				loader: ExtractTextPlugin.extract('style-loader',
+					'css-loader!postcss-loader!stylus-loader'),
 			},
 			{
 				test: /\.json$/,
 				loader: 'json-loader',
 			},
 		],
+	},
+	postcss() {
+		return [
+			autoprefixer,
+		]
 	},
 }
