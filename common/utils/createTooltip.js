@@ -13,7 +13,7 @@ export default ({ subunit = {}, displayName, sortingDelegate }) => {
 
 	const rows = candidates.slice(0, 4).map(candidate => {
 
-		const { candidateID, voteCount, last, winner } = candidate
+		const { candidateID, voteCount, last, winner, party } = candidate
 
 		// Add appropriate commas to the candidate's vote count.
 		const vote = addCommas(voteCount)
@@ -27,11 +27,16 @@ export default ({ subunit = {}, displayName, sortingDelegate }) => {
 		const candidateClass =
 			classnames('benton-bold', { 'is-winner': !!winner })
 
+		const squareClass = _.includes(['dem', 'gop'], party.toLowerCase()) ?
+			`fill-${party.toLowerCase()}` : 'fill-ind'
+
 		// Create this candidate's table row.
 		return `
 			<tr class='r-table__row'>
 				<td class='r-table__cell' scope='row'>
-					<p class='${candidateClass}'>${last}</p>
+					<p class='${candidateClass}'>
+						<span class='color-square ${squareClass}'>&nbsp;</span>
+					${last}</p>
 				</td>
 				<td class='r-table__cell' scope='row'>
 					<p class='benton-bold'>${+pctForDisplay}%</p>
