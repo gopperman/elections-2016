@@ -16,6 +16,14 @@
 		vertical-align top
 		padding 0.5em
 		p
+			abbr
+				+mq('bp-2')
+					display none
+			span.full
+				display none
+				+mq('bp-2')
+					display inline-block
+
 			line-height 1.5
 			&:not(:last-child)
 				font-size 0.8em
