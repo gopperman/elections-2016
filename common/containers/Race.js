@@ -25,10 +25,6 @@ const flourish = `
 	</svg>
 `
 
-// import RaceSummary from './../components/RaceSummary.js'
-// import MassMap from './../components/MassMap.js'
-// import TownResultsTable from './../components/TownResultsTable.js'
-
 // We'll keep these urls here for testing. A description:
 
 // this one returns a 500,
