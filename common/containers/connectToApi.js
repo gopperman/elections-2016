@@ -29,8 +29,7 @@ const connectToApi = (WrappedComponent) => {
 		}
 
 		componentDidMount = () => {
-			const { dispatch, params } = this.props
-			hooks.fetch({ dispatch, params })
+			this.fetchData()
 		}
 
 		componentDidUpdate = (prevProps) => {
@@ -50,6 +49,11 @@ const connectToApi = (WrappedComponent) => {
 
 			}
 
+		}
+
+		fetchData = () => {
+			const { dispatch, params } = this.props
+			hooks.fetch({ dispatch, params })
 		}
 
 		render() {
