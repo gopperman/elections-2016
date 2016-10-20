@@ -14,7 +14,7 @@ import STATES from './../../data/output/STATES.json'
 import Header from './../components/templates/Header.js'
 import TestStatus from './../components/TestStatus.js'
 import SwingStates from './../components/SwingStates.js'
-import FeaturedRace from './../components/FeaturedRace.js'
+import ResultDualBar from './../components/ResultDualBar.js'
 
 import {
 	sortByElectoralCount,
@@ -202,7 +202,7 @@ class Homepage extends Component {
 		const featuredRaces = _.difference(races, presidentRaces)
 			.concat(massPresident)
 			.filter(v => v)
-			.map((race, key) => <FeaturedRace {...{ race, key }} />)
+			.map((race, key) => <ResultDualBar {...{ race, key }} />)
 
 		return (
 			<div className='Homepage'>
