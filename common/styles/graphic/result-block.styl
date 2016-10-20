@@ -56,6 +56,12 @@
 	position relative
 	&__name
 		font-size 1em
+		span
+			display block
+			&:first-of-type
+				margin-right 0.5em
+			+mq('bp-2')
+				display inline-block
 		&--number
 			font-size 1.3em
 		&--center
@@ -63,5 +69,9 @@
 			font-size 0.8em
 			color set-gray('medium')
 			padding 0 0.5em
+			span
+				display block
+				+mq('bp-2')
+					display inline-block
 		&:last-of-type
 			text-align right
