@@ -24,7 +24,7 @@ const url = '2016-11-08?statePostal=MA&level=ru'
 @connectToApi
 class Race extends Component {
 
-	static url(params) {
+	static apiUrl(params) {
 		const { officeName, seatName } = params
 		return `${url}&officeName=${officeName}&seatName=${seatName}`
 	}

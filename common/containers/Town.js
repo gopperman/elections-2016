@@ -8,6 +8,8 @@ import TestStatus from './../components/TestStatus.js'
 import ResultGroup from './../components/ResultGroup.js'
 import { sortByVoteCount } from './../utils/Candidates.js'
 import Hero from './../components/Hero.js'
+import LinkButton from './../components/LinkButton.js'
+import urlManager from './../utils/urlManager.js'
 
 // We'll keep these urls here for testing. A description:
 
@@ -23,7 +25,7 @@ const url = '2016-11-08?location='
 @connectToApi
 class Town extends Component {
 
-	static url(params) {
+	static apiUrl(params) {
 		return `${url}${params.townName}`
 	}
 
@@ -79,6 +81,7 @@ class Town extends Component {
 					<ResultGroup
 						precinctsReportingPct={stateUnit.precinctsReportingPct}
 						candidates={sortByVoteCount(candidates)} />
+					<LinkButton text='See full results' url={urlManager.race(race)} />
 				</div>
 			)
 

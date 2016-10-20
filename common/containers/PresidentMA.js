@@ -30,7 +30,7 @@ const url = '2016-11-08?officeID=P&statePostal=US,MA&level=ru'
 @connectToApi
 class PresidentMA extends Component {
 
-	static url() {
+	static apiUrl() {
 		return url
 	}
 

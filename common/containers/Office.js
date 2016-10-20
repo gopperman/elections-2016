@@ -24,7 +24,7 @@ const url = '2016-11-08?officeName='
 @connectToApi
 class Office extends Component {
 
-	static url(params) {
+	static apiUrl(params) {
 		return `${url}${params.officeName}`
 	}
 

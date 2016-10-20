@@ -4,7 +4,6 @@ import classnames from 'classnames'
 import { fullName, percent } from './../utils/Candidate.js'
 import { percentForDisplay } from './../utils/standardize.js'
 
-// TODO: add 'go to full results' button
 // TODO: use images?
 const ResultBar = ({ candidate, candidates, showImage,
 precinctsReportingPct }) => {

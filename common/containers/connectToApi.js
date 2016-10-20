@@ -8,7 +8,8 @@ const connectToApi = (WrappedComponent) => {
 
 	const hooks = {
 		fetch: ({ dispatch, params }) =>
-			dispatch(actions.fetchResults({ url: WrappedComponent.url(params) })),
+			dispatch(actions.fetchResults({
+				url: WrappedComponent.apiUrl(params) })),
 	}
 
 	const mapDispatchToProps = (dispatch) => ({
