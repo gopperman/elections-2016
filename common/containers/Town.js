@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-
 import _ from 'lodash'
 import connectToApi from './connectToApi.js'
 import Timer from './../components/Timer.js'
