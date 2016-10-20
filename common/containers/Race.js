@@ -16,15 +16,7 @@ import TestStatus from './../components/TestStatus.js'
 import TownResultsTable from './../components/TownResultsTable.js'
 import ResultBar from './../components/ResultBar.js'
 import { sortByVoteCount } from './../utils/Candidates.js'
-
-const flourish = `
-	<svg version="1.1" id="icon-chart" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="46px" height="54px" viewBox="0 0 46 54" enable-background="new 0 0 46 54" xml:space="preserve" aria-labelledby="chart-title">
-		<title id="chart-title">Chart</title>
-		<rect y="17" width="10" height="37"></rect>
-		<rect x="18" width="10" height="54"></rect>
-		<rect x="36" y="27" width="10" height="27"></rect>
-	</svg>
-`
+import svgs from './../utils/svgs.js'
 
 // We'll keep these urls here for testing. A description:
 
@@ -194,7 +186,7 @@ class Race extends Component {
 						<h1 className='hed hero__hed benton-bold'>{title}</h1>
 						<div
 							className='hero__flourish'
-							dangerouslySetInnerHTML={{ __html: flourish }} />
+							dangerouslySetInnerHTML={{ __html: svgs.flourish }} />
 					</div>
 
 					<div className='container-lg'>
