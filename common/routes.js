@@ -8,22 +8,24 @@ import PresidentUS from './containers/PresidentUS.js'
 import PresidentMA from './containers/PresidentMA.js'
 import Race from './containers/Race.js'
 import Town from './containers/Town.js'
+import urlManager from './utils/urlManager.js'
 
 // TODO:
-//		<Route path='elections/2016/ballot-questions/:race' component={Race} />
-//		<Route path='elections/2016/ballot-questions' component={()} />
+//		<Route path='${urlManager.base()}/ballot-questions/:race' component={Race} />
+//		<Route path='${urlManager.base()}/ballot-questions' component={()} />
+
 export default (
 	<Route path='/' component={App}>
 		<IndexRoute component={Homepage} />
-		<Route path='elections/2016/election' component={Election} />
-		<Route path='elections/2016/president' component={PresidentUS} />
+		<Route path={`${urlManager.base()}/election`} component={Election} />
+		<Route path={`${urlManager.base()}/president`} component={PresidentUS} />
 		<Route
-			path='elections/2016/president/massachusetts'
+			path={`${urlManager.base()}/president/massachusetts`}
 			component={PresidentMA} />
 		<Route
-			path='elections/2016/race/:officeName/:seatName'
+			path={`${urlManager.base()}/race/:officeName/:seatName`}
 			component={Race} />
-		<Route path='elections/2016/town/:townName' component={Town} />
-		<Route path='elections/2016/office/:officeName' component={Office} />
+		<Route path={`${urlManager.base()}/town/:townName`} component={Town} />
+		<Route path={`${urlManager.base()}/office/:officeName`} component={Office} />
 	</Route>
 )
