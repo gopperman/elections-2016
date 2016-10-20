@@ -1,17 +1,12 @@
-/* eslint-disable max-len */
+import React, { Component } from 'react'
 
-import React, { Component, PropTypes } from 'react'
-import { provideHooks } from 'redial'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
 import _ from 'lodash'
-
-import * as actions from './../actions/actionCreators.js'
-import Header from './../components/Header.js'
-import ResultBar from './../components/ResultBar.js'
+import connectToApi from './connectToApi.js'
 import Timer from './../components/Timer.js'
+import Header from './../components/Header.js'
 import Footer from './../components/Footer.js'
 import TestStatus from './../components/TestStatus.js'
+import ResultBar from './../components/ResultBar.js'
 import { sortByVoteCount } from './../utils/Candidates.js'
 import Hero from './../components/Hero.js'
 
@@ -26,83 +21,38 @@ import Hero from './../components/Hero.js'
 // and this one is the correct url - it returns everything.
 const url = '2016-11-08?location='
 
-const hooks = {
-	fetch: ({ dispatch, params }) =>
-		dispatch(actions.fetchResults({ url: `${url}${params.townName}` })),
-}
-
-const mapDispatchToProps = (dispatch) => ({
-	dispatch,
-	actions: bindActionCreators(actions, dispatch),
-})
-
-@provideHooks(hooks)
-@connect(s => s, mapDispatchToProps)
+@connectToApi
 class Town extends Component {
 
-	static propTypes = {
-		params: PropTypes.object.isRequired,
-		actions: PropTypes.object.isRequired,
-		timer: PropTypes.object.isRequired,
-		results: PropTypes.object.isRequired,
-		dispatch: PropTypes.func.isRequired,
+	static url(params) {
+		return `${url}${params.townName}`
 	}
 
-	componentDidMount = () => {
-		this.fetchData()
-	}
+	static areAllRacesComplete(results) {
 
-	componentDidUpdate = (prevProps) => {
+		// Get the data - or an empty object.
+		const data = results.data || {}
 
-		const { props } = this
-		const { startTimer, cancelTimer } = props.actions
-		const { results } = props
+		// Get API results.
+		const races = data.races || []
 
-		// did we stop fetching?
-		if (prevProps.results.isFetching && !props.results.isFetching) {
+		// For each race,
+		const anyIncompleteRaces = _(races)
+			// get its reportingUnits array,
+			.map('reportingUnits')
+			// flatten to a one-dimensional array,
+			.flatten()
+			// and see if there is at least one at less than 100% pct.
+			.some(v => +v.precinctsReportingPct < 100)
 
-			// Get the data - or an empty object.
-			const data = results.data || {}
+		return !anyIncompleteRaces
 
-			// Get API results.
-			const races = data.races || []
-
-			// For each race,
-			const anyIncompleteRaces = _(races)
-				// get its reportingUnits array,
-				.map('reportingUnits')
-				// flatten to a one-dimensional array,
-				.flatten()
-				// and see if there is at least one at less than 100% pct.
-				.some(v => +v.precinctsReportingPct < 100)
-
-			if (!anyIncompleteRaces) {
-				cancelTimer()
-			} else {
-				startTimer()
-			}
-
-		}
-
-	}
-
-	fetchData = () => {
-		const { dispatch, params } = this.props
-		hooks.fetch({ dispatch, params })
 	}
 
 	render() {
-		const { props, fetchData } = this
-		const { timer, results, params } = props
-		const { stopTimer } = props.actions
 
-		const timerProps = {
-			...timer,
-			callback: () => {
-				stopTimer()
-				fetchData()
-			},
-		}
+		const { props } = this
+		const { results, params, timerProps } = props
 
 		// Get the data - or an empty object.
 		const data = results.data || {}
