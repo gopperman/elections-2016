@@ -4,16 +4,12 @@ import classnames from 'classnames'
 import { fullName, percent } from './../utils/Candidate.js'
 import { percentForDisplay } from './../utils/standardize.js'
 
-// TODO: use pct reporting
-// TODO: mark incumbent
-// TODO: mark checkmark
 // TODO: add 'go to full results' button
 // TODO: use images?
-// TODO question: where can we find pct reporting in the API?
 const ResultBar = ({ candidate, candidates, showImage,
 precinctsReportingPct }) => {
 
-	const { party, candidateID, voteCount, winner } = candidate
+	const { party, candidateID, voteCount, winner, incumbent } = candidate
 
 	const partyToDisplay = party.toLowerCase()
 	const name = fullName(candidate)
@@ -37,13 +33,16 @@ precinctsReportingPct }) => {
 		</p>) :
 		null
 
+	const incumbentSpan = incumbent ?
+		<span className='incumbent'>(incumbent)</span> : null
+
 	return (
 
 		<div className='r-block'>
 
 			{image}
 
-			<p className={candidateClass}>{name}</p>
+			<p className={candidateClass}>{name}{incumbentSpan}</p>
 
 			<div className='r-block__results'>
 				<div className='r-block__bar results-bar'>
