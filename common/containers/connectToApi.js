@@ -18,7 +18,7 @@ const connectToApi = (WrappedComponent) => {
 
 	return @provideHooks(hooks)
 	@connect(s => s, mapDispatchToProps)
-	class ContainerHOC extends Component {
+	class ConnectToApiHoc extends Component {
 
 		static propTypes = {
 			params: PropTypes.object.isRequired,
@@ -29,7 +29,8 @@ const connectToApi = (WrappedComponent) => {
 		}
 
 		componentDidMount = () => {
-			this.fetchData()
+			const { dispatch, params } = this.props
+			hooks.fetch({ dispatch, params })
 		}
 
 		componentDidUpdate = (prevProps) => {
@@ -49,11 +50,6 @@ const connectToApi = (WrappedComponent) => {
 
 			}
 
-		}
-
-		fetchData = () => {
-			const { dispatch, params } = this.props
-			hooks.fetch({ dispatch, params })
 		}
 
 		render() {
