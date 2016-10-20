@@ -1,15 +1,7 @@
-/* eslint-disable max-len */
+import React, { Component } from 'react'
 
-// The `Office` class displays summary results for all races
-// of this office.
-
-import React, { Component, PropTypes } from 'react'
-import { provideHooks } from 'redial'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
 import _ from 'lodash'
-
-import * as actions from './../actions/actionCreators.js'
+import connectToApi from './connectToApi.js'
 import Timer from './../components/Timer.js'
 import Header from './../components/Header.js'
 import Footer from './../components/Footer.js'
@@ -29,116 +21,38 @@ import Hero from './../components/Hero.js'
 // and this one is the correct url - it returns everything.
 const url = '2016-11-08?officeName='
 
-// This object, used by the `@provideHooks` decorator, defines our custom
-// data loading dependencies. At the moment we just have one: `fetch`. It
-// gets triggered on both server and client.
-const hooks = {
-
-	// `fetch` takes a `dispatch` argument, which we will use to fire
-	// our custom data loading actions. In this case, we dispatch the
-	// `fetchResults` action.
-	fetch: ({ dispatch, params }) =>
-		dispatch(actions.fetchResults({ url: `${url}${params.officeName}` })),
-}
-
-// This object maps various properties as React `props`:
-const mapDispatchToProps = (dispatch) => ({
-
-	// `actions` which have already been bound with `dispatch`
-	// for convenience,
-	actions: bindActionCreators(actions, dispatch),
-
-	// and `dispatch`, so we can pass it to `fetch` above. Normally we
-	// wouldn't set `dispatch` as a React `props`, but we need it to fire
-	// our custom `fetch` lifecycle event above.
-	dispatch,
-
-})
-
-// Decorate the class with `connect` and `provideHooks`,
-// in that order (it matters).
-@provideHooks(hooks)
-@connect(s => s, mapDispatchToProps)
+@connectToApi
 class Office extends Component {
 
-	static propTypes = {
-		params: PropTypes.object.isRequired,
-		actions: PropTypes.object.isRequired,
-		timer: PropTypes.object.isRequired,
-		results: PropTypes.object.isRequired,
-		dispatch: PropTypes.func.isRequired,
+	static url(params) {
+		return `${url}${params.officeName}`
 	}
 
-	// This lifecycle event gets called once, immediately after the initial
-	// rendering occurs. We will use it to fire the `fetch` hook.
-	componentDidMount = () => {
-		this.fetchData()
-	}
+	static areAllRacesComplete(results) {
 
-	// This gets called once after the component's updates are flushed to DOM.
-	// At the moment we will use it to determine whether to stop the clock.
-	componentDidUpdate = (prevProps) => {
+		// Get the data - or an empty object.
+		const data = results.data || {}
 
-		const { props } = this
-		const { startTimer, cancelTimer } = props.actions
-		const { results } = props
+		// Get API results.
+		const races = data.races || []
 
-		// Did we stop fetching - that is, did we go from `isFetching == true`
-		// to `isFetching == false`? If so:
-		if (prevProps.results.isFetching && !props.results.isFetching) {
+		// For each race,
+		const anyIncompleteRaces = _(races)
+			// get its reportingUnits array,
+			.map('reportingUnits')
+			// try to find the state-level reporting unit,
+			.map(v => _.find(v, { level: 'state' }))
+			// and see if there is at least one at less than 100% pct.
+			.some(v => +v.precinctsReportingPct < 100)
 
-			// Get the data - or an empty object.
-			const data = results.data || {}
+		return !anyIncompleteRaces
 
-			// Get API results.
-			const races = data.races || []
-
-			// For each race,
-			const anyIncompleteRaces = _(races)
-				// get its reportingUnits array,
-				.map('reportingUnits')
-				// try to find the state-level reporting unit,
-				.map(v => _.find(v, { level: 'state' }))
-				// and see if there is at least one at less than 100% pct.
-				.some(v => +v.precinctsReportingPct < 100)
-
-			if (!anyIncompleteRaces) {
-				cancelTimer()
-			} else {
-				startTimer()
-			}
-
-		}
-
-	}
-
-	// Wrap the `fetch` call in a simpler `fetchData` function.
-	fetchData = () => {
-		const { dispatch, params } = this.props
-		hooks.fetch({ dispatch, params })
 	}
 
 	render() {
 
-		const { props, fetchData } = this
-		const { timer, params, results } = props
-		const { stopTimer } = props.actions
-
-		// Prepare `Timer` props, including
-		const timerProps = {
-			...timer,
-
-			// a callback which gets invoked when the `Timer` runs out. If so,
-			callback: () => {
-
-				// fire the `stopTimer` action,
-				stopTimer()
-
-				// and fire the `fetch` hook, which will fire the `fetchResults`
-				// action.
-				fetchData()
-			},
-		}
+		const { props } = this
+		const { results, params, timerProps } = props
 
 		// Get the data - or an empty object.
 		const data = results.data || {}
@@ -171,7 +85,6 @@ class Office extends Component {
 
 		})
 
-		// Finally we can render all the components!
 		return (
 			<div>
 
