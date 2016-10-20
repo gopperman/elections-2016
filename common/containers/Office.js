@@ -45,10 +45,8 @@ const hooks = {
 	// `fetch` takes a `dispatch` argument, which we will use to fire
 	// our custom data loading actions. In this case, we dispatch the
 	// `fetchResults` action.
-	fetch: ({ dispatch, params }) => {
-		const fullUrl = `${url}${params.officeName}`
-		return dispatch(actions.fetchResults({ url: fullUrl }))
-	},
+	fetch: ({ dispatch, params }) =>
+		dispatch(actions.fetchResults({ url: `${url}${params.officeName}` })),
 }
 
 // This object maps various properties as React `props`:

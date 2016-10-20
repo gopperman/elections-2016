@@ -179,7 +179,7 @@ class Race extends Component {
 
 		// Get race title.
 		const { officeName, seatName } = race
-		const title = [officeName, seatName].join(', ')
+		const title = [officeName, seatName].filter(v => v).join(', ')
 
 		// Finally we can render all the components!
 		return (

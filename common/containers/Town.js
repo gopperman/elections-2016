@@ -1,17 +1,42 @@
+/* eslint-disable max-len */
+
 import React, { Component, PropTypes } from 'react'
 import { provideHooks } from 'redial'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import _ from 'lodash'
+
 import * as actions from './../actions/actionCreators.js'
-import { getPresidentSummaryState } from './../utils/dataUtil.js'
-import { toSentenceCase } from './../utils/standardize.js'
 import Header from './../components/templates/Header.js'
-import Footer from './../components/templates/Footer.js'
+import ResultBar from './../components/ResultBar.js'
 import Timer from './../components/Timer.js'
+import Footer from './../components/templates/Footer.js'
+import TestStatus from './../components/TestStatus.js'
+import { sortByVoteCount } from './../utils/Candidates.js'
+
+const flourish = `
+	<svg version="1.1" id="icon-chart" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="46px" height="54px" viewBox="0 0 46 54" enable-background="new 0 0 46 54" xml:space="preserve" aria-labelledby="chart-title">
+		<title id="chart-title">Chart</title>
+		<rect y="17" width="10" height="37"></rect>
+		<rect x="18" width="10" height="54"></rect>
+		<rect x="36" y="27" width="10" height="27"></rect>
+	</svg>
+`
+
+// We'll keep these urls here for testing. A description:
+
+// this one returns a 500,
+// const url = 'NO'
+
+// this one returns json but the data is incomplete,
+// const url = '2016-11-08?locat='
+
+// and this one is the correct url - it returns everything.
+const url = '2016-11-08?location='
 
 const hooks = {
-	fetch: ({ dispatch }) =>
-		dispatch(actions.fetchResults({ url: 'town' })),
+	fetch: ({ dispatch, params }) =>
+		dispatch(actions.fetchResults({ url: `${url}${params.townName}` })),
 }
 
 const mapDispatchToProps = (dispatch) => ({
@@ -24,13 +49,13 @@ const mapDispatchToProps = (dispatch) => ({
 class Town extends Component {
 
 	static propTypes = {
+		params: PropTypes.object.isRequired,
 		actions: PropTypes.object.isRequired,
 		timer: PropTypes.object.isRequired,
 		results: PropTypes.object.isRequired,
 		dispatch: PropTypes.func.isRequired,
 	}
 
-	// when component is initially mounted onto DOM, fire its 'fetch' hook
 	componentDidMount = () => {
 		this.fetchData()
 	}
@@ -39,15 +64,27 @@ class Town extends Component {
 
 		const { props } = this
 		const { startTimer, cancelTimer } = props.actions
+		const { results } = props
 
 		// did we stop fetching?
 		if (prevProps.results.isFetching && !props.results.isFetching) {
 
-			// TODO: add data completeness check
-			++this.count
+			// Get the data - or an empty object.
+			const data = results.data || {}
 
-			// is the race over?
-			if (this.count > 0) {
+			// Get API results.
+			const races = data.races || []
+
+			// For each race,
+			const anyIncompleteRaces = _(races)
+				// get its reportingUnits array,
+				.map('reportingUnits')
+				// flatten to a one-dimensional array,
+				.flatten()
+				// and see if there is at least one at less than 100% pct.
+				.some(v => +v.precinctsReportingPct < 100)
+
+			if (!anyIncompleteRaces) {
 				cancelTimer()
 			} else {
 				startTimer()
@@ -58,40 +95,83 @@ class Town extends Component {
 	}
 
 	fetchData = () => {
-		hooks.fetch({ dispatch: this.props.dispatch })
+		const { dispatch, params } = this.props
+		hooks.fetch({ dispatch, params })
 	}
-
-	count = 0
 
 	render() {
 		const { props, fetchData } = this
-		const { timer, results } = props
+		const { timer, results, params } = props
 		const { stopTimer } = props.actions
 
-		const townName = toSentenceCase(props.params.townName)
+		const timerProps = {
+			...timer,
+			callback: () => {
+				stopTimer()
+				fetchData()
+			},
+		}
 
-		const races = results.data['town-abington'].map((race) => {
-			const raceTitle = `${race.office_name} ${race.seat_name}`
-			
-			// TO-DO: We're waiting on consistent test data so we can use RaceSummary
-			const unit = (race.reporting_units && race.reporting_units[0]) || []
+		// Get the data - or an empty object.
+		const data = results.data || {}
+
+		// Get API results.
+		const races = data.races || []
+
+		// Get test status.
+		const isTest = _.some(data.races, 'test')
+
+		const townTitle = params.townName
+
+		const raceBlocks = races.map((race, i) => {
+
+			const stateUnit = (race.reportingUnits || [])[0] || {}
+
+			const candidates = stateUnit.candidates || []
+
+			const candidateBlocks = sortByVoteCount(candidates)
+				.map((candidate, key) =>
+					<ResultBar {...{ key, candidate, candidates }} />)
+
+			const { officeName, seatName } = race
+			const raceTitle = [officeName, seatName].filter(v => v).join(', ')
 
 			return (
-				<li key={race.race_number}>
-					{raceTitle}
-					(Race Summary goes here)
-				</li>
+				<div key={i}>
+					<h2 className='benton-bold'>{raceTitle}</h2>
+					{candidateBlocks}
+				</div>
 			)
+
 		})
-		
+
 		return (
-			<div className='Town'>
-				<Header summaryState={getPresidentSummaryState(results.data['president-us-states'])} />
-				<h1>{townName}, MA</h1>
-				<ul>
-					{races}
-				</ul>
+			<div>
+
+				<TestStatus isTest={isTest} />
+
+				<Header />
+
+				<main id='content'>
+					<div className='hero lead-bg'>
+						<h1 className='hed hero__hed benton-bold'>{townTitle}</h1>
+						<div
+							className='hero__flourish'
+							dangerouslySetInnerHTML={{ __html: flourish }} />
+					</div>
+
+					<div className='container-lg'>
+
+						<Timer {...timerProps} />
+
+						{raceBlocks}
+
+					</div>
+
+				</main>
+
 				<Footer />
+
 			</div>
 		)
 

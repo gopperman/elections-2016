@@ -23,17 +23,6 @@ export default (req, res) => {
 			break
 		}
 
-		case 'town': {
-			result = {
-				'president-us-states': readJson('president-us-states-0'),
-				'town-abington': readJson('town-abington'),
-			}
-			console.log('about to send town data')
-
-			setTimeout(() => res.json(result), 0)
-			break
-		}
-
 		case 'homepage': {
 			console.log('about to send homepage data')
 
