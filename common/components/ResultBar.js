@@ -1,19 +1,19 @@
 import React, { PropTypes } from 'react'
 import addCommas from 'add-commas'
+import classnames from 'classnames'
 import { fullName, percent } from './../utils/Candidate.js'
 import { percentForDisplay } from './../utils/standardize.js'
 
-// TODO: mark is winner
-// TODO: use real votes
 // TODO: use pct reporting
 // TODO: mark incumbent
 // TODO: mark checkmark
 // TODO: add 'go to full results' button
 // TODO: use images?
 // TODO question: where can we find pct reporting in the API?
-const ResultBar = ({ candidate, candidates, showImage }) => {
+const ResultBar = ({ candidate, candidates, showImage,
+precinctsReportingPct }) => {
 
-	const { party, candidateID, voteCount } = candidate
+	const { party, candidateID, voteCount, winner } = candidate
 
 	const partyToDisplay = party.toLowerCase()
 	const name = fullName(candidate)
@@ -28,13 +28,22 @@ const ResultBar = ({ candidate, candidates, showImage }) => {
 			src='assets/avatar/trump.jpg'
 			alt='Donald Trump' />) : null
 
+	const candidateClass = classnames('r-block__name', 'benton-bold',
+		{ 'is-winner': !!winner })
+
+	const precincts = precinctsReportingPct ?
+		(<p className='note benton-regular'>
+			<span>{+precinctsReportingPct}% reporting</span>
+		</p>) :
+		null
+
 	return (
 
 		<div className='r-block'>
 
 			{image}
 
-			<p className='r-block__name benton-bold'>{name}</p>
+			<p className={candidateClass}>{name}</p>
 
 			<div className='r-block__results'>
 				<div className='r-block__bar results-bar'>
@@ -52,7 +61,7 @@ const ResultBar = ({ candidate, candidates, showImage }) => {
 				<p className='r-block__meta benton-regular'>{vote} votes</p>
 			</div>
 
-			<p className='note benton-regular'><span>78% reporting</span></p>
+			{precincts}
 
 		</div>
 
@@ -63,6 +72,7 @@ const ResultBar = ({ candidate, candidates, showImage }) => {
 ResultBar.propTypes = {
 	candidate: PropTypes.object.isRequired,
 	candidates: PropTypes.array.isRequired,
+	precinctsReportingPct: PropTypes.string,
 	showImage: PropTypes.bool,
 }
 

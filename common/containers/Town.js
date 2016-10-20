@@ -5,7 +5,7 @@ import Timer from './../components/Timer.js'
 import Header from './../components/Header.js'
 import Footer from './../components/Footer.js'
 import TestStatus from './../components/TestStatus.js'
-import ResultBar from './../components/ResultBar.js'
+import ResultGroup from './../components/ResultGroup.js'
 import { sortByVoteCount } from './../utils/Candidates.js'
 import Hero from './../components/Hero.js'
 
@@ -70,17 +70,15 @@ class Town extends Component {
 
 			const candidates = stateUnit.candidates || []
 
-			const candidateBlocks = sortByVoteCount(candidates)
-				.map((candidate, key) =>
-					<ResultBar {...{ key, candidate, candidates }} />)
-
 			const { officeName, seatName } = race
 			const raceTitle = [officeName, seatName].filter(v => v).join(', ')
 
 			return (
 				<div key={i}>
 					<h2 className='benton-bold'>{raceTitle}</h2>
-					{candidateBlocks}
+					<ResultGroup
+						precinctsReportingPct={stateUnit.precinctsReportingPct}
+						candidates={sortByVoteCount(candidates)} />
 				</div>
 			)
 
