@@ -7,10 +7,10 @@ import { connect } from 'react-redux'
 import _ from 'lodash'
 
 import * as actions from './../actions/actionCreators.js'
-import Header from './../components/templates/Header.js'
+import Header from './../components/Header.js'
 import ResultBar from './../components/ResultBar.js'
 import Timer from './../components/Timer.js'
-import Footer from './../components/templates/Footer.js'
+import Footer from './../components/Footer.js'
 import TestStatus from './../components/TestStatus.js'
 import { sortByVoteCount } from './../utils/Candidates.js'
 

@@ -5,8 +5,8 @@ import { connect } from 'react-redux'
 import * as actions from './../actions/actionCreators.js'
 import Timer from './../components/Timer.js'
 import Map from './../components/Map.js'
-import Header from './../components/templates/Header.js'
-import Footer from './../components/templates/Footer.js'
+import Header from './../components/Header.js'
+import Footer from './../components/Footer.js'
 import BalanceOfPower from './../components/BalanceOfPower.js'
 import {
 	getPresidentSummaryState,

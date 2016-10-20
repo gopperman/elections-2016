@@ -1,5 +1,4 @@
 import React from 'react'
-import FooterNav from './FooterNav.js'
 import RaceNavigationLinks from './RaceNavigationLinks.js'
 
 const Footer = () => (
