@@ -13,7 +13,7 @@ import Timer from './../components/Timer.js'
 import Footer from './../components/Footer.js'
 import TestStatus from './../components/TestStatus.js'
 import { sortByVoteCount } from './../utils/Candidates.js'
-import svgs from './../utils/svgs.js'
+import Hero from './../components/Hero.js'
 
 // We'll keep these urls here for testing. A description:
 
@@ -145,12 +145,7 @@ class Town extends Component {
 				<Header />
 
 				<main id='content'>
-					<div className='hero lead-bg'>
-						<h1 className='hed hero__hed benton-bold'>{townTitle}</h1>
-						<div
-							className='hero__flourish'
-							dangerouslySetInnerHTML={{ __html: svgs.flourish }} />
-					</div>
+					<Hero title={townTitle} />
 
 					<div className='container-lg'>
 

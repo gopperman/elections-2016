@@ -19,7 +19,7 @@ import Header from './../components/Header.js'
 import Footer from './../components/Footer.js'
 import TestStatus from './../components/TestStatus.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
-import svgs from './../utils/svgs.js'
+import Hero from './../components/Hero.js'
 
 import {
 	sortByElectoralCount,
@@ -205,12 +205,7 @@ class PresidentUS extends Component {
 
 				<Header />
 				<main id='content'>
-					<div className='hero lead-bg'>
-						<h1 className='hed hero__hed benton-bold'>US Presidential Results</h1>
-						<div
-							className='hero__flourish'
-							dangerouslySetInnerHTML={{ __html: svgs.flourish }} />
-					</div>
+					<Hero title='US Presidential results' />
 
 					<div className='container-lg'>
 						<Timer {...timerProps} />

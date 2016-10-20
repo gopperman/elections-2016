@@ -16,7 +16,7 @@ import Footer from './../components/Footer.js'
 import TestStatus from './../components/TestStatus.js'
 import ResultBar from './../components/ResultBar.js'
 import { sortByVoteCount } from './../utils/Candidates.js'
-import svgs from './../utils/svgs.js'
+import Hero from './../components/Hero.js'
 
 // We'll keep these urls here for testing. A description:
 
@@ -180,12 +180,7 @@ class Office extends Component {
 				<Header />
 
 				<main id='content'>
-					<div className='hero lead-bg'>
-						<h1 className='hed hero__hed benton-bold'>{title}</h1>
-						<div
-							className='hero__flourish'
-							dangerouslySetInnerHTML={{ __html: svgs.flourish }} />
-					</div>
+					<Hero title={title} />
 
 					<div className='container-lg'>
 
