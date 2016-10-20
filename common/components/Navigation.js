@@ -2,7 +2,6 @@ import React from 'react'
 // import RaceNavigationLinks from './RaceNavigationLinks.js'
 // import TownLookup from '../TownLookup.js'
 
-
 const Navigation = () => (
 	<nav className='g-nav' key='nav'>
 		<ul className='g-nav__list'>

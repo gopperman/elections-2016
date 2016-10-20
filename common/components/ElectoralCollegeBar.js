@@ -21,9 +21,18 @@ const ElectoralCollegeBar = ({
 		<div className='r-block'>
 			<div className='r-block__duo-results'>
 				<div className='feat-text'>
-					<p className={classnames('feat-text__name', { 'is-winner': dem.winner })}><span className='benton-bold color-dem feat-text__name--number'>{dem.electWon}</span> <span className='benton-bold'>{dem.last}</span></p>
-					<p className='feat-text__name--center'><span className='benton-bold color-tie feat-text__name--number'>{undecided}</span> <span className='benton-regular'>Undecided</span></p>
-					<p className={classnames('feat-text__name', { 'is-winner': gop.winner })}><span className='benton-bold color-gop feat-text__name--number'>{gop.electWon}</span> <span className='benton-bold'>{gop.last}</span></p>
+					<p className={classnames('feat-text__name', { 'is-winner': dem.winner })}>
+						<span className='benton-bold color-dem feat-text__name--number'>{dem.electWon}</span>
+						<span className='benton-bold'>{dem.last}</span>
+					</p>
+					<p className='feat-text__name--center'>
+						<span className='benton-bold color-tie feat-text__name--number'>{undecided}</span>
+						<span className='benton-regular'>Undecided</span>
+					</p>
+					<p className={classnames('feat-text__name', { 'is-winner': gop.winner })}>
+						<span className='benton-bold color-gop feat-text__name--number'>{gop.electWon}</span>
+						<span className='benton-bold'>{gop.last}</span>
+					</p>
 				</div>
 				<div className='results-bar'>
 					<span
