@@ -11,8 +11,27 @@
 		margin 0 auto
 		display flex
 		justify-content space-between
+		padding 1em 0
 	&__item
 		font-size 0.8em
+		&:not(:last-of-type)
+			margin-right 1.5em
+	&__link
+		display inline-block
+		text-align center
+		filter grayscale(100%)
+		&:hover
+			filter grayscale(0)
+		+mq('bp-2')
+			text-align left
+		// Icons
+		&:before
+			display block
+			vertical-align text-bottom
+			margin 0 auto 0.5em auto
+			+mq('bp-2')
+				display inline-block
+				margin 0 0.5em 0 0
 
 // Sub nav
 .subnav
