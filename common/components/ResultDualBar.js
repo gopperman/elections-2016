@@ -6,24 +6,19 @@ import { percent } from './../utils/Candidate.js'
 import { percentForDisplay } from './../utils/standardize.js'
 import { getName } from './../utils/Race.js'
 
-// TODO: at the moment this assumes that:
-// - we are only dealing with either:
-// 		a ballot question or other similar, officeID == I
-//		a race where the only candidates we care about are blue or red
-// - the summary reporting unit is level: 'state'
+// Assumptions:
+// - displays vote count, not electoral votes
+// - only deals with 'I' officeIDs (ballot question) or dem/gop races
 const ResultDualBar = ({ race }) => {
 
 	const raceName = getName(race)
 
 	const reportingUnits = race.reportingUnits || []
 
-	// Get the race's summary reporting unit
-	// TODO: verify that we are getting the right reporting unit
-	// everywhere else.
-	const summaryUnit = _.find(reportingUnits, { level: 'state' }) || {}
+	const stateUnit = _.find(reportingUnits, { level: 'state' }) || {}
 
-	const precincts = +(summaryUnit.precinctsReportingPct || 0)
-	const candidates = sortByVoteCount(summaryUnit.candidates || [])
+	const precincts = +(stateUnit.precinctsReportingPct || 0)
+	const candidates = sortByVoteCount(stateUnit.candidates || [])
 
 	let left
 	let right
