@@ -14,6 +14,7 @@ import Header from './../components/templates/Header.js'
 import Footer from './../components/templates/Footer.js'
 import TestStatus from './../components/TestStatus.js'
 import TownResultsTable from './../components/TownResultsTable.js'
+import ResultBar from './../components/ResultBar.js'
 import { sortByVoteCount } from './../utils/Candidates.js'
 
 const flourish = `
@@ -171,6 +172,11 @@ class Race extends Component {
 		// Get summary candidates.
 		const summaryCandidates = sortByVoteCount(state.candidates || [])
 
+		// Create summary candidate blocks.
+		const candidateBlocks = summaryCandidates
+			.map((candidate, key) =>
+				<ResultBar {...{ key, candidate, candidates: summaryCandidates }} />)
+
 		// Get race title.
 		const { officeName, seatName } = race
 		const title = [officeName, seatName].join(', ')
@@ -193,6 +199,12 @@ class Race extends Component {
 
 					<div className='container-lg'>
 						<Timer {...timerProps} />
+
+						<div>
+							<h2 className='benton-bold'>{title}</h2>
+							{candidateBlocks}
+						</div>
+
 					</div>
 
 					<div className='container-downpage'>

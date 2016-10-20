@@ -10,7 +10,7 @@ import { percentForDisplay } from './../utils/standardize.js'
 // TODO: mark checkmark
 // TODO: add 'go to full results' button
 // TODO: use images?
-// question: where can we find pct reporting in the API?
+// TODO question: where can we find pct reporting in the API?
 const ResultBar = ({ candidate, candidates, showImage }) => {
 
 	const { party, candidateID, voteCount } = candidate
