@@ -191,12 +191,12 @@ class Race extends Component {
 							dangerouslySetInnerHTML={{ __html: flourish }} />
 					</div>
 
-					<div className='container'>
-
+					<div className='container-lg'>
 						<Timer {...timerProps} />
+					</div>
 
+					<div className='container-downpage'>
 						<TownResultsTable {...{ towns, summaryCandidates }} />
-
 					</div>
 
 				</main>

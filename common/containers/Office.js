@@ -197,7 +197,7 @@ class Office extends Component {
 							dangerouslySetInnerHTML={{ __html: flourish }} />
 					</div>
 
-					<div className='container'>
+					<div className='container-lg'>
 
 						<Timer {...timerProps} />
 
