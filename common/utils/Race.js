@@ -13,5 +13,6 @@ const getName = (race) =>
 	[race.statePostal, race.officeName, race.seatName].join(' ').trim()
 
 export {
+	// eslint-disable-next-line import/prefer-default-export
 	getName,
 }

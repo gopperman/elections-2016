@@ -6,7 +6,7 @@ import Header from './../components/Header.js'
 import Footer from './../components/Footer.js'
 import TestStatus from './../components/TestStatus.js'
 import TownResultsTable from './../components/TownResultsTable.js'
-import ResultBar from './../components/ResultBar.js'
+import ResultGroup from './../components/ResultGroup.js'
 import { sortByVoteCount } from './../utils/Candidates.js'
 import Hero from './../components/Hero.js'
 
@@ -24,7 +24,7 @@ const url = '2016-11-08?statePostal=MA&level=ru'
 @connectToApi
 class Race extends Component {
 
-	static url(params) {
+	static apiUrl(params) {
 		const { officeName, seatName } = params
 		return `${url}&officeName=${officeName}&seatName=${seatName}`
 	}
@@ -73,12 +73,6 @@ class Race extends Component {
 		// Get summary candidates.
 		const summaryCandidates = sortByVoteCount(state.candidates || [])
 
-		// Create summary candidate blocks.
-		const candidateBlocks = summaryCandidates
-			.map((candidate, key) =>
-				(<ResultBar
-					{...{ key, candidate, candidates: summaryCandidates }} />))
-
 		// Get race title.
 		const { officeName, seatName } = race
 		const title = [officeName, seatName].filter(v => v).join(', ')
@@ -99,7 +93,9 @@ class Race extends Component {
 
 						<div>
 							<h2 className='benton-bold'>{title}</h2>
-							{candidateBlocks}
+							<ResultGroup
+								precinctsReportingPct={state.precinctsReportingPct}
+								candidates={summaryCandidates} />
 						</div>
 
 					</div>
