@@ -63,7 +63,7 @@ class Office extends Component {
 	render() {
 
 		const { props } = this
-		const { results, params, timerProps } = props
+		const { results, timerProps } = props
 
 		// Get the data - or an empty object.
 		const data = results.data || {}
@@ -74,8 +74,13 @@ class Office extends Component {
 		// Get test status.
 		const isTest = _.some(data.races, 'test')
 
-		const title = params.officeName
+		// Get the first race.
+		const firstRace = races[0] || {}
 
+		// Get the page's title.
+		const title = firstRace.officeName
+
+		// Create result blocks for all races of this office type.
 		const raceBlocks = races.map((v, i) => {
 
 			const stateUnit =

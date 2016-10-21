@@ -10,6 +10,7 @@ import { sortByVoteCount } from './../utils/Candidates.js'
 import Hero from './../components/Hero.js'
 import LinkButton from './../components/LinkButton.js'
 import urlManager from './../utils/urlManager.js'
+import { toTitleCase } from './../utils/standardize.js'
 
 // We'll keep these urls here for testing. A description:
 
@@ -75,8 +76,10 @@ class Town extends Component {
 		// Get test status.
 		const isTest = _.some(data.races, 'test')
 
-		const townTitle = params.townName
+		// Get the town's title.
+		const townTitle = toTitleCase(params.townName)
 
+		// Create result blocks for all the town races.
 		const raceBlocks = races.map((race, i) => {
 
 			const stateUnit = (race.reportingUnits || [])[0] || {}
