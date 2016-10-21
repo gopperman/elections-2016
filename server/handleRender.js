@@ -59,6 +59,8 @@ export default (req, res) => {
 						</Provider>
 					)
 
+					res.header('Surrogate-Key', 'electionsapp')
+
 					// Make express render 'html' view with an object as parameter
 					res.render('html', {
 						pretty: true,
