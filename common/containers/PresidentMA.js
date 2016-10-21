@@ -10,6 +10,8 @@ import TownResultsTable from './../components/TownResultsTable.js'
 import Map from './../components/Map.js'
 import TOWNS from './../../data/output/TOWNS.json'
 import TestStatus from './../components/TestStatus.js'
+import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
+import Hero from './../components/Hero.js'
 
 import {
 	sortByVoteCount,
@@ -50,7 +52,7 @@ class PresidentMA extends Component {
 		const usUnit =
 			_.find(usRace.reportingUnits, { level: 'national' }) || {}
 		const maUnit =
-			_.find(maRace.reportingUnits, { level: 'national' }) || {}
+			_.find(maRace.reportingUnits, { level: 'state' }) || {}
 
 		// Check if all results are in.
 		const isFinished = +usUnit.precinctsReportingPct === 100 &&
@@ -82,15 +84,14 @@ class PresidentMA extends Component {
 		const usUnit =
 			_.find(usRace.reportingUnits, { level: 'national' }) || {}
 		const maUnit =
-			_.find(maRace.reportingUnits, { level: 'national' }) || {}
+			_.find(maRace.reportingUnits, { level: 'state' }) || {}
 
 		// Get summary MA candidates, so we can sort by them.
 		const summaryTownCandidates = sortByVoteCount(maUnit.candidates)
 
 		// Prepare the MA race so it can be easily ingested by sub-components:
 		const towns = _(maRace.reportingUnits)
-			// don't include summary town,
-			.reject({ level: 'national' })
+			.filter({ level: 'subunit' })
 			// sort towns by their full name,
 			.sortBy('reportingunitName')
 			.map(v => ({
@@ -114,21 +115,26 @@ class PresidentMA extends Component {
 				<TestStatus isTest={isTest} />
 
 				<Header summaryState={usUnit} />
-				<h1>PresidentMA</h1>
+				<main id='content'>
+					<Hero title='MA Presidential results' />
 
-				<Timer {...timerProps} />
-
-				<Map
-					geoJson={topojson.feature(TOWNS, TOWNS.objects.UNITS)}
-					data={towns}
-					sortingDelegate={sortByVoteCount}
-					projection={massProjection}
-					unitName='reportingunitName'
-					dropdownName='town'
-					displayName='reportingunitName' />
-
-				<TownResultsTable
-					{...{ towns, summaryCandidates: summaryTownCandidates }} />
+					<div className='container-lg'>
+						<Timer {...timerProps} />
+						<ElectoralCollegeBar {...usUnit} />
+						<Map
+							geoJson={topojson.feature(TOWNS, TOWNS.objects.UNITS)}
+							data={towns}
+							sortingDelegate={sortByVoteCount}
+							projection={massProjection}
+							unitName='reportingunitName'
+							dropdownName='town'
+							displayName='reportingunitName' />
+					</div>
+					<div className='container-downpage'>
+						<TownResultsTable
+							{...{ towns, summaryCandidates: summaryTownCandidates }} />
+					</div>
+				</main>
 
 				<Footer />
 
