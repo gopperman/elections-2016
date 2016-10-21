@@ -42,7 +42,7 @@ const connectToApi = (WrappedComponent) => {
 			// did we stop fetching?
 			if (prevProps.results.isFetching && !props.results.isFetching) {
 
-				if (!WrappedComponent.areAllRacesComplete(results)) {
+				if (WrappedComponent.areAllRacesComplete(results)) {
 					cancelTimer()
 				} else {
 					startTimer()
