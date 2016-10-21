@@ -67,6 +67,10 @@ const fetchResults = ({ url }) =>
 
 			}
 
+		} else if (process.env.NODE_ENV === 'staging') {
+
+			fullUrl = `${process.env.API_URL}/electionapi/elections/${url}`
+
 		} else {
 
 			// Finally, if we're on dev, use localhost:3001/api.
@@ -84,10 +88,59 @@ const fetchResults = ({ url }) =>
 
 			})
 			.then(response => response.json())
-			.then(data => dispatch(fetchResultsSuccess({ url, data })))
+			.then(data => {
+
+				// Did we not get any races?
+				if (!data || !data.races || !data.races.length) {
+
+					// Indeed we got no races. Prepare an error message.
+					const message = `API didn't return any races for ${url}`
+
+					// Are we on the server?
+					if (!location) {
+
+						// Then throw an error so we won't render any pages.
+						throw new Error(message)
+
+					// If we're on the client,
+					} else {
+
+						// log the error,
+						console.error(message)
+
+						// and fire the failure redux action so the user is notified.
+						return dispatch(fetchResultsFailure({ error: message }))
+
+					}
+
+				} else {
+
+					// We did get at least 1 race! Proceed.
+					return dispatch(fetchResultsSuccess({ url, data }))
+
+				}
+
+			})
 			.catch(({ message }) => {
-				console.log('caught error and going to rethrow it')
-				dispatch(fetchResultsFailure({ error: message }))
+
+				// We got an error.
+				// If we're on the client,
+				if (location) {
+
+					// log the error,
+					console.error(message)
+
+					// and fire the failure redux action so the user is notified.
+					dispatch(fetchResultsFailure({ error: message }))
+
+				} else {
+
+					// We're on the server.
+					// Throw an error so we won't render any pages.
+					throw new Error(message)
+
+				}
+
 			})
 	}
 

@@ -36,16 +36,27 @@ class Office extends Component {
 		// Get API results.
 		const races = data.races || []
 
-		// For each race,
-		const anyIncompleteRaces = _(races)
-			// get its reportingUnits array,
-			.map('reportingUnits')
-			// try to find the state-level reporting unit,
-			.map(v => _.find(v, { level: 'state' }))
-			// and see if there is at least one at less than 100% pct.
-			.some(v => +v.precinctsReportingPct < 100)
+		let allComplete
 
-		return !anyIncompleteRaces
+		// Do we have races?
+		if (races.length) {
+
+			// Yes - make sure all are at 100%.
+			allComplete = _(races)
+				// get its reportingUnits array,
+				.map('reportingUnits')
+				// flatten to a one-dimensional array,
+				.flatten()
+				// and see if there is at least one at less than 100% pct.
+				.every(v => +v.precinctsReportingPct === 100)
+
+		} else {
+
+			// No - so some sort of error happened. We're not complete.
+			allComplete = false
+		}
+
+		return allComplete
 
 	}
 

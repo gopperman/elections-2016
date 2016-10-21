@@ -14,6 +14,7 @@ module.exports = {
 		publicPath: '/static/',
 	},
 	plugins: [
+		new webpack.EnvironmentPlugin(['NODE_ENV', 'API_URL']),
 		new webpack.optimize.OccurrenceOrderPlugin(),
 		new webpack.HotModuleReplacementPlugin(),
 		new webpack.ProvidePlugin({
