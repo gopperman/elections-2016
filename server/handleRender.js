@@ -22,12 +22,13 @@ export default (req, res) => {
 		if (error) {
 
 			// there was an error somewhere during route matching
-			// TODO: better error handling
+			console.error(error.message)
 			res.status(500).send(error.message)
 
 		} else if (redirect) {
 
 			// TODO: better understanding of this line
+			console.error('error during redirect')
 			res.redirect(redirect.pathname + redirect.search)
 
 		} else if (props) {
@@ -67,13 +68,17 @@ export default (req, res) => {
 					})
 
 				})
-				// TODO: better error handling
-				.catch(e => console.log(e))
+				.catch(e => {
+
+					console.error(e)
+					res.status(404).send(e.message)
+
+				})
 
 		} else {
 
 			// no errors, no redirect, we just didn't match anything
-			// TODO: better error handling
+			console.error('Not Found: Could not match url to any routes')
 			res.status(404).send('Not Found')
 
 		}
