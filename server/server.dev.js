@@ -42,7 +42,7 @@ app.get('/homepage', (req, res) => {
 
 })
 
-app.get('/api/:endpoint', api)
+app.get('/api/*', api)
 
 // This is fired every time the server side receives a request
 app.get('*', handleRender)

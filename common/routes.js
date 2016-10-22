@@ -17,7 +17,7 @@ import urlManager from './utils/urlManager.js'
 export default (
 	<Route path='/' component={App}>
 		<IndexRoute component={Homepage} />
-		<Route path={`${urlManager.base()}/election`} component={Election} />
+		<Route path={`${urlManager.base()}`} component={Election} />
 		<Route path={`${urlManager.base()}/president`} component={PresidentUS} />
 		<Route
 			path={`${urlManager.base()}/president/massachusetts`}
