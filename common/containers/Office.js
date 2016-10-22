@@ -9,6 +9,8 @@ import TestStatus from './../components/TestStatus.js'
 import ResultGroup from './../components/ResultGroup.js'
 import { sortByVoteCount } from './../utils/Candidates.js'
 import Hero from './../components/Hero.js'
+import LinkButton from './../components/LinkButton.js'
+import urlManager from './../utils/urlManager.js'
 
 // We'll keep these urls here for testing. A description:
 
@@ -81,19 +83,20 @@ class Office extends Component {
 		const title = [firstRace.officeName, firstRace.statePostal].join(', ')
 
 		// Create result blocks for all races of this office type.
-		const raceBlocks = races.map((v, i) => {
+		const raceBlocks = races.map((race, i) => {
 
 			const stateUnit =
-				_.find(v.reportingUnits, { level: 'state' }) || {}
+				_.find(race.reportingUnits, { level: 'state' }) || {}
 
 			const candidates = stateUnit.candidates || []
 
 			return (
 				<div key={i}>
-					<h2 className='benton-bold'>{v.seatName}</h2>
+					<h2 className='benton-bold'>{race.seatName}</h2>
 					<ResultGroup
 						precinctsReportingPct={stateUnit.precinctsReportingPct}
 						candidates={sortByVoteCount(candidates)} />
+					<LinkButton text='See full results' url={urlManager.race(race)} />
 				</div>
 			)
 
