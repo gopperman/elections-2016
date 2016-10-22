@@ -2,11 +2,14 @@
 // Map!
 //=======================
 
-.map
+div.map
 	position relative
 	&__select
 		text-align center
 		margin-bottom 1em
+
+	.map-wrappers
+		position relative
 
 	svg
 		cursor default
@@ -18,6 +21,23 @@
 			&.background
 				stroke white
 				stroke-width 3px
+
+		&.inset
+			// border solid black 1px
+			position absolute
+			bottom 0
+			right 0
+			width 25%
+
+			g.outline
+				fill set-gray('light')
+				+mq('bp-2')
+					fill set-gray('lightest')
+
+			g.subset
+				fill set-gray('darkest')
+				+mq('bp-2')
+					fill set-gray('dark')
 
 		path
 			&.selected
@@ -36,27 +56,38 @@
 			font-size 0.65em
 			text-anchor middle
 			pointer-events none
-			display none
+
+			text
+				display none
+
+			text.largest-town
+				font-size 1.25em
+				text-anchor start
+				display block
 
 			.DC,.NH,.CT,.RI,.DE,.MD,.NJ,.MS,.KY,.WV,.VT,.MA,.NC
 				display none
 
 			@media (min-width: 25em)
-				display block
+				text
+					display block
 
 			@media (min-width: 40em)
-				display block
-				font-size 0.75em
-				.MS,.KY,.WV,.VT,.MA,.NC
+				text
 					display block
+					font-size 0.75em
+					.MS,.KY,.WV,.VT,.MA,.NC
+						display block
 
 			@media (min-width: 50em)
-				font-size 0.85em
-				.NJ
-					display block
+				text
+					font-size 0.85em
+					.NJ
+						display block
 
 			@media (min-width: 60em)
-				font-size 0.9em
+				text
+					font-size 0.9em
 
 
 // Legend

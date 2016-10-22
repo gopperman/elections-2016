@@ -70,7 +70,13 @@ class Map extends Component {
 
 		// Find bounds and aspect ratio for this projection.
 		const b = this._path.bounds(subsetFeature || feature)
-		const aspect = (b[1][0] - b[0][0]) / (b[1][1] - b[0][1])
+
+		// Compute aspect, but constrain the height so we don't end up
+		// with really vertical maps.
+		const aspect = Math.max(
+			(b[1][0] - b[0][0]) / (b[1][1] - b[0][1]),
+			4 / 3
+		)
 
 		// Create width and height.
 		const width = this._svg.parentNode.offsetWidth
@@ -87,46 +93,85 @@ class Map extends Component {
 
 		// Calculate feature centroids,
 		// and set features for convenience, so we don't keep topojsoning.
-		this._geoFeatures = features
+		this._geoFeatures = matchingFeatures
 			.map(d => ({
 				...d,
 				centroid: this._path.centroid(d),
 			}))
 
+		let centroids = []
+
 		if (labelsName) {
 
-			const centroids = this._geoFeatures
+			centroids = this._geoFeatures
 				.map(d => ({
 					centroid: d.centroid,
-					id: d.properties[labelsName],
+					label: d.properties[labelsName],
 				}))
 
-			// Draw labels background.
-			svg.append('g').attr('class', 'labels').selectAll('text.background')
-					.data(centroids, d => d.id)
-				.enter()
-				.append('text')
-					.attr('class', d => [d.id, 'benton-bold', 'background'].join(' '))
-					.attr('x', d => d.centroid[0])
-					.attr('y', d => d.centroid[1])
-					.attr('dy', 4)
-					.text(d => d.id)
+		} else if (subsetFeature) {
 
-			// Draw labels foreground.
-			svg.append('g').attr('class', 'labels').selectAll('text.foreground')
-					.data(centroids, d => d.id)
+			centroids = _(this._geoFeatures)
+				.sortBy(d => -d.properties.population)
+				.slice(0, 1)
+				.map(d => ({
+					centroid: this._path.centroid(d),
+					label: toTitleCase(d.id),
+				}))
+				.value()
+
+			svg.append('g').attr('class', 'labels').selectAll('circle')
+					.data(centroids, d => d.label)
 				.enter()
-				.append('text')
-					.attr('class', d => [d.id, 'benton-bold', 'foreground'].join(' '))
-					.attr('x', d => d.centroid[0])
-					.attr('y', d => d.centroid[1])
-					.attr('dy', 4)
-					.text(d => d.id)
+				.append('circle')
+					.attr('cx', d => d.centroid[0])
+					.attr('cy', d => d.centroid[1])
+					.attr('r', 3)
 
 		}
 
+		// Draw labels background.
+		svg.append('g').attr('class', 'labels').selectAll('text.background')
+				.data(centroids, d => d.label)
+			.enter()
+			.append('text')
+				.attr('class', d => [
+					labelsName ? d.label : 'largest-town',
+					'benton-bold', 'background'].join(' '))
+				.attr('x', d => d.centroid[0])
+				.attr('y', d => d.centroid[1])
+				.attr('dx', subsetFeature ? 6 : 0)
+				.attr('dy', labelsName ? 4 : -4)
+				.text(d => d.label)
+
+		// Draw labels foreground.
+		svg.append('g').attr('class', 'labels').selectAll('text.foreground')
+				.data(centroids, d => d.label)
+			.enter()
+			.append('text')
+				.attr('class', d => [
+					labelsName ? d.label : 'largest-town',
+					'benton-bold', 'foreground'].join(' '))
+				.attr('x', d => d.centroid[0])
+				.attr('y', d => d.centroid[1])
+				.attr('dx', subsetFeature ? 6 : 0)
+				.attr('dy', labelsName ? 4 : -4)
+				.text(d => d.label)
+
 		// Draw features (although at this point we might not have data).
 		this.drawFeatures()
+
+		if (subsetFeature) {
+
+			this.drawInset({
+				feature:
+					topojson.merge(shapefile, shapefile.objects.UNITS.geometries),
+				subsetFeature,
+				projection,
+				svg: this._inset,
+			})
+
+		}
 
 	}
 
@@ -188,6 +233,39 @@ class Map extends Component {
 	getViewBoxDimensions = () => {
 		const [,, width, height] = select(this._svg).attr('viewBox').split(' ')
 		return { width, height }
+	}
+
+	drawInset({ feature, subsetFeature, projection, svg }) {
+
+		// Create `this._path` and save it for convenience.
+		const path = geoPath().projection(projection)
+
+		// Find bounds and aspect ratio for this projection.
+		const b = path.bounds(feature)
+
+		// Compute aspect.
+		const aspect = (b[1][0] - b[0][0]) / (b[1][1] - b[0][1])
+
+		// Create width and height.
+		const width = svg.parentNode.offsetWidth
+		const height = Math.round(width / aspect)
+
+		// Fit this projection to the newly-calculated aspect ratio.
+		projection.fitSize([width, height], feature)
+
+		// Set viewBox on svg.
+		const inset = select(svg).attr('viewBox', `0 0 ${width} ${height}`)
+
+		inset.append('g').attr('class', 'outline')
+			.append('path')
+				.datum(feature)
+				.attr('d', path)
+
+		inset.append('g').attr('class', 'subset')
+			.append('path')
+				.datum(subsetFeature)
+				.attr('d', path)
+
 	}
 
 	clearTooltip = () => {
@@ -369,9 +447,13 @@ class Map extends Component {
 						onChange={this.onSelectChange}
 						ref={(c) => this._dropdown = c}>{options}</select>
 				</div>
-				<svg
-					ref={(c) => this._svg = c}
-					dangerouslySetInnerHTML={{ __html: svgs.crossHatchesDefs }} />
+				<div className='map-wrappers'>
+					<svg
+						className='map'
+						ref={(c) => this._svg = c}
+						dangerouslySetInnerHTML={{ __html: svgs.crossHatchesDefs }} />
+					<svg className='inset' ref={(c) => this._inset = c} />
+				</div>
 				<div className='tooltip-wrapper' ref={(c) => this._tooltip = c}>
 					<div className='r-block tooltip js-tooltip'>
 						<button
