@@ -9,10 +9,14 @@ import TestStatus from './../components/TestStatus.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 import Map from './../components/Map.js'
 import STATES from './../../data/output/STATES.json'
-import { sortByElectoralCount } from './../utils/Candidates.js'
-import FeatureGroup from './../components/FeatureGroup.js'
+import {
+	sortByElectoralCount,
+	sortByVoteCount,
+} from './../utils/Candidates.js'
+import ResultGroup from './../components/ResultGroup.js'
 import LinkButton from './../components/LinkButton.js'
 import urlManager from './../utils/urlManager.js'
+import { getName } from './../utils/Race.js'
 
 // We'll keep these urls here for testing. A description:
 
@@ -83,9 +87,27 @@ class Homepage extends Component {
 		const isTest = _.some(races, 'test')
 
 		// Get featured races.
-		const featured = _(races)
-			.reject({ officeName: 'President' })
-			.map((race, key) => <FeatureGroup {...{ race, key }} />)
+		const raceBlocks = _(races)
+			.reject(v => v.officeName === 'President' && v.statePostal !== 'MA')
+			.map((race, i) => {
+
+				const stateUnit =
+					_.find(race.reportingUnits, { level: 'state' }) || {}
+
+				const candidates = stateUnit.candidates || []
+
+				return (
+					<div key={i}>
+						<h2 className='benton-bold'>{getName(race)}</h2>
+						<ResultGroup
+							precinctsReportingPct={stateUnit.precinctsReportingPct}
+							candidates={sortByVoteCount(candidates)} />
+						<LinkButton
+							text='See full results' url={urlManager.race(race)} />
+					</div>
+				)
+
+			})
 			.value()
 
 		return (
@@ -109,9 +131,7 @@ class Homepage extends Component {
 							text='See full results'
 							url={urlManager.race(presUs)} />
 
-						<div className='r-row--full'>
-							{featured}
-						</div>
+						{raceBlocks}
 
 					</div>
 
