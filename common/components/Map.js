@@ -93,43 +93,70 @@ class Map extends Component {
 
 		// Calculate feature centroids,
 		// and set features for convenience, so we don't keep topojsoning.
-		this._geoFeatures = features
+		this._geoFeatures = matchingFeatures
 			.map(d => ({
 				...d,
 				centroid: this._path.centroid(d),
 			}))
 
+		let centroids = []
+
 		if (labelsName) {
 
-			const centroids = this._geoFeatures
+			centroids = this._geoFeatures
 				.map(d => ({
 					centroid: d.centroid,
-					id: d.properties[labelsName],
+					label: d.properties[labelsName],
 				}))
 
-			// Draw labels background.
-			svg.append('g').attr('class', 'labels').selectAll('text.background')
-					.data(centroids, d => d.id)
-				.enter()
-				.append('text')
-					.attr('class', d => [d.id, 'benton-bold', 'background'].join(' '))
-					.attr('x', d => d.centroid[0])
-					.attr('y', d => d.centroid[1])
-					.attr('dy', 4)
-					.text(d => d.id)
+		} else if (subsetFeature) {
 
-			// Draw labels foreground.
-			svg.append('g').attr('class', 'labels').selectAll('text.foreground')
-					.data(centroids, d => d.id)
+			centroids = _(this._geoFeatures)
+				.sortBy(d => -d.properties.population)
+				.slice(0, 1)
+				.map(d => ({
+					centroid: this._path.centroid(d),
+					label: toTitleCase(d.id),
+				}))
+				.value()
+
+			svg.append('g').attr('class', 'labels').selectAll('circle')
+					.data(centroids, d => d.label)
 				.enter()
-				.append('text')
-					.attr('class', d => [d.id, 'benton-bold', 'foreground'].join(' '))
-					.attr('x', d => d.centroid[0])
-					.attr('y', d => d.centroid[1])
-					.attr('dy', 4)
-					.text(d => d.id)
+				.append('circle')
+					.attr('cx', d => d.centroid[0])
+					.attr('cy', d => d.centroid[1])
+					.attr('r', 3)
 
 		}
+
+		// Draw labels background.
+		svg.append('g').attr('class', 'labels').selectAll('text.background')
+				.data(centroids, d => d.label)
+			.enter()
+			.append('text')
+				.attr('class', d => [
+					labelsName ? d.label : 'largest-town',
+					'benton-bold', 'background'].join(' '))
+				.attr('x', d => d.centroid[0])
+				.attr('y', d => d.centroid[1])
+				.attr('dx', subsetFeature ? 6 : 0)
+				.attr('dy', labelsName ? 4 : -4)
+				.text(d => d.label)
+
+		// Draw labels foreground.
+		svg.append('g').attr('class', 'labels').selectAll('text.foreground')
+				.data(centroids, d => d.label)
+			.enter()
+			.append('text')
+				.attr('class', d => [
+					labelsName ? d.label : 'largest-town',
+					'benton-bold', 'foreground'].join(' '))
+				.attr('x', d => d.centroid[0])
+				.attr('y', d => d.centroid[1])
+				.attr('dx', subsetFeature ? 6 : 0)
+				.attr('dy', labelsName ? 4 : -4)
+				.text(d => d.label)
 
 		// Draw features (although at this point we might not have data).
 		this.drawFeatures()

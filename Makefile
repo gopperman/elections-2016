@@ -33,7 +33,7 @@ reproject_US:
 reproject_MA:
 	cd data/output; \
 		ogr2ogr -t_srs EPSG:4326 -f GeoJSON UNITS.geojson ../input/TOWNS_POLYM.shp; \
-		topojson --id-property TOWN -o TOWNS.json --simplify-proportion 0.1 UNITS.geojson; \
+		topojson --id-property TOWN -p population=POP2010 -o TOWNS.json --simplify-proportion 0.1 UNITS.geojson; \
 		rm UNITS.geojson;
 
 all: clean download reproject
