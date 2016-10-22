@@ -11,7 +11,9 @@ import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 import Map from './../components/Map.js'
 import STATES from './../../data/output/STATES.json'
 import { sortByElectoralCount } from './../utils/Candidates.js'
-
+import FeatureGroup from './../components/FeatureGroup.js'
+import LinkButton from './../components/LinkButton.js'
+import urlManager from './../utils/urlManager.js'
 
 // We'll keep these urls here for testing. A description:
 
@@ -19,10 +21,10 @@ import { sortByElectoralCount } from './../utils/Candidates.js'
 // const url = 'NO'
 
 // this one returns json but the data is incomplete,
-// const url = '2016-11-08/rezcentral?reports=Trend-s'
+// const url = '2016-11-08/rezcentral'
 
 // and this one is the correct url - it returns everything.
-const url = '2016-11-08/prezcentral?reports=Trend-s'
+const url = '2016-11-08/prezcentral?races=MA-22949,MA-24805'
 
 @connectToApi
 class Election extends Component {
@@ -58,6 +60,9 @@ class Election extends Component {
 			.filter(v => v)
 			.value()
 
+		const presUs = _.find(races,
+			{ officeName: 'President', statePostal: 'US' })
+
 		// Get presidential summary.
 		const presSummary = _.find(presRaces, { statePostal: 'US' })
 
@@ -78,6 +83,12 @@ class Election extends Component {
 		// Get test status.
 		const isTest = _.some(races, 'test')
 
+		// Get featured races.
+		const featured = _(races)
+			.reject({ officeName: 'President' })
+			.map((race, key) => <FeatureGroup {...{ race, key }} />)
+			.value()
+
 		return (
 			<div>
 
@@ -96,6 +107,14 @@ class Election extends Component {
 
 						{map}
 
+						<LinkButton
+							text='See full results'
+							url={urlManager.race(presUs)} />
+
+						<div className='r-row--full'>
+							{featured}
+						</div>
+
 					</div>
 
 				</main>
@@ -103,7 +122,6 @@ class Election extends Component {
 				<Footer />
 
 			</div>
-
 		)
 
 	}
