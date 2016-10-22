@@ -10,13 +10,8 @@ import Hero from './../components/Hero.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 import Map from './../components/Map.js'
 import STATES from './../../data/output/STATES.json'
-import {
-	sortByElectoralCount,
-	sortByVoteCount,
-} from './../utils/Candidates.js'
-import ResultGroup from './../components/ResultGroup.js'
-import LinkButton from './../components/LinkButton.js'
-import urlManager from './../utils/urlManager.js'
+import { sortByElectoralCount } from './../utils/Candidates.js'
+import FeatureGroup from './../components/FeatureGroup.js'
 
 // We'll keep these urls here for testing. A description:
 
@@ -86,27 +81,8 @@ class Election extends Component {
 		// Get featured races.
 		const featured = _(races)
 			.reject({ officeName: 'President' })
+			.map((race, key) => <FeatureGroup {...{ race, key }} />)
 			.value()
-
-		// Create result blocks for all races of this office type.
-		const raceBlocks = featured.map((race, i) => {
-
-			const stateUnit =
-				_.find(race.reportingUnits, { level: 'state' }) || {}
-
-			const candidates = stateUnit.candidates || []
-
-			return (
-				<div key={i}>
-					<h2 className='benton-bold'>{race.seatName}</h2>
-					<ResultGroup
-						precinctsReportingPct={stateUnit.precinctsReportingPct}
-						candidates={sortByVoteCount(candidates)} />
-					<LinkButton text='See full results' url={urlManager.race(race)} />
-				</div>
-			)
-
-		})
 
 		return (
 			<div>
@@ -126,7 +102,9 @@ class Election extends Component {
 
 						{map}
 
-						{raceBlocks}
+						<div className='r-row--full'>
+							{featured}
+						</div>
 
 					</div>
 
