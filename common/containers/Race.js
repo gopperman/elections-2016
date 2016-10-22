@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import { geoConicConformal } from 'd3-geo'
 import React, { Component } from 'react'
 import connectToApi from './connectToApi.js'
 import Timer from './../components/Timer.js'
@@ -9,6 +10,8 @@ import TownResultsTable from './../components/TownResultsTable.js'
 import ResultGroup from './../components/ResultGroup.js'
 import { sortByVoteCount } from './../utils/Candidates.js'
 import Hero from './../components/Hero.js'
+import TOWNS from './../../data/output/TOWNS.json'
+import Map from './../components/Map.js'
 
 // We'll keep these urls here for testing. A description:
 
@@ -77,6 +80,20 @@ class Race extends Component {
 		const { officeName, seatName } = race
 		const title = [officeName, seatName].filter(v => v).join(', ')
 
+		// Setup a MA-centric projection.
+		const massProjection = geoConicConformal()
+			.parallels([41 + (43 / 60), 42 + (41 / 60)])
+			.rotate([71 + (30 / 60), -41])
+
+		const map = towns.length ? (<Map
+			shapefile={TOWNS}
+			data={towns}
+			unitName='reportingunitName'
+			projection={massProjection}
+			sortingDelegate={sortByVoteCount}
+			dropdownName='town'
+			displayName='reportingunitName' />) : null
+
 		// Finally we can render all the components!
 		return (
 			<div>
@@ -97,6 +114,8 @@ class Race extends Component {
 								precinctsReportingPct={state.precinctsReportingPct}
 								candidates={summaryCandidates} />
 						</div>
+
+						{map}
 
 					</div>
 

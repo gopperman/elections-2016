@@ -1,7 +1,6 @@
 import { geoConicConformal } from 'd3-geo'
 import _ from 'lodash'
 import React, { Component } from 'react'
-import * as topojson from 'topojson'
 import connectToApi from './connectToApi.js'
 import Header from './../components/Header.js'
 import Footer from './../components/Footer.js'
@@ -109,6 +108,15 @@ class PresidentMA extends Component {
 			.parallels([41 + (43 / 60), 42 + (41 / 60)])
 			.rotate([71 + (30 / 60), -41])
 
+		const map = towns.length ? (<Map
+			shapefile={TOWNS}
+			data={towns}
+			unitName='reportingunitName'
+			projection={massProjection}
+			sortingDelegate={sortByVoteCount}
+			dropdownName='town'
+			displayName='reportingunitName' />) : null
+
 		return (
 			<div>
 
@@ -121,14 +129,7 @@ class PresidentMA extends Component {
 					<div className='container-lg'>
 						<Timer {...timerProps} />
 						<ElectoralCollegeBar {...usUnit} />
-						<Map
-							geoJson={topojson.feature(TOWNS, TOWNS.objects.UNITS)}
-							data={towns}
-							sortingDelegate={sortByVoteCount}
-							projection={massProjection}
-							unitName='reportingunitName'
-							dropdownName='town'
-							displayName='reportingunitName' />
+						{map}
 					</div>
 					<div className='container-downpage'>
 						<TownResultsTable

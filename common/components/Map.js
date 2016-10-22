@@ -1,5 +1,6 @@
 /* eslint-disable no-return-assign, max-len */
 
+import * as topojson from 'topojson'
 import deepEqual from 'deep-equal'
 import _ from 'lodash'
 import React, { Component, PropTypes } from 'react'
@@ -15,17 +16,15 @@ class Map extends Component {
 
 	static propTypes = {
 
-		// These will never change.
-		geoJson: PropTypes.object.isRequired,
-		projection: PropTypes.func.isRequired,
-		sortingDelegate: PropTypes.func.isRequired,
-		unitName: PropTypes.string.isRequired,
-		displayName: PropTypes.string.isRequired,
-		dropdownName: PropTypes.string.isRequired,
-		labelsName: PropTypes.string,
-
-		// This will change.
+		shapefile: PropTypes.object.isRequired,
 		data: PropTypes.array.isRequired,
+		unitName: PropTypes.string.isRequired,
+		projection: PropTypes.func.isRequired,
+
+		sortingDelegate: PropTypes.func.isRequired,
+		dropdownName: PropTypes.string.isRequired,
+		displayName: PropTypes.string.isRequired,
+		labelsName: PropTypes.string,
 	}
 
 	state = {
@@ -36,13 +35,41 @@ class Map extends Component {
 	// rendering occurs.
 	componentDidMount() {
 
-		const { geoJson, projection, labelsName } = this.props
+		const { shapefile, data, unitName, projection, labelsName } = this.props
+
+		let subsetFeature
+
+		// Create the GeoJSON feature for this shapefile.
+		const feature = topojson.feature(shapefile, shapefile.objects.UNITS)
+		const { features } = feature
 
 		// Create `this._path` and save it for convenience.
 		this._path = geoPath().projection(projection)
 
+		// Create an array of data unit ids.
+		const ids = data.map(v => v[unitName].toUpperCase())
+
+		// Get features that match the incoming data units.
+		const matchingFeatures = features
+			.filter(v => _.includes(ids, v.id.toUpperCase()))
+
+		// If the matching geometries aren't equal to the shapefile geometries,
+		if (matchingFeatures.length !== features.length) {
+
+			// we have to draw only the matching shapes,
+			// zoom in on them,
+			// and draw an inset.
+			// So here we'll create an outline for this subset.
+
+			// Create the GeoJSON outline for this subset.
+			subsetFeature = topojson.merge(shapefile,
+				shapefile.objects.UNITS.geometries
+					.filter(v => _.includes(ids, v.id.toUpperCase())))
+
+		}
+
 		// Find bounds and aspect ratio for this projection.
-		const b = this._path.bounds(geoJson)
+		const b = this._path.bounds(subsetFeature || feature)
 		const aspect = (b[1][0] - b[0][0]) / (b[1][1] - b[0][1])
 
 		// Create width and height.
@@ -50,7 +77,7 @@ class Map extends Component {
 		const height = Math.round(width / aspect)
 
 		// Fit this projection to the newly-calculated aspect ratio.
-		projection.fitSize([width, height], geoJson)
+		projection.fitSize([width, height], subsetFeature || feature)
 
 		// Set viewBox on svg.
 		const svg = select(this._svg).attr('viewBox', `0 0 ${width} ${height}`)
@@ -60,7 +87,7 @@ class Map extends Component {
 
 		// Calculate feature centroids,
 		// and set features for convenience, so we don't keep topojsoning.
-		this._geoFeatures = geoJson.features
+		this._geoFeatures = features
 			.map(d => ({
 				...d,
 				centroid: this._path.centroid(d),
@@ -136,7 +163,8 @@ class Map extends Component {
 		paths.classed('selected', false)
 
 		// Find the feature that matches the dropdown option,
-		const match = paths.filter(d => d.id === e.target.value)
+		const match = paths
+			.filter(d => d.id.toUpperCase() === e.target.value.toUpperCase())
 
 		// select it, and raise it.
 		match.classed('selected', true).raise()
@@ -216,6 +244,7 @@ class Map extends Component {
 				subunit: _.find(data, f =>
 					compareStrings(f[unitName], v.id)),
 			}))
+			.filter('subunit')
 			.map(v => ({
 				...v,
 
@@ -260,7 +289,7 @@ class Map extends Component {
 			.on('mousemove', function mousemove(d) {
 
 				// Set the dropdown.
-				_dropdown.value = d.id
+				_dropdown.value = d.id.toUpperCase()
 
 				// Set this feature's `id` to local state on mousemove.
 				setState({ selectionId: d.id })
@@ -306,19 +335,19 @@ class Map extends Component {
 
 	render() {
 
-		const { geoJson, dropdownName } = this.props
+		const { data, unitName, dropdownName } = this.props
 
 		const firstOption = {
 			display: `Select a ${dropdownName}`,
 			value: '',
 		}
 
-		const optionsList = _(geoJson.features)
-			.sortBy('id')
+		const optionsList = _(data)
 			.map(v => ({
-				display: toTitleCase(v.id),
-				value: v.id,
+				display: toTitleCase(v[unitName]),
+				value: v[unitName].toUpperCase(),
 			}))
+			.sortBy('display')
 			.value()
 
 		const options = [firstOption].concat(optionsList)
