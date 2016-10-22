@@ -19,7 +19,7 @@ import Hero from './../components/Hero.js'
 // const url = '2016-11-08?statePostal=M'
 
 // and this one is the correct url - it returns everything.
-const url = '2016-11-08?officeName='
+const url = '2016-11-08?statePostal=MA&officeName='
 
 @connectToApi
 class Office extends Component {
@@ -69,7 +69,7 @@ class Office extends Component {
 		const data = results.data || {}
 
 		// Get API results.
-		const races = data.races || []
+		const races = _.sortBy(data.races || [], 'seatName')
 
 		// Get test status.
 		const isTest = _.some(data.races, 'test')
@@ -78,7 +78,7 @@ class Office extends Component {
 		const firstRace = races[0] || {}
 
 		// Get the page's title.
-		const title = firstRace.officeName
+		const title = [firstRace.officeName, firstRace.statePostal].join(', ')
 
 		// Create result blocks for all races of this office type.
 		const raceBlocks = races.map((v, i) => {
