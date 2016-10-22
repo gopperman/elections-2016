@@ -70,7 +70,13 @@ class Map extends Component {
 
 		// Find bounds and aspect ratio for this projection.
 		const b = this._path.bounds(subsetFeature || feature)
-		const aspect = (b[1][0] - b[0][0]) / (b[1][1] - b[0][1])
+
+		// Compute aspect, but constrain the height so we don't end up
+		// with really vertical maps.
+		const aspect = Math.max(
+			(b[1][0] - b[0][0]) / (b[1][1] - b[0][1]),
+			4 / 3
+		)
 
 		// Create width and height.
 		const width = this._svg.parentNode.offsetWidth
