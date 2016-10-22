@@ -134,6 +134,18 @@ class Map extends Component {
 		// Draw features (although at this point we might not have data).
 		this.drawFeatures()
 
+		if (subsetFeature) {
+
+			this.drawInset({
+				feature:
+					topojson.merge(shapefile, shapefile.objects.UNITS.geometries),
+				subsetFeature,
+				projection,
+				svg: this._inset,
+			})
+
+		}
+
 	}
 
 	// This is invoked before rendering when new props or state are being
@@ -194,6 +206,39 @@ class Map extends Component {
 	getViewBoxDimensions = () => {
 		const [,, width, height] = select(this._svg).attr('viewBox').split(' ')
 		return { width, height }
+	}
+
+	drawInset({ feature, subsetFeature, projection, svg }) {
+
+		// Create `this._path` and save it for convenience.
+		const path = geoPath().projection(projection)
+
+		// Find bounds and aspect ratio for this projection.
+		const b = path.bounds(feature)
+
+		// Compute aspect.
+		const aspect = (b[1][0] - b[0][0]) / (b[1][1] - b[0][1])
+
+		// Create width and height.
+		const width = svg.parentNode.offsetWidth
+		const height = Math.round(width / aspect)
+
+		// Fit this projection to the newly-calculated aspect ratio.
+		projection.fitSize([width, height], feature)
+
+		// Set viewBox on svg.
+		const inset = select(svg).attr('viewBox', `0 0 ${width} ${height}`)
+
+		inset.append('g').attr('class', 'outline')
+			.append('path')
+				.datum(feature)
+				.attr('d', path)
+
+		inset.append('g').attr('class', 'subset')
+			.append('path')
+				.datum(subsetFeature)
+				.attr('d', path)
+
 	}
 
 	clearTooltip = () => {
@@ -375,9 +420,13 @@ class Map extends Component {
 						onChange={this.onSelectChange}
 						ref={(c) => this._dropdown = c}>{options}</select>
 				</div>
-				<svg
-					ref={(c) => this._svg = c}
-					dangerouslySetInnerHTML={{ __html: svgs.crossHatchesDefs }} />
+				<div className='map-wrappers'>
+					<svg
+						className='map'
+						ref={(c) => this._svg = c}
+						dangerouslySetInnerHTML={{ __html: svgs.crossHatchesDefs }} />
+					<svg className='inset' ref={(c) => this._inset = c} />
+				</div>
 				<div className='tooltip-wrapper' ref={(c) => this._tooltip = c}>
 					<div className='r-block tooltip js-tooltip'>
 						<button
