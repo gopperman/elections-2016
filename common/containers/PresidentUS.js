@@ -68,7 +68,7 @@ class PresidentUS extends Component {
 		// Get the data - or an empty object.
 		const data = results.data || {}
 
-		// Get API results.
+		// Get all races.
 		const races = data.races || []
 
 		// Get US race:
