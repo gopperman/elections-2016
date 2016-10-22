@@ -1,7 +1,6 @@
 import { geoAlbersUsa } from 'd3-geo'
 import _ from 'lodash'
 import React, { Component } from 'react'
-import * as topojson from 'topojson'
 import connectToApi from './connectToApi.js'
 import Timer from './../components/Timer.js'
 import StateResultsTable from './../components/StateResultsTable.js'
@@ -112,6 +111,16 @@ class PresidentUS extends Component {
 			}))
 			.value()
 
+		const map = states.length ? (<Map
+			shapefile={STATES}
+			data={states}
+			unitName='stateName'
+			projection={geoAlbersUsa()}
+			sortingDelegate={sortByElectoralCount}
+			dropdownName='state'
+			displayName='stateName'
+			labelsName='STUSPS' />) : null
+
 		// Finally we can render all the components!
 		return (
 			<div>
@@ -125,15 +134,7 @@ class PresidentUS extends Component {
 					<div className='container-lg'>
 						<Timer {...timerProps} />
 						<ElectoralCollegeBar {...summaryState} />
-						<Map
-							geoJson={topojson.feature(STATES, STATES.objects.UNITS)}
-							data={states}
-							sortingDelegate={sortByElectoralCount}
-							projection={geoAlbersUsa()}
-							unitName='stateName'
-							dropdownName='state'
-							labelsName='STUSPS'
-							displayName='stateName' />
+						{map}
 					</div>
 					<div className='container-downpage'>
 						<StateResultsTable
