@@ -10,8 +10,13 @@ import Hero from './../components/Hero.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 import Map from './../components/Map.js'
 import STATES from './../../data/output/STATES.json'
-import { sortByElectoralCount } from './../utils/Candidates.js'
-
+import {
+	sortByElectoralCount,
+	sortByVoteCount,
+} from './../utils/Candidates.js'
+import ResultGroup from './../components/ResultGroup.js'
+import LinkButton from './../components/LinkButton.js'
+import urlManager from './../utils/urlManager.js'
 
 // We'll keep these urls here for testing. A description:
 
@@ -19,10 +24,10 @@ import { sortByElectoralCount } from './../utils/Candidates.js'
 // const url = 'NO'
 
 // this one returns json but the data is incomplete,
-// const url = '2016-11-08/rezcentral?reports=Trend-s'
+// const url = '2016-11-08/rezcentral'
 
 // and this one is the correct url - it returns everything.
-const url = '2016-11-08/prezcentral?reports=Trend-s'
+const url = '2016-11-08/prezcentral?races=MA-22949,MA-24805'
 
 @connectToApi
 class Election extends Component {
@@ -78,6 +83,31 @@ class Election extends Component {
 		// Get test status.
 		const isTest = _.some(races, 'test')
 
+		// Get featured races.
+		const featured = _(races)
+			.reject({ officeName: 'President' })
+			.value()
+
+		// Create result blocks for all races of this office type.
+		const raceBlocks = featured.map((race, i) => {
+
+			const stateUnit =
+				_.find(race.reportingUnits, { level: 'state' }) || {}
+
+			const candidates = stateUnit.candidates || []
+
+			return (
+				<div key={i}>
+					<h2 className='benton-bold'>{race.seatName}</h2>
+					<ResultGroup
+						precinctsReportingPct={stateUnit.precinctsReportingPct}
+						candidates={sortByVoteCount(candidates)} />
+					<LinkButton text='See full results' url={urlManager.race(race)} />
+				</div>
+			)
+
+		})
+
 		return (
 			<div>
 
@@ -95,6 +125,8 @@ class Election extends Component {
 						<ElectoralCollegeBar {...presSummary} />
 
 						{map}
+
+						{raceBlocks}
 
 					</div>
 
