@@ -12,6 +12,8 @@ import Map from './../components/Map.js'
 import STATES from './../../data/output/STATES.json'
 import { sortByElectoralCount } from './../utils/Candidates.js'
 import FeatureGroup from './../components/FeatureGroup.js'
+import LinkButton from './../components/LinkButton.js'
+import urlManager from './../utils/urlManager.js'
 
 // We'll keep these urls here for testing. A description:
 
@@ -58,6 +60,9 @@ class Election extends Component {
 			.filter(v => v)
 			.value()
 
+		const presUs = _.find(races,
+			{ officeName: 'President', statePostal: 'US' })
+
 		// Get presidential summary.
 		const presSummary = _.find(presRaces, { statePostal: 'US' })
 
@@ -102,6 +107,10 @@ class Election extends Component {
 
 						{map}
 
+						<LinkButton
+							text='See full results'
+							url={urlManager.race(presUs)} />
+
 						<div className='r-row--full'>
 							{featured}
 						</div>
@@ -113,7 +122,6 @@ class Election extends Component {
 				<Footer />
 
 			</div>
-
 		)
 
 	}
