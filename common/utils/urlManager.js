@@ -5,7 +5,17 @@ const urlManager = {
 	},
 
 	office(officeName) {
-		return `${this.base()}/race/${officeName}`
+
+		let result
+
+		if (officeName.toLowerCase() === 'president') {
+			result = `${this.base()}/president`
+		} else {
+			result = `${this.base()}/race/${officeName}`
+		}
+
+		return result
+
 	},
 
 	race(race) {
