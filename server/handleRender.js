@@ -27,8 +27,6 @@ export default (req, res) => {
 
 		} else if (redirect) {
 
-			// TODO: better understanding of this line
-			console.error('error during redirect')
 			res.redirect(redirect.pathname + redirect.search)
 
 		} else if (props) {
