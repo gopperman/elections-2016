@@ -16,16 +16,32 @@ import urlManager from './utils/urlManager.js'
 
 export default (
 	<Route path='/' component={App}>
+
 		<IndexRoute component={Homepage} />
-		<Route path={`${urlManager.base()}`} component={Election} />
-		<Route path={`${urlManager.base()}/president`} component={PresidentUS} />
+
+		<Route
+			path={`${urlManager.base()}`}
+			component={Election} />
+
+		<Route
+			path={`${urlManager.base()}/president`}
+			component={PresidentUS} />
+
 		<Route
 			path={`${urlManager.base()}/president/massachusetts`}
 			component={PresidentMA} />
+
+		<Route
+			path={`${urlManager.base()}/race/:officeName`}
+			component={Office} />
+
 		<Route
 			path={`${urlManager.base()}/race/:officeName/:seatName`}
 			component={Race} />
-		<Route path={`${urlManager.base()}/town/:townName`} component={Town} />
-		<Route path={`${urlManager.base()}/office/:officeName`} component={Office} />
+
+		<Route
+			path={`${urlManager.base()}/town/:townName`}
+			component={Town} />
+
 	</Route>
 )

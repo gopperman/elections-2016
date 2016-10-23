@@ -5,7 +5,7 @@ const urlManager = {
 	},
 
 	office(officeName) {
-		return `${this.base()}/office/${officeName}`
+		return `${this.base()}/race/${officeName}`
 	},
 
 	race(race) {
