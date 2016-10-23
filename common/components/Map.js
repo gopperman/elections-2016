@@ -471,9 +471,9 @@ class Map extends Component {
 						</li>
 						<li className='legend__item'>
 							<p className='legend__label benton-regular'>Lead</p>
-							<div className='legend__marker stripe-dem' />
-							<div className='legend__marker stripe-gop' />
-							<div className='legend__marker stripe-ind' />
+							<div className='legend__marker fill-leading-dem' />
+							<div className='legend__marker fill-leading-gop' />
+							<div className='legend__marker fill-leading-ind' />
 						</li>
 						<li className='legend__item'>
 							<p className='legend__label benton-regular'>Win</p>
