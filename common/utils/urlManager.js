@@ -1,16 +1,16 @@
 const urlManager = {
 
 	base() {
-		return 'elections/2016'
+		return '/elections/2016'
 	},
 
 	office(officeName) {
-		return `/${this.base()}/office/${officeName}`
+		return `${this.base()}/office/${officeName}`
 	},
 
 	race(race) {
 		const { officeName, seatName } = race
-		return `/${this.base()}/race/${officeName}/${seatName}`
+		return `${this.base()}/race/${officeName}/${seatName}`
 	},
 
 }
