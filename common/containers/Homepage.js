@@ -73,6 +73,21 @@ class Homepage extends Component {
 		// Get all 51 states.
 		const presStates = _.reject(presRaces, { statePostal: 'US' })
 
+		// Specify list of swing states
+		const swingStatesSelection = [
+			'AZ',
+			'CO',
+			'FL',
+			'GA',
+			'IA',
+			'ME',
+			'MI',
+			'MN',
+		]
+
+		const swingStates = presStates.filter(v =>
+			_.includes(swingStatesSelection, v.statePostal))
+
 		// Create the map (if we have data).
 		const map = presStates.length ? (<Map
 			shapefile={STATES}
@@ -126,7 +141,8 @@ class Homepage extends Component {
 
 						<ElectoralCollegeBar {...presSummary} />
 
-						<SwingStates states={presStates.slice(0, 8)} />
+						<p>Swing states</p>
+						<SwingStates states={swingStates} />
 
 						{map}
 
