@@ -11,6 +11,8 @@ import Footer from './../components/Footer.js'
 import TestStatus from './../components/TestStatus.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 import Hero from './../components/Hero.js'
+import LinkButton from './../components/LinkButton.js'
+import urlManager from './../utils/urlManager.js'
 
 import {
 	sortByElectoralCount,
@@ -70,6 +72,8 @@ class PresidentUS extends Component {
 
 		// Get all races.
 		const races = data.races || []
+
+		const usRace = _.find(races, { statePostal: 'US' })
 
 		// Get US race:
 		const allStates = races
@@ -135,6 +139,12 @@ class PresidentUS extends Component {
 						<Timer {...timerProps} />
 						<ElectoralCollegeBar {...summaryState} />
 						{map}
+
+						<LinkButton
+							isSecondary
+							text='Switch to MA results'
+							url={`${urlManager.race(usRace)}/massachusetts`} />
+
 					</div>
 					<div className='container-downpage'>
 						<StateResultsTable
