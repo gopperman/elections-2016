@@ -11,6 +11,8 @@ import TOWNS from './../../data/output/TOWNS.json'
 import TestStatus from './../components/TestStatus.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 import Hero from './../components/Hero.js'
+import LinkButton from './../components/LinkButton.js'
+import urlManager from './../utils/urlManager.js'
 
 import {
 	sortByVoteCount,
@@ -130,6 +132,12 @@ class PresidentMA extends Component {
 						<Timer {...timerProps} />
 						<ElectoralCollegeBar {...usUnit} />
 						{map}
+
+						<LinkButton
+							isSecondary
+							text='Switch to US results'
+							url={urlManager.race(usRace)} />
+
 					</div>
 					<div className='container-downpage'>
 						<TownResultsTable
