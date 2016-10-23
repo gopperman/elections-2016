@@ -41,6 +41,10 @@ export default (
 		<Route
 			path={`${urlManager.base()}/town/:townName`}
 			component={Town} />
+		<Redirect
+			from={`${urlManager.base()}/town`}
+			to={urlManager.town('Boston')} />
+
 
 	</Route>
 )

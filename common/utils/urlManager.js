@@ -4,6 +4,10 @@ const urlManager = {
 		return '/elections/2016'
 	},
 
+	town(townName) {
+		return `${this.base()}/town/${townName}`
+	},
+
 	office(officeName) {
 
 		let result
