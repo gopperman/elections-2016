@@ -17,6 +17,7 @@ import ResultGroup from './../components/ResultGroup.js'
 import LinkButton from './../components/LinkButton.js'
 import urlManager from './../utils/urlManager.js'
 import { getName } from './../utils/Race.js'
+import SwingStates from './../components/SwingStates.js'
 
 // We'll keep these urls here for testing. A description:
 
@@ -124,6 +125,8 @@ class Homepage extends Component {
 						<Timer {...timerProps} />
 
 						<ElectoralCollegeBar {...presSummary} />
+
+						<SwingStates states={presStates.slice(0, 8)} />
 
 						{map}
 
