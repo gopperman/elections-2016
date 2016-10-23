@@ -1,3 +1,9 @@
+getOffices:
+
+	curl 'http://${env}.bostonglobe.com/electionapi/elections/2016-11-08?statePostal=MA' \
+		| jq '[.races[] | .officeName]' | jq 'unique' > data/offices.json;
+	cat data/offices.json
+
 clean: clean_input clean_output
 
 clean_input:
