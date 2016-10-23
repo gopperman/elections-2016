@@ -22,12 +22,16 @@ div.map
 				stroke white
 				stroke-width 3px
 
+		&.insetted
+			width 70%
+
 		&.inset
 			// border solid black 1px
 			position absolute
 			bottom 0
 			right 0
 			width 25%
+			pointer-events none
 
 			g.outline
 				fill set-gray('light')
@@ -61,7 +65,7 @@ div.map
 				display none
 
 			text.largest-town
-				font-size 1.25em
+				font-size 2em
 				text-anchor start
 				display block
 

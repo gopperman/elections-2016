@@ -15,7 +15,8 @@ export default (req, res) => {
 	const { dispatch, getState } = store
 
 	// Set up history for router
-	const history = createMemoryHistory(req.url)
+	const { url } = req
+	const history = createMemoryHistory(url)
 
 	match({ routes, history }, (error, redirect, props) => {
 
@@ -78,7 +79,7 @@ export default (req, res) => {
 		} else {
 
 			// no errors, no redirect, we just didn't match anything
-			console.error('Not Found: Could not match url to any routes')
+			console.error(`Not Found: Could not match any routes for ${url}`)
 			res.status(404).send('Not Found')
 
 		}

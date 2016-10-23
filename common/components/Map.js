@@ -86,7 +86,9 @@ class Map extends Component {
 		projection.fitSize([width, height], subsetFeature || feature)
 
 		// Set viewBox on svg.
-		const svg = select(this._svg).attr('viewBox', `0 0 ${width} ${height}`)
+		const svg = select(this._svg)
+			.attr('viewBox', `0 0 ${width} ${height}`)
+			.classed('insetted', !!subsetFeature)
 
 		// Create features group.
 		svg.append('g').attr('class', 'features')
@@ -130,6 +132,24 @@ class Map extends Component {
 
 		}
 
+		const calculateLabelDx = (d) => {
+			let dx
+			if (subsetFeature) {
+				if (d.centroid[0] > width / 2) {
+					dx = -6
+				} else {
+					dx = 6
+				}
+			} else {
+				dx = 0
+			}
+			return dx
+		}
+
+		const calculateLabelTextAnchor = (d) =>
+			((!!subsetFeature && d.centroid[0] > width / 2) ?
+			'end' : 'start')
+
 		// Draw labels background.
 		svg.append('g').attr('class', 'labels').selectAll('text.background')
 				.data(centroids, d => d.label)
@@ -140,9 +160,10 @@ class Map extends Component {
 					'benton-bold', 'background'].join(' '))
 				.attr('x', d => d.centroid[0])
 				.attr('y', d => d.centroid[1])
-				.attr('dx', subsetFeature ? 6 : 0)
+				.attr('dx', calculateLabelDx)
 				.attr('dy', labelsName ? 4 : -4)
 				.text(d => d.label)
+				.style('text-anchor', calculateLabelTextAnchor)
 
 		// Draw labels foreground.
 		svg.append('g').attr('class', 'labels').selectAll('text.foreground')
@@ -154,9 +175,10 @@ class Map extends Component {
 					'benton-bold', 'foreground'].join(' '))
 				.attr('x', d => d.centroid[0])
 				.attr('y', d => d.centroid[1])
-				.attr('dx', subsetFeature ? 6 : 0)
+				.attr('dx', calculateLabelDx)
 				.attr('dy', labelsName ? 4 : -4)
 				.text(d => d.label)
+				.style('text-anchor', calculateLabelTextAnchor)
 
 		// Draw features (although at this point we might not have data).
 		this.drawFeatures()
