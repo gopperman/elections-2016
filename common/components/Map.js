@@ -86,7 +86,9 @@ class Map extends Component {
 		projection.fitSize([width, height], subsetFeature || feature)
 
 		// Set viewBox on svg.
-		const svg = select(this._svg).attr('viewBox', `0 0 ${width} ${height}`)
+		const svg = select(this._svg)
+			.attr('viewBox', `0 0 ${width} ${height}`)
+			.classed('insetted', !!subsetFeature)
 
 		// Create features group.
 		svg.append('g').attr('class', 'features')
