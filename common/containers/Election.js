@@ -50,6 +50,14 @@ class Election extends Component {
 		const data = results.data || {}
 
 		const senate = getSenateReport(data.reports)
+		const senateDems = _.find(senate, {party: "Dem"})
+		const senateGOP = _.find(senate, {party: "GOP"})
+
+		const senateDemCount = (senateDems && senateDems.seats) || 0
+		const senateGOPCount = (senateGOP && senateGOP.seats) || 0
+
+		console.log(senateDemCount)
+		console.log(senateDems)
 
 		// Get all races.
 		const races = data.races || []
@@ -93,10 +101,6 @@ class Election extends Component {
 			.map((race, key) => <FeatureGroup {...{ race, key }} />)
 			.value()
 
-		//TODO: Use live data
-		const dem = 42
-		const gop = 51
-
 		return (
 			<div>
 
@@ -123,8 +127,8 @@ class Election extends Component {
 							{featured}
 						</div>
 						<div className='r-row--full'>
-							<BalanceOfPower dem gop />
-							<BalanceOfPower dem gop />
+							<BalanceOfPower dem={senateDemCount} gop={senateGOPCount} />
+							<BalanceOfPower dem={senateDemCount} gop={senateGOPCount} />
 						</div>
 
 					</div>
