@@ -2,7 +2,6 @@ import React, { PropTypes } from 'react'
 import _ from 'lodash'
 import ResultGroup from './../components/ResultGroup.js'
 import { sortByVoteCount } from './../utils/Candidates.js'
-import LinkButton from './../components/LinkButton.js'
 import urlManager from './../utils/urlManager.js'
 import { getName } from './../utils/Race.js'
 
@@ -14,13 +13,13 @@ const FeatureGroup = ({ race }) => {
 	const candidates = stateUnit.candidates || []
 
 	return (
-		<div className='r-col r-feature'>
-			<ResultGroup
-				overline={getName(race)}
-				precinctsReportingPct={stateUnit.precinctsReportingPct}
-				candidates={sortByVoteCount(candidates)} />
-			<LinkButton text='See full results' url={urlManager.race(race)} />
-		</div>
+		<ResultGroup
+			isFeature
+			overline={getName(race)}
+			precinctsReportingPct={stateUnit.precinctsReportingPct}
+			buttonText='See full results'
+			buttonUrl={urlManager.race(race)}
+			candidates={sortByVoteCount(candidates)} />
 	)
 
 }
