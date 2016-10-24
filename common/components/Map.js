@@ -479,9 +479,9 @@ class Map extends Component {
 						<div className='r-block tooltip js-tooltip'>
 							<button
 								className='tooltip__button'
-								onClick={this.drawTooltip}
+								onClick={this.clearTooltip}
 								dangerouslySetInnerHTML={{ __html: svgs.closeSvg }} />
-							<div className='js-tooltip-content'>actual content</div>
+							<div className='js-tooltip-content' />
 						</div>
 					</div>
 				</div>
