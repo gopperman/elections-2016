@@ -11,6 +11,7 @@ import Hero from './../components/Hero.js'
 import LinkButton from './../components/LinkButton.js'
 import urlManager from './../utils/urlManager.js'
 import { toTitleCase } from './../utils/standardize.js'
+import { getName } from './../utils/Race.js'
 
 // We'll keep these urls here for testing. A description:
 
@@ -86,12 +87,9 @@ class Town extends Component {
 
 			const candidates = stateUnit.candidates || []
 
-			const { officeName, seatName } = race
-			const raceTitle = [officeName, seatName].filter(v => v).join(', ')
-
 			return (
 				<div key={i}>
-					<h2 className='benton-bold'>{raceTitle}</h2>
+					<h2 className='benton-bold'>{getName(race)}</h2>
 					<ResultGroup
 						precinctsReportingPct={stateUnit.precinctsReportingPct}
 						candidates={sortByVoteCount(candidates)} />
