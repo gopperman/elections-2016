@@ -113,14 +113,13 @@ class Homepage extends Component {
 				const candidates = stateUnit.candidates || []
 
 				return (
-					<div key={i}>
-						<ResultGroup
-							overline={getName(race)}
-							precinctsReportingPct={stateUnit.precinctsReportingPct}
-							candidates={sortByVoteCount(candidates)} />
-						<LinkButton
-							text='See full results' url={urlManager.race(race)} />
-					</div>
+					<ResultGroup
+						key={i}
+						overline={getName(race)}
+						precinctsReportingPct={stateUnit.precinctsReportingPct}
+						candidates={sortByVoteCount(candidates)}
+						buttonText='See full results'
+						buttonUrl={urlManager.race(race)} />
 				)
 
 			})

@@ -9,7 +9,6 @@ import TestStatus from './../components/TestStatus.js'
 import ResultGroup from './../components/ResultGroup.js'
 import { sortByVoteCount } from './../utils/Candidates.js'
 import Hero from './../components/Hero.js'
-import LinkButton from './../components/LinkButton.js'
 import urlManager from './../utils/urlManager.js'
 import { getName } from './../utils/Race.js'
 
@@ -92,13 +91,13 @@ class Office extends Component {
 			const candidates = stateUnit.candidates || []
 
 			return (
-				<div key={i}>
-					<ResultGroup
-						overline={getName(race)}
-						precinctsReportingPct={stateUnit.precinctsReportingPct}
-						candidates={sortByVoteCount(candidates)} />
-					<LinkButton text='See full results' url={urlManager.race(race)} />
-				</div>
+				<ResultGroup
+					key={i}
+					overline={getName(race)}
+					precinctsReportingPct={stateUnit.precinctsReportingPct}
+					candidates={sortByVoteCount(candidates)}
+					buttonText='See full results'
+					buttonUrl={urlManager.race(race)} />
 			)
 
 		})

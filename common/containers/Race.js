@@ -105,12 +105,10 @@ class Race extends Component {
 					<div className='container-lg'>
 						<Timer {...timerProps} />
 
-						<div>
-							<ResultGroup
-								overline={getName(race)}
-								precinctsReportingPct={state.precinctsReportingPct}
-								candidates={summaryCandidates} />
-						</div>
+						<ResultGroup
+							overline={getName(race)}
+							precinctsReportingPct={state.precinctsReportingPct}
+							candidates={summaryCandidates} />
 
 						{map}
 
