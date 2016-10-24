@@ -1,36 +1,63 @@
-import React, { Component } from 'react'
 import classNames from 'classnames'
+import React, { Component } from 'react'
 import RaceNavigationLinks from './RaceNavigationLinks.js'
 import urlManager from './../utils/urlManager.js'
-// import TownLookup from '../TownLookup.js'
+import TownLookup from './TownLookup.js'
 
 class Navigation extends Component {
 
 	state = {
-		expanded: false,
+		townIsOpen: false,
+		raceIsOpen: false,
+	}
+
+	townOnClick = () => {
+
+		// Collapse race and toggle town
+		this.setState({
+			raceIsOpen: false,
+			townIsOpen: !this.state.townIsOpen,
+		})
+
 	}
 
 	raceOnClick = () => {
-		this.setState({ expanded: !this.state.expanded })
+
+		// Collapse town and toggle race
+		this.setState({
+			townIsOpen: false,
+			raceIsOpen: !this.state.raceIsOpen,
+		})
+
 	}
 
 	render() {
 
-		const toggleRaceNav =
-			classNames('g-nav', { 'subnav-is-open': this.state.expanded })
+		const { townIsOpen, raceIsOpen } = this.state
+
+		const mainClass = classNames('g-nav', {
+			'is-open': townIsOpen || raceIsOpen,
+			'town-is-open': townIsOpen,
+			'race-is-open': raceIsOpen,
+		})
 
 		return (
-			<nav className={toggleRaceNav} key='nav'>
+			<nav className={mainClass} key='nav'>
 				<ul className='g-nav__list'>
 					<li className='g-nav__item'>
 						<a
 							className='g-nav__link benton-bold icon icon--election'
 							href={urlManager.base()}>Elections 2016</a>
 					</li>
-					<li className='g-nav__item'>
-						<button className='g-nav__link benton-bold icon icon--town'>Town results</button>
+					<li className='g-nav__item town'>
+						<button
+							className='g-nav__link benton-bold icon icon--town'
+							onClick={this.townOnClick}>Town results</button>
+						<nav className='subnav'>
+							<TownLookup />
+						</nav>
 					</li>
-					<li className='g-nav__item g-nav__item--subnav'>
+					<li className='g-nav__item race'>
 						<button
 							className='g-nav__link benton-bold icon icon--race'
 							onClick={this.raceOnClick}>Find a race</button>
@@ -44,6 +71,7 @@ class Navigation extends Component {
 				</ul>
 			</nav>
 		)
+
 	}
 
 }
