@@ -505,11 +505,11 @@ class Map extends Component {
 						</li>
 						<li className='legend__item'>
 							<p className='legend__label benton-regular'>Win</p>
-							<div className='legend__marker fill-dem' />
-							<div className='legend__marker fill-gop' />
-							<div className='legend__marker fill-yes' />
-							<div className='legend__marker fill-yes' />
-							<div className='legend__marker fill-no' />
+							<div className='legend__marker fill-complete-dem' />
+							<div className='legend__marker fill-complete-gop' />
+							<div className='legend__marker fill-complete-yes' />
+							<div className='legend__marker fill-complete-yes' />
+							<div className='legend__marker fill-complete-no' />
 						</li>
 					</ul>
 				</div>
