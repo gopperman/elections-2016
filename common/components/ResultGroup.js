@@ -7,7 +7,7 @@ const ResultGroup = ({ candidates, precinctsReportingPct, overline }) => {
 		<h3 className='overline benton-bold'>{overline}</h3> : null
 
 	return (
-		<div>
+		<div className='r-col'>
 			{overlineH3}
 			{ candidates.map((candidate, key, array) =>
 				(<ResultBar

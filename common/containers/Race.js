@@ -106,8 +106,8 @@ class Race extends Component {
 						<Timer {...timerProps} />
 
 						<div>
-							<h2 className='benton-bold'>{getName(race)}</h2>
 							<ResultGroup
+								overline={getName(race)}
 								precinctsReportingPct={state.precinctsReportingPct}
 								candidates={summaryCandidates} />
 						</div>
