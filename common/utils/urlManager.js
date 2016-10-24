@@ -1,3 +1,5 @@
+const e = (s) => encodeURIComponent(encodeURIComponent(s))
+
 const urlManager = {
 
 	base() {
@@ -5,7 +7,7 @@ const urlManager = {
 	},
 
 	town(townName) {
-		return `${this.base()}/town/${townName}`
+		return `${this.base()}/town/${e(townName)}`
 	},
 
 	office(officeName) {
@@ -15,7 +17,7 @@ const urlManager = {
 		if (officeName.toLowerCase() === 'president') {
 			result = `${this.base()}/president`
 		} else {
-			result = `${this.base()}/race/${officeName}`
+			result = `${this.base()}/race/${e(officeName)}`
 		}
 
 		return result
@@ -30,7 +32,7 @@ const urlManager = {
 		if (officeName.toLowerCase() === 'president') {
 			result = `${this.base()}/president`
 		} else {
-			result = `${this.base()}/race/${officeName}/${seatName}`
+			result = `${this.base()}/race/${e(officeName)}/${e(seatName)}`
 		}
 
 		return result
