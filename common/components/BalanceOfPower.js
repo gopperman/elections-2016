@@ -100,7 +100,7 @@ class BalanceOfPower extends Component {
 		// The previous `data` function returns a UPDATE lifecycle.
 		// Use it to set the UPDATE attributes.
 		circle
-				.attr('class', d => d.party)
+				.attr('class', d => `fill-winner-${d.party}`)
 
 		// Append `circle` and set its ENTER attributes.
 		circle.enter().append('circle')
@@ -111,7 +111,7 @@ class BalanceOfPower extends Component {
 				.attr('cy', (d, i) =>
 					-((baseRadius + ((d.row + 1) * 16)) * Math.sin((Math.PI / (senate[0].length - 1)) * i))
 				)
-				.attr('class', d => d.party)
+				.attr('class', d => `fill-winner-${d.party}`)
 	}
 
 	render() {

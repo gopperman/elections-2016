@@ -56,9 +56,6 @@ class Election extends Component {
 		const senateDemCount = (senateDems && senateDems.seats) || 0
 		const senateGOPCount = (senateGOP && senateGOP.seats) || 0
 
-		console.log(senateDemCount)
-		console.log(senateDems)
-
 		// Get all races.
 		const races = data.races || []
 

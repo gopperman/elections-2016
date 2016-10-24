@@ -30,7 +30,7 @@ const buildRow = ({ dem, gop, undecided }) => {
 	while (undecidedCount--) {
 		row.push({
 			seat: seatNum++,
-			party: 'undecided',
+			party: 'none',
 		})
 	}
 	while (gopCount--) {
