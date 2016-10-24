@@ -15,6 +15,7 @@ import { sortByElectoralCount } from './../utils/Candidates.js'
 import FeatureGroup from './../components/FeatureGroup.js'
 import LinkButton from './../components/LinkButton.js'
 import urlManager from './../utils/urlManager.js'
+import { getSenateReport } from './../utils/dataUtil.js'
 
 // We'll keep these urls here for testing. A description:
 
@@ -25,7 +26,7 @@ import urlManager from './../utils/urlManager.js'
 // const url = '2016-11-08/rezcentral'
 
 // and this one is the correct url - it returns everything.
-const url = '2016-11-08/prezcentral?races=MA-22949,MA-24805'
+const url = '2016-11-08/prezcentral?reports=Trend-s&races=MA-22949,MA-24805'
 
 @connectToApi
 class Election extends Component {
@@ -48,7 +49,8 @@ class Election extends Component {
 		// Get the data - or an empty object.
 		const data = results.data || {}
 
-		console.log(data)
+		const senate = getSenateReport(data.reports)
+
 		// Get all races.
 		const races = data.races || []
 
@@ -120,10 +122,11 @@ class Election extends Component {
 						<div className='r-row--full'>
 							{featured}
 						</div>
-
 						<div className='r-row--full'>
 							<BalanceOfPower dem gop />
+							<BalanceOfPower dem gop />
 						</div>
+
 					</div>
 
 				</main>

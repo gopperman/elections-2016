@@ -20,8 +20,30 @@ const getPresidentStates = (data) =>
 const getPresidentSummaryState = (data) =>
 	_.find(getPresidentStates(data), { statePostal: 'US' })
 
+const getSenateReport = (reports) => {
+	const r = (reports && reports[0]) || {} 
+	const reps = r.reports
+
+	const senateReport = _.find(reps, { title: 'Trend / s / test / US' })
+
+	// The report can come in as undefined at first, need to be defensive
+	const trendtable = (senateReport && senateReport.report && senateReport.report.trendtable) || {}
+	const parties = (trendtable && trendtable.party) || []
+
+	const balance = (parties && parties.map(p => {
+		const trends = Object.assign(...p.trend)
+		return { 
+			'party': p.title,
+			'seats': parseInt(trends.Current) 
+		}
+	})) || []
+
+	return parties
+}
+
 export {
 	getRaceUnits,
 	getPresidentStates,
 	getPresidentSummaryState,
+	getSenateReport,
 }
