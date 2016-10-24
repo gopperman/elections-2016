@@ -1,3 +1,17 @@
+import _ from 'lodash'
+
+const standardizeParty = (s) => {
+	let party
+	if (s) {
+		party = (_.includes(['dem', 'gop', 'yes', 'no'], s.toLowerCase()) ?
+			s.toLowerCase() : 'ind')
+	} else {
+		party = s
+	}
+	return party
+
+}
+
 const toTitleCase = (str) =>
 	str.replace(/\w\S*/g, txt =>
 		txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase())
@@ -26,4 +40,5 @@ export {
 	percentForDisplay,
 	toSentenceCase,
 	toTitleCase,
+	standardizeParty,
 }

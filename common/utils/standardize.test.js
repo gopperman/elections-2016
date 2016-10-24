@@ -1,9 +1,23 @@
 /* global describe, it */
 
 import assert from 'assert'
-import { percentForDisplay } from './standardize.js'
+import { percentForDisplay, standardizeParty } from './standardize.js'
 
 describe('standardize', () => {
+
+	describe('party', () => {
+
+		it('should work', () => {
+
+			assert.equal(standardizeParty('Dem'), 'dem')
+			assert.equal(standardizeParty('Gop'), 'gop')
+			assert.equal(standardizeParty('Yes'), 'yes')
+			assert.equal(standardizeParty('No'), 'no')
+			assert.equal(standardizeParty('asdf'), 'ind')
+
+		})
+
+	})
 
 	describe('percentForDisplay', () => {
 
