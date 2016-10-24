@@ -6,6 +6,7 @@ import Timer from './../components/Timer.js'
 import Header from './../components/Header.js'
 import Footer from './../components/Footer.js'
 import TestStatus from './../components/TestStatus.js'
+import BalanceOfPower from './../components/BalanceOfPower.js'
 import Hero from './../components/Hero.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 import Map from './../components/Map.js'
@@ -47,6 +48,7 @@ class Election extends Component {
 		// Get the data - or an empty object.
 		const data = results.data || {}
 
+		console.log(data)
 		// Get all races.
 		const races = data.races || []
 
@@ -89,6 +91,10 @@ class Election extends Component {
 			.map((race, key) => <FeatureGroup {...{ race, key }} />)
 			.value()
 
+		//TODO: Use live data
+		const dem = 42
+		const gop = 51
+
 		return (
 			<div>
 
@@ -115,6 +121,9 @@ class Election extends Component {
 							{featured}
 						</div>
 
+						<div className='r-row--full'>
+							<BalanceOfPower dem gop />
+						</div>
 					</div>
 
 				</main>
