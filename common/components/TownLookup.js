@@ -7,6 +7,14 @@ class TownLookup extends Component {
 
 	state = {
 		value: null,
+		mounted: false,
+	}
+
+	// I have to do this to get around a `react-select` bug that despite
+	// a PR (https://github.com/JedWatson/react-select/pull/1105) is
+	// not working.
+	componentDidMount = () => {
+		this.setState({ mounted: true })
 	}
 
 	onChange = (value) => {
@@ -23,17 +31,24 @@ class TownLookup extends Component {
 
 	}
 
-	render = () => (
-		<Select
-			placeholder='Select a town...'
-			value={this.state.value}
-			searchable
-			className='benton-regular'
-			onChange={this.onChange}
-			options={getTownList().map(v => ({ value: v, label: v }))} />
-	)
+	render() {
+
+		const select = this.state.mounted ?
+			<Select
+				placeholder='Select a town...'
+				value={this.state.value}
+				searchable
+				className='benton-regular'
+				onChange={this.onChange}
+				options={getTownList().map(v => ({ value: v, label: v }))} /> :
+			null
+
+		return (
+			<div>{select}</div>
+		)
+
+	}
 
 }
-
 
 module.exports = TownLookup
