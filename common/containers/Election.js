@@ -97,7 +97,7 @@ class Election extends Component {
 				<Header />
 
 				<main id='content'>
-					<Hero title='Election Home' />
+					<Hero title='Election Home' isFeature />
 
 					<div className='container-lg'>
 
