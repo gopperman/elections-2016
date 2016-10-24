@@ -475,14 +475,14 @@ class Map extends Component {
 						ref={(c) => this._svg = c}
 						dangerouslySetInnerHTML={{ __html: svgs.crossHatchesDefs }} />
 					<svg className='inset' ref={(c) => this._inset = c} />
-				</div>
-				<div className='tooltip-wrapper' ref={(c) => this._tooltip = c}>
-					<div className='r-block tooltip js-tooltip'>
-						<button
-							className='tooltip__button'
-							onClick={this.drawTooltip}
-							dangerouslySetInnerHTML={{ __html: svgs.closeSvg }} />
-						<div className='js-tooltip-content'>actual content</div>
+					<div className='tooltip-wrapper' ref={(c) => this._tooltip = c}>
+						<div className='r-block tooltip js-tooltip'>
+							<button
+								className='tooltip__button'
+								onClick={this.drawTooltip}
+								dangerouslySetInnerHTML={{ __html: svgs.closeSvg }} />
+							<div className='js-tooltip-content'>actual content</div>
+						</div>
 					</div>
 				</div>
 				<div className='legend' aria-hidden='true'>
