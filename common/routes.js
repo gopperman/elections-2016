@@ -8,6 +8,7 @@ import PresidentUS from './containers/PresidentUS.js'
 import PresidentMA from './containers/PresidentMA.js'
 import Race from './containers/Race.js'
 import RaceHome from './components/RaceHome.js'
+import TownHome from './components/TownHome.js'
 import Town from './containers/Town.js'
 import urlManager from './utils/urlManager.js'
 
@@ -44,12 +45,12 @@ export default (
 			component={Race} />
 
 		<Route
+			path={`${urlManager.base()}/town`}
+			component={TownHome} />
+
+		<Route
 			path={`${urlManager.base()}/town/:townName`}
 			component={Town} />
-		<Redirect
-			from={`${urlManager.base()}/town`}
-			to={urlManager.town('Boston')} />
-
 
 	</Route>
 )
