@@ -5,6 +5,15 @@
 // Global nav
 .g-nav
 	position relative
+	height 5.5em
+	transition 0.3s ease-in-out height
+	+mq('bp-2')
+		height 3.5em
+	// Subnav open
+	&.subnav-is-open
+		height 33em
+		+mq('bp-2')
+			height 16em
 	&__list
 		width 90%
 		max-width 50em
@@ -13,13 +22,18 @@
 		justify-content space-between
 		padding 1em 0
 	&__item
-		font-size 0.8em
+		width 25%
 		&:not(:last-of-type)
 			margin-right 1.5em
 	&__link
+		font-size 0.8rem
+		border none
+		background-color transparent
+		padding 0
 		display inline-block
 		text-align center
 		filter grayscale(100%)
+		color set-gray('darkest')
 		&:hover
 			filter grayscale(0)
 		+mq('bp-2')
@@ -36,8 +50,23 @@
 // Sub nav
 .subnav
 	width 90%
-	max-width 50em
+	max-width 50rem
 	margin 0 auto
+	// If part of global nav
+	/.g-nav &
+		position absolute
+		left 0
+		right 0
+		bottom 1em
+		hidden(accessible)
+		opacity 0
+		transition opacity 0.5s ease-in-out 0.5s
+	/.g-nav.subnav-is-open &
+		width 90%
+		height auto
+		max-width 50rem
+		overflow auto
+		opacity 1
 	&__list
 		text-align center
 		+mq('bp-2')
@@ -48,7 +77,7 @@
 			height 10em
 	&__item
 		flex 1
-		font-size 0.85em
+		font-size 0.85rem
 		line-height 1.2
 		&:not(:last-of-type)
 			margin-bottom 1.5em
