@@ -29,7 +29,7 @@ const getSenateReport = (reports) => {
 	// The report can come in as undefined at first, need to be defensive
 	const trendtable = (senateReport && senateReport.report && senateReport.report.trendtable) || {}
 	const parties = (trendtable && trendtable.party) || []
-	console.log(parties)
+	
 	const balance = (parties && parties.map(p => {
 		//TO-DO: Do no use Object.assign
 		const trends = Object.assign(...p.trend)
