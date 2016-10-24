@@ -16,8 +16,10 @@
 			height 16em
 	// Town
 	&.town-is-open
-		height 15em
+		height 10em
 		+mq('bp-2')
+			height 9em
+		+mq('bp-3')
 			height 8em
 	&__list
 		width 90%
@@ -70,6 +72,7 @@
 		hidden(accessible)
 		opacity 0
 		transition opacity 0.25s ease-in-out 0.25s
+		z-index 10000
 	/.g-nav.race-is-open .race &,
 	/.g-nav.town-is-open .town &
 		width 90%
@@ -77,6 +80,8 @@
 		max-width 50rem
 		overflow auto
 		opacity 1
+	/.g-nav.town-is-open .town &
+		overflow visible
 	&__list
 		text-align center
 		+mq('bp-2')

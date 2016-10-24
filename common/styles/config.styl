@@ -16,7 +16,8 @@ $assets-path = '//apps.bostonglobe.com/election-results/2016/general/assets/'
 //=======================
 // See base/fonts for full listing
 // Set other fonts in main.styl
-// Note: all projects require Benton Bold and Miller-Regular so don't change em
+// Note: all projects require Benton Bold and Miller-Regular
+// so don't change em
 set-font('benton-bold')
 set-font('benton-regular')
 set-font('miller-regular')
@@ -25,6 +26,8 @@ set-font('miller-regular')
 // Template Components
 //=======================
 @require 'template/*'
+
+@require './../../node_modules/react-select/dist/react-select.css'
 
 //=======================
 // Custom styles
