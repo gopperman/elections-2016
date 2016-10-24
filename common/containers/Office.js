@@ -93,8 +93,8 @@ class Office extends Component {
 
 			return (
 				<div key={i}>
-					<h2 className='benton-bold'>{getName(race)}</h2>
 					<ResultGroup
+						overline={getName(race)}
 						precinctsReportingPct={stateUnit.precinctsReportingPct}
 						candidates={sortByVoteCount(candidates)} />
 					<LinkButton text='See full results' url={urlManager.race(race)} />
