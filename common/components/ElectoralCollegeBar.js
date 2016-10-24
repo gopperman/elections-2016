@@ -36,14 +36,14 @@ const ElectoralCollegeBar = ({
 				</div>
 				<div className='results-bar'>
 					<span
-						className='fill-dem'
+						className='fill-complete-dem'
 						role='progressbar'
 						aria-valuenow={demElectPct}
 						aria-valuemin='0'
 						aria-valuemax='100'
 						style={{ width: `${demElectPct}%` }} />
 					<span
-						className='fill-gop'
+						className='fill-complete-gop'
 						role='progressbar'
 						aria-valuenow={gopElectPct}
 						aria-valuemin='0'

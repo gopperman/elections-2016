@@ -3,16 +3,23 @@
 //========================
 
 // Fills
+
+// Leading
 .fill-leading-dem
 	fill url('#crosshatch-dem')
 .fill-leading-gop
 	fill url('#crosshatch-gop')
 .fill-leading-ind
 	fill url('#crosshatch-ind')
-.fill-winner-ind, .fill-complete-ind, .fill-ind
+
+// Solid
+// There are three classes:
+// fill-winner is for presidential races
+// fill-complete is for non-presidential races
+.fill-winner-ind, .fill-complete-ind
 	background-color set-color('green', dark)
 	fill set-color('green', dark)
-.fill-winner-dem, .fill-complete-dem, .fill-dem
+.fill-winner-dem, .fill-complete-dem
 	background-color set-color('blue')
 	fill set-color('blue')
 	&--light
@@ -21,7 +28,7 @@
 	&--dark
 		background-color set-color('blue', dark)
 		fill set-color('blue', dark)
-.fill-winner-gop, .fill-complete-gop, .fill-gop
+.fill-winner-gop, .fill-complete-gop
 	background-color set-color('red')
 	fill set-color('red')
 	&--light
@@ -30,7 +37,7 @@
 	&--dark
 		background-color set-color('red', dark)
 		fill set-color('red', dark)
-.fill-yes
+.fill-complete-yes
 	background-color set-color('green')
 	fill set-color('green')
 	&--light
@@ -39,7 +46,7 @@
 	&--dark
 		background-color set-color('green', dark)
 		fill set-color('green', dark)
-.fill-no
+.fill-complete-no
 	background-color set-color('gold')
 	fill set-color('gold')
 	&--light

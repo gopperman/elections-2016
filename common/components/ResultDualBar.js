@@ -53,14 +53,14 @@ const ResultDualBar = ({ race }) => {
 
 				<div className='results-bar'>
 					<span
-						className='fill-dem'
+						className='fill-complete-dem'
 						role='progressbar'
 						aria-valuenow={leftPct}
 						aria-valuemin='0'
 						aria-valuemax='100'
 						style={leftStyle} />
 					<span
-						className='fill-gop'
+						className='fill-complete-gop'
 						role='progressbar'
 						aria-valuenow={rightPct}
 						aria-valuemin='0'

@@ -46,7 +46,7 @@ precinctsReportingPct }) => {
 				<div className='r-block__bar results-bar'>
 
 					<span
-						className={`fill-${partyToDisplay}`}
+						className={`fill-complete-${partyToDisplay}`}
 						role='progressbar'
 						aria-valuenow={pct}
 						aria-valuemin='0'

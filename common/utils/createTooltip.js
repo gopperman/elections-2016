@@ -1,8 +1,7 @@
 import addCommas from 'add-commas'
 import classnames from 'classnames'
-import _ from 'lodash'
 import { percent } from './Candidate.js'
-import { percentForDisplay } from './standardize.js'
+import { percentForDisplay, standardizeParty } from './standardize.js'
 
 // TODO: create summary
 export default ({ subunit = {}, displayName, sortingDelegate }) => {
@@ -28,8 +27,7 @@ export default ({ subunit = {}, displayName, sortingDelegate }) => {
 		const candidateClass =
 			classnames('benton-bold', { 'is-winner': !!winner })
 
-		const squareClass = _.includes(['dem', 'gop'], party.toLowerCase()) ?
-			`fill-${party.toLowerCase()}` : 'fill-ind'
+		const squareClass = `fill-complete-${standardizeParty(party)}`
 
 		// Create this candidate's table row.
 		return `
