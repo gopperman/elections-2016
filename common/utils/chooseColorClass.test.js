@@ -156,6 +156,7 @@ describe('chooseColorClass', () => {
 
 		it('should ignore winner and call complete if = 100%', () => {
 
+			// regular race
 			assert.equal(
 				chooseColorClass({
 					candidates: [
@@ -167,10 +168,23 @@ describe('chooseColorClass', () => {
 				'fill-complete-dem',
 			)
 
+			// question
+			assert.equal(
+				chooseColorClass({
+					candidates: [
+						{ voteCount: 1, party: 'Yes' },
+						{ voteCount: 0, winner: 'X', party: 'ABC' },
+					],
+					precinctsReportingPct: '100.0',
+				}),
+				'fill-complete-yes',
+			)
+
 		})
 
 		it('should ignore winner and not call complete if < 100%', () => {
 
+			// regular race
 			assert.equal(
 				chooseColorClass({
 					candidates: [
@@ -180,6 +194,18 @@ describe('chooseColorClass', () => {
 					precinctsReportingPct: '1',
 				}),
 				'fill-leading-dem',
+			)
+
+			// question
+			assert.equal(
+				chooseColorClass({
+					candidates: [
+						{ voteCount: 1, party: 'Yes' },
+						{ voteCount: 0, winner: 'X', party: 'ABC' },
+					],
+					precinctsReportingPct: '1',
+				}),
+				'fill-leading-yes',
 			)
 
 		})

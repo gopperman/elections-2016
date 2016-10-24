@@ -6,7 +6,7 @@ import {
 } from './Candidates.js'
 
 const normalizeParty = (party = '') =>
-	(_.includes(['dem', 'gop'], party.toLowerCase()) ?
+	(_.includes(['dem', 'gop', 'yes', 'no'], party.toLowerCase()) ?
 		party.toLowerCase() :
 		'ind')
 
