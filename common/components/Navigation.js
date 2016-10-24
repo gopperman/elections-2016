@@ -12,9 +12,9 @@ class Navigation extends Component {
 		this.setState({expanded: !this.state.expanded}) 
 	}
 	render() {
-		const test = classNames('g-nav', { 'subnav-is-open': this.state.expanded })
+		const toggleRaceNav = classNames('g-nav', { 'subnav-is-open': this.state.expanded })
 		return(
-		<nav className={test} key='nav'>
+		<nav className={toggleRaceNav} key='nav'>
 			<ul className='g-nav__list'>
 				<li className='g-nav__item'>
 					<a className='g-nav__link benton-bold icon icon--election' 
