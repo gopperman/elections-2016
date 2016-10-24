@@ -11,6 +11,7 @@ import { sortByVoteCount } from './../utils/Candidates.js'
 import Hero from './../components/Hero.js'
 import LinkButton from './../components/LinkButton.js'
 import urlManager from './../utils/urlManager.js'
+import { getName } from './../utils/Race.js'
 
 // We'll keep these urls here for testing. A description:
 
@@ -92,7 +93,7 @@ class Office extends Component {
 
 			return (
 				<div key={i}>
-					<h2 className='benton-bold'>{race.seatName}</h2>
+					<h2 className='benton-bold'>{getName(race)}</h2>
 					<ResultGroup
 						precinctsReportingPct={stateUnit.precinctsReportingPct}
 						candidates={sortByVoteCount(candidates)} />
