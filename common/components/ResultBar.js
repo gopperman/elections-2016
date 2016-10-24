@@ -4,7 +4,6 @@ import classnames from 'classnames'
 import { fullName, percent } from './../utils/Candidate.js'
 import { percentForDisplay } from './../utils/standardize.js'
 
-// TODO: use images?
 const ResultBar = ({ candidate, candidates, showImage,
 precinctsReportingPct }) => {
 
@@ -20,7 +19,7 @@ precinctsReportingPct }) => {
 	const image = showImage ?
 		(<img
 			className='r-block__img avatar'
-			src='assets/avatar/trump.jpg'
+			src={`assets/avatar/${name.toLowerCase()}.jpg`}
 			alt='Donald Trump' />) : null
 
 	const candidateClass = classnames('r-block__name', 'benton-bold',
