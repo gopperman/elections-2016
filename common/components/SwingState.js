@@ -28,7 +28,7 @@ const SwingState = ({ state }) => {
 			<div
 				className={`results-circle ${colorClass}`}
 				role='progressbar'
-				aria-valuenow={79.7}
+				aria-valuenow={margin}
 				aria-valuemin='0'
 				aria-valuemax='100'>
 				<p className='r-block__meta benton-bold'>+{margin}%</p>
