@@ -12,6 +12,7 @@ import { sortByVoteCount } from './../utils/Candidates.js'
 import Hero from './../components/Hero.js'
 import TOWNS from './../../data/output/TOWNS.json'
 import Map from './../components/Map.js'
+import { getName } from './../utils/Race.js'
 
 // We'll keep these urls here for testing. A description:
 
@@ -76,10 +77,6 @@ class Race extends Component {
 		// Get summary candidates.
 		const summaryCandidates = sortByVoteCount(state.candidates || [])
 
-		// Get race title.
-		const { officeName, seatName } = race
-		const title = [officeName, seatName].filter(v => v).join(', ')
-
 		// Setup a MA-centric projection.
 		const massProjection = geoConicConformal()
 			.parallels([41 + (43 / 60), 42 + (41 / 60)])
@@ -103,13 +100,13 @@ class Race extends Component {
 				<Header />
 
 				<main id='content'>
-					<Hero title={title} />
+					<Hero title={getName(race)} />
 
 					<div className='container-lg'>
 						<Timer {...timerProps} />
 
 						<div>
-							<h2 className='benton-bold'>{title}</h2>
+							<h2 className='benton-bold'>{getName(race)}</h2>
 							<ResultGroup
 								precinctsReportingPct={state.precinctsReportingPct}
 								candidates={summaryCandidates} />
