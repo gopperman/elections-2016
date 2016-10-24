@@ -4,6 +4,7 @@ import * as topojson from 'topojson'
 import TOWNS from './../../data/output/TOWNS.json'
 import { toSentenceCase } from './../utils/standardize.js'
 
+// TODO: verify this component uses the latest utils/architecture
 class TownLookup extends Component {
 
 	componentDidMount() {
