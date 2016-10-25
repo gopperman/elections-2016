@@ -1,0 +1,165 @@
+[
+  {
+    "id": "https://api.ap.org/v2/reports",
+    "title": "Election Reports",
+    "updated": "2016-10-24T18:58:11Z",
+    "reports": [
+      {
+        "id": "48",
+        "title": "Trend / s / test / US",
+        "contentLink": "https://api.ap.org/v2/reports/d97bb937ef764869a41fc06f0cf68f5a",
+        "contentType": "application/json",
+        "report": {
+          "trendtable": {
+            "office": "U.S. Senate",
+            "OfficeTypeCode": "S",
+            "Test": "1",
+            "timestamp": "2016-10-24T18:54:30Z",
+            "party": [
+              {
+                "title": "Dem",
+                "trend": [
+                  {
+                    "Won": "13"
+                  },
+                  {
+                    "Leading": "0"
+                  },
+                  {
+                    "Holdovers": "34"
+                  },
+                  {
+                    "Winning Trend": "47"
+                  },
+                  {
+                    "Current": "44"
+                  },
+                  {
+                    "InsufficientVote": "0"
+                  }
+                ],
+                "NetChange": {
+                  "trend": [
+                    {
+                      "Winners": "+3"
+                    },
+                    {
+                      "Leaders": "0"
+                    }
+                  ]
+                }
+              },
+              {
+                "title": "GOP",
+                "trend": [
+                  {
+                    "Won": "19"
+                  },
+                  {
+                    "Leading": "2"
+                  },
+                  {
+                    "Holdovers": "30"
+                  },
+                  {
+                    "Winning Trend": "51"
+                  },
+                  {
+                    "Current": "54"
+                  },
+                  {
+                    "InsufficientVote": "0"
+                  }
+                ],
+                "NetChange": {
+                  "trend": [
+                    {
+                      "Winners": "-3"
+                    },
+                    {
+                      "Leaders": "0"
+                    }
+                  ]
+                }
+              },
+              {
+                "title": "Others",
+                "trend": [
+                  {
+                    "Won": "0"
+                  },
+                  {
+                    "Leading": "0"
+                  },
+                  {
+                    "Holdovers": "2"
+                  },
+                  {
+                    "Winning Trend": "2"
+                  },
+                  {
+                    "Current": "2"
+                  },
+                  {
+                    "InsufficientVote": "0"
+                  }
+                ],
+                "NetChange": {
+                  "trend": [
+                    {
+                      "Winners": "0"
+                    },
+                    {
+                      "Leaders": "0"
+                    }
+                  ]
+                }
+              }
+            ],
+            "InsufficientVote": {
+              "trend": [
+                {
+                  "Dem Open": "0"
+                },
+                {
+                  "GOP Open": "0"
+                },
+                {
+                  "Oth Open": "0"
+                },
+                {
+                  "Dem Incumbent": "0"
+                },
+                {
+                  "GOP Incumbent": "0"
+                },
+                {
+                  "Oth Incumbent": "0"
+                },
+                {
+                  "Total": "0"
+                }
+              ]
+            }
+          }
+        },
+        "updated": "2016-10-24T18:58:11Z",
+        "electionDate": "2016-11-08",
+        "categories": [
+          {
+            "scheme": "https://api.ap.org/cv/type/",
+            "term": "Trend"
+          },
+          {
+            "scheme": "https://api.ap.org/cv/subtype/",
+            "term": "s"
+          },
+          {
+            "scheme": "https://api.ap.org/cv/test/",
+            "term": "false"
+          }
+        ]
+      }
+    ]
+  }
+]

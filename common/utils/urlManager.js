@@ -1,3 +1,5 @@
+import compareStrings from './compareStrings.js'
+
 const e = (s) => encodeURIComponent(encodeURIComponent(s))
 
 const urlManager = {
@@ -14,7 +16,7 @@ const urlManager = {
 
 		let result
 
-		if (officeName.toLowerCase() === 'president') {
+		if (compareStrings(officeName, 'president')) {
 			result = `${this.base()}/president`
 		} else {
 			result = `${this.base()}/race/${e(officeName)}`
@@ -29,7 +31,7 @@ const urlManager = {
 		const { officeName, seatName } = race
 		let result
 
-		if (officeName.toLowerCase() === 'president') {
+		if (compareStrings(officeName, 'president')) {
 			result = `${this.base()}/president`
 		} else {
 			result = `${this.base()}/race/${e(officeName)}/${e(seatName)}`

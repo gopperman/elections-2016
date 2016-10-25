@@ -235,7 +235,7 @@ class Map extends Component {
 
 		// Find the feature that matches the dropdown option,
 		const match = paths
-			.filter(d => d.id.toUpperCase() === e.target.value.toUpperCase())
+			.filter(d => compareStrings(d.id, e.target.value))
 
 		// select it, and raise it.
 		match.classed('selected', true).raise()
