@@ -60,18 +60,20 @@ const buildSeats = ({ dem, gop, ind, total, rows }) => {
 	const seatsPerRow = Math.floor(total / rows)
 	let rowsCount = rows
 
-	// Our first row is unique in that we want all of the independents centered in the same row,
-	// contrary to how we handle the other two parties
-	// The rest of the slots will be filled with Democrats and Republicans
-	// We'll handle this special case first
-	if ( rowsCount--) {
-		d = Math.floor(seatsPerRow / 2) - Math.floor( ind / 2)
-		r = Math.ceil(seatsPerRow / 2) - Math.ceil( ind / 2)
-		seats.push(buildRow({ dem: d, gop: r, ind: ind, undecided: 0}))
+	// Our first row is unique in that we want all of the independents
+	// centered in the same row,
+	// contrary to how we handle the other two parties.
+	// The rest of the slots will be filled with Democrats and Republicans.
+	// We'll handle this special case first.
+	if (rowsCount--) {
+		d = Math.floor(seatsPerRow / 2) - Math.floor(ind / 2)
+		r = Math.ceil(seatsPerRow / 2) - Math.ceil(ind / 2)
+		seats.push(buildRow({ dem: d, gop: r, ind, undecided: 0 }))
 	}
 
-	// Calculate how many democrats and republicans per row based on what's left over
-	const demPerRow = Math.floor((dem - d)/ rowsCount)
+	// Calculate how many democrats and republicans per row
+	// based on what's left over.
+	const demPerRow = Math.floor((dem - d) / rowsCount)
 	let demRemainder = (dem - d) % rows
 
 	const gopPerRow = Math.floor((gop - r) / rowsCount)
