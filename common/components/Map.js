@@ -9,7 +9,11 @@ import { select, mouse } from 'd3-selection'
 import chooseColorClass from './../utils/chooseColorClass.js'
 import compareStrings from './../utils/compareStrings.js'
 import createTooltip from './../utils/createTooltip.js'
-import { toSentenceCase, toTitleCase } from './../utils/standardize.js'
+import {
+	standardizeParty,
+	toSentenceCase,
+	toTitleCase,
+} from './../utils/standardize.js'
 import svgs from './../utils/svgs.js'
 
 class Map extends Component {
@@ -457,6 +461,15 @@ class Map extends Component {
 
 		const dropdownLabel = toSentenceCase(`${dropdownName} results`)
 
+		const parties = _(data)
+			.map('candidates')
+			.flatten()
+			.map('party')
+			.uniq()
+			.map(standardizeParty)
+			.uniq()
+			.value()
+
 		return (
 			<div className='map'>
 				<div className='map__select'>
@@ -497,19 +510,19 @@ class Map extends Component {
 						</li>
 						<li className='legend__item'>
 							<p className='legend__label benton-regular'>Lead</p>
-							<div className='legend__marker fill-leading-dem' />
-							<div className='legend__marker fill-leading-gop' />
-							<div className='legend__marker fill-leading-ind' />
-							<div className='legend__marker fill-leading-yes' />
-							<div className='legend__marker fill-leading-no' />
+							{parties.map((v, i) =>
+								<div
+									key={i}
+									className={`legend__marker fill-leading-${v}`} />
+							)}
 						</li>
 						<li className='legend__item'>
 							<p className='legend__label benton-regular'>Win</p>
-							<div className='legend__marker fill-complete-dem' />
-							<div className='legend__marker fill-complete-gop' />
-							<div className='legend__marker fill-complete-yes' />
-							<div className='legend__marker fill-complete-yes' />
-							<div className='legend__marker fill-complete-no' />
+							{parties.map((v, i) =>
+								<div
+									key={i}
+									className={`legend__marker fill-complete-${v}`} />
+							)}
 						</li>
 					</ul>
 				</div>
