@@ -38,7 +38,7 @@ class TownLookup extends Component {
 				placeholder='Select a town...'
 				value={this.state.value}
 				searchable
-				className='benton-regular'
+				className='form__select benton-bold'
 				onChange={this.onChange}
 				options={getTownList().map(v => ({ value: v, label: v }))} /> :
 			null
