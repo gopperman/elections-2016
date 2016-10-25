@@ -11,12 +11,13 @@
  * @example
  * buildRow({ dem: 1, gop: 1, undecided: 0 }) //=> [{ party: 'dem'...
  */
-const buildRow = ({ dem, gop, undecided }) => {
+const buildRow = ({ dem, gop, ind, undecided }) => {
 
 	// Declare new variables so we don't mutate the incoming object.
 	let demCount = dem
 	let gopCount = gop
 	let undecidedCount = undecided
+	let indCount = ind
 
 	const row = []
 	let seatNum = 1
@@ -25,6 +26,12 @@ const buildRow = ({ dem, gop, undecided }) => {
 		row.push({
 			seat: seatNum++,
 			party: 'dem',
+		})
+	}
+	while (indCount--) {
+		row.push({
+			seat: seatNum++,
+			party: 'ind',
 		})
 	}
 	while (undecidedCount--) {
@@ -39,16 +46,17 @@ const buildRow = ({ dem, gop, undecided }) => {
 			party: 'gop',
 		})
 	}
-
 	return row
 }
 
 // Builds a seating chart for the Senate balance of power visualization
-const buildSeats = ({ dem, gop, total, rows }) => {
+const buildSeats = ({ dem, gop, ind, total, rows }) => {
 
 	let d
 	let r
+	let i = ind
 	let u
+
 	const seats = []
 	const seatsPerRow = Math.floor(total / rows)
 	let rowsCount = rows
@@ -59,11 +67,13 @@ const buildSeats = ({ dem, gop, total, rows }) => {
 	const gopPerRow = Math.floor(gop / rows)
 	let gopRemainder = gop % rows
 
-	while (rowsCount--) {
-		let seatsTaken = demPerRow + gopPerRow
-		d = demPerRow
-		r = gopPerRow
+	// We know there's going to be less than 10, and we want them all on the same row
 
+	while (rowsCount--) {
+		d = demPerRow - Math.floor( i / 2 )
+		r = gopPerRow - Math.ceil( i / 2 )
+		let seatsTaken = d + r + i
+		console.log([d, r, i, seatsTaken])
 		if (demRemainder > 0 && seatsTaken < seatsPerRow) {
 			d++
 			demRemainder--
@@ -75,9 +85,17 @@ const buildSeats = ({ dem, gop, total, rows }) => {
 			seatsTaken++
 		}
 
-		u = (seatsTaken >= seatsPerRow) ? 0 : seatsPerRow - d - r
+		u = (seatsTaken >= seatsPerRow) ? 0 : seatsPerRow - d - r - i
 
-		seats.push(buildRow({ dem: d, gop: r, undecided: u }))
+		// We know there's going to be less than 10 independents, 
+		// and we want them all on the same row, contrary to how we handle
+		// the other two parties
+		d = 9
+		r = 9
+		u = 0
+		i = 2
+		seats.push(buildRow({ dem: d, gop: r, ind: i, undecided: u }))
+		i = 0
 	}
 
 	return seats
