@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import {
 	FETCH_RESULTS_REQUEST,
 	FETCH_RESULTS_SUCCESS,
@@ -16,20 +17,19 @@ export default(state = initialState, action) => {
 
 		case FETCH_RESULTS_REQUEST:
 
-			return {
+			return _.omit({
 				...state,
 				url,
 				isFetching: true,
-			}
+			}, 'error')
 
 		case FETCH_RESULTS_SUCCESS:
 
-			return {
+			return _.omit({
 				...state,
-				url,
 				data,
 				isFetching: false,
-			}
+			}, 'error')
 
 		case FETCH_RESULTS_FAILURE:
 
