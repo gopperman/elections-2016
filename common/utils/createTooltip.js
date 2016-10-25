@@ -1,7 +1,7 @@
 import addCommas from 'add-commas'
 import classnames from 'classnames'
 import { percent } from './Candidate.js'
-import { percentForDisplay, standardizeParty } from './standardize.js'
+import { percentForDisplay, normalizeParty } from './standardize.js'
 
 // TODO: create summary
 export default ({ subunit = {}, displayName, sortingDelegate }) => {
@@ -27,7 +27,7 @@ export default ({ subunit = {}, displayName, sortingDelegate }) => {
 		const candidateClass =
 			classnames('benton-bold', { 'is-winner': !!winner })
 
-		const squareClass = `fill-complete-${standardizeParty(party)}`
+		const squareClass = `fill-complete-${normalizeParty(party)}`
 
 		// Create this candidate's table row.
 		return `

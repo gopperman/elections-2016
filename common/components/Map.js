@@ -10,7 +10,7 @@ import chooseColorClass from './../utils/chooseColorClass.js'
 import compareStrings from './../utils/compareStrings.js'
 import createTooltip from './../utils/createTooltip.js'
 import {
-	standardizeParty,
+	normalizeParty,
 	toSentenceCase,
 	toTitleCase,
 } from './../utils/standardize.js'
@@ -467,7 +467,7 @@ class Map extends Component {
 			.flatten()
 			.map('party')
 			.uniq()
-			.map(standardizeParty)
+			.map(normalizeParty)
 			.uniq()
 			.value()
 

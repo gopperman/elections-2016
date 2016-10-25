@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
+import { standardizeParty } from './../utils/standardize.js'
 
-const MapLegend = () => (
+const MapLegend = ({ parties }) => (
 	<ul className='legend'>
 		<li className='legend__item'>
 			<p className='legend__subhed'>No Data</p>
@@ -19,26 +20,26 @@ const MapLegend = () => (
 		<li className='legend__item'>
 			<p className='legend__subhed'>Lead</p>
 			<dl className='legend__deflist'>
-				<dt className='legend__term'>Dem</dt>
-				<dd className='legend__def hash-dem' />
-				<dt className='legend__term'>GOP</dt>
-				<dd className='legend__def hash-gop' />
-				<dt className='legend__term'>Ind</dt>
-				<dd className='legend__def hash-ind' />
+				{parties.map(party => (
+					[<dt className='legend__term'>{standardizeParty(party)}</dt>,
+						<dd className={`legend__def hash-${party}`} />]
+				))}
 			</dl>
 		</li>
 		<li className='legend__item'>
 			<p className='legend__subhed'>Win</p>
 			<dl className='legend__deflist'>
-				<dt className='legend__term'>Dem</dt>
-				<dd className='legend__def fill-dem' />
-				<dt className='legend__term'>GOP</dt>
-				<dd className='legend__def fill-gop' />
-				<dt className='legend__term'>Ind</dt>
-				<dd className='legend__def fill-ind' />
+				{parties.map(party => (
+					[<dt className='legend__term'>{standardizeParty(party)}</dt>,
+						<dd className={`legend__def fill-${party}`} />]
+				))}
 			</dl>
 		</li>
 	</ul>
 )
+
+MapLegend.propTypes = {
+	parties: PropTypes.array.isRequired,
+}
 
 export default MapLegend

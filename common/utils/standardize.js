@@ -1,6 +1,17 @@
 import _ from 'lodash'
 
-const standardizeParty = (s) => {
+/**
+ * Normalizes a party string.
+ * @memberof standardize
+ * @function
+ * @param {String} a party string, e.g. 'DEM'
+ * @returns {String} a normalized party string
+ * @example
+ * normalizeParty('DEM') //=> 'dem'
+ * normalizeParty('gop') //=> 'gop'
+ * normalizeParty('green') //=> 'ind'
+ */
+const normalizeParty = (s) => {
 	let party
 	if (s) {
 		party = (_.includes(['dem', 'gop', 'yes', 'no'], s.toLowerCase()) ?
@@ -15,6 +26,9 @@ const standardizeParty = (s) => {
 const toTitleCase = (str) =>
 	str.replace(/\w\S*/g, txt =>
 		txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase())
+
+const standardizeParty = (s) =>
+	toTitleCase(s).replace('Gop', 'GOP')
 
 const toSentenceCase = (s) =>
 	[s[0].toUpperCase(), s.slice(1)].join('')
@@ -40,5 +54,6 @@ export {
 	percentForDisplay,
 	toSentenceCase,
 	toTitleCase,
+	normalizeParty,
 	standardizeParty,
 }
