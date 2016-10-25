@@ -5,9 +5,12 @@ import Timer from './../components/Timer.js'
 import Header from './../components/Header.js'
 import Footer from './../components/Footer.js'
 import TestStatus from './../components/TestStatus.js'
-import FeatureGroup from './../components/FeatureGroup.js'
+import ResultGroup from './../components/ResultGroup.js'
+import { sortByVoteCount } from './../utils/Candidates.js'
 import Hero from './../components/Hero.js'
+import urlManager from './../utils/urlManager.js'
 import { toTitleCase } from './../utils/standardize.js'
+import { getName } from './../utils/Race.js'
 
 // We'll keep these urls here for testing. A description:
 
@@ -77,8 +80,23 @@ class Town extends Component {
 		const townTitle = toTitleCase(params.townName)
 
 		// Create result blocks for all the town races.
-		const raceBlocks = races.map((race, key) =>
-			<FeatureGroup {...{ race, key }} />)
+		const raceBlocks = races.map((race, i) => {
+
+			const stateUnit = (race.reportingUnits || [])[0] || {}
+
+			const candidates = stateUnit.candidates || []
+
+			return (
+				<ResultGroup
+					key={i}
+					overline={getName(race)}
+					precinctsReportingPct={stateUnit.precinctsReportingPct}
+					candidates={sortByVoteCount(candidates)}
+					buttonText='See full results'
+					buttonUrl={urlManager.race(race)} />
+			)
+
+		})
 
 		return (
 			<div>
@@ -94,9 +112,7 @@ class Town extends Component {
 
 						<Timer {...timerProps} />
 
-						<div className='r-row--full'>
-							{raceBlocks}
-						</div>
+						{raceBlocks}
 
 					</div>
 
