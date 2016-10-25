@@ -54,26 +54,33 @@ const buildSeats = ({ dem, gop, ind, total, rows }) => {
 
 	let d
 	let r
-	let i = ind
 	let u
 
 	const seats = []
 	const seatsPerRow = Math.floor(total / rows)
 	let rowsCount = rows
 
-	const demPerRow = Math.floor(dem / rows)
-	let demRemainder = dem % rows
+	// Our first row is unique in that we want all of the independents centered in the same row,
+	// contrary to how we handle the other two parties
+	// The rest of the slots will be filled with Democrats and Republicans
+	// We'll handle this special case first
+	if ( rowsCount--) {
+		d = Math.floor(seatsPerRow / 2) - Math.floor( ind / 2)
+		r = Math.ceil(seatsPerRow / 2) - Math.ceil( ind / 2)
+		seats.push(buildRow({ dem: d, gop: r, ind: ind, undecided: 0}))
+	}
 
-	const gopPerRow = Math.floor(gop / rows)
-	let gopRemainder = gop % rows
+	// Calculate how many democrats and republicans per row based on what's left over
+	const demPerRow = Math.floor((dem - d)/ rowsCount)
+	let demRemainder = (dem - d) % rows
 
-	// We know there's going to be less than 10, and we want them all on the same row
+	const gopPerRow = Math.floor((gop - r) / rowsCount)
+	let gopRemainder = (gop - r) % rows
 
 	while (rowsCount--) {
-		d = demPerRow - Math.floor( i / 2 )
-		r = gopPerRow - Math.ceil( i / 2 )
-		let seatsTaken = d + r + i
-		console.log([d, r, i, seatsTaken])
+		d = demPerRow
+		r = gopPerRow
+		let seatsTaken = d + r
 		if (demRemainder > 0 && seatsTaken < seatsPerRow) {
 			d++
 			demRemainder--
@@ -85,17 +92,9 @@ const buildSeats = ({ dem, gop, ind, total, rows }) => {
 			seatsTaken++
 		}
 
-		u = (seatsTaken >= seatsPerRow) ? 0 : seatsPerRow - d - r - i
+		u = (seatsTaken >= seatsPerRow) ? 0 : seatsPerRow - d - r
 
-		// We know there's going to be less than 10 independents, 
-		// and we want them all on the same row, contrary to how we handle
-		// the other two parties
-		d = 9
-		r = 9
-		u = 0
-		i = 2
-		seats.push(buildRow({ dem: d, gop: r, ind: i, undecided: u }))
-		i = 0
+		seats.push(buildRow({ dem: d, gop: r, ind: 0, undecided: u }))
 	}
 
 	return seats
