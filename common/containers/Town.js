@@ -108,7 +108,7 @@ class Town extends Component {
 				<main id='content'>
 					<Hero title={townTitle} />
 
-					<div className='container-lg'>
+					<div className='container-sm'>
 
 						<Timer {...timerProps} />
 
