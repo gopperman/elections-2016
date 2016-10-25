@@ -100,7 +100,6 @@ class Election extends Component {
 			.map((race, key) => <FeatureGroup {...{ race, key }} />)
 			.value()
 
-//							<BalanceOfPower dem={senateDemCount} gop={senateGOPCount} ind={senateOtherCount} />
 		return (
 			<div>
 
@@ -128,7 +127,7 @@ class Election extends Component {
 						</div>
 						<div className='r-row--full'>
 							<BalanceOfPower dem={senateDemCount} gop={senateGOPCount} ind={senateOtherCount} />
-							<BalanceOfPower dem={50} gop={48} ind={2} />
+							<BalanceOfPower dem={34} gop={30} ind={2} />
 						</div>
 
 					</div>
