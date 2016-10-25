@@ -7,6 +7,7 @@ import { trigger } from 'redial'
 import configureStore from './../common/store/configureStore.js'
 import initialState from './../common/store/initialState.js'
 import routes from './../common/routes.js'
+import meta from './../data/meta.json'
 
 export default (req, res) => {
 
@@ -66,6 +67,7 @@ export default (req, res) => {
 						appHtml,
 						initialState: state,
 						isProduction: process.env.NODE_ENV === 'production',
+						meta,
 					})
 
 				})
