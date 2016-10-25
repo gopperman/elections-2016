@@ -112,7 +112,7 @@ class Office extends Component {
 				<main id='content'>
 					<Hero title={title} />
 
-					<div className='container-lg'>
+					<div className='container-sm'>
 
 						<Timer {...timerProps} />
 

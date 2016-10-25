@@ -3,11 +3,17 @@
 //========================
 
 // Result grouping
-.r-col > *
-	margin-bottom 1em
-	&:not(:last-of-type)
-		padding-bottom 1em
-		border-bottom 1px solid set-gray('lightest')
+.r-col
+	border-top 3px solid set-gray('lightest')
+	padding-top 1em
+	> *
+		margin-bottom 1em
+		&:not(:last-of-type)
+			padding-bottom 1em
+			border-bottom 1px solid set-gray('lightest')
+	a, button
+		margin-top 2em
+		width 100%
 
 .r-row
 	display flex
@@ -38,7 +44,4 @@
 	border 8px solid transparent
 	border-image linear-gradient(to top,set-color('blue') 0,set-color('red') 100%)
 	border-image-slice 1
-	a, button
-		margin-top 2em
-		width 100%
 		
