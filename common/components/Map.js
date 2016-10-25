@@ -14,6 +14,7 @@ import {
 	toSentenceCase,
 	toTitleCase,
 } from './../utils/standardize.js'
+import MapLegend from './MapLegend.js'
 import svgs from './../utils/svgs.js'
 
 class Map extends Component {
@@ -498,34 +499,7 @@ class Map extends Component {
 						</div>
 					</div>
 				</div>
-				<div className='legend' aria-hidden='true'>
-					<ul className='legend__list'>
-						<li className='legend__item'>
-							<p className='legend__label benton-regular'>No data</p>
-							<div className='legend__marker fill-none' />
-						</li>
-						<li className='legend__item'>
-							<p className='legend__label benton-regular'>Tie</p>
-							<div className='legend__marker fill-tie' />
-						</li>
-						<li className='legend__item'>
-							<p className='legend__label benton-regular'>Lead</p>
-							{parties.map((v, i) =>
-								<div
-									key={i}
-									className={`legend__marker fill-leading-${v}`} />
-							)}
-						</li>
-						<li className='legend__item'>
-							<p className='legend__label benton-regular'>Win</p>
-							{parties.map((v, i) =>
-								<div
-									key={i}
-									className={`legend__marker fill-complete-${v}`} />
-							)}
-						</li>
-					</ul>
-				</div>
+				<MapLegend parties={parties} />
 			</div>
 		)
 
