@@ -6,7 +6,7 @@ import Timer from './../components/Timer.js'
 import Header from './../components/Header.js'
 import Footer from './../components/Footer.js'
 import TestStatus from './../components/TestStatus.js'
-import BalanceOfPower from './../components/BalanceOfPower.js'
+// import BalanceOfPower from './../components/BalanceOfPower.js'
 import Hero from './../components/Hero.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 import Map from './../components/Map.js'
@@ -50,13 +50,15 @@ class Election extends Component {
 		const data = results.data || {}
 
 		const senate = getSenateReport(data.reports)
-		const senateDems = _.find(senate, {party: "Dem"})
-		const senateGOP = _.find(senate, {party: "GOP"})
-		const senateOther = _.find(senate, {party: "Others"})
+		const senateDems = _.find(senate, { party: 'Dem' })
+		const senateGOP = _.find(senate, { party: 'GOP' })
+		const senateOther = _.find(senate, { party: 'Others' })
 
+		// TODO: get rid of hardcoded numbers
 		const senateDemCount = (senateDems && senateDems.seats) || 43
 		const senateGOPCount = (senateGOP && senateGOP.seats) || 49
 		const senateOtherCount = (senateOther && senateOther.seats) || 2
+		console.log({ senateDemCount, senateGOPCount, senateOtherCount })
 
 		// Get all races.
 		const races = data.races || []
@@ -126,8 +128,11 @@ class Election extends Component {
 							{featured}
 						</div>
 						<div className='r-row--full'>
-							{/*<BalanceOfPower dem={senateDemCount} gop={senateGOPCount} ind={senateOtherCount} />*/}
-							{/*<BalanceOfPower dem={34} gop={30} ind={2} />*/}
+							{/* <BalanceOfPower
+								dem={senateDemCount}
+								gop={senateGOPCount}
+								ind={senateOtherCount} />*/}
+							{/* <BalanceOfPower dem={34} gop={30} ind={2} />*/}
 						</div>
 
 					</div>
