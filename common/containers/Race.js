@@ -101,18 +101,17 @@ class Race extends Component {
 
 				<main id='content'>
 					<Hero title={getName(race)} />
+						<div className='container-sm'>
+							<Timer {...timerProps} />
 
-					<div className='container-lg'>
-						<Timer {...timerProps} />
-
-						<ResultGroup
-							overline={getName(race)}
-							precinctsReportingPct={state.precinctsReportingPct}
-							candidates={summaryCandidates} />
-
-						{map}
-
-					</div>
+							<ResultGroup
+								overline={getName(race)}
+								precinctsReportingPct={state.precinctsReportingPct}
+								candidates={summaryCandidates} />
+						</div>
+						<div className='container-lg'>
+							{map}
+						</div>
 
 					<div className='container-downpage'>
 						<TownResultsTable {...{ towns, summaryCandidates }} />
