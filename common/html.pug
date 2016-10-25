@@ -1,12 +1,78 @@
 doctype html
-html(lang="en")
+html(lang='en')
 	head
+
 		meta(name='viewport', content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no')
 		meta(charset='utf-8')
-		meta(http-equiv='X-UA-Compatible' content='IE=edge,chrome=1')
+		meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
+		meta(name='author', content='The Boston Globe')
+		meta(name='description', content=meta.description)
+
+		// for business
+		meta(property='title', content=meta.title)
+		meta(property='section', content=meta.section)
+		meta(property='author', content=meta.author)
+		meta(property='meter', content=meta.meter)
+		meta(property='socialConnect', content=meta.socialConnect)
+
+		meta(property='og:city', content='Boston')
+		meta(property='og:state', content='MA')
+		meta(property='og:country', content='US')
+		meta(property='og:type', content='article')
+		meta(property='og:title', content=meta.title)
+		meta(property='og:description', content=meta.description)
+		meta(property='og:url', content=meta.url)
+		meta(property='og:image', content=meta.imageUrl)
+		meta(property='og:site_name', content='BostonGlobe.com')
+		meta(property='fb:admins', content='100001044693856,507486035')
+		meta(property='fb:app_id', content='103933749691726')
+		meta(property='article:publisher', content='https://www.facebook.com/globe')
+
+		meta(property='twitter:account_id', content='95431448')
+		meta(name='twitter:card', content='summary')
+		meta(name='twitter:url', content=meta.url)
+		meta(name='twitter:title', content=meta.title)
+		meta(name='twitter:description', content=meta.description)
+		meta(name='twitter:image', content=meta.imageUrl)
+		meta(name='twitter:site', content='@BostonGlobe')
+		meta(name='twitter:creator', content='@BostonGlobe')
+
+		meta(name='robots', content='noarchive')
+		meta(name='news_keywords', content=`Boston Globe, Boston, interactive, graphic, ${meta.title}, ${meta.keywords}`)
+
+		// main.css (smooshed)
+
+		// favicon
+		link(rel='apple-touch-icon', sizes='57x57', href='//apps.bostonglobe.com/common/favicon/apple-touch-icon-57x57.png?v=2016')
+		link(rel='apple-touch-icon', sizes='60x60', href='//apps.bostonglobe.com/common/favicon/apple-touch-icon-60x60.png?v=2016')
+		link(rel='apple-touch-icon', sizes='72x72', href='//apps.bostonglobe.com/common/favicon/apple-touch-icon-72x72.png?v=2016')
+		link(rel='apple-touch-icon', sizes='76x76', href='//apps.bostonglobe.com/common/favicon/apple-touch-icon-76x76.png?v=2016')
+		link(rel='apple-touch-icon', sizes='114x114', href='//apps.bostonglobe.com/common/favicon/apple-touch-icon-114x114.png?v=2016')
+		link(rel='apple-touch-icon', sizes='120x120', href='//apps.bostonglobe.com/common/favicon/apple-touch-icon-120x120.png?v=2016')
+		link(rel='apple-touch-icon', sizes='144x144', href='//apps.bostonglobe.com/common/favicon/apple-touch-icon-144x144.png?v=2016')
+		link(rel='apple-touch-icon', sizes='152x152', href='//apps.bostonglobe.com/common/favicon/apple-touch-icon-152x152.png?v=2016')
+		link(rel='apple-touch-icon', sizes='180x180', href='//apps.bostonglobe.com/common/favicon/apple-touch-icon-180x180.png?v=2016')
+		link(rel='icon', type='image/png', href='//apps.bostonglobe.com/common/favicon/favicon-32x32.png?v=2016', sizes='32x32')
+		link(rel='icon', type='image/png', href='//apps.bostonglobe.com/common/favicon/favicon-194x194.png?v=2016', sizes='194x194')
+		link(rel='icon', type='image/png', href='//apps.bostonglobe.com/common/favicon/favicon-96x96.png?v=2016', sizes='96x96')
+		link(rel='icon', type='image/png', href='//apps.bostonglobe.com/common/favicon/android-chrome-192x192.png?v=2016', sizes='192x192')
+		link(rel='icon', type='image/png', href='//apps.bostonglobe.com/common/favicon/favicon-16x16.png?v=2016', sizes='16x16')
+		link(rel='manifest', href='//apps.bostonglobe.com/common/favicon/manifest.json?v=2016')
+		link(rel='mask-icon', href='//apps.bostonglobe.com/common/favicon/safari-pinned-tab.svg?v=2016', color='#000000')
+		link(rel='shortcut icon', href='//apps.bostonglobe.com/common/favicon/favicon.ico?v=2016')
+		meta(name='msapplication-TileColor', content='#ffffff')
+		meta(name='msapplication-TileImage', content='//apps.bostonglobe.com/common/favicon/mstile-144x144.png?v=2016')
+		meta(name='msapplication-config', content='//apps.bostonglobe.com/common/favicon/browserconfig.xml?v=2016')
+		meta(name='theme-color', content='#ffffff')
+
+		// critical.js (smooshed)
+
 		if isProduction
 			link(href='/static/compiled.css', rel='stylesheet', type='text/css')
 	body
 		#root!= appHtml
 		script window.REDUX__INITIALSTATE = !{JSON.stringify(initialState)}
 		script(src='/static/bundle.js')
+
+		// bundle.js (timestamped)
+		// business.js async=true
