@@ -127,7 +127,9 @@ class Election extends Component {
 						<div className='r-row--full'>
 							{featured}
 						</div>
+
 						<div className='r-row--full'>
+							this is a balance of power placeholder
 							{/* <BalanceOfPower
 								dem={senateDemCount}
 								gop={senateGOPCount}
