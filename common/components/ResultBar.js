@@ -32,7 +32,7 @@ precinctsReportingPct }) => {
 		null
 
 	const incumbentSpan = incumbent ?
-		<span className='incumbent'>(incumbent)</span> : null
+		<span className='r-block__aside benton-regular'>Incumbent</span> : null
 
 	return (
 
