@@ -12,6 +12,7 @@ class BalanceOfPower extends Component {
 	static propTypes = {
 		dem: PropTypes.number.isRequired,
 		gop: PropTypes.number.isRequired,
+		ind: PropTypes.number.isRequired,
 	}
 
 	// This lifecycle event gets called once, immediately after the initial
@@ -63,7 +64,7 @@ class BalanceOfPower extends Component {
 
 	drawChart = () => {
 
-		const { dem, gop } = this.props
+		const { dem, gop, ind } = this.props
 
 		// Create outer width from container.
 		const outerWidth = this._svg.parentNode.offsetWidth
@@ -75,7 +76,7 @@ class BalanceOfPower extends Component {
 		const baseRadius = 80
 
 		// Get the data.
-		const senate = buildSeats({ dem, gop, total: 100, rows: 4 })
+		const senate = buildSeats({ dem, gop, ind, total: 100, rows: 5 })
 
 		// Select the svg node.
 		const svg = select(this._svg)
@@ -100,7 +101,7 @@ class BalanceOfPower extends Component {
 		// The previous `data` function returns a UPDATE lifecycle.
 		// Use it to set the UPDATE attributes.
 		circle
-				.attr('class', d => d.party)
+				.attr('class', d => `fill-winner-${d.party}`)
 
 		// Append `circle` and set its ENTER attributes.
 		circle.enter().append('circle')
@@ -111,7 +112,7 @@ class BalanceOfPower extends Component {
 				.attr('cy', (d, i) =>
 					-((baseRadius + ((d.row + 1) * 16)) * Math.sin((Math.PI / (senate[0].length - 1)) * i))
 				)
-				.attr('class', d => d.party)
+				.attr('class', d => `fill-winner-${d.party}`)
 	}
 
 	render() {

@@ -3,7 +3,6 @@ import { standardizeParty } from './standardize.js'
 
 // { party: 'dem', won: 13, leading: 0, holdovers: 34 },
 const getSenateReport = (reports) => {
-
 	// Get the senate report
 	const report = _(reports)
 		.map('reports')
@@ -31,7 +30,6 @@ const getSenateReport = (reports) => {
 		.value()
 
 	return result
-
 }
 
 export {
