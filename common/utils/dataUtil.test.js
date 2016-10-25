@@ -8,6 +8,18 @@ describe('dataUtil', () => {
 
 	describe('getSenateReport', () => {
 
+		it('should work with null data', () => {
+
+			assert.deepEqual(getSenateReport(null), [])
+
+		})
+
+		it('should work with empty data', () => {
+
+			assert.deepEqual(getSenateReport([]), [])
+
+		})
+
 		it('should work with valid data', () => {
 
 			const reports = readFileSync('./data/report-trend-s.json')
