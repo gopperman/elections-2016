@@ -67,7 +67,7 @@ class Timer extends Component {
 				const timeLeft = Math.max(
 					Math.round((DURATION - (Date.now() - startedAt)) / 1000), 0)
 
-				message = `update in ${timeLeft}`
+				message = `Update in ${timeLeft}`
 				break
 
 			}
@@ -84,10 +84,8 @@ class Timer extends Component {
 		}
 
 		return (
-			<div className='Timer'>
-				<h1>Timer</h1>
-				<p>Status: {status}</p>
-				<p>Message: {message}</p>
+			<div className='timer'>
+				<p className='timer__update benton-bold'>{message}</p>
 			</div>
 		)
 
