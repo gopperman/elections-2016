@@ -5,9 +5,9 @@ import officeNames from './../../data/offices.json'
 const RaceNavigationLinks = () => (
 	<nav className='subnav'>
 		<ul className='subnav__list'>
-			<li className='subnav__item icon-election'>
+			<li className='subnav__item'>
 				<a
-					className='subnav__link benton-bold'
+					className='subnav__link benton-bold icon--election'
 					href={urlManager.base()}>Election 2016</a>
 			</li>
 			{officeNames.map((officeName, i) => (
