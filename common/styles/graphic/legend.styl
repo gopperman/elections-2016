@@ -1,0 +1,33 @@
+//========================
+// Legend
+//========================
+
+.legend
+	list-style()
+	display flex
+	justify-content space-between
+	flex-wrap wrap
+	margin-top 1.5em
+	max-width 40em
+	&__item
+		width 50%
+		padding 0.75em
+		+mq('bp-2')
+			width auto
+	&__subhed
+		font-size 0.8em
+		margin-bottom 0.5em
+		border-bottom 1px solid set-gray('lightest')
+	&__deflist
+		display flex
+		justify-content space-between
+	&__term
+		text-transform uppercase
+		font-size 0.7em
+		line-height 1.5
+		margin-right 0.25em
+	&__def
+		width 2em
+		height 1em
+		&:not(:last-of-type)
+			margin-right 0.5em

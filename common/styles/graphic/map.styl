@@ -94,35 +94,3 @@ div.map
 			@media (min-width: 60em)
 				text
 					font-size 0.9em
-
-
-// Legend
-.legend
-	margin-top 1.5em
-	width 100%
-	max-width 30em
-	&__list
-		list-style()
-		display flex
-		justify-content space-between
-	&__item
-		flex 1
-		// &:not(:last-of-type)
-		// 	margin-right 1em
-	&__label
-		font-size 0.8em
-		+mq('bp-2')
-			display inline-block
-			transform translateY(-0.25em)
-			margin-right 0.5em
-	&__marker
-		width 1em
-		+mq('bp-2')
-			width 1.2em
-		height 0.8em
-		display inline-block
-		margin-right 0.25em
-
-	.legend
-		margin-top 1.5em
-		font-size 0.7em
