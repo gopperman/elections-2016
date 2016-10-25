@@ -30,6 +30,10 @@ const toTitleCase = (str) =>
 const standardizeParty = (s) =>
 	toTitleCase(s).replace('Gop', 'GOP')
 
+const orderParties = (parties) =>
+	_.sortBy(parties, party =>
+		_.indexOf(['dem', 'gop', 'ind', 'yes', 'no'], normalizeParty(party)))
+
 const toSentenceCase = (s) =>
 	[s[0].toUpperCase(), s.slice(1)].join('')
 
@@ -56,4 +60,5 @@ export {
 	toTitleCase,
 	normalizeParty,
 	standardizeParty,
+	orderParties,
 }

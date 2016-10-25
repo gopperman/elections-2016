@@ -5,9 +5,23 @@ import {
 	percentForDisplay,
 	normalizeParty,
 	standardizeParty,
+	orderParties,
 } from './standardize.js'
 
 describe('standardize', () => {
+
+	describe('orderParties', () => {
+
+		it('should work', () => {
+
+			assert.deepEqual(
+				orderParties(['gop', 'OTH', 'DEM']),
+				['DEM', 'gop', 'OTH']
+			)
+
+		})
+
+	})
 
 	describe('normalizeParty', () => {
 

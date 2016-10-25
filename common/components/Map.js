@@ -11,6 +11,7 @@ import compareStrings from './../utils/compareStrings.js'
 import createTooltip from './../utils/createTooltip.js'
 import {
 	normalizeParty,
+	orderParties,
 	toSentenceCase,
 	toTitleCase,
 } from './../utils/standardize.js'
@@ -462,14 +463,14 @@ class Map extends Component {
 
 		const dropdownLabel = toSentenceCase(`${dropdownName} results`)
 
-		const parties = _(data)
+		const parties = orderParties(_(data)
 			.map('candidates')
 			.flatten()
 			.map('party')
 			.uniq()
 			.map(normalizeParty)
 			.uniq()
-			.value()
+			.value())
 
 		return (
 			<div className='map'>

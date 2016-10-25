@@ -3,20 +3,7 @@ import { standardizeParty } from './../utils/standardize.js'
 
 const MapLegend = ({ parties }) => (
 	<ul className='legend'>
-		<li className='legend__item'>
-			<p className='legend__subhed benton-regular'>No Data</p>
-			<dl className='legend__deflist'>
-				<dt className='legend__term benton-regular hide-accessible'>No Data</dt>
-				<dd className='legend__def fill-none' />
-			</dl>
-		</li>
-		<li className='legend__item'>
-			<p className='legend__subhed benton-regular'>Tie</p>
-			<dl className='legend__deflist'>
-				<dt className='legend__term benton-regular hide-accessible'>Tie</dt>
-				<dd className='legend__def fill-tie' />
-			</dl>
-		</li>
+
 		<li className='legend__item'>
 			<p className='legend__subhed benton-regular'>Lead</p>
 			<dl className='legend__deflist'>
@@ -26,6 +13,7 @@ const MapLegend = ({ parties }) => (
 				))}
 			</dl>
 		</li>
+
 		<li className='legend__item'>
 			<p className='legend__subhed benton-regular'>Win</p>
 			<dl className='legend__deflist'>
@@ -35,6 +23,23 @@ const MapLegend = ({ parties }) => (
 				))}
 			</dl>
 		</li>
+
+		<li className='legend__item'>
+			<p className='legend__subhed benton-regular'>No Data</p>
+			<dl className='legend__deflist'>
+				<dt className='legend__term benton-regular hide-accessible'>No Data</dt>
+				<dd className='legend__def fill-none' />
+			</dl>
+		</li>
+
+		<li className='legend__item'>
+			<p className='legend__subhed benton-regular'>Tie</p>
+			<dl className='legend__deflist'>
+				<dt className='legend__term benton-regular hide-accessible'>Tie</dt>
+				<dd className='legend__def fill-tie' />
+			</dl>
+		</li>
+
 	</ul>
 )
 
