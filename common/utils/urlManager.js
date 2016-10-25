@@ -1,8 +1,5 @@
-<<<<<<< HEAD
 import compareStrings from './compareStrings.js'
 
-=======
->>>>>>> 38513b2f7ecf2fc69bd492e9cc9a42d38457a933
 const e = (s) => encodeURIComponent(encodeURIComponent(s))
 
 const urlManager = {
