@@ -28,7 +28,7 @@ const TownResultsTable = ({ towns, summaryCandidates }) =>
 							classnames('benton-bold', { 'is-winner': !!winner })
 
 						const incumbentSpan = incumbent ?
-							<span className='incumbent'>(incumbent)</span> : null
+							<span className='r-block__aside benton-regular'>Incumbent</span> : null
 
 						return (
 							<th scope='col' className='r-table__cell' key={i}>
