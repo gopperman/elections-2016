@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { standardizeParty } from './standardize.js'
+import { normalizeParty } from './standardize.js'
 import {
 	candidatesAreEqual,
 	sortByElectoralCount,
@@ -37,7 +37,7 @@ export default ({ candidates, precinctsReportingPct }) => {
 			// We have a winner.
 			if (winner) {
 
-				result = `fill-winner-${standardizeParty(winner.party)}`
+				result = `fill-winner-${normalizeParty(winner.party)}`
 
 			// We don't have a winner.
 			// Do we have data? (electWon OR voteCount)
@@ -57,7 +57,7 @@ export default ({ candidates, precinctsReportingPct }) => {
 					// We do not have a tie.
 					} else {
 
-						result = `fill-leading-${standardizeParty(first.party)}`
+						result = `fill-leading-${normalizeParty(first.party)}`
 
 					}
 
@@ -87,12 +87,12 @@ export default ({ candidates, precinctsReportingPct }) => {
 				} else if (+precinctsReportingPct === 100) {
 
 					// Yes - so color it complete.
-					result = `fill-complete-${standardizeParty(first.party)}`
+					result = `fill-complete-${normalizeParty(first.party)}`
 
 				// No - color it leading.
 				} else {
 
-					result = `fill-leading-${standardizeParty(first.party)}`
+					result = `fill-leading-${normalizeParty(first.party)}`
 
 				}
 

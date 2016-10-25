@@ -1,19 +1,35 @@
 /* global describe, it */
 
 import assert from 'assert'
-import { percentForDisplay, standardizeParty } from './standardize.js'
+import {
+	percentForDisplay,
+	normalizeParty,
+	standardizeParty,
+} from './standardize.js'
 
 describe('standardize', () => {
 
-	describe('party', () => {
+	describe('normalizeParty', () => {
 
 		it('should work', () => {
 
-			assert.equal(standardizeParty('Dem'), 'dem')
-			assert.equal(standardizeParty('Gop'), 'gop')
-			assert.equal(standardizeParty('Yes'), 'yes')
-			assert.equal(standardizeParty('No'), 'no')
-			assert.equal(standardizeParty('asdf'), 'ind')
+			assert.deepEqual(
+				['Dem', 'Gop', 'Yes', 'No', 'asdf'].map(normalizeParty),
+				['dem', 'gop', 'yes', 'no', 'ind']
+			)
+
+		})
+
+	})
+
+	describe('standardizeParty', () => {
+
+		it('should work', () => {
+
+			assert.deepEqual(
+				['dem', 'gop', 'yes', 'no', 'ind'].map(standardizeParty),
+				['Dem', 'GOP', 'Yes', 'No', 'Ind']
+			)
 
 		})
 

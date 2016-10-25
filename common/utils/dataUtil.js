@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { standardizeParty } from './standardize.js'
+import { normalizeParty } from './standardize.js'
 
 const getSenateReport = (reports) => {
 	// Get the senate report
@@ -21,7 +21,7 @@ const getSenateReport = (reports) => {
 		}))
 		// and lowercase + toInt when appropriate.
 		.map(v => ({
-			party: standardizeParty(v.title),
+			party: normalizeParty(v.title),
 			won: +v.Won,
 			leading: +v.Leading,
 			holdovers: +v.Holdovers,
