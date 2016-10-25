@@ -6,11 +6,8 @@ import Timer from './../components/Timer.js'
 import Header from './../components/Header.js'
 import Footer from './../components/Footer.js'
 import TestStatus from './../components/TestStatus.js'
-import ResultGroup from './../components/ResultGroup.js'
-import { sortByVoteCount } from './../utils/Candidates.js'
+import FeatureGroup from './../components/FeatureGroup.js'
 import Hero from './../components/Hero.js'
-import urlManager from './../utils/urlManager.js'
-import { getName } from './../utils/Race.js'
 
 // We'll keep these urls here for testing. A description:
 
@@ -83,24 +80,8 @@ class Office extends Component {
 		const title = [firstRace.officeName, firstRace.statePostal].join(', ')
 
 		// Create result blocks for all races of this office type.
-		const raceBlocks = races.map((race, i) => {
-
-			const stateUnit =
-				_.find(race.reportingUnits, { level: 'state' }) || {}
-
-			const candidates = stateUnit.candidates || []
-
-			return (
-				<ResultGroup
-					key={i}
-					overline={getName(race)}
-					precinctsReportingPct={stateUnit.precinctsReportingPct}
-					candidates={sortByVoteCount(candidates)}
-					buttonText='See full results'
-					buttonUrl={urlManager.race(race)} />
-			)
-
-		})
+		const raceBlocks = races.map((race, key) =>
+			<FeatureGroup {...{ race, key }} />)
 
 		return (
 			<div>
@@ -116,7 +97,9 @@ class Office extends Component {
 
 						<Timer {...timerProps} />
 
-						{raceBlocks}
+						<div className='r-row--full'>
+							{raceBlocks}
+						</div>
 
 					</div>
 
