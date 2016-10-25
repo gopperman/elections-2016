@@ -1,50 +1,40 @@
 import _ from 'lodash'
+import { standardizeParty } from './standardize.js'
 
-const getRaceUnits = (data) => {
-	// Grab the `data.races` property.
-	const { races } = data
-
-	// If possible, grab the first race. Otherwise set it to an
-	// empty object.
-	const race = (races && races[0]) || {}
-	const subunits = race.reportingUnits || []
-
-	return subunits
-}
-
-const getPresidentStates = (data) =>
-	data.races.map(v => ({
-		...v.reportingUnits[0],
-	}))
-
-const getPresidentSummaryState = (data) =>
-	_.find(getPresidentStates(data), { statePostal: 'US' })
-
+// { party: 'dem', won: 13, leading: 0, holdovers: 34 },
 const getSenateReport = (reports) => {
-	const r = (reports && reports[0]) || {} 
-	const reps = r.reports
 
-	const senateReport = _.find(reps, { title: 'Trend / s / test / US' })
+	// Get the senate report
+	const report = _(reports)
+		.map('reports')
+		.flatten()
+		.find({ title: 'Trend / s / test / US' }) || {}
 
-	// The report can come in as undefined at first, need to be defensive
-	const trendtable = (senateReport && senateReport.report && senateReport.report.trendtable) || {}
-	const parties = (trendtable && trendtable.party) || []
-	console.log(parties)
-	const balance = (parties && parties.map(p => {
-		//TO-DO: Do no use Object.assign
-		const trends = Object.assign(...p.trend)
-		return { 
-			'party': p.title,
-			'seats': parseInt(trends.Holdovers) + parseInt(trends.Won)
-		}
-	})) || []
+	// Get all the `party` keys.
+	const parties = _.get(report, 'report.trendtable.party') || []
 
-	return balance
+	// Iterate over the parties,
+	const result = _(parties)
+		.map(v => ({
+			// return everything in the party,
+			...v,
+			// and also turn `trend` into an object,
+			..._.assign.apply(null, v.trend),
+		}))
+		// and lowercase + toInt when appropriate.
+		.map(v => ({
+			party: standardizeParty(v.title),
+			won: +v.Won,
+			leading: +v.Leading,
+			holdovers: +v.Holdovers,
+		}))
+		.value()
+
+	return result
+
 }
 
 export {
-	getRaceUnits,
-	getPresidentStates,
-	getPresidentSummaryState,
+	// eslint-disable-next-line import/prefer-default-export
 	getSenateReport,
 }
