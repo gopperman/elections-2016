@@ -30,9 +30,8 @@ const fetchResultsRequest = ({ url }) => ({
 	url,
 })
 
-const fetchResultsSuccess = ({ url, data }) => ({
+const fetchResultsSuccess = ({ data }) => ({
 	type: FETCH_RESULTS_SUCCESS,
-	url,
 	data,
 })
 
@@ -116,7 +115,7 @@ const fetchResults = ({ url }) =>
 				} else {
 
 					// We did get at least 1 race! Proceed.
-					return dispatch(fetchResultsSuccess({ url, data }))
+					return dispatch(fetchResultsSuccess({ data }))
 
 				}
 

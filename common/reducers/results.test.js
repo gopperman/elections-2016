@@ -4,8 +4,8 @@ import { expect } from 'chai'
 import rootReducer from '../../common/reducers/index.js'
 import {
 	FETCH_RESULTS_REQUEST,
-	// FETCH_RESULTS_SUCCESS,
-	// FETCH_RESULTS_FAILURE,
+	FETCH_RESULTS_SUCCESS,
+	FETCH_RESULTS_FAILURE,
 } from '../actions/actionTypes.js'
 
 describe('results reducer', () => {
@@ -36,24 +36,197 @@ describe('results reducer', () => {
 		})
 
 		it('should go from request to success', () => {
-			expect(true).to.deep.equal(false)
+
+			const initialState = {
+				results: {
+					isFetching: true,
+					url: 'myurl',
+				},
+			}
+
+			const action = {
+				type: FETCH_RESULTS_SUCCESS,
+				data: {
+					key: 'myvalue',
+				},
+			}
+
+			const finalState = {
+				results: {
+					isFetching: false,
+					url: 'myurl',
+					data: {
+						key: 'myvalue',
+					},
+				},
+			}
+
+			expect(rootReducer(initialState, action).results)
+				.to.deep.equal(finalState.results)
+
 		})
+
 		it('should go from request to failure', () => {
-			expect(true).to.deep.equal(false)
+
+			const initialState = {
+				results: {
+					isFetching: true,
+					url: 'myurl',
+				},
+			}
+
+			const action = {
+				type: FETCH_RESULTS_FAILURE,
+				error: {
+					key: 'myerror',
+				},
+			}
+
+			const finalState = {
+				results: {
+					isFetching: false,
+					url: 'myurl',
+					error: {
+						key: 'myerror',
+					},
+				},
+			}
+
+			expect(rootReducer(initialState, action).results)
+				.to.deep.equal(finalState.results)
+
 		})
 
 		it('should go from success to request', () => {
-			expect(true).to.deep.equal(false)
+
+			const initialState = {
+				results: {
+					isFetching: false,
+					url: 'myurl',
+					data: {
+						key: 'myvalue',
+					},
+				},
+			}
+
+			const action = {
+				type: FETCH_RESULTS_REQUEST,
+				url: 'anotherurl',
+			}
+
+			const finalState = {
+				results: {
+					isFetching: true,
+					url: 'anotherurl',
+					data: {
+						key: 'myvalue',
+					},
+				},
+			}
+
+			expect(rootReducer(initialState, action).results)
+				.to.deep.equal(finalState.results)
+
 		})
+
 		it('should go from success to failure', () => {
-			expect(true).to.deep.equal(false)
+
+			const initialState = {
+				results: {
+					isFetching: false,
+					url: 'myurl',
+					data: {
+						key: 'myvalue',
+					},
+				},
+			}
+
+			const action = {
+				type: FETCH_RESULTS_FAILURE,
+				error: 'myerror',
+			}
+
+			const finalState = {
+				results: {
+					isFetching: false,
+					url: 'myurl',
+					data: {
+						key: 'myvalue',
+					},
+					error: 'myerror',
+				},
+			}
+
+			expect(rootReducer(initialState, action).results)
+				.to.deep.equal(finalState.results)
+
 		})
 
 		it('should go from failure to success', () => {
-			expect(true).to.deep.equal(false)
+
+			const initialState = {
+				results: {
+					isFetching: false,
+					url: 'myurl',
+					data: {
+						key: 'myvalue',
+					},
+					error: 'myerror',
+				},
+			}
+
+			const action = {
+				type: FETCH_RESULTS_SUCCESS,
+				data: {
+					my: 'data',
+				},
+			}
+
+			const finalState = {
+				results: {
+					isFetching: false,
+					url: 'myurl',
+					data: {
+						my: 'data',
+					},
+				},
+			}
+
+			expect(rootReducer(initialState, action).results)
+				.to.deep.equal(finalState.results)
+
 		})
 		it('should go from failure to request', () => {
-			expect(true).to.deep.equal(false)
+
+			const initialState = {
+				results: {
+					isFetching: false,
+					url: 'myurl',
+					data: {
+						key: 'myvalue',
+					},
+					error: 'myerror',
+				},
+			}
+
+			const action = {
+				type: FETCH_RESULTS_REQUEST,
+				url: 'anotherurl',
+			}
+
+			const finalState = {
+				results: {
+					isFetching: true,
+					url: 'anotherurl',
+					data: {
+						key: 'myvalue',
+					},
+				},
+			}
+
+			expect(rootReducer(initialState, action).results)
+				.to.deep.equal(finalState.results)
+
 		})
 
 	})
