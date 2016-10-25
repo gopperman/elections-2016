@@ -117,9 +117,10 @@ class BalanceOfPower extends Component {
 	render() {
 
 		return (
-			<div className='balanceOfPower'>
-				<h1>Balance of Power</h1>
+			<div className='balanceOfPower r-col r-feature'>
+				<h3 className="overline benton-bold">Senate Balance of Power</h3>
 				<svg ref={(c) => this._svg = c} />
+				<a href="/elections/2016/race/U.S.%20Senate/" className="btn--primary benton-bold">See full results</a>
 			</div>
 		)
 
