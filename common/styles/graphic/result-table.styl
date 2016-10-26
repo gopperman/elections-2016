@@ -3,9 +3,9 @@
 //========================
 
 .r-table
-	width 100%
 	max-width 40rem
 	margin 0 auto
+	width 100%
 	position relative
 	border-bottom 3px solid set-gray('light')
 	/.container-downpage &
@@ -47,3 +47,22 @@
 				font-size 0.7em
 				+mq('bp-2')
 					font-size 0.8em
+
+
+// Overflow container
+.table-container--outer
+	position relative
+	&:after
+		content ''
+		display block
+		z-index set-index('top')
+		position absolute
+		right 0
+		top 0
+		bottom 0
+		background linear-gradient(to left, rgba(black, 0.2), rgba(black, 0) 60%)
+		width 2em
+		+mq('bp-1')
+			display none
+.table-container--inner
+	overflow-x auto

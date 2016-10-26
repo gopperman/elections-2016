@@ -13,39 +13,43 @@ const createSummary = (raceName) =>
 const StateResultsTable = ({ states, summaryCandidates }) =>
 	<div className='r-block'>
 		<h3 className='subhed benton-bold'><span>State Results</span></h3>
-		<table className='r-table' summary={createSummary()}>
-			<thead className='r-table__head'>
-				<tr className='r-table__row'>
-					<th className='r-table__cell'>
-						<p className='benton-bold'>State</p>
-						<p className='benton-regular'>Precincts reporting</p>
-					</th>
-					{ summaryCandidates
-						.filter(v => v.isMainCandidate)
-						.map((candidate, i) => {
+		<div className='table-container--outer'>
+			<div className='table-container--inner'>
+				<table className='r-table' summary={createSummary()}>
+					<thead className='r-table__head'>
+						<tr className='r-table__row'>
+							<th className='r-table__cell'>
+								<p className='benton-bold'>State</p>
+								<p className='benton-regular'>Precincts reporting</p>
+							</th>
+							{ summaryCandidates
+								.filter(v => v.isMainCandidate)
+								.map((candidate, i) => {
 
-							const { winner, last } = candidate
+									const { winner, last } = candidate
 
-							const candidateClass =
-								classnames('benton-bold', { 'is-winner': !!winner })
+									const candidateClass =
+										classnames('benton-bold', { 'is-winner': !!winner })
 
-							return (
-								<th scope='col' className='r-table__cell' key={i}>
-									<p className={candidateClass}>{last}</p>
-									<p className='benton-regular'>{i === 0 ? 'Votes' : ''}</p>
-								</th>
-							)
-						})
-					}
-				</tr>
-			</thead>
-			<tbody>
-				{ states.map((state, key) => (
-					<StateResultsTableRow
-						{...{ key, ...state, summaryCandidates }} />
-				))}
-			</tbody>
-		</table>
+									return (
+										<th scope='col' className='r-table__cell' key={i}>
+											<p className={candidateClass}>{last}</p>
+											<p className='benton-regular'>{i === 0 ? 'Votes' : ''}</p>
+										</th>
+									)
+								})
+							}
+						</tr>
+					</thead>
+					<tbody>
+						{ states.map((state, key) => (
+							<StateResultsTableRow
+								{...{ key, ...state, summaryCandidates }} />
+						))}
+					</tbody>
+				</table>
+			</div>
+		</div>
 	</div>
 
 StateResultsTable.propTypes = {
