@@ -1,7 +1,9 @@
 import * as topojson from 'topojson'
 import _ from 'lodash'
-import TOWNS from './../../data/output/TOWNS.json'
 import { toTitleCase } from './standardize.js'
+
+import getTownsShapefile from './getTownsShapefile.js'
+const TOWNS = getTownsShapefile()
 
 export default () => {
 
