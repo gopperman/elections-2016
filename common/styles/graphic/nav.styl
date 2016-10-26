@@ -41,12 +41,11 @@
 		display inline-block
 		text-align center
 		filter grayscale(100%)
-		color set-gray('darkest')
-		opacity 0.7
+		color set-gray('dark')
 		transition 0.2s ease-in-out all
 		&:hover
 			filter grayscale(0)
-			opacity 1
+			color set-gray('darkest')
 		+mq('bp-2')
 			text-align left
 		// Icons
@@ -54,6 +53,7 @@
 			display block
 			vertical-align text-bottom
 			margin 0 auto 0.5em auto
+			// transition 0.2s ease-in-out all
 			+mq('bp-2')
 				display inline-block
 				margin 0 0.5em 0 0
