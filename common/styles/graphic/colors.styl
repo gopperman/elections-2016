@@ -17,8 +17,8 @@
 // fill-winner is for presidential races
 // fill-complete is for non-presidential races
 .fill-winner-ind, .fill-complete-ind
-	background-color set-color('green', dark)
-	fill set-color('green', dark)
+	background-color set-color('yellow')
+	fill set-color('yellow')
 .fill-winner-dem, .fill-complete-dem
 	background-color set-color('blue')
 	fill set-color('blue')
@@ -59,8 +59,8 @@
 	background-color set-gray('lightest')
 	fill set-gray('lightest')
 .fill-tie
-	background-color purple
-	fill purple
+	background-color set-color('purple')
+	fill set-color('purple')
 
 // Colors
 .color-dem
@@ -72,14 +72,15 @@
 .color-no
 	color set-color('gold', dark)
 .color-tie
-	color set-gray('medium')
+	color set-color('purple')
 
 // Stripes
 .fill-leading-dem
 	background repeating-linear-gradient(120deg, set-color('blue') 0, white 1px, white .15em, set-color('blue') calc(.15em + 1px), set-color('blue') .2em)
 .fill-leading-gop
 	background repeating-linear-gradient(120deg, set-color('red') 0, white 1px, white .15em, set-color('red') calc(.15em + 1px), set-color('red') .2em)
-.fill-leading-ind,
+.fill-leading-ind
+	background repeating-linear-gradient(120deg, set-color('green') 0, white 1px, white .15em, set-color('yellow') calc(.15em + 1px), set-color('yellow') .2em)
 .fill-leading-yes
 	background repeating-linear-gradient(120deg, set-color('green') 0, white 1px, white .15em, set-color('green') calc(.15em + 1px), set-color('green') .2em)
 .fill-leading-no
