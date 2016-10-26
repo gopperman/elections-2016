@@ -3,7 +3,7 @@
 import assert from 'assert'
 import { buildSeats, buildRow } from './visUtils.js'
 
-describe.only('visUtils', () => {
+describe('visUtils', () => {
 
 	describe('buildSeats', () => {
 
