@@ -10,12 +10,14 @@ import TestStatus from './../components/TestStatus.js'
 import Hero from './../components/Hero.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 import Map from './../components/Map.js'
-import STATES from './../../data/output/STATES.json'
 import { sortByElectoralCount } from './../utils/Candidates.js'
 import FeatureGroup from './../components/FeatureGroup.js'
 import LinkButton from './../components/LinkButton.js'
 import urlManager from './../utils/urlManager.js'
 import { getSenateReport } from './../utils/dataUtil.js'
+import getStatesShapefile from './../utils/getStatesShapefile.js'
+
+const STATES = getStatesShapefile()
 
 // We'll keep these urls here for testing. A description:
 

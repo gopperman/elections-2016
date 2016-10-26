@@ -14,6 +14,9 @@ module.exports = {
 		publicPath: '/static/',
 	},
 	plugins: [
+		new webpack.DefinePlugin({
+			'process.env.SSR_ENV': JSON.stringify('client'),
+		}),
 		new webpack.EnvironmentPlugin(['NODE_ENV', 'API_URL']),
 		new webpack.optimize.OccurrenceOrderPlugin(),
 		new webpack.HotModuleReplacementPlugin(),

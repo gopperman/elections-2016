@@ -8,7 +8,6 @@ import Footer from './../components/Footer.js'
 import TestStatus from './../components/TestStatus.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 import Map from './../components/Map.js'
-import STATES from './../../data/output/STATES.json'
 import {
 	sortByElectoralCount,
 	sortByVoteCount,
@@ -18,6 +17,9 @@ import LinkButton from './../components/LinkButton.js'
 import urlManager from './../utils/urlManager.js'
 import { getName } from './../utils/Race.js'
 import SwingStates from './../components/SwingStates.js'
+import getStatesShapefile from './../utils/getStatesShapefile.js'
+
+const STATES = getStatesShapefile()
 
 // We'll keep these urls here for testing. A description:
 
