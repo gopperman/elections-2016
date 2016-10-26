@@ -6,7 +6,7 @@ import Timer from './../components/Timer.js'
 import Header from './../components/Header.js'
 import Footer from './../components/Footer.js'
 import TestStatus from './../components/TestStatus.js'
-// import BalanceOfPower from './../components/BalanceOfPower.js'
+import BalanceOfPower from './../components/BalanceOfPower.js'
 import Hero from './../components/Hero.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 import Map from './../components/Map.js'
@@ -120,6 +120,14 @@ class Election extends Component {
 
 						<ElectoralCollegeBar {...presSummary} />
 
+						<div className='r-row--full'>
+							{/* <BalanceOfPower
+								dem={senateDemCount}
+								gop={senateGOPCount}
+								ind={senateOtherCount} />*/}
+							<BalanceOfPower dem={34} gop={30} ind={2} />
+						</div>
+
 						{map}
 
 						<LinkButton
@@ -128,13 +136,6 @@ class Election extends Component {
 
 						<div className='r-row--full'>
 							{featured}
-						</div>
-						<div className='r-row--full'>
-							{/* <BalanceOfPower
-								dem={senateDemCount}
-								gop={senateGOPCount}
-								ind={senateOtherCount} />*/}
-							{/* <BalanceOfPower dem={34} gop={30} ind={2} />*/}
 						</div>
 
 					</div>

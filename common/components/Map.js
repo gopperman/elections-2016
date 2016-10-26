@@ -17,6 +17,7 @@ import {
 } from './../utils/standardize.js'
 import MapLegend from './MapLegend.js'
 import svgs from './../utils/svgs.js'
+import { getViewBoxDimensions } from './../utils/svgUtils.js'
 
 const location = typeof window !== 'undefined' && window.location
 
@@ -107,7 +108,7 @@ class Map extends Component {
 		const datum = match.datum()
 
 		// Get the mouse position.
-		const { width, height } = this.getViewBoxDimensions()
+		const { width, height } = getViewBoxDimensions(this._svg)
 		const [x, y] = datum.centroid
 		const position = {
 			x: 100 * (x / width),
@@ -182,12 +183,6 @@ class Map extends Component {
 			subsetFeature,
 		}
 
-	}
-
-	// Extract svg's `viewBox` width and height.
-	getViewBoxDimensions = () => {
-		const [,, width, height] = select(this._svg).attr('viewBox').split(' ')
-		return { width, height }
 	}
 
 	drawInitial({ width, height, subsetFeature }) {
@@ -367,10 +362,11 @@ class Map extends Component {
 
 	drawFeatures = () => {
 
-		const { drawTooltip, clearTooltip, getViewBoxDimensions } = this
+		const { drawTooltip, clearTooltip } = this
 		const { data, unitName } = this.props
 		const { selectionId } = this.state
 		const _dropdown = this._dropdown
+		const _svg = this._svg
 
 		// Create a `setState` function and bind `this` so we can call it
 		// inside d3 functions with their own `this`.
@@ -399,7 +395,7 @@ class Map extends Component {
 			.value()
 
 		// Select the svg node.
-		const svg = select(this._svg).select('g.features')
+		const svg = select(_svg).select('g.features')
 
 		// DATA JOIN (d3 pattern)
 		const paths = svg.selectAll('path')
@@ -443,7 +439,7 @@ class Map extends Component {
 				select(this).classed('selected', true).raise()
 
 				// Get the mouse position.
-				const { width, height } = getViewBoxDimensions()
+				const { width, height } = getViewBoxDimensions(_svg)
 				const [x, y] = mouse(this)
 				const position = {
 					x: 100 * (x / width),
