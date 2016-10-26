@@ -3,6 +3,7 @@
 
 import React, { Component, PropTypes } from 'react'
 import { interval } from 'd3-timer'
+import classnames from 'classnames'
 
 const DURATION = 15 * 1000
 
@@ -83,8 +84,11 @@ class Timer extends Component {
 
 		}
 
+		const klass =
+			classnames('timer', { 'hide-display': status === CANCELED })
+
 		return (
-			<div className='timer'>
+			<div className={klass}>
 				<p className='timer__update benton-bold'>{message}</p>
 			</div>
 		)
