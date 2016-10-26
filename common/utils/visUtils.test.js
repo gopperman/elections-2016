@@ -1,7 +1,7 @@
 /* global describe, it, afterEach */
 
 import assert from 'assert'
-import { buildRow } from './visUtils.js'
+import { buildSeats, buildRow } from './visUtils.js'
 
 describe.only('visUtils', () => {
 
