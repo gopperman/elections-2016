@@ -43,13 +43,19 @@ class BalanceOfPower extends Component {
 	// `forceUpdate` is used.
 	shouldComponentUpdate(nextProps) {
 
-		// // Update component if `dem` or `gop` has changed.
-		// const { dem, gop } = this.props
-		// const newDem = nextProps.dem
-		// const newGop = nextProps.gop
+		const currentProps = {
+			dem: this.props.dem,
+			gop: this.props.gop,
+			ind: this.props.ind,
+		}
 
-		// If dem or gop numbers change, update
-		return !(deepEqual(this.props.dem, nextProps.dem) && deepEqual(this.props.gop, nextProps.gop))
+		const newProps = {
+			dem: nextProps.dem,
+			gop: nextProps.gop,
+			ind: nextProps.ind,
+		}
+
+		return !(deepEqual(currentProps, newProps))
 
 	}
 
