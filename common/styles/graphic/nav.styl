@@ -43,9 +43,20 @@
 		filter grayscale(100%)
 		color set-gray('dark')
 		transition 0.2s ease-in-out all
+		position relative
+		&:after
+			content ''
+			display block
+			background linear-gradient(to left, set-color('red'), set-color('blue'))
+			width 0
+			height 4px
+			margin-top 0.5em
+			transition width 0.4s ease-in-out
 		&:hover
 			filter grayscale(0)
 			color set-gray('darkest')
+			&:after
+				width 100%
 		+mq('bp-2')
 			text-align left
 		// Icons
