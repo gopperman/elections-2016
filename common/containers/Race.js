@@ -10,9 +10,11 @@ import TownResultsTable from './../components/TownResultsTable.js'
 import ResultGroup from './../components/ResultGroup.js'
 import { sortByVoteCount } from './../utils/Candidates.js'
 import Hero from './../components/Hero.js'
-import TOWNS from './../../data/output/TOWNS.json'
 import Map from './../components/Map.js'
 import { getName } from './../utils/Race.js'
+
+import getTownsShapefile from './../utils/getTownsShapefile.js'
+const TOWNS = getTownsShapefile()
 
 // We'll keep these urls here for testing. A description:
 
@@ -101,17 +103,17 @@ class Race extends Component {
 
 				<main id='content'>
 					<Hero title={getName(race)} />
-						<div className='container-sm'>
-							<Timer {...timerProps} />
+					<div className='container-sm'>
+						<Timer {...timerProps} />
 
-							<ResultGroup
-								overline={getName(race)}
-								precinctsReportingPct={state.precinctsReportingPct}
-								candidates={summaryCandidates} />
-						</div>
-						<div className='container-lg'>
-							{map}
-						</div>
+						<ResultGroup
+							overline={getName(race)}
+							precinctsReportingPct={state.precinctsReportingPct}
+							candidates={summaryCandidates} />
+					</div>
+					<div className='container-lg'>
+						{map}
+					</div>
 
 					<div className='container-downpage'>
 						<TownResultsTable {...{ towns, summaryCandidates }} />
