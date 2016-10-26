@@ -1,9 +1,25 @@
 /* global describe, it, afterEach */
 
 import assert from 'assert'
-import { buildSeatRows } from './visUtils.js'
+import { buildSeatRows, buildSeatColumns } from './visUtils.js'
 
 describe('visUtils', () => {
+
+	describe('buildSeatColumns', () => {
+
+		it('should return the correct number of columns', () => {
+			const props = {
+				dem: 5,
+				ind: 3,
+				gop: 7,
+				total: 18,
+				rows: 3,
+			}
+			const columns = buildSeatColumns(props)
+			assert.equal(columns.length, 6)
+		})
+
+	})
 
 	describe('buildSeatRows', () => {
 
@@ -20,9 +36,21 @@ describe('visUtils', () => {
 
 		it('should return the correct number of rows', () => {
 			const props = {
+				dem: 5,
+				ind: 3,
+				gop: 7,
+				total: 18,
+				rows: 3,
+			}
+			const rows = buildSeatRows(props)
+			assert.equal(rows.length, 3)
+		})
+
+		it('should return the correct number of rows', () => {
+			const props = {
 				dem: 20,
 				gop: 20,
-				total: 40,
+				total: 60,
 				rows: 4,
 			}
 			const seats = buildSeatRows(props)

@@ -5,8 +5,16 @@
 import React, { Component, PropTypes } from 'react'
 import { select } from 'd3-selection'
 import deepEqual from 'deep-equal'
-import { buildSeats } from './../utils/visUtils.js'
+import { buildSeatColumns } from './../utils/visUtils.js'
 
+// TODO: make sure it is getting data from AP
+// TODO: make sure it updates correctly
+// TODO: figure out how to make it responsive (look at viewBox)
+// TODO: probably no need to make it square?
+// TODO: style
+// TODO: get colors right
+// TODO: use a number to say who's won, pct reporting, etc
+// TODO: add a LinkButton with a link to the right race
 class BalanceOfPower extends Component {
 
 	static propTypes = {
@@ -26,13 +34,17 @@ class BalanceOfPower extends Component {
 		const outerHeight = outerWidth
 
 		// Create margins and inner dimensions.
-		const margin = { top: 10, right: 10, bottom: 10, left: 10 }
+		const margin = { top: 0, right: 0, bottom: 0, left: 0 }
 		const width = outerWidth - margin.left - margin.right
 		const height = outerHeight - margin.top - margin.bottom
 
 		// Set viewBox on svg.
 		select(this._svg)
-			.attr('viewBox', `0 0 ${width} ${height}`)
+				.attr('viewBox', `0 0 ${width} ${height}`)
+			.append('g')
+				.attr('class', 'columns')
+				.attr('transform',
+					`translate(${outerWidth / 2}, ${outerHeight / 2})`)
 
 		// Draw chart (although at this point we might not have data).
 		this.drawChart()
@@ -43,13 +55,10 @@ class BalanceOfPower extends Component {
 	// `forceUpdate` is used.
 	shouldComponentUpdate(nextProps) {
 
-		// // Update component if `dem` or `gop` has changed.
-		// const { dem, gop } = this.props
-		// const newDem = nextProps.dem
-		// const newGop = nextProps.gop
-
-		// If dem or gop numbers change, update
-		return !(deepEqual(this.props.dem, nextProps.dem) && deepEqual(this.props.gop, nextProps.gop))
+		return !(deepEqual(
+			this.getDataFromProps(this.props),
+			this.getDataFromProps(nextProps)
+		))
 
 	}
 
@@ -62,66 +71,65 @@ class BalanceOfPower extends Component {
 
 	}
 
+	getDataFromProps(props) {
+		const { dem, gop, ind } = props
+		return { dem, gop, ind }
+	}
+
 	drawChart = () => {
 
 		const { dem, gop, ind } = this.props
 
-		// Create outer width from container.
-		const outerWidth = this._svg.parentNode.offsetWidth
-
-		// Set outer height from outer width.
-		const outerHeight = outerWidth
-
-		// Set baseline radius of each row
-		const baseRadius = 80
+// 		// Set baseline radius of each row
+// 		const baseRadius = 80
 
 		// Get the data.
-		const senate = buildSeats({ dem, gop, ind, total: 100, rows: 5 })
+		const senate = buildSeatColumns({ dem, gop, ind, total: 100, rows: 4 })
 
 		// Select the svg node.
-		const svg = select(this._svg)
+		const svg = select(this._svg).select('g.columns')
 
 		// Select all `g` and join them to a senate row.
-		const row = svg.selectAll('g')
+		const columns = svg.selectAll('g')
 				.data(senate)
 
-		// Append `g` and set its ENTER attributes (in this case only `transform`).
-		const rowEnter = row.enter().append('g')
-				.attr('transform', `translate(${outerWidth / 2}, ${outerHeight / 2})`)
+		// Append `g` and set its ENTER attributes - in this case,
+		// a rotation about the origin.
+		const columnEnter = columns.enter()
+			.append('g')
+				.attr('transform', (d, i, a) =>
+					`rotate(${i * (-180 / (a.length - 1))}, 0 0)`)
 
-		// Select all `circles` of `g` and join to the row's seats.
-		const circle = rowEnter.selectAll('circle')
-				.data((d, seatsRow) =>
+		// Select all `circles` of `g` and join to the column's seats.
+		const circle = columnEnter.selectAll('circle')
+				.data((d, seatsColumn) =>
 					d.map(e => ({
 						...e,
-						row: seatsRow,
+						column: seatsColumn,
 					}))
 				)
 
-		// The previous `data` function returns a UPDATE lifecycle.
-		// Use it to set the UPDATE attributes.
-		circle
-				.attr('class', d => `fill-winner-${d.party}`)
+// 		// The previous `data` function returns a UPDATE lifecycle.
+// 		// Use it to set the UPDATE attributes.
+// 		circle
+// 				.attr('class', d => `fill-winner-${d.party}`)
 
 		// Append `circle` and set its ENTER attributes.
-		circle.enter().append('circle')
+		circle.enter()
+			.append('circle')
 				.attr('r', 5)
-				.attr('cx', (d, i) =>
-					((baseRadius + ((d.row + 1) * 16)) * Math.cos((Math.PI / (senate[0].length - 1)) * i))
-				)
-				.attr('cy', (d, i) =>
-					-((baseRadius + ((d.row + 1) * 16)) * Math.sin((Math.PI / (senate[0].length - 1)) * i))
-				)
+				.attr('cx', (d, i) => i * 30)
+				.attr('cy', 0)
 				.attr('class', d => `fill-winner-${d.party}`)
+
 	}
 
 	render() {
 
 		return (
 			<div className='balanceOfPower r-col r-feature'>
-				<h3 className="overline benton-bold">Senate Balance of Power</h3>
+				<h3 className='overline benton-bold'>Senate Balance of Power</h3>
 				<svg ref={(c) => this._svg = c} />
-				<a href="/elections/2016/race/U.S.%20Senate/" className="btn--primary benton-bold">See full results</a>
 			</div>
 		)
 
