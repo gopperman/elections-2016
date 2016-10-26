@@ -41,55 +41,19 @@ class Map extends Component {
 	// rendering occurs.
 	componentDidMount() {
 
-		const { shapefile, data, unitName, projection, labelsName } = this.props
+		const { shapefile, data, unitName, projection, labelsName } =
+			this.props
 
-		let subsetFeature
+		const { path, width, height, geoFeatures, subsetFeature } = this.setup({
+			shapefile,
+			data,
+			unitName,
+			projection,
+			width: this._svg.parentNode.offsetWidth,
+		})
 
-		// Create the GeoJSON feature for this shapefile.
-		const feature = topojson.feature(shapefile, shapefile.objects.UNITS)
-		const { features } = feature
-
-		// Create `this._path` and save it for convenience.
-		this._path = geoPath().projection(projection)
-
-		// Create an array of data unit ids.
-		const ids = data.map(v => v[unitName].toUpperCase())
-
-		// Get features that match the incoming data units.
-		const matchingFeatures = features
-			.filter(v => _.includes(ids, v.id.toUpperCase()))
-
-		// If the matching geometries aren't equal to the shapefile geometries,
-		if (matchingFeatures.length !== features.length) {
-
-			// we have to draw only the matching shapes,
-			// zoom in on them,
-			// and draw an inset.
-			// So here we'll create an outline for this subset.
-
-			// Create the GeoJSON outline for this subset.
-			subsetFeature = topojson.merge(shapefile,
-				shapefile.objects.UNITS.geometries
-					.filter(v => _.includes(ids, v.id.toUpperCase())))
-
-		}
-
-		// Find bounds and aspect ratio for this projection.
-		const b = this._path.bounds(subsetFeature || feature)
-
-		// Compute aspect, but constrain the height so we don't end up
-		// with really vertical maps.
-		const aspect = Math.max(
-			(b[1][0] - b[0][0]) / (b[1][1] - b[0][1]),
-			4 / 3
-		)
-
-		// Create width and height.
-		const width = this._svg.parentNode.offsetWidth
-		const height = Math.round(width / aspect)
-
-		// Fit this projection to the newly-calculated aspect ratio.
-		projection.fitSize([width, height], subsetFeature || feature)
+		this._path = path
+		this._geoFeatures = geoFeatures
 
 		// Set viewBox on svg.
 		const svg = select(this._svg)
@@ -98,14 +62,6 @@ class Map extends Component {
 
 		// Create features group.
 		svg.append('g').attr('class', 'features')
-
-		// Calculate feature centroids,
-		// and set features for convenience, so we don't keep topojsoning.
-		this._geoFeatures = matchingFeatures
-			.map(d => ({
-				...d,
-				centroid: this._path.centroid(d),
-			}))
 
 		let centroids = []
 
@@ -254,6 +210,72 @@ class Map extends Component {
 
 		// Draw the tooltip for this subunit.
 		this.drawTooltip({ subunit: datum.subunit, position })
+
+	}
+
+	setup({ shapefile, data, unitName, projection, width }) {
+
+		let subsetFeature
+
+		// Create the GeoJSON feature for this shapefile.
+		const feature = topojson.feature(shapefile, shapefile.objects.UNITS)
+		const { features } = feature
+
+		const path = geoPath().projection(projection)
+
+		// Create an array of data unit ids.
+		const ids = data.map(v => v[unitName].toUpperCase())
+
+		// Get features that match the incoming data units.
+		const matchingFeatures = features
+			.filter(v => _.includes(ids, v.id.toUpperCase()))
+
+		// If the matching geometries aren't equal to the shapefile geometries,
+		if (matchingFeatures.length !== features.length) {
+
+			// we have to draw only the matching shapes,
+			// zoom in on them,
+			// and draw an inset.
+			// So here we'll create an outline for this subset.
+
+			// Create the GeoJSON outline for this subset.
+			subsetFeature = topojson.merge(shapefile,
+				shapefile.objects.UNITS.geometries
+					.filter(v => _.includes(ids, v.id.toUpperCase())))
+
+		}
+
+		// Find bounds and aspect ratio for this projection.
+		const b = path.bounds(subsetFeature || feature)
+
+		// Compute aspect, but constrain the height so we don't end up
+		// with really vertical maps.
+		const aspect = Math.max(
+			(b[1][0] - b[0][0]) / (b[1][1] - b[0][1]),
+			4 / 3
+		)
+
+		// Create width and height.
+		const height = Math.round(width / aspect)
+
+		// Fit this projection to the newly-calculated aspect ratio.
+		projection.fitSize([width, height], subsetFeature || feature)
+
+		// Calculate feature centroids,
+		// and set features for convenience, so we don't keep topojsoning.
+		const geoFeatures = matchingFeatures
+			.map(d => ({
+				...d,
+				centroid: path.centroid(d),
+			}))
+
+		return {
+			path,
+			width,
+			height,
+			geoFeatures,
+			subsetFeature,
+		}
 
 	}
 
