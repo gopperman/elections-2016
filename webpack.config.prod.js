@@ -15,6 +15,7 @@ module.exports = {
 	plugins: [
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify('production'),
+			'process.env.SSR_ENV': JSON.stringify('client'),
 		}),
 		new webpack.optimize.OccurrenceOrderPlugin(),
 		new webpack.optimize.DedupePlugin(),

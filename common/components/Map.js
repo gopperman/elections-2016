@@ -18,6 +18,11 @@ import {
 import MapLegend from './MapLegend.js'
 import svgs from './../utils/svgs.js'
 
+const location = typeof window !== 'undefined' && window.location
+
+const { jsdom } = process.env.SSR_ENV === 'client' ?
+	{ jsdom() {} } : require('jsdom')
+
 class Map extends Component {
 
 	static propTypes = {
@@ -41,19 +46,153 @@ class Map extends Component {
 	// rendering occurs.
 	componentDidMount() {
 
-		const { shapefile, data, unitName, projection, labelsName } =
+		const { shapefile, data, unitName, projection } =
 			this.props
 
-		const { path, width, height, geoFeatures, subsetFeature } = this.setup({
-			shapefile,
-			data,
-			unitName,
-			projection,
-			width: this._svg.parentNode.offsetWidth,
-		})
+		const { path, width, height, geoFeatures, subsetFeature } =
+			this.setup({
+				shapefile,
+				data,
+				unitName,
+				projection,
+				width: this._svg.parentNode.offsetWidth,
+			})
 
 		this._path = path
 		this._geoFeatures = geoFeatures
+
+		this.drawInitial({ width, height, subsetFeature })
+
+	}
+
+	// This is invoked before rendering when new props or state are being
+	// received. This method is not called for the initial render or when
+	// `forceUpdate` is used.
+	shouldComponentUpdate(nextProps) {
+
+		// Update component if the `data` has changed.
+		return !deepEqual(this.props.data, nextProps.data)
+
+	}
+
+	// This is invoked immediately after the component's updates are flushed
+	// to the DOM. This method is not called for the initial render.
+	componentDidUpdate() {
+
+		// After the component updates, draw map features.
+		this.drawFeatures()
+
+	}
+
+	// TODO: try selecting something with no data, or the placeholder.
+	onSelectChange = (e) => {
+
+		// Save this selection to state so it doesn't get cleared out
+		// with new data.
+		this.setState({ selectionId: e.target.value })
+
+		// Select all paths,
+		const paths = select(this._svg).select('g.features').selectAll('path')
+
+		// and deselect them.
+		paths.classed('selected', false)
+
+		// Find the feature that matches the dropdown option,
+		const match = paths
+			.filter(d => compareStrings(d.id, e.target.value))
+
+		// select it, and raise it.
+		match.classed('selected', true).raise()
+
+		const datum = match.datum()
+
+		// Get the mouse position.
+		const { width, height } = this.getViewBoxDimensions()
+		const [x, y] = datum.centroid
+		const position = {
+			x: 100 * (x / width),
+			y: 100 * (y / height),
+		}
+
+		// Draw the tooltip for this subunit.
+		this.drawTooltip({ subunit: datum.subunit, position })
+
+	}
+
+	setup({ shapefile, data, unitName, projection, width }) {
+
+		// Create the GeoJSON feature for this shapefile.
+		const feature = topojson.feature(shapefile, shapefile.objects.UNITS)
+		const { features } = feature
+
+		const path = geoPath().projection(projection)
+
+		// Create an array of data unit ids.
+		const ids = data.map(v => v[unitName].toUpperCase())
+
+		// Get features that match the incoming data units.
+		const matchingFeatures = features
+			.filter(v => _.includes(ids, v.id.toUpperCase()))
+
+		let subsetFeature
+
+		// If the matching geometries aren't equal to the shapefile geometries,
+		if (matchingFeatures.length !== features.length) {
+
+			// we have to draw only the matching shapes,
+			// zoom in on them,
+			// and draw an inset.
+			// So here we'll create an outline for this subset.
+
+			// Create the GeoJSON outline for this subset.
+			subsetFeature = topojson.merge(shapefile,
+				shapefile.objects.UNITS.geometries
+					.filter(v => _.includes(ids, v.id.toUpperCase())))
+
+		}
+
+		// Find bounds and aspect ratio for this projection.
+		const b = path.bounds(subsetFeature || feature)
+
+		// Compute aspect, but constrain the height so we don't end up
+		// with really vertical maps.
+		const aspect = Math.max(
+			(b[1][0] - b[0][0]) / (b[1][1] - b[0][1]),
+			4 / 3
+		)
+
+		// Create width and height.
+		const height = Math.round(width / aspect)
+
+		// Fit this projection to the newly-calculated aspect ratio.
+		projection.fitSize([width, height], subsetFeature || feature)
+
+		// Calculate feature centroids.
+		const geoFeatures = matchingFeatures
+			.map(d => ({
+				...d,
+				centroid: path.centroid(d),
+			}))
+
+		return {
+			path,
+			width,
+			height,
+			geoFeatures,
+			subsetFeature,
+		}
+
+	}
+
+	// Extract svg's `viewBox` width and height.
+	getViewBoxDimensions = () => {
+		const [,, width, height] = select(this._svg).attr('viewBox').split(' ')
+		return { width, height }
+	}
+
+	drawInitial({ width, height, subsetFeature }) {
+
+		const { shapefile, projection, labelsName } = this.props
 
 		// Set viewBox on svg.
 		const svg = select(this._svg)
@@ -145,7 +284,7 @@ class Map extends Component {
 		// Draw features (although at this point we might not have data).
 		this.drawFeatures()
 
-		if (subsetFeature) {
+		if (subsetFeature && location) {
 
 			this.drawInset({
 				feature:
@@ -157,132 +296,6 @@ class Map extends Component {
 
 		}
 
-	}
-
-	// This is invoked before rendering when new props or state are being
-	// received. This method is not called for the initial render or when
-	// `forceUpdate` is used.
-	shouldComponentUpdate(nextProps) {
-
-		// Update component if the `data` has changed.
-		return !deepEqual(this.props.data, nextProps.data)
-
-	}
-
-	// This is invoked immediately after the component's updates are flushed
-	// to the DOM. This method is not called for the initial render.
-	componentDidUpdate() {
-
-		// After the component updates, draw map features.
-		this.drawFeatures()
-
-	}
-
-	// TODO: try selecting something with no data, or the placeholder.
-	onSelectChange = (e) => {
-
-		// Save this selection to state so it doesn't get cleared out
-		// with new data.
-		this.setState({ selectionId: e.target.value })
-
-		// Select all paths,
-		const paths = select(this._svg).select('g.features').selectAll('path')
-
-		// and deselect them.
-		paths.classed('selected', false)
-
-		// Find the feature that matches the dropdown option,
-		const match = paths
-			.filter(d => compareStrings(d.id, e.target.value))
-
-		// select it, and raise it.
-		match.classed('selected', true).raise()
-
-		const datum = match.datum()
-
-		// Get the mouse position.
-		const { width, height } = this.getViewBoxDimensions()
-		const [x, y] = datum.centroid
-		const position = {
-			x: 100 * (x / width),
-			y: 100 * (y / height),
-		}
-
-		// Draw the tooltip for this subunit.
-		this.drawTooltip({ subunit: datum.subunit, position })
-
-	}
-
-	setup({ shapefile, data, unitName, projection, width }) {
-
-		let subsetFeature
-
-		// Create the GeoJSON feature for this shapefile.
-		const feature = topojson.feature(shapefile, shapefile.objects.UNITS)
-		const { features } = feature
-
-		const path = geoPath().projection(projection)
-
-		// Create an array of data unit ids.
-		const ids = data.map(v => v[unitName].toUpperCase())
-
-		// Get features that match the incoming data units.
-		const matchingFeatures = features
-			.filter(v => _.includes(ids, v.id.toUpperCase()))
-
-		// If the matching geometries aren't equal to the shapefile geometries,
-		if (matchingFeatures.length !== features.length) {
-
-			// we have to draw only the matching shapes,
-			// zoom in on them,
-			// and draw an inset.
-			// So here we'll create an outline for this subset.
-
-			// Create the GeoJSON outline for this subset.
-			subsetFeature = topojson.merge(shapefile,
-				shapefile.objects.UNITS.geometries
-					.filter(v => _.includes(ids, v.id.toUpperCase())))
-
-		}
-
-		// Find bounds and aspect ratio for this projection.
-		const b = path.bounds(subsetFeature || feature)
-
-		// Compute aspect, but constrain the height so we don't end up
-		// with really vertical maps.
-		const aspect = Math.max(
-			(b[1][0] - b[0][0]) / (b[1][1] - b[0][1]),
-			4 / 3
-		)
-
-		// Create width and height.
-		const height = Math.round(width / aspect)
-
-		// Fit this projection to the newly-calculated aspect ratio.
-		projection.fitSize([width, height], subsetFeature || feature)
-
-		// Calculate feature centroids,
-		// and set features for convenience, so we don't keep topojsoning.
-		const geoFeatures = matchingFeatures
-			.map(d => ({
-				...d,
-				centroid: path.centroid(d),
-			}))
-
-		return {
-			path,
-			width,
-			height,
-			geoFeatures,
-			subsetFeature,
-		}
-
-	}
-
-	// Extract svg's `viewBox` width and height.
-	getViewBoxDimensions = () => {
-		const [,, width, height] = select(this._svg).attr('viewBox').split(' ')
-		return { width, height }
 	}
 
 	drawInset({ feature, subsetFeature, projection, svg }) {
@@ -463,7 +476,32 @@ class Map extends Component {
 
 	render() {
 
-		const { data, unitName, dropdownName } = this.props
+		const { data, unitName, dropdownName, shapefile, projection } = this.props
+
+		let serverSvg = null
+		if (!location) {
+
+			const document = jsdom(`<svg>${svgs.crossHatchesDefs}</svg>`)
+			this._svg = document.querySelector('svg')
+
+			const { path, width, height, geoFeatures, subsetFeature } =
+				this.setup({
+					shapefile,
+					data,
+					unitName,
+					projection,
+					width: 640,
+				})
+
+			this._path = path
+			this._geoFeatures = geoFeatures
+
+			this.drawInitial({ width, height, subsetFeature })
+
+			serverSvg =
+				<div dangerouslySetInnerHTML={{ __html: this._svg.outerHTML }} />
+
+		}
 
 		const firstOption = {
 			display: `Select a ${dropdownName}`,
@@ -507,6 +545,7 @@ class Map extends Component {
 						ref={(c) => this._dropdown = c}>{options}</select>
 				</div>
 				<div className='map-wrappers'>
+					{serverSvg}
 					<svg
 						className='map'
 						ref={(c) => this._svg = c}
