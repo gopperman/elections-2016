@@ -7,12 +7,14 @@ import Footer from './../components/Footer.js'
 import Timer from './../components/Timer.js'
 import TownResultsTable from './../components/TownResultsTable.js'
 import Map from './../components/Map.js'
-import TOWNS from './../../data/output/TOWNS.json'
 import TestStatus from './../components/TestStatus.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 import Hero from './../components/Hero.js'
 import LinkButton from './../components/LinkButton.js'
 import urlManager from './../utils/urlManager.js'
+
+import getTownsShapefile from './../utils/getTownsShapefile.js'
+const TOWNS = getTownsShapefile()
 
 import {
 	sortByVoteCount,
