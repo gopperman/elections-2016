@@ -9,7 +9,7 @@
  * @param {number} $0.undecided the number of undecided seats
  * @returns {Array} a row of seats
  * @example
- * buildRow({ dem: 1, gop: 1, undecided: 0 }) //=> [{ party: 'dem'...
+ * buildRow({ dem: 1, gop: 1, ind: 1, undecided: 0 }) //=> [{ party: 'dem'
  */
 const buildRow = ({ dem, gop, ind, undecided }) => {
 
