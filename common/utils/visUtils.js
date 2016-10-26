@@ -1,6 +1,7 @@
 /** @module */
 
 import _ from 'lodash'
+import { transpose } from 'd3-array'
 
 /**
  * Build a row of `balance of power` seats.
@@ -39,59 +40,35 @@ const buildRow = ({ dem, ind, undecided, gop }) => {
 }
 
 // Builds a seating chart for the Senate balance of power visualization
-const buildSeats = ({ dem, gop, ind, total, rows }) => {
+const buildSeatRows = ({ dem = 0, gop = 0, ind = 0, total = 0,
+rows = 0 }) => {
 
-	let d
-	let r
-	let u
+	const undecided = total - (dem + gop + ind)
 
-	const seats = []
-	const seatsPerRow = Math.floor(total / rows)
-	let rowsCount = rows
+	// Create an array of dem, ind, undecided, and gop, in that order.
+	const seats = [].concat(
+		_.range(dem).map(() => 'dem'),
+		_.range(ind).map(() => 'ind'),
+		_.range(undecided).map(() => 'undecided'),
+		_.range(gop).map(() => 'gop'),
+	)
 
-	// Our first row is unique in that we want all of the independents
-	// centered in the same row,
-	// contrary to how we handle the other two parties.
-	// The rest of the slots will be filled with Democrats and Republicans.
-	// We'll handle this special case first.
-	if (rowsCount--) {
-		d = Math.floor(seatsPerRow / 2) - Math.floor(ind / 2)
-		r = Math.ceil(seatsPerRow / 2) - Math.ceil(ind / 2)
-		seats.push(buildRow({ dem: d, gop: r, ind, undecided: 0 }))
-	}
+	// Partition seats into chunks of size `rows`, thus creating a matrix.
+	const matrix = _.chunk(seats, rows)
 
-	// Calculate how many democrats and republicans per row
-	// based on what's left over.
-	const demPerRow = Math.floor((dem - d) / rowsCount)
-	let demRemainder = (dem - d) % rows
+	// Transpose matrix.
+	const transposedMatrix = transpose(matrix)
 
-	const gopPerRow = Math.floor((gop - r) / rowsCount)
-	let gopRemainder = (gop - r) % rows
+	// Add party and seat to every matrix element.
+	const result = transposedMatrix.map(row =>
+		row.map((party, i) => ({ party, seat: i + 1 }))
+	)
 
-	while (rowsCount--) {
-		d = demPerRow
-		r = gopPerRow
-		let seatsTaken = d + r
-		if (demRemainder > 0 && seatsTaken < seatsPerRow) {
-			d++
-			demRemainder--
-			seatsTaken++
-		}
-		if (gopRemainder > 0 && seatsTaken < seatsPerRow) {
-			r++
-			gopRemainder--
-			seatsTaken++
-		}
+	return result
 
-		u = (seatsTaken >= seatsPerRow) ? 0 : seatsPerRow - d - r
-
-		seats.push(buildRow({ dem: d, gop: r, ind: 0, undecided: u }))
-	}
-
-	return seats
 }
 
 export {
 	buildRow,
-	buildSeats,
+	buildSeatRows,
 }

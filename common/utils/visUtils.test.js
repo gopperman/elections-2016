@@ -1,20 +1,21 @@
 /* global describe, it, afterEach */
 
 import assert from 'assert'
-import { buildSeats, buildRow } from './visUtils.js'
+import { buildSeatRows, buildRow } from './visUtils.js'
 
 describe('visUtils', () => {
 
-	describe('buildSeats', () => {
+	describe('buildSeatRows', () => {
 
 		it('should return empty when no rows', () => {
 			const props = {
 				dem: 0,
 				gop: 0,
+				ind: 0,
 				total: 0,
 				rows: 0,
 			}
-			assert.deepEqual(buildSeats(props), [])
+			assert.deepEqual(buildSeatRows(props), [])
 		})
 
 		it('should return the correct number of rows', () => {
@@ -24,7 +25,7 @@ describe('visUtils', () => {
 				total: 40,
 				rows: 4,
 			}
-			const seats = buildSeats(props)
+			const seats = buildSeatRows(props)
 			assert.equal(seats.length, 4)
 		})
 
@@ -37,11 +38,11 @@ describe('visUtils', () => {
 					},
 					{
 						seat: 2,
-						party: 'none',
+						party: 'undecided',
 					},
 					{
 						seat: 3,
-						party: 'none',
+						party: 'undecided',
 					},
 					{
 						seat: 4,
@@ -55,11 +56,11 @@ describe('visUtils', () => {
 					},
 					{
 						seat: 2,
-						party: 'none',
+						party: 'undecided',
 					},
 					{
 						seat: 3,
-						party: 'none',
+						party: 'undecided',
 					},
 					{
 						seat: 4,
@@ -67,7 +68,7 @@ describe('visUtils', () => {
 					},
 				],
 			]
-			const seats = buildSeats({ dem: 2, gop: 2, total: 8, rows: 2 })
+			const seats = buildSeatRows({ dem: 2, gop: 2, total: 8, rows: 2 })
 			assert.deepEqual(seats, expected)
 		})
 
