@@ -25,9 +25,9 @@ const MapLegend = ({ parties }) => (
 		</li>
 
 		<li className='legend__item'>
-			<p className='legend__subhed benton-regular'>No Data</p>
+			<p className='legend__subhed benton-regular'>No results</p>
 			<dl className='legend__deflist'>
-				<dt className='legend__term benton-regular hide-accessible'>No Data</dt>
+				<dt className='legend__term benton-regular hide-accessible'>No results</dt>
 				<dd className='legend__def fill-none' />
 			</dl>
 		</li>
