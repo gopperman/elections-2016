@@ -38,43 +38,6 @@ const buildRow = ({ dem, ind, undecided, gop }) => {
 
 }
 
-// 	// Declare new variables so we don't mutate the incoming object.
-// 	let demCount = dem
-// 	let gopCount = gop
-// 	let undecidedCount = undecided
-// 	let indCount = ind
-
-// 	const row = []
-// 	let seatNum = 1
-
-// 	while (demCount--) {
-// 		row.push({
-// 			seat: seatNum++,
-// 			party: 'dem',
-// 		})
-// 	}
-// 	while (indCount--) {
-// 		row.push({
-// 			seat: seatNum++,
-// 			party: 'ind',
-// 		})
-// 	}
-// 	while (undecidedCount--) {
-// 		row.push({
-// 			seat: seatNum++,
-// 			party: 'none',
-// 		})
-// 	}
-// 	while (gopCount--) {
-// 		row.push({
-// 			seat: seatNum++,
-// 			party: 'gop',
-// 		})
-// 	}
-// 	return row
-// }
-	//
-
 // Builds a seating chart for the Senate balance of power visualization
 const buildSeats = ({ dem, gop, ind, total, rows }) => {
 
