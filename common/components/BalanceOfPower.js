@@ -5,7 +5,7 @@
 import React, { Component, PropTypes } from 'react'
 import { select } from 'd3-selection'
 import deepEqual from 'deep-equal'
-import { buildSeats } from './../utils/visUtils.js'
+import { buildSeatRows } from './../utils/visUtils.js'
 
 class BalanceOfPower extends Component {
 
@@ -33,6 +33,7 @@ class BalanceOfPower extends Component {
 		// Set viewBox on svg.
 		select(this._svg)
 			.attr('viewBox', `0 0 ${width} ${height}`)
+			.append('g').attr('class', 'seats')
 
 		// Draw chart (although at this point we might not have data).
 		this.drawChart()
@@ -66,64 +67,61 @@ class BalanceOfPower extends Component {
 
 	drawChart = () => {
 
-		const { dem, gop, ind } = this.props
+// 		const { dem, gop, ind } = this.props
 
-		// Create outer width from container.
-		const outerWidth = this._svg.parentNode.offsetWidth
+// 		// Set baseline radius of each row
+// 		const baseRadius = 80
 
-		// Set outer height from outer width.
-		const outerHeight = outerWidth
-
-		// Set baseline radius of each row
-		const baseRadius = 80
-
-		// Get the data.
-		const senate = buildSeats({ dem, gop, ind, total: 100, rows: 5 })
+// 		// Get the data.
+// 		const senate = buildSeatRows({ dem, gop, ind, total: 100, rows: 5 })
 
 		// Select the svg node.
-		const svg = select(this._svg)
+		const g = select(this._svg).select('g.seats')
 
-		// Select all `g` and join them to a senate row.
-		const row = svg.selectAll('g')
-				.data(senate)
+// 		// Select all `g` and join them to a senate row.
+// 		const row = svg.selectAll('g')
+// 				.data(senate)
 
-		// Append `g` and set its ENTER attributes (in this case only `transform`).
-		const rowEnter = row.enter().append('g')
-				.attr('transform', `translate(${outerWidth / 2}, ${outerHeight / 2})`)
+// 		// Append `g` and set its ENTER attributes (in this case only `transform`).
+// 		const rowEnter = row.enter().append('g')
+// 				.attr('transform', `translate(${outerWidth / 2}, ${outerHeight / 2})`)
 
-		// Select all `circles` of `g` and join to the row's seats.
-		const circle = rowEnter.selectAll('circle')
-				.data((d, seatsRow) =>
-					d.map(e => ({
-						...e,
-						row: seatsRow,
-					}))
-				)
+// 		// Select all `circles` of `g` and join to the row's seats.
+// 		const circle = rowEnter.selectAll('circle')
+// 				.data((d, seatsRow) =>
+// 					d.map(e => ({
+// 						...e,
+// 						row: seatsRow,
+// 					}))
+// 				)
 
-		// The previous `data` function returns a UPDATE lifecycle.
-		// Use it to set the UPDATE attributes.
-		circle
-				.attr('class', d => `fill-winner-${d.party}`)
+// 		// The previous `data` function returns a UPDATE lifecycle.
+// 		// Use it to set the UPDATE attributes.
+// 		circle
+// 				.attr('class', d => `fill-winner-${d.party}`)
 
-		// Append `circle` and set its ENTER attributes.
-		circle.enter().append('circle')
-				.attr('r', 5)
-				.attr('cx', (d, i) =>
-					((baseRadius + ((d.row + 1) * 16)) * Math.cos((Math.PI / (senate[0].length - 1)) * i))
-				)
-				.attr('cy', (d, i) =>
-					-((baseRadius + ((d.row + 1) * 16)) * Math.sin((Math.PI / (senate[0].length - 1)) * i))
-				)
-				.attr('class', d => `fill-winner-${d.party}`)
+// 		// Append `circle` and set its ENTER attributes.
+// 		circle.enter().append('circle')
+// 				.attr('r', 5)
+// 				.attr('cx', (d, i) =>
+// 					((baseRadius + ((d.row + 1) * 16)) * Math.cos((Math.PI / (senate[0].length - 1)) * i))
+// 				)
+// 				.attr('cy', (d, i) =>
+// 					-((baseRadius + ((d.row + 1) * 16)) * Math.sin((Math.PI / (senate[0].length - 1)) * i))
+// 				)
+// 				.attr('class', d => `fill-winner-${d.party}`)
+
 	}
 
 	render() {
 
 		return (
 			<div className='balanceOfPower r-col r-feature'>
-				<h3 className="overline benton-bold">Senate Balance of Power</h3>
+				<h3 className='overline benton-bold'>Senate Balance of Power</h3>
 				<svg ref={(c) => this._svg = c} />
-				<a href="/elections/2016/race/U.S.%20Senate/" className="btn--primary benton-bold">See full results</a>
+				<a
+					href='/elections/2016/race/U.S.%20Senate/'
+					className='btn--primary benton-bold'>See full results</a>
 			</div>
 		)
 
