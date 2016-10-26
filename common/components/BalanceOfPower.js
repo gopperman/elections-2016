@@ -7,6 +7,7 @@ import { select } from 'd3-selection'
 import deepEqual from 'deep-equal'
 import { buildSeatColumns } from './../utils/visUtils.js'
 
+// TODO: make sure it is getting data from AP
 // TODO: make sure it updates correctly
 // TODO: figure out how to make it responsive (look at viewBox)
 // TODO: probably no need to make it square?
