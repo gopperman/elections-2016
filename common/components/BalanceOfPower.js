@@ -43,19 +43,10 @@ class BalanceOfPower extends Component {
 	// `forceUpdate` is used.
 	shouldComponentUpdate(nextProps) {
 
-		const currentProps = {
-			dem: this.props.dem,
-			gop: this.props.gop,
-			ind: this.props.ind,
-		}
-
-		const newProps = {
-			dem: nextProps.dem,
-			gop: nextProps.gop,
-			ind: nextProps.ind,
-		}
-
-		return !(deepEqual(currentProps, newProps))
+		return !(deepEqual(
+			this.getDataFromProps(this.props),
+			this.getDataFromProps(nextProps)
+		))
 
 	}
 
@@ -66,6 +57,11 @@ class BalanceOfPower extends Component {
 		// After the component updates, draw chart.
 		this.drawChart()
 
+	}
+
+	getDataFromProps(props) {
+		const { dem, gop, ind } = props
+		return { dem, gop, ind }
 	}
 
 	drawChart = () => {
