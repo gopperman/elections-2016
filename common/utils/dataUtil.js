@@ -2,7 +2,6 @@ import _ from 'lodash'
 import { normalizeParty } from './standardize.js'
 
 const getSenateReport = (reports) => {
-
 	// Get the senate report
 	const report = _(reports)
 		.map('reports')
@@ -30,7 +29,6 @@ const getSenateReport = (reports) => {
 		.value()
 
 	return result
-
 }
 
 export {
