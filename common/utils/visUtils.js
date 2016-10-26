@@ -4,42 +4,16 @@ import _ from 'lodash'
 import { transpose } from 'd3-array'
 
 /**
- * Build a row of `balance of power` seats.
+ * Builds a seating chart for balance of power charts.
  * @memberof visUtils
  * @function
  * @param {number} $0.dem the number of democratic seats
  * @param {number} $0.ind the number of independent seats
- * @param {number} $0.undecided the number of undecided seats
  * @param {number} $0.gop the number of gop seats
- * @returns {Array} a row of seats
- * @example
- * buildRow({ dem: 1, gop: 1, ind: 1, undecided: 0 }) //=> [{ party: 'dem'
+ * @param {number} $0.total the total number of seats
+ * @param {number} $0.rows the desired number of rows
+ * @returns {Array} an array of rows of seats
  */
-const buildRow = ({ dem, ind, undecided, gop }) => {
-
-	// Create a new array, and then concatenate onto it
-	const result = [].concat(
-		// an array of { party: 'dem' } objects, of length `dem`,
-		_.range(dem).map(() => ({ party: 'dem' })),
-		// and repeat for ind,
-		_.range(ind).map(() => ({ party: 'ind' })),
-		// undecided,
-		_.range(undecided).map(() => ({ party: 'undecided' })),
-		// and gop.
-		_.range(gop).map(() => ({ party: 'gop' })),
-	// Next, iterate over the entire array,
-	).map((v, i) => ({
-		// return each item's contents,
-		...v,
-		// and a new one, `seat`, set to the array's index + 1.
-		seat: i + 1,
-	}))
-
-	return result
-
-}
-
-// Builds a seating chart for the Senate balance of power visualization
 const buildSeatRows = ({ dem = 0, gop = 0, ind = 0, total = 0,
 rows = 0 }) => {
 
@@ -69,6 +43,6 @@ rows = 0 }) => {
 }
 
 export {
-	buildRow,
+	// eslint-disable-next-line import/prefer-default-export
 	buildSeatRows,
 }
