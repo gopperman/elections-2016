@@ -1,52 +1,41 @@
 /** @module */
 
+import _ from 'lodash'
+
 /**
  * Build a row of `balance of power` seats.
  * @memberof visUtils
  * @function
  * @param {number} $0.dem the number of democratic seats
- * @param {number} $0.gop the number of gop seats
+ * @param {number} $0.ind the number of independent seats
  * @param {number} $0.undecided the number of undecided seats
+ * @param {number} $0.gop the number of gop seats
  * @returns {Array} a row of seats
  * @example
- * buildRow({ dem: 1, gop: 1, undecided: 0 }) //=> [{ party: 'dem'...
+ * buildRow({ dem: 1, gop: 1, ind: 1, undecided: 0 }) //=> [{ party: 'dem'
  */
-const buildRow = ({ dem, gop, ind, undecided }) => {
+const buildRow = ({ dem, ind, undecided, gop }) => {
 
-	// Declare new variables so we don't mutate the incoming object.
-	let demCount = dem
-	let gopCount = gop
-	let undecidedCount = undecided
-	let indCount = ind
+	// Create a new array, and then concatenate onto it
+	const result = [].concat(
+		// an array of { party: 'dem' } objects, of length `dem`,
+		_.range(dem).map(() => ({ party: 'dem' })),
+		// and repeat for ind,
+		_.range(ind).map(() => ({ party: 'ind' })),
+		// undecided,
+		_.range(undecided).map(() => ({ party: 'undecided' })),
+		// and gop.
+		_.range(gop).map(() => ({ party: 'gop' })),
+	// Next, iterate over the entire array,
+	).map((v, i) => ({
+		// return each item's contents,
+		...v,
+		// and a new one, `seat`, set to the array's index + 1.
+		seat: i + 1,
+	}))
 
-	const row = []
-	let seatNum = 1
+	return result
 
-	while (demCount--) {
-		row.push({
-			seat: seatNum++,
-			party: 'dem',
-		})
-	}
-	while (indCount--) {
-		row.push({
-			seat: seatNum++,
-			party: 'ind',
-		})
-	}
-	while (undecidedCount--) {
-		row.push({
-			seat: seatNum++,
-			party: 'none',
-		})
-	}
-	while (gopCount--) {
-		row.push({
-			seat: seatNum++,
-			party: 'gop',
-		})
-	}
-	return row
 }
 
 // Builds a seating chart for the Senate balance of power visualization

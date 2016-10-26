@@ -3,8 +3,6 @@
 import assert from 'assert'
 import { buildSeats, buildRow } from './visUtils.js'
 
-/*
-
 describe('visUtils', () => {
 
 	describe('buildSeats', () => {
@@ -78,11 +76,12 @@ describe('visUtils', () => {
 	describe('buildRow', () => {
 
 		it('should return empty when no results', () => {
-			assert.deepEqual(buildRow({ dem: 0, gop: 0, none: 0 }), [])
+			assert.deepEqual(
+				buildRow({ dem: 0, ind: 0, undecided: 0, gop: 0 }), [])
 		})
 
-		it('should build a row of dems, undecideds, then gop', () => {
-			assert.deepEqual(buildRow({ dem: 2, gop: 0, none: 0 }), [
+		it('should build a row of dems, inds, undecideds, then gop', () => {
+			assert.deepEqual(buildRow({ dem: 2, gop: 0, undecided: 1, ind: 2 }), [
 				{
 					seat: 1,
 					party: 'dem',
@@ -90,41 +89,22 @@ describe('visUtils', () => {
 				{
 					seat: 2,
 					party: 'dem',
-				},
-			])
-			assert.deepEqual(buildRow({ dem: 0, gop: 2, none: 0 }), [
-				{
-					seat: 1,
-					party: 'gop',
-				},
-				{
-					seat: 2,
-					party: 'gop',
-				},
-			])
-			assert.deepEqual(buildRow({ dem: 1, gop: 1, none: 2 }), [
-				{
-					seat: 1,
-					party: 'dem',
-				},
-				{
-					seat: 2,
-					party: 'none',
 				},
 				{
 					seat: 3,
-					party: 'none',
+					party: 'ind',
 				},
 				{
 					seat: 4,
-					party: 'gop',
+					party: 'ind',
+				},
+				{
+					seat: 5,
+					party: 'undecided',
 				},
 			])
-
 		})
 
 	})
 
 })
-
-*/
