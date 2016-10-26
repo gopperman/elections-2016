@@ -5,7 +5,6 @@ import connectToApi from './connectToApi.js'
 import Timer from './../components/Timer.js'
 import StateResultsTable from './../components/StateResultsTable.js'
 import Map from './../components/Map.js'
-import STATES from './../../data/output/STATES.json'
 import Header from './../components/Header.js'
 import Footer from './../components/Footer.js'
 import TestStatus from './../components/TestStatus.js'
@@ -18,6 +17,10 @@ import {
 	sortByElectoralCount,
 	sortByPolIDs,
 } from './../utils/Candidates.js'
+
+import getStatesShapefile from './../utils/getStatesShapefile.js'
+
+const STATES = getStatesShapefile()
 
 // We'll keep these urls here for testing. A description:
 

@@ -12,8 +12,8 @@ import { sortByVoteCount } from './../utils/Candidates.js'
 import Hero from './../components/Hero.js'
 import Map from './../components/Map.js'
 import { getName } from './../utils/Race.js'
-
 import getTownsShapefile from './../utils/getTownsShapefile.js'
+
 const TOWNS = getTownsShapefile()
 
 // We'll keep these urls here for testing. A description:

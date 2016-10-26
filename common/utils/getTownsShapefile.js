@@ -1,5 +1,6 @@
-import TOWNS from './../../data/output/TOWNS.json'
-import TOWNS_LITE from './../../data/output/TOWNS-lite.json'
+/* eslint-disable global-require */
 
 export default () =>
-  (process.env.SSR_ENV === 'client' ? TOWNS : TOWNS_LITE)
+  (process.env.SSR_ENV === 'client' ?
+    require('./../../data/output/TOWNS.json') :
+    require('./../../data/output/TOWNS-lite.json'))

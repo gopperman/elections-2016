@@ -12,14 +12,14 @@ import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 import Hero from './../components/Hero.js'
 import LinkButton from './../components/LinkButton.js'
 import urlManager from './../utils/urlManager.js'
-
 import getTownsShapefile from './../utils/getTownsShapefile.js'
-const TOWNS = getTownsShapefile()
 
 import {
 	sortByVoteCount,
 	sortByCandidateIDs,
 } from './../utils/Candidates.js'
+
+const TOWNS = getTownsShapefile()
 
 // We'll keep these urls here for testing. A description:
 
