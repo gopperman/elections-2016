@@ -28,7 +28,7 @@ class BalanceOfPower extends Component {
 	componentDidMount() {
 
 		const outerWidth = 100
-		const outerHeight = 50
+		const outerHeight = outerWidth / 2
 
 		// Set viewBox on svg.
 		select(this._svg)
@@ -94,6 +94,7 @@ class BalanceOfPower extends Component {
 				.data((d, seatsColumn) =>
 					d.map(e => ({
 						...e,
+						// TODO: is this necessary?
 						column: seatsColumn,
 					}))
 				)
