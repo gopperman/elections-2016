@@ -136,7 +136,7 @@ class PresidentUS extends Component {
 
 				<Header />
 				<main id='content'>
-					<Hero title='US Presidential results' />
+					<Hero title='US Presidential results' isFeature />
 
 					<div className='container-lg'>
 						<Timer {...timerProps} />
