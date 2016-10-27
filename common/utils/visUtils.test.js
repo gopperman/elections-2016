@@ -1,9 +1,53 @@
 /* global describe, it, afterEach */
 
 import assert from 'assert'
-import { buildSeatRows, buildSeatColumns } from './visUtils.js'
+import {
+	buildSeatRows,
+	buildSeatColumns,
+	buildSeats,
+} from './visUtils.js'
 
 describe('visUtils', () => {
+
+	describe('buildSeats', () => {
+
+		it('should return the correct data', () => {
+
+			const props = {
+				dem: 5,
+				ind: 3,
+				gop: 7,
+				total: 18,
+				rows: 3,
+			}
+
+			const expected = [
+				{ party: 'dem', seat: 0, column: 0, index: 0 },
+				{ party: 'dem', seat: 1, column: 0, index: 1 },
+				{ party: 'dem', seat: 2, column: 0, index: 2 },
+				{ party: 'dem', seat: 0, column: 1, index: 3 },
+				{ party: 'dem', seat: 1, column: 1, index: 4 },
+				{ party: 'ind', seat: 2, column: 1, index: 5 },
+				{ party: 'ind', seat: 0, column: 2, index: 6 },
+				{ party: 'ind', seat: 1, column: 2, index: 7 },
+				{ party: 'none', seat: 2, column: 2, index: 8 },
+				{ party: 'none', seat: 0, column: 3, index: 9 },
+				{ party: 'none', seat: 1, column: 3, index: 10 },
+				{ party: 'gop', seat: 2, column: 3, index: 11 },
+				{ party: 'gop', seat: 0, column: 4, index: 12 },
+				{ party: 'gop', seat: 1, column: 4, index: 13 },
+				{ party: 'gop', seat: 2, column: 4, index: 14 },
+				{ party: 'gop', seat: 0, column: 5, index: 15 },
+				{ party: 'gop', seat: 1, column: 5, index: 16 },
+				{ party: 'gop', seat: 2, column: 5, index: 17 },
+			]
+
+			const output = buildSeats(props)
+			assert.deepEqual(output, expected)
+
+		})
+
+	})
 
 	describe('buildSeatColumns', () => {
 
@@ -61,8 +105,12 @@ describe('visUtils', () => {
 			const expected = [
 				[
 					{
-						seat: 1,
+						seat: 0,
 						party: 'dem',
+					},
+					{
+						seat: 1,
+						party: 'none',
 					},
 					{
 						seat: 2,
@@ -70,17 +118,17 @@ describe('visUtils', () => {
 					},
 					{
 						seat: 3,
-						party: 'none',
-					},
-					{
-						seat: 4,
 						party: 'gop',
 					},
 				],
 				[
 					{
-						seat: 1,
+						seat: 0,
 						party: 'dem',
+					},
+					{
+						seat: 1,
+						party: 'none',
 					},
 					{
 						seat: 2,
@@ -88,10 +136,6 @@ describe('visUtils', () => {
 					},
 					{
 						seat: 3,
-						party: 'none',
-					},
-					{
-						seat: 4,
 						party: 'gop',
 					},
 				],

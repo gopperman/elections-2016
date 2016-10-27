@@ -24,10 +24,46 @@ rows = 0, isRow }) => {
 
 	// Add party and seat to every matrix element.
 	const result = finalMatrix.map(row =>
-		row.map((party, i) => ({ party, seat: i + 1 }))
+		row.map((party, seat) => ({ party, seat }))
 	)
 
 	return result
+
+}
+
+/**
+ * Builds a seating chart for balance of power charts. Returns the seats.
+ * @memberof visUtils
+ * @function
+ * @param {number} $0.dem the number of democratic seats
+ * @param {number} $0.ind the number of independent seats
+ * @param {number} $0.gop the number of gop seats
+ * @param {number} $0.total the total number of seats
+ * @param {number} $0.rows the desired number of rows
+ * @returns {Array} an array of seats
+ */
+const buildSeats = ({ dem = 0, gop = 0, ind = 0,
+total = 0, rows = 0 }) => {
+
+	// Build the matrix (seats grouped by columns).
+	const matrix = buildMatrix({ dem, gop, ind, total, rows })
+
+	// Add column numbers to each seat and flatten matrix.
+	const seats = _(matrix)
+		.map((column, columnIndex) =>
+			column.map(seat => ({
+				...seat,
+				column: columnIndex,
+			}))
+		)
+		.flatten()
+		.map((seat, index) => ({
+			...seat,
+			index,
+		}))
+		.value()
+
+	return seats
 
 }
 
@@ -64,4 +100,5 @@ total = 0, rows = 0 }) =>
 export {
 	buildSeatRows,
 	buildSeatColumns,
+	buildSeats,
 }
