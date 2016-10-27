@@ -27,24 +27,16 @@ class BalanceOfPower extends Component {
 	// rendering occurs.
 	componentDidMount() {
 
-		// Create outer width from container.
-		const outerWidth = this._svg.parentNode.offsetWidth
-
-		// Set outer height from outer width.
-		const outerHeight = outerWidth
-
-		// Create margins and inner dimensions.
-		const margin = { top: 0, right: 0, bottom: 0, left: 0 }
-		const width = outerWidth - margin.left - margin.right
-		const height = outerHeight - margin.top - margin.bottom
+		const outerWidth = 100
+		const outerHeight = 50
 
 		// Set viewBox on svg.
 		select(this._svg)
-				.attr('viewBox', `0 0 ${width} ${height}`)
+				.attr('viewBox', `0 0 ${outerWidth} ${outerHeight}`)
 			.append('g')
 				.attr('class', 'columns')
 				.attr('transform',
-					`translate(${outerWidth / 2}, ${outerHeight / 2})`)
+					`translate(${outerWidth / 2}, ${outerHeight})`)
 
 		// Draw chart (although at this point we might not have data).
 		this.drawChart()
@@ -80,9 +72,6 @@ class BalanceOfPower extends Component {
 
 		const { dem, gop, ind } = this.props
 
-// 		// Set baseline radius of each row
-// 		const baseRadius = 80
-
 		// Get the data.
 		const senate = buildSeatColumns({ dem, gop, ind, total: 100, rows: 4 })
 
@@ -117,8 +106,8 @@ class BalanceOfPower extends Component {
 		// Append `circle` and set its ENTER attributes.
 		circle.enter()
 			.append('circle')
-				.attr('r', 5)
-				.attr('cx', (d, i) => i * 30)
+				.attr('r', 1)
+				.attr('cx', (d, i) => 50/4 + (i * 50/4))
 				.attr('cy', 0)
 				.attr('class', d => `fill-winner-${d.party}`)
 
