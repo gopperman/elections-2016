@@ -51,16 +51,13 @@ class Election extends Component {
 		// Get the data - or an empty object.
 		const data = results.data || {}
 
-		const senate = getSenateReport(data.reports)
-		const senateDems = _.find(senate, { party: 'Dem' })
-		const senateGOP = _.find(senate, { party: 'GOP' })
-		const senateOther = _.find(senate, { party: 'Others' })
+		// Get senate report data.
+		const senateData = _.map(getSenateReport(data.reports), v => ({
+			[v.party]: v.won + v.holdovers,
+		}))
 
-		// TODO: get rid of hardcoded numbers
-		const senateDemCount = (senateDems && senateDems.seats) || 43
-		const senateGOPCount = (senateGOP && senateGOP.seats) || 49
-		const senateOtherCount = (senateOther && senateOther.seats) || 2
-		console.log({ senateDemCount, senateGOPCount, senateOtherCount })
+		// Build senate balance of power data.
+		const bopData = _.assign.apply(null, senateData)
 
 		// Get all races.
 		const races = data.races || []
@@ -127,7 +124,7 @@ class Election extends Component {
 							url={urlManager.race(presUs)} />
 
 						<div className='r-row--full'>
-							<BalanceOfPower dem={34} gop={30} ind={2} />
+							<BalanceOfPower {...bopData} />
 							{featured}
 						</div>
 
