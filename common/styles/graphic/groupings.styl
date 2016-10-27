@@ -17,7 +17,7 @@
 
 .r-row
 	display flex
-	flex-wrap wrap
+	// flex-wrap wrap
 	// > *
 	// 	margin-right 1.5em
 	.r-block__name--small
@@ -26,12 +26,12 @@
 		@extends .r-row
 		flex-direction column
 		flex-wrap wrap
-		+mq('bp-2')
+		+mq('bp-3')
 			flex-direction row
 		> *
 			width 100%
 			margin 1em
-			+mq('bp-2')
+			+mq('bp-3')
 				width 45%
 			
 			// &:not(:last-child)
