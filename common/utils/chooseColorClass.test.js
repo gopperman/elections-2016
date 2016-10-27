@@ -210,6 +210,31 @@ describe('chooseColorClass', () => {
 
 		})
 
+		it('should denote leading yes and no for ballot questions', () => {
+			// Yes
+			assert.equal(
+				chooseColorClass({
+					candidates: [
+						{ voteCount: 7, party: 'Yes' },
+						{ voteCount: 2, party: 'No' },
+					],
+					precinctsReportingPct: '20',
+				}),
+				'fill-leading-yes',
+			)
+			// No
+			assert.equal(
+				chooseColorClass({
+					candidates: [
+						{ voteCount: 999, party: 'Yes' },
+						{ voteCount: 1234, party: 'No' },
+					],
+					precinctsReportingPct: '20',
+				}),
+				'fill-leading-no',
+			)
+		})
+
 		it('should work with no data', () => {
 
 			// no data means no voteCount
