@@ -125,7 +125,7 @@ class BalanceOfPower extends Component {
 				<svg ref={(c) => this._svg = c} />
 				<MapLegend
 					parties={['dem', 'gop', 'ind']}
-					choices={['none', 'win']} />
+					choices={['undecided', 'win']} />
 				<LinkButton text='See full results' url={urlManager.base()} />
 			</div>
 		)
