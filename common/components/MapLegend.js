@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { standardizeParty } from './../utils/standardize.js'
 
 const MapLegend = ({ parties,
-choices = ['lead', 'win', 'none', 'tie'] }) => {
+choices = ['lead', 'win', 'none', 'undecided', 'tie'] }) => {
 
 	const options = {
 
@@ -38,6 +38,18 @@ choices = ['lead', 'win', 'none', 'tie'] }) => {
 			return (
 				<li key={key} className='legend__item'>
 					<p className='legend__subhed benton-regular'>No results</p>
+					<dl className='legend__deflist'>
+						<dt className='legend__term benton-regular hide-accessible'>No results</dt>
+						<dd className='legend__def fill-none' />
+					</dl>
+				</li>
+			)
+		},
+
+		undecided(key) {
+			return (
+				<li key={key} className='legend__item'>
+					<p className='legend__subhed benton-regular'>Undecided</p>
 					<dl className='legend__deflist'>
 						<dt className='legend__term benton-regular hide-accessible'>No results</dt>
 						<dd className='legend__def fill-none' />
