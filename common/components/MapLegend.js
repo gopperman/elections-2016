@@ -51,7 +51,7 @@ choices = ['lead', 'win', 'none', 'undecided', 'tie'] }) => {
 				<li key={key} className='legend__item'>
 					<p className='legend__subhed benton-regular'>Undecided</p>
 					<dl className='legend__deflist'>
-						<dt className='legend__term benton-regular hide-accessible'>No results</dt>
+						<dt className='legend__term benton-regular hide-accessible'>Undecided</dt>
 						<dd className='legend__def fill-none' />
 					</dl>
 				</li>
