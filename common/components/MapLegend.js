@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react'
 import { standardizeParty } from './../utils/standardize.js'
 
-const MapLegend = ({ parties,
+const MapLegend = ({ parties, isPresidential,
 choices = ['lead', 'win', 'none', 'tie'] }) => {
 
 	const options = {
@@ -72,7 +72,10 @@ choices = ['lead', 'win', 'none', 'tie'] }) => {
 
 	}
 
-	const display = choices.map((v, i) => options[v](i))
+	const modifiedChoices = isPresidential ?
+		choices.filter(v => v !== 'tie') : choices
+
+	const display = modifiedChoices.map((v, i) => options[v](i))
 
 	return (
 		<ul className='legend'>
@@ -85,6 +88,7 @@ choices = ['lead', 'win', 'none', 'tie'] }) => {
 MapLegend.propTypes = {
 	parties: PropTypes.array.isRequired,
 	choices: PropTypes.array,
+	isPresidential: PropTypes.bool,
 }
 
 export default MapLegend

@@ -126,6 +126,7 @@ class PresidentUS extends Component {
 			sortingDelegate={sortByElectoralCount}
 			dropdownName='state'
 			displayName='stateName'
+			isPresidential
 			labelsName='STUSPS' />) : null
 
 		// Finally we can render all the components!

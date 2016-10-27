@@ -90,6 +90,7 @@ class Election extends Component {
 			sortingDelegate={sortByElectoralCount}
 			dropdownName='state'
 			displayName='stateName'
+			isPresidential
 			labelsName='STUSPS' />) : null
 
 		// Get test status.

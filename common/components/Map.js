@@ -37,6 +37,7 @@ class Map extends Component {
 		dropdownName: PropTypes.string.isRequired,
 		displayName: PropTypes.string.isRequired,
 		labelsName: PropTypes.string,
+		isPresidential: PropTypes.bool,
 	}
 
 	state = {
@@ -474,7 +475,8 @@ class Map extends Component {
 
 	render() {
 
-		const { data, unitName, dropdownName, shapefile, projection } = this.props
+		const { data, unitName, dropdownName, shapefile, projection,
+			isPresidential } = this.props
 
 		let serverSvg = null
 		if (!location) {
@@ -559,7 +561,7 @@ class Map extends Component {
 						</div>
 					</div>
 				</div>
-				<MapLegend parties={parties} />
+				<MapLegend isPresidential={isPresidential} parties={parties} />
 			</div>
 		)
 
