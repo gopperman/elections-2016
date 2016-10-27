@@ -110,6 +110,7 @@ class BalanceOfPower extends Component {
 				.data((d, seatsColumn) =>
 					d.map(e => ({
 						...e,
+						// TODO: is this necessary?
 						column: seatsColumn,
 					}))
 				)
