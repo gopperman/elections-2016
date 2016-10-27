@@ -172,7 +172,7 @@ class Map extends Component {
 		const geoFeatures = matchingFeatures
 			.map(d => ({
 				...d,
-				centroid: path.centroid(d),
+				centroid: projection(d.properties.centroid.split(', ')),
 			}))
 
 		return {
