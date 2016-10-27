@@ -2,10 +2,11 @@
 
 /* eslint-disable no-return-assign */
 
+import _ from 'lodash'
 import React, { Component, PropTypes } from 'react'
 import { select } from 'd3-selection'
 import deepEqual from 'deep-equal'
-import { buildSeatColumns } from './../utils/visUtils.js'
+import { buildSeats } from './../utils/visUtils.js'
 import LinkButton from './LinkButton.js'
 import urlManager from './../utils/urlManager.js'
 
@@ -46,7 +47,7 @@ class BalanceOfPower extends Component {
 				.attr('viewBox',
 					`0 0 ${WIDTH + (2 * RADIUS)} ${height + (2 * RADIUS)}`)
 			.append('g')
-				.attr('class', 'columns')
+				.attr('class', 'seats')
 				.attr('transform',
 					`translate(${(WIDTH / 2) + RADIUS}, ${height + RADIUS})`)
 
@@ -84,42 +85,35 @@ class BalanceOfPower extends Component {
 
 		const { dem, gop, ind } = this.props
 
-		// Get the data.
-		const senate =
-			buildSeatColumns({ dem, gop, ind, total: 100, rows: ROWS }).reverse()
+		// Build the matrix of seats.
+		const seats =
+			buildSeats({ dem, gop, ind, total: 100, rows: ROWS })
+
+		// Get the number of columns.
+		const columns = _(seats)
+			.map('column')
+			.max()
 
 		// Select the svg node.
-		const svg = select(this._svg).select('g.columns')
+		const svg = select(this._svg).select('g.seats')
 
-		// Select all `g` and join them to a senate row.
-		const columns = svg.selectAll('g')
-				.data(senate)
+		// DATA JOIN
+		const circles = svg.selectAll('circle')
+			.data(seats, d => d.index)
 
-		// Append `g` and set its ENTER attributes - in this case,
-		// a rotation about the origin.
-		const columnEnter = columns.enter()
-			.append('g')
-				.attr('transform', (d, i, a) =>
-					`rotate(${i * (-180 / (a.length - 1))}, 0 0)`)
-
-		// Select all `circles` of `g` and join to the column's seats.
-		const circle = columnEnter.selectAll('circle')
-				.data((d, seatsColumn) =>
-					d.map(e => ({
-						...e,
-						// TODO: is this necessary?
-						column: seatsColumn,
-					}))
-				)
-
-		// Append `circle` and set its ENTER attributes.
-		circle.enter()
+		// ENTER + UPDATE
+		circles.enter()
 			.append('circle')
+			.merge(circles)
 				.attr('r', RADIUS)
-				.attr('cx', (d, i) => x1 + (i * x2))
+				.attr('cx', d => x1 + (d.seat * x2))
 				.attr('cy', 0)
+				.attr('transform', d =>
+					`scale(-1, 1) rotate(${d.column * (-180 / (columns - 1))}, 0 0)`)
 				.attr('class', d => `fill-winner-${d.party}`)
 
+		// EXIT
+		circles.exit().remove()
 	}
 
 	render() {
