@@ -66,11 +66,11 @@ describe('visUtils', () => {
 					},
 					{
 						seat: 2,
-						party: 'undecided',
+						party: 'none',
 					},
 					{
 						seat: 3,
-						party: 'undecided',
+						party: 'none',
 					},
 					{
 						seat: 4,
@@ -84,11 +84,11 @@ describe('visUtils', () => {
 					},
 					{
 						seat: 2,
-						party: 'undecided',
+						party: 'none',
 					},
 					{
 						seat: 3,
-						party: 'undecided',
+						party: 'none',
 					},
 					{
 						seat: 4,

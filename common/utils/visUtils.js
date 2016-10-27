@@ -6,13 +6,13 @@ import { transpose } from 'd3-array'
 const buildMatrix = ({ dem = 0, gop = 0, ind = 0, total = 0,
 rows = 0, isRow }) => {
 
-	const undecided = total - (dem + gop + ind)
+	const none = total - (dem + gop + ind)
 
-	// Create an array of dem, ind, undecided, and gop, in that order.
+	// Create an array of dem, ind, none, and gop, in that order.
 	const seats = [].concat(
 		_.range(dem).map(() => 'dem'),
 		_.range(ind).map(() => 'ind'),
-		_.range(undecided).map(() => 'undecided'),
+		_.range(none).map(() => 'none'),
 		_.range(gop).map(() => 'gop'),
 	)
 
