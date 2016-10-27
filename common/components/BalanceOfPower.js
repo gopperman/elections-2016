@@ -6,6 +6,8 @@ import React, { Component, PropTypes } from 'react'
 import { select } from 'd3-selection'
 import deepEqual from 'deep-equal'
 import { buildSeatColumns } from './../utils/visUtils.js'
+import LinkButton from './LinkButton.js'
+import urlManager from './../utils/urlManager.js'
 
 // Set width (this is an arbitrary number, but 100 is convenient).
 const WIDTH = 100
@@ -22,12 +24,7 @@ const x1 = (WIDTH / 2) * 0.6
 // Set distance between rows.
 const x2 = ((WIDTH / 2) - x1) / (ROWS - 1)
 
-// TODO: make sure it is getting data from AP
 // TODO: make sure it updates correctly
-// TODO: probably no need to make it square?
-// TODO: style
-// TODO: get colors right
-// TODO: use a number to say who's won, pct reporting, etc
 // TODO: add a LinkButton with a link to the right race
 // TODO: add a result dual bar under balance of power
 class BalanceOfPower extends Component {
@@ -115,11 +112,6 @@ class BalanceOfPower extends Component {
 					}))
 				)
 
-// 		// The previous `data` function returns a UPDATE lifecycle.
-// 		// Use it to set the UPDATE attributes.
-// 		circle
-// 				.attr('class', d => `fill-winner-${d.party}`)
-
 		// Append `circle` and set its ENTER attributes.
 		circle.enter()
 			.append('circle')
@@ -136,6 +128,7 @@ class BalanceOfPower extends Component {
 			<div className='balanceOfPower r-col r-feature'>
 				<h3 className='overline benton-bold'>US Senate balance of power</h3>
 				<svg ref={(c) => this._svg = c} />
+				<LinkButton text='See full results' url={urlManager.base()} />
 			</div>
 		)
 
