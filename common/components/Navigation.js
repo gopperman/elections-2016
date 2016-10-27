@@ -46,12 +46,12 @@ class Navigation extends Component {
 				<ul className='g-nav__list'>
 					<li className='g-nav__item'>
 						<a
-							className='g-nav__link benton-bold icon icon--election'
+							className='g-nav__link nav-election benton-bold icon icon--election'
 							href={urlManager.base()}>Elections 2016</a>
 					</li>
 					<li className='g-nav__item town'>
 						<button
-							className='g-nav__link benton-bold icon icon--town'
+							className='g-nav__link nav-town benton-bold icon icon--town'
 							onClick={this.townOnClick}>Town results</button>
 						<nav className='subnav'>
 							<TownLookup />
@@ -59,13 +59,13 @@ class Navigation extends Component {
 					</li>
 					<li className='g-nav__item race'>
 						<button
-							className='g-nav__link benton-bold icon icon--race'
+							className='g-nav__link nav-race benton-bold icon icon--race'
 							onClick={this.raceOnClick}>Find a race</button>
 						<RaceNavigationLinks />
 					</li>
 					<li className='g-nav__item'>
 						<a
-							className='g-nav__link benton-bold icon icon--president'
+							className='g-nav__link nav-president benton-bold icon icon--president'
 							href={urlManager.office('President')}>Presidential race</a>
 					</li>
 				</ul>

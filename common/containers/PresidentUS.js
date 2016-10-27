@@ -130,7 +130,7 @@ class PresidentUS extends Component {
 
 		// Finally we can render all the components!
 		return (
-			<div>
+			<div className='president-is-open'>
 
 				<TestStatus isTest={isTest} />
 

@@ -105,7 +105,7 @@ class Election extends Component {
 			.value()
 
 		return (
-			<div>
+			<div className='election-is-open'>
 
 				<TestStatus isTest={isTest} />
 
