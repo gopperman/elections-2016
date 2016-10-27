@@ -8,19 +8,26 @@
 	border-radius 50%
 
 // Lead
-$bg-position-hidden = 30% 25rem, 70% 45rem, 50%, 50%
-$bg-position-shown = 30% 100%, 70% 100%, 50%, 50%
+$bg-position-hidden--lg = 30% 25rem, 70% 45rem, 50%, 50%
+$bg-position-shown--lg = 30% 100%, 70% 100%, 50%, 50%
+$bg-position-hidden--sm = 10% 35rem, 90% 55rem, 50%, 50%
+$bg-position-shown--sm = 10% 100%, 90% 100%, 50%, 50%
+$hero-height-sm = 13rem
+$hero-height-lg = 22rem
 .lead-img
 	position relative
 	background url($assets-path + 'lead/clinton.png') no-repeat, url($assets-path + 'lead/trump.png') no-repeat, url($assets-path + 'lead/map.png') no-repeat, linear-gradient(to top, desaturate(set-color('red', dark), 50%), desaturate(set-color('blue', dark), 50%))
-	background-size 28%, 35%, 75%, 100%
-	height 13em
-	background-position $bg-position-hidden
+	background-size 48%, 60%, 75%, 100%
+	min-height $hero-height-sm
+	background-position $bg-position-hidden--sm
 	background-blend-mode multiply, multiply, overlay
-	animation pop 0.75s 0.5s linear forwards
+	animation pop-sm 0.75s 0.75s linear forwards
 	padding 1em
 	+mq('bp-2')
-		height 20rem
+		min-height $hero-height-lg
+		background-size 28%, 35%, 75%, 100%
+		background-position $bg-position-hidden--lg
+		animation pop-lg 0.75s 0.5s linear forwards
 	&:before
 		content ''
 		display block
@@ -32,22 +39,28 @@ $bg-position-shown = 30% 100%, 70% 100%, 50%, 50%
 		background-image url($assets-path + 'lead/texture.png')
 		opacity 0.07
 
-@keyframes pop
+@keyframes pop-sm
 	from
-		background-position $bg-position-hidden
+		background-position $bg-position-hidden--sm
 	to
-		background-position $bg-position-shown
+		background-position $bg-position-shown--sm
+
+@keyframes pop-lg
+	from
+		background-position $bg-position-hidden--lg
+	to
+		background-position $bg-position-shown--lg
 
 .lead-bg
 	position relative
 	background url($assets-path + 'lead/ma-map.png') no-repeat, linear-gradient(to top, desaturate(set-color('red', dark), 50%), desaturate(set-color('blue', dark), 50%))
 	background-size 75%, 100%
-	height 40vh
+	min-height $hero-height-sm
 	background-position 50% 20%, 50%
 	background-blend-mode overlay
 	padding 1em
 	+mq('bp-2')
-		height 50vh
+		min-height $hero-height-lg
 	&:before
 		content ''
 		display block
