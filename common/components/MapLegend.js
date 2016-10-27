@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { standardizeParty } from './../utils/standardize.js'
 
 const MapLegend = ({ parties,
-choices = ['lead', 'win', 'none', 'undecided', 'tie'] }) => {
+choices = ['lead', 'win', 'none', 'tie'] }) => {
 
 	const options = {
 
