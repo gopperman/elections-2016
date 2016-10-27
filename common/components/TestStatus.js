@@ -3,7 +3,7 @@ import React, { PropTypes } from 'react'
 const TestStatus = ({ isTest }) => {
 
 	const test = isTest ? (
-		<h1 className='TestStatus'>AP TEST DATA</h1>
+		<h1 className='TestStatus benton-bold'>AP TEST DATA</h1>
 	) : null
 
 	return test
