@@ -9,6 +9,7 @@ import deepEqual from 'deep-equal'
 import { buildSeats } from './../utils/visUtils.js'
 import LinkButton from './LinkButton.js'
 import urlManager from './../utils/urlManager.js'
+import MapLegend from './MapLegend.js'
 
 // Set width (this is an arbitrary number, but 100 is convenient).
 const WIDTH = 100
@@ -122,6 +123,9 @@ class BalanceOfPower extends Component {
 			<div className='balanceOfPower r-col r-feature'>
 				<h3 className='overline benton-bold'>US Senate balance of power</h3>
 				<svg ref={(c) => this._svg = c} />
+				<MapLegend
+					parties={['dem', 'gop', 'ind']}
+					choices={['none', 'win']} />
 				<LinkButton text='See full results' url={urlManager.base()} />
 			</div>
 		)
