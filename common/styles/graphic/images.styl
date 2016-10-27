@@ -3,9 +3,12 @@
 //========================
 // Avatar
 .avatar
-	max-width 50px
-	max-height @max-width
 	border-radius 50%
+	max-width 40px
+	max-height @max-width
+	&:only-of-type
+		max-width 50px
+		max-height @max-width
 
 // Lead
 $bg-position-hidden--lg = 30% 25rem, 70% 45rem, 50%, 50%

@@ -21,6 +21,11 @@
 		justify-content space-between
 	&__duo-results
 		position relative
+		.r-block__img
+			transform translateY(-0.8em)
+			display none
+			+mq('bp-2')
+				display block
 	&__bar
 		-ms-flex 0 1 auto
 	&__meta
@@ -44,8 +49,12 @@
 				position absolute
 				right 0
 	&__img
-		float left
-		margin-right 0.5em
+		&:first-of-type
+			float left
+			margin-right 0.5em
+		&:last-of-type
+			float right
+			margin-left 0.5em
 	&__aside
 		font-size 0.6rem
 		margin-left 1em

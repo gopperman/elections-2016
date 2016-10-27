@@ -138,9 +138,11 @@ class PresidentUS extends Component {
 				<main id='content'>
 					<Hero title='US Presidential results' isFeature />
 
-					<div className='container-lg'>
+					<div className='container-sm'>
 						<Timer {...timerProps} />
 						<ElectoralCollegeBar {...summaryState} />
+					</div>
+					<div className='container-lg'>
 						{map}
 
 						<LinkButton

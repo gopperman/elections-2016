@@ -111,12 +111,13 @@ class Election extends Component {
 				<main id='content'>
 					<Hero title='Election Home' isFeature isElectionCtrl />
 
-					<div className='container-lg'>
+					<div className='container-sm'>
 
 						<Timer {...timerProps} />
 
 						<ElectoralCollegeBar {...presSummary} />
-
+					</div>
+					<div className='container-lg'>
 						{map}
 
 						<LinkButton

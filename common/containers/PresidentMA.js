@@ -130,9 +130,11 @@ class PresidentMA extends Component {
 				<main id='content'>
 					<Hero title='MA Presidential results' />
 
-					<div className='container-lg'>
+					<div className='container-sm'>
 						<Timer {...timerProps} />
 						<ElectoralCollegeBar {...usUnit} />
+					</div>
+					<div className='container-lg'>
 						{map}
 
 						<LinkButton
