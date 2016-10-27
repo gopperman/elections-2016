@@ -7,14 +7,29 @@ import { select } from 'd3-selection'
 import deepEqual from 'deep-equal'
 import { buildSeatColumns } from './../utils/visUtils.js'
 
+// Set width (this is an arbitrary number, but 100 is convenient).
+const WIDTH = 100
+
+// Set radius.
+const RADIUS = WIDTH * 0.02
+
+// Set number of rows.
+const ROWS = 5
+
+// Set distance from origin to first row.
+const x1 = (WIDTH / 2) * 0.6
+
+// Set distance between rows.
+const x2 = ((WIDTH / 2) - x1) / (ROWS - 1)
+
 // TODO: make sure it is getting data from AP
 // TODO: make sure it updates correctly
-// TODO: figure out how to make it responsive (look at viewBox)
 // TODO: probably no need to make it square?
 // TODO: style
 // TODO: get colors right
 // TODO: use a number to say who's won, pct reporting, etc
 // TODO: add a LinkButton with a link to the right race
+// TODO: add a result dual bar under balance of power
 class BalanceOfPower extends Component {
 
 	static propTypes = {
@@ -27,16 +42,16 @@ class BalanceOfPower extends Component {
 	// rendering occurs.
 	componentDidMount() {
 
-		const outerWidth = 100
-		const outerHeight = 50
+		const height = WIDTH / 2
 
 		// Set viewBox on svg.
 		select(this._svg)
-				.attr('viewBox', `0 0 ${outerWidth} ${outerHeight}`)
+				.attr('viewBox',
+					`0 0 ${WIDTH + (2 * RADIUS)} ${height + (2 * RADIUS)}`)
 			.append('g')
 				.attr('class', 'columns')
 				.attr('transform',
-					`translate(${outerWidth / 2}, ${outerHeight})`)
+					`translate(${(WIDTH / 2) + RADIUS}, ${height + RADIUS})`)
 
 		// Draw chart (although at this point we might not have data).
 		this.drawChart()
@@ -73,7 +88,8 @@ class BalanceOfPower extends Component {
 		const { dem, gop, ind } = this.props
 
 		// Get the data.
-		const senate = buildSeatColumns({ dem, gop, ind, total: 100, rows: 4 })
+		const senate =
+			buildSeatColumns({ dem, gop, ind, total: 100, rows: ROWS }).reverse()
 
 		// Select the svg node.
 		const svg = select(this._svg).select('g.columns')
@@ -106,8 +122,8 @@ class BalanceOfPower extends Component {
 		// Append `circle` and set its ENTER attributes.
 		circle.enter()
 			.append('circle')
-				.attr('r', 1)
-				.attr('cx', (d, i) => 50/4 + (i * 50/4))
+				.attr('r', RADIUS)
+				.attr('cx', (d, i) => x1 + (i * x2))
 				.attr('cy', 0)
 				.attr('class', d => `fill-winner-${d.party}`)
 
@@ -117,7 +133,7 @@ class BalanceOfPower extends Component {
 
 		return (
 			<div className='balanceOfPower r-col r-feature'>
-				<h3 className='overline benton-bold'>Senate Balance of Power</h3>
+				<h3 className='overline benton-bold'>US Senate balance of power</h3>
 				<svg ref={(c) => this._svg = c} />
 			</div>
 		)

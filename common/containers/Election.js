@@ -120,14 +120,6 @@ class Election extends Component {
 
 						<ElectoralCollegeBar {...presSummary} />
 
-						<div className='r-row--full'>
-							{/* <BalanceOfPower
-								dem={senateDemCount}
-								gop={senateGOPCount}
-								ind={senateOtherCount} />*/}
-							<BalanceOfPower dem={34} gop={30} ind={2} />
-						</div>
-
 						{map}
 
 						<LinkButton
@@ -135,6 +127,7 @@ class Election extends Component {
 							url={urlManager.race(presUs)} />
 
 						<div className='r-row--full'>
+							<BalanceOfPower dem={34} gop={30} ind={2} />
 							{featured}
 						</div>
 
