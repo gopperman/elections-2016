@@ -37,7 +37,18 @@ export default ({ candidates, precinctsReportingPct }) => {
 			// We have a winner.
 			if (winner) {
 
-				result = `fill-winner-${normalizeParty(winner.party)}`
+				// Do we have split votes?
+				if (first.electWon > 0 && second.electWon > 0) {
+
+					// We have a split-vote state like ME.
+					result = 'fill-winner-split'
+
+				} else {
+
+					// We don't have split votes.
+					result = `fill-winner-${normalizeParty(winner.party)}`
+
+				}
 
 			// We don't have a winner.
 			// Do we have data? (electWon OR voteCount)
@@ -55,6 +66,13 @@ export default ({ candidates, precinctsReportingPct }) => {
 						result = TIE
 
 					// We do not have a tie.
+					// Do we have split votes?
+					} else if (first.electWon > 0 && second.electWon > 0) {
+
+						// We have a split-vote state like ME.
+						result = 'fill-leading-split'
+
+					// We don't have split votes.
 					} else {
 
 						result = `fill-leading-${normalizeParty(first.party)}`

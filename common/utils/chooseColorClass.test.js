@@ -7,6 +7,35 @@ describe('chooseColorClass', () => {
 
 	describe('for presidential results', () => {
 
+		it('should work with split-votes like ME, leading', () => {
+
+			assert.equal(
+				chooseColorClass({
+					candidates: [
+						{ electWon: 1, voteCount: 0 },
+						{ electWon: 3, voteCount: 0 },
+					],
+					precinctsReportingPct: '1',
+				}),
+				'fill-leading-split'
+			)
+
+		})
+
+		it('should work with split-votes like ME, winner', () => {
+
+			assert.equal(
+				chooseColorClass({
+					candidates: [
+						{ electWon: 1, voteCount: 0 },
+						{ electWon: 3, voteCount: 0, winner: 'X' },
+					],
+				}),
+				'fill-winner-split'
+			)
+
+		})
+
 		it('should work with a winner', () => {
 
 			assert.equal(
@@ -97,9 +126,9 @@ describe('chooseColorClass', () => {
 			assert.equal(
 				chooseColorClass({
 					candidates: [
-						{ electWon: 1, voteCount: 1 },
-						{ electWon: 1, voteCount: 1 },
-						{ electWon: 1, voteCount: 1 },
+						{ electWon: 0, voteCount: 1 },
+						{ electWon: 0, voteCount: 1 },
+						{ electWon: 0, voteCount: 1 },
 					],
 					precinctsReportingPct: '1',
 				}),
@@ -110,9 +139,9 @@ describe('chooseColorClass', () => {
 			assert.notEqual(
 				chooseColorClass({
 					candidates: [
-						{ electWon: 1, voteCount: 0 },
-						{ electWon: 1, voteCount: 1 },
-						{ electWon: 1, voteCount: 2 },
+						{ electWon: 0, voteCount: 0 },
+						{ electWon: 0, voteCount: 1 },
+						{ electWon: 0, voteCount: 2 },
 					],
 					precinctsReportingPct: '1',
 				}),
@@ -126,9 +155,9 @@ describe('chooseColorClass', () => {
 			assert.equal(
 				chooseColorClass({
 					candidates: [
-						{ electWon: 1, voteCount: 1, party: 'dem' },
-						{ electWon: 2, voteCount: 1, party: 'gop' },
-						{ electWon: 3, voteCount: 1, party: 'AC' },
+						{ electWon: 0, voteCount: 1, party: 'dem' },
+						{ electWon: 0, voteCount: 1, party: 'gop' },
+						{ electWon: 0, voteCount: 2, party: 'AC' },
 					],
 					precinctsReportingPct: '1',
 				}),
@@ -138,9 +167,9 @@ describe('chooseColorClass', () => {
 			assert.equal(
 				chooseColorClass({
 					candidates: [
-						{ electWon: 1, voteCount: 3, party: 'dem' },
-						{ electWon: 1, voteCount: 2, party: 'ind' },
-						{ electWon: 1, voteCount: 1, party: 'gop' },
+						{ electWon: 0, voteCount: 3, party: 'dem' },
+						{ electWon: 0, voteCount: 2, party: 'ind' },
+						{ electWon: 0, voteCount: 1, party: 'gop' },
 					],
 					precinctsReportingPct: '1',
 				}),
