@@ -35,13 +35,17 @@
 			display flex
 			justify-content space-between
 			p
-				font-size 0.8em
+				font-size 0.7em
 				&:nth-of-type(2)
 					color set-gray('medium')
+					position relative
+					top -0.5em
+					line-height 1em
 					&:before
 						content '\25B4'
 						display block
 						text-align center
+						font-size 1.5em
 		/.results-circle &
 			background-color rgba(white, 0.8)
 			padding 0.05em
