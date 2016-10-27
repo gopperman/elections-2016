@@ -52,8 +52,11 @@ const ElectoralCollegeBar = ({
 						aria-valuemax='100'
 						style={{ width: `${gopElectPct}%` }} />
 				</div>
-				<p className='r-block__meta benton-regular'>{addCommas(dem.voteCount || '')} votes</p>
-				<p className='r-block__meta benton-regular'>{addCommas(gop.voteCount || '')} votes</p>
+				<div className='r-block__meta--feature'>
+					<p className='benton-regular'>{addCommas(dem.voteCount || '')} votes</p>
+					<p className='benton-regular'>270 to win</p>
+					<p className='benton-regular'>{addCommas(gop.voteCount || '')} votes</p>
+				</div>
 			</div>
 			<p className='note benton-regular'><span>{+precinctsReportingPct}% reporting</span></p>
 		</div>
