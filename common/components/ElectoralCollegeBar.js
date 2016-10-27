@@ -3,6 +3,8 @@ import addCommas from 'add-commas'
 import _ from 'lodash'
 import classnames from 'classnames'
 
+const IMAGE_BASE = '//apps.bostonglobe.com/election-results/2016/general/assets/avatar/'
+
 const ElectoralCollegeBar = ({
 	candidates = [],
 	precinctsReportingPct = '',
@@ -20,8 +22,14 @@ const ElectoralCollegeBar = ({
 	return (
 		<div className='r-block'>
 			<div className='r-block__duo-results'>
-			<img className='avatar r-block__img' aria-hidden='true' src='//apps.bostonglobe.com/election-results/2016/general/assets/avatar/clinton.jpg' alt='Hillary Clinton'/>
-			<img className='avatar r-block__img' aria-hidden='true' src='//apps.bostonglobe.com/election-results/2016/general/assets/avatar/trump.jpg' alt='Donald Trump'/>
+				<img
+					className='avatar r-block__img'
+					aria-hidden='true' src={`${IMAGE_BASE}/clinton.jpg`}
+					alt='Hillary Clinton' />
+				<img
+					className='avatar r-block__img'
+					aria-hidden='true' src={`${IMAGE_BASE}/trump.jpg`}
+					alt='Donald Trump' />
 				<div className='feat-text'>
 					<p className={classnames('feat-text__name', { 'is-winner': dem.winner })}>
 						<span className='benton-bold color-dem feat-text__name--number'>{dem.electWon}</span>
