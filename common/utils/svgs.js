@@ -17,7 +17,7 @@ const svgs = {
   		<line fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="244.826" y1="217.479" x2="258.967" y2="203.337"/>
   	</svg>`,
 
-  globeLogo: `
+	globeLogo: `
     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="140px" height="18.674px" viewBox="0 0 140 18.674" enable-background="new 0 0 140 18.674" xml:space="preserve" aria-labelledby="g-logo-title">
     <title id="g-logo-title">Boston Globe</title>
     <a xlink:href="http://www.bostonglobe.com"></a>
