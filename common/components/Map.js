@@ -91,25 +91,27 @@ class Map extends Component {
 
 		// Save this selection to state so it doesn't get cleared out
 		// with new data.
+		// TODO: what happens when e || e.target || e.target.value is null?
 		this.setState({ selectionId: e.target.value })
 
-		// Select all paths,
-		const paths = select(this._svg).select('g.features').selectAll('path')
-
-		// and deselect them.
-		paths.classed('selected', false)
+		// Deselect all paths.
+		const paths = this.deselectAllPaths()
 
 		// Find the feature that matches the dropdown option,
+		// TODO: what if e || e.target || e.target.value is null?
 		const match = paths
 			.filter(d => compareStrings(d.id, e.target.value))
 
 		// select it, and raise it.
+		// TODO: could match be null?
 		match.classed('selected', true).raise()
 
+		// TODO: this will fail if match is null
 		const datum = match.datum()
 
 		// Get the mouse position.
 		const { width, height } = getViewBoxDimensions(this._svg)
+		// TODO: this will fail if datum is null
 		const [x, y] = datum.centroid
 		const position = {
 			x: 100 * (x / width),
@@ -329,10 +331,31 @@ class Map extends Component {
 
 	}
 
+	deselectAllPaths = () => {
+
+		// Select all paths,
+		const paths = select(this._svg).select('g.features').selectAll('path')
+
+		// and deselect them.
+		paths.classed('selected', false)
+
+		return paths
+
+	}
+
 	clearTooltip = () => {
 
-		// Hide the tooltip.
+		// Hide the tooltip,
 		this._tooltip.classList.remove('show')
+
+		// clear out local state,
+		this.setState({ selectionId: null })
+
+		// clear out the dropdown,
+		this._dropdown.value = ''
+
+		// and deselect all paths.
+		this.deselectAllPaths()
 
 	}
 
@@ -365,7 +388,7 @@ class Map extends Component {
 
 	drawFeatures = () => {
 
-		const { drawTooltip, clearTooltip } = this
+		const { drawTooltip, clearTooltip, deselectAllPaths } = this
 		const { data, unitName } = this.props
 		const { selectionId } = this.state
 		const _dropdown = this._dropdown
@@ -436,7 +459,7 @@ class Map extends Component {
 
 				// Deselect all other features.
 				// We need this because of the dropdown.
-				svg.selectAll('path').classed('selected', false)
+				deselectAllPaths()
 
 				// Select the feature and raise it.
 				select(this).classed('selected', true).raise()
@@ -453,19 +476,11 @@ class Map extends Component {
 				drawTooltip({ subunit: d.subunit, position })
 
 			})
-			.on('mouseleave', function mouseleave() {
+			.on('mouseleave', () => {
 
-				// Clear out local state,
-				setState({ selectionId: null })
-
-				// clear out the dropdown,
-				_dropdown.value = ''
-
-				// clear out the tooltip,
+				// Clear out the tooltip.
 				clearTooltip()
 
-				// and deselect the feature.
-				select(this).classed('selected', false)
 			})
 
 	}
