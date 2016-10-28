@@ -70,10 +70,22 @@ choices = ['lead', 'win', 'none', 'tie'] }) => {
 			)
 		},
 
+		split(key) {
+			return (
+				<li key={key} className='legend__item'>
+					<p className='legend__subhed benton-regular'>Split votes</p>
+					<dl className='legend__deflist'>
+						<dt className='legend__term benton-regular hide-accessible'>Split votes</dt>
+						<dd className='legend__def fill-tie' />
+					</dl>
+				</li>
+			)
+		},
+
 	}
 
 	const modifiedChoices = isPresidential ?
-		choices.filter(v => v !== 'tie') : choices
+		['lead', 'win', 'none', 'split'] : choices
 
 	const display = modifiedChoices.map((v, i) => options[v](i))
 

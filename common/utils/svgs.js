@@ -36,6 +36,9 @@ const svgs = {
     <pattern id="crosshatch-no" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(30)">
       <rect class="fill-complete-no" width="8" height="10" transform="translate(0,0)"></rect>
     </pattern>
+    <pattern id="crosshatch-split" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(30)">
+      <rect class="fill-winner-split" width="8" height="10" transform="translate(0,0)"></rect>
+    </pattern>
   </defs>`,
 
 }
