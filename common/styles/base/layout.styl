@@ -29,6 +29,11 @@ img, video
 button
 	cursor pointer
 
+hr
+	border 0
+	height 0
+	border-top 2px solid set-gray('lightest')
+
 // Base button extend
 $btn
 	display inline-block
@@ -62,8 +67,8 @@ $btn
 	width 90%
 	max-width 60rem
 	margin 0 auto
-	> *:not(:first-child)
-		margin-bottom 4em
+	> *
+		margin-bottom 2em
 .container-sm
 	width 90%
 	max-width 40rem

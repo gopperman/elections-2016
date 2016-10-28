@@ -124,12 +124,14 @@ class Election extends Component {
 						<LinkButton
 							text='See full results'
 							url={urlManager.race(presUs)} />
-
-						<div className='r-row--full'>
-							<BalanceOfPower {...bopData} />
-							{featured}
+					</div>
+					<div className='container-downpage'>
+						<div className='container-lg'>
+							<div className='r-row--full'>
+									<BalanceOfPower {...bopData} />
+									{featured}
+							</div>
 						</div>
-
 					</div>
 
 				</main>

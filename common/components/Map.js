@@ -555,7 +555,7 @@ class Map extends Component {
 						className='benton-bold form__label form__label--overline'>{dropdownLabel}</label>
 					<select
 						id='map-select'
-						className='form__select'
+						className='form__select benton-bold'
 						onChange={this.onSelectChange}
 						ref={(c) => this._dropdown = c}>{options}</select>
 				</div>
