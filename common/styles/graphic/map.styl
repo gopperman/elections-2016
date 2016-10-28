@@ -2,7 +2,7 @@
 // Map!
 //=======================
 
-div.map
+.map-component
 	position relative
 	&__select
 		text-align center
@@ -13,7 +13,8 @@ div.map
 	.map-wrappers
 		position relative
 
-	svg
+	.full-map,
+	.inset-map
 		cursor default
 		display block
 		stroke-linecap round
@@ -27,7 +28,7 @@ div.map
 		&.insetted
 			width 70%
 
-		&.inset
+		&.inset-map
 			// border solid black 1px
 			position absolute
 			bottom 0

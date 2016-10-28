@@ -548,7 +548,7 @@ class Map extends Component {
 			.value())
 
 		return (
-			<div className='map'>
+			<div className='map-component'>
 				<div className='map__select'>
 					<label
 						htmlFor='map-select'
@@ -562,10 +562,10 @@ class Map extends Component {
 				<div className='map-wrappers'>
 					{serverSvg}
 					<svg
-						className='map'
+						className='full-map'
 						ref={(c) => this._svg = c}
 						dangerouslySetInnerHTML={{ __html: svgs.crossHatchesDefs }} />
-					<svg className='inset' ref={(c) => this._inset = c} />
+					<svg className='inset-map' ref={(c) => this._inset = c} />
 					<div className='tooltip-wrapper' ref={(c) => this._tooltip = c}>
 						<div className='r-block tooltip js-tooltip'>
 							<button
