@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react'
+import _ from 'lodash'
 import addCommas from 'add-commas'
 import classnames from 'classnames'
 import { fullName, percent } from './../utils/Candidate.js'
@@ -33,6 +34,9 @@ precinctsReportingPct }) => {
 
 	const incumbentSpan = incumbent ?
 		<span className='r-block__aside benton-regular'>Incumbent</span> : null
+	
+	const partySpan = !_.includes(['yes', 'no'], partyToDisplay) ?
+		<span className='r-block__aside benton-regular'>{partyToDisplay}</span> : null
 
 	return (
 
@@ -40,7 +44,7 @@ precinctsReportingPct }) => {
 
 			{image}
 
-			<p className={candidateClass}>{name}{incumbentSpan}</p>
+			<p className={candidateClass}>{name}{partySpan}{incumbentSpan}</p>
 
 			<div className='r-block__results'>
 				<div className='r-block__bar results-bar'>
