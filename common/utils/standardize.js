@@ -1,6 +1,18 @@
 import _ from 'lodash'
 
 /**
+ * Get race name.
+ * @memberof Race
+ * @function
+ * @param {Object} race a race
+ * @returns {String} a race's name
+ * @example
+ * raceName(race) //=> 'NH Governor'
+ */
+const raceName = (race) =>
+	[race.statePostal, race.officeName, race.seatName].join(' ').trim()
+
+/**
  * Normalizes a party string.
  * @memberof standardize
  * @function
@@ -61,4 +73,5 @@ export {
 	normalizeParty,
 	standardizeParty,
 	orderParties,
+	raceName,
 }
