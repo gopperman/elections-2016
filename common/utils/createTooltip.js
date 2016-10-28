@@ -33,7 +33,7 @@ export default ({ subunit = {}, displayName, sortingDelegate }) => {
 		return `
 			<tr class='r-table__row'>
 				<td class='r-table__cell' scope='row'>
-					<div aria-hidden='true' class='r-table__square ${squareClass}'></div>
+					<div aria-hidden='true' class='r-table__square ${squareClass}' />
 					<p class='${candidateClass}'>${last}</p>
 				</td>
 				<td class='r-table__cell' scope='row'>
