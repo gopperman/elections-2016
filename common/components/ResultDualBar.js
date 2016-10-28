@@ -3,15 +3,12 @@ import React, { PropTypes } from 'react'
 import classNames from 'classnames'
 import { sortByVoteCount } from './../utils/Candidates.js'
 import { percent } from './../utils/Candidate.js'
-import { percentForDisplay } from './../utils/standardize.js'
-import { getName } from './../utils/Race.js'
+import { percentForDisplay, raceName } from './../utils/standardize.js'
 
 // Assumptions:
 // - displays vote count, not electoral votes
 // - only deals with 'I' officeIDs (ballot question) or dem/gop races
 const ResultDualBar = ({ race }) => {
-
-	const raceName = getName(race)
 
 	const reportingUnits = race.reportingUnits || []
 
@@ -47,7 +44,7 @@ const ResultDualBar = ({ race }) => {
 
 		<div className='r-block'>
 
-			<p className='r-block__name benton-bold'>{raceName}</p>
+			<p className='r-block__name benton-bold'>{raceName(race)}</p>
 
 			<div className='r-block__duo-results'>
 

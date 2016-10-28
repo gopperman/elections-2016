@@ -1,11 +1,12 @@
 [
   "President",
   "U.S. House",
+  "U.S. Senate",
+  "State House",
+  "State Senate",
   "County Commissioner",
   "Governor's Council",
   "Question",
   "Register of Deeds",
-  "Sheriff",
-  "State House",
-  "State Senate"
+  "Sheriff"
 ]

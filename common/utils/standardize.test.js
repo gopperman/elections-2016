@@ -6,10 +6,33 @@ import {
 	normalizeParty,
 	standardizeParty,
 	orderParties,
+	raceName,
 } from './standardize.js'
 
 describe('standardize', () => {
 
+	describe('raceName', () => {
+
+		it('should work with general races', () => {
+
+			assert.equal(raceName({
+				statePostal: 'MA',
+				officeName: 'Question',
+				seatName: '4 - Legalize Marijuana',
+			}), 'MA Question 4 - Legalize Marijuana')
+
+		})
+
+		it('should work with ballot questions', () => {
+
+			assert.equal(raceName({
+				statePostal: 'MA',
+				officeName: 'President',
+			}), 'MA President')
+
+		})
+
+	})
 	describe('orderParties', () => {
 
 		it('should work', () => {

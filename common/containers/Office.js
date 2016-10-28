@@ -10,7 +10,7 @@ import ResultGroup from './../components/ResultGroup.js'
 import { sortByVoteCount } from './../utils/Candidates.js'
 import Hero from './../components/Hero.js'
 import urlManager from './../utils/urlManager.js'
-import { getName } from './../utils/Race.js'
+import { raceName, officeName } from './../utils/standardize.js'
 
 // We'll keep these urls here for testing. A description:
 
@@ -21,7 +21,7 @@ import { getName } from './../utils/Race.js'
 // const url = '2016-11-08?statePostal=M'
 
 // and this one is the correct url - it returns everything.
-const url = '2016-11-08?statePostal=MA&officeName='
+const url = '2016-11-08?officeName='
 
 @connectToApi
 class Office extends Component {
@@ -79,9 +79,6 @@ class Office extends Component {
 		// Get the first race.
 		const firstRace = races[0] || {}
 
-		// Get the page's title.
-		const title = [firstRace.officeName, firstRace.statePostal].join(', ')
-
 		// Create result blocks for all races of this office type.
 		const raceBlocks = races.map((race, i) => {
 
@@ -93,7 +90,7 @@ class Office extends Component {
 			return (
 				<ResultGroup
 					key={i}
-					overline={getName(race)}
+					overline={raceName(race)}
 					precinctsReportingPct={stateUnit.precinctsReportingPct}
 					candidates={sortByVoteCount(candidates)}
 					buttonText='See full results'
@@ -110,7 +107,7 @@ class Office extends Component {
 				<Header />
 
 				<main id='content'>
-					<Hero title={title} />
+					<Hero title={officeName(firstRace)} />
 
 					<div className='container-sm'>
 

@@ -34,7 +34,7 @@ precinctsReportingPct }) => {
 
 	const incumbentSpan = incumbent ?
 		<span className='r-block__aside benton-regular'>Incumbent</span> : null
-	
+
 	const partySpan = !_.includes(['yes', 'no'], partyToDisplay) ?
 		<span className='r-block__aside benton-regular'>{partyToDisplay}</span> : null
 
