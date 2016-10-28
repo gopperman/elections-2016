@@ -15,7 +15,7 @@ import {
 import ResultGroup from './../components/ResultGroup.js'
 import LinkButton from './../components/LinkButton.js'
 import urlManager from './../utils/urlManager.js'
-import { getName } from './../utils/Race.js'
+import { raceName } from './../utils/standardize.js'
 import SwingStates from './../components/SwingStates.js'
 import getStatesShapefile from './../utils/getStatesShapefile.js'
 
@@ -117,7 +117,7 @@ class Homepage extends Component {
 				return (
 					<ResultGroup
 						key={i}
-						overline={getName(race)}
+						overline={raceName(race)}
 						precinctsReportingPct={stateUnit.precinctsReportingPct}
 						candidates={sortByVoteCount(candidates)}
 						buttonText='See full results'

@@ -11,7 +11,7 @@ import ResultGroup from './../components/ResultGroup.js'
 import { sortByVoteCount } from './../utils/Candidates.js'
 import Hero from './../components/Hero.js'
 import Map from './../components/Map.js'
-import { getName } from './../utils/Race.js'
+import { raceName } from './../utils/standardize.js'
 import getTownsShapefile from './../utils/getTownsShapefile.js'
 
 const TOWNS = getTownsShapefile()
@@ -102,12 +102,12 @@ class Race extends Component {
 				<Header />
 
 				<main id='content'>
-					<Hero title={getName(race)} />
+					<Hero title={raceName(race)} />
 					<div className='container-sm'>
 						<Timer {...timerProps} />
 
 						<ResultGroup
-							overline={getName(race)}
+							overline={raceName(race)}
 							precinctsReportingPct={state.precinctsReportingPct}
 							candidates={summaryCandidates} />
 					</div>
