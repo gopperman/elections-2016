@@ -21,7 +21,7 @@ import { getName } from './../utils/Race.js'
 // const url = '2016-11-08?statePostal=M'
 
 // and this one is the correct url - it returns everything.
-const url = '2016-11-08?statePostal=MA&officeName='
+const url = '2016-11-08?officeName='
 
 @connectToApi
 class Office extends Component {
