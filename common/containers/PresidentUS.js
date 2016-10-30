@@ -137,7 +137,7 @@ class PresidentUS extends Component {
 
 				<Header />
 				<main id='content'>
-					<Hero title='US Presidential results' isFeature />
+					<Hero className='lead-img' title='US Presidential results' />
 
 					<div className='container-sm'>
 						<Timer {...timerProps} />

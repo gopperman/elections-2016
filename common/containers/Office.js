@@ -11,6 +11,7 @@ import { sortByVoteCount } from './../utils/Candidates.js'
 import Hero from './../components/Hero.js'
 import urlManager from './../utils/urlManager.js'
 import { raceName, officeName } from './../utils/standardize.js'
+import compareStringsNoAlpha from './../utils/compareStringsNoAlpha.js'
 
 // We'll keep these urls here for testing. A description:
 
@@ -99,6 +100,9 @@ class Office extends Component {
 
 		})
 
+		const heroClass = compareStringsNoAlpha(firstRace.statePostal, 'ma') ?
+			'lead-ma-map' : 'lead-us-map'
+
 		return (
 			<div>
 
@@ -107,7 +111,7 @@ class Office extends Component {
 				<Header />
 
 				<main id='content'>
-					<Hero title={officeName(firstRace)} />
+					<Hero className={heroClass} title={officeName(firstRace)} />
 
 					<div className='container-sm'>
 

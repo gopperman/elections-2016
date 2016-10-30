@@ -128,7 +128,7 @@ class PresidentMA extends Component {
 
 				<Header summaryState={usUnit} />
 				<main id='content'>
-					<Hero title='MA Presidential results' />
+					<Hero className='lead-img' title='MA Presidential results' />
 
 					<div className='container-sm'>
 						<Timer {...timerProps} />

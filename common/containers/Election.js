@@ -110,7 +110,7 @@ class Election extends Component {
 				<Header />
 
 				<main id='content'>
-					<Hero title='Election Home' isFeature isElectionCtrl />
+					<Hero title='Election Home' className='lead-img' isElectionCtrl />
 
 					<div className='container-sm'>
 
@@ -127,10 +127,12 @@ class Election extends Component {
 					</div>
 					<div className='container-downpage'>
 						<div className='container-lg'>
-							<h3 className='subhed benton-bold'><span>Featured Races</span></h3>
+							<h3 className='subhed benton-bold'>
+								<span>Featured Races</span>
+							</h3>
 							<div className='r-row--full'>
-									<BalanceOfPower {...bopData} />
-									{featured}
+								<BalanceOfPower {...bopData} />
+								{featured}
 							</div>
 						</div>
 					</div>

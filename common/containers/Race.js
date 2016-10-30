@@ -106,7 +106,7 @@ class Race extends Component {
 				<Header />
 
 				<main id='content'>
-					<Hero title={raceName(race)} />
+					<Hero className='lead-ma-map' title={raceName(race)} />
 					<div className='container-sm'>
 						<Timer {...timerProps} />
 

@@ -2,12 +2,8 @@ import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 import svgs from './../utils/svgs.js'
 
-const Hero = ({ title, isFeature, isElectionCtrl }) => {
+const Hero = ({ title, isElectionCtrl, className }) => {
 
-	const mainClass = classnames('hero', {
-		'lead-bg': !isFeature,
-		'lead-img': isFeature,
-	})
 	const h1Class =
 		classnames('hed', 'hero__hed', { 'benton-bold': !isElectionCtrl })
 
@@ -19,7 +15,7 @@ const Hero = ({ title, isFeature, isElectionCtrl }) => {
 	) : (<h1 className={h1Class}>{title}</h1>)
 
 	return (
-		<div className={mainClass}>
+		<div className={`hero ${className}`}>
 			{h1}
 			<div
 				className='hero__flourish'
@@ -30,7 +26,7 @@ const Hero = ({ title, isFeature, isElectionCtrl }) => {
 
 Hero.propTypes = {
 	title: PropTypes.string.isRequired,
-	isFeature: PropTypes.bool,
+	className: PropTypes.string,
 	isElectionCtrl: PropTypes.bool,
 }
 

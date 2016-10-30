@@ -54,7 +54,28 @@ $hero-height-lg = 22rem
 	to
 		background-position $bg-position-shown--lg
 
-.lead-bg
+.lead-us-map
+	position relative
+	background url($assets-path + 'lead/map.png') no-repeat, linear-gradient(to top, desaturate(set-color('red', dark), 50%), desaturate(set-color('blue', dark), 50%))
+	background-size 75%, 100%
+	min-height $hero-height-sm
+	background-position 50% 20%, 50%
+	background-blend-mode overlay
+	padding 1em
+	+mq('bp-2')
+		min-height $hero-height-lg
+	&:before
+		content ''
+		display block
+		position absolute
+		left 0
+		top 0
+		bottom 0
+		width 100%
+		background-image url($assets-path + 'lead/texture.png')
+		opacity 0.07
+
+.lead-ma-map
 	position relative
 	background url($assets-path + 'lead/ma-map.png') no-repeat, linear-gradient(to top, desaturate(set-color('red', dark), 50%), desaturate(set-color('blue', dark), 50%))
 	background-size 75%, 100%

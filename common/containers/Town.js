@@ -105,7 +105,7 @@ class Town extends Component {
 				<Header />
 
 				<main id='content'>
-					<Hero title={townTitle} />
+					<Hero className='lead-ma-map' title={townTitle} />
 
 					<div className='container-sm'>
 
