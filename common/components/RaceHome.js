@@ -11,7 +11,7 @@ const RaceHome = () => {
 		<li key={i} className='subnav__item'>
 			<a
 				className='subnav__link benton-bold'
-				href={urlManager.office(officeName)}>{officeName}</a>
+				href={urlManager.office({ officeName })}>{officeName}</a>
 		</li>
 	))
 

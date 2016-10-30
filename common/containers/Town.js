@@ -20,13 +20,13 @@ import { toTitleCase, raceName } from './../utils/standardize.js'
 // const url = '2016-11-08?locat='
 
 // and this one is the correct url - it returns everything.
-const url = '2016-11-08?location='
+const url = '2016-11-08?'
 
 @connectToApi
 class Town extends Component {
 
 	static apiUrl(params) {
-		return `${url}${params.townName}`
+		return `${url}${urlManager.stringifyParams(params)}`
 	}
 
 	static areAllRacesComplete(results) {
@@ -76,7 +76,7 @@ class Town extends Component {
 		const isTest = _.some(data.races, 'test')
 
 		// Get the town's title.
-		const townTitle = toTitleCase(params.townName)
+		const townTitle = toTitleCase(params.location)
 
 		// Create result blocks for all the town races.
 		const raceBlocks = races.map((race, i) => {

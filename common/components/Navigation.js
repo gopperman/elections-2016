@@ -66,7 +66,7 @@ class Navigation extends Component {
 					<li className='g-nav__item'>
 						<a
 							className='g-nav__link nav-president benton-bold icon icon--president'
-							href={urlManager.office('President')}>Presidential race</a>
+							href={urlManager.office({ officeName: 'President' })}>Presidential race</a>
 					</li>
 				</ul>
 			</nav>

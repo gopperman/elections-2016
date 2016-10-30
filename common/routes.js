@@ -1,5 +1,5 @@
 import React from 'react'
-import { Redirect, Route, IndexRoute } from 'react-router'
+import { Route, IndexRoute } from 'react-router'
 import App from './components/App.js'
 import Election from './containers/Election.js'
 import Homepage from './containers/Homepage.js'
@@ -7,8 +7,6 @@ import Office from './containers/Office.js'
 import PresidentUS from './containers/PresidentUS.js'
 import PresidentMA from './containers/PresidentMA.js'
 import Race from './containers/Race.js'
-import RaceHome from './components/RaceHome.js'
-import TownHome from './components/TownHome.js'
 import Town from './containers/Town.js'
 import urlManager from './utils/urlManager.js'
 
@@ -26,31 +24,24 @@ export default (
 			component={PresidentUS} />
 
 		<Route
-			path={`${urlManager.base()}/president/massachusetts`}
+			path={`${urlManager.base()}/MA/president`}
 			component={PresidentMA} />
-		<Redirect
-			from={`${urlManager.base()}/race/president`}
-			to={urlManager.office('President')} />
 
 		<Route
-			path={`${urlManager.base()}/race`}
-			component={RaceHome} />
-
-		<Route
-			path={`${urlManager.base()}/race/:officeName`}
+			path={`${urlManager.base()}/:officeName`}
 			component={Office} />
 
 		<Route
-			path={`${urlManager.base()}/race/:officeName/:seatName`}
-			component={Race} />
+			path={`${urlManager.base()}/:statePostal/:officeName`}
+			component={Office} />
 
 		<Route
-			path={`${urlManager.base()}/town`}
-			component={TownHome} />
-
-		<Route
-			path={`${urlManager.base()}/town/:townName`}
+			path={`${urlManager.base()}/:statePostal/town/:location`}
 			component={Town} />
+
+		<Route
+			path={`${urlManager.base()}/:statePostal/:officeName/:seatName`}
+			component={Race} />
 
 	</Route>
 )
