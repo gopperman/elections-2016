@@ -8,6 +8,7 @@ import configureStore from './../common/store/configureStore.js'
 import initialState from './../common/store/initialState.js'
 import routes from './../common/routes.js'
 import meta from './../data/meta.json'
+import pakage from './../package.json'
 
 export default (req, res) => {
 
@@ -68,6 +69,7 @@ export default (req, res) => {
 						initialState: state,
 						isProduction: process.env.NODE_ENV === 'production',
 						meta,
+						version: pakage.version,
 					})
 
 				})

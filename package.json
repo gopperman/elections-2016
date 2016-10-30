@@ -79,5 +79,22 @@
     "mocha": "^3.0.2",
     "rimraf": "^2.5.4",
     "tap": "^6.3.2"
-  }
+  },
+  "name": "elections-2016",
+  "description": "Please note: do not reproduce Boston Globe logos or fonts without written permission.",
+  "version": "0.0.2",
+  "main": "client/index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BostonGlobe/elections-2016.git"
+  },
+  "author": "Gabriel Florit",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/BostonGlobe/elections-2016/issues"
+  },
+  "homepage": "https://github.com/BostonGlobe/elections-2016#readme"
 }

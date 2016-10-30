@@ -40,7 +40,7 @@ html(lang='en')
 		meta(name='robots', content='noarchive')
 		meta(name='news_keywords', content=`Boston Globe, Boston, interactive, graphic, ${meta.title}, ${meta.keywords}`)
 
-		// main.css (smooshed)
+		// critical.css (smooshed)
 
 		// favicon
 		link(rel='apple-touch-icon', sizes='57x57', href='//apps.bostonglobe.com/common/favicon/apple-touch-icon-57x57.png?v=2016')
@@ -68,11 +68,9 @@ html(lang='en')
 		// critical.js (smooshed)
 
 		if isProduction
-			link(href='/static/compiled.css', rel='stylesheet', type='text/css')
+			link(href=`/static/compiled.css?v=${version}`, rel='stylesheet', type='text/css')
 	body
 		#root!= appHtml
 		script window.REDUX__INITIALSTATE = !{JSON.stringify(initialState)}
-		script(src='/static/bundle.js')
-
-		// bundle.js (timestamped)
-		// business.js async=true
+		script(src=`/static/bundle.js?v=${version}`)
+		script(src='//apps.bostonglobe.com/common/js/business/business-1.4.4.js', async=true)
