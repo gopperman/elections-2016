@@ -3,14 +3,16 @@ import _ from 'lodash'
 import addCommas from 'add-commas'
 import classnames from 'classnames'
 import { fullName, percent } from './../utils/Candidate.js'
-import { percentForDisplay } from './../utils/standardize.js'
+import {
+	percentForDisplay,
+	normalizeParty,
+} from './../utils/standardize.js'
 
 const ResultBar = ({ candidate, candidates, showImage,
 precinctsReportingPct }) => {
 
 	const { party, candidateID, voteCount, winner, incumbent } = candidate
 
-	const partyToDisplay = party.toLowerCase()
 	const name = fullName(candidate)
 	const pct = percentForDisplay(
 		percent({ candidates, candidateID }))
@@ -35,8 +37,8 @@ precinctsReportingPct }) => {
 	const incumbentSpan = incumbent ?
 		<span className='r-block__aside benton-regular'>Incumbent</span> : null
 
-	const partySpan = !_.includes(['yes', 'no'], partyToDisplay) ?
-		<span className='r-block__aside benton-regular'>{partyToDisplay}</span> : null
+	const partySpan = !_.includes(['yes', 'no'], party.toLowerCase()) ?
+		<span className='r-block__aside benton-regular'>{party}</span> : null
 
 	return (
 
@@ -50,7 +52,7 @@ precinctsReportingPct }) => {
 				<div className='r-block__bar results-bar'>
 
 					<span
-						className={`fill-complete-${partyToDisplay}`}
+						className={`fill-complete-${normalizeParty(party)}`}
 						role='progressbar'
 						aria-valuenow={pct}
 						aria-valuemin='0'
