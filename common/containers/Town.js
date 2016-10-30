@@ -25,6 +25,10 @@ const url = '2016-11-08?'
 @connectToApi
 class Town extends Component {
 
+	static getTitle() {
+		return 'Election results 2016'
+	}
+
 	static apiUrl(params) {
 		return `${url}${urlManager.stringifyParams(params)}`
 	}

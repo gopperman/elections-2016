@@ -2,6 +2,8 @@ doctype html
 html(lang='en')
 	head
 
+		title=title
+
 		meta(name='viewport', content='width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no')
 		meta(charset='utf-8')
 		meta(http-equiv='X-UA-Compatible', content='IE=edge,chrome=1')
@@ -70,7 +72,7 @@ html(lang='en')
 		if isProduction
 			link(href=`/static/compiled.css?v=${version}`, rel='stylesheet', type='text/css')
 	body
-		#root!= appHtml
-		script window.REDUX__INITIALSTATE = !{JSON.stringify(initialState)}
+		#root!=appHtml
+		script window.REDUX__INITIALSTATE=!{JSON.stringify(initialState)}
 		script(src=`/static/bundle.js?v=${version}`)
 		script(src='//apps.bostonglobe.com/common/js/business/business-1.4.4.js', async=true)

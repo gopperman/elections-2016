@@ -21,6 +21,10 @@ const connectToApi = (WrappedComponent) => {
 	@connect(s => s, mapDispatchToProps)
 	class ConnectToApiHoc extends Component {
 
+		static getTitle(params) {
+			return WrappedComponent.getTitle(params)
+		}
+
 		static propTypes = {
 			params: PropTypes.object.isRequired,
 			actions: PropTypes.object.isRequired,

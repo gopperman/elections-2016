@@ -27,6 +27,10 @@ const url = '2016-11-08?'
 @connectToApi
 class Office extends Component {
 
+	static getTitle(params) {
+		return [params.statePostal, params.officeName].filter(v => v).join(', ')
+	}
+
 	static apiUrl(params) {
 		return `${url}${urlManager.stringifyParams(params)}`
 	}

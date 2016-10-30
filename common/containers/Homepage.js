@@ -35,6 +35,10 @@ const url = '2016-11-08/prezcentral?races=MA-22949,MA-24805'
 @connectToApi
 class Homepage extends Component {
 
+	static getTitle() {
+		return ''
+	}
+
 	static apiUrl() {
 		return url
 	}

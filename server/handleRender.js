@@ -35,13 +35,24 @@ export default (req, res) => {
 		} else if (props) {
 
 			// Get array of route handler components
-			const { components } = props
+			const { components, params } = props
+
+			// Get page title
+			const pageTitle = components
+				.map(v => v.getTitle && v.getTitle(params))
+				.filter(v => v)[0]
+
+			const title = [
+				pageTitle,
+				'Election results 2016',
+				'The Boston Globe',
+			].filter(v => v).join(' - ')
 
 			// Define locals to be provided to all lifecycle hooks
 			const locals = {
 				path: props.location.pathname,
 				query: props.location.query,
-				params: props.params,
+				params,
 
 				// Allow lifecycle hooks to dispatch Redux actions
 				dispatch,
@@ -70,6 +81,7 @@ export default (req, res) => {
 						isProduction: process.env.NODE_ENV === 'production',
 						meta,
 						version: pakage.version,
+						title,
 					})
 
 				})
