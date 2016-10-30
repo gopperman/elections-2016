@@ -121,12 +121,14 @@ class BalanceOfPower extends Component {
 
 		return (
 			<div className='balanceOfPower r-col r-feature'>
-				<h3 className='overline benton-bold'>US Senate balance of power</h3>
+				<h3 className='overline benton-bold'>U.S. Senate balance of power</h3>
 				<svg ref={(c) => this._svg = c} />
 				<MapLegend
 					parties={['dem', 'gop', 'ind']}
 					choices={['undecided', 'win']} />
-				<LinkButton text='See full results' url={urlManager.base()} />
+				<LinkButton
+					text='See full results'
+					url={urlManager.office({ officeName: 'U.S. Senate' })} />
 			</div>
 		)
 

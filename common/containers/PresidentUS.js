@@ -76,8 +76,6 @@ class PresidentUS extends Component {
 		// Get all races.
 		const races = data.races || []
 
-		const usRace = _.find(races, { statePostal: 'US' })
-
 		// Get US race:
 		const allStates = races
 			// return the first item of reportingUnits,
@@ -149,7 +147,8 @@ class PresidentUS extends Component {
 						<LinkButton
 							isSecondary
 							text='Switch to MA results'
-							url={`${urlManager.race(usRace)}/massachusetts`} />
+							url={urlManager.race({ officeName: 'President',
+								statePostal: 'MA' })} />
 
 					</div>
 					<div className='container-downpage'>
