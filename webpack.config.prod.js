@@ -6,7 +6,7 @@ const autoprefixer = require('autoprefixer')
 module.exports = {
 	devtool: 'source-map',
 	entry: [
-		'./client/index.js',
+		'./client/entry.js',
 	],
 	output: {
 		path: path.join(__dirname, 'static'),
