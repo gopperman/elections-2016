@@ -119,6 +119,8 @@ class BalanceOfPower extends Component {
 
 	render() {
 
+		const { dem, gop, ind } = this.props
+
 		return (
 			<div className='balanceOfPower r-col r-feature'>
 				<h3 className='overline benton-bold'>U.S. Senate balance of power</h3>
@@ -126,6 +128,10 @@ class BalanceOfPower extends Component {
 				<MapLegend
 					parties={['dem', 'gop', 'ind']}
 					choices={['undecided', 'win']} />
+				<p>Dem: {dem}</p>
+				<p>Independents: {ind}</p>
+				<p>GOP: {gop}</p>
+				<p>Undecideds: {100 - (dem + ind + gop)}</p>
 				<LinkButton
 					text='See full results'
 					url={urlManager.office({ officeName: 'U.S. Senate' })} />
