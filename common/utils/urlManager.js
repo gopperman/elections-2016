@@ -1,40 +1,67 @@
-import compareStrings from './compareStrings.js'
+import _ from 'lodash'
+import compareStringsNoAlpha from './compareStringsNoAlpha.js'
 
 const e = (s) => encodeURIComponent(encodeURIComponent(s))
 
 const urlManager = {
+
+	stringifyParams(params) {
+		return _(_.map(params, (value, key) => ({ value, key })))
+			.filter(v => v.value)
+			.map(v => `${v.key}=${v.value}`)
+			.value()
+			.join('&')
+
+	},
 
 	base() {
 		return '/elections/2016'
 	},
 
 	town(townName) {
-		return `${this.base()}/town/${e(townName)}`
+		return `${this.base()}/MA/town/${e(townName)}`
 	},
 
-	office(officeName) {
+	office({ officeName, statePostal = '' }) {
 
 		let result
 
-		if (compareStrings(officeName, 'president')) {
-			result = `${this.base()}/president`
+		if (compareStringsNoAlpha(officeName, 'president')) {
+			result = this.race({ officeName: 'president' })
+		} else if (_.includes(['ma', 'nh'], statePostal.toLowerCase())) {
+			result = `${this.base()}/${statePostal}/${e(officeName)}`
 		} else {
-			result = `${this.base()}/race/${e(officeName)}`
+			result = `${this.base()}/${e(officeName)}`
 		}
 
 		return result
 
 	},
 
-	race(race) {
+	race({ officeName, seatName, statePostal }) {
 
-		const { officeName, seatName } = race
 		let result
 
-		if (compareStrings(officeName, 'president')) {
-			result = `${this.base()}/president`
+		// This function will only return urls for either president page,
+		if (compareStringsNoAlpha(officeName, 'president')) {
+
+			if (compareStringsNoAlpha(statePostal, 'ma')) {
+				result = `${this.base()}/${statePostal}/${officeName}`
+			} else {
+				result = `${this.base()}/${officeName}`
+			}
+
+		// or a MA race.
+		} else if (compareStringsNoAlpha(statePostal, 'ma') &&
+		officeName && seatName) {
+
+			result =
+				`${this.base()}/${statePostal}/${e(officeName)}/${e(seatName)}`
+
 		} else {
-			result = `${this.base()}/race/${e(officeName)}/${e(seatName)}`
+
+			result = null
+
 		}
 
 		return result

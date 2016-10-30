@@ -21,13 +21,13 @@ import { raceName, officeName } from './../utils/standardize.js'
 // const url = '2016-11-08?statePostal=M'
 
 // and this one is the correct url - it returns everything.
-const url = '2016-11-08?officeName='
+const url = '2016-11-08?'
 
 @connectToApi
 class Office extends Component {
 
 	static apiUrl(params) {
-		return `${url}${params.officeName}`
+		return `${url}${urlManager.stringifyParams(params)}`
 	}
 
 	static areAllRacesComplete(results) {

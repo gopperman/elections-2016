@@ -13,6 +13,7 @@ import Hero from './../components/Hero.js'
 import Map from './../components/Map.js'
 import { raceName } from './../utils/standardize.js'
 import getTownsShapefile from './../utils/getTownsShapefile.js'
+import urlManager from './../utils/urlManager.js'
 
 const TOWNS = getTownsShapefile()
 
@@ -25,14 +26,17 @@ const TOWNS = getTownsShapefile()
 // const url = '2016-11-08?statePostal=M'
 
 // and this one is the correct url - it returns everything.
-const url = '2016-11-08?statePostal=MA&level=ru'
+const url = '2016-11-08?'
 
 @connectToApi
 class Race extends Component {
 
 	static apiUrl(params) {
-		const { officeName, seatName } = params
-		return `${url}&officeName=${officeName}&seatName=${seatName}`
+		const newParams = {
+			...params,
+			level: 'ru',
+		}
+		return `${url}${urlManager.stringifyParams(newParams)}`
 	}
 
 	static areAllRacesComplete(results) {

@@ -7,7 +7,7 @@ import React, { Component, PropTypes } from 'react'
 import { geoPath } from 'd3-geo'
 import { select, mouse } from 'd3-selection'
 import chooseColorClass from './../utils/chooseColorClass.js'
-import compareStrings from './../utils/compareStrings.js'
+import compareStringsNoAlpha from './../utils/compareStringsNoAlpha.js'
 import createTooltip from './../utils/createTooltip.js'
 import {
 	normalizeParty,
@@ -100,7 +100,7 @@ class Map extends Component {
 		// Find the feature that matches the dropdown option,
 		// TODO: what if e || e.target || e.target.value is null?
 		const match = paths
-			.filter(d => compareStrings(d.id, e.target.value))
+			.filter(d => compareStringsNoAlpha(d.id, e.target.value))
 
 		// select it, and raise it.
 		// TODO: could match be null?
@@ -405,7 +405,7 @@ class Map extends Component {
 			.map(v => ({
 				...v,
 				subunit: _.find(data, f =>
-					compareStrings(f[unitName], v.id)),
+					compareStringsNoAlpha(f[unitName], v.id)),
 			}))
 			.filter('subunit')
 			.map(v => ({
@@ -439,7 +439,7 @@ class Map extends Component {
 
 				// If this feature is selected (if the `selectionId` is in
 				// local state),
-				if (compareStrings(d.id, selectionId)) {
+				if (compareStringsNoAlpha(d.id, selectionId)) {
 
 					// give it a selected class.
 					selectedClass = 'selected'
