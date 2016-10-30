@@ -28,17 +28,22 @@ precinctsReportingPct }) => {
 	const candidateClass = classnames('r-block__name', 'benton-bold',
 		{ 'is-winner': !!winner })
 
+	const asideClass = 'r-block__aside benton-regular'
+
+	const runoffSpan = winner === 'R' ?
+		<span className={asideClass}>Advances to runoff</span> : null
+
+	const incumbentSpan = incumbent ?
+		<span className={asideClass}>Incumbent</span> : null
+
+	const partySpan = !_.includes(['yes', 'no'], party.toLowerCase()) ?
+		<span className={asideClass}>{party}</span> : null
+
 	const precincts = precinctsReportingPct ?
 		(<p className='note benton-regular'>
 			<span>{+precinctsReportingPct}% reporting</span>
 		</p>) :
 		null
-
-	const incumbentSpan = incumbent ?
-		<span className='r-block__aside benton-regular'>Incumbent</span> : null
-
-	const partySpan = !_.includes(['yes', 'no'], party.toLowerCase()) ?
-		<span className='r-block__aside benton-regular'>{party}</span> : null
 
 	return (
 
@@ -46,7 +51,7 @@ precinctsReportingPct }) => {
 
 			{image}
 
-			<p className={candidateClass}>{name}{partySpan}{incumbentSpan}</p>
+			<p className={candidateClass}>{name}{partySpan}{incumbentSpan}{runoffSpan}</p>
 
 			<div className='r-block__results'>
 				<div className='r-block__bar results-bar'>

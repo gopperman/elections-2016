@@ -31,7 +31,7 @@ const ElectoralCollegeBar = ({
 					aria-hidden='true' src={`${IMAGE_BASE}/trump.jpg`}
 					alt='Donald Trump' />
 				<div className='feat-text'>
-					<p className={classnames('feat-text__name', { 'is-winner': dem.winner })}>
+					<p className={classnames('feat-text__name', { 'is-winner': !!dem.winner })}>
 						<span className='benton-bold color-dem feat-text__name--number'>{dem.electWon}</span>
 						<span className='benton-bold'>{dem.last}</span>
 					</p>
@@ -39,7 +39,7 @@ const ElectoralCollegeBar = ({
 						<span className='benton-bold feat-text__name--number'>{undecided}</span>
 						<span className='benton-regular'>Undecided</span>
 					</p>
-					<p className={classnames('feat-text__name', { 'is-winner': gop.winner })}>
+					<p className={classnames('feat-text__name', { 'is-winner': !!gop.winner })}>
 						<span className='benton-bold color-gop feat-text__name--number'>{gop.electWon}</span>
 						<span className='benton-bold'>{gop.last}</span>
 					</p>
