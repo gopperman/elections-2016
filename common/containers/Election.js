@@ -53,7 +53,10 @@ class Election extends Component {
 
 		// Get senate report data.
 		const senateData = _.map(getSenateReport(data.reports), v => ({
-			[v.party]: v.won + v.holdovers,
+			[v.party]: {
+				won: v.won,
+				holdovers: v.holdovers,
+			},
 		}))
 
 		// Build senate balance of power data.

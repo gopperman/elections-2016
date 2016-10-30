@@ -6,7 +6,7 @@ import _ from 'lodash'
 import React, { Component, PropTypes } from 'react'
 import { select } from 'd3-selection'
 import deepEqual from 'deep-equal'
-import { buildSeats } from './../utils/visUtils.js'
+import { buildSeatsWithHoldovers } from './../utils/visUtils.js'
 import LinkButton from './LinkButton.js'
 import urlManager from './../utils/urlManager.js'
 import MapLegend from './MapLegend.js'
@@ -32,9 +32,9 @@ const x2 = ((WIDTH / 2) - x1) / (ROWS - 1)
 class BalanceOfPower extends Component {
 
 	static propTypes = {
-		dem: PropTypes.number.isRequired,
-		gop: PropTypes.number.isRequired,
-		ind: PropTypes.number.isRequired,
+		dem: PropTypes.object.isRequired,
+		gop: PropTypes.object.isRequired,
+		ind: PropTypes.object.isRequired,
 	}
 
 	// This lifecycle event gets called once, immediately after the initial
@@ -88,7 +88,7 @@ class BalanceOfPower extends Component {
 
 		// Build the matrix of seats.
 		const seats =
-			buildSeats({ dem, gop, ind, total: 100, rows: ROWS })
+			buildSeatsWithHoldovers({ dem, gop, ind, total: 100, rows: ROWS })
 
 		// Get the number of columns.
 		const columns = _(seats)
@@ -106,7 +106,7 @@ class BalanceOfPower extends Component {
 		circles.enter()
 			.append('circle')
 			.merge(circles)
-				.attr('r', RADIUS)
+				.attr('r', d => (d.isHoldover ? RADIUS / 3 : RADIUS))
 				.attr('cx', d => x1 + (d.seat * x2))
 				.attr('cy', 0)
 				.attr('transform', d =>
@@ -121,6 +121,12 @@ class BalanceOfPower extends Component {
 
 		const { dem, gop, ind } = this.props
 
+		const demTotal = dem.won + dem.holdovers
+		const indTotal = ind.won + ind.holdovers
+		const gopTotal = gop.won + gop.holdovers
+
+		const undecideds = 100 - (demTotal + indTotal + gopTotal)
+
 		return (
 			<div className='balanceOfPower r-col r-feature'>
 				<h3 className='overline benton-bold'>U.S. Senate balance of power</h3>
@@ -128,10 +134,12 @@ class BalanceOfPower extends Component {
 				<MapLegend
 					parties={['dem', 'gop', 'ind']}
 					choices={['undecided', 'win']} />
-				<p>Dem: {dem}</p>
-				<p>Independents: {ind}</p>
-				<p>GOP: {gop}</p>
-				<p>Undecideds: {100 - (dem + ind + gop)}</p>
+
+				<p>Dem: {demTotal}</p>
+				<p>Independents: {indTotal}</p>
+				<p>GOP: {gopTotal}</p>
+				<p>Undecideds: {undecideds}</p>
+
 				<LinkButton
 					text='See full results'
 					url={urlManager.office({ officeName: 'U.S. Senate' })} />
