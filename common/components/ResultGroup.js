@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 import ResultBar from './ResultBar.js'
@@ -14,6 +15,12 @@ overline, buttonText, buttonUrl, isFeature }) => {
 
 	const mainClass = classnames('r-col', { 'r-feature': isFeature })
 
+	const numWinners = _.filter(candidates, v => !!v.winner).length
+
+	const multipleWinnersDescription = numWinners > 1 ?
+		// eslint-disable-next-line max-len
+		<p className='r-block__aside benton-regular'>This race allows a maximum of {numWinners} multiple winners</p> : null
+
 	return (
 		<div className={mainClass}>
 			{overlineH3}
@@ -28,6 +35,7 @@ overline, buttonText, buttonUrl, isFeature }) => {
 					}}
 				/>))
 			}
+			{multipleWinnersDescription}
 			{button}
 		</div>
 	)
