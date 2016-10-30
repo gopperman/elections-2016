@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import compareStrings from './compareStrings.js'
+import compareStringsNoAlpha from './compareStringsNoAlpha.js'
 
 const e = (s) => encodeURIComponent(encodeURIComponent(s))
 
@@ -26,7 +26,7 @@ const urlManager = {
 
 		let result
 
-		if (compareStrings(officeName, 'president')) {
+		if (compareStringsNoAlpha(officeName, 'president')) {
 			result = this.race({ officeName: 'president' })
 		} else if (_.includes(['ma', 'nh'], statePostal.toLowerCase())) {
 			result = `${this.base()}/${statePostal}/${e(officeName)}`
@@ -43,16 +43,16 @@ const urlManager = {
 		let result
 
 		// This function will only return urls for either president page,
-		if (compareStrings(officeName, 'president')) {
+		if (compareStringsNoAlpha(officeName, 'president')) {
 
-			if (compareStrings(statePostal, 'ma')) {
+			if (compareStringsNoAlpha(statePostal, 'ma')) {
 				result = `${this.base()}/${statePostal}/${officeName}`
 			} else {
 				result = `${this.base()}/${officeName}`
 			}
 
 		// or a MA race.
-		} else if (compareStrings(statePostal, 'ma') &&
+		} else if (compareStringsNoAlpha(statePostal, 'ma') &&
 		officeName && seatName) {
 
 			result =
