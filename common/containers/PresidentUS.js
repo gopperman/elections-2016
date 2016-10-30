@@ -145,7 +145,6 @@ class PresidentUS extends Component {
 						{map}
 
 						<LinkButton
-							isSecondary
 							text='Switch to MA results'
 							url={urlManager.race({ officeName: 'President',
 								statePostal: 'MA' })} />

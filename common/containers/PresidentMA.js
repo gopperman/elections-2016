@@ -138,7 +138,6 @@ class PresidentMA extends Component {
 						{map}
 
 						<LinkButton
-							isSecondary
 							text='Switch to US results'
 							url={urlManager.race(usRace)} />
 
