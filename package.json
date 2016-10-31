@@ -68,6 +68,7 @@
     "stylus-loader": "^2.1.2",
     "topojson": "^1.6.26",
     "url-loader": "^0.5.7",
+    "us-abbreviations": "github:gabrielflorit/us-abbreviations",
     "webpack": "^1.13.1",
     "webpack-dashboard": "^0.1.1",
     "webpack-dev-middleware": "^1.6.1",

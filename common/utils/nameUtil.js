@@ -1,100 +1,149 @@
+import usAbbreviations from 'us-abbreviations'
 import urlManager from './urlManager.js'
 import { toTitleCase } from './standardize.js'
+import compareStringsNoAlpha from './compareStringsNoAlpha.js'
 
-const nameUtil = {
+const convertStateToAP = usAbbreviations('postal', 'ap')
 
-	election: {
+const clean = (s) =>
+	s
+		// u.s. => US
+		.replace(/\bu\.s\./gi, 'US')
+		// us => US
+		.replace(/\bus\b/gi, 'US')
 
-		htmlTitle() {
-			return ''
-		},
+const election = {
+
+	htmlTitle() {
+		return ''
 	},
 
-	presidentUS: {
+}
 
-		htmlTitle() {
-			return 'President'
-		},
+const presidentUS = {
 
-		name() {
-			return 'US president results'
-		},
-
+	htmlTitle() {
+		return 'President'
 	},
 
-	presidentMA: {
-
-		htmlTitle() {
-			return 'How Mass. voted for president'
-		},
-
-		name() {
-			return this.htmlTitle()
-		},
-
+	name() {
+		return 'US president results'
 	},
 
-	office: {
+}
 
-		htmlTitle(params) {
-			return toTitleCase(
-				[params.statePostal, params.officeName]
-					.filter(v => v)
-					.map(v => urlManager.decode(v))
-					.join(' '))
-		},
+const presidentMA = {
 
-		name(params) {
-			return this.htmlTitle(params)
-		},
-
+	htmlTitle() {
+		return 'How Mass. voted for president'
 	},
 
-	race: {
+	name() {
+		return this.htmlTitle()
+	},
 
-		htmlTitle(params) {
+}
+
+const office = {
+
+	htmlTitle({ statePostal = '', officeName = '' }) {
+
+		return clean([
+			convertStateToAP(urlManager.decode(statePostal).toUpperCase()),
+			toTitleCase(urlManager.decode(officeName)),
+		]
+		.filter(v => v)
+		.join(' '))
+	},
+
+	name(params) {
+		return this.htmlTitle(params)
+	},
+
+}
+
+const race = {
+
+	htmlTitle({ officeName, statePostal, seatName }) {
+
+		let result
+
+		if (compareStringsNoAlpha(officeName, 'president')) {
+			if (compareStringsNoAlpha(statePostal, 'ma')) {
+				result = presidentMA.htmlTitle()
+			} else {
+				result = presidentUS.htmlTitle()
+			}
+		} else {
 
 			// e.g. MA State House
-			const firstPart = [params.statePostal, params.officeName]
-				.filter(v => v)
-				.map(v => `${urlManager.decode(v)}`)
-				.join(' ')
+			const firstPart = [
+				convertStateToAP(urlManager.decode(statePostal).toUpperCase()),
+				toTitleCase(urlManager.decode(officeName)),
+			]
+			.filter(v => v)
+			.join(' ')
 
 			// e.g. 10th Bristol
-			const secondPart = urlManager.decode(params.seatName)
+			const secondPart = seatName ?
+				toTitleCase(urlManager.decode(seatName)) : null
 
 			// MA State House, 10th Bristol
-			return toTitleCase(
-				[firstPart, (secondPart || null)]
+			result = clean([firstPart, (secondPart || null)]
 					.filter(v => v)
 					.join(', '))
 
-		},
+		}
 
-		name(params) {
-			return this.htmlTitle(params)
-		},
+		return result
 
 	},
 
-	town: {
+	name(params) {
 
-		htmlTitle(params) {
+		let result = ''
 
-			return toTitleCase(
-				[params.location, params.statePostal]
-					.filter(v => v)
-					.map(v => urlManager.decode(v))
-					.join(', '))
+		if (compareStringsNoAlpha(params.officeName, 'president')) {
+			if (compareStringsNoAlpha(params.statePostal, 'ma')) {
+				result = presidentMA.name()
+			} else {
+				result = presidentUS.name()
+			}
+		} else {
+			result = race.htmlTitle(params)
+		}
 
-		},
+		return result
+	},
 
-		name(params) {
-			return this.htmlTitle(params)
-		},
+}
+
+const town = {
+
+	htmlTitle({ location, statePostal }) {
+
+		return [
+			toTitleCase(urlManager.decode(location)),
+			convertStateToAP(urlManager.decode(statePostal).toUpperCase()),
+		]
+		.filter(v => v)
+		.join(', ')
 
 	},
 
+	name(params) {
+		return this.htmlTitle(params)
+	},
+
+}
+
+const nameUtil = {
+	election,
+	presidentUS,
+	presidentMA,
+	office,
+	race,
+	town,
 }
 
 export default nameUtil

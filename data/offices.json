@@ -1,7 +1,7 @@
 [
   { "statePostal": "US", "officeName": "President" },
-  { "statePostal": "US", "officeName": "U.S. House" },
-  { "statePostal": "US", "officeName": "U.S. Senate" },
+  { "statePostal": "US", "officeName": "US House" },
+  { "statePostal": "US", "officeName": "US Senate" },
   { "statePostal": "US", "officeName": "Governor" },
   { "statePostal": "MA", "officeName": "State House" },
   { "statePostal": "MA", "officeName": "State Senate" },
