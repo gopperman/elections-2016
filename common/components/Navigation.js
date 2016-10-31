@@ -1,8 +1,11 @@
+/* eslint-disable max-len */
+
 import classNames from 'classnames'
 import React, { Component } from 'react'
 import RaceNavigationLinks from './RaceNavigationLinks.js'
 import urlManager from './../utils/urlManager.js'
 import TownLookup from './TownLookup.js'
+import pageUtil from './../utils/pageUtil.js'
 
 class Navigation extends Component {
 
@@ -66,7 +69,7 @@ class Navigation extends Component {
 					<li className='g-nav__item'>
 						<a
 							className='g-nav__link nav-president benton-bold icon icon--president'
-							href={urlManager.office({ officeName: 'President' })}>Presidential race</a>
+							href={urlManager.office({ officeName: 'President' })}>{pageUtil.presidentUS.title()}</a>
 					</li>
 				</ul>
 			</nav>

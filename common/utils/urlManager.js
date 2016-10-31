@@ -1,9 +1,15 @@
 import _ from 'lodash'
 import compareStringsNoAlpha from './compareStringsNoAlpha.js'
 
-const e = (s) => encodeURIComponent(encodeURIComponent(s))
-
 const urlManager = {
+
+	encode(s) {
+		return encodeURIComponent(encodeURIComponent(s))
+	},
+
+	decode(s) {
+		return decodeURIComponent(decodeURIComponent(s))
+	},
 
 	stringifyParams(params) {
 		return _(_.map(params, (value, key) => ({ value, key })))
@@ -19,7 +25,7 @@ const urlManager = {
 	},
 
 	town(townName) {
-		return `${this.base()}/MA/town/${e(townName)}`
+		return `${this.base()}/MA/town/${this.encode(townName)}`
 	},
 
 	office({ officeName, statePostal = '' }) {
@@ -29,9 +35,9 @@ const urlManager = {
 		if (compareStringsNoAlpha(officeName, 'president')) {
 			result = this.race({ officeName: 'President' })
 		} else if (_.includes(['ma', 'nh'], statePostal.toLowerCase())) {
-			result = `${this.base()}/${statePostal}/${e(officeName)}`
+			result = `${this.base()}/${statePostal}/${this.encode(officeName)}`
 		} else {
-			result = `${this.base()}/${e(officeName)}`
+			result = `${this.base()}/${this.encode(officeName)}`
 		}
 
 		return result
@@ -56,7 +62,7 @@ const urlManager = {
 		officeName && seatName) {
 
 			result =
-				`${this.base()}/${statePostal}/${e(officeName)}/${e(seatName)}`
+				`${this.base()}/${statePostal}/${this.encode(officeName)}/${this.encode(seatName)}`
 
 		} else {
 

@@ -14,6 +14,7 @@ import Map from './../components/Map.js'
 import { raceName } from './../utils/standardize.js'
 import getTownsShapefile from './../utils/getTownsShapefile.js'
 import urlManager from './../utils/urlManager.js'
+import pageUtil from './../utils/pageUtil.js'
 
 const TOWNS = getTownsShapefile()
 
@@ -31,8 +32,8 @@ const url = '2016-11-08?'
 @connectToApi
 class Race extends Component {
 
-	static getTitle() {
-		return 'Election results 2016'
+	static getTitle(params) {
+		return pageUtil.race.title(params)
 	}
 
 	static apiUrl(params) {
@@ -110,7 +111,7 @@ class Race extends Component {
 				<Header />
 
 				<main id='content'>
-					<Hero className='lead-ma-map' title={raceName(race)} />
+					<Hero className='lead-ma-map' title={pageUtil.race.name(race)} />
 					<div className='container-sm'>
 						<Timer {...timerProps} />
 

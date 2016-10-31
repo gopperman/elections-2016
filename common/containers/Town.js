@@ -9,7 +9,8 @@ import ResultGroup from './../components/ResultGroup.js'
 import { sortByVoteCount } from './../utils/Candidates.js'
 import Hero from './../components/Hero.js'
 import urlManager from './../utils/urlManager.js'
-import { toTitleCase, raceName } from './../utils/standardize.js'
+import { raceName } from './../utils/standardize.js'
+import pageUtil from './../utils/pageUtil.js'
 
 // We'll keep these urls here for testing. A description:
 
@@ -25,8 +26,8 @@ const url = '2016-11-08?'
 @connectToApi
 class Town extends Component {
 
-	static getTitle() {
-		return 'Election results 2016'
+	static getTitle(params) {
+		return pageUtil.town.title(params)
 	}
 
 	static apiUrl(params) {
@@ -79,9 +80,6 @@ class Town extends Component {
 		// Get test status.
 		const isTest = _.some(data.races, 'test')
 
-		// Get the town's title.
-		const townTitle = toTitleCase(params.location)
-
 		// Create result blocks for all the town races.
 		const raceBlocks = races.map((race, i) => {
 
@@ -109,7 +107,10 @@ class Town extends Component {
 				<Header />
 
 				<main id='content'>
-					<Hero className='lead-ma-map' title={townTitle} />
+
+					<Hero
+						className='lead-ma-map'
+						title={pageUtil.town.title(params)} />
 
 					<div className='container-sm'>
 

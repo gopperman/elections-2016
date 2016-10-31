@@ -12,6 +12,7 @@ import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 import Hero from './../components/Hero.js'
 import LinkButton from './../components/LinkButton.js'
 import urlManager from './../utils/urlManager.js'
+import pageUtil from './../utils/pageUtil.js'
 
 import {
 	sortByElectoralCount,
@@ -37,7 +38,7 @@ const url = '2016-11-08?officeID=P'
 class PresidentUS extends Component {
 
 	static getTitle() {
-		return 'Election results 2016'
+		return pageUtil.presidentUS.title()
 	}
 
 	static apiUrl() {
@@ -139,7 +140,7 @@ class PresidentUS extends Component {
 
 				<Header />
 				<main id='content'>
-					<Hero className='lead-img' title='US Presidential results' />
+					<Hero className='lead-img' title={pageUtil.presidentUS.name()} />
 
 					<div className='container-sm'>
 						<Timer {...timerProps} />
@@ -149,7 +150,7 @@ class PresidentUS extends Component {
 						{map}
 
 						<LinkButton
-							text='Switch to MA results'
+							text={pageUtil.presidentMA.name()}
 							url={urlManager.race({ officeName: 'President',
 								statePostal: 'MA' })} />
 

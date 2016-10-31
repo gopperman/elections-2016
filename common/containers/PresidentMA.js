@@ -13,6 +13,7 @@ import Hero from './../components/Hero.js'
 import LinkButton from './../components/LinkButton.js'
 import urlManager from './../utils/urlManager.js'
 import getTownsShapefile from './../utils/getTownsShapefile.js'
+import pageUtil from './../utils/pageUtil.js'
 
 import {
 	sortByVoteCount,
@@ -36,7 +37,7 @@ const url = '2016-11-08?officeID=P&statePostal=US,MA&level=ru'
 class PresidentMA extends Component {
 
 	static getTitle() {
-		return 'Election results 2016'
+		return pageUtil.presidentMA.title()
 	}
 
 	static apiUrl() {
@@ -132,7 +133,7 @@ class PresidentMA extends Component {
 
 				<Header summaryState={usUnit} />
 				<main id='content'>
-					<Hero className='lead-img' title='MA Presidential results' />
+					<Hero className='lead-img' title={pageUtil.presidentMA.title()} />
 
 					<div className='container-sm'>
 						<Timer {...timerProps} />
@@ -142,7 +143,7 @@ class PresidentMA extends Component {
 						{map}
 
 						<LinkButton
-							text='Switch to US results'
+							text={pageUtil.presidentUS.name()}
 							url={urlManager.race(usRace)} />
 
 					</div>
