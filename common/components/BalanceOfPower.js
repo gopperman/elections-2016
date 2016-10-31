@@ -110,7 +110,7 @@ class BalanceOfPower extends Component {
 				.attr('cx', d => x1 + (d.seat * x2))
 				.attr('cy', 0)
 				.attr('transform', d =>
-					`scale(-1, 1) rotate(${d.column * (-180 / (columns - 1))}, 0 0)`)
+					`scale(-1, 1) rotate(${d.column * (-180 / (columns))}, 0 0)`)
 				.attr('class', d => `fill-winner-${d.party}`)
 
 		// EXIT
