@@ -25,6 +25,7 @@ export default (req, res) => {
 		if (error) {
 
 			// there was an error somewhere during route matching
+			console.error('handleRender.js: error during route matching')
 			console.error(error.message)
 			res.status(500).send(error.message)
 
@@ -87,6 +88,7 @@ export default (req, res) => {
 				})
 				.catch(e => {
 
+					console.error('handleRender.js: error during/after fetch trigger')
 					console.error(e)
 					res.status(404).send(e.message)
 
@@ -95,6 +97,7 @@ export default (req, res) => {
 		} else {
 
 			// no errors, no redirect, we just didn't match anything
+			console.error('handleRender.js: could not match anything')
 			console.error(`Not Found: Could not match any routes for ${url}`)
 			res.status(404).send('Not Found')
 

@@ -17,7 +17,10 @@ const addFontRule = ({ font, sheet }) => {
 	sheet.insertRule(rule, 0)
 }
 
-const handleError = err => console.error(err)
+const handleError = err => {
+	console.error('loadFont.js: error trying to load fonts')
+	console.error(err)
+}
 
 const loadFont = fonts => {
 	const sheet = createStylesheet()

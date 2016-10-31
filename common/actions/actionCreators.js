@@ -105,6 +105,7 @@ const fetchResults = ({ url }) =>
 					} else {
 
 						// log the error,
+						console.error('actionCreator.js: we did not get any races')
 						console.error(message)
 
 						// and fire the failure redux action so the user is notified.
@@ -127,6 +128,7 @@ const fetchResults = ({ url }) =>
 				if (location) {
 
 					// log the error,
+					console.error('actionCreator.js: error in fetch catch')
 					console.error(message)
 
 					// and fire the failure redux action so the user is notified.

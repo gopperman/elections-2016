@@ -51,6 +51,7 @@ app.listen(port, (error) => {
 
 	if (error) {
 
+		console.error('server.dev.js: error trying to start app')
 		console.error(error)
 
 	} else {
