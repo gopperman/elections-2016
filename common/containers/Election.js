@@ -45,7 +45,7 @@ class Election extends Component {
 	static areAllRacesComplete() {
 
 		// TODO: implement
-		return true
+		return false
 	}
 
 	render() {
