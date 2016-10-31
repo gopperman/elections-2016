@@ -27,9 +27,6 @@ module.exports = {
 		new ExtractTextPlugin('compiled.css', {
 			allChunks: true,
 		}),
-		new webpack.ProvidePlugin({
-			Promise: 'imports?this=>global!exports?global.Promise!es6-promise',
-		}),
 	],
 	module: {
 		loaders: [

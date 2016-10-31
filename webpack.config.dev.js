@@ -20,9 +20,6 @@ module.exports = {
 		new webpack.EnvironmentPlugin(['NODE_ENV', 'API_URL']),
 		new webpack.optimize.OccurrenceOrderPlugin(),
 		new webpack.HotModuleReplacementPlugin(),
-		new webpack.ProvidePlugin({
-			Promise: 'imports?this=>global!exports?global.Promise!es6-promise',
-		}),
 	],
 	module: {
 		loaders: [
