@@ -10,7 +10,7 @@ import { sortByVoteCount } from './../utils/Candidates.js'
 import Hero from './../components/Hero.js'
 import urlManager from './../utils/urlManager.js'
 import { raceName } from './../utils/standardize.js'
-import pageUtil from './../utils/pageUtil.js'
+import nameUtil from './../utils/nameUtil.js'
 
 // We'll keep these urls here for testing. A description:
 
@@ -27,7 +27,7 @@ const url = '2016-11-08?'
 class Town extends Component {
 
 	static getTitle(params) {
-		return pageUtil.town.title(params)
+		return nameUtil.town.title(params)
 	}
 
 	static apiUrl(params) {
@@ -110,7 +110,7 @@ class Town extends Component {
 
 					<Hero
 						className='lead-ma-map'
-						title={pageUtil.town.title(params)} />
+						title={nameUtil.town.title(params)} />
 
 					<div className='container-sm'>
 

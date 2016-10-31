@@ -12,7 +12,7 @@ import Hero from './../components/Hero.js'
 import urlManager from './../utils/urlManager.js'
 import { raceName } from './../utils/standardize.js'
 import compareStringsNoAlpha from './../utils/compareStringsNoAlpha.js'
-import pageUtil from './../utils/pageUtil.js'
+import nameUtil from './../utils/nameUtil.js'
 
 // We'll keep these urls here for testing. A description:
 
@@ -29,7 +29,7 @@ const url = '2016-11-08?'
 class Office extends Component {
 
 	static getTitle(params) {
-		return pageUtil.office.title(params)
+		return nameUtil.office.title(params)
 	}
 
 	static apiUrl(params) {
@@ -116,7 +116,7 @@ class Office extends Component {
 				<Header />
 
 				<main id='content'>
-					<Hero className={heroClass} title={pageUtil.office.name(params)} />
+					<Hero className={heroClass} title={nameUtil.office.name(params)} />
 
 					<div className='container-sm'>
 

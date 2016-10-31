@@ -16,7 +16,7 @@ import LinkButton from './../components/LinkButton.js'
 import urlManager from './../utils/urlManager.js'
 import { getSenateReport } from './../utils/dataUtil.js'
 import getStatesShapefile from './../utils/getStatesShapefile.js'
-import pageUtil from './../utils/pageUtil.js'
+import nameUtil from './../utils/nameUtil.js'
 
 const STATES = getStatesShapefile()
 
@@ -35,7 +35,7 @@ const url = '2016-11-08/prezcentral?reports=Trend-s&races=MA-22949,MA-24805'
 class Election extends Component {
 
 	static getTitle() {
-		return pageUtil.election.title()
+		return nameUtil.election.title()
 	}
 
 	static apiUrl() {
@@ -130,7 +130,7 @@ class Election extends Component {
 						{map}
 
 						<LinkButton
-							text={pageUtil.presidentUS.name()}
+							text={nameUtil.presidentUS.name()}
 							url={urlManager.race(presUs)} />
 					</div>
 					<div className='container-downpage'>

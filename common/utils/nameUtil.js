@@ -1,6 +1,6 @@
 import urlManager from './urlManager.js'
 
-const pageUtil = {
+const nameUtil = {
 
 	election: {
 
@@ -91,4 +91,4 @@ const pageUtil = {
 
 }
 
-export default pageUtil
+export default nameUtil
