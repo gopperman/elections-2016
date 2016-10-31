@@ -28,16 +28,16 @@ precinctsReportingPct }) => {
 	const candidateClass = classnames('r-block__name', 'benton-bold',
 		{ 'is-winner': !!winner })
 
-	const asideClass = 'r-block__aside benton-regular'
+	const tagClass = 'r-block__tag benton-regular'
 
 	const runoffSpan = winner === 'R' ?
-		<span className={asideClass}>Advances to runoff</span> : null
+		<span className={tagClass}><abbr title='advances'>Adv.</abbr> to runoff</span> : null
 
 	const incumbentSpan = incumbent ?
-		<span className={asideClass}>Incumbent</span> : null
+		<span className={tagClass}>Incumbent</span> : null
 
 	const partySpan = !_.includes(['yes', 'no'], party.toLowerCase()) ?
-		<span className={asideClass}>{party}</span> : null
+		<span className={tagClass}>{party}</span> : null
 
 	const precincts = precinctsReportingPct ?
 		(<p className='note benton-regular'>

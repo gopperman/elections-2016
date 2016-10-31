@@ -19,7 +19,7 @@ overline, buttonText, buttonUrl, isFeature }) => {
 
 	const multipleWinnersDescription = numWinners > 1 ?
 		// eslint-disable-next-line max-len
-		<p className='r-block__aside benton-regular'>This race allows a maximum of {numWinners} multiple winners</p> : null
+		<aside className='r-block__aside benton-regular'>This race allows a maximum of {numWinners} multiple winners</aside> : null
 
 	return (
 		<div className={mainClass}>
