@@ -1,4 +1,5 @@
 import express from 'express'
+import serializeError from 'serialize-error'
 import compression from 'compression'
 import handleRender from './handleRender.js'
 
@@ -30,7 +31,7 @@ app.listen(port, (error) => {
 	if (error) {
 
 		console.error('server.prod.js: error trying to start app')
-		console.error(error)
+		console.error(serializeError(error))
 
 	} else {
 

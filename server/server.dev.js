@@ -1,4 +1,5 @@
 import express from 'express'
+import serializeError from 'serialize-error'
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
@@ -52,7 +53,7 @@ app.listen(port, (error) => {
 	if (error) {
 
 		console.error('server.dev.js: error trying to start app')
-		console.error(error)
+		console.error(serializeError(error))
 
 	} else {
 

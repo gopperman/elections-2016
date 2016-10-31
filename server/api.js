@@ -1,5 +1,7 @@
 // TODO: remove this file
 
+import serializeError from 'serialize-error'
+
 const { fetch } = require('fetch-ponyfill')()
 
 export default (req, res) => {
@@ -20,7 +22,7 @@ export default (req, res) => {
 		.catch(e => {
 
 			console.error(`api.js: could not fetch ${url}`)
-			console.error(e)
+			console.error(serializeError(e))
 			console.log('about to send 500')
 			res.sendStatus(500)
 

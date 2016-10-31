@@ -63,6 +63,7 @@
     "redial": "^0.4.2",
     "redux": "^3.5.2",
     "redux-thunk": "^2.1.0",
+    "serialize-error": "^2.0.0",
     "style-loader": "^0.13.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^2.1.2",

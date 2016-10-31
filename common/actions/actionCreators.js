@@ -1,3 +1,4 @@
+import serializeError from 'serialize-error'
 import {
 
 	START_TIMER,
@@ -121,7 +122,7 @@ const fetchResults = ({ url }) =>
 				}
 
 			})
-			.catch(({ message }) => {
+			.catch(error => {
 
 				// We got an error.
 				// If we're on the client,
@@ -129,16 +130,16 @@ const fetchResults = ({ url }) =>
 
 					// log the error,
 					console.error('actionCreator.js: error in fetch catch')
-					console.error(message)
+					console.error(serializeError(error))
 
 					// and fire the failure redux action so the user is notified.
-					dispatch(fetchResultsFailure({ error: message }))
+					dispatch(fetchResultsFailure({ error: serializeError(error) }))
 
 				} else {
 
 					// We're on the server.
 					// Throw an error so we won't render any pages.
-					throw new Error(message)
+					throw new Error(error)
 
 				}
 
