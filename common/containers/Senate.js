@@ -9,6 +9,7 @@ import BalanceOfPower from './../components/BalanceOfPower.js'
 import TestStatus from './../components/TestStatus.js'
 import ResultGroup from './../components/ResultGroup.js'
 import { sortByVoteCount } from './../utils/Candidates.js'
+import {senateTrendReport} from './../utils/visUtils.js'
 import Hero from './../components/Hero.js'
 import urlManager from './../utils/urlManager.js'
 import compareStringsNoAlpha from './../utils/compareStringsNoAlpha.js'
@@ -76,22 +77,13 @@ class Senate extends Component {
 		// Get the data - or an empty object.
 		const data = results.data || {}
 
-		const bopData = {
-			dem: {
-				holdovers: 20,
-				won: 10
-			},
-			gop: {
-				holdovers: 25,
-				won: 12
-			},
-			ind: {
-				holdovers: 2,
-				won: 0
-			}
-		}
+		//console.log(bop)
+
 		// Get API results.
 		const races = _.sortBy(data.races || [], 'seatName')
+
+		const bopData = senateTrendReport(races)
+		console.log(bopData)
 
 		// Get test status.
 		const isTest = _.some(data.races, 'test')
@@ -133,7 +125,7 @@ class Senate extends Component {
 					<Hero className={heroClass} title={nameUtil.office.name(params)} />
 					<div className='container-sm'>
 						<Timer {...timerProps} />
-						<BalanceOfPower {...bopData} displayLink={true} />
+						<BalanceOfPower {...bopData} displayLink={false} />
 						{raceBlocks}
 					</div>
 				</main>
