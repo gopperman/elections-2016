@@ -11,7 +11,6 @@ import ResultGroup from './../components/ResultGroup.js'
 import { sortByVoteCount } from './../utils/Candidates.js'
 import Hero from './../components/Hero.js'
 import Map from './../components/Map.js'
-import { raceName } from './../utils/standardize.js'
 import getTownsShapefile from './../utils/getTownsShapefile.js'
 import urlManager from './../utils/urlManager.js'
 import nameUtil from './../utils/nameUtil.js'
@@ -116,7 +115,7 @@ class Race extends Component {
 						<Timer {...timerProps} />
 
 						<ResultGroup
-							overline={raceName(race)}
+							overline={nameUtil.race.name(race)}
 							precinctsReportingPct={state.precinctsReportingPct}
 							candidates={summaryCandidates} />
 					</div>

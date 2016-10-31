@@ -10,7 +10,6 @@ import ResultGroup from './../components/ResultGroup.js'
 import { sortByVoteCount } from './../utils/Candidates.js'
 import Hero from './../components/Hero.js'
 import urlManager from './../utils/urlManager.js'
-import { raceName } from './../utils/standardize.js'
 import compareStringsNoAlpha from './../utils/compareStringsNoAlpha.js'
 import nameUtil from './../utils/nameUtil.js'
 
@@ -96,7 +95,7 @@ class Office extends Component {
 			return (
 				<ResultGroup
 					key={i}
-					overline={raceName(race)}
+					overline={nameUtil.race.name(race)}
 					precinctsReportingPct={stateUnit.precinctsReportingPct}
 					candidates={sortByVoteCount(candidates)}
 					buttonText='See full results'

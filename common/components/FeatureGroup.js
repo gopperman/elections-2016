@@ -3,7 +3,7 @@ import _ from 'lodash'
 import ResultGroup from './../components/ResultGroup.js'
 import { sortByVoteCount } from './../utils/Candidates.js'
 import urlManager from './../utils/urlManager.js'
-import { raceName } from './../utils/standardize.js'
+import nameUtil from './../utils/nameUtil.js'
 
 const FeatureGroup = ({ race }) => {
 
@@ -15,7 +15,7 @@ const FeatureGroup = ({ race }) => {
 	return (
 		<ResultGroup
 			isFeature
-			overline={raceName(race)}
+			overline={nameUtil.race.name(race)}
 			precinctsReportingPct={stateUnit.precinctsReportingPct}
 			buttonText='See full results'
 			buttonUrl={urlManager.race(race)}

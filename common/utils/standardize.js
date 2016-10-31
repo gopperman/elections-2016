@@ -1,26 +1,6 @@
 import _ from 'lodash'
 
 /**
- * Get office name.
- * @memberof standardize
- * @function
- * @param {Object} race a race
- * @returns {String} an office's name
- */
-const officeName = (race) =>
-	race.officeName
-
-/**
- * Get race name.
- * @memberof standardize
- * @function
- * @param {Object} race a race
- * @returns {String} a race's name
- */
-const raceName = (race) =>
-	[race.statePostal, race.officeName, race.seatName].join(' ').trim()
-
-/**
  * Normalizes a party string.
  * @memberof standardize
  * @function
@@ -81,6 +61,4 @@ export {
 	normalizeParty,
 	standardizeParty,
 	orderParties,
-	raceName,
-	officeName,
 }
