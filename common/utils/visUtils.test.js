@@ -10,7 +10,7 @@ import {
 
 describe('visUtils', () => {
 
-	describe.only('buildSeatsWithHoldovers', () => {
+	describe('buildSeatsWithHoldovers', () => {
 
 		it('should return the correct data', () => {
 
