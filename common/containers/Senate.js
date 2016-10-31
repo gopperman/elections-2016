@@ -133,16 +133,10 @@ class Senate extends Component {
 				<main id='content'>
 					<Hero className={heroClass} title={nameUtil.office.name(params)} />
 					<div className='container-sm'>
-						<BalanceOfPower {...bopData} />
-					</div>
-					<div className='container-sm'>
-
 						<Timer {...timerProps} />
-
+						<BalanceOfPower {...bopData} />
 						{raceBlocks}
-
 					</div>
-
 				</main>
 
 				<Footer />
