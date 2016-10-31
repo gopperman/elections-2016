@@ -70,9 +70,9 @@ html(lang='en')
 		// critical.js (smooshed)
 
 		if isProduction
-			link(href=`/static/compiled.css?v=${version}`, rel='stylesheet', type='text/css')
+			link(href=`/elections/static/compiled.css?v=${version}`, rel='stylesheet', type='text/css')
 	body
 		#root!=appHtml
 		script window.REDUX__INITIALSTATE=!{JSON.stringify(initialState)}
-		script(src=`/static/bundle.js?v=${version}`)
+		script(src=`${isProduction ? '/elections' : ''}/static/bundle.js?v=${version}`)
 		script(src='//apps.bostonglobe.com/common/js/business/business-1.4.4.js', async=true)
