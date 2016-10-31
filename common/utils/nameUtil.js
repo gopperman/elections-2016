@@ -40,7 +40,7 @@ const nameUtil = {
 			return toTitleCase(
 				[params.statePostal, params.officeName]
 					.filter(v => v)
-					.map(v => urlManager.decode(v).toUpperCase())
+					.map(v => urlManager.decode(v))
 					.join(' '))
 		},
 
