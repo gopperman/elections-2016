@@ -66,7 +66,6 @@ class Election extends Component {
 
 		// Build senate balance of power data.
 		const bopData = _.assign.apply(null, senateData)
-		console.log(bopData)
 
 		// Get all races.
 		const races = data.races || []
