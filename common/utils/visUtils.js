@@ -12,7 +12,24 @@ const senateTrendReport = (races) => {
 	const trends = _.countBy(races.map((race) => {
 		const candidates = _.get(race, 'reportingUnits[0].candidates')
 		const winner = _.find(candidates, { winner: 'X' })
-		return (winner) ? winner.party.toLowerCase() : null
+
+		/* 
+		 * If there's no winner, figure out if you can at least call the race for a party
+		 * If all the candidates who advanced to the runoff belong to the same party,
+		 * count it for that party
+		 */
+		if (winner) {
+			return winner.party.toLowerCase()
+		} else {
+			const runoffs = _.filter(candidates, { winner: 'R' })
+			const winningParties = Object.keys(_.countBy(runoffs.map((candidate) => candidate.party)))
+
+			if (1 === winningParties.length) {
+				return winningParties[0].toLowerCase()
+			} else {
+				return null
+			}
+		}
 	}))
 
 	return 	{

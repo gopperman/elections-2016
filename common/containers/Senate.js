@@ -81,7 +81,6 @@ class Senate extends Component {
 		const races = _.sortBy(data.races || [], 'seatName')
 
 		const bopData = senateTrendReport(races)
-		console.log(bopData)
 
 		// Get test status.
 		const isTest = _.some(data.races, 'test')
