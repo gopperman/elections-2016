@@ -2,33 +2,32 @@
 
 import _ from 'lodash'
 import { transpose } from 'd3-array'
-import { sortByElectoralCount } from './Candidates.js'
 
 /* Builds a senate trend report from a list of races
- * Specifically, for displaying the balance of power on the Senate page, where 
+ * Specifically, for displaying the balance of power on the Senate page, where
  * we don't have access to the AP API's senate trend report
  * @param {array} An array of race objects
  */
 const senateTrendReport = (races) => {
 	const trends = _.countBy(races.map((race) => {
 		const candidates = _.get(race, 'reportingUnits[0].candidates')
-		const winner = _.find(candidates, {winner: 'X'})
+		const winner = _.find(candidates, { winner: 'X' })
 		return (winner) ? winner.party.toLowerCase() : null
 	}))
 
 	return 	{
 		dem: {
 			holdovers: 34,
-			won: _.get(trends, 'dem', 0)
+			won: _.get(trends, 'dem', 0),
 		},
 		gop: {
 			holdovers: 30,
-			won: _.get(trends, 'gop', 0)
+			won: _.get(trends, 'gop', 0),
 		},
 		ind: {
 			holdovers: 2,
-			won: _.get(trends, 'ind', 0)
-		}
+			won: _.get(trends, 'ind', 0),
+		},
 	}
 }
 
