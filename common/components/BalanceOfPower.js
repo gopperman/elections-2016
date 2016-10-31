@@ -122,19 +122,11 @@ class BalanceOfPower extends Component {
 
 		const { dem, gop, ind, displayLink } = this.props
 
-		console.log(displayLink)
-
 		const demTotal = dem.won + dem.holdovers
 		const indTotal = ind.won + ind.holdovers
 		const gopTotal = gop.won + gop.holdovers
 
 		const undecideds = 100 - (demTotal + indTotal + gopTotal)
-
-		const linkButton = () => {(
-				<LinkButton
-					text='See full results'
-					url={urlManager.office({ officeName: 'U.S. Senate' })} />
-		)}
 
 		const link = (displayLink) ? (
 			<LinkButton
