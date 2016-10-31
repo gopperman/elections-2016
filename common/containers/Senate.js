@@ -5,6 +5,7 @@ import connectToApi from './connectToApi.js'
 import Timer from './../components/Timer.js'
 import Header from './../components/Header.js'
 import Footer from './../components/Footer.js'
+import BalanceOfPower from './../components/BalanceOfPower.js'
 import TestStatus from './../components/TestStatus.js'
 import ResultGroup from './../components/ResultGroup.js'
 import { sortByVoteCount } from './../utils/Candidates.js'
@@ -74,7 +75,22 @@ class Senate extends Component {
 
 		// Get the data - or an empty object.
 		const data = results.data || {}
+		console.log(data)
 
+		const bopData = {
+			dem: {
+				holdovers: 20,
+				won: 10
+			},
+			gop: {
+				holdovers: 25,
+				won: 12
+			},
+			ind: {
+				holdovers: 2,
+				won: 0
+			}
+		}
 		// Get API results.
 		const races = _.sortBy(data.races || [], 'seatName')
 
@@ -116,7 +132,9 @@ class Senate extends Component {
 
 				<main id='content'>
 					<Hero className={heroClass} title={nameUtil.office.name(params)} />
-
+					<div className='container-sm'>
+						<BalanceOfPower {...bopData} />
+					</div>
 					<div className='container-sm'>
 
 						<Timer {...timerProps} />
