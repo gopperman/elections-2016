@@ -26,7 +26,7 @@ const url = '2016-11-08?'
 class Town extends Component {
 
 	static getTitle(params) {
-		return nameUtil.town.title(params)
+		return nameUtil.town.htmlTitle(params)
 	}
 
 	static apiUrl(params) {
@@ -109,7 +109,7 @@ class Town extends Component {
 
 					<Hero
 						className='lead-ma-map'
-						title={nameUtil.town.title(params)} />
+						title={nameUtil.town.htmlTitle(params)} />
 
 					<div className='container-sm'>
 

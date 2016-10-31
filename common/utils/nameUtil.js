@@ -5,14 +5,14 @@ const nameUtil = {
 
 	election: {
 
-		title() {
+		htmlTitle() {
 			return ''
 		},
 	},
 
 	presidentUS: {
 
-		title() {
+		htmlTitle() {
 			return 'President'
 		},
 
@@ -24,19 +24,19 @@ const nameUtil = {
 
 	presidentMA: {
 
-		title() {
+		htmlTitle() {
 			return 'How Mass. voted for president'
 		},
 
 		name() {
-			return this.title()
+			return this.htmlTitle()
 		},
 
 	},
 
 	office: {
 
-		title(params) {
+		htmlTitle(params) {
 			return toTitleCase(
 				[params.statePostal, params.officeName]
 					.filter(v => v)
@@ -45,14 +45,14 @@ const nameUtil = {
 		},
 
 		name(params) {
-			return this.title(params)
+			return this.htmlTitle(params)
 		},
 
 	},
 
 	race: {
 
-		title(params) {
+		htmlTitle(params) {
 
 			// e.g. MA State House
 			const firstPart = [params.statePostal, params.officeName]
@@ -72,14 +72,14 @@ const nameUtil = {
 		},
 
 		name(params) {
-			return this.title(params)
+			return this.htmlTitle(params)
 		},
 
 	},
 
 	town: {
 
-		title(params) {
+		htmlTitle(params) {
 
 			return toTitleCase(
 				[params.location, params.statePostal]
@@ -90,7 +90,7 @@ const nameUtil = {
 		},
 
 		name(params) {
-			return this.title(params)
+			return this.htmlTitle(params)
 		},
 
 	},

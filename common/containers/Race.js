@@ -32,7 +32,7 @@ const url = '2016-11-08?'
 class Race extends Component {
 
 	static getTitle(params) {
-		return nameUtil.race.title(params)
+		return nameUtil.race.htmlTitle(params)
 	}
 
 	static apiUrl(params) {

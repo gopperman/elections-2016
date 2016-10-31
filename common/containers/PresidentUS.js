@@ -38,7 +38,7 @@ const url = '2016-11-08?officeID=P'
 class PresidentUS extends Component {
 
 	static getTitle() {
-		return nameUtil.presidentUS.title()
+		return nameUtil.presidentUS.htmlTitle()
 	}
 
 	static apiUrl() {

@@ -35,7 +35,7 @@ const url = '2016-11-08/prezcentral?reports=Trend-s&races=MA-22949,MA-24805'
 class Election extends Component {
 
 	static getTitle() {
-		return nameUtil.election.title()
+		return nameUtil.election.htmlTitle()
 	}
 
 	static apiUrl() {

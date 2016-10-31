@@ -37,7 +37,7 @@ const url = '2016-11-08?officeID=P&statePostal=US,MA&level=ru'
 class PresidentMA extends Component {
 
 	static getTitle() {
-		return nameUtil.presidentMA.title()
+		return nameUtil.presidentMA.htmlTitle()
 	}
 
 	static apiUrl() {
@@ -133,7 +133,7 @@ class PresidentMA extends Component {
 
 				<Header summaryState={usUnit} />
 				<main id='content'>
-					<Hero className='lead-img' title={nameUtil.presidentMA.title()} />
+					<Hero className='lead-img' title={nameUtil.presidentMA.htmlTitle()} />
 
 					<div className='container-sm'>
 						<Timer {...timerProps} />

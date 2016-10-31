@@ -28,7 +28,7 @@ const url = '2016-11-08?'
 class Office extends Component {
 
 	static getTitle(params) {
-		return nameUtil.office.title(params)
+		return nameUtil.office.htmlTitle(params)
 	}
 
 	static apiUrl(params) {
