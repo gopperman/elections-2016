@@ -106,7 +106,7 @@ class BalanceOfPower extends Component {
 		circles.enter()
 			.append('circle')
 			.merge(circles)
-				.attr('r', d => (d.isHoldover ? RADIUS / 3 : RADIUS))
+				.attr('r', d => (d.isHoldover ? RADIUS / 2 : RADIUS))
 				.attr('cx', d => x1 + (d.seat * x2))
 				.attr('cy', 0)
 				.attr('transform', d =>
