@@ -7,9 +7,20 @@ import {
 	standardizeParty,
 	orderParties,
 	raceName,
+	toTitleCase,
 } from './standardize.js'
 
 describe('standardize', () => {
+
+	describe('toTitleCase', () => {
+
+		it('should work', () => {
+
+			assert.equal(toTitleCase('one two'), 'One Two')
+
+		})
+
+	})
 
 	describe('raceName', () => {
 

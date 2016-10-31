@@ -1,4 +1,5 @@
 import urlManager from './urlManager.js'
+import { toTitleCase } from './standardize.js'
 
 const nameUtil = {
 
@@ -36,10 +37,11 @@ const nameUtil = {
 	office: {
 
 		title(params) {
-			return [params.statePostal, params.officeName]
-				.filter(v => v)
-				.map(v => urlManager.decode(v))
-				.join(' ')
+			return toTitleCase(
+				[params.statePostal, params.officeName]
+					.filter(v => v)
+					.map(v => urlManager.decode(v).toUpperCase())
+					.join(' '))
 		},
 
 		name(params) {
@@ -62,9 +64,10 @@ const nameUtil = {
 			const secondPart = urlManager.decode(params.seatName)
 
 			// MA State House, 10th Bristol
-			return [firstPart, (secondPart || null)]
-				.filter(v => v)
-				.join(', ')
+			return toTitleCase(
+				[firstPart, (secondPart || null)]
+					.filter(v => v)
+					.join(', '))
 
 		},
 
@@ -77,10 +80,13 @@ const nameUtil = {
 	town: {
 
 		title(params) {
-			return [params.location, params.statePostal]
-				.filter(v => v)
-				.map(v => urlManager.decode(v))
-				.join(', ')
+
+			return toTitleCase(
+				[params.location, params.statePostal]
+					.filter(v => v)
+					.map(v => urlManager.decode(v))
+					.join(', '))
+
 		},
 
 		name(params) {
