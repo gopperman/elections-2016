@@ -19,10 +19,6 @@ app.use('/static', express.static('static'))
 app.set('views', './common')
 app.set('view engine', 'pug')
 
-app.get('/homepage', (req, res) => {
-	res.status(404).send("The /homepage doesn't exist here.")
-})
-
 // This is fired every time the server side receives a request
 app.get('*', handleRender)
 

@@ -1,8 +1,7 @@
 import React from 'react'
-import { Route, IndexRoute } from 'react-router'
+import { Route } from 'react-router'
 import App from './components/App.js'
 import Election from './containers/Election.js'
-import Homepage from './containers/Homepage.js'
 import Office from './containers/Office.js'
 import PresidentUS from './containers/PresidentUS.js'
 import PresidentMA from './containers/PresidentMA.js'
@@ -12,8 +11,6 @@ import urlManager from './utils/urlManager.js'
 
 export default (
 	<Route path='/' component={App}>
-
-		<IndexRoute component={Homepage} />
 
 		<Route
 			path={urlManager.base()}
