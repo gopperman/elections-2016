@@ -75,7 +75,6 @@ class Senate extends Component {
 
 		// Get the data - or an empty object.
 		const data = results.data || {}
-		console.log(data)
 
 		const bopData = {
 			dem: {
@@ -134,7 +133,7 @@ class Senate extends Component {
 					<Hero className={heroClass} title={nameUtil.office.name(params)} />
 					<div className='container-sm'>
 						<Timer {...timerProps} />
-						<BalanceOfPower {...bopData} />
+						<BalanceOfPower {...bopData} displayLink={true} />
 						{raceBlocks}
 					</div>
 				</main>
