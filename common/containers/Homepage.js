@@ -8,14 +8,10 @@ import Footer from './../components/Footer.js'
 import TestStatus from './../components/TestStatus.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 import Map from './../components/Map.js'
-import {
-	sortByElectoralCount,
-	sortByVoteCount,
-} from './../utils/Candidates.js'
-import ResultGroup from './../components/ResultGroup.js'
+import { sortByElectoralCount } from './../utils/Candidates.js'
 import LinkButton from './../components/LinkButton.js'
 import urlManager from './../utils/urlManager.js'
-import { raceName } from './../utils/standardize.js'
+import FeatureGroup from './../components/FeatureGroup.js'
 import SwingStates from './../components/SwingStates.js'
 import getStatesShapefile from './../utils/getStatesShapefile.js'
 
@@ -46,7 +42,7 @@ class Homepage extends Component {
 	static areAllRacesComplete() {
 
 		// TODO: implement
-		return true
+		return false
 	}
 
 	render() {
@@ -103,6 +99,7 @@ class Homepage extends Component {
 			sortingDelegate={sortByElectoralCount}
 			dropdownName='state'
 			displayName='stateName'
+			isPresidential
 			labelsName='STUSPS' />) : null
 
 		// Get test status.
@@ -111,24 +108,7 @@ class Homepage extends Component {
 		// Get featured races.
 		const raceBlocks = _(races)
 			.reject(v => v.officeName === 'President' && v.statePostal !== 'MA')
-			.map((race, i) => {
-
-				const stateUnit =
-					_.find(race.reportingUnits, { level: 'state' }) || {}
-
-				const candidates = stateUnit.candidates || []
-
-				return (
-					<ResultGroup
-						key={i}
-						overline={raceName(race)}
-						precinctsReportingPct={stateUnit.precinctsReportingPct}
-						candidates={sortByVoteCount(candidates)}
-						buttonText='See full results'
-						buttonUrl={urlManager.race(race)} />
-				)
-
-			})
+			.map((race, key) => <FeatureGroup {...{ race, key }} />)
 			.value()
 
 		return (
