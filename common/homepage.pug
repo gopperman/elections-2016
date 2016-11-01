@@ -3,15 +3,15 @@ html(lang="en")
 	head
 		if isProduction
 			link(href='/static/HpElectoralCollege.css', rel='stylesheet', type='text/css')
-			// link(href='/static/HpMap.css', rel='stylesheet', type='text/css')
+			link(href='/static/HpMap.css', rel='stylesheet', type='text/css')
 			// link(href='/static/HpFeaturedRaces.css', rel='stylesheet', type='text/css')
 	body
 		#elections-HpElectoralCollege
-		// #elections-HpMap
+		#elections-HpMap
 		// #elections-HpFeaturedRaces
 		if isProduction
 			script(src='/static/HpElectoralCollege.js')
-			// script(src='/static/HpMap.js')
+			script(src='/static/HpMap.js')
 			// script(src='/static/HpFeaturedRaces.js')
 		else
 			script(src='/static/bundle.js')
