@@ -2,4 +2,13 @@
 
 // TODO: remove this on production
 require('babel-register')
-require('./server.homepage.dev.js')
+
+if (process.env.NODE_ENV === 'production') {
+
+	require('./server.homepage.prod.js')
+
+} else {
+
+	require('./server.homepage.dev.js')
+
+}

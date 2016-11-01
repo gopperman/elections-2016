@@ -14,6 +14,7 @@ Please note: do not reproduce Boston Globe logos or fonts without written permis
 ## dev
 
 -   `API_URL=<API_URL> npm start` - start the app
+-   `API_URL=<API_URL> HP_CONTAINER=<HP_CONTAINER> npm run start:hp` - start the homepage app, where HP_CONTAINER is one of `HpElectoralCollege, HpMap, HpFeaturedRaces`.
 -   `npm run doc` - generate documentation
 
 ## prod

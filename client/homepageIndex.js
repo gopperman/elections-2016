@@ -11,7 +11,7 @@ import critical from './../common/appUtils/critical.js'
 // Hydrate the Redux store with `initialState`.
 const store = configureStore({})
 
-const containerName = 'HpElectoralCollege'
+const containerName = process.env.HP_CONTAINER
 
 const node = document.getElementById(`elections-${containerName}`)
 

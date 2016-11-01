@@ -57,6 +57,7 @@ class HpElectoralCollege extends Component {
 					<div className='container-sm'>
 
 						<Timer {...timerProps} />
+
 						<ElectoralCollegeBar {...summaryUnit} />
 
 					</div>

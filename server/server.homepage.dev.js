@@ -38,7 +38,7 @@ app.get('/', (req, res) => {
 
 	res.render('homepage', {
 		pretty: true,
-		isProduction: process.env.NODE_ENV === 'production',
+		isProduction: false,
 	})
 
 })

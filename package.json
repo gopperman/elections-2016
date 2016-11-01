@@ -5,11 +5,13 @@
     "start:hp": "webpack-dashboard -- node server/indexHomepage.js",
 
     "start:prod": "node server/index.js",
+    "start:prod:hp": "node server/indexHomepage.js",
 
     "build": "webpack --config webpack.config.prod.js --progress",
     "build:hp": "webpack --config webpack.config.homepage.prod.js --progress",
 
     "prod": "NODE_ENV=production npm run start:prod",
+    "prod:hp": "NODE_ENV=production npm run start:prod:hp",
 
     "lint": "eslint .",
     "test": "mocha --compilers js:babel-core/register \"./{,!(docs|node_modules)/**/}*.test.js\"",
