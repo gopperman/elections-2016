@@ -129,13 +129,40 @@ class BalanceOfPower extends Component {
 		) : null
 
 		return (
-			<div className='balanceOfPower r-col r-feature'>
+			<div className='bop r-col r-feature'>
 				<h3 className='overline benton-bold'>U.S. Senate balance of power</h3>
 				<svg ref={(c) => this._svg = c} />
+
+				<ul className='chart-meta'>
+					<li className='chart-meta__item'>
+						<p className='chart-meta__info'>
+							<abbr title='Democrats' className='benton-regular'>Dem</abbr>
+							<span className='benton-bold color-dem'>{demTotal}</span>
+						</p>
+					</li>
+					<li className='chart-meta__item'>
+						<p className='chart-meta__info'>
+							<abbr title='Republicans' className='benton-regular'>Gop</abbr>
+							<span className='benton-bold color-gop'>{gopTotal}</span>
+						</p>
+					</li>
+					<li className='chart-meta__item'>
+						<p className='chart-meta__info'>
+							<abbr title='Independents' className='benton-regular'>Ind</abbr>
+							<span className='benton-bold color-ind'>{indTotal}</span>
+						</p>
+					</li>
+					<li className='chart-meta__item'>
+						<p className='chart-meta__info'>
+							<abbr title='Undecideds' className='benton-regular'>Undecided</abbr>
+							<span className='benton-bold color-undecided'>{undecideds}</span>
+						</p>
+					</li>
+				</ul>
+
 				<MapLegend
 					parties={['dem', 'gop', 'ind']}
 					choices={['undecided', 'win']} />
-				{link}
 			</div>
 		)
 
