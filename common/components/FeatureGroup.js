@@ -14,6 +14,7 @@ const FeatureGroup = ({ race }) => {
 
 	return (
 		<ResultGroup
+			numWinners={race.numWinners}
 			isFeature
 			overline={nameUtil.race.name(race)}
 			precinctsReportingPct={stateUnit.precinctsReportingPct}

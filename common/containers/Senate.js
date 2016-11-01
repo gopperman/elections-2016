@@ -94,6 +94,7 @@ class Senate extends Component {
 
 			return (
 				<ResultGroup
+					numWinners={race.numWinners}
 					key={i}
 					overline={nameUtil.race.name(race)}
 					precinctsReportingPct={stateUnit.precinctsReportingPct}
@@ -112,7 +113,9 @@ class Senate extends Component {
 				<Header />
 
 				<main id='content'>
-					<Hero className='lead-us-map' title={nameUtil.office.name(params)} />
+					<Hero
+						className='lead-us-map'
+						title={nameUtil.office.name(params)} />
 					<div className='container-sm'>
 						<Timer {...timerProps} />
 						<BalanceOfPower {...bopData} displayLink={false} />

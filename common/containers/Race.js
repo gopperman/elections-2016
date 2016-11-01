@@ -115,6 +115,7 @@ class Race extends Component {
 						<Timer {...timerProps} />
 
 						<ResultGroup
+							numWinners={race.numWinners}
 							overline={nameUtil.race.name(race)}
 							precinctsReportingPct={state.precinctsReportingPct}
 							candidates={summaryCandidates} />

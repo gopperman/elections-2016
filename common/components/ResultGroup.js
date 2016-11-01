@@ -1,23 +1,21 @@
-import _ from 'lodash'
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 import ResultBar from './ResultBar.js'
 import LinkButton from './../components/LinkButton.js'
 
 const ResultGroup = ({ candidates, precinctsReportingPct,
-overline, buttonText, buttonUrl, isFeature }) => {
+overline, buttonText, buttonUrl, isFeature, numWinners }) => {
 
 	const button = buttonUrl && buttonText ?
 		<LinkButton text={buttonText} url={buttonUrl} /> : null
 
 	const mainClass = classnames('r-col', { 'r-feature': isFeature })
 
-	const numWinners = _.filter(candidates, v => !!v.winner).length
-
 	const overlineH3 = () => {
-		const aside = numWinners > 1 ? ' has-aside' : ''
-		const classNames = `overline benton-bold${aside}`
-		return (overline ? <h3 className={classNames}>{overline}</h3> : null)
+		const klass = classnames('overline', 'benton-bold', {
+			'has-aside': numWinners > 1,
+		})
+		return (overline ? <h3 className={klass}>{overline}</h3> : null)
 	}
 
 	const multipleWinnersDescription = numWinners > 1 ?
@@ -46,6 +44,7 @@ overline, buttonText, buttonUrl, isFeature }) => {
 }
 
 ResultGroup.propTypes = {
+	numWinners: PropTypes.number,
 	isFeature: PropTypes.bool,
 	precinctsReportingPct: PropTypes.string.isRequired,
 	candidates: PropTypes.array.isRequired,

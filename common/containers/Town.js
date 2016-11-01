@@ -88,6 +88,7 @@ class Town extends Component {
 
 			return (
 				<ResultGroup
+					numWinners={race.numWinners}
 					key={i}
 					overline={nameUtil.race.name(race)}
 					precinctsReportingPct={stateUnit.precinctsReportingPct}
