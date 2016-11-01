@@ -53,8 +53,14 @@ const fetchResults = ({ url }) =>
 		// If we're on prod,
 		if (process.env.NODE_ENV === 'production') {
 
-			// and we're on the client,
-			if (location) {
+			// and we're building a homepage component,
+			if (process.env.HP_CONTAINER) {
+
+				// use an env variable to construct the full url.
+				fullUrl = `${process.env.API_URL}/electionapi/elections/${url}`
+
+			// Else, if we're on the client,
+			} else if (location) {
 
 				// use the window location to construct the full url.
 				fullUrl = `${location.origin}/electionapi/elections/${url}`

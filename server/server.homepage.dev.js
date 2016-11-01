@@ -4,9 +4,8 @@ import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
 import DashboardPlugin from 'webpack-dashboard/plugin'
-import handleRender from './handleRender.js'
 import api from './api.js'
-import webpackConfig from './../webpack.config.dev.js'
+import webpackConfig from './../webpack.config.homepage.dev.js'
 
 const app = express()
 const port = process.env.PORT || 3001
@@ -35,8 +34,14 @@ app.set('view engine', 'pug')
 
 app.get('/api/*', api)
 
-// This is fired every time the server side receives a request
-app.get('*', handleRender)
+app.get('/', (req, res) => {
+
+	res.render('homepage', {
+		pretty: true,
+		isProduction: false,
+	})
+
+})
 
 app.listen(port, (error) => {
 

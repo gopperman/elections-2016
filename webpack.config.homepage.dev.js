@@ -6,7 +6,7 @@ module.exports = {
 	devtool: 'inline-source-map',
 	entry: [
 		'webpack-hot-middleware/client',
-		'./client/entry.js',
+		'./client/homepageEntry.js',
 	],
 	output: {
 		path: path.join(__dirname, 'dist'),
@@ -17,7 +17,7 @@ module.exports = {
 		new webpack.DefinePlugin({
 			'process.env.SSR_ENV': JSON.stringify('client'),
 		}),
-		new webpack.EnvironmentPlugin(['NODE_ENV', 'API_URL']),
+		new webpack.EnvironmentPlugin(['API_URL', 'HP_CONTAINER']),
 		new webpack.optimize.OccurrenceOrderPlugin(),
 		new webpack.HotModuleReplacementPlugin(),
 	],

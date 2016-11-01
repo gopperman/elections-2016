@@ -6,25 +6,28 @@ const autoprefixer = require('autoprefixer')
 module.exports = {
 	devtool: 'source-map',
 	entry: [
-		'./client/entry.js',
+		'./client/homepageEntry.js',
 	],
 	output: {
 		path: path.join(__dirname, 'static'),
-		filename: 'bundle.js',
+		filename: `${process.env.HP_CONTAINER}.js`,
 	},
 	plugins: [
 		new webpack.DefinePlugin({
 			'process.env.NODE_ENV': JSON.stringify('production'),
 			'process.env.SSR_ENV': JSON.stringify('client'),
 		}),
+		new webpack.EnvironmentPlugin(['API_URL', 'HP_CONTAINER']),
 		new webpack.optimize.OccurrenceOrderPlugin(),
 		new webpack.optimize.DedupePlugin(),
-		new webpack.optimize.UglifyJsPlugin({
-			compressor: {
-				warnings: false,
-			},
-		}),
-		new ExtractTextPlugin('compiled.css', {
+
+		// new webpack.optimize.UglifyJsPlugin({
+		// 	compressor: {
+		// 		warnings: false,
+		// 	},
+		// }),
+
+		new ExtractTextPlugin(`${process.env.HP_CONTAINER}.css`, {
 			allChunks: true,
 		}),
 	],

@@ -1,7 +1,6 @@
 import express from 'express'
 import serializeError from 'serialize-error'
 import compression from 'compression'
-import handleRender from './handleRender.js'
 
 const app = express()
 const port = process.env.PORT || 3001
@@ -19,8 +18,14 @@ app.use('/static', express.static('static'))
 app.set('views', './common')
 app.set('view engine', 'pug')
 
-// This is fired every time the server side receives a request
-app.get('*', handleRender)
+app.get('/', (req, res) => {
+
+	res.render('homepage', {
+		pretty: true,
+		isProduction: true,
+	})
+
+})
 
 app.listen(port, (error) => {
 
@@ -36,3 +41,4 @@ app.listen(port, (error) => {
 	}
 
 })
+
