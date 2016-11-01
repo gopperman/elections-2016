@@ -18,20 +18,21 @@ describe('visUtils', () => {
 			const input = readFileSync('./data/us-senate.json')
 			const expected = {
 				dem: {
-				holdovers: 34,
-				won: 44,
+					holdovers: 34,
+					won: 10,
 				},
 				gop: {
 					holdovers: 30,
-					won: 53,
+					won: 23,
 				},
 				ind: {
 					holdovers: 2,
-					won: 2,
+					won: 0,
 				},
 			}
 
 			const output = senateTrendReport(input.races)
+			assert.deepEqual(output, expected)
 		})
 	})
 
