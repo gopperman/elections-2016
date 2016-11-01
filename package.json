@@ -1,15 +1,21 @@
 {
   "scripts": {
+
     "start": "webpack-dashboard -- node server/index.js",
+    "start:hp": "webpack-dashboard -- node server/indexHomepage.js",
+
     "start:prod": "node server/index.js",
+
     "build": "webpack --config webpack.config.prod.js --progress",
     "prod": "NODE_ENV=production npm run start:prod",
+
     "lint": "eslint .",
     "test": "mocha --compilers js:babel-core/register \"./{,!(docs|node_modules)/**/}*.test.js\"",
     "doc:user": "indoc -c indoc.json",
     "doc:utils": "documentation build common/utils/*.js -o docs/utils -f html --github",
     "doc:utilsdev": "documentation serve common/utils/*.js -w",
     "doc": "rimraf docs && npm run doc:user && npm run doc:utils"
+
   },
   "dependencies": {
     "add-commas": "github:gabrielflorit/add-commas",
