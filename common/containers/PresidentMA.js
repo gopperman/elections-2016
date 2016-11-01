@@ -10,7 +10,6 @@ import Map from './../components/Map.js'
 import TestStatus from './../components/TestStatus.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 import Hero from './../components/Hero.js'
-import LinkButton from './../components/LinkButton.js'
 import urlManager from './../utils/urlManager.js'
 import getTownsShapefile from './../utils/getTownsShapefile.js'
 import nameUtil from './../utils/nameUtil.js'
@@ -124,6 +123,8 @@ class PresidentMA extends Component {
 			projection={massProjection}
 			sortingDelegate={sortByVoteCount}
 			dropdownName='town'
+			buttonText={nameUtil.presidentUS.name()}
+			buttonUrl={urlManager.race(usRace)}
 			displayName='reportingunitName' />) : null
 
 		return (
@@ -141,11 +142,6 @@ class PresidentMA extends Component {
 					</div>
 					<div className='container-lg'>
 						{map}
-
-						<LinkButton
-							text={nameUtil.presidentUS.name()}
-							url={urlManager.race(usRace)} />
-
 					</div>
 					<div className='container-downpage'>
 						<TownResultsTable

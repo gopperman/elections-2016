@@ -18,6 +18,9 @@ import {
 import MapLegend from './MapLegend.js'
 import svgs from './../utils/svgs.js'
 import { getViewBoxDimensions } from './../utils/svgUtils.js'
+import nameUtil from './../utils/nameUtil.js'
+import urlManager from './../utils/urlManager.js'
+import LinkButton from './../components/LinkButton.js'
 
 const location = typeof window !== 'undefined' && window.location
 
@@ -38,6 +41,8 @@ class Map extends Component {
 		displayName: PropTypes.string.isRequired,
 		labelsName: PropTypes.string,
 		isPresidential: PropTypes.bool,
+		buttonText: PropTypes.string,
+		buttonUrl: PropTypes.string,
 	}
 
 	state = {
@@ -491,7 +496,7 @@ class Map extends Component {
 	render() {
 
 		const { data, unitName, dropdownName, shapefile, projection,
-			isPresidential } = this.props
+			isPresidential, buttonText, buttonUrl } = this.props
 
 		let serverSvg = null
 		if (!location) {
@@ -547,8 +552,12 @@ class Map extends Component {
 			.uniq()
 			.value())
 
+		const button = (buttonText && buttonUrl) ?
+			<LinkButton text={buttonText} url={buttonUrl} /> : null
+
 		return (
 			<div className='map-component'>
+				{button}
 				<div className='map__select'>
 					<label
 						htmlFor='map-select'

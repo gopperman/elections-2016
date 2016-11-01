@@ -10,7 +10,6 @@ import Footer from './../components/Footer.js'
 import TestStatus from './../components/TestStatus.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 import Hero from './../components/Hero.js'
-import LinkButton from './../components/LinkButton.js'
 import urlManager from './../utils/urlManager.js'
 import nameUtil from './../utils/nameUtil.js'
 
@@ -130,6 +129,8 @@ class PresidentUS extends Component {
 			dropdownName='state'
 			displayName='stateName'
 			isPresidential
+			buttonText={nameUtil.presidentMA.name()}
+			buttonUrl={urlManager.race({ officeName: 'President', statePostal: 'MA' })}
 			labelsName='STUSPS' />) : null
 
 		// Finally we can render all the components!
@@ -148,11 +149,6 @@ class PresidentUS extends Component {
 					</div>
 					<div className='container-lg'>
 						{map}
-
-						<LinkButton
-							text={nameUtil.presidentMA.name()}
-							url={urlManager.race({ officeName: 'President',
-								statePostal: 'MA' })} />
 
 					</div>
 					<div className='container-downpage'>

@@ -12,7 +12,6 @@ import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 import Map from './../components/Map.js'
 import { sortByElectoralCount } from './../utils/Candidates.js'
 import FeatureGroup from './../components/FeatureGroup.js'
-import LinkButton from './../components/LinkButton.js'
 import urlManager from './../utils/urlManager.js'
 import { getSenateReport } from './../utils/dataUtil.js'
 import getStatesShapefile from './../utils/getStatesShapefile.js'
@@ -99,6 +98,8 @@ class Election extends Component {
 			dropdownName='state'
 			displayName='stateName'
 			isPresidential
+			buttonText={nameUtil.presidentUS.name()}
+			buttonUrl={urlManager.race(presUs)}
 			labelsName='STUSPS' />) : null
 
 		// Get test status.
@@ -128,10 +129,6 @@ class Election extends Component {
 					</div>
 					<div className='container-lg'>
 						{map}
-
-						<LinkButton
-							text={nameUtil.presidentUS.name()}
-							url={urlManager.race(presUs)} />
 					</div>
 					<div className='container-downpage'>
 						<div className='container-lg'>
