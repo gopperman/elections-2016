@@ -164,6 +164,12 @@ class BalanceOfPower extends Component {
 				<MapLegend
 					parties={['dem', 'gop', 'ind']}
 					choices={['undecided', 'win']} />
+				<dl className='sublegend'>
+					<dt className='sublegend__term benton-regular'>Holdovers</dt>
+					<dd className='sublegend__def circle-sm'></dd>
+					<dt className='sublegend__term benton-regular'>Won</dt>
+					<dd className='sublegend__def circle-lg'></dd>
+				</dl>
 				{link}
 			</div>
 		)

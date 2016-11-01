@@ -8,8 +8,9 @@
 	display flex
 	// justify-content space-between
 	flex-wrap wrap
-	margin-top 1em
 	max-width 40em
+	/.map-component &
+		margin-top 1.5em
 	&__item
 		// width 50%
 		padding 0.5rem 1rem
@@ -24,12 +25,36 @@
 		text-transform uppercase
 		font-size 0.65em
 		line-height 1.5
-		margin-right 0.25em
+		margin-right 0.5em
 	&__def
 		width 2em
 		height 1em
 		&:not(:last-of-type)
-			margin-right 0.5em
+			margin-right 0.75em
+
+//Sub legend
+.sublegend
+	display flex
+	padding 0.5rem 1rem
+	margin-top 0.5rem
+	&__term
+		@extends .legend__term
+	> *:last-child
+		order 1
+	> *:nth-last-child(2)
+		order 2
+	&__def
+		border-radius 50%
+		background-color set-gray('dark')
+		margin-right 1em
+	.circle-sm
+		width 8px
+		height @width
+		transform translateY(0.15em)
+	.circle-lg
+		width 15px
+		height @width
+
 
 // Map/Chart meta
 .chart-meta
@@ -42,6 +67,7 @@
 		text-align center
 	abbr
 		@extends .legend__term
+		margin-right 0
 		display block
 			
 		
