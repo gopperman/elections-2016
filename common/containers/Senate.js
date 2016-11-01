@@ -23,7 +23,7 @@ import nameUtil from './../utils/nameUtil.js'
 // const url = '2016-11-08?statePostal=M'
 
 // and this one is the correct url - it returns everything.
-const url = '2016-11-08?officeName=US%2520Senate'
+const url = '2016-11-08?office=US%2520Senate'
 
 @connectToApi
 class Senate extends Component {
