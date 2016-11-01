@@ -1,14 +1,39 @@
 /* global describe, it, afterEach */
 
 import assert from 'assert'
+import { readFileSync } from 'jsonfile'
 import {
 	buildSeatRows,
 	buildSeatColumns,
 	buildSeats,
 	buildSeatsWithHoldovers,
+	senateTrendReport,
 } from './visUtils.js'
 
 describe('visUtils', () => {
+
+	describe('senateTrendReport', () => {
+
+		it('should return the correct data', () => {
+			const input = readFileSync('./data/us-senate.json')
+			const expected = {
+				dem: {
+				holdovers: 34,
+				won: 44,
+				},
+				gop: {
+					holdovers: 30,
+					won: 53,
+				},
+				ind: {
+					holdovers: 2,
+					won: 2,
+				},
+			}
+
+			const output = senateTrendReport(input.races)
+		})
+	})
 
 	describe('buildSeatsWithHoldovers', () => {
 

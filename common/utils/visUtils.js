@@ -2,6 +2,50 @@
 
 import _ from 'lodash'
 import { transpose } from 'd3-array'
+import { normalizeParty } from './standardize.js'
+
+/* Builds a senate trend report from a list of races
+ * Specifically, for displaying the balance of power on the Senate page, where
+ * we don't have access to the AP API's senate trend report
+ * @param {array} An array of race objects
+ */
+const senateTrendReport = (races) => {
+	const trends = _.countBy(races.map((race) => {
+		const candidates = _.get(race, 'reportingUnits[0].candidates')
+		const winner = _.find(candidates, { winner: 'X' })
+
+		if (winner) {
+			return normalizeParty(winner.party)
+		}
+
+		// If there's no winner, figure out if you can at least call the runoff race for a party
+		const runoffs = _.filter(candidates, { winner: 'R' })
+		const winningParties = Object.keys(_.countBy(runoffs.map((candidate) => candidate.party)))
+
+		// If there's one and only one party that advanced to the runoff, return that party
+		if (winningParties.length === 1) {
+			return normalizeParty(winningParties[0])
+		}
+
+		return null
+	}))
+
+	// We know the number of holdovers this year
+	return 	{
+		dem: {
+			holdovers: 34,
+			won: _.get(trends, 'dem', 0),
+		},
+		gop: {
+			holdovers: 30,
+			won: _.get(trends, 'gop', 0),
+		},
+		ind: {
+			holdovers: 2,
+			won: _.get(trends, 'ind', 0),
+		},
+	}
+}
 
 const buildMatrixWithHoldovers = ({ total = 0, rows = 0,
 dem = { won: 0, holdovers: 0 },
@@ -177,4 +221,5 @@ export {
 	buildSeatColumns,
 	buildSeats,
 	buildSeatsWithHoldovers,
+	senateTrendReport,
 }

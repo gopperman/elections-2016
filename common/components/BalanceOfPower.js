@@ -35,6 +35,7 @@ class BalanceOfPower extends Component {
 		dem: PropTypes.object.isRequired,
 		gop: PropTypes.object.isRequired,
 		ind: PropTypes.object.isRequired,
+		displayLink: PropTypes.bool.isRequired,
 	}
 
 	// This lifecycle event gets called once, immediately after the initial
@@ -106,7 +107,7 @@ class BalanceOfPower extends Component {
 		circles.enter()
 			.append('circle')
 			.merge(circles)
-				.attr('r', d => (d.isHoldover ? RADIUS / 3 : RADIUS))
+				.attr('r', d => (d.isHoldover ? RADIUS / 2 : RADIUS))
 				.attr('cx', d => x1 + (d.seat * x2))
 				.attr('cy', 0)
 				.attr('transform', d =>
@@ -119,13 +120,13 @@ class BalanceOfPower extends Component {
 
 	render() {
 
-		const { dem, gop, ind } = this.props
+		const { displayLink } = this.props
 
-		const demTotal = dem.won + dem.holdovers
-		const indTotal = ind.won + ind.holdovers
-		const gopTotal = gop.won + gop.holdovers
-
-		const undecideds = 100 - (demTotal + indTotal + gopTotal)
+		const link = (displayLink) ? (
+			<LinkButton
+				text='See full results'
+				url={urlManager.office({ officeName: 'U.S. Senate' })} />
+		) : null
 
 		return (
 			<div className='balanceOfPower r-col r-feature'>
@@ -134,15 +135,7 @@ class BalanceOfPower extends Component {
 				<MapLegend
 					parties={['dem', 'gop', 'ind']}
 					choices={['undecided', 'win']} />
-
-				<p>Dem: {demTotal}</p>
-				<p>Independents: {indTotal}</p>
-				<p>GOP: {gopTotal}</p>
-				<p>Undecideds: {undecideds}</p>
-
-				<LinkButton
-					text='See full results'
-					url={urlManager.office({ officeName: 'U.S. Senate' })} />
+				{link}
 			</div>
 		)
 
