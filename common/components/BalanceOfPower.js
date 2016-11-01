@@ -120,13 +120,7 @@ class BalanceOfPower extends Component {
 
 	render() {
 
-		const { dem, gop, ind, displayLink } = this.props
-
-		const demTotal = dem.won + dem.holdovers
-		const indTotal = ind.won + ind.holdovers
-		const gopTotal = gop.won + gop.holdovers
-
-		const undecideds = 100 - (demTotal + indTotal + gopTotal)
+		const { displayLink } = this.props
 
 		const link = (displayLink) ? (
 			<LinkButton
@@ -141,12 +135,6 @@ class BalanceOfPower extends Component {
 				<MapLegend
 					parties={['dem', 'gop', 'ind']}
 					choices={['undecided', 'win']} />
-
-				<p>Dem: {demTotal}</p>
-				<p>Independents: {indTotal}</p>
-				<p>GOP: {gopTotal}</p>
-				<p>Undecideds: {undecideds}</p>
-
 				{link}
 			</div>
 		)

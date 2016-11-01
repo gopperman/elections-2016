@@ -12,7 +12,6 @@ import { sortByVoteCount } from './../utils/Candidates.js'
 import { senateTrendReport } from './../utils/visUtils.js'
 import Hero from './../components/Hero.js'
 import urlManager from './../utils/urlManager.js'
-import compareStringsNoAlpha from './../utils/compareStringsNoAlpha.js'
 import nameUtil from './../utils/nameUtil.js'
 
 // We'll keep these urls here for testing. A description:
@@ -85,9 +84,6 @@ class Senate extends Component {
 		// Get test status.
 		const isTest = _.some(data.races, 'test')
 
-		// Get the first race.
-		const firstRace = races[0] || {}
-
 		// Create result blocks for all races of this office type.
 		const raceBlocks = races.map((race, i) => {
 
@@ -108,9 +104,6 @@ class Senate extends Component {
 
 		})
 
-		const heroClass = compareStringsNoAlpha(firstRace.statePostal, 'ma') ?
-			'lead-ma-map' : 'lead-us-map'
-
 		return (
 			<div>
 
@@ -119,7 +112,7 @@ class Senate extends Component {
 				<Header />
 
 				<main id='content'>
-					<Hero className={heroClass} title={nameUtil.office.name(params)} />
+					<Hero className='lead-us-map' title={nameUtil.office.name(params)} />
 					<div className='container-sm'>
 						<Timer {...timerProps} />
 						<BalanceOfPower {...bopData} displayLink={false} />

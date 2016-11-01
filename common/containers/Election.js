@@ -139,7 +139,7 @@ class Election extends Component {
 								<span>Featured Races</span>
 							</h3>
 							<div className='r-row--full'>
-								<BalanceOfPower {...bopData} displayLink={true} />
+								<BalanceOfPower {...bopData} displayLink />
 								{featured}
 							</div>
 						</div>

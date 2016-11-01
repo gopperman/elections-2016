@@ -2,6 +2,7 @@
 
 import _ from 'lodash'
 import { transpose } from 'd3-array'
+import { normalizeParty } from './standardize.js'
 
 /* Builds a senate trend report from a list of races
  * Specifically, for displaying the balance of power on the Senate page, where
@@ -14,7 +15,7 @@ const senateTrendReport = (races) => {
 		const winner = _.find(candidates, { winner: 'X' })
 
 		if (winner) {
-			return winner.party.toLowerCase()
+			return normalizeParty(winner.party)
 		}
 
 		// If there's no winner, figure out if you can at least call the runoff race for a party
@@ -23,7 +24,7 @@ const senateTrendReport = (races) => {
 
 		// If there's one and only one party that advanced to the runoff, return that party
 		if (winningParties.length === 1) {
-			return winningParties[0].toLowerCase()
+			return normalizeParty(winningParties[0])
 		}
 
 		return null

@@ -29,7 +29,7 @@ export default (
 			component={PresidentMA} />
 
 		<Route
-			path={`${urlManager.base()}/US%2520Senate`}
+			path={urlManager.office({ officeName: 'US Senate' })}
 			component={Senate} />
 
 		<Route
