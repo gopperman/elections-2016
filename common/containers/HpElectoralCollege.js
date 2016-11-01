@@ -1,7 +1,9 @@
+import _ from 'lodash'
 import React, { Component } from 'react'
 import connectToApi from './connectToApi.js'
 import Timer from './../components/Timer.js'
 import TestStatus from './../components/TestStatus.js'
+import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 
 // We'll keep these urls here for testing. A description:
 
@@ -28,7 +30,7 @@ class HpElectoralCollege extends Component {
 	static areAllRacesComplete() {
 
 		// TODO: implement
-		return true
+		return false
 	}
 
 	render() {
@@ -36,33 +38,14 @@ class HpElectoralCollege extends Component {
 		const { props } = this
 		const { timerProps, results } = props
 
-		// Get the data - or an empty object.
-		const data = results.data || {}
+		// Get the race.
+		const race = _.get(results, 'data.races[0]', {})
 
-		// console.log(data)
+		// Get test status.
+		const isTest = !!race.test
 
-// 		// Get all races.
-// 		const races = data.races || []
-
-// 		// Get all presidential races:
-// 		const presRaces = _(races)
-// 			// get all races where officeName='President',
-// 			.filter({ officeName: 'President' })
-// 			// get the first item of reportingUnits,
-// 			.map(v => (v.reportingUnits || [])[0])
-// 			// and don't include null items.
-// 			.filter(v => v)
-// 			.value()
-
-// 		// Get presidential summary.
-// 		const presSummary = _.find(presRaces, { statePostal: 'US' })
-
-// 		// Get test status.
-// 		const isTest = _.some(races, 'test')
-
-		const isTest = true
-
-						// <ElectoralCollegeBar {...presSummary} />
+		// Get the reporting unit.
+		const summaryUnit = _.get(race, 'reportingUnits[0]', {})
 
 		return (
 			<div className='election-is-open'>
@@ -74,6 +57,7 @@ class HpElectoralCollege extends Component {
 					<div className='container-sm'>
 
 						<Timer {...timerProps} />
+						<ElectoralCollegeBar {...summaryUnit} />
 
 					</div>
 
