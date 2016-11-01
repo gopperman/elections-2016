@@ -17,6 +17,7 @@ import urlManager from './../utils/urlManager.js'
 import { getSenateReport } from './../utils/dataUtil.js'
 import getStatesShapefile from './../utils/getStatesShapefile.js'
 import nameUtil from './../utils/nameUtil.js'
+import swingStatesSelection from './../../data/swing-states.json'
 
 const STATES = getStatesShapefile()
 
@@ -90,17 +91,6 @@ class Election extends Component {
 		const presStates = _.reject(presRaces, { statePostal: 'US' })
 
 		// Specify list of swing states
-		const swingStatesSelection = [
-			'AZ',
-			'CO',
-			'FL',
-			'GA',
-			'IA',
-			'ME',
-			'MI',
-			'MN',
-		]
-
 		const swingStates = presStates.filter(v =>
 			_.includes(swingStatesSelection, v.statePostal))
 
