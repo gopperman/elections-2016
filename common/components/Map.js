@@ -573,6 +573,7 @@ class Map extends Component {
 				<div className='map-wrappers'>
 					{serverSvg}
 					<svg
+						aria-hidden='true'
 						className='full-map'
 						ref={(c) => this._svg = c}
 						dangerouslySetInnerHTML={{ __html: svgs.crossHatchesDefs }} />

@@ -54,7 +54,7 @@ precinctsReportingPct }) => {
 			<p className={candidateClass}>{name}{partySpan}{incumbentSpan}{runoffSpan}</p>
 
 			<div className='r-block__results'>
-				<div className='r-block__bar results-bar'>
+				<div className='r-block__bar results-bar' aria-hidden='true'>
 
 					<span
 						className={`fill-complete-${normalizeParty(party)}`}

@@ -90,7 +90,7 @@ choices = ['lead', 'win', 'none', 'tie'] }) => {
 	const display = modifiedChoices.map((v, i) => options[v](i))
 
 	return (
-		<ul className='legend'>
+		<ul className='legend' aria-hidden='true'>
 			{display}
 		</ul>
 	)

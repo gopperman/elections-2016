@@ -18,6 +18,7 @@ const Hero = ({ title, isElectionCtrl, className }) => {
 		<div className={`hero ${className}`}>
 			{h1}
 			<div
+				aria-hidden='true'
 				className='hero__flourish'
 				dangerouslySetInnerHTML={{ __html: svgs.flourish }} />
 		</div>
