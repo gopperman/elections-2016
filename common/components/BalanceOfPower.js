@@ -119,9 +119,12 @@ class BalanceOfPower extends Component {
 	}
 
 	render() {
-
+		const { dem, gop, ind } = this.props
 		const { displayLink } = this.props
-
+		const demTotal = dem.won + dem.holdovers
+		const gopTotal = gop.won + gop.holdovers
+		const indTotal = ind.won + ind.holdovers
+		const undecideds = 100 - (demTotal + gopTotal + indTotal)
 		const link = (displayLink) ? (
 			<LinkButton
 				text='See full results'
@@ -129,10 +132,9 @@ class BalanceOfPower extends Component {
 		) : null
 
 		return (
-			<div className='bop r-col r-feature'>
+			<div className='balanceOfPower r-col r-feature'>
 				<h3 className='overline benton-bold'>U.S. Senate balance of power</h3>
 				<svg ref={(c) => this._svg = c} />
-
 				<ul className='chart-meta'>
 					<li className='chart-meta__item'>
 						<p className='chart-meta__info'>
@@ -159,10 +161,10 @@ class BalanceOfPower extends Component {
 						</p>
 					</li>
 				</ul>
-
 				<MapLegend
 					parties={['dem', 'gop', 'ind']}
 					choices={['undecided', 'win']} />
+				{link}
 			</div>
 		)
 
