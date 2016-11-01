@@ -17,6 +17,7 @@ module.exports = {
 			'process.env.NODE_ENV': JSON.stringify('production'),
 			'process.env.SSR_ENV': JSON.stringify('client'),
 		}),
+		new webpack.EnvironmentPlugin(['API_URL', 'HP_CONTAINER']),
 		new webpack.optimize.OccurrenceOrderPlugin(),
 		new webpack.optimize.DedupePlugin(),
 
