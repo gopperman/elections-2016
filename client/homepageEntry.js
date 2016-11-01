@@ -1,4 +1,12 @@
-/* eslint-disable global-require */
+/* eslint-disable global-require, no-undef */
 
-require('es6-promise').polyfill()
-require('./homepageIndex.js')
+(function outerClosure() {
+
+	globe.onDefine('window.jQuery && $("#elections-HpElectoralCollege").length', () => {
+
+		require('es6-promise').polyfill()
+		require('./homepageIndex.js')
+
+	})
+
+}())

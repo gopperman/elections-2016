@@ -6,7 +6,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import configureStore from './../common/store/configureStore.js'
 import css from './../common/styles/config.styl'
-import critical from './../common/appUtils/critical.js'
 
 // Hydrate the Redux store with `initialState`.
 const store = configureStore({})
