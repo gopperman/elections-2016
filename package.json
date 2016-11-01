@@ -7,6 +7,8 @@
     "start:prod": "node server/index.js",
 
     "build": "webpack --config webpack.config.prod.js --progress",
+    "build:hp": "webpack --config webpack.config.homepage.prod.js --progress",
+
     "prod": "NODE_ENV=production npm run start:prod",
 
     "lint": "eslint .",

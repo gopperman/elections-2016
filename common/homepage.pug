@@ -4,6 +4,7 @@ html(lang="en")
 		if isProduction
 			link(href='/static/compiled.css', rel='stylesheet', type='text/css')
 	body
-		#elections-electoralCollege!= appHtml
-		script window.REDUX__INITIALSTATE = {}
+		#elections-HpElectoralCollege
+		#elections-HpMap
+		#elections-HpFeaturedRaces
 		script(src='/static/bundle.js')

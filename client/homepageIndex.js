@@ -11,21 +11,19 @@ import critical from './../common/appUtils/critical.js'
 // Hydrate the Redux store with `initialState`.
 const store = configureStore({})
 
-// TODO: change this.
-const electoralCollege =
-	document.getElementById('elections-electoralCollege')
+const containerName = 'HpElectoralCollege'
+
+const node = document.getElementById(`elections-${containerName}`)
 
 // Setup a `render` function that we will overwrite for hot module
 // reloading - see https://github.com/reactjs/redux/pull/1455.
 let render = () => {
 
-	const ElectoralCollegeRoot =
-		require('./../common/components/ElectoralCollegeRoot.js').default
+	const Root = require('./../common/components/HomepageRoot.js').default
 
-	// Render ElectoralCollegeRoot to `electoralCollege`.
-	if (electoralCollege) {
-		ReactDOM.render(<ElectoralCollegeRoot store={store} />,
-			electoralCollege)
+	// Render Root to `electoralCollege`.
+	if (node) {
+		ReactDOM.render(<Root store={store} />, node)
 	}
 
 }
@@ -41,8 +39,8 @@ if (module.hot) {
 		const RedBox = require('redbox-react').default
 
 		// render error with `RedBox` styling.
-		if (electoralCollege) {
-			ReactDOM.render(<RedBox error={error} />, electoralCollege)
+		if (node) {
+			ReactDOM.render(<RedBox error={error} />, node)
 		}
 
 	}
@@ -58,7 +56,7 @@ if (module.hot) {
 
 	}
 
-	module.hot.accept('./../common/components/ElectoralCollegeRoot.js', () => {
+	module.hot.accept('./../common/components/HomepageRoot.js', () => {
 		setTimeout(render)
 	})
 

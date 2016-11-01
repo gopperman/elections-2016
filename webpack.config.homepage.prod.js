@@ -1,25 +1,32 @@
 const path = require('path')
 const webpack = require('webpack')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const autoprefixer = require('autoprefixer')
 
 module.exports = {
-	devtool: 'inline-source-map',
+	devtool: 'source-map',
 	entry: [
-		'webpack-hot-middleware/client',
 		'./client/homepageEntry.js',
 	],
 	output: {
-		path: path.join(__dirname, 'dist'),
-		filename: 'bundle.js',
-		publicPath: '/static/',
+		path: path.join(__dirname, 'static'),
+		filename: `${process.env.HP_CONTAINER}.js`,
 	},
 	plugins: [
 		new webpack.DefinePlugin({
+			'process.env.NODE_ENV': JSON.stringify('production'),
 			'process.env.SSR_ENV': JSON.stringify('client'),
 		}),
-		new webpack.EnvironmentPlugin(['API_URL', 'HP_CONTAINER']),
 		new webpack.optimize.OccurrenceOrderPlugin(),
-		new webpack.HotModuleReplacementPlugin(),
+		new webpack.optimize.DedupePlugin(),
+		new webpack.optimize.UglifyJsPlugin({
+			compressor: {
+				warnings: false,
+			},
+		}),
+		new ExtractTextPlugin(`${process.env.HP_CONTAINER}.css`, {
+			allChunks: true,
+		}),
 	],
 	module: {
 		loaders: [
@@ -27,11 +34,11 @@ module.exports = {
 				test: /\.js$/,
 				loader: 'babel',
 				exclude: /node_modules/,
-				include: __dirname,
 			},
 			{
 				test: /\.styl$/,
-				loader: 'style-loader!css-loader!postcss-loader!stylus-loader',
+				loader: ExtractTextPlugin.extract('style-loader',
+					'css-loader!postcss-loader!stylus-loader'),
 			},
 			{
 				test: /\.json$/,
