@@ -26,7 +26,7 @@ const connectToApi = (WrappedComponent) => {
 		}
 
 		static propTypes = {
-			// params: PropTypes.object.isRequired,
+			params: PropTypes.object.isRequired,
 			actions: PropTypes.object.isRequired,
 			timer: PropTypes.object.isRequired,
 			results: PropTypes.object.isRequired,

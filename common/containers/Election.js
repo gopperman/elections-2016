@@ -50,8 +50,6 @@ class Election extends Component {
 
 	render() {
 
-		debugger
-
 		const { props } = this
 		const { timerProps, results } = props
 
@@ -131,9 +129,9 @@ class Election extends Component {
 					<div className='container-lg'>
 						{map}
 
-						{/* <LinkButton
+						<LinkButton
 							text={nameUtil.presidentUS.name()}
-							url={urlManager.race(presUs)} /> */}
+							url={urlManager.race(presUs)} />
 					</div>
 					<div className='container-downpage'>
 						<div className='container-lg'>
@@ -141,7 +139,7 @@ class Election extends Component {
 								<span>Featured Races</span>
 							</h3>
 							<div className='r-row--full'>
-								{/* <BalanceOfPower {...bopData} /> */}
+								<BalanceOfPower {...bopData} />
 								{featured}
 							</div>
 						</div>

@@ -46,8 +46,6 @@ const urlManager = {
 
 	race({ officeName, seatName, statePostal }) {
 
-		debugger
-
 		let result
 
 		// This function will only return urls for either president page,
