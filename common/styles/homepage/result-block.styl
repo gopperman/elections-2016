@@ -22,20 +22,17 @@
 	&__duo-results
 		position relative
 		.r-block__img
-			transform translateY(-0.8em)
 			display none
-			+mq('bp-2')
-				display block
 	&__bar
 		-ms-flex 0 1 auto
 	&__meta
-		font-size 0.8em
+		font-size 1rem
 		&--feature
-			margin-top 0.5em
+			margin-top 1rem
 			display flex
 			justify-content space-between
 			p
-				font-size 0.7em
+				font-size 1.2rem
 				&:nth-of-type(2)
 					color set-gray('medium')
 					position relative
@@ -93,17 +90,19 @@
 	align-items flex-end
 	position relative
 	&__name
-		font-size 1em
+		font-size 1.4rem
 		span
 			display block
+			benton()
 			+mq('bp-2')
 				display inline-block
 		&--number
-			font-size 1.3em
+			font-size 2rem
 			margin-right 0.25em
+			benton()
 		&--center
 			text-align center
-			font-size 0.8em
+			font-size 1.2rem
 			color set-gray('medium')
 			padding 0 0.5em
 			span
