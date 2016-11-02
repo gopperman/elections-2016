@@ -32,7 +32,7 @@ describe('urlManager', () => {
 
 			assert.equal(
 				urlManager.office(params),
-				'/elections/2016/one %26 two, three - four'
+				'/elections/2016/one %2526 two, three - four'
 			)
 
 		})

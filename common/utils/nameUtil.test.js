@@ -12,11 +12,11 @@ describe('nameUtil', () => {
 			it('should work with no statePostal', () => {
 
 				assert.equal(nameUtil.office.htmlTitle({
-					officeName: 'u.s.%2520house',
+					officeName: 'u.s. house',
 				}), 'US House')
 
 				assert.equal(nameUtil.office.htmlTitle({
-					officeName: 'us%2520house',
+					officeName: 'us house',
 				}), 'US House')
 
 				assert.equal(nameUtil.office.htmlTitle({
@@ -29,12 +29,12 @@ describe('nameUtil', () => {
 
 				assert.equal(nameUtil.office.htmlTitle({
 					statePostal: 'ma',
-					officeName: 'u.s.%2520house',
+					officeName: 'u.s. house',
 				}), 'Mass. US House')
 
 				assert.equal(nameUtil.office.htmlTitle({
 					statePostal: 'ma',
-					officeName: 'us%2520house',
+					officeName: 'us house',
 				}), 'Mass. US House')
 
 				assert.equal(nameUtil.office.htmlTitle({
@@ -117,8 +117,8 @@ describe('nameUtil', () => {
 
 				assert.equal(nameUtil.race.htmlTitle({
 					statePostal: 'ma',
-					officeName: 'State%2520House',
-					seatName: '10th%2520Essex',
+					officeName: 'State House',
+					seatName: '10th Essex',
 				}), 'Mass. State House, 10th Essex')
 
 			})
@@ -127,8 +127,8 @@ describe('nameUtil', () => {
 
 				assert.equal(nameUtil.race.htmlTitle({
 					statePostal: 'ak',
-					officeName: 'us%2520house',
-					seatName: 'district%25201',
+					officeName: 'us house',
+					seatName: 'district 1',
 				}), 'Alaska US House, District 1')
 
 			})
@@ -167,8 +167,8 @@ describe('nameUtil', () => {
 
 				assert.equal(nameUtil.race.name({
 					statePostal: 'ma',
-					officeName: 'State%2520House',
-					seatName: '10th%2520Essex',
+					officeName: 'State House',
+					seatName: '10th Essex',
 				}), 'Mass. State House, 10th Essex')
 
 			})
@@ -177,8 +177,8 @@ describe('nameUtil', () => {
 
 				assert.equal(nameUtil.race.name({
 					statePostal: 'ak',
-					officeName: 'us%2520house',
-					seatName: 'district%25201',
+					officeName: 'us house',
+					seatName: 'district 1',
 				}), 'Alaska US House, District 1')
 
 			})
