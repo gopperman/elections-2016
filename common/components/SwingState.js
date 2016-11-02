@@ -1,9 +1,13 @@
 import React, { PropTypes } from 'react'
+import usAbbreviations from 'us-abbreviations'
+import urlManager from './../utils/urlManager.js'
 import chooseColorClass from './../utils/chooseColorClass.js'
 import { percent } from './../utils/Candidate.js'
 import { percentForDisplay } from './../utils/standardize.js'
 
 const SwingState = ({ state }) => {
+
+	const convertStateToAP = usAbbreviations('postal', 'ap')
 
 	const { statePostal, candidates, precinctsReportingPct } = state
 
@@ -22,9 +26,11 @@ const SwingState = ({ state }) => {
 
 	const margin = percentForDisplay(firstPct - secondPct, true)
 
+	const stateDisplayName = convertStateToAP(urlManager.decode(statePostal).toUpperCase())
+
 	return (
 		<div className='r-block'>
-			<p className='r-block__name--small benton-bold'>{statePostal}</p>
+			<p className='r-block__name--small benton-bold'>{stateDisplayName}</p>
 			<div
 				className={`results-circle ${colorClass}`}
 				role='progressbar'

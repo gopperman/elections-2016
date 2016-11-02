@@ -10,8 +10,10 @@ import Footer from './../components/Footer.js'
 import TestStatus from './../components/TestStatus.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 import Hero from './../components/Hero.js'
+import SwingStates from './../components/SwingStates.js'
 import urlManager from './../utils/urlManager.js'
 import nameUtil from './../utils/nameUtil.js'
+import swingStatesSelection from './../../data/swing-states.json'
 
 import {
 	sortByElectoralCount,
@@ -120,6 +122,10 @@ class PresidentUS extends Component {
 			}))
 			.value()
 
+		// Specify list of swing states
+		const swingStates = states.filter(v =>
+			_.includes(swingStatesSelection, v.statePostal))
+
 		const map = states.length ? (<Map
 			shapefile={STATES}
 			data={states}
@@ -148,8 +154,8 @@ class PresidentUS extends Component {
 						<ElectoralCollegeBar {...summaryState} />
 					</div>
 					<div className='container-lg'>
+						<SwingStates states={swingStates} />
 						{map}
-
 					</div>
 					<div className='container-downpage'>
 						<StateResultsTable

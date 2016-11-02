@@ -10,12 +10,14 @@ import BalanceOfPower from './../components/BalanceOfPower.js'
 import Hero from './../components/Hero.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 import Map from './../components/Map.js'
+import SwingStates from './../components/SwingStates.js'
 import { sortByElectoralCount } from './../utils/Candidates.js'
 import FeatureGroup from './../components/FeatureGroup.js'
 import urlManager from './../utils/urlManager.js'
 import { getSenateReport } from './../utils/dataUtil.js'
 import getStatesShapefile from './../utils/getStatesShapefile.js'
 import nameUtil from './../utils/nameUtil.js'
+import swingStatesSelection from './../../data/swing-states.json'
 
 const STATES = getStatesShapefile()
 
@@ -88,6 +90,10 @@ class Election extends Component {
 		// Get all 51 states.
 		const presStates = _.reject(presRaces, { statePostal: 'US' })
 
+		// Specify list of swing states
+		const swingStates = presStates.filter(v =>
+			_.includes(swingStatesSelection, v.statePostal))
+
 		// Create the map (if we have data).
 		const map = presStates.length ? (<Map
 			shapefile={STATES}
@@ -128,6 +134,7 @@ class Election extends Component {
 						<ElectoralCollegeBar {...presSummary} />
 					</div>
 					<div className='container-lg'>
+						<SwingStates states={swingStates} />
 						{map}
 					</div>
 					<div className='container-downpage'>
