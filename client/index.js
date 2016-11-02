@@ -8,6 +8,11 @@ import { browserHistory } from 'react-router'
 import configureStore from './../common/store/configureStore.js'
 import css from './../common/styles/config.styl'
 import critical from './../common/appUtils/critical.js'
+import setPathCookie from './../common/appUtils/setPathCookie.js'
+import removeMobileHover from './../common/appUtils/removeMobileHover.js'
+
+removeMobileHover()
+setPathCookie()
 
 // Grab the initial Redux state (a json string created by the server).
 const initialState = window.REDUX__INITIALSTATE
