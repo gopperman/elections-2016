@@ -166,9 +166,9 @@ class BalanceOfPower extends Component {
 					choices={['undecided', 'win']} />
 				<dl className='sublegend'>
 					<dt className='sublegend__term benton-regular'>Holdovers</dt>
-					<dd className='sublegend__def circle-sm'></dd>
+					<dd className='sublegend__def circle-sm' />
 					<dt className='sublegend__term benton-regular'>Won</dt>
-					<dd className='sublegend__def circle-lg'></dd>
+					<dd className='sublegend__def circle-lg' />
 				</dl>
 				{link}
 			</div>

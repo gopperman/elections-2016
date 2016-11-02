@@ -7,7 +7,7 @@ const SwingStates = ({ states }) => {
 		<SwingState {...{ state, key }} />)
 
 	return (
-		<div className="container-sm">
+		<div className='container-sm'>
 			<div className='r-row'>
 				{circles}
 			</div>

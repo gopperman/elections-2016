@@ -18,8 +18,6 @@ import {
 import MapLegend from './MapLegend.js'
 import svgs from './../utils/svgs.js'
 import { getViewBoxDimensions } from './../utils/svgUtils.js'
-import nameUtil from './../utils/nameUtil.js'
-import urlManager from './../utils/urlManager.js'
 import LinkButton from './../components/LinkButton.js'
 
 const location = typeof window !== 'undefined' && window.location
