@@ -9,8 +9,6 @@
 	// justify-content space-between
 	flex-wrap wrap
 	max-width 40em
-	/.map-component &
-		margin-top 1.5em
 	&__item
 		// width 50%
 		padding 0.5rem 1rem
@@ -32,13 +30,19 @@
 		&:not(:last-of-type)
 			margin-right 0.75em
 
+.map-component .legend
+	margin-top 1.5em
+
 //Sub legend
 .sublegend
 	display flex
 	padding 0.5rem 1rem
 	margin-top 0.5rem
 	&__term
-		@extends .legend__term
+		text-transform uppercase
+		font-size 0.65em
+		line-height 1.5
+		margin-right 0.5em
 	> *:last-child
 		order 1
 	> *:nth-last-child(2)
@@ -66,7 +70,9 @@
 	&__info
 		text-align center
 	abbr
-		@extends .legend__term
+		text-transform uppercase
+		font-size 0.65em
+		line-height 1.5
 		margin-right 0
 		display block
 			

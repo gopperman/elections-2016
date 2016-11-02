@@ -46,24 +46,6 @@
 						display block
 						text-align center
 						font-size 1.5em
-		/.results-circle &
-			background-color rgba(white, 0.8)
-			padding 0.05em
-			border-radius 3px
-		/.r-block__results &
-			margin-left 1em
-			align-self flex-end
-			text-align right
-			&:first-of-type
-				width 10%
-			&:last-of-type
-				width 35%
-		/.r-block__duo-results &
-			display inline-block
-			margin-top 0.5em
-			&:last-of-type
-				position absolute
-				right 0
 	&__img
 		&:first-of-type
 			float left
@@ -83,6 +65,25 @@
 		&:before
 			content '\002A'
 			margin-right 0.25em
+
+.results-circle .r-block__meta
+	background-color rgba(white, 0.8)
+	padding 0.05em
+	border-radius 3px
+.r-block__results .r-block__meta
+	margin-left 1em
+	align-self flex-end
+	text-align right
+	&:first-of-type
+		width 10%
+	&:last-of-type
+		width 35%
+.r-block__duo-results .r-block__meta
+	display inline-block
+	margin-top 0.5em
+	&:last-of-type
+		position absolute
+				right 0
 
 // Feature text
 .feat-text

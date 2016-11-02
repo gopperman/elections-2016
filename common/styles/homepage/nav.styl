@@ -72,24 +72,38 @@
 		+mq('bp-2')
 			height 16em
 		.nav-race
-			@extends .g-nav__link:hover
-	// Town is open
-	&.town-is-open
+			color set-gray('darkest')
+			filter grayscale(0)
+			// IE filtering
+			-ms-filter grayscale(0%)
+			filter none
 		height 10em
 		+mq('bp-2')
 			height 9em
 		+mq('bp-3')
 			height 8em
 		.nav-town
-			@extends .g-nav__link:hover
-	// President is open
-	/.president-is-open .nav-president
-		@extends .g-nav__link:hover
-		pointer-events none
-	// President is open
-	/.election-is-open .nav-election
-		@extends .g-nav__link:hover
-		pointer-events none
+			color set-gray('darkest')
+			filter grayscale(0)
+			// IE filtering
+			-ms-filter grayscale(0%)
+			filter none
+// President is open
+.president-is-open .nav-president
+	color set-gray('darkest')
+	filter grayscale(0)
+	// IE filtering
+	-ms-filter grayscale(0%)
+	filter none
+	pointer-events none
+// President is open
+.election-is-open .nav-election
+	color set-gray('darkest')
+	filter grayscale(0)
+	// IE filtering
+	-ms-filter grayscale(0%)
+	filter none
+	pointer-events none
 		
 // Toggle underline if drawer is open
 .president-is-open .g-nav.town-is-open .nav-president:after, .president-is-open .g-nav.race-is-open .nav-president:after, .election-is-open .g-nav.town-is-open .nav-election:after, .election-is-open .g-nav.race-is-open .nav-election:after
@@ -100,25 +114,6 @@
 	width 90%
 	max-width 50rem
 	margin 0 auto
-	// If part of global nav
-	/.g-nav &
-		position absolute
-		left 0
-		right 0
-		bottom 1em
-		hidden(accessible)
-		opacity 0
-		transition opacity 0.25s ease-in-out 0.25s
-		z-index 10000
-	/.g-nav.race-is-open .race &,
-	/.g-nav.town-is-open .town &
-		width 90%
-		height auto
-		max-width 50rem
-		overflow auto
-		opacity 1
-	/.g-nav.town-is-open .town &
-		overflow visible
 	&__list
 		text-align center
 		+mq('bp-2')
@@ -138,6 +133,25 @@
 				font-size 1em
 			+mq('bp-2')
 				flex 1 0 100%
-			// // If in the header, hide the elections-home link
-			/.header &
-				display none
+// // If in the header, hide the elections-home link
+.header .subnav__item:first-of-type
+	display none
+// If part of global nav
+.g-nav .subnav
+	position absolute
+	left 0
+	right 0
+	bottom 1em
+	hidden(accessible)
+	opacity 0
+	transition opacity 0.25s ease-in-out 0.25s
+	z-index 10000
+.g-nav.race-is-open .race .subnav,
+.g-nav.town-is-open .town .subnav
+	width 90%
+	height auto
+	max-width 50rem
+	overflow auto
+	opacity 1
+.g-nav.town-is-open .town .subnav
+	overflow visible
