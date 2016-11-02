@@ -116,16 +116,13 @@ class Office extends Component {
 				<Header />
 
 				<main id='content'>
-					<Hero className={heroClass} title={nameUtil.office.name(params)} />
-
+					<Hero
+						className={heroClass}
+						title={nameUtil.office.name(params)} />
 					<div className='container-sm'>
-
 						<Timer {...timerProps} />
-
 						{raceBlocks}
-
 					</div>
-
 				</main>
 
 				<Footer />
