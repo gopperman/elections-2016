@@ -1,5 +1,8 @@
 import express from 'express'
+import path from 'path'
 import serializeError from 'serialize-error'
+import url from 'url'
+import proxy from 'express-http-proxy'
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
@@ -27,19 +30,27 @@ app.use(webpackHotMiddleware(compiler, {
 	log: () => {},
 }))
 
-// Tell express to use pug as our view engine
-// We'll only use this to render the top-level html wrapper
-app.set('views', './common')
-app.set('view engine', 'pug')
+app.use('/css', proxy('www.bostonglobe.com', {
+	forwardPath: (req) => `/css${url.parse(req.url).path}`,
+}))
+
+app.use('/js', proxy('www.bostonglobe.com', {
+	forwardPath: (req) => `/js${url.parse(req.url).path}`,
+}))
+
+app.use('/rw', proxy('www.bostonglobe.com', {
+	forwardPath: (req) => `/rw${url.parse(req.url).path}`,
+}))
+
+app.use('/rf', proxy('www.bostonglobe.com', {
+	forwardPath: (req) => `/rf${url.parse(req.url).path}`,
+}))
 
 app.get('/api/*', api)
 
 app.get('/', (req, res) => {
 
-	res.render('homepage', {
-		pretty: true,
-		isProduction: false,
-	})
+	res.sendFile(path.join(__dirname, '../common', 'homepage.html'))
 
 })
 
