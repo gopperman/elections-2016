@@ -1,0 +1,141 @@
+//========================
+// Images
+//========================
+// Avatar
+.avatar
+	border-radius 50%
+	max-width 40px
+	max-height @max-width
+	&:only-of-type
+		max-width 50px
+		max-height @max-width
+
+// Lead
+$bg-position-hidden--lg = 30% 25rem, 70% 45rem, 50%, 50%
+$bg-position-shown--lg = 30% 100%, 70% 100%, 50%, 50%
+$bg-position-hidden--sm = 10% 35rem, 90% 55rem, 50%, 50%
+$bg-position-shown--sm = 10% 100%, 90% 100%, 50%, 50%
+$hero-height-sm = 13rem
+$hero-height-lg = 22rem
+.lead-img
+	position relative
+	background url($assets-path + 'lead/clinton.png') no-repeat, url($assets-path + 'lead/trump.png') no-repeat, url($assets-path + 'lead/map.png') no-repeat, linear-gradient(to top, desaturate(set-color('red', dark), 50%), desaturate(set-color('blue', dark), 50%))
+	background-size 48%, 60%, 75%, 100%
+	min-height $hero-height-sm
+	background-position $bg-position-hidden--sm
+	background-blend-mode multiply, multiply, overlay
+	animation pop-sm 0.75s 0.75s linear forwards
+	padding 1em
+	+mq('bp-2')
+		min-height $hero-height-lg
+		background-size 28%, 35%, 75%, 100%
+		background-position $bg-position-hidden--lg
+		animation pop-lg 0.75s 0.5s linear forwards
+	&:before
+		content ''
+		display block
+		position absolute
+		left 0
+		top 0
+		bottom 0
+		width 100%
+		background-image url($assets-path + 'lead/texture.png')
+		opacity 0.07
+
+@keyframes pop-sm
+	from
+		background-position $bg-position-hidden--sm
+	to
+		background-position $bg-position-shown--sm
+
+@keyframes pop-lg
+	from
+		background-position $bg-position-hidden--lg
+	to
+		background-position $bg-position-shown--lg
+
+.lead-us-map
+	position relative
+	background url($assets-path + 'lead/map.png') no-repeat, linear-gradient(to top, desaturate(set-color('red', dark), 50%), desaturate(set-color('blue', dark), 50%))
+	background-size 75%, 100%
+	min-height $hero-height-sm
+	background-position 50% 20%, 50%
+	background-blend-mode overlay
+	padding 1em
+	+mq('bp-2')
+		min-height $hero-height-lg
+	&:before
+		content ''
+		display block
+		position absolute
+		left 0
+		top 0
+		bottom 0
+		width 100%
+		background-image url($assets-path + 'lead/texture.png')
+		opacity 0.07
+
+.lead-ma-map
+	position relative
+	background url($assets-path + 'lead/ma-map.png') no-repeat, linear-gradient(to top, desaturate(set-color('red', dark), 50%), desaturate(set-color('blue', dark), 50%))
+	background-size 75%, 100%
+	min-height $hero-height-sm
+	background-position 50% 20%, 50%
+	background-blend-mode overlay
+	padding 1em
+	+mq('bp-2')
+		min-height $hero-height-lg
+	&:before
+		content ''
+		display block
+		position absolute
+		left 0
+		top 0
+		bottom 0
+		width 100%
+		background-image url($assets-path + 'lead/texture.png')
+		opacity 0.07
+
+// Icons
+
+//Checkmark
+.is-winner:before
+	content ''
+	display inline-block
+	width 1em
+	height 1em
+	background url($assets-path + 'misc/checkmark.svg') no-repeat 50%
+	background-size contain
+	margin-right 0.25em
+
+// Election logo
+.icon--election:before
+	content ''
+	width 2em
+	height 1.5em
+	background url($assets-path + 'misc/campaign-logo.svg') no-repeat 50%
+	background-size contain
+
+// Town logo
+.icon--town:before
+	content ''
+	width 2em
+	height 1.5em
+	background url($assets-path + 'misc/town.svg') no-repeat 50%
+	background-size contain
+	
+// Race logo
+.icon--race:before
+	content ''
+	width 2em
+	height 1.5em
+	background url($assets-path + 'misc/race.svg') no-repeat 50%
+	background-size contain
+
+// President logo
+.icon--president:before
+	content ''
+	width 3em
+	height 1.5em
+	background url($assets-path + 'misc/president.svg') no-repeat 50%
+	background-size contain

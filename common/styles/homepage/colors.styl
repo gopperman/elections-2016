@@ -1,0 +1,102 @@
+//========================
+// Colors
+//========================
+
+// Fills
+
+// Leading
+.fill-leading-dem
+	fill url('#crosshatch-dem')
+.fill-leading-gop
+	fill url('#crosshatch-gop')
+.fill-leading-ind
+	fill url('#crosshatch-ind')
+.fill-leading-yes
+	fill url('#crosshatch-yes')
+.fill-leading-no
+	fill url('#crosshatch-no')
+.fill-leading-split
+	fill url('#crosshatch-split')
+
+// Solid
+// There are three classes:
+// fill-winner is for presidential races
+// fill-complete is for non-presidential races
+.fill-winner-split
+	background-color set-color('purple')
+	fill set-color('purple')
+.fill-winner-ind, .fill-complete-ind
+	background-color set-color('yellow')
+	fill set-color('yellow')
+.fill-winner-dem, .fill-complete-dem
+	background-color set-color('blue')
+	fill set-color('blue')
+	&--light
+		background-color set-color('blue', light)
+		fill set-color('blue', light)
+	&--dark
+		background-color set-color('blue', dark)
+		fill set-color('blue', dark)
+.fill-winner-gop, .fill-complete-gop
+	background-color set-color('red')
+	fill set-color('red')
+	&--light
+		background-color set-color('red', light)
+		fill set-color('red', light)
+	&--dark
+		background-color set-color('red', dark)
+		fill set-color('red', dark)
+.fill-complete-yes
+	background-color set-color('green')
+	fill set-color('green')
+	&--light
+		background-color set-color('green', light)
+		fill set-color('green', light)
+	&--dark
+		background-color set-color('green', dark)
+		fill set-color('green', dark)
+.fill-complete-no
+	background-color set-color('gold')
+	fill set-color('gold')
+	&--light
+		background-color set-color('gold', light)
+		fill set-color('gold', light)
+	&--dark
+		background-color set-color('gold', dark)
+		fill set-color('gold', dark)
+.fill-none, .fill-winner-none
+	background-color set-gray('lightest')
+	fill set-gray('lightest')
+.fill-tie
+	background-color set-color('purple')
+	fill set-color('purple')
+
+// Colors
+.color-dem
+	color set-color('blue', dark)
+.color-gop
+	color set-color('red', dark)
+.color-yes
+	color set-color('green', dark)
+.color-no
+	color set-color('gold', dark)
+.color-tie
+	color set-color('purple')
+.color-ind
+	color darken(set-color('yellow', dark), 10)
+.color-undecided
+	color set-gray('medium')
+
+// Stripes
+.fill-leading-dem
+	background repeating-linear-gradient(120deg, set-color('blue') 0, white 1px, white .15em, set-color('blue') calc(.15em + 1px), set-color('blue') .2em)
+.fill-leading-gop
+	background repeating-linear-gradient(120deg, set-color('red') 0, white 1px, white .15em, set-color('red') calc(.15em + 1px), set-color('red') .2em)
+.fill-leading-ind
+	background repeating-linear-gradient(120deg, set-color('green') 0, white 1px, white .15em, set-color('yellow') calc(.15em + 1px), set-color('yellow') .2em)
+.fill-leading-yes
+	background repeating-linear-gradient(120deg, set-color('green') 0, white 1px, white .15em, set-color('green') calc(.15em + 1px), set-color('green') .2em)
+.fill-leading-no
+	background repeating-linear-gradient(120deg, set-color('gold') 0, white 1px, white .15em, set-color('gold') calc(.15em + 1px), set-color('gold') .2em)
+.fill-leading-split
+	background repeating-linear-gradient(120deg, set-color('purple') 0, white 1px, white .15em, set-color('purple') calc(.15em + 1px), set-color('purple') .2em)

@@ -1,0 +1,144 @@
+//========================
+// Messaging
+//========================
+
+.TestStatus
+	background-color #f2f2f2
+	text-align center
+	letter-spacing 0.25em
+	border-bottom solid set-gray('medium') 1px
+
+.balanceOfPower
+	svg
+		display block
+
+// Spinner
+.spinner
+	width 1em
+	height @width
+	position relative
+	background-color white
+	display inline-block
+	&__pie
+		width 50%
+		height 100%
+		transform-origin 100% 50%
+		position absolute
+		background-color mix(set-color('blue', 'dark'), set-color('red', 'dark'))
+	&__rotator
+		border-radius 100% 0 0 100% / 50% 0 0 50%
+		z-index set-index('top')
+		animation rotate 15s linear infinite
+	&__filler
+		border-radius 0 100% 100% 0 / 0 50% 50% 0
+		left 50%
+		opacity 0
+		z-index set-index('top')
+		animation opacity 15s steps(1, end) infinite reverse
+	&__mask
+		width 50%
+		height 100%
+		position absolute
+		background-color inherit
+		opacity 1
+		z-index set-index('overlay')
+		animation opacity 15s steps(1, end) infinite
+
+@keyframes rotate
+	0%
+		transform rotate(0deg)
+	100%
+		transform rotate(360deg)
+
+@keyframes opacity
+	0%
+		opacity 1
+	50%, 100%
+		opacity 0
+
+// Timer
+.timer
+	text-align center
+	transform translateY(-3em)
+	&__update
+		display inline-block
+		background-color white
+		width 10em
+		padding 1em 0
+		font-size 0.8em
+
+// Update
+.update
+	width 100%
+	text-align center
+	> *
+		display inline-block
+	&__text
+		font-size 0.9em
+		+mq('bp-1')
+			font-size 1.1em
+	&__share
+		margin-left 1em
+
+// Tooltip
+.map-component .tooltip-wrapper
+	cursor default
+	width 22em
+	position absolute
+	top 0
+	left 0
+	margin-top 2.5rem
+	padding 0
+	z-index set-index('overlay')
+	pointer-events none
+	display none
+
+	&.show
+		display block
+
+	.tooltip
+		box-shadow 0 0 5px set-gray('medium')
+		border-radius 3px
+		padding 1em
+		margin 0
+		background-color white
+		position relative
+		width auto
+
+		&__button
+			position absolute
+			font-size 2em
+			right 0.5em
+			pointer-events all
+			background-color transparent
+			border none
+			svg
+				display block
+
+		@media (max-width: 40em)
+			// pin to bottom
+			position fixed
+			bottom 0
+			left 0 !important
+			width 100%
+
+// Flash if updated
+// .is-updated
+// 	animation blink 1.5s linear 2
+
+// @keyframes blink
+// 	50%
+// 		opacity 0
+// Find a home for this
+.share-tw
+	background-color #0084b4
+	padding 0.25em 1em
+	text-align center
+	border-radius 3px
+	transition $transition
+	&:hover
+		background-color darken(#0084b4, 10)
+	svg
+		width 1em
+		height 1em
+		fill white
