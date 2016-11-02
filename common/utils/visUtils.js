@@ -5,8 +5,8 @@ import { transpose } from 'd3-array'
 import { normalizeParty } from './standardize.js'
 
 /* Builds a senate trend report from a list of races
- * Specifically, for displaying the balance of power on the Senate page, where
- * we don't have access to the AP API's senate trend report
+ * Specifically, for displaying the balance of power on the Senate page,
+ * where we don't have access to the AP API's senate trend report.
  * @param {array} An array of race objects
  */
 const senateTrendReport = (races) => {
@@ -18,11 +18,14 @@ const senateTrendReport = (races) => {
 			return normalizeParty(winner.party)
 		}
 
-		// If there's no winner, figure out if you can at least call the runoff race for a party
+		// If there's no winner, figure out if you can at least call
+		// the runoff race for a party.
 		const runoffs = _.filter(candidates, { winner: 'R' })
-		const winningParties = Object.keys(_.countBy(runoffs.map((candidate) => candidate.party)))
+		const winningParties =
+			Object.keys(_.countBy(runoffs.map((candidate) => candidate.party)))
 
-		// If there's one and only one party that advanced to the runoff, return that party
+		// If there's one and only one party that advanced to the runoff,
+		// return that party.
 		if (winningParties.length === 1) {
 			return normalizeParty(winningParties[0])
 		}
