@@ -46,17 +46,9 @@ class HpElectoralCollege extends Component {
 
 				<TestStatus isTest={isTest} />
 
-				<main id='content'>
+					<Timer {...timerProps} />
 
-					<div className='container-sm'>
-
-						<Timer {...timerProps} />
-
-						<ElectoralCollegeBar {...summaryUnit} />
-
-					</div>
-
-				</main>
+					<ElectoralCollegeBar {...summaryUnit} />
 
 			</div>
 		)
