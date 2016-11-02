@@ -42,7 +42,7 @@ class HpElectoralCollege extends Component {
 		const summaryUnit = _.get(race, 'reportingUnits[0]', {})
 
 		return (
-			<div className='election-is-open'>
+			<div className='election-graphic'>
 
 				<TestStatus isTest={isTest} />
 
