@@ -1,4 +1,5 @@
 import express from 'express'
+import path from 'path'
 import serializeError from 'serialize-error'
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
@@ -27,19 +28,11 @@ app.use(webpackHotMiddleware(compiler, {
 	log: () => {},
 }))
 
-// Tell express to use pug as our view engine
-// We'll only use this to render the top-level html wrapper
-app.set('views', './common')
-app.set('view engine', 'pug')
-
 app.get('/api/*', api)
 
 app.get('/', (req, res) => {
 
-	res.render('homepage', {
-		pretty: true,
-		isProduction: false,
-	})
+	res.sendFile(path.join(__dirname, '../common', 'homepage.html'))
 
 })
 
