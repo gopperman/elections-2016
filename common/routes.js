@@ -6,7 +6,6 @@ import Office from './containers/Office.js'
 import PresidentUS from './containers/PresidentUS.js'
 import PresidentMA from './containers/PresidentMA.js'
 import Race from './containers/Race.js'
-import Senate from './containers/Senate.js'
 import Town from './containers/Town.js'
 import urlManager from './utils/urlManager.js'
 
@@ -24,10 +23,6 @@ export default (
 		<Route
 			path={`${urlManager.base()}/MA/president`}
 			component={PresidentMA} />
-
-		<Route
-			path={urlManager.office({ officeName: 'US Senate' })}
-			component={Senate} />
 
 		<Route
 			path={`${urlManager.base()}/:officeName`}

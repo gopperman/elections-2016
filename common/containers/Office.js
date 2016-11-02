@@ -12,6 +12,8 @@ import Hero from './../components/Hero.js'
 import urlManager from './../utils/urlManager.js'
 import compareStringsNoAlpha from './../utils/compareStringsNoAlpha.js'
 import nameUtil from './../utils/nameUtil.js'
+import { senateTrendReport } from './../utils/visUtils.js'
+import BalanceOfPower from './../components/BalanceOfPower.js'
 
 // We'll keep these urls here for testing. A description:
 
@@ -81,9 +83,6 @@ class Office extends Component {
 		// Get test status.
 		const isTest = _.some(data.races, 'test')
 
-		// Get the first race.
-		const firstRace = races[0] || {}
-
 		// Create result blocks for all races of this office type.
 		const raceBlocks = races.map((race, i) => {
 
@@ -105,8 +104,18 @@ class Office extends Component {
 
 		})
 
-		const heroClass = compareStringsNoAlpha(firstRace.statePostal, 'ma') ?
+		const heroClass = compareStringsNoAlpha(params.statePostal, 'ma') ?
 			'lead-ma-map' : 'lead-us-map'
+
+		const title = nameUtil.office.name(params)
+
+		let bop = null
+		if (title === 'US Senate') {
+
+			const bopData = senateTrendReport(races)
+			bop = <BalanceOfPower {...bopData} displayLink={false} />
+
+		}
 
 		return (
 			<div>
@@ -118,9 +127,10 @@ class Office extends Component {
 				<main id='content'>
 					<Hero
 						className={heroClass}
-						title={nameUtil.office.name(params)} />
+						title={title} />
 					<div className='container-sm'>
 						<Timer {...timerProps} />
+						{bop}
 						{raceBlocks}
 					</div>
 				</main>
