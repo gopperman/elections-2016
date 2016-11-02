@@ -14,6 +14,7 @@ import Map from './../components/Map.js'
 import getTownsShapefile from './../utils/getTownsShapefile.js'
 import urlManager from './../utils/urlManager.js'
 import nameUtil from './../utils/nameUtil.js'
+import { racesAreComplete } from './../utils/completenessUtil.js'
 
 const TOWNS = getTownsShapefile()
 
@@ -45,19 +46,10 @@ class Race extends Component {
 
 	static areAllRacesComplete(results) {
 
-		// Get the data - or an empty object.
-		const data = results.data || {}
+		// Get all the races.
+		const races = _.get(results, 'data.races', [])
 
-		// Get API results.
-		const race = data.races && data.races.length ? data.races[0] : {}
-
-		// Get state.
-		const state = _.find(race.reportingUnits, { level: 'state' }) || {}
-
-		// Check if all results are in.
-		const isFinished = +state.precinctsReportingPct === 100
-
-		return isFinished
+		return racesAreComplete(races)
 
 	}
 

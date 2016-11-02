@@ -13,7 +13,7 @@ import Hero from './../components/Hero.js'
 import urlManager from './../utils/urlManager.js'
 import getTownsShapefile from './../utils/getTownsShapefile.js'
 import nameUtil from './../utils/nameUtil.js'
-
+import { racesAreComplete } from './../utils/completenessUtil.js'
 import {
 	sortByVoteCount,
 	sortByCandidateIDs,
@@ -45,27 +45,10 @@ class PresidentMA extends Component {
 
 	static areAllRacesComplete(results) {
 
-		// Get the data - or an empty object.
-		const data = results.data || {}
+		// Get all the races.
+		const races = _.get(results, 'data.races', [])
 
-		// Get API results.
-		const races = data.races || []
-
-		// Get the US and MA races.
-		const usRace = _.find(races, { statePostal: 'US' }) || {}
-		const maRace = _.find(races, { statePostal: 'MA' }) || {}
-
-		// Get the overall units.
-		const usUnit =
-			_.find(usRace.reportingUnits, { level: 'national' }) || {}
-		const maUnit =
-			_.find(maRace.reportingUnits, { level: 'state' }) || {}
-
-		// Check if all results are in.
-		const isFinished = +usUnit.precinctsReportingPct === 100 &&
-			+maUnit.precinctsReportingPct === 100
-
-		return isFinished
+		return racesAreComplete(races)
 
 	}
 
