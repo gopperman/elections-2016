@@ -1,6 +1,8 @@
 import express from 'express'
 import path from 'path'
 import serializeError from 'serialize-error'
+import url from 'url'
+import proxy from 'express-http-proxy'
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
@@ -26,6 +28,22 @@ app.use(webpackDevMiddleware(compiler, {
 // Use this middleware to set up hot module reloading via webpack
 app.use(webpackHotMiddleware(compiler, {
 	log: () => {},
+}))
+
+app.use('/css', proxy('www.bostonglobe.com', {
+	forwardPath: (req) => `/css${url.parse(req.url).path}`,
+}))
+
+app.use('/js', proxy('www.bostonglobe.com', {
+	forwardPath: (req) => `/js${url.parse(req.url).path}`,
+}))
+
+app.use('/rw', proxy('www.bostonglobe.com', {
+	forwardPath: (req) => `/rw${url.parse(req.url).path}`,
+}))
+
+app.use('/rf', proxy('www.bostonglobe.com', {
+	forwardPath: (req) => `/rf${url.parse(req.url).path}`,
 }))
 
 app.get('/api/*', api)
