@@ -4,6 +4,7 @@ import connectToApi from './connectToApi.js'
 import Timer from './../components/Timer.js'
 import TestStatus from './../components/TestStatus.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
+import { racesAreComplete } from './../utils/completenessUtil.js'
 
 // We'll keep these urls here for testing. A description:
 
@@ -27,10 +28,13 @@ class HpElectoralCollege extends Component {
 		return url
 	}
 
-	static areAllRacesComplete() {
+	static areAllRacesComplete(results) {
 
-		// TODO: implement
-		return false
+		// Get all the races.
+		const races = _.get(results, 'data.races', [])
+
+		return racesAreComplete(races)
+
 	}
 
 	render() {

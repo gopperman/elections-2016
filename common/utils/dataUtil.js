@@ -2,6 +2,7 @@ import _ from 'lodash'
 import { normalizeParty } from './standardize.js'
 
 const getSenateReport = (reports) => {
+
 	// Get the senate report
 	const report = _(reports)
 		.map('reports')
@@ -9,7 +10,7 @@ const getSenateReport = (reports) => {
 		.find({ title: 'Trend / s / test / US' }) || {}
 
 	// Get all the `party` keys.
-	const parties = _.get(report, 'report.trendtable.party') || []
+	const parties = _.get(report, 'report.trendtable.party', [])
 
 	// Iterate over the parties,
 	const result = _(parties)
@@ -21,14 +22,17 @@ const getSenateReport = (reports) => {
 		}))
 		// and lowercase + toInt when appropriate.
 		.map(v => ({
-			party: normalizeParty(v.title),
-			won: +v.Won,
-			leading: +v.Leading,
-			holdovers: +v.Holdovers,
+			[normalizeParty(v.title)]: {
+				won: +v.Won,
+				leading: +v.Leading,
+				holdovers: +v.Holdovers,
+			},
 		}))
 		.value()
 
-	return result
+	// Finally, turn everything into an object.
+	return _.assign.apply(null, result)
+
 }
 
 export {

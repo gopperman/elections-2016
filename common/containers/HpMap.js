@@ -8,6 +8,7 @@ import TestStatus from './../components/TestStatus.js'
 import LinkButton from './../components/LinkButton.js'
 import urlManager from './../utils/urlManager.js'
 import nameUtil from './../utils/nameUtil.js'
+import { racesAreComplete } from './../utils/completenessUtil.js'
 
 import {
 	sortByElectoralCount,
@@ -42,26 +43,10 @@ class PresidentUS extends Component {
 
 	static areAllRacesComplete(results) {
 
-		// Get the data - or an empty object.
-		const data = results.data || {}
+		// Get all the races.
+		const races = _.get(results, 'data.races', [])
 
-		// Get API results.
-		const races = data.races || []
-
-		// Get US race:
-		const allStates = races
-			// return the first item of reportingUnits,
-			.map(v => (v.reportingUnits || [])[0])
-			// and don't include null items.
-			.filter(v => v)
-
-		// Get US presidential race summary.
-		const summaryState = _.find(allStates, { statePostal: 'US' }) || {}
-
-		// Check if all results are in.
-		const isFinished = +summaryState.precinctsReportingPct === 100
-
-		return isFinished
+		return racesAreComplete(races)
 
 	}
 

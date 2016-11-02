@@ -14,6 +14,7 @@ import compareStringsNoAlpha from './../utils/compareStringsNoAlpha.js'
 import nameUtil from './../utils/nameUtil.js'
 import { senateTrendReport } from './../utils/visUtils.js'
 import BalanceOfPower from './../components/BalanceOfPower.js'
+import { racesAreComplete } from './../utils/completenessUtil.js'
 
 // We'll keep these urls here for testing. A description:
 
@@ -39,33 +40,10 @@ class Office extends Component {
 
 	static areAllRacesComplete(results) {
 
-		// Get the data - or an empty object.
-		const data = results.data || {}
+		// Get all the races.
+		const races = _.get(results, 'data.races', [])
 
-		// Get API results.
-		const races = data.races || []
-
-		let allComplete
-
-		// Do we have races?
-		if (races.length) {
-
-			// Yes - make sure all are at 100%.
-			allComplete = _(races)
-				// get its reportingUnits array,
-				.map('reportingUnits')
-				// flatten to a one-dimensional array,
-				.flatten()
-				// and see if there is at least one at less than 100% pct.
-				.every(v => +v.precinctsReportingPct === 100)
-
-		} else {
-
-			// No - so some sort of error happened. We're not complete.
-			allComplete = false
-		}
-
-		return allComplete
+		return racesAreComplete(races)
 
 	}
 

@@ -18,6 +18,10 @@ import { getSenateReport } from './../utils/dataUtil.js'
 import getStatesShapefile from './../utils/getStatesShapefile.js'
 import nameUtil from './../utils/nameUtil.js'
 import swingStatesSelection from './../../data/swing-states.json'
+import {
+	senateIsComplete,
+	racesAreComplete,
+} from './../utils/completenessUtil.js'
 
 const STATES = getStatesShapefile()
 
@@ -43,10 +47,16 @@ class Election extends Component {
 		return url
 	}
 
-	static areAllRacesComplete() {
+	static areAllRacesComplete(results) {
 
-		// TODO: implement
-		return false
+		// Get the reports.
+		const reports = _.get(results, 'data.reports', {})
+
+		// Get all the races.
+		const races = _.get(results, 'data.races', [])
+
+		return senateIsComplete(reports) && racesAreComplete(races)
+
 	}
 
 	render() {
@@ -58,15 +68,7 @@ class Election extends Component {
 		const data = results.data || {}
 
 		// Get senate report data.
-		const senateData = _.map(getSenateReport(data.reports), v => ({
-			[v.party]: {
-				won: v.won,
-				holdovers: v.holdovers,
-			},
-		}))
-
-		// Build senate balance of power data.
-		const bopData = _.assign.apply(null, senateData)
+		const bopData = getSenateReport(data.reports)
 
 		// Get all races.
 		const races = data.races || []
