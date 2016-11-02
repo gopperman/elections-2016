@@ -1,15 +1,15 @@
 import React, { PropTypes } from 'react'
 import usAbbreviations from 'us-abbreviations'
-import urlManager from './../utils/urlManager.js'
 import chooseColorClass from './../utils/chooseColorClass.js'
 import { percent } from './../utils/Candidate.js'
 import { percentForDisplay } from './../utils/standardize.js'
+import { sortByElectoralCount } from './../utils/Candidates.js'
 
 const SwingState = ({ state }) => {
 
-	const convertStateToAP = usAbbreviations('postal', 'ap')
+	const { statePostal, precinctsReportingPct } = state
 
-	const { statePostal, candidates, precinctsReportingPct } = state
+	const candidates = sortByElectoralCount(state.candidates)
 
 	const colorClass = chooseColorClass({
 		candidates: candidates || [],
@@ -26,7 +26,8 @@ const SwingState = ({ state }) => {
 
 	const margin = percentForDisplay(firstPct - secondPct, true)
 
-	const stateDisplayName = convertStateToAP(urlManager.decode(statePostal).toUpperCase())
+	const convertStateToAP = usAbbreviations('postal', 'ap')
+	const stateDisplayName = convertStateToAP(statePostal.toUpperCase())
 
 	return (
 		<div className='r-block'>
