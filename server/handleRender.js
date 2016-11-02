@@ -28,7 +28,7 @@ export default (req, res) => {
 			// there was an error somewhere during route matching
 			console.error('handleRender.js: error during route matching')
 			console.error(serializeError(error))
-			res.status(500).send(serializeError(error))
+			res.status(500).send(error.message)
 
 		} else if (redirect) {
 
@@ -91,7 +91,7 @@ export default (req, res) => {
 
 					console.error('handleRender.js: error during/after fetch trigger')
 					console.error(serializeError(e))
-					res.status(404).send(serializeError(e))
+					res.status(404).send(e.message)
 
 				})
 
