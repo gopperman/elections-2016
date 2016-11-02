@@ -4,11 +4,11 @@ import compareStringsNoAlpha from './compareStringsNoAlpha.js'
 const urlManager = {
 
 	encode(s) {
-		return encodeURIComponent(encodeURIComponent(s))
+		return s.replace(/&/g, '%2526')
 	},
 
 	decode(s) {
-		return decodeURIComponent(decodeURIComponent(s))
+		return s.replace(/%2526/g, '&')
 	},
 
 	stringifyParams(params) {

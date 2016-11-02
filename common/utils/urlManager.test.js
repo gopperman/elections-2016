@@ -22,4 +22,21 @@ describe('urlManager', () => {
 
 	})
 
+	describe('encode', () => {
+
+		it('should only encode ampersands', () => {
+
+			const params = {
+				officeName: 'one & two, three - four',
+			}
+
+			assert.equal(
+				urlManager.office(params),
+				'/elections/2016/one %26 two, three - four'
+			)
+
+		})
+
+	})
+
 })
