@@ -133,22 +133,14 @@ class PresidentUS extends Component {
 
 				<TestStatus isTest={isTest} />
 
-				<main id='content'>
+				<Timer {...timerProps} />
 
-					<div className='container-sm'>
+				{map}
 
-						<Timer {...timerProps} />
-
-						{map}
-
-						<LinkButton
-							text={nameUtil.presidentMA.name()}
-							url={urlManager.race({ officeName: 'President',
-								statePostal: 'MA' })} />
-
-					</div>
-
-				</main>
+				<LinkButton
+					text={nameUtil.presidentMA.name()}
+					url={urlManager.race({ officeName: 'President',
+						statePostal: 'MA' })} />
 
 			</div>
 		)
