@@ -51,8 +51,7 @@ class Map extends Component {
 	// rendering occurs.
 	componentDidMount() {
 
-		const { shapefile, data, unitName, projection } =
-			this.props
+		const { shapefile, data, unitName, projection } = this.props
 
 		const { path, width, height, geoFeatures, subsetFeature } =
 			this.setup({
