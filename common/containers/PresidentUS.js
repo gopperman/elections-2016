@@ -18,6 +18,7 @@ import {
 	sortByElectoralCount,
 	sortByPolIDs,
 } from './../utils/Candidates.js'
+import Legend from './../components/Legend.js'
 
 import getStatesShapefile from './../utils/getStatesShapefile.js'
 
@@ -125,6 +126,7 @@ class PresidentUS extends Component {
 					<div className='container-lg'>
 						<SwingStates states={swingStates} />
 						{map}
+						<Legend isPresidential races={states} />
 					</div>
 					<div className='container-downpage'>
 						<StateResultsTable

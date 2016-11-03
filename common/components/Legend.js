@@ -1,9 +1,24 @@
+import _ from 'lodash'
 import React, { PropTypes } from 'react'
-import { standardizeParty } from './../utils/standardize.js'
 import LegendItem from './LegendItem.js'
+import {
+	normalizeParty,
+	standardizeParty,
+	orderParties,
+} from './../utils/standardize.js'
 
-const Legend = ({ parties, isPresidential,
+const Legend = ({ races, parties, isPresidential,
 choices = ['lead', 'win', 'none', 'tie'] }) => {
+
+	const computedParties = parties ||
+		orderParties(_(races)
+			.map('candidates')
+			.flatten()
+			.map('party')
+			.uniq()
+			.map(normalizeParty)
+			.uniq()
+			.value())
 
 	const options = {
 
@@ -11,7 +26,7 @@ choices = ['lead', 'win', 'none', 'tie'] }) => {
 			return (
 				<LegendItem
 					key={key}
-					terms={parties.map(party => ({
+					terms={computedParties.map(party => ({
 						label: standardizeParty(party),
 						klass: `fill-leading-${party}`,
 					}))}
@@ -23,7 +38,7 @@ choices = ['lead', 'win', 'none', 'tie'] }) => {
 			return (
 				<LegendItem
 					key={key}
-					terms={parties.map(party => ({
+					terms={computedParties.map(party => ({
 						label: standardizeParty(party),
 						klass: `fill-complete-${party}`,
 					}))}
@@ -83,7 +98,8 @@ choices = ['lead', 'win', 'none', 'tie'] }) => {
 }
 
 Legend.propTypes = {
-	parties: PropTypes.array.isRequired,
+	races: PropTypes.array,
+	parties: PropTypes.array,
 	choices: PropTypes.array,
 	isPresidential: PropTypes.bool,
 }

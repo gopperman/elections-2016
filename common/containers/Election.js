@@ -18,10 +18,6 @@ import getReports from './../utils/getReports.js'
 import getStatesShapefile from './../utils/getStatesShapefile.js'
 import nameUtil from './../utils/nameUtil.js'
 import swingStatesSelection from './../../data/swing-states.json'
-import {
-	normalizeParty,
-	orderParties,
-} from './../utils/standardize.js'
 import Legend from './../components/Legend.js'
 
 const STATES = getStatesShapefile()
@@ -114,16 +110,6 @@ class Election extends Component {
 			.map((race, key) => <FeatureGroup {...{ race, key }} />)
 			.value()
 
-		// Create legend parties.
-		const parties = orderParties(_(presStates)
-			.map('candidates')
-			.flatten()
-			.map('party')
-			.uniq()
-			.map(normalizeParty)
-			.uniq()
-			.value())
-
 		return (
 			<div className='election-is-open'>
 				<TestStatus isTest={isTest} />
@@ -143,7 +129,7 @@ class Election extends Component {
 						<div className='container-lg'>
 							{map}
 							<SwingStates states={swingStates} />
-							<Legend isPresidential parties={parties} />
+							<Legend isPresidential races={presStates} />
 						</div>
 					</div>
 					<div className='container-downpage'>
