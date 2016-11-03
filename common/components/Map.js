@@ -1,4 +1,4 @@
-/* eslint-disable no-return-assign, max-len */
+/* eslint-disable no-return-assign */
 
 import * as topojson from 'topojson'
 import deepEqual from 'deep-equal'
