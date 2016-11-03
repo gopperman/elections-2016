@@ -8,7 +8,6 @@ import TestStatus from './../components/TestStatus.js'
 import LinkButton from './../components/LinkButton.js'
 import urlManager from './../utils/urlManager.js'
 import nameUtil from './../utils/nameUtil.js'
-import { racesAreComplete } from './../utils/completenessUtil.js'
 
 import {
 	sortByElectoralCount,
@@ -39,15 +38,6 @@ class PresidentUS extends Component {
 
 	static apiUrl() {
 		return url
-	}
-
-	static areAllRacesComplete(results) {
-
-		// Get all the races.
-		const races = _.get(results, 'data.races', [])
-
-		return racesAreComplete(races)
-
 	}
 
 	render() {

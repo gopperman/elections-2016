@@ -10,7 +10,6 @@ import { sortByVoteCount } from './../utils/Candidates.js'
 import Hero from './../components/Hero.js'
 import urlManager from './../utils/urlManager.js'
 import nameUtil from './../utils/nameUtil.js'
-import { racesAreComplete } from './../utils/completenessUtil.js'
 
 // We'll keep these urls here for testing. A description:
 
@@ -32,15 +31,6 @@ class Town extends Component {
 
 	static apiUrl(params) {
 		return `${url}${urlManager.stringifyParams(params)}`
-	}
-
-	static areAllRacesComplete(results) {
-
-		// Get all the races.
-		const races = _.get(results, 'data.races', [])
-
-		return racesAreComplete(races)
-
 	}
 
 	render() {

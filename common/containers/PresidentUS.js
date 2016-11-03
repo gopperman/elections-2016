@@ -14,7 +14,6 @@ import SwingStates from './../components/SwingStates.js'
 import urlManager from './../utils/urlManager.js'
 import nameUtil from './../utils/nameUtil.js'
 import swingStatesSelection from './../../data/swing-states.json'
-import { racesAreComplete } from './../utils/completenessUtil.js'
 import {
 	sortByElectoralCount,
 	sortByPolIDs,
@@ -44,15 +43,6 @@ class PresidentUS extends Component {
 
 	static apiUrl() {
 		return url
-	}
-
-	static areAllRacesComplete(results) {
-
-		// Get all the races.
-		const races = _.get(results, 'data.races', [])
-
-		return racesAreComplete(races)
-
 	}
 
 	render() {

@@ -13,7 +13,6 @@ import Hero from './../components/Hero.js'
 import urlManager from './../utils/urlManager.js'
 import getTownsShapefile from './../utils/getTownsShapefile.js'
 import nameUtil from './../utils/nameUtil.js'
-import { racesAreComplete } from './../utils/completenessUtil.js'
 import {
 	sortByVoteCount,
 	sortByCandidateIDs,
@@ -41,15 +40,6 @@ class PresidentMA extends Component {
 
 	static apiUrl() {
 		return url
-	}
-
-	static areAllRacesComplete(results) {
-
-		// Get all the races.
-		const races = _.get(results, 'data.races', [])
-
-		return racesAreComplete(races)
-
 	}
 
 	render() {
