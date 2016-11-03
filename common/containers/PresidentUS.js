@@ -90,8 +90,10 @@ class PresidentUS extends Component {
 			.value()
 
 		// Specify list of swing states
-		const swingStates = states.filter(v =>
-			_.includes(swingStatesSelection, v.statePostal))
+		const swingStates = _(states)
+			.filter(v => _.includes(swingStatesSelection, v.statePostal))
+			.sortBy(v => _.indexOf(swingStatesSelection, v.statePostal))
+			.value()
 
 		const map = states.length ? (<Map
 			shapefile={STATES}

@@ -80,9 +80,11 @@ class Election extends Component {
 		// Get all 51 state units.
 		const presStates = _.reject(presUnits, { statePostal: 'US' })
 
-		// Specify list of swing states.
-		const swingStates = presStates.filter(v =>
-			_.includes(swingStatesSelection, v.statePostal))
+		// Specify list of swing states
+		const swingStates = _(presStates)
+			.filter(v => _.includes(swingStatesSelection, v.statePostal))
+			.sortBy(v => _.indexOf(swingStatesSelection, v.statePostal))
+			.value()
 
 		// Create the map (if we have data).
 		const map = presStates.length ? (<Map
