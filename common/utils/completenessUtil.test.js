@@ -3,12 +3,29 @@
 import assert from 'assert'
 import { readFileSync } from 'jsonfile'
 import {
+	racesAreComplete,
 	reportsAreComplete,
 } from './completenessUtil.js'
 
 describe('completenessUtil', () => {
 
-	describe.only('reportsAreComplete', () => {
+	describe('racesAreComplete', () => {
+
+		it('should work with no races', () => {
+
+			assert.equal(racesAreComplete([]), true)
+
+		})
+
+	})
+
+	describe('reportsAreComplete', () => {
+
+		it('should work with no reports', () => {
+
+			assert.equal(reportsAreComplete([]), true)
+
+		})
 
 		it('should work with all reports', () => {
 
