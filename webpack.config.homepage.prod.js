@@ -20,13 +20,11 @@ module.exports = {
 		new webpack.EnvironmentPlugin(['API_URL', 'HP_CONTAINER']),
 		new webpack.optimize.OccurrenceOrderPlugin(),
 		new webpack.optimize.DedupePlugin(),
-
-		// new webpack.optimize.UglifyJsPlugin({
-		// 	compressor: {
-		// 		warnings: false,
-		// 	},
-		// }),
-
+		new webpack.optimize.UglifyJsPlugin({
+			compressor: {
+				warnings: false,
+			},
+		}),
 		new ExtractTextPlugin(`${process.env.HP_CONTAINER}.css`, {
 			allChunks: true,
 		}),
