@@ -61,26 +61,26 @@ class Election extends Component {
 		// Get all races.
 		const races = _.get(results, 'data.races', [])
 
-		// Get all presidential races:
-		const presRaces = _(races)
+		// Get all presidential units:
+		const presUnits = _(races)
 			// get all races where officeName='President',
 			.filter({ officeName: 'President' })
-			// get the first item of reportingUnits,
-			.map(v => (v.reportingUnits || [])[0])
-			// and don't include null items.
-			.filter(v => v)
+			// get the reporting units,
+			.map('reportingUnits')
+			// and flatten.
+			.flatten()
 			.value()
 
-		const presUs = _.find(races,
+		const presSummaryRace = _.find(races,
 			{ officeName: 'President', statePostal: 'US' })
 
 		// Get presidential summary.
-		const presSummary = _.find(presRaces, { statePostal: 'US' })
+		const presSummaryUnit = _.find(presUnits, { statePostal: 'US' })
 
-		// Get all 51 states.
-		const presStates = _.reject(presRaces, { statePostal: 'US' })
+		// Get all 51 state units.
+		const presStates = _.reject(presUnits, { statePostal: 'US' })
 
-		// Specify list of swing states
+		// Specify list of swing states.
 		const swingStates = presStates.filter(v =>
 			_.includes(swingStatesSelection, v.statePostal))
 
@@ -95,7 +95,7 @@ class Election extends Component {
 			displayName='stateName'
 			isPresidential
 			buttonText={nameUtil.presidentUS.name()}
-			buttonUrl={urlManager.race(presUs)}
+			buttonUrl={urlManager.race(presSummaryRace)}
 			labelsName='STUSPS' />) : null
 
 		// Get test status.
@@ -121,7 +121,7 @@ class Election extends Component {
 
 						<Timer {...timerProps} />
 
-						<ElectoralCollegeBar {...presSummary} />
+						<ElectoralCollegeBar {...presSummaryUnit} />
 					</div>
 					<div className='container-lg'>
 						<SwingStates states={swingStates} />
