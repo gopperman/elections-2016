@@ -97,8 +97,8 @@ class Election extends Component {
 			dropdownName='state'
 			displayName='stateName'
 			isPresidential
-			buttonText={nameUtil.presidentUS.name()}
-			buttonUrl={urlManager.race(presSummaryRace)}
+			buttonText={nameUtil.presidentMA.name()}
+			buttonUrl={urlManager.race({ officeName: 'President', statePostal: 'MA' })}
 			labelsName='STUSPS' />) : null
 
 		// Get test status.
