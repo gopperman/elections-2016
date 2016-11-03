@@ -1,0 +1,491 @@
+[
+  {
+    "id": "https://api.ap.org/v2/reports",
+    "title": "Election Reports",
+    "updated": "2016-11-02T18:57:10Z",
+    "reports": [
+      {
+        "id": "66",
+        "title": "Trend / s / test / US",
+        "contentLink": "https://api.ap.org/v2/reports/d1adbab65ce945d8a2ef343b4dc50402",
+        "contentType": "application/json",
+        "report": {
+          "trendtable": {
+            "office": "U.S. Senate",
+            "OfficeTypeCode": "S",
+            "Test": "1",
+            "timestamp": "2016-11-02T18:55:58Z",
+            "party": [
+              {
+                "title": "Dem",
+                "trend": [
+                  {
+                    "Won": "10"
+                  },
+                  {
+                    "Leading": "0"
+                  },
+                  {
+                    "Holdovers": "34"
+                  },
+                  {
+                    "Winning Trend": "44"
+                  },
+                  {
+                    "Current": "44"
+                  },
+                  {
+                    "InsufficientVote": "0"
+                  }
+                ],
+                "NetChange": {
+                  "trend": [
+                    {
+                      "Winners": "0"
+                    },
+                    {
+                      "Leaders": "0"
+                    }
+                  ]
+                }
+              },
+              {
+                "title": "GOP",
+                "trend": [
+                  {
+                    "Won": "23"
+                  },
+                  {
+                    "Leading": "1"
+                  },
+                  {
+                    "Holdovers": "30"
+                  },
+                  {
+                    "Winning Trend": "54"
+                  },
+                  {
+                    "Current": "54"
+                  },
+                  {
+                    "InsufficientVote": "0"
+                  }
+                ],
+                "NetChange": {
+                  "trend": [
+                    {
+                      "Winners": "0"
+                    },
+                    {
+                      "Leaders": "0"
+                    }
+                  ]
+                }
+              },
+              {
+                "title": "Others",
+                "trend": [
+                  {
+                    "Won": "0"
+                  },
+                  {
+                    "Leading": "0"
+                  },
+                  {
+                    "Holdovers": "2"
+                  },
+                  {
+                    "Winning Trend": "2"
+                  },
+                  {
+                    "Current": "2"
+                  },
+                  {
+                    "InsufficientVote": "0"
+                  }
+                ],
+                "NetChange": {
+                  "trend": [
+                    {
+                      "Winners": "0"
+                    },
+                    {
+                      "Leaders": "0"
+                    }
+                  ]
+                }
+              }
+            ],
+            "InsufficientVote": {
+              "trend": [
+                {
+                  "Dem Open": "0"
+                },
+                {
+                  "GOP Open": "0"
+                },
+                {
+                  "Oth Open": "0"
+                },
+                {
+                  "Dem Incumbent": "0"
+                },
+                {
+                  "GOP Incumbent": "0"
+                },
+                {
+                  "Oth Incumbent": "0"
+                },
+                {
+                  "Total": "0"
+                }
+              ]
+            }
+          }
+        },
+        "updated": "2016-11-02T18:57:10Z",
+        "electionDate": "2016-11-08",
+        "categories": [
+          {
+            "scheme": "https://api.ap.org/cv/type/",
+            "term": "Trend"
+          },
+          {
+            "scheme": "https://api.ap.org/cv/subtype/",
+            "term": "s"
+          },
+          {
+            "scheme": "https://api.ap.org/cv/test/",
+            "term": "false"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "https://api.ap.org/v2/reports",
+    "title": "Election Reports",
+    "updated": "2016-11-02T18:57:10Z",
+    "reports": [
+      {
+        "id": "65",
+        "title": "Trend / h / test / US",
+        "contentLink": "https://api.ap.org/v2/reports/8837316db29448e09143b3ebc05fef40",
+        "contentType": "application/json",
+        "report": {
+          "trendtable": {
+            "office": "U.S. House",
+            "OfficeTypeCode": "H",
+            "Test": "1",
+            "timestamp": "2016-11-02T18:55:54Z",
+            "party": [
+              {
+                "title": "Dem",
+                "trend": [
+                  {
+                    "Won": "192"
+                  },
+                  {
+                    "Leading": "1"
+                  },
+                  {
+                    "Holdovers": "0"
+                  },
+                  {
+                    "Winning Trend": "193"
+                  },
+                  {
+                    "Current": "187"
+                  },
+                  {
+                    "InsufficientVote": "0"
+                  }
+                ],
+                "NetChange": {
+                  "trend": [
+                    {
+                      "Winners": "+5"
+                    },
+                    {
+                      "Leaders": "+1"
+                    }
+                  ]
+                }
+              },
+              {
+                "title": "GOP",
+                "trend": [
+                  {
+                    "Won": "238"
+                  },
+                  {
+                    "Leading": "1"
+                  },
+                  {
+                    "Holdovers": "0"
+                  },
+                  {
+                    "Winning Trend": "239"
+                  },
+                  {
+                    "Current": "247"
+                  },
+                  {
+                    "InsufficientVote": "0"
+                  }
+                ],
+                "NetChange": {
+                  "trend": [
+                    {
+                      "Winners": "-7"
+                    },
+                    {
+                      "Leaders": "-1"
+                    }
+                  ]
+                }
+              },
+              {
+                "title": "Others",
+                "trend": [
+                  {
+                    "Won": "3"
+                  },
+                  {
+                    "Leading": "0"
+                  },
+                  {
+                    "Holdovers": "0"
+                  },
+                  {
+                    "Winning Trend": "3"
+                  },
+                  {
+                    "Current": "1"
+                  },
+                  {
+                    "InsufficientVote": "0"
+                  }
+                ],
+                "NetChange": {
+                  "trend": [
+                    {
+                      "Winners": "+2"
+                    },
+                    {
+                      "Leaders": "0"
+                    }
+                  ]
+                }
+              }
+            ],
+            "InsufficientVote": {
+              "trend": [
+                {
+                  "Dem Open": "0"
+                },
+                {
+                  "GOP Open": "0"
+                },
+                {
+                  "Oth Open": "0"
+                },
+                {
+                  "Dem Incumbent": "0"
+                },
+                {
+                  "GOP Incumbent": "0"
+                },
+                {
+                  "Oth Incumbent": "0"
+                },
+                {
+                  "Total": "0"
+                }
+              ]
+            }
+          }
+        },
+        "updated": "2016-11-02T18:57:10Z",
+        "electionDate": "2016-11-08",
+        "categories": [
+          {
+            "scheme": "https://api.ap.org/cv/type/",
+            "term": "Trend"
+          },
+          {
+            "scheme": "https://api.ap.org/cv/subtype/",
+            "term": "h"
+          },
+          {
+            "scheme": "https://api.ap.org/cv/test/",
+            "term": "false"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "id": "https://api.ap.org/v2/reports",
+    "title": "Election Reports",
+    "updated": "2016-11-02T18:57:10Z",
+    "reports": [
+      {
+        "id": "64",
+        "title": "Trend / g / test / US",
+        "contentLink": "https://api.ap.org/v2/reports/a1adee7559ce4cdea0675844b9264f50",
+        "contentType": "application/json",
+        "report": {
+          "trendtable": {
+            "office": "Governor",
+            "OfficeTypeCode": "G",
+            "Test": "1",
+            "timestamp": "2016-11-02T18:55:56Z",
+            "party": [
+              {
+                "title": "Dem",
+                "trend": [
+                  {
+                    "Won": "7"
+                  },
+                  {
+                    "Leading": "0"
+                  },
+                  {
+                    "Holdovers": "10"
+                  },
+                  {
+                    "Winning Trend": "17"
+                  },
+                  {
+                    "Current": "18"
+                  },
+                  {
+                    "InsufficientVote": "0"
+                  }
+                ],
+                "NetChange": {
+                  "trend": [
+                    {
+                      "Winners": "-1"
+                    },
+                    {
+                      "Leaders": "0"
+                    }
+                  ]
+                }
+              },
+              {
+                "title": "GOP",
+                "trend": [
+                  {
+                    "Won": "5"
+                  },
+                  {
+                    "Leading": "0"
+                  },
+                  {
+                    "Holdovers": "27"
+                  },
+                  {
+                    "Winning Trend": "32"
+                  },
+                  {
+                    "Current": "31"
+                  },
+                  {
+                    "InsufficientVote": "0"
+                  }
+                ],
+                "NetChange": {
+                  "trend": [
+                    {
+                      "Winners": "+1"
+                    },
+                    {
+                      "Leaders": "0"
+                    }
+                  ]
+                }
+              },
+              {
+                "title": "Others",
+                "trend": [
+                  {
+                    "Won": "0"
+                  },
+                  {
+                    "Leading": "0"
+                  },
+                  {
+                    "Holdovers": "1"
+                  },
+                  {
+                    "Winning Trend": "1"
+                  },
+                  {
+                    "Current": "1"
+                  },
+                  {
+                    "InsufficientVote": "0"
+                  }
+                ],
+                "NetChange": {
+                  "trend": [
+                    {
+                      "Winners": "0"
+                    },
+                    {
+                      "Leaders": "0"
+                    }
+                  ]
+                }
+              }
+            ],
+            "InsufficientVote": {
+              "trend": [
+                {
+                  "Dem Open": "0"
+                },
+                {
+                  "GOP Open": "0"
+                },
+                {
+                  "Oth Open": "0"
+                },
+                {
+                  "Dem Incumbent": "0"
+                },
+                {
+                  "GOP Incumbent": "0"
+                },
+                {
+                  "Oth Incumbent": "0"
+                },
+                {
+                  "Total": "0"
+                }
+              ]
+            }
+          }
+        },
+        "updated": "2016-11-02T18:57:10Z",
+        "electionDate": "2016-11-08",
+        "categories": [
+          {
+            "scheme": "https://api.ap.org/cv/type/",
+            "term": "Trend"
+          },
+          {
+            "scheme": "https://api.ap.org/cv/subtype/",
+            "term": "g"
+          },
+          {
+            "scheme": "https://api.ap.org/cv/test/",
+            "term": "false"
+          }
+        ]
+      }
+    ]
+  }
+]
