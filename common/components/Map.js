@@ -10,12 +10,9 @@ import chooseColorClass from './../utils/chooseColorClass.js'
 import compareStringsNoAlpha from './../utils/compareStringsNoAlpha.js'
 import createTooltip from './../utils/createTooltip.js'
 import {
-	normalizeParty,
-	orderParties,
 	toSentenceCase,
 	toTitleCase,
 } from './../utils/standardize.js'
-import Legend from './Legend.js'
 import svgs from './../utils/svgs.js'
 import { getViewBoxDimensions } from './../utils/svgUtils.js'
 import LinkButton from './../components/LinkButton.js'
@@ -495,7 +492,7 @@ class Map extends Component {
 	render() {
 
 		const { data, unitName, dropdownName, shapefile, projection,
-			isPresidential, buttonText, buttonUrl } = this.props
+			buttonText, buttonUrl } = this.props
 
 		let serverSvg = null
 		if (!location) {
@@ -542,15 +539,6 @@ class Map extends Component {
 
 		const dropdownLabel = toSentenceCase(`${dropdownName} results`)
 
-		const parties = orderParties(_(data)
-			.map('candidates')
-			.flatten()
-			.map('party')
-			.uniq()
-			.map(normalizeParty)
-			.uniq()
-			.value())
-
 		const button = (buttonText && buttonUrl) ?
 			(<LinkButton
 				text={`Switch to ${buttonText}`}
@@ -590,7 +578,6 @@ class Map extends Component {
 						</div>
 					</div>
 				</div>
-				<Legend isPresidential={isPresidential} parties={parties} />
 			</div>
 		)
 
