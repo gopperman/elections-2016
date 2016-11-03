@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import { standardizeParty } from './../utils/standardize.js'
+import LegendItem from './LegendItem.js'
 
 const MapLegend = ({ parties, isPresidential,
 choices = ['lead', 'win', 'none', 'tie'] }) => {
@@ -8,77 +9,61 @@ choices = ['lead', 'win', 'none', 'tie'] }) => {
 
 		lead(key) {
 			return (
-				<li key={key} className='legend__item'>
-					<p className='legend__subhed benton-regular'>Lead</p>
-					<dl className='legend__deflist'>
-						{parties.map(party => (
-							[<dt className='legend__term benton-regular'>{standardizeParty(party)}</dt>,
-								<dd className={`legend__def fill-leading-${party}`} />]
-						))}
-					</dl>
-				</li>
+				<LegendItem
+					key={key}
+					terms={parties.map(party => ({
+						label: standardizeParty(party),
+						klass: `fill-leading-${party}`,
+					}))}
+					text='Lead' />
 			)
 		},
 
 		win(key) {
 			return (
-				<li key={key} className='legend__item'>
-					<p className='legend__subhed benton-regular'>Win</p>
-					<dl className='legend__deflist'>
-						{parties.map(party => (
-							[<dt className='legend__term benton-regular'>{standardizeParty(party)}</dt>,
-								<dd className={`legend__def fill-complete-${party}`} />]
-						))}
-					</dl>
-				</li>
+				<LegendItem
+					key={key}
+					terms={parties.map(party => ({
+						label: standardizeParty(party),
+						klass: `fill-complete-${party}`,
+					}))}
+					text='Win' />
 			)
 		},
 
 		none(key) {
 			return (
-				<li key={key} className='legend__item'>
-					<p className='legend__subhed benton-regular'>No results</p>
-					<dl className='legend__deflist'>
-						<dt className='legend__term benton-regular hide-accessible'>No results</dt>
-						<dd className='legend__def fill-none' />
-					</dl>
-				</li>
+				<LegendItem
+					key={key}
+					terms={[{ label: 'No results', klass: 'fill-none' }]}
+					text='No results' />
 			)
 		},
 
 		undecided(key) {
 			return (
-				<li key={key} className='legend__item'>
-					<p className='legend__subhed benton-regular'>Undecided</p>
-					<dl className='legend__deflist'>
-						<dt className='legend__term benton-regular hide-accessible'>Undecided</dt>
-						<dd className='legend__def fill-none' />
-					</dl>
-				</li>
+				<LegendItem
+					key={key}
+					terms={[{ label: 'Undecided', klass: 'fill-none' }]}
+					text='Undecided' />
 			)
 		},
 
 		tie(key) {
 			return (
-				<li key={key} className='legend__item'>
-					<p className='legend__subhed benton-regular'>Tie</p>
-					<dl className='legend__deflist'>
-						<dt className='legend__term benton-regular hide-accessible'>Tie</dt>
-						<dd className='legend__def fill-tie' />
-					</dl>
-				</li>
+				<LegendItem
+					key={key}
+					terms={[{ label: 'Tie', klass: 'fill-tie' }]}
+					text='Tie' />
 			)
 		},
 
 		split(key) {
 			return (
-				<li key={key} className='legend__item'>
-					<p className='legend__subhed benton-regular'>Split votes</p>
-					<dl className='legend__deflist'>
-						<dt className='legend__term benton-regular hide-accessible'>Split votes</dt>
-						<dd className='legend__def fill-tie' />
-					</dl>
-				</li>
+				<LegendItem
+					key={key}
+					terms={[{ label: 'Split votes', klass: 'fill-tie' }]}
+					text='Split votes' />
 			)
 		},
 
