@@ -11,7 +11,7 @@ export default ({ subunit = {}, displayName, sortingDelegate }) => {
 	const summary = ''
 	const candidates = sortingDelegate(subunit.candidates || [])
 
-	const rows = candidates.slice(0, 4).map(candidate => {
+	const rows = candidates.slice(0, 4).map((candidate, i) => {
 
 		const { candidateID, voteCount, last, winner, party } = candidate
 
@@ -29,6 +29,8 @@ export default ({ subunit = {}, displayName, sortingDelegate }) => {
 
 		const squareClass = `fill-complete-${normalizeParty(party)}`
 
+		const pctSpan = `<span class='${i > 0 && 'hide-invisible'}'>%</span>`
+
 		// Create this candidate's table row.
 		return `
 			<tr class='r-table__row'>
@@ -37,7 +39,7 @@ export default ({ subunit = {}, displayName, sortingDelegate }) => {
 					<p class='${candidateClass}'>${last}</p>
 				</td>
 				<td class='r-table__cell' scope='row'>
-					<p class='benton-bold'>${+pctForDisplay}%</p>
+					<p class='benton-bold'>${+pctForDisplay}${pctSpan}</p>
 				</td>
 				<td class='r-table__cell' scope='row'>
 					<p class='benton-bold'>${vote}</p>
