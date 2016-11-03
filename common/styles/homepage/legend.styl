@@ -1,0 +1,79 @@
+//========================
+// Legend
+//========================
+
+// Map/Chart Legend
+.legend
+	list-style()
+	display flex
+	// justify-content space-between
+	flex-wrap wrap
+	max-width 40em
+	&__item
+		// width 50%
+		padding 0.5rem 1rem
+	&__subhed
+		font-size 0.8em
+		margin-bottom 0.5em
+		border-bottom 1px solid set-gray('lightest')
+	&__deflist
+		display flex
+		justify-content space-between
+	&__term
+		text-transform uppercase
+		font-size 0.65em
+		line-height 1.5
+		margin-right 0.5em
+	&__def
+		width 2em
+		height 1em
+		&:not(:last-of-type)
+			margin-right 0.75em
+
+.map-component .legend
+	margin-top 1.5em
+
+//Sub legend
+.sublegend
+	display flex
+	padding 0.5rem 1rem
+	margin-top 0.5rem
+	&__term
+		text-transform uppercase
+		font-size 0.65em
+		line-height 1.5
+		margin-right 0.5em
+	> *:last-child
+		order 1
+	> *:nth-last-child(2)
+		order 2
+	&__def
+		border-radius 50%
+		background-color set-gray('dark')
+		margin-right 1em
+	.circle-sm
+		width 8px
+		height @width
+		transform translateY(0.15em)
+	.circle-lg
+		width 15px
+		height @width
+
+
+// Map/Chart meta
+.chart-meta
+	list-style()
+	display flex
+	justify-content space-between
+	&__item
+		padding 0 1rem
+	&__info
+		text-align center
+	abbr
+		text-transform uppercase
+		font-size 0.65em
+		line-height 1.5
+		margin-right 0
+		display block
+			
+		

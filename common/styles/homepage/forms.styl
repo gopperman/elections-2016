@@ -1,0 +1,35 @@
+//========================
+// Forms
+//========================
+.form
+	position relative
+	input
+		border 5px solid transparent
+		&:focus
+			border-image linear-gradient(to top,set-color('blue') 0,set-color('red') 100%)
+			border-image-slice 1
+	&__search
+		display inline-block
+		font-size 0.9em
+		border none
+		background-color set-gray('lightest')
+		padding 1em
+		border-radius 3px
+		min-width 15rem
+		transition $transition
+		appearance none
+		&:focus
+			background-color white
+	&__select
+		display block
+		font-size 0.9em
+		background-color white
+		width 100%
+		border-radius 3px
+		height 2.5em
+		cursor pointer
+	&__label
+		font-size 0.8em
+		&--overline
+			display block
+			margin-bottom 0.5em

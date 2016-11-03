@@ -1,0 +1,157 @@
+//========================
+// Nav
+//========================
+
+// Global nav
+.g-nav
+	position relative
+	height 5.5em
+	transition 0.3s ease-in-out height
+	+mq('bp-2')
+		height 3.2em
+	&__list
+		width 90%
+		max-width 50em
+		margin 0 auto
+		display flex
+		justify-content space-between
+		padding 1em 0
+		border-bottom 1px solid set-gray('lightest')
+	&__item
+		width 25%
+		&:not(:last-of-type)
+			margin-right 1.5em
+	&__link
+		font-size 0.8rem
+		border none
+		background-color transparent
+		padding 0
+		display inline-block
+		text-align center
+		color rgba(set-gray('darkest'), 0.65)
+		transition 0.2s ease-in-out all
+		position relative
+		filter grayscale(100%)
+		// IE filtering
+		-ms-filter grayscale(100%)
+		filter gray
+		&:after
+			content ''
+			display block
+			background linear-gradient(to left, set-color('red'), set-color('blue'))
+			width 0
+			height 4px
+			margin-top 0.5em
+			transition width 0.4s ease-in-out
+		&:hover
+			color set-gray('darkest')
+			filter grayscale(0)
+			// IE filtering
+			-ms-filter grayscale(0%)
+			filter none
+			&:after
+				width 100%
+		+mq('bp-2')
+			text-align left
+		// Icons
+		&:before
+			display block
+			vertical-align text-bottom
+			margin 0 auto 0.5em auto
+			// transition 0.2s ease-in-out all
+			+mq('bp-2')
+				display inline-block
+				margin 0 0.5em 0 0
+	.form__select
+		max-width 35em
+		margin 0 auto
+	
+	// Race is open
+	&.race-is-open
+		height 35em
+		+mq('bp-2')
+			height 16em
+		.nav-race
+			color set-gray('darkest')
+			filter grayscale(0)
+			// IE filtering
+			-ms-filter grayscale(0%)
+			filter none
+		height 10em
+		+mq('bp-2')
+			height 9em
+		+mq('bp-3')
+			height 8em
+		.nav-town
+			color set-gray('darkest')
+			filter grayscale(0)
+			// IE filtering
+			-ms-filter grayscale(0%)
+			filter none
+// President is open
+.president-is-open .nav-president
+	color set-gray('darkest')
+	filter grayscale(0)
+	// IE filtering
+	-ms-filter grayscale(0%)
+	filter none
+	pointer-events none
+// President is open
+.election-is-open .nav-election
+	color set-gray('darkest')
+	filter grayscale(0)
+	// IE filtering
+	-ms-filter grayscale(0%)
+	filter none
+	pointer-events none
+		
+// Toggle underline if drawer is open
+.president-is-open .g-nav.town-is-open .nav-president:after, .president-is-open .g-nav.race-is-open .nav-president:after, .election-is-open .g-nav.town-is-open .nav-election:after, .election-is-open .g-nav.race-is-open .nav-election:after
+	width 0
+
+// Sub nav
+.subnav
+	width 90%
+	max-width 50rem
+	margin 0 auto
+	&__list
+		text-align center
+		+mq('bp-2')
+			text-align left
+			display flex
+			flex-flow column wrap
+			align-content space-between
+			height 10em
+	&__link
+		display inline-block
+		font-size 0.85rem
+		line-height 1.2
+		margin-bottom 1.5em
+	&__item
+		&:first-of-type 
+			a
+				font-size 1em
+			+mq('bp-2')
+				flex 1 0 100%
+// // If in the header, hide the elections-home link
+.header .subnav__item:first-of-type
+	display none
+// If part of global nav
+.g-nav .subnav
+	position absolute
+	left 0
+	right 0
+	bottom 1em
+	hidden(accessible)
+	opacity 0
+	transition opacity 0.25s ease-in-out 0.25s
+	z-index 10000
+.g-nav.race-is-open .race .subnav,
+.g-nav.town-is-open .town .subnav
+	width 90%
+	height auto
+	max-width 50rem
+	overflow auto
+	opacity 1
+.g-nav.town-is-open .town .subnav
+	overflow visible

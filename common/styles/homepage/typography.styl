@@ -1,0 +1,47 @@
+.hed
+	font-size 2em
+	line-height 1.2
+	margin-bottom 0.5em
+	text-align center
+	+mq('bp-2')
+		font-size 2.8em
+
+.subhed
+	font-size 1.3em
+	line-height 1.2
+	margin-bottom 1.5em
+	text-align center
+	span
+		padding-bottom 0.25em
+		border-bottom 8px solid transparent
+		border-image linear-gradient(to right,set-color('blue') 0,set-color('red') 100%)
+		border-image-slice 1
+	+mq('bp-2')
+		font-size 1.8em
+
+.overline
+	font-size 1em
+	line-height 1.2
+	margin-bottom 1.5em
+	&.has-aside:after
+		font-size 0.8em
+		color set-gray('dark')
+		content '\002A'
+		margin-left 0.25em
+.r-col .overline
+	border-bottom 3px solid set-gray('lightest')
+	padding-bottom 0.5em
+
+.copy-block
+	font-size 1.1em
+	line-height 1.8
+	margin-bottom 0.5em
+
+.note
+	font-size 0.7em
+	margin-top 1.5em
+	text-align right
+	span
+		background-color set-gray('lightest')
+		padding 0.5em
+		border-radius 3px

@@ -42,21 +42,13 @@ class HpElectoralCollege extends Component {
 		const summaryUnit = _.get(race, 'reportingUnits[0]', {})
 
 		return (
-			<div className='election-is-open'>
+			<div className='election-graphic'>
 
 				<TestStatus isTest={isTest} />
 
-				<main id='content'>
+					<Timer {...timerProps} />
 
-					<div className='container-sm'>
-
-						<Timer {...timerProps} />
-
-						<ElectoralCollegeBar {...summaryUnit} />
-
-					</div>
-
-				</main>
+					<ElectoralCollegeBar {...summaryUnit} />
 
 			</div>
 		)

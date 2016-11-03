@@ -1,0 +1,113 @@
+//========================
+// Result Blocks
+//========================
+
+// Summary
+.r-block
+	position relative
+	clearfix()
+	&__name
+		font-size 1.1em
+		line-height 1.2
+		margin-bottom 0.25em
+		+mq('bp-1')
+			font-size 1.2em
+		&--small
+			font-size 0.9em
+			margin-bottom 0.25em
+	&__results
+		display flex
+		align-items flex-end
+		justify-content space-between
+	&__duo-results
+		position relative
+		.r-block__img
+			display none
+	&__bar
+		-ms-flex 0 1 auto
+	&__meta
+		font-size 1rem
+		&--feature
+			margin-top 1rem
+			display flex
+			justify-content space-between
+			p
+				font-size 1.2rem
+				&:nth-of-type(2)
+					color set-gray('medium')
+					position relative
+					top -0.5em
+					line-height 1em
+					&:before
+						content '\25B4'
+						display block
+						text-align center
+						font-size 1.5em
+	&__img
+		&:first-of-type
+			float left
+			margin-right 0.5em
+		&:last-of-type
+			float right
+			margin-left 0.5em
+	&__tag
+		font-size 0.6rem
+		margin-left 1em
+		text-transform uppercase
+		color set-gray('dark')
+		vertical-align middle
+	&__aside
+		font-size 0.8em
+		color set-gray('dark')
+		&:before
+			content '\002A'
+			margin-right 0.25em
+
+.results-circle .r-block__meta
+	background-color rgba(white, 0.8)
+	padding 0.05em
+	border-radius 3px
+.r-block__results .r-block__meta
+	margin-left 1em
+	align-self flex-end
+	text-align right
+	&:first-of-type
+		width 10%
+	&:last-of-type
+		width 35%
+.r-block__duo-results .r-block__meta
+	display inline-block
+	margin-top 0.5em
+	&:last-of-type
+		position absolute
+				right 0
+
+// Feature text
+.feat-text
+	display flex
+	justify-content space-between
+	padding-bottom 0.5em
+	align-items flex-end
+	position relative
+	&__name
+		font-size 1.4rem
+		span
+			display block
+			benton()
+			+mq('bp-2')
+				display inline-block
+		&--number
+			font-size 2rem
+			margin-right 0.25em
+			benton()
+		&--center
+			text-align center
+			font-size 1.2rem
+			color set-gray('medium')
+			padding 0 0.5em
+			span
+				display block
+				+mq('bp-2')
+					display inline-block
+		&:last-of-type
+			text-align right
