@@ -18,10 +18,6 @@ import { getSenateReport } from './../utils/dataUtil.js'
 import getStatesShapefile from './../utils/getStatesShapefile.js'
 import nameUtil from './../utils/nameUtil.js'
 import swingStatesSelection from './../../data/swing-states.json'
-import {
-	senateIsComplete,
-	racesAreComplete,
-} from './../utils/completenessUtil.js'
 
 const STATES = getStatesShapefile()
 
@@ -45,18 +41,6 @@ class Election extends Component {
 
 	static apiUrl() {
 		return url
-	}
-
-	static areAllRacesComplete(results) {
-
-		// Get the reports.
-		const reports = _.get(results, 'data.reports', {})
-
-		// Get all the races.
-		const races = _.get(results, 'data.races', [])
-
-		return senateIsComplete(reports) && racesAreComplete(races)
-
 	}
 
 	render() {

@@ -1,8 +1,13 @@
+import _ from 'lodash'
 import React, { Component, PropTypes } from 'react'
 import { provideHooks } from 'redial'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import * as actions from './../actions/actionCreators.js'
+import {
+	reportsAreComplete,
+	racesAreComplete,
+} from './../utils/completenessUtil.js'
 
 const connectToApi = (WrappedComponent) => {
 
@@ -42,10 +47,18 @@ const connectToApi = (WrappedComponent) => {
 			const { props } = this
 			const { startTimer, cancelTimer } = props.actions
 
-			// did we stop fetching?
+			// Did we stop fetching?
 			if (prevProps.results.isFetching && !props.results.isFetching) {
 
-				if (WrappedComponent.areAllRacesComplete(props.results)) {
+				// Get the races and reports,
+				const races = _.get(props.results, 'data.races', [])
+				const reports = _.get(props.results, 'data.reports', [])
+
+				// and check that they are both complete.
+				const complete = racesAreComplete(races) &&
+					reportsAreComplete(reports)
+
+				if (complete) {
 					cancelTimer()
 				} else {
 					startTimer()
