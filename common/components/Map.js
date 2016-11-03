@@ -550,7 +550,10 @@ class Map extends Component {
 			.value())
 
 		const button = (buttonText && buttonUrl) ?
-			<LinkButton text={`Switch to ${buttonText}`} url={buttonUrl} isSecondary /> : null
+			(<LinkButton
+				text={`Switch to ${buttonText}`}
+				url={buttonUrl}
+				isSecondary />) : null
 
 		return (
 			<div className='map-component'>
