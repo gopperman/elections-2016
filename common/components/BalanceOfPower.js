@@ -9,7 +9,7 @@ import deepEqual from 'deep-equal'
 import { buildSeatsWithHoldovers } from './../utils/visUtils.js'
 import LinkButton from './LinkButton.js'
 import urlManager from './../utils/urlManager.js'
-import MapLegend from './MapLegend.js'
+import Legend from './Legend.js'
 
 // Set width (this is an arbitrary number, but 100 is convenient).
 const WIDTH = 100
@@ -161,7 +161,7 @@ class BalanceOfPower extends Component {
 						</p>
 					</li>
 				</ul>
-				<MapLegend
+				<Legend
 					parties={['dem', 'gop', 'ind']}
 					choices={['undecided', 'win']} />
 				<dl className='sublegend'>

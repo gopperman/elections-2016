@@ -15,7 +15,7 @@ import {
 	toSentenceCase,
 	toTitleCase,
 } from './../utils/standardize.js'
-import MapLegend from './MapLegend.js'
+import Legend from './Legend.js'
 import svgs from './../utils/svgs.js'
 import { getViewBoxDimensions } from './../utils/svgUtils.js'
 import LinkButton from './../components/LinkButton.js'
@@ -590,7 +590,7 @@ class Map extends Component {
 						</div>
 					</div>
 				</div>
-				<MapLegend isPresidential={isPresidential} parties={parties} />
+				<Legend isPresidential={isPresidential} parties={parties} />
 			</div>
 		)
 

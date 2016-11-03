@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { standardizeParty } from './../utils/standardize.js'
 import LegendItem from './LegendItem.js'
 
-const MapLegend = ({ parties, isPresidential,
+const Legend = ({ parties, isPresidential,
 choices = ['lead', 'win', 'none', 'tie'] }) => {
 
 	const options = {
@@ -82,10 +82,10 @@ choices = ['lead', 'win', 'none', 'tie'] }) => {
 
 }
 
-MapLegend.propTypes = {
+Legend.propTypes = {
 	parties: PropTypes.array.isRequired,
 	choices: PropTypes.array,
 	isPresidential: PropTypes.bool,
 }
 
-export default MapLegend
+export default Legend
