@@ -1,23 +1,21 @@
 import _ from 'lodash'
-import { getSenateReport } from './dataUtil.js'
+import getReports from './getReports.js'
 
-const senateIsComplete = (reports) => {
+const reportsAreComplete = (reports) =>
 
-	// Get the Senate report.
-	const senateData = getSenateReport(reports)
-
-	// Get the total number of leading seats.
-	const leadingSenateSeats =
-		_.get(senateData, 'dem.leading', 0) +
-		_.get(senateData, 'gop.leading', 0) +
-		_.get(senateData, 'ind.leading', 0)
-
-	// Senate report is complete when there are no leading seats.
-	return leadingSenateSeats === 0
-
-}
+	// For each report,
+	_(getReports(reports))
+		// get all the leading seats,
+		.map(v =>
+			_.get(v, 'dem.leading', 0) +
+			_.get(v, 'gop.leading', 0) +
+			_.get(v, 'ind.leading', 0)
+		)
+		// and check that they all are 0.
+		.every(v => v === 0)
 
 const racesAreComplete = (races) =>
+
 	// For each race,
 	_(races)
 		// grab its reportingUnits,
@@ -30,6 +28,6 @@ const racesAreComplete = (races) =>
 		.every(v => v === 100)
 
 export {
-	senateIsComplete,
+	reportsAreComplete,
 	racesAreComplete,
 }

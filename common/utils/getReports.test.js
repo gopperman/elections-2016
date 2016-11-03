@@ -18,23 +18,26 @@ describe('getReport', () => {
 
 		const input = getReports(reports)
 
-		const output = {
-			S: {
+		const output = [
+			{
+				officeType: 'S',
 				dem: { won: 10, leading: 0, holdovers: 34 },
 				gop: { won: 23, leading: 1, holdovers: 30 },
 				ind: { won: 0, leading: 0, holdovers: 2 },
 			},
-			H: {
+			{
+				officeType: 'H',
 				dem: { won: 192, leading: 1, holdovers: 0 },
 				gop: { won: 238, leading: 1, holdovers: 0 },
 				ind: { won: 3, leading: 0, holdovers: 0 },
 			},
-			G: {
+			{
+				officeType: 'G',
 				dem: { won: 7, leading: 0, holdovers: 10 },
 				gop: { won: 5, leading: 0, holdovers: 27 },
 				ind: { won: 0, leading: 0, holdovers: 1 },
 			},
-		}
+		]
 
 		assert.deepEqual(input, output)
 

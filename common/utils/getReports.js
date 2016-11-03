@@ -37,11 +37,12 @@ const getReports = (reports) => {
 		.flatten()
 		.map('report.trendtable')
 		.map(v => ({
-			[v.OfficeTypeCode]: prepareReport(v),
+			officeType: v.OfficeTypeCode,
+			...prepareReport(v),
 		}))
 		.value()
 
-	return _.assign.apply(null, allReports)
+	return allReports
 
 }
 
