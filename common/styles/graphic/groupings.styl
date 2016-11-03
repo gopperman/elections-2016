@@ -23,6 +23,16 @@
 	// 	margin-right 1.5em
 	.r-block__name--small
 		text-align center
+	&--circle
+		@extends .r-row
+		// max-width 40rem
+		// margin 2em auto
+		flex-wrap wrap
+		justify-content space-between
+		> *
+			padding 0.25em 0.5em
+		// border-bottom 3px solid set-gray('lightest')
+		// padding-bottom 1em
 	&--full
 		@extends .r-row
 		flex-direction column

@@ -75,6 +75,8 @@ $btn
 	margin 0 auto
 	> *:not(:first-child)
 		margin-bottom 4em
+	> *:only-of-type
+		margin-bottom 3em
 
 .container-downpage
 	background-color set-gray('lightest')
@@ -82,3 +84,8 @@ $btn
 	padding-top 2em
 	> *
 		padding-bottom 4em
+
+.container-inset
+	// background-color set-gray('lightest')
+	padding-top 2em
+	box-shadow inset  0  8px 15px -8px set-gray('medium')

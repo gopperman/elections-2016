@@ -119,15 +119,18 @@ class Election extends Component {
 				<main id='content'>
 					<Hero title='Election Home' className='lead-img' isElectionCtrl />
 
-					<div className='container-sm'>
+					<div>
 
 						<Timer {...timerProps} />
-
-						<ElectoralCollegeBar {...presSummaryUnit} />
+						 <div className='container-sm'>
+							<ElectoralCollegeBar {...presSummaryUnit} />
+						</div>
 					</div>
-					<div className='container-lg'>
-						<SwingStates states={swingStates} />
-						{map}
+					<div className='container-inset'>
+						<div className='container-lg'>
+							{map}
+							<SwingStates states={swingStates} />
+						</div>
 					</div>
 					<div className='container-downpage'>
 						<div className='container-lg'>
