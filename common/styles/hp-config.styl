@@ -6,6 +6,16 @@ $assets-path = 'https://apps.bostonglobe.com/election-results/2016/general/asset
 @require 'base/variables'
 @require 'base/helpers'
 @require 'base/unicode'
+// Button
+$btn
+	display inline-block
+	text-align center
+	overflow visible
+	vertical-align middle
+	border none
+	text-decoration none
+	transition 0.2s ease-in-out all
+
 //=======================
 // Custom styles
 //=======================
@@ -17,5 +27,12 @@ $assets-path = 'https://apps.bostonglobe.com/election-results/2016/general/asset
 	.benton-regular
 		font-family $sans
 		font-weight 400
+	// Various hides
+	.hide-accessible
+		hidden(accessible)
+	.hide-invisible
+		hidden(invisible)
+	.hide-display
+		hidden()
 	// Town by town
 	@require './../../node_modules/react-select/dist/react-select.css'

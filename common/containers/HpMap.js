@@ -93,6 +93,8 @@ class PresidentUS extends Component {
 			dropdownName='state'
 			displayName='stateName'
 			isPresidential
+			buttonText='TK TK TK'
+			buttonUrl='#'
 			labelsName='STUSPS' />) : null
 
 		// Finally we can render all the components!
@@ -104,11 +106,6 @@ class PresidentUS extends Component {
 				<Timer {...timerProps} />
 
 				{map}
-
-				<LinkButton
-					text={nameUtil.presidentMA.name()}
-					url={urlManager.race({ officeName: 'President',
-						statePostal: 'MA' })} />
 
 			</div>
 		)
