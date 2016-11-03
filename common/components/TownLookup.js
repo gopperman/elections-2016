@@ -38,13 +38,19 @@ class TownLookup extends Component {
 				placeholder='Select a town...'
 				value={this.state.value}
 				searchable
+				id='town-select'
 				className='form__select benton-bold'
 				onChange={this.onChange}
 				options={getTownList().map(v => ({ value: v, label: v }))} /> :
 			null
 
 		return (
-			<div>{select}</div>
+			<div className='container-select'>
+				<label
+					htmlFor='town-select'
+					className='benton-bold form__label form__label--overline'>Find your town results</label>
+					{select}
+			</div>
 		)
 
 	}
