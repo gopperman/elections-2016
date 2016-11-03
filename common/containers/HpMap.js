@@ -5,7 +5,6 @@ import connectToApi from './connectToApi.js'
 import Timer from './../components/Timer.js'
 import Map from './../components/Map.js'
 import TestStatus from './../components/TestStatus.js'
-import LinkButton from './../components/LinkButton.js'
 import urlManager from './../utils/urlManager.js'
 import nameUtil from './../utils/nameUtil.js'
 
@@ -30,7 +29,7 @@ const STATES = getStatesShapefile()
 const url = '2016-11-08?officeID=P'
 
 @connectToApi
-class PresidentUS extends Component {
+class HpMap extends Component {
 
 	static getTitle() {
 		return ''
@@ -93,8 +92,8 @@ class PresidentUS extends Component {
 			dropdownName='state'
 			displayName='stateName'
 			isPresidential
-			buttonText='TK TK TK'
-			buttonUrl='#'
+			buttonText={nameUtil.presidentUS.name()}
+			buttonUrl={urlManager.base()}
 			labelsName='STUSPS' />) : null
 
 		// Finally we can render all the components!
@@ -114,5 +113,5 @@ class PresidentUS extends Component {
 
 }
 
-export default PresidentUS
+export default HpMap
 
