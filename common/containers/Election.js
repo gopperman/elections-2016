@@ -14,7 +14,7 @@ import SwingStates from './../components/SwingStates.js'
 import { sortByElectoralCount } from './../utils/Candidates.js'
 import FeatureGroup from './../components/FeatureGroup.js'
 import urlManager from './../utils/urlManager.js'
-import { getSenateReport } from './../utils/dataUtil.js'
+import getReports from './../utils/getReports.js'
 import getStatesShapefile from './../utils/getStatesShapefile.js'
 import nameUtil from './../utils/nameUtil.js'
 import swingStatesSelection from './../../data/swing-states.json'
@@ -48,14 +48,18 @@ class Election extends Component {
 		const { props } = this
 		const { timerProps, results } = props
 
-		// Get the data - or an empty object.
-		const data = results.data || {}
+		// Get the reports.
+		const reports = _.get(results, 'data.reports', [])
 
 		// Get senate report data.
-		const bopData = getSenateReport(data.reports)
+		const senateReport =
+			_.find(getReports(reports), { officeType: 'S' })
+
+		const balanceOfPower = senateReport ?
+			<BalanceOfPower {...senateReport} displayLink /> : null
 
 		// Get all races.
-		const races = data.races || []
+		const races = _.get(results, 'data.races', [])
 
 		// Get all presidential races:
 		const presRaces = _(races)
@@ -129,7 +133,7 @@ class Election extends Component {
 								<span>Featured Races</span>
 							</h3>
 							<div className='r-row--full'>
-								<BalanceOfPower {...bopData} displayLink />
+								{balanceOfPower}
 								{featured}
 							</div>
 						</div>

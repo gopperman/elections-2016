@@ -8,7 +8,7 @@ describe('getReport', () => {
 
 	it('should work with empty data', () => {
 
-		assert.deepEqual(getReports(), {})
+		assert.deepEqual(getReports([]), [])
 
 	})
 
