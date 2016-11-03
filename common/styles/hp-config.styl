@@ -6,18 +6,16 @@ $assets-path = 'https://apps.bostonglobe.com/election-results/2016/general/asset
 @require 'base/variables'
 @require 'base/helpers'
 @require 'base/unicode'
-
-// Homepage fonts
-benton()
-	font-family "Benton Sans Bold", Helvetica, Arial, sans-serif
-	font-weight bold
-
 //=======================
 // Custom styles
 //=======================
 .election-graphic
-	font-family $sans
 	@require 'homepage/*'
-
+	.benton-bold
+		font-family "Benton Sans Bold", Helvetica, Arial, sans-serif
+		font-weight 700
+	.benton-regular
+		font-family $sans
+		font-weight 400
 	// Town by town
 	@require './../../node_modules/react-select/dist/react-select.css'

@@ -3,7 +3,6 @@
 //========================
 
 .r-table
-	max-width 40rem
 	margin 0 auto
 	width 100%
 	position relative
@@ -13,11 +12,11 @@
 	&__row:nth-of-type(even)
 		background-color set-gray('lightest')
 	&__square
-		width 1em
-		height 1em
-		margin-bottom 0.5em
+		width 1.2rem
+		height 1.2rem
+		margin-bottom 0.75rem
 		float left
-		margin-right 0.25em
+		margin-right 0.5rem
 	&__cell
 		vertical-align top
 		padding 0.5em 1em
@@ -34,10 +33,10 @@
 
 			line-height 1.5
 			&:not(:last-child)
-				font-size 0.8em
+				font-size 1.2rem
 				+mq('bp-2')
-					font-size 1em
+					font-size 1.3em
 			&:last-child
-				font-size 0.7em
+				font-size 1.2rem
 				+mq('bp-2')
-					font-size 0.8em
+					font-size 1.3rem

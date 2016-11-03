@@ -7,8 +7,9 @@
 	.map__tools
 		display flex
 		justify-content space-between
-		margin-bottom 2em
 		flex-direction column
+		max-width 60rem
+		margin 0 auto 3rem auto
 		+mq('bp-2')
 			flex-direction row
 		a
@@ -25,14 +26,15 @@
 				width 100%
 				max-width 100%
 				order 2
+				margin 0
 				+mq('bp-2')
-					max-width 25rem
+					max-width 30rem
 					order 1
 		.map__select
 			margin 0 auto
 			text-align center
 			width 100%
-			max-width 30rem
+			max-width 40rem
 			select
 				border 3px solid set-gray('lightest')
 				height 4rem

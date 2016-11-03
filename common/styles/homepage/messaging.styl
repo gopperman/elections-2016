@@ -62,7 +62,6 @@
 	margin-bottom 1em
 	&__update
 		font-size 1.1rem
-		benton()
 
 // Update
 .update
@@ -80,7 +79,7 @@
 // Tooltip
 .map-component .tooltip-wrapper
 	cursor default
-	width 22em
+	width 40rem
 	position absolute
 	top 0
 	left 0
@@ -96,7 +95,7 @@
 	.tooltip
 		box-shadow 0 0 5px set-gray('medium')
 		border-radius 3px
-		padding 1em
+		padding 1.8rem
 		margin 0
 		background-color white
 		position relative
@@ -104,20 +103,23 @@
 
 		&__button
 			position absolute
-			font-size 2em
+			font-size 1.5rem
 			right 0.5em
+			top 1em
 			pointer-events all
 			background-color transparent
 			border none
 			svg
 				display block
+		.r-table
+			margin-top 2rem
 
 		@media (max-width: 40em)
 			// pin to bottom
 			position fixed
 			bottom 0
 			left 0 !important
-			width 100%
+			right 0
 
 // Flash if updated
 // .is-updated

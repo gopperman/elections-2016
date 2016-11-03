@@ -1,0 +1,31 @@
+//========================
+// Buttons
+//========================
+
+.btn--primary, .btn--primary:visited
+	@extends $btn
+	border none
+	background-color set-gray('darkest')
+	color white
+	padding 1em
+	box-shadow 7px 7px 0px 1px set-gray('light')
+	font-size 1.2rem
+	+mq('bp-2')
+		font-size 1.4rem
+	&:hover, &:active
+		color white
+		box-shadow none
+
+.btn--secondary, .btn--secondary:visited
+	@extends $btn
+	border 1px solid set-gray('lightest')
+	background-color white
+	color set-gray('darkest')
+	padding 1em
+	box-shadow 7px 7px 0px 1px set-gray('lightest')
+	font-size 1.2rem
+	+mq('bp-2')
+		font-size 1.4rem
+	&:visited, &:hover, &:active
+		color set-gray('darkest')
+		box-shadow none
