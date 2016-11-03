@@ -200,6 +200,8 @@ class Map extends Component {
 		const svg = select(this._svg)
 			.attr('viewBox', `0 0 ${width} ${height}`)
 			.classed('insetted', !!subsetFeature)
+			.attr('width', width)
+			.attr('height', height)
 
 		// Create features group.
 		svg.append('g').attr('class', 'features')
