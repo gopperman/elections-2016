@@ -2,7 +2,7 @@
 
 import assert from 'assert'
 import { readFileSync } from 'jsonfile'
-import getReports from './getReport.js'
+import getReports from './getReports.js'
 
 describe('getReport', () => {
 
