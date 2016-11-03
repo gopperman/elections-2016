@@ -119,18 +119,18 @@ class Election extends Component {
 						title='Election Home'
 						className='lead-img'
 						isElectionCtrl />
-					<div>
-						<Timer {...timerProps} />
+					<Timer {...timerProps} />
+					<div className='container-inset'>
 						<div className='container-sm'>
 							<ElectoralCollegeBar {...presSummaryUnit} />
 						</div>
 					</div>
-					<div className='container-inset'>
-						<div className='container-lg'>
-							{map}
-							<SwingStates states={swingStates} />
-							<Legend isPresidential races={presStates} />
-						</div>
+					<div className='container-lg'>
+						{map}
+					</div>
+					<div className='container-sm'>
+						<SwingStates states={swingStates} />
+						<Legend isPresidential races={presStates} />
 					</div>
 					<div className='container-downpage'>
 						<div className='container-lg'>

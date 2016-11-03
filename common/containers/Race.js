@@ -88,17 +88,22 @@ class Race extends Component {
 
 				<main id='content'>
 					<Hero className='lead-ma-map' title={nameUtil.race.name(race)} />
-					<div className='container-sm'>
-						<Timer {...timerProps} />
+					<Timer {...timerProps} />
 
-						<ResultGroup
-							numWinners={race.numWinners}
-							overline={nameUtil.race.name(race)}
-							precinctsReportingPct={state.precinctsReportingPct}
-							candidates={summaryCandidates} />
+					<div className='container-inset'>
+						<div className='container-sm'>
+							<ResultGroup
+								numWinners={race.numWinners}
+								overline={nameUtil.race.name(race)}
+								precinctsReportingPct={state.precinctsReportingPct}
+								candidates={summaryCandidates} />
+						</div>
 					</div>
+
 					<div className='container-lg'>
 						{map}
+					</div>
+					<div className='container-sm'>
 						<Legend isPresidential={false} races={towns} />
 					</div>
 

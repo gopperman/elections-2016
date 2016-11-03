@@ -118,14 +118,17 @@ class PresidentUS extends Component {
 				<Header />
 				<main id='content'>
 					<Hero className='lead-img' title={nameUtil.presidentUS.name()} />
-
-					<div className='container-sm'>
-						<Timer {...timerProps} />
-						<ElectoralCollegeBar {...summaryState} />
+					<Timer {...timerProps} />
+					<div className='container-inset'>
+						<div className='container-sm'>
+							<ElectoralCollegeBar {...summaryState} />
+						</div>
 					</div>
 					<div className='container-lg'>
-						<SwingStates states={swingStates} />
 						{map}
+					</div>
+					<div className='container-sm'>
+						<SwingStates states={swingStates} />
 						<Legend isPresidential races={states} />
 					</div>
 					<div className='container-downpage'>

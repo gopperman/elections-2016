@@ -109,14 +109,19 @@ class PresidentMA extends Component {
 						className='lead-img'
 						title={nameUtil.presidentMA.htmlTitle()} />
 
-					<div className='container-sm'>
-						<Timer {...timerProps} />
-						<ElectoralCollegeBar {...usUnit} />
+					<Timer {...timerProps} />
+					<div className='container-inset'>
+						<div className='container-sm'>
+							<ElectoralCollegeBar {...usUnit} />
+						</div>
 					</div>
 					<div className='container-lg'>
 						{map}
+					</div>
+					<div className='container-sm'>
 						<Legend isPresidential={false} races={towns} />
 					</div>
+
 					<div className='container-downpage'>
 						<TownResultsTable
 							{...{ towns, summaryCandidates: summaryTownCandidates }} />

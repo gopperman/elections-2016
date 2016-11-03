@@ -95,8 +95,8 @@ class Office extends Component {
 					<Hero
 						className={heroClass}
 						title={title} />
+					<Timer {...timerProps} />
 					<div className='container-sm'>
-						<Timer {...timerProps} />
 						{bop}
 						{raceBlocks}
 					</div>

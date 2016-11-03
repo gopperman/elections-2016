@@ -77,13 +77,11 @@ class Town extends Component {
 						className='lead-ma-map'
 						title={nameUtil.town.htmlTitle(params)} />
 
+					<Timer {...timerProps} />
 					<div className='container-sm'>
-
-						<Timer {...timerProps} />
-
 						{raceBlocks}
-
 					</div>
+
 
 				</main>
 
