@@ -78,7 +78,6 @@ const fetchResults = ({ url }) =>
 			fullUrl = `${process.env.API_URL}/electionapi/elections/${url}`
 
 		} else {
-			console.log('hello')
 			// Finally, if we're on dev, use localhost:3001/api.
 			fullUrl = `http://localhost:3001/api/${url}`
 
