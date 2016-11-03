@@ -33,7 +33,7 @@ const url = '2016-11-08?officeID=P'
 class PresidentUS extends Component {
 
 	static getTitle() {
-		return nameUtil.presidentUS.htmlTitle()
+		return ''
 	}
 
 	static apiUrl() {
@@ -97,7 +97,7 @@ class PresidentUS extends Component {
 
 		// Finally we can render all the components!
 		return (
-			<div className='president-is-open'>
+			<div className='election-graphic'>
 
 				<TestStatus isTest={isTest} />
 
