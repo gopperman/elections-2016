@@ -6,7 +6,7 @@ import _ from 'lodash'
 import React, { Component, PropTypes } from 'react'
 import { select } from 'd3-selection'
 import deepEqual from 'deep-equal'
-import { buildSeatsWithHoldovers } from './../utils/visUtils.js'
+import { buildSeats } from './../utils/visUtils.js'
 import LinkButton from './LinkButton.js'
 import urlManager from './../utils/urlManager.js'
 import Legend from './Legend.js'
@@ -89,7 +89,7 @@ class BalanceOfPower extends Component {
 
 		// Build the matrix of seats.
 		const seats =
-			buildSeatsWithHoldovers({ dem, gop, ind, total: 100, rows: ROWS })
+			buildSeats({ dem, gop, ind, total: 100, rows: ROWS })
 
 		// Get the number of columns.
 		const columns = _(seats)
