@@ -46,9 +46,9 @@ class HpElectoralCollege extends Component {
 
 				<TestStatus isTest={isTest} />
 
-					<Timer {...timerProps} />
+				<Timer {...timerProps} />
 
-					<ElectoralCollegeBar {...summaryUnit} />
+				<ElectoralCollegeBar {...summaryUnit} />
 
 			</div>
 		)
