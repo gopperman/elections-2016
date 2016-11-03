@@ -7,6 +7,7 @@ import Map from './../components/Map.js'
 import TestStatus from './../components/TestStatus.js'
 import urlManager from './../utils/urlManager.js'
 import nameUtil from './../utils/nameUtil.js'
+import Legend from './../components/Legend.js'
 
 import {
 	sortByElectoralCount,
@@ -105,6 +106,7 @@ class HpMap extends Component {
 				<Timer {...timerProps} />
 
 				{map}
+				<Legend isPresidential races={states} />
 
 			</div>
 		)

@@ -9,7 +9,7 @@ import deepEqual from 'deep-equal'
 import { buildSeatsWithHoldovers } from './../utils/visUtils.js'
 import LinkButton from './LinkButton.js'
 import urlManager from './../utils/urlManager.js'
-import MapLegend from './MapLegend.js'
+import Legend from './Legend.js'
 
 // Set width (this is an arbitrary number, but 100 is convenient).
 const WIDTH = 100
@@ -144,24 +144,31 @@ class BalanceOfPower extends Component {
 					</li>
 					<li className='chart-meta__item'>
 						<p className='chart-meta__info'>
-							<abbr title='Republicans' className='benton-regular'>Gop</abbr>
+							<abbr
+								title='Republicans'
+								className='benton-regular'>Gop</abbr>
 							<span className='benton-bold color-gop'>{gopTotal}</span>
 						</p>
 					</li>
 					<li className='chart-meta__item'>
 						<p className='chart-meta__info'>
-							<abbr title='Independents' className='benton-regular'>Ind</abbr>
+							<abbr
+								title='Independents'
+								className='benton-regular'>Ind</abbr>
 							<span className='benton-bold color-ind'>{indTotal}</span>
 						</p>
 					</li>
 					<li className='chart-meta__item'>
 						<p className='chart-meta__info'>
-							<abbr title='Undecideds' className='benton-regular'>Undecided</abbr>
-							<span className='benton-bold color-undecided'>{undecideds}</span>
+							<abbr
+								title='Undecideds'
+								className='benton-regular'>Undecided</abbr>
+							<span
+								className='benton-bold color-undecided'>{undecideds}</span>
 						</p>
 					</li>
 				</ul>
-				<MapLegend
+				<Legend
 					parties={['dem', 'gop', 'ind']}
 					choices={['undecided', 'win']} />
 				<dl className='sublegend'>

@@ -14,6 +14,7 @@ import Map from './../components/Map.js'
 import getTownsShapefile from './../utils/getTownsShapefile.js'
 import urlManager from './../utils/urlManager.js'
 import nameUtil from './../utils/nameUtil.js'
+import Legend from './../components/Legend.js'
 
 const TOWNS = getTownsShapefile()
 
@@ -98,6 +99,7 @@ class Race extends Component {
 					</div>
 					<div className='container-lg'>
 						{map}
+						<Legend isPresidential={false} races={towns} />
 					</div>
 
 					<div className='container-downpage'>

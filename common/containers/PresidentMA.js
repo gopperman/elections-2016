@@ -17,6 +17,7 @@ import {
 	sortByVoteCount,
 	sortByCandidateIDs,
 } from './../utils/Candidates.js'
+import Legend from './../components/Legend.js'
 
 const TOWNS = getTownsShapefile()
 
@@ -114,6 +115,7 @@ class PresidentMA extends Component {
 					</div>
 					<div className='container-lg'>
 						{map}
+						<Legend isPresidential={false} races={towns} />
 					</div>
 					<div className='container-downpage'>
 						<TownResultsTable
