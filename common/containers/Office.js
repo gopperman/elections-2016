@@ -42,17 +42,16 @@ class Office extends Component {
 		const { props } = this
 		const { results, timerProps, params } = props
 
-		// Get the data - or an empty object.
-		const data = results.data || {}
+		// Get races.
+		const unsortedRaces = _.get(results, 'data.races', [])
 
-		// Get API results.
-		const races = _.sortBy(data.races || [], 'seatName')
+		const sortedRaces = _.sortBy(unsortedRaces, 'seatName')
 
 		// Get test status.
-		const isTest = _.some(data.races, 'test')
+		const isTest = _.some(sortedRaces, 'test')
 
 		// Create result blocks for all races of this office type.
-		const raceBlocks = races.map((race, i) => {
+		const raceBlocks = sortedRaces.map((race, i) => {
 
 			const stateUnit =
 				_.find(race.reportingUnits, { level: 'state' }) || {}
@@ -80,7 +79,7 @@ class Office extends Component {
 		let bop = null
 		if (title === 'US Senate') {
 
-			const bopData = senateTrendReport(races)
+			const bopData = senateTrendReport(sortedRaces)
 			bop = <BalanceOfPower {...bopData} displayLink={false} />
 
 		}

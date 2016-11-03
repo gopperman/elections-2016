@@ -50,18 +50,11 @@ class PresidentUS extends Component {
 		const { props } = this
 		const { results, timerProps } = props
 
-		// Get the data - or an empty object.
-		const data = results.data || {}
+		// Get races.
+		const races = _.get(results, 'data.races', [])
 
-		// Get all races.
-		const races = data.races || []
-
-		// Get US race:
-		const allStates = races
-			// return the first item of reportingUnits,
-			.map(v => (v.reportingUnits || [])[0])
-			// and don't include null items.
-			.filter(v => v)
+		// Get US race.
+		const allStates = _.map(races, 'reportingUnits[0]')
 
 		// Get test status.
 		const isTest = _.some(races, 'test')

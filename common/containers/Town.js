@@ -38,19 +38,16 @@ class Town extends Component {
 		const { props } = this
 		const { results, params, timerProps } = props
 
-		// Get the data - or an empty object.
-		const data = results.data || {}
-
-		// Get API results.
-		const races = data.races || []
+		// Get races.
+		const races = _.get(results, 'data.races', [])
 
 		// Get test status.
-		const isTest = _.some(data.races, 'test')
+		const isTest = _.some(races, 'test')
 
 		// Create result blocks for all the town races.
 		const raceBlocks = races.map((race, i) => {
 
-			const stateUnit = (race.reportingUnits || [])[0] || {}
+			const stateUnit = _.get(race, 'reportingUnits[0]', {})
 
 			const candidates = stateUnit.candidates || []
 

@@ -48,23 +48,17 @@ class Race extends Component {
 		const { props } = this
 		const { results, timerProps } = props
 
-		// Get the data - or an empty object.
-		const data = results.data || {}
-
-		// Get API results.
-		const race = data.races && data.races.length ? data.races[0] : {}
+		// Get race.
+		const race = _.get(results, 'data.races[0]', {})
 
 		// Get test status.
-		const isTest = _.some(data.races, 'test')
+		const isTest = !!race.test
 
 		// Get state.
-		const state =
-			_.find(race.reportingUnits, { level: 'state' }) || {}
+		const state = _.find(race.reportingUnits, { level: 'state' }) || {}
 
 		// Get towns.
-		const towns = _(race.reportingUnits)
-			.filter({ level: 'subunit' })
-			.value()
+		const towns = _.filter(race.reportingUnits, { level: 'subunit' })
 
 		// Get summary candidates.
 		const summaryCandidates = sortByVoteCount(state.candidates || [])

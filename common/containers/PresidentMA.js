@@ -47,11 +47,8 @@ class PresidentMA extends Component {
 		const { props } = this
 		const { results, timerProps } = props
 
-		// Get the data - or an empty object.
-		const data = results.data || {}
-
-		// Get API results.
-		const races = data.races || []
+		// Get races.
+		const races = _.get(results, 'data.races', [])
 
 		// Get test status.
 		const isTest = _.some(races, 'test')
@@ -107,7 +104,9 @@ class PresidentMA extends Component {
 
 				<Header summaryState={usUnit} />
 				<main id='content'>
-					<Hero className='lead-img' title={nameUtil.presidentMA.htmlTitle()} />
+					<Hero
+						className='lead-img'
+						title={nameUtil.presidentMA.htmlTitle()} />
 
 					<div className='container-sm'>
 						<Timer {...timerProps} />
