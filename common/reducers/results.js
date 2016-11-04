@@ -11,7 +11,7 @@ const initialState = {
 
 export default(state = initialState, action) => {
 
-	const { type, data, url, error } = action
+	const { type, data, breakingNews, url, error } = action
 
 	console.log(`${process.env.HP_CONTAINER} fired action ${type}`)
 
@@ -30,6 +30,7 @@ export default(state = initialState, action) => {
 			return _.omit({
 				...state,
 				data,
+				breakingNews,
 				isFetching: false,
 			}, 'error')
 
