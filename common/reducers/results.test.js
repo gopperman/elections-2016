@@ -49,6 +49,7 @@ describe('results reducer', () => {
 				data: {
 					key: 'myvalue',
 				},
+				breakingNews: ['hey'],
 			}
 
 			const finalState = {
@@ -58,6 +59,7 @@ describe('results reducer', () => {
 					data: {
 						key: 'myvalue',
 					},
+					breakingNews: ['hey'],
 				},
 			}
 
@@ -106,6 +108,7 @@ describe('results reducer', () => {
 					data: {
 						key: 'myvalue',
 					},
+					breakingNews: ['hey'],
 				},
 			}
 
@@ -121,6 +124,7 @@ describe('results reducer', () => {
 					data: {
 						key: 'myvalue',
 					},
+					breakingNews: ['hey'],
 				},
 			}
 
@@ -138,6 +142,7 @@ describe('results reducer', () => {
 					data: {
 						key: 'myvalue',
 					},
+					breakingNews: ['hey'],
 				},
 			}
 
@@ -153,6 +158,7 @@ describe('results reducer', () => {
 					data: {
 						key: 'myvalue',
 					},
+					breakingNews: ['hey'],
 					error: 'myerror',
 				},
 			}
@@ -171,6 +177,7 @@ describe('results reducer', () => {
 					data: {
 						key: 'myvalue',
 					},
+					breakingNews: ['hey'],
 					error: 'myerror',
 				},
 			}
@@ -180,6 +187,7 @@ describe('results reducer', () => {
 				data: {
 					my: 'data',
 				},
+				breakingNews: ['ho'],
 			}
 
 			const finalState = {
@@ -189,6 +197,7 @@ describe('results reducer', () => {
 					data: {
 						my: 'data',
 					},
+					breakingNews: ['ho'],
 				},
 			}
 
@@ -206,6 +215,7 @@ describe('results reducer', () => {
 						key: 'myvalue',
 					},
 					error: 'myerror',
+					breakingNews: ['hey'],
 				},
 			}
 
@@ -221,6 +231,7 @@ describe('results reducer', () => {
 					data: {
 						key: 'myvalue',
 					},
+					breakingNews: ['hey'],
 				},
 			}
 
