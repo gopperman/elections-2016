@@ -570,7 +570,7 @@ class Map extends Component {
 					<div className='tooltip-wrapper' ref={(c) => this._tooltip = c}>
 						<div className='r-block tooltip js-tooltip'>
 							<button
-								className='tooltip__button'
+								className='btn--close'
 								onClick={this.clearTooltip}
 								dangerouslySetInnerHTML={{ __html: svgs.closeSvg }} />
 							<div className='js-tooltip-content' />
