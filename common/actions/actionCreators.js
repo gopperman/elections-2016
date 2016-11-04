@@ -31,9 +31,10 @@ const fetchResultsRequest = ({ url }) => ({
 	url,
 })
 
-const fetchResultsSuccess = ({ data }) => ({
+const fetchResultsSuccess = ({ data, breakingNews }) => ({
 	type: FETCH_RESULTS_SUCCESS,
 	data,
+	breakingNews,
 })
 
 const fetchResultsFailure = ({ error }) => ({
@@ -83,17 +84,23 @@ const fetchResults = ({ url }) =>
 
 		}
 
-		return fetch(fullUrl)
-			.then(response => {
+		const getJson = (urlToFetch) =>
+			fetch(urlToFetch)
+				.then(response => {
+					// if error, bail out
+					if (response.status !== 200) throw new Error(response.statusText)
+					return response
+				})
+				.then(response => response.json())
 
-				// if error, bail out
-				if (response.status !== 200) throw new Error(response.statusText)
+		// Should be http://www.bostonglobe.com/bn_endpoint.json
+		const allUrls = [
+			fullUrl,
+			'http://devedit.bostonglobe.com/fragment/SysConfig/WebPortal/BostonGlobe/Framework/skins/leaf/story/bn_endpoint.jpt',
+		]
 
-				return response
-
-			})
-			.then(response => response.json())
-			.then(data => {
+		return Promise.all(allUrls.map(getJson))
+			.then(([data, breakingNews]) => {
 
 				// Did we not get any races?
 				if (!data || !data.races || !data.races.length) {
@@ -122,7 +129,7 @@ const fetchResults = ({ url }) =>
 				} else {
 
 					// We did get at least 1 race! Proceed.
-					return dispatch(fetchResultsSuccess({ data }))
+					return dispatch(fetchResultsSuccess({ data, breakingNews }))
 
 				}
 
@@ -156,7 +163,5 @@ export {
 	startTimer,
 	stopTimer,
 	cancelTimer,
-
 	fetchResults,
-
 }
