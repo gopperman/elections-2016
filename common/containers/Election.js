@@ -3,6 +3,7 @@ import { geoAlbersUsa } from 'd3-geo'
 import React, { Component } from 'react'
 import connectToApi from './connectToApi.js'
 import Timer from './../components/Timer.js'
+import BreakingBar from './../components/BreakingBar.js'
 import Header from './../components/Header.js'
 import Footer from './../components/Footer.js'
 import TestStatus from './../components/TestStatus.js'
@@ -51,6 +52,9 @@ class Election extends Component {
 
 		// Get the reports.
 		const reports = _.get(results, 'data.reports', [])
+
+		// Get breaking news
+		const breakingNews = _.first(results.breakingNews)
 
 		// Get senate report data.
 		const senateReport =
@@ -138,6 +142,7 @@ class Election extends Component {
 		return (
 			<div className='election-is-open'>
 				<TestStatus isTest={isTest} />
+				<BreakingBar {...breakingNews} />
 				<Header />
 				<main id='content'>
 					<Hero
