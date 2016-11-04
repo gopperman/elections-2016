@@ -546,7 +546,7 @@ class Map extends Component {
 
 		return (
 			<div className='map-component'>
-				<div className='map__tools container-sm'>
+				<div className='map__tools'>
 					{button}
 					<div className='map__select'>
 						<label

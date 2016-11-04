@@ -4,29 +4,35 @@
 
 .map-component
 	position relative
+	display flex
+	flex-direction column
+	+mq('bp-3')
+		flex-direction row
 	.map__tools
 		display flex
-		justify-content space-between
+		// justify-content space-between
 		margin-bottom 2em
 		flex-direction column
-		+mq('bp-2')
-			flex-direction row
+		+mq('bp-3')
+			width 30%
+			margin-right 2em
+		// 	flex-direction row
 		a
 			display block
 			order 1
-			max-width 20rem
+			width 100%
+			max-width 25rem
 			align-self center
 			margin 0 0 2.5em 0
-			+mq('bp-2')
+			+mq('bp-3')
 				order 2
-				margin 0 0 1em 2em
+				margin 1.5em 0 0 0
 			+ .map__select
 				text-align left
 				width 100%
-				max-width 100%
+				max-width 25rem
 				order 2
-				+mq('bp-2')
-					max-width 25rem
+				+mq('bp-3')
 					order 1
 		.map__select
 			margin 0 auto
@@ -36,7 +42,7 @@
 			select
 				border 3px solid set-gray('lightest')
 				height 3rem
-				+mq('bp-2')
+				+mq('bp-3')
 					height 3.5rem
 	// a
 	// 	float right
@@ -57,7 +63,9 @@
 
 	.map-wrappers
 		position relative
-
+		width 100%
+		+mq('bp-3')
+			width 70%
 	.full-map,
 	.inset-map
 		cursor default

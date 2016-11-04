@@ -107,7 +107,7 @@ class Race extends Component {
 					<div className='container-lg'>
 						{map}
 					</div>
-					<div className='container-sm'>
+					<div className='container-lg'>
 						<Legend isPresidential={false} races={towns} />
 					</div>
 

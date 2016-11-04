@@ -153,7 +153,7 @@ class PresidentUS extends Component {
 					<div className='container-lg'>
 						{map}
 					</div>
-					<div className='container-sm'>
+					<div className='container-lg'>
 						<SwingStates states={swingStates} />
 						<Legend isPresidential races={states} />
 					</div>
