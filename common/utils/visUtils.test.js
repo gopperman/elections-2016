@@ -4,6 +4,7 @@ import assert from 'assert'
 import { readFileSync } from 'jsonfile'
 import {
 	buildSeats,
+	buildSeatsLite,
 	senateTrendReport,
 } from './visUtils.js'
 
@@ -31,6 +32,46 @@ describe('visUtils', () => {
 			const output = senateTrendReport(input.races)
 			assert.deepEqual(output, expected)
 		})
+	})
+
+	describe('buildSeatsLite', () => {
+
+		it('should return the correct data', () => {
+
+			const props = {
+				dem: { won: 3, holdovers: 2 },
+				ind: { won: 3, holdovers: 0 },
+				gop: { won: 2, holdovers: 5 },
+				total: 18,
+				rows: 3,
+			}
+
+			const expected = [
+				{ party: 'dem', isHoldover: true },
+				{ party: 'dem', isHoldover: false },
+				{ party: 'ind', isHoldover: false },
+				{ party: 'none', isHoldover: false },
+				{ party: 'gop', isHoldover: false },
+				{ party: 'gop', isHoldover: true },
+				{ party: 'dem', isHoldover: true },
+				{ party: 'dem', isHoldover: false },
+				{ party: 'ind', isHoldover: false },
+				{ party: 'none', isHoldover: false },
+				{ party: 'gop', isHoldover: true },
+				{ party: 'gop', isHoldover: true },
+				{ party: 'dem', isHoldover: false },
+				{ party: 'ind', isHoldover: false },
+				{ party: 'none', isHoldover: false },
+				{ party: 'gop', isHoldover: false },
+				{ party: 'gop', isHoldover: true },
+				{ party: 'gop', isHoldover: true },
+			]
+
+			const output = buildSeatsLite(props)
+			assert.deepEqual(output, expected)
+
+		})
+
 	})
 
 	describe('buildSeats', () => {

@@ -1,6 +1,7 @@
 /** @module */
 
 import _ from 'lodash'
+import { transpose } from 'd3-array'
 import { normalizeParty } from './standardize.js'
 
 /* Builds a senate trend report from a list of races
@@ -124,7 +125,37 @@ gop = { won: 0, holdovers: 0 } }) => {
 
 }
 
+const buildSeatsLite = ({ total = 0, rows = 0,
+dem = { won: 0, holdovers: 0 },
+ind = { won: 0, holdovers: 0 },
+gop = { won: 0, holdovers: 0 } }) => {
+
+	const none = total - (dem.won + dem.holdovers +
+		gop.won + gop.holdovers +
+		ind.won + ind.holdovers)
+
+	// Create an array of dem, ind, none, and gop, in that order.
+	const seats = [].concat(
+
+		_.range(dem.holdovers).map(() => ({ party: 'dem', isHoldover: true })),
+		_.range(dem.won).map(() => ({ party: 'dem', isHoldover: false })),
+
+		_.range(ind.holdovers).map(() => ({ party: 'ind', isHoldover: true })),
+		_.range(ind.won).map(() => ({ party: 'ind', isHoldover: false })),
+
+		_.range(none).map(() => ({ party: 'none', isHoldover: false })),
+
+		_.range(gop.won).map(() => ({ party: 'gop', isHoldover: false })),
+		_.range(gop.holdovers).map(() => ({ party: 'gop', isHoldover: true })),
+
+	)
+
+	return _.flatten(transpose(_.chunk(seats, rows)))
+
+}
+
 export {
+	buildSeatsLite,
 	buildSeats,
 	senateTrendReport,
 }

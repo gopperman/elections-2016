@@ -2,39 +2,30 @@
 
 /* eslint-disable no-return-assign */
 
-import _ from 'lodash'
 import React, { Component, PropTypes } from 'react'
 import { select } from 'd3-selection'
+import { scalePoint } from 'd3-scale'
+import { range } from 'd3-array'
 import deepEqual from 'deep-equal'
-import { buildSeats } from './../utils/visUtils.js'
+import { buildSeatsLite } from './../utils/visUtils.js'
+
 import LinkButton from './LinkButton.js'
 import urlManager from './../utils/urlManager.js'
 import Legend from './Legend.js'
 
-// Set width (this is an arbitrary number, but 100 is convenient).
 const WIDTH = 100
-
-// Set radius.
+const HEIGHT = WIDTH / 4
 const RADIUS = WIDTH * 0.02
 
-// Set number of rows.
-const ROWS = 5
-
-// Set distance from origin to first row.
-const x1 = (WIDTH / 2) * 0.6
-
-// Set distance between rows.
-const x2 = ((WIDTH / 2) - x1) / (ROWS - 1)
-
 // TODO: make sure it updates correctly
-// TODO: add a LinkButton with a link to the right race
-// TODO: add a result dual bar under balance of power
 class BalanceOfPower extends Component {
 
 	static propTypes = {
 		dem: PropTypes.object.isRequired,
 		gop: PropTypes.object.isRequired,
 		ind: PropTypes.object.isRequired,
+		rows: PropTypes.number.isRequired,
+		total: PropTypes.number.isRequired,
 		displayLink: PropTypes.bool.isRequired,
 	}
 
@@ -42,19 +33,28 @@ class BalanceOfPower extends Component {
 	// rendering occurs.
 	componentDidMount() {
 
-		const height = WIDTH / 2
+		const { rows, total } = this.props
+		this._columns = Math.ceil(total / rows)
 
-		// Set viewBox on svg.
+		const margin =
+			{ top: RADIUS, right: RADIUS, bottom: RADIUS, left: RADIUS }
+
+		const width = WIDTH - margin.left - margin.right
+		const height = HEIGHT - margin.top - margin.bottom
+
+		this._x = scalePoint().range([0, width]).domain(range(this._columns))
+		this._y = scalePoint().range([height, 0]).domain(range(rows))
+
+		// Set svg.
 		select(this._svg)
-				.attr('viewBox',
-					`0 0 ${WIDTH + (2 * RADIUS)} ${height + (2 * RADIUS)}`)
+				.attr('viewBox', `0 0 ${WIDTH} ${HEIGHT}`)
 			.append('g')
 				.attr('class', 'seats')
-				.attr('transform',
-					`translate(${(WIDTH / 2) + RADIUS}, ${height + RADIUS})`)
+				.attr('transform', `translate(${margin.left}, ${margin.top})`)
 
 		// Draw chart (although at this point we might not have data).
 		this.drawChart()
+
 	}
 
 	// This is invoked before rendering when new props or state are being
@@ -85,46 +85,41 @@ class BalanceOfPower extends Component {
 
 	drawChart = () => {
 
-		const { dem, gop, ind } = this.props
+		const { dem, gop, ind, total, rows } = this.props
 
 		// Build the matrix of seats.
-		const seats =
-			buildSeats({ dem, gop, ind, total: 100, rows: ROWS })
-
-		// Get the number of columns.
-		const columns = _(seats)
-			.map('column')
-			.max()
+		const seats = buildSeatsLite({ dem, gop, ind, total, rows })
 
 		// Select the svg node.
 		const svg = select(this._svg).select('g.seats')
 
 		// DATA JOIN
 		const circles = svg.selectAll('circle')
-			.data(seats, d => d.index)
+			.data(seats)
 
 		// ENTER + UPDATE
 		circles.enter()
 			.append('circle')
 			.merge(circles)
 				.attr('r', d => (d.isHoldover ? RADIUS / 2 : RADIUS))
-				.attr('cx', d => x1 + (d.seat * x2))
-				.attr('cy', 0)
-				.attr('transform', d =>
-					`scale(-1, 1) rotate(${d.column * (-180 / (columns))}, 0 0)`)
+				.attr('cx', (d, i) => this._x(i % this._columns))
+				.attr('cy', (d, i) => this._y(Math.floor(i / this._columns)))
 				.attr('class', d => `fill-winner-${d.party}`)
 
 		// EXIT
 		circles.exit().remove()
+
 	}
 
 	render() {
+
 		const { dem, gop, ind } = this.props
 		const { displayLink } = this.props
 		const demTotal = dem.won + dem.holdovers
 		const gopTotal = gop.won + gop.holdovers
 		const indTotal = ind.won + ind.holdovers
 		const undecideds = 100 - (demTotal + gopTotal + indTotal)
+
 		const link = (displayLink) ? (
 			<LinkButton
 				text='See full results'
@@ -180,6 +175,7 @@ class BalanceOfPower extends Component {
 				{link}
 			</div>
 		)
+
 
 	}
 
