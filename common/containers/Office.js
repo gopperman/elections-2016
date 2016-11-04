@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import _ from 'lodash'
 import connectToApi from './connectToApi.js'
 import Timer from './../components/Timer.js'
+import BreakingBar from './../components/BreakingBar.js'
 import Header from './../components/Header.js'
 import Footer from './../components/Footer.js'
 import TestStatus from './../components/TestStatus.js'
@@ -45,6 +46,9 @@ class Office extends Component {
 
 		const { props } = this
 		const { results, timerProps, params } = props
+
+		// Get breaking news
+		const breakingNews = _.first(results.breakingNews) || {}
 
 		// Get races.
 		const unsortedRaces = _.get(results, 'data.races', [])
@@ -96,7 +100,7 @@ class Office extends Component {
 			<div>
 
 				<TestStatus isTest={isTest} />
-
+				<BreakingBar {...breakingNews} />
 				<Header />
 
 				<main id='content'>
