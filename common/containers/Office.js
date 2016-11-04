@@ -84,12 +84,17 @@ class Office extends Component {
 		if (title === 'US Senate') {
 
 			const bopData = senateTrendReport(sortedRaces)
-			bop = (<BalanceOfPower
-				{...bopData}
-				total={100}
-				rows={5}
-				displayLink={false} />)
-
+			bop = (
+				<div className='container-inset'>
+					<div className='r-col bop-container'>
+						<BalanceOfPower
+						{...bopData}
+						total={100}
+						rows={5}
+						displayLink={false} />
+					</div>
+				</div>
+			)
 		}
 
 		return (
@@ -104,11 +109,7 @@ class Office extends Component {
 						className={heroClass}
 						title={title} />
 					<Timer {...timerProps} />
-					<div className='container-inset'>
-						<div className='r-col bop-container'>
 							{bop}
-						</div>
-					</div>
 					<div className='container-sm'>
 						{raceBlocks}
 					</div>

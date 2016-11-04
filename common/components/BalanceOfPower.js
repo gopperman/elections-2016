@@ -138,7 +138,7 @@ class BalanceOfPower extends Component {
 		) : null
 
 		return (
-			<div className='balance-of-power r-col r-feature'>
+			<div className='balance-of-power r-col'>
 				<h3 className='overline benton-bold'>US Senate balance of power</h3>
 				<div className='chart-container'>
 					<svg aria-hidden='true' ref={(c) => this._svg = c} />
