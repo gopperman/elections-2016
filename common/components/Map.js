@@ -31,7 +31,7 @@ class Map extends Component {
 		unitName: PropTypes.string.isRequired,
 		projection: PropTypes.func.isRequired,
 
-		sortingDelegate: PropTypes.func.isRequired,
+		tooltipSortingDelegate: PropTypes.func.isRequired,
 		dropdownName: PropTypes.string.isRequired,
 		displayName: PropTypes.string.isRequired,
 		labelsName: PropTypes.string,
@@ -364,7 +364,7 @@ class Map extends Component {
 	// when new data comes in and we're on a feature.
 	drawTooltip = ({ subunit, position }) => {
 
-		const { unitName, displayName, sortingDelegate } = this.props
+		const { unitName, displayName, tooltipSortingDelegate } = this.props
 
 		// Position tooltip.
 		if (position) {
@@ -379,7 +379,7 @@ class Map extends Component {
 			createTooltip({
 				subunit,
 				displayName: displayName || unitName,
-				sortingDelegate,
+				tooltipSortingDelegate,
 			})
 
 		// Show the tooltip.

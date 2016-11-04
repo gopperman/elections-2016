@@ -92,7 +92,7 @@ class PresidentMA extends Component {
 			data={towns}
 			unitName='reportingunitName'
 			projection={massProjection}
-			sortingDelegate={sortByVoteCount}
+			tooltipSortingDelegate={sortByVoteCount}
 			dropdownName='town'
 			buttonText={nameUtil.presidentUS.name()}
 			buttonUrl={urlManager.race(usRace)}

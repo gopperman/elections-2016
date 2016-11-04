@@ -11,7 +11,7 @@ import Hero from './../components/Hero.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 import Map from './../components/Map.js'
 import SwingStates from './../components/SwingStates.js'
-import { sortByElectoralCount } from './../utils/Candidates.js'
+import { sortByElectoralCount, sortByPolIDs } from './../utils/Candidates.js'
 import FeatureGroup from './../components/FeatureGroup.js'
 import urlManager from './../utils/urlManager.js'
 import getReports from './../utils/getReports.js'
@@ -87,13 +87,35 @@ class Election extends Component {
 			.sortBy(v => _.indexOf(swingStatesSelection, v.statePostal))
 			.value()
 
+		const tooltipSorter = (candidates) => {
+			const cutoff = 4
+			const nationalCandidates = sortByElectoralCount(presSummaryUnit.candidates)
+			const localCandidates = sortByElectoralCount(candidates)
+
+			const natIDs = _.map(nationalCandidates.slice(0, cutoff), 'polID')
+			const locIDs = _.map(localCandidates.slice(0, cutoff), 'polID')
+
+			// If the national leaders are the same as the local ones, just return them
+			if (!_.difference(locIDs, natIDs).length) {
+				return sortByPolIDs({
+					candidates: localCandidates,
+					polIDs: natIDs,
+				})
+			}
+
+			return sortByPolIDs({
+				candidates: localCandidates.slice(0, cutoff),
+				polIDs: _.map(nationalCandidates, 'polID'),
+			})
+		}
+
 		// Create the map (if we have data).
 		const map = presStates.length ? (<Map
 			shapefile={STATES}
 			data={presStates}
 			unitName='stateName'
 			projection={geoAlbersUsa()}
-			sortingDelegate={sortByElectoralCount}
+			tooltipSortingDelegate={tooltipSorter}
 			dropdownName='state'
 			displayName='stateName'
 			isPresidential

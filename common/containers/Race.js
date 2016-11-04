@@ -74,7 +74,7 @@ class Race extends Component {
 			data={towns}
 			unitName='reportingunitName'
 			projection={massProjection}
-			sortingDelegate={sortByVoteCount}
+			tooltipSortingDelegate={sortByVoteCount}
 			dropdownName='town'
 			displayName='reportingunitName' />) : null
 
