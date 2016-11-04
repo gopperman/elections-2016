@@ -7,7 +7,7 @@ import { select } from 'd3-selection'
 import { scalePoint } from 'd3-scale'
 import { range } from 'd3-array'
 import deepEqual from 'deep-equal'
-import { buildSeatsLite } from './../utils/visUtils.js'
+import { buildSeats } from './../utils/visUtils.js'
 
 import LinkButton from './LinkButton.js'
 import urlManager from './../utils/urlManager.js'
@@ -35,6 +35,7 @@ class BalanceOfPower extends Component {
 
 		const { rows, total } = this.props
 		this._columns = Math.ceil(total / rows)
+		console.log(this._columns)
 
 		const margin =
 			{ top: RADIUS, right: RADIUS, bottom: RADIUS, left: RADIUS }
@@ -88,7 +89,7 @@ class BalanceOfPower extends Component {
 		const { dem, gop, ind, total, rows } = this.props
 
 		// Build the matrix of seats.
-		const seats = buildSeatsLite({ dem, gop, ind, total, rows })
+		const seats = buildSeats({ dem, gop, ind, total, rows })
 
 		// Select the svg node.
 		const svg = select(this._svg).select('g.seats')
@@ -101,7 +102,19 @@ class BalanceOfPower extends Component {
 		circles.enter()
 			.append('circle')
 			.merge(circles)
-				.attr('r', d => (d.isHoldover ? RADIUS / 2 : RADIUS))
+				.attr('r', d => {
+					let radius
+					if (d.party) {
+						if (d.isHoldover) {
+							radius = RADIUS / 2
+						} else {
+							radius = RADIUS
+						}
+					} else {
+						radius = 0
+					}
+					return radius
+				})
 				.attr('cx', (d, i) => this._x(i % this._columns))
 				.attr('cy', (d, i) => this._y(Math.floor(i / this._columns)))
 				.attr('class', d => `fill-winner-${d.party}`)

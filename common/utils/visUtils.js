@@ -1,7 +1,7 @@
 /** @module */
 
 import _ from 'lodash'
-import { transpose } from 'd3-array'
+import { transpose, range } from 'd3-array'
 import { normalizeParty } from './standardize.js'
 
 /* Builds a senate trend report from a list of races
@@ -50,85 +50,14 @@ const senateTrendReport = (races) => {
 	}
 }
 
-const buildMatrix = ({ total = 0, rows = 0,
-dem = { won: 0, holdovers: 0 },
-ind = { won: 0, holdovers: 0 },
-gop = { won: 0, holdovers: 0 } }) => {
-
-	const none = total - (dem.won + dem.holdovers +
-		gop.won + gop.holdovers +
-		ind.won + ind.holdovers)
-
-	// Create an array of dem, ind, none, and gop, in that order.
-	const seats = [].concat(
-
-		_.range(dem.holdovers).map(() => ({ party: 'dem', isHoldover: true })),
-		_.range(dem.won).map(() => ({ party: 'dem', isHoldover: false })),
-
-		_.range(ind.holdovers).map(() => ({ party: 'ind', isHoldover: true })),
-		_.range(ind.won).map(() => ({ party: 'ind', isHoldover: false })),
-
-		_.range(none).map(() => ({ party: 'none', isHoldover: false })),
-
-		_.range(gop.won).map(() => ({ party: 'gop', isHoldover: false })),
-		_.range(gop.holdovers).map(() => ({ party: 'gop', isHoldover: true })),
-
-	)
-
-	// Partition seats into chunks of size `rows`, thus creating a matrix.
-	const matrix = _.chunk(seats, rows)
-
-	// Add party and seat to every matrix element.
-	const result = matrix.map(row =>
-		row.map((v, seat) => ({ ...v, seat }))
-	)
-
-	return result
-
-}
-
-/**
- * Builds a seating chart for balance of power charts. Returns the seats.
- * @memberof visUtils
- * @function
- * @param {number} $0.dem the number of democratic seats
- * @param {number} $0.ind the number of independent seats
- * @param {number} $0.gop the number of gop seats
- * @param {number} $0.total the total number of seats
- * @param {number} $0.rows the desired number of rows
- * @returns {Array} an array of seats
- */
 const buildSeats = ({ total = 0, rows = 0,
 dem = { won: 0, holdovers: 0 },
 ind = { won: 0, holdovers: 0 },
 gop = { won: 0, holdovers: 0 } }) => {
 
-	// Build the matrix (seats grouped by columns).
-	const matrix = buildMatrix({ dem, gop, ind, total, rows })
+	const columns = Math.ceil(total / rows)
 
-	// Add column numbers to each seat and flatten matrix.
-	const seats = _(matrix)
-		.map((column, columnIndex) =>
-			column.map(seat => ({
-				...seat,
-				column: columnIndex,
-			}))
-		)
-		.flatten()
-		.map((seat, index) => ({
-			...seat,
-			index,
-		}))
-		.value()
-
-	return seats
-
-}
-
-const buildSeatsLite = ({ total = 0, rows = 0,
-dem = { won: 0, holdovers: 0 },
-ind = { won: 0, holdovers: 0 },
-gop = { won: 0, holdovers: 0 } }) => {
+	const realTotal = columns * rows
 
 	const none = total - (dem.won + dem.holdovers +
 		gop.won + gop.holdovers +
@@ -137,25 +66,28 @@ gop = { won: 0, holdovers: 0 } }) => {
 	// Create an array of dem, ind, none, and gop, in that order.
 	const seats = [].concat(
 
-		_.range(dem.holdovers).map(() => ({ party: 'dem', isHoldover: true })),
-		_.range(dem.won).map(() => ({ party: 'dem', isHoldover: false })),
+		range(dem.holdovers).map(() => ({ party: 'dem', isHoldover: true })),
+		range(dem.won).map(() => ({ party: 'dem', isHoldover: false })),
 
-		_.range(ind.holdovers).map(() => ({ party: 'ind', isHoldover: true })),
-		_.range(ind.won).map(() => ({ party: 'ind', isHoldover: false })),
+		range(ind.holdovers).map(() => ({ party: 'ind', isHoldover: true })),
+		range(ind.won).map(() => ({ party: 'ind', isHoldover: false })),
 
-		_.range(none).map(() => ({ party: 'none', isHoldover: false })),
+		range(none).map(() => ({ party: 'none', isHoldover: false })),
 
-		_.range(gop.won).map(() => ({ party: 'gop', isHoldover: false })),
-		_.range(gop.holdovers).map(() => ({ party: 'gop', isHoldover: true })),
+		range(gop.won).map(() => ({ party: 'gop', isHoldover: false })),
+		range(gop.holdovers).map(() => ({ party: 'gop', isHoldover: true })),
+
+		range(realTotal - total).map(() => ({ })),
 
 	)
 
-	return _.flatten(transpose(_.chunk(seats, rows)))
+	const result = _.flatten(transpose(_.chunk(seats, rows)))
+
+	return result
 
 }
 
 export {
-	buildSeatsLite,
 	buildSeats,
 	senateTrendReport,
 }
