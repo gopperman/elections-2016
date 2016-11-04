@@ -60,8 +60,6 @@ class Election extends Component {
 		// Get breaking news
 		const breakingNews = _.first(results.breakingNews) || {}
 
-		console.log(breakingNews)
-
 		// Get senate report data.
 		const senateReport =
 			_.find(getReports(reports), { officeType: 'S' })
