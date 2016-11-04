@@ -132,7 +132,7 @@ class BalanceOfPower extends Component {
 		) : null
 
 		return (
-			<div className='balanceOfPower r-col r-feature'>
+			<div className='bop'>
 				<h3 className='overline benton-bold'>US Senate balance of power</h3>
 				<svg aria-hidden='true' ref={(c) => this._svg = c} />
 				<ul className='chart-meta'>
@@ -168,15 +168,17 @@ class BalanceOfPower extends Component {
 						</p>
 					</li>
 				</ul>
-				<Legend
-					parties={['dem', 'gop', 'ind']}
-					choices={['undecided', 'win']} />
-				<dl className='sublegend'>
-					<dt className='sublegend__term benton-regular'>Holdovers</dt>
-					<dd className='sublegend__def circle-sm' />
-					<dt className='sublegend__term benton-regular'>Won</dt>
-					<dd className='sublegend__def circle-lg' />
-				</dl>
+				<div className='legend-container'>
+					<Legend
+						parties={['dem', 'gop', 'ind']}
+						choices={['undecided', 'win']} />
+					<dl className='sublegend'>
+						<dt className='sublegend__term benton-regular'>Holdovers</dt>
+						<dd className='sublegend__def circle-sm' />
+						<dt className='sublegend__term benton-regular'>Won</dt>
+						<dd className='sublegend__def circle-lg' />
+					</dl>
+				</div>
 				{link}
 			</div>
 		)

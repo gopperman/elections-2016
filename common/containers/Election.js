@@ -138,7 +138,9 @@ class Election extends Component {
 								<span>Featured Races</span>
 							</h3>
 							<div className='r-row--full'>
-								{balanceOfPower}
+								<div className='r-col r-feature'>
+									{balanceOfPower}
+								</div>
 								{featured}
 							</div>
 						</div>

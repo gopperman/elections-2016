@@ -96,8 +96,12 @@ class Office extends Component {
 						className={heroClass}
 						title={title} />
 					<Timer {...timerProps} />
+						<div className='container-inset'>
+							<div className='r-col bop-container'>
+								{bop}
+							</div>
+						</div>
 					<div className='container-sm'>
-						{bop}
 						{raceBlocks}
 					</div>
 				</main>
