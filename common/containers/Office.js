@@ -29,6 +29,10 @@ const url = '2016-11-08?'
 @connectToApi
 class Office extends Component {
 
+	static getSection() {
+		return 'Office'
+	}
+
 	static getTitle(params) {
 		return nameUtil.office.htmlTitle(params)
 	}

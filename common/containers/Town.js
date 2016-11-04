@@ -25,6 +25,10 @@ const url = '2016-11-08?'
 @connectToApi
 class Town extends Component {
 
+	static getSection() {
+		return 'Town'
+	}
+
 	static getTitle(params) {
 		return nameUtil.town.htmlTitle(params)
 	}

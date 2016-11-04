@@ -32,6 +32,10 @@ const url = '2016-11-08?'
 @connectToApi
 class Race extends Component {
 
+	static getSection() {
+		return 'Race'
+	}
+
 	static getTitle(params) {
 		return nameUtil.race.htmlTitle(params)
 	}

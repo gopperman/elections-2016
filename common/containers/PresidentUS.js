@@ -38,6 +38,10 @@ const url = '2016-11-08?officeID=P'
 @connectToApi
 class PresidentUS extends Component {
 
+	static getSection() {
+		return 'Race'
+	}
+
 	static getTitle() {
 		return nameUtil.presidentUS.htmlTitle()
 	}

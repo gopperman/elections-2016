@@ -26,6 +26,10 @@ const connectToApi = (WrappedComponent) => {
 	@connect(s => s, mapDispatchToProps)
 	class ConnectToApiHoc extends Component {
 
+		static getSection() {
+			return WrappedComponent.getSection()
+		}
+
 		static getTitle(params) {
 			return WrappedComponent.getTitle(params)
 		}

@@ -44,6 +44,11 @@ export default (req, res) => {
 				.map(v => v.getTitle && v.getTitle(params))
 				.filter(v => v)[0]
 
+			// Get page section
+			const pageSection = components
+				.map(v => v.getSection && v.getSection())
+				.filter(v => v)[0]
+
 			const title = [
 				pageTitle,
 				'Election results 2016',
@@ -81,7 +86,10 @@ export default (req, res) => {
 						appHtml,
 						initialState: state,
 						isProduction: process.env.NODE_ENV === 'production',
-						meta,
+						meta: {
+							...meta,
+							section: pageSection,
+						},
 						version: pakage.version,
 						title,
 					})
