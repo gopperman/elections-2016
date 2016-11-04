@@ -15,7 +15,7 @@ import Legend from './Legend.js'
 
 const WIDTH = 100
 const HEIGHT = WIDTH / 4
-const RADIUS = WIDTH * 0.02
+const RADIUS = WIDTH * 0.019
 
 // TODO: make sure it updates correctly
 class BalanceOfPower extends Component {
@@ -127,9 +127,12 @@ class BalanceOfPower extends Component {
 		) : null
 
 		return (
-			<div className='bop'>
+			<div className='balance-of-power r-col r-feature'>
 				<h3 className='overline benton-bold'>US Senate balance of power</h3>
-				<svg aria-hidden='true' ref={(c) => this._svg = c} />
+				<div className='chart-container'>
+					<svg aria-hidden='true' ref={(c) => this._svg = c} />
+					<div className='plumbline' />
+				</div>
 				<ul className='chart-meta'>
 					<li className='chart-meta__item'>
 						<p className='chart-meta__info'>
@@ -175,7 +178,6 @@ class BalanceOfPower extends Component {
 				{link}
 			</div>
 		)
-
 
 	}
 

@@ -80,7 +80,11 @@ class Office extends Component {
 		if (title === 'US Senate') {
 
 			const bopData = senateTrendReport(sortedRaces)
-			bop = <BalanceOfPower {...bopData} displayLink={false} />
+			bop = (<BalanceOfPower
+				{...bopData}
+				total={100}
+				rows={5}
+				displayLink={false} />)
 
 		}
 
