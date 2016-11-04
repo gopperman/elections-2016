@@ -8,7 +8,7 @@ const RaceNavigationLinks = () => (
 			<li className='subnav__item'>
 				<a
 					className='subnav__link benton-bold icon--election'
-					href={urlManager.base()}>Election 2016</a>
+					href={urlManager.base(true)}>Election 2016</a>
 			</li>
 			{offices.map((office, i) => (
 				<li key={i} className='subnav__item'>

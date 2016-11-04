@@ -20,8 +20,8 @@ const urlManager = {
 
 	},
 
-	base() {
-		return '/elections/2016'
+	base(isFinal) {
+		return `/elections/2016${isFinal ? '?p1=BG_election_nav_central' : ''}`
 	},
 
 	town(townName) {
@@ -61,8 +61,12 @@ const urlManager = {
 		} else if (compareStringsNoAlpha(statePostal, 'ma') &&
 		officeName && seatName) {
 
-			result =
-				`${this.base()}/${statePostal}/${this.encode(officeName)}/${this.encode(seatName)}`
+			result = [
+				this.base(),
+				statePostal,
+				this.encode(officeName),
+				this.encode(seatName),
+			].join('/')
 
 		} else {
 

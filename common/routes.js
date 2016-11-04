@@ -13,7 +13,7 @@ export default (
 	<Route path='/' component={App}>
 
 		<Route
-			path={urlManager.base()}
+			path={urlManager.base(true)}
 			component={Election} />
 
 		<Route
