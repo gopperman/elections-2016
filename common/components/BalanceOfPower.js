@@ -11,7 +11,6 @@ import { buildSeats } from './../utils/visUtils.js'
 
 import LinkButton from './LinkButton.js'
 import urlManager from './../utils/urlManager.js'
-import Legend from './Legend.js'
 
 const WIDTH = 100
 const RADIUS = WIDTH * 0.019
@@ -178,9 +177,6 @@ class BalanceOfPower extends Component {
 						</p>
 					</li>
 				</ul>
-				<Legend
-					parties={['dem', 'gop', 'ind']}
-					choices={['undecided', 'win']} />
 				<dl className='sublegend'>
 					<dt className='sublegend__term benton-regular'>Holdovers</dt>
 					<dd className='sublegend__def circle-sm' />
