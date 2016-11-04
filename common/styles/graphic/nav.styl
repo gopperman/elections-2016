@@ -98,6 +98,7 @@
 	width 90%
 	max-width 50rem
 	margin 0 auto
+	z-index set-index('middle')
 	// If part of global nav
 	/.g-nav &
 		position absolute
@@ -107,7 +108,6 @@
 		hidden(accessible)
 		opacity 0
 		transition opacity 0.25s ease-in-out 0.25s
-		z-index 10000
 	/.g-nav.race-is-open .race &,
 	/.g-nav.town-is-open .town &
 		width 90%
