@@ -9,7 +9,7 @@ const BreakingBar = (alert) => {
 			<div className='breaking__content'>
 				<p className='breaking__copy benton-bold'>
 					<mark>Breaking:</mark> <a href={alert.link} target='_blank' >{alert.headline}</a>
-					<time datetime={alert.timestamp} className='benton-regular'>{time}</time>
+					<time dateTime={alert.timestamp} className='benton-regular'>{time}</time>
 				</p>
 			</div>
 		</div>
