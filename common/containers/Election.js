@@ -65,11 +65,7 @@ class Election extends Component {
 			_.find(getReports(reports), { officeType: 'S' })
 
 		const balanceOfPower = senateReport ?
-			<BalanceOfPower
-				{...senateReport}
-				total={100}
-				rows={5}
-				displayLink /> : null
+			<BalanceOfPower {...senateReport} displayLink /> : null
 
 		// Get all races.
 		const races = _.get(results, 'data.races', [])
@@ -83,6 +79,9 @@ class Election extends Component {
 			// and flatten.
 			.flatten()
 			.value()
+
+		const presSummaryRace = _.find(races,
+			{ officeName: 'President', statePostal: 'US' })
 
 		// Get presidential summary.
 		const presSummaryUnit = _.find(presUnits, { statePostal: 'US' })
@@ -98,15 +97,13 @@ class Election extends Component {
 
 		const tooltipSorter = (candidates) => {
 			const cutoff = 4
-			const nationalCandidates =
-				sortByElectoralCount(presSummaryUnit.candidates)
+			const nationalCandidates = sortByElectoralCount(presSummaryUnit.candidates)
 			const localCandidates = sortByElectoralCount(candidates)
 
 			const natIDs = _.map(nationalCandidates.slice(0, cutoff), 'polID')
 			const locIDs = _.map(localCandidates.slice(0, cutoff), 'polID')
 
-			// If the national leaders are the same as the local ones,
-			// just return them.
+			// If the national leaders are the same as the local ones, just return them
 			if (!_.difference(locIDs, natIDs).length) {
 				return sortByPolIDs({
 					candidates: localCandidates,
@@ -172,7 +169,9 @@ class Election extends Component {
 								<span>Featured Races</span>
 							</h3>
 							<div className='r-row--full'>
-								{balanceOfPower}
+								<div className='r-col r-feature'>
+									{balanceOfPower}
+								</div>
 								{featured}
 							</div>
 						</div>

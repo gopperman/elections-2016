@@ -39,6 +39,12 @@ const svgs = {
     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="140px" height="18.674px" viewBox="0 0 140 18.674" enable-background="new 0 0 140 18.674" xml:space="preserve" aria-labelledby="g-logo-title">
     <title id="g-logo-title">Boston Globe</title>
     <a xlink:href="http://www.bostonglobe.com"></a>
+     <defs>
+        <linearGradient id="logoGradient">
+            <stop offset="5%"  stop-color="#9a3b3b"/>
+            <stop offset="95%" stop-color="#53a5b4"/>
+        </linearGradient>
+    </defs>
     <g>
       <path d="M129.334,11.479c0,1.375-0.062,4.065-0.062,4.16l-0.095,0.094l-2.597-1.625V7.727c0.406-0.625,0.97-0.938,1.471-0.938
       c0.594,0,1.03,0.438,1.249,1.032C129.3,8.071,129.334,9.729,129.334,11.479 M137.902,8.885l-2.408,1.97V6.383L137.902,8.885z
@@ -109,12 +115,6 @@ const svgs = {
       c1.657-0.937,4.097-2.345,4.097-2.345l2.252,2.033l1.563-1.533l-1.22-1.282V7.727c0.532-0.719,1.126-1.032,1.596-1.032
       c0.531,0,1.031,0.376,1.157,1.064v7.852c0.187,0.656,0.968,1.279,1.751,1.5l2.784-2.096l3.222,2.221L28.775,13.952z" />
     </g>
-    <defs>
-        <linearGradient id="logoGradient">
-            <stop offset="5%"  stop-color="#9a3b3b"/>
-            <stop offset="95%" stop-color="#53a5b4"/>
-        </linearGradient>
-    </defs>
   </svg>`,
 
 	crossHatchesDefs: `<defs>
