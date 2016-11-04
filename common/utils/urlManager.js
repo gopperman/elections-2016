@@ -3,6 +3,10 @@ import compareStringsNoAlpha from './compareStringsNoAlpha.js'
 
 const urlManager = {
 
+	tag(source, page) {
+		return source ? `?p1=BG_election_${source}_${page}` : ''
+	},
+
 	encode(s) {
 		return s.replace(/&/g, '%2526')
 	},
@@ -20,12 +24,12 @@ const urlManager = {
 
 	},
 
-	base(isFinal) {
-		return `/elections/2016${isFinal ? '?p1=BG_election_nav_central' : ''}`
+	base(source) {
+		return `/elections/2016${this.tag(source, 'central')}`
 	},
 
-	town(townName) {
-		return `${this.base()}/MA/town/${this.encode(townName)}`
+	town({ townName, source }) {
+		return `${this.base()}/MA/town/${this.encode(townName)}${this.tag(source, 'town')}`
 	},
 
 	office({ officeName, statePostal = '' }) {

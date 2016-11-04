@@ -50,7 +50,7 @@ class Navigation extends Component {
 					<li className='g-nav__item'>
 						<a
 							className='g-nav__link nav-election benton-bold icon icon--election'
-							href={urlManager.base(true)}>Election 2016</a>
+							href={urlManager.base('nav')}>Election 2016</a>
 					</li>
 					<li className='g-nav__item town'>
 						<button

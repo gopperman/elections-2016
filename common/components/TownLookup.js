@@ -24,7 +24,8 @@ class TownLookup extends Component {
 			this.setState({ value })
 
 			if (value) {
-				location.href = urlManager.town(value.value)
+				location.href = urlManager.town({
+					townName: value.value, source: 'nav' })
 			}
 
 		}
@@ -49,7 +50,7 @@ class TownLookup extends Component {
 				<label
 					htmlFor='town-select'
 					className='benton-bold form__label form__label--overline'>Find your town results</label>
-					{select}
+				{select}
 			</div>
 		)
 
