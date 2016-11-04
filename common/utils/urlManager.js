@@ -32,7 +32,7 @@ const urlManager = {
 		return `${this.base()}/MA/town/${this.encode(townName)}${this.tag(source, 'town')}`
 	},
 
-	office({ officeName, statePostal = '' }) {
+	office({ officeName, statePostal = '', source }) {
 
 		let result
 
@@ -44,7 +44,7 @@ const urlManager = {
 			result = `${this.base()}/${this.encode(officeName)}`
 		}
 
-		return result
+		return `${result}${this.tag(source, 'race')}`
 
 	},
 
