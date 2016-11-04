@@ -3,7 +3,7 @@ import RaceNavigationLinks from './RaceNavigationLinks.js'
 
 const Footer = () => (
 	<footer className='footer' key='footer' role='contentinfo'>
-		<RaceNavigationLinks />
+		<RaceNavigationLinks isFooter />
 	</footer>
 )
 

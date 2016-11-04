@@ -3,6 +3,10 @@ import compareStringsNoAlpha from './compareStringsNoAlpha.js'
 
 const urlManager = {
 
+	tag(url, source, page) {
+		return `${url}${source ? `?p1=BG_election_${source}_${page}` : ''}`
+	},
+
 	encode(s) {
 		return s.replace(/&/g, '%2526')
 	},
@@ -20,31 +24,34 @@ const urlManager = {
 
 	},
 
-	base() {
-		return '/elections/2016'
+	base(source) {
+		return this.tag('/elections/2016', source, 'central')
 	},
 
-	town(townName) {
-		return `${this.base()}/MA/town/${this.encode(townName)}`
+	town({ townName, source }) {
+		return this.tag(
+			`${this.base()}/MA/town/${this.encode(townName)}`, source, 'town')
 	},
 
-	office({ officeName, statePostal = '' }) {
+	office({ officeName, statePostal = '', source }) {
 
 		let result
 
 		if (compareStringsNoAlpha(officeName, 'president')) {
-			result = this.race({ officeName: 'President' })
+			result = this.race({ officeName: 'President', source })
 		} else if (_.includes(['ma', 'nh'], statePostal.toLowerCase())) {
 			result = `${this.base()}/${statePostal}/${this.encode(officeName)}`
+			result = this.tag(result, source, 'race')
 		} else {
 			result = `${this.base()}/${this.encode(officeName)}`
+			result = this.tag(result, source, 'race')
 		}
 
 		return result
 
 	},
 
-	race({ officeName, seatName, statePostal }) {
+	race({ officeName, seatName, statePostal, source }) {
 
 		let result
 
@@ -57,12 +64,20 @@ const urlManager = {
 				result = `${this.base()}/${officeName}`
 			}
 
+			result = this.tag(result, source, 'president')
+
 		// or a MA race.
 		} else if (compareStringsNoAlpha(statePostal, 'ma') &&
 		officeName && seatName) {
 
-			result =
-				`${this.base()}/${statePostal}/${this.encode(officeName)}/${this.encode(seatName)}`
+			result = [
+				this.base(),
+				statePostal,
+				this.encode(officeName),
+				this.encode(seatName),
+			].join('/')
+
+			result = this.tag(result, 'full', 'results')
 
 		} else {
 
