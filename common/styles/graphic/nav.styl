@@ -96,7 +96,6 @@
 	width 90%
 	max-width 50rem
 	margin 0 auto
-	z-index set-index('middle')
 	// If part of global nav
 	/.g-nav &
 		position absolute
@@ -113,6 +112,8 @@
 		max-width 50rem
 		overflow auto
 		opacity 1
+	/.g-nav.race-is-open &
+		z-index set-index('middle')
 	/.g-nav.town-is-open .town &
 		overflow visible
 	&__list
