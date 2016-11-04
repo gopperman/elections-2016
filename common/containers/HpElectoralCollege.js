@@ -4,6 +4,7 @@ import connectToApi from './connectToApi.js'
 import Timer from './../components/Timer.js'
 import TestStatus from './../components/TestStatus.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
+import Navigation from './../components/Navigation.js'
 
 // We'll keep these urls here for testing. A description:
 
@@ -49,6 +50,8 @@ class HpElectoralCollege extends Component {
 				<Timer {...timerProps} />
 
 				<ElectoralCollegeBar {...summaryUnit} />
+
+				<Navigation />
 
 			</div>
 		)
