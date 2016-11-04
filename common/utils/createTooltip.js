@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import addCommas from 'add-commas'
 import classnames from 'classnames'
 import { percent } from './Candidate.js'
@@ -10,6 +11,8 @@ export default ({ subunit = {}, displayName, tooltipSortingDelegate }) => {
 	const { precinctsReportingPct } = subunit
 	const summary = ''
 	const candidates = tooltipSortingDelegate(subunit.candidates || [])
+
+	const isPresidential = _.has(candidates[0], 'electWon')
 
 	const rows = candidates.slice(0, 4).map((candidate, i) => {
 
@@ -25,7 +28,7 @@ export default ({ subunit = {}, displayName, tooltipSortingDelegate }) => {
 		const pctForDisplay = percentForDisplay(pct)
 
 		const candidateClass =
-			classnames('benton-bold', { 'is-winner': !!winner })
+			classnames('benton-bold', { 'is-winner': !!winner && isPresidential })
 
 		const squareClass = `fill-complete-${normalizeParty(party)}`
 
