@@ -99,11 +99,11 @@ class PresidentUS extends Component {
 			const nationalCandidates = sortByElectoralCount(summaryState.candidates)
 			const localCandidates = sortByElectoralCount(candidates)
 
-			const natIDs = _.map(nationalCandidates.slice(0,4), 'polID')
-			const locIDs = _.map(localCandidates.slice(0,4), 'polID')
+			const natIDs = _.map(nationalCandidates.slice(0, 4), 'polID')
+			const locIDs = _.map(localCandidates.slice(0, 4), 'polID')
 
 			// If the national leaders are the same as the local ones, just return them
-			if (! _.difference(locIDs, natIDs).length) {
+			if (!_.difference(locIDs, natIDs).length) {
 				return sortByPolIDs({
 					candidates: localCandidates,
 					polIDs: natIDs,
@@ -111,7 +111,7 @@ class PresidentUS extends Component {
 			}
 
 			return sortByPolIDs({
-				candidates: localCandidates.slice(0,4),
+				candidates: localCandidates.slice(0, 4),
 				polIDs: _.map(nationalCandidates, 'polID'),
 			})
 		}

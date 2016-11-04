@@ -2,7 +2,6 @@ import _ from 'lodash'
 import { geoAlbersUsa } from 'd3-geo'
 import React, { Component } from 'react'
 import connectToApi from './connectToApi.js'
-import deepEqual from 'deep-equal'
 import Timer from './../components/Timer.js'
 import Header from './../components/Header.js'
 import Footer from './../components/Footer.js'
@@ -12,7 +11,7 @@ import Hero from './../components/Hero.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 import Map from './../components/Map.js'
 import SwingStates from './../components/SwingStates.js'
-import { sortByVoteCount, sortByElectoralCount, sortByPolIDs } from './../utils/Candidates.js'
+import { sortByElectoralCount, sortByPolIDs } from './../utils/Candidates.js'
 import FeatureGroup from './../components/FeatureGroup.js'
 import urlManager from './../utils/urlManager.js'
 import getReports from './../utils/getReports.js'
@@ -91,11 +90,11 @@ class Election extends Component {
 			const nationalCandidates = sortByElectoralCount(presSummaryUnit.candidates)
 			const localCandidates = sortByElectoralCount(candidates)
 
-			const natIDs = _.map(nationalCandidates.slice(0,4), 'polID')
-			const locIDs = _.map(localCandidates.slice(0,4), 'polID')
+			const natIDs = _.map(nationalCandidates.slice(0, 4), 'polID')
+			const locIDs = _.map(localCandidates.slice(0, 4), 'polID')
 
 			// If the national leaders are the same as the local ones, just return them
-			if (! _.difference(locIDs, natIDs).length) {
+			if (!_.difference(locIDs, natIDs).length) {
 				return sortByPolIDs({
 					candidates: localCandidates,
 					polIDs: natIDs,
@@ -103,7 +102,7 @@ class Election extends Component {
 			}
 
 			return sortByPolIDs({
-				candidates: localCandidates.slice(0,4),
+				candidates: localCandidates.slice(0, 4),
 				polIDs: _.map(nationalCandidates, 'polID'),
 			})
 		}

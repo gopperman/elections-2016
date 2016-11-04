@@ -28,9 +28,8 @@ const candidatesAreEqual = (left, right) =>
  * @example
  * sortByElectoralCount(candidate) //=> sortedCandidates
  */
-const sortByElectoralCount = (candidates) => {
-	return _.orderBy(candidates, ['electWon', 'voteCount'], ['desc', 'desc'])
-}
+const sortByElectoralCount = (candidates) =>
+	_.orderBy(candidates, ['electWon', 'voteCount'], ['desc', 'desc'])
 
 /**
  * Sort candidates by total vote count.
