@@ -4,12 +4,12 @@ import { percent } from './Candidate.js'
 import { percentForDisplay, normalizeParty } from './standardize.js'
 
 // TODO: create summary
-export default ({ subunit = {}, displayName, sortingDelegate }) => {
+export default ({ subunit = {}, displayName, tooltipSortingDelegate }) => {
 
 	const title = subunit[displayName]
 	const { precinctsReportingPct } = subunit
 	const summary = ''
-	const candidates = sortingDelegate(subunit.candidates || [])
+	const candidates = tooltipSortingDelegate(subunit.candidates || [])
 
 	const rows = candidates.slice(0, 4).map((candidate, i) => {
 

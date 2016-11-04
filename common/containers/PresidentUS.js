@@ -100,7 +100,7 @@ class PresidentUS extends Component {
 			data={states}
 			unitName='stateName'
 			projection={geoAlbersUsa()}
-			sortingDelegate={sortByElectoralCount}
+			tooltipSortingDelegate={sortByElectoralCount}
 			dropdownName='state'
 			displayName='stateName'
 			isPresidential
