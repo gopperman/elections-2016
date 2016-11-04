@@ -4,7 +4,7 @@ import { formatTime } from './../utils/timeUtil.js'
 const BreakingBar = (alert) => {
 	const time = formatTime(new Date(alert.timestamp))
 
-	return (
+	return (Object.keys(alert).length) ? (
 		<div className='breaking'  aria-live='polite'>
 			<div className='breaking__content'>
 				<p className='breaking__copy benton-bold'>
@@ -13,7 +13,7 @@ const BreakingBar = (alert) => {
 				</p>
 			</div>
 		</div>
-	)
+	) : null
 }
 
 /* 

@@ -58,7 +58,9 @@ class Election extends Component {
 		const reports = _.get(results, 'data.reports', [])
 
 		// Get breaking news
-		const breakingNews = _.first(results.breakingNews)
+		const breakingNews = _.first(results.breakingNews) || {}
+
+		console.log(breakingNews)
 
 		// Get senate report data.
 		const senateReport =
