@@ -168,17 +168,15 @@ class BalanceOfPower extends Component {
 						</p>
 					</li>
 				</ul>
-				<div className='legend-container'>
-					<Legend
-						parties={['dem', 'gop', 'ind']}
-						choices={['undecided', 'win']} />
-					<dl className='sublegend'>
-						<dt className='sublegend__term benton-regular'>Holdovers</dt>
-						<dd className='sublegend__def circle-sm' />
-						<dt className='sublegend__term benton-regular'>Won</dt>
-						<dd className='sublegend__def circle-lg' />
-					</dl>
-				</div>
+				<Legend
+					parties={['dem', 'gop', 'ind']}
+					choices={['undecided', 'win']} />
+				<dl className='sublegend'>
+					<dt className='sublegend__term benton-regular'>Holdovers</dt>
+					<dd className='sublegend__def circle-sm' />
+					<dt className='sublegend__term benton-regular'>Won</dt>
+					<dd className='sublegend__def circle-lg' />
+				</dl>
 				{link}
 			</div>
 		)
