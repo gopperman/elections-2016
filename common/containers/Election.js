@@ -102,7 +102,6 @@ class Election extends Component {
 				})
 			}
 
-			console.log(_.map(nationalCandidates, 'polID'))
 			return sortByPolIDs({
 				candidates: localCandidates.slice(0,4),
 				polIDs: _.map(nationalCandidates, 'polID'),

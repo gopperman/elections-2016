@@ -95,12 +95,33 @@ class PresidentUS extends Component {
 			.sortBy(v => _.indexOf(swingStatesSelection, v.statePostal))
 			.value()
 
+		const tooltipSorter = (candidates) => {
+			const nationalCandidates = sortByElectoralCount(summaryState.candidates)
+			const localCandidates = sortByElectoralCount(candidates)
+
+			const natIDs = _.map(nationalCandidates.slice(0,4), 'polID')
+			const locIDs = _.map(localCandidates.slice(0,4), 'polID')
+
+			// If the national leaders are the same as the local ones, just return them
+			if (! _.difference(locIDs, natIDs).length) {
+				return sortByPolIDs({
+					candidates: localCandidates,
+					polIDs: natIDs,
+				})
+			}
+
+			return sortByPolIDs({
+				candidates: localCandidates.slice(0,4),
+				polIDs: _.map(nationalCandidates, 'polID'),
+			})
+		}
+
 		const map = states.length ? (<Map
 			shapefile={STATES}
 			data={states}
 			unitName='stateName'
 			projection={geoAlbersUsa()}
-			tooltipSortingDelegate={sortByElectoralCount}
+			tooltipSortingDelegate={tooltipSorter}
 			dropdownName='state'
 			displayName='stateName'
 			isPresidential
