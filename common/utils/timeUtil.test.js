@@ -9,6 +9,11 @@ describe('timeUtil', () => {
 
 			assert.equal(now, '0 minutes ago')
 		})
+		it('Should return one minute, not one minutes, if post is one minute old', () => {
+			let time = new Date()
+			time.setMinutes(time.getMinutes() - 1)
+			assert.equal(formatTime(time), '1 minute ago')
+		})
 		it('Should return time in hh:mm format if post is more than an hour old', () => {
 			const moonWalk = formatTime(new Date(-14159040000))
 
