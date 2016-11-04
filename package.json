@@ -36,6 +36,7 @@
     "d3-scale": "^1.0.3",
     "d3-selection": "^1.0.2",
     "d3-timer": "^1.0.2",
+    "dateline": "^2.1.0",
     "deep-equal": "^1.0.1",
     "documentation": "^4.0.0-beta10",
     "es6-promise": "^3.2.1",
