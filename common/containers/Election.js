@@ -59,8 +59,8 @@ class Election extends Component {
 		const balanceOfPower = senateReport ?
 			<BalanceOfPower
 				{...senateReport}
-				total={100}
-				rows={5}
+				total={435}
+				rows={29}
 				displayLink /> : null
 
 		// Get all races.

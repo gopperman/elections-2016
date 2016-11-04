@@ -14,7 +14,6 @@ import urlManager from './../utils/urlManager.js'
 import Legend from './Legend.js'
 
 const WIDTH = 100
-const HEIGHT = WIDTH / 4
 const RADIUS = WIDTH * 0.019
 
 // TODO: make sure it updates correctly
@@ -35,20 +34,20 @@ class BalanceOfPower extends Component {
 
 		const { rows, total } = this.props
 		this._columns = Math.ceil(total / rows)
-		console.log(this._columns)
+		this._height = rows * 5
 
 		const margin =
 			{ top: RADIUS, right: RADIUS, bottom: RADIUS, left: RADIUS }
 
 		const width = WIDTH - margin.left - margin.right
-		const height = HEIGHT - margin.top - margin.bottom
+		const height = this._height - margin.top - margin.bottom
 
 		this._x = scalePoint().range([0, width]).domain(range(this._columns))
 		this._y = scalePoint().range([height, 0]).domain(range(rows))
 
 		// Set svg.
 		select(this._svg)
-				.attr('viewBox', `0 0 ${WIDTH} ${HEIGHT}`)
+				.attr('viewBox', `0 0 ${WIDTH} ${this._height}`)
 			.append('g')
 				.attr('class', 'seats')
 				.attr('transform', `translate(${margin.left}, ${margin.top})`)
