@@ -5,6 +5,11 @@ import svgs from './../utils/svgs.js'
 const BreakingBar = (alert) => {
 	const time = formatTime(new Date(alert.timestamp))
 
+	const encodedURI = encodeURIComponent(alert.link)
+	const encodedHeadline = encodeURIComponent(alert.headline)
+
+	console.log(encodedURI)
+
 	return (Object.keys(alert).length) ? (
 		<div className='breaking'  aria-live='polite'>
 			<div className='breaking__content'>
@@ -14,7 +19,7 @@ const BreakingBar = (alert) => {
 				</p>
 				<a 
 					className='btn--tw' 
-					href='"https://twitter.com/intent/tweet?text=Breaking%3A%20Giant%20meteor%20hurdles%20toward%20Earth&via=BostonGlobe&url=https://bostonglobe.com/elections/2016'
+					href={`https://twitter.com/intent/tweet?text=${encodedHeadline}&via=BostonGlobe&url=${encodedURI}`}
 					target='_blank'
 					dangerouslySetInnerHTML={{ __html: svgs.twitterSvg }} />
 			</div>
