@@ -6,6 +6,7 @@ import Timer from './../components/Timer.js'
 import BreakingBar from './../components/BreakingBar.js'
 import Header from './../components/Header.js'
 import Footer from './../components/Footer.js'
+import LinkButton from './../components/LinkButton.js'
 import TestStatus from './../components/TestStatus.js'
 import ResultGroup from './../components/ResultGroup.js'
 import { sortByVoteCount } from './../utils/Candidates.js'
@@ -85,11 +86,13 @@ class Office extends Component {
 		const title = nameUtil.office.name(params)
 
 		let bop = null
-		if (title === 'US Senate') {
+		let link = null
+		let bopData = null
 
-			const bopData = senateTrendReport(sortedRaces)
-			bop = (
-				<div className='container-inset'>
+		switch (title) {
+			case 'US Senate':
+				bopData = senateTrendReport(sortedRaces)
+				bop = (
 					<div className='r-col bop-container'>
 						<BalanceOfPower
 							{...bopData}
@@ -97,6 +100,27 @@ class Office extends Component {
 							rows={5}
 							displayLink={false} />
 					</div>
+				)
+				link = (<LinkButton
+					text={'Switch to US House'}
+					url={urlManager.office({ officeName: 'US House' })} />)
+				break
+			case 'US House':
+				link = (<LinkButton
+					text={'Switch to US Senate'}
+					url={urlManager.office({ officeName: 'US Senate' })} />)
+				break
+			default:
+				// Nothing to see here
+		}
+
+		// We can drop this logic once the house gets a balance of power widget, probably
+		let officeSummary = null
+		if (bop || link) {
+			officeSummary = (
+				<div className='container-inset'>
+					{bop}
+					{link}
 				</div>
 			)
 		}
@@ -113,7 +137,7 @@ class Office extends Component {
 						className={heroClass}
 						title={title} />
 					<Timer {...timerProps} />
-					{bop}
+					{officeSummary}
 					<div className='container-sm'>
 						{raceBlocks}
 					</div>
