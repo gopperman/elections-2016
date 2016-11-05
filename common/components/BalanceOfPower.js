@@ -134,7 +134,8 @@ class BalanceOfPower extends Component {
 		const link = (displayLink) ? (
 			<LinkButton
 				text='See full results'
-				url={urlManager.office({ officeName: 'U.S. Senate' })} />
+				url={urlManager.office({
+					officeName: 'U.S. Senate', source: 'balanceofpower' })} />
 		) : null
 
 		return (

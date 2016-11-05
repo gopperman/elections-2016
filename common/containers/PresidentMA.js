@@ -104,7 +104,8 @@ class PresidentMA extends Component {
 			tooltipSortingDelegate={sortByVoteCount}
 			dropdownName='town'
 			buttonText={nameUtil.presidentUS.name()}
-			buttonUrl={urlManager.race(usRace)}
+			buttonUrl={urlManager.race({
+				...usRace, source: 'US' })}
 			displayName='reportingunitName' />) : null
 
 		return (

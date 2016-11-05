@@ -88,6 +88,7 @@ class Office extends Component {
 		let bop = null
 		let link = null
 		let bopData = null
+		const source = 'balanceofpower'
 
 		switch (title) {
 			case 'US Senate':
@@ -103,12 +104,12 @@ class Office extends Component {
 				)
 				link = (<LinkButton
 					text={'Switch to US House'}
-					url={urlManager.office({ officeName: 'US House' })} />)
+					url={urlManager.office({ officeName: 'US House', source })} />)
 				break
 			case 'US House':
 				link = (<LinkButton
 					text={'Switch to US Senate'}
-					url={urlManager.office({ officeName: 'US Senate' })} />)
+					url={urlManager.office({ officeName: 'US Senate', source })} />)
 				break
 			default:
 				// Nothing to see here
