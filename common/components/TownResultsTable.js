@@ -24,17 +24,15 @@ const TownResultsTable = ({ towns, summaryCandidates }) =>
 							</th>
 							{ summaryCandidates.map((candidate, i) => {
 
-								const { winner, incumbent, last } = candidate
+								const { winner, last } = candidate
 
 								const candidateClass =
-									classnames('benton-bold', 'r-table__name', { 'is-winner': !!winner })
-
-								const incumbentSpan = incumbent ?
-									<span className='r-block__tag benton-regular'>Incumbent</span> : null
+									classnames('benton-bold', 'r-table__name',
+										{ 'is-winner': !!winner })
 
 								return (
 									<th scope='col' className='r-table__cell' key={i}>
-										<p className={candidateClass}>{last}{incumbentSpan}</p>
+										<p className={candidateClass}>{last}</p>
 										<p className='benton-regular'>{i === 0 ? 'Votes' : ''}</p>
 									</th>
 								)

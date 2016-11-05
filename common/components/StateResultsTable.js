@@ -29,7 +29,8 @@ const StateResultsTable = ({ states, summaryCandidates }) =>
 									const { winner, last } = candidate
 
 									const candidateClass =
-										classnames('benton-bold', 'r-table__name', { 'is-winner': !!winner })
+										classnames('benton-bold', 'r-table__name',
+											{ 'is-winner': !!winner })
 
 									return (
 										<th scope='col' className='r-table__cell' key={i}>
