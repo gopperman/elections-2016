@@ -14,6 +14,7 @@ import Hero from './../components/Hero.js'
 import urlManager from './../utils/urlManager.js'
 import getTownsShapefile from './../utils/getTownsShapefile.js'
 import nameUtil from './../utils/nameUtil.js'
+import ResultGroup from './../components/ResultGroup.js'
 import {
 	sortByVoteCount,
 	sortByCandidateIDs,
@@ -124,6 +125,10 @@ class PresidentMA extends Component {
 						</div>
 					</div>
 					<div className='container-lg'>
+						<ResultGroup
+							overline={nameUtil.race.name(maRace)}
+							precinctsReportingPct={maUnit.precinctsReportingPct}
+							candidates={summaryTownCandidates} />
 						{map}
 					</div>
 					<div className='container-lg'>
