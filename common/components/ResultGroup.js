@@ -3,8 +3,8 @@ import classnames from 'classnames'
 import ResultBar from './ResultBar.js'
 import LinkButton from './../components/LinkButton.js'
 
-const ResultGroup = ({ candidates, precinctsReportingPct,
-overline, buttonText, buttonUrl, isFeature, numWinners }) => {
+const ResultGroup = ({ candidates, precinctsReportingPct, overline,
+overlineSuffix, buttonText, buttonUrl, isFeature, numWinners }) => {
 
 	const button = buttonUrl && buttonText ?
 		<LinkButton text={buttonText} url={buttonUrl} /> : null
@@ -15,7 +15,8 @@ overline, buttonText, buttonUrl, isFeature, numWinners }) => {
 		const klass = classnames('overline', 'benton-bold', {
 			'has-aside': numWinners > 1,
 		})
-		return (overline ? <h3 className={klass}>{overline}</h3> : null)
+		const suffix = <span className='overline-suffix'>{overlineSuffix}</span>
+		return (overline ? <h3 className={klass}>{overline}{suffix}</h3> : null)
 	}
 
 	const multipleWinnersDescription = numWinners > 1 ?
@@ -49,6 +50,7 @@ ResultGroup.propTypes = {
 	precinctsReportingPct: PropTypes.string.isRequired,
 	candidates: PropTypes.array.isRequired,
 	overline: PropTypes.string,
+	overlineSuffix: PropTypes.string,
 	buttonUrl: PropTypes.string,
 	buttonText: PropTypes.string,
 }

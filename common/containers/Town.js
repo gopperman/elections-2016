@@ -11,6 +11,7 @@ import { sortByVoteCount } from './../utils/Candidates.js'
 import Hero from './../components/Hero.js'
 import urlManager from './../utils/urlManager.js'
 import nameUtil from './../utils/nameUtil.js'
+import { toTitleCase } from './../utils/standardize.js'
 
 // We'll keep these urls here for testing. A description:
 
@@ -52,6 +53,8 @@ class Town extends Component {
 		// Get test status.
 		const isTest = _.some(races, 'test')
 
+		const town = toTitleCase(urlManager.decode(params.location))
+
 		// Create result blocks for all the town races.
 		const raceBlocks = races.map((race, i) => {
 
@@ -64,6 +67,7 @@ class Town extends Component {
 					numWinners={race.numWinners}
 					key={i}
 					overline={nameUtil.race.name(race)}
+					overlineSuffix={town}
 					precinctsReportingPct={stateUnit.precinctsReportingPct}
 					candidates={sortByVoteCount(candidates)}
 					buttonText='See full results'
