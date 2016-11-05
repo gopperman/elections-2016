@@ -69,20 +69,23 @@
 .timer
 	text-align center
 	transform translateY(-3em)
+	margin-bottom -2em
 	&__elements
 		display inline-block
 		background-color white
-		width 22em
-		padding 1em 1em
+		padding 0.5em 1em
 		font-size 0.8em
+		line-height 1.8
 		overflow hidden
 		span
-			display inline-block
-		&__clock
-			float left
-		&__update
-			font-size 0.95em
-			float right
+			display  block
+			&:last-of-type
+				font-size 0.9em
+		// &__clock
+		// 	float left
+		// &__update
+		// 	font-size 0.95em
+		// 	float right
 
 // Update
 // .update

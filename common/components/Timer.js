@@ -107,8 +107,8 @@ class Timer extends Component {
 		return (
 			<div className='timer'>
 				<p className='timer__elements'>
-					<span className='timer__elements__clock benton-bold'>{message}</span>
-					<span className='timer__elements__update benton-regular'>{updated}</span>
+					<span className='timer__clock benton-bold'>{message}</span>
+					<span className='timer__update benton-regular'>{updated}</span>
 				</p>
 			</div>
 		)
