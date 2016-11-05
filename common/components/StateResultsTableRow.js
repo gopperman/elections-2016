@@ -7,6 +7,7 @@ import _ from 'lodash'
 import addCommas from 'add-commas'
 import { percent } from './../utils/Candidate.js'
 import { percentForDisplay } from './../utils/standardize.js'
+import TableCell from './../components/TableCell.js'
 
 const StateResultsTableRow = ({ statePostal, stateName,
 precinctsReportingPct, candidates, summaryCandidates }) =>
@@ -26,12 +27,12 @@ precinctsReportingPct, candidates, summaryCandidates }) =>
 				const candidate = _.find(candidates, { polID: v.polID })
 
 				return candidate ? (
-					<td className='r-table__cell' key={i}>
-						<p className='hide-accessible'>{candidate.last}</p>
-						<p className='benton-bold'>{+percentForDisplay(percent({
-							candidates, candidateID: candidate.candidateID }))}%</p>
-						<p className='benton-regular'>{addCommas(candidate.voteCount)}</p>
-					</td>
+					<TableCell
+						key={i}
+						name={candidate.last}
+						pct={+percentForDisplay(percent({
+							candidates, candidateID: candidate.candidateID }))}
+						votes={addCommas(candidate.voteCount)} />
 				) : (<td key={i} />)
 
 			})}
