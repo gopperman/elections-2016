@@ -8,14 +8,13 @@ import {
 	normalizeParty,
 } from './../utils/standardize.js'
 
-const ResultBar = ({ candidate, candidates, showImage,
+const ResultBar = ({ candidate, candidates, showImage, hideCheckmark,
 precinctsReportingPct }) => {
 
 	const { party, candidateID, voteCount, winner, incumbent } = candidate
 
 	const name = fullName(candidate)
-	const pct = percentForDisplay(
-		percent({ candidates, candidateID }))
+	const pct = percentForDisplay(percent({ candidates, candidateID }))
 	const style = { width: `${pct}%` }
 	const vote = addCommas(voteCount)
 
@@ -26,12 +25,14 @@ precinctsReportingPct }) => {
 			alt='Donald Trump' />) : null
 
 	const candidateClass = classnames('r-block__name', 'benton-bold',
-		{ 'is-winner': !!winner })
+		{ 'is-winner': !!winner && !hideCheckmark })
 
 	const tagClass = 'r-block__tag benton-regular'
 
 	const runoffSpan = winner === 'R' ?
-		<span className={tagClass}><abbr title='advances'>Adv.</abbr> to runoff</span> : null
+		(<span className={tagClass}>
+			<abbr title='advances'>Adv.</abbr> to runoff
+		</span>) : null
 
 	const incumbentSpan = incumbent ?
 		<span className={tagClass}>Incumbent</span> : null
@@ -42,8 +43,7 @@ precinctsReportingPct }) => {
 	const precincts = precinctsReportingPct ?
 		(<p className='note benton-regular'>
 			<span>{+precinctsReportingPct}% reporting</span>
-		</p>) :
-		null
+		</p>) : null
 
 	return (
 
@@ -51,7 +51,9 @@ precinctsReportingPct }) => {
 
 			{image}
 
-			<p className={candidateClass}>{name}{partySpan}{incumbentSpan}{runoffSpan}</p>
+			<p className={candidateClass}>
+				{name}{partySpan}{incumbentSpan}{runoffSpan}
+			</p>
 
 			<div className='r-block__results'>
 				<div className='r-block__bar results-bar' aria-hidden='true'>
@@ -82,6 +84,7 @@ ResultBar.propTypes = {
 	candidates: PropTypes.array.isRequired,
 	precinctsReportingPct: PropTypes.string,
 	showImage: PropTypes.bool,
+	hideCheckmark: PropTypes.bool,
 }
 
 export default ResultBar

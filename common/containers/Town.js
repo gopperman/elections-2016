@@ -71,6 +71,7 @@ class Town extends Component {
 					precinctsReportingPct={stateUnit.precinctsReportingPct}
 					candidates={sortByVoteCount(candidates)}
 					buttonText='See full results'
+					hideCheckmark
 					buttonUrl={urlManager.race(race)} />
 			)
 

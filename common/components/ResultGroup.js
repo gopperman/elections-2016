@@ -4,7 +4,8 @@ import ResultBar from './ResultBar.js'
 import LinkButton from './../components/LinkButton.js'
 
 const ResultGroup = ({ candidates, precinctsReportingPct, overline,
-overlineSuffix, buttonText, buttonUrl, isFeature, numWinners }) => {
+overlineSuffix, buttonText, buttonUrl, isFeature,
+numWinners, hideCheckmark }) => {
 
 	const button = buttonUrl && buttonText ?
 		<LinkButton text={buttonText} url={buttonUrl} /> : null
@@ -31,6 +32,7 @@ overlineSuffix, buttonText, buttonUrl, isFeature, numWinners }) => {
 					{...{
 						key,
 						candidate,
+						hideCheckmark,
 						precinctsReportingPct: key === array.length - 1 ?
 						precinctsReportingPct : null,
 						candidates,
@@ -47,6 +49,7 @@ overlineSuffix, buttonText, buttonUrl, isFeature, numWinners }) => {
 ResultGroup.propTypes = {
 	numWinners: PropTypes.number,
 	isFeature: PropTypes.bool,
+	hideCheckmark: PropTypes.bool,
 	precinctsReportingPct: PropTypes.string.isRequired,
 	candidates: PropTypes.array.isRequired,
 	overline: PropTypes.string,
