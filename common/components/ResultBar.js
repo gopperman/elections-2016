@@ -2,6 +2,7 @@ import React, { PropTypes } from 'react'
 import _ from 'lodash'
 import addCommas from 'add-commas'
 import classnames from 'classnames'
+import nameUtil from './../utils/nameUtil.js'
 import { fullName, percent } from './../utils/Candidate.js'
 import {
 	percentForDisplay,
@@ -38,7 +39,7 @@ precinctsReportingPct }) => {
 		<span className={tagClass}>Incumbent</span> : null
 
 	const partySpan = !_.includes(['yes', 'no'], party.toLowerCase()) ?
-		<span className={tagClass}>{party}</span> : null
+		<span title={nameUtil.party.name(party)} className={tagClass}>{party}</span> : null
 
 	const precincts = precinctsReportingPct ?
 		(<p className='note benton-regular'>

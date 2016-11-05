@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import classnames from 'classnames'
+import nameUtil from './../utils/nameUtil.js'
 
 const LegendItem = ({ terms, text }) => (
 
@@ -18,7 +19,7 @@ const LegendItem = ({ terms, text }) => (
 				const ddClass = classnames('legend__def', term.klass)
 
 				return ([
-					<dt className={dtClass}>{term.label}</dt>,
+					<dt title={nameUtil.party.name(term.label)} className={dtClass}>{term.label}</dt>,
 					<dd className={ddClass} />,
 				])
 
