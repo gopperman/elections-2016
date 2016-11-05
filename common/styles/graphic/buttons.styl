@@ -38,8 +38,13 @@
 	pointer-events all
 	background-color transparent
 	border none
+	transition $transition
+	&:hover svg line
+		stroke set-color('purple')
 	svg
 		display block
+		line
+			transition $transition
 
 // Twitter btn
 .btn--tw
