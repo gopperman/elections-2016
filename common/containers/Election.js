@@ -164,7 +164,7 @@ class Election extends Component {
 					<div className='container-downpage'>
 						<div className='container-lg'>
 							<h3 className='subhed benton-bold'>
-								<span>Featured Races</span>
+								<span>Featured races</span>
 							</h3>
 							<div className='r-row--full'>
 								<div className='r-col r-feature'>
