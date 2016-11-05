@@ -16,8 +16,8 @@ numWinners, hideCheckmark }) => {
 		const klass = classnames('overline', 'benton-bold', {
 			'has-aside': numWinners > 1,
 		})
-		const suffix = <span className='overline-suffix'>{overlineSuffix}</span>
-		return (overline ? <h3 className={klass}>{overline}{suffix}</h3> : null)
+		const suffix = <span className='overline--meta benton-regular'>{overlineSuffix} results</span>
+		return (overline ? <h3 className={klass}>{overline}&#8195;{suffix}</h3> : null)
 	}
 
 	const multipleWinnersDescription = numWinners > 1 ?
