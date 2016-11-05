@@ -76,7 +76,7 @@ class Town extends Component {
 			<div>
 
 				<TestStatus isTest={isTest} />
-				<BreakingBar {...breakingNews} />
+				<BreakingBar alert={breakingNews} />
 				<Header />
 
 				<main id='content'>

@@ -144,7 +144,7 @@ class PresidentUS extends Component {
 			<div className='president-is-open'>
 
 				<TestStatus isTest={isTest} />
-				<BreakingBar {...breakingNews} />
+				<BreakingBar alert={breakingNews} />
 				<Header />
 				<main id='content'>
 					<Hero className='lead-img' title={nameUtil.presidentUS.name()} />

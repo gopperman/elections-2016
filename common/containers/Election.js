@@ -146,7 +146,7 @@ class Election extends Component {
 		return (
 			<div className='election-is-open'>
 				<TestStatus isTest={isTest} />
-				<BreakingBar {...breakingNews} />
+				<BreakingBar alert={breakingNews} />
 				<Header />
 				<main id='content'>
 					<Hero

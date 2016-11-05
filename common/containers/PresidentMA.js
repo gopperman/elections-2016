@@ -110,7 +110,7 @@ class PresidentMA extends Component {
 			<div>
 
 				<TestStatus isTest={isTest} />
-				<BreakingBar {...breakingNews} />
+				<BreakingBar alert={breakingNews} />
 				<Header summaryState={usUnit} />
 				<main id='content'>
 					<Hero
