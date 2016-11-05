@@ -17,7 +17,7 @@ const svgs = {
   		<line fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" x1="244.826" y1="217.479" x2="258.967" y2="203.337"/>
   	</svg>`,
 
-  twitterSvg: `
+	twitterSvg: `
     <svg version="1.1" id="icon-twitter" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="20px" height="16.253px" viewBox="2.305 1.874 20 16.253" enable-background="new 2.305 1.874 20 16.253" xml:space="preserve" aria-labelledby="twitter-title">
       <title id="twitter-title">Tweet this</title>
       <g>
