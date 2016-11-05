@@ -10,6 +10,7 @@ import {
 	FETCH_RESULTS_FAILURE,
 
 } from './actionTypes.js'
+import config from './../../data/config.json'
 
 const { fetch } = require('fetch-ponyfill')()
 
@@ -84,22 +85,32 @@ const fetchResults = ({ url }) =>
 
 		}
 
-		const getJson = (urlToFetch) =>
+		const parseJson = (response) => response.json()
+
+		const getJsonSafely = (urlToFetch) =>
 			fetch(urlToFetch)
 				.then(response => {
 					// if error, bail out
 					if (response.status !== 200) throw new Error(response.statusText)
 					return response
 				})
-				.then(response => response.json())
+				.then(parseJson)
 
-		// Should be 'http://www.bostonglobe.com/bn_endpoint.json'
-		const allUrls = [
-			fullUrl,
-			'http://devedit.bostonglobe.com/fragment/SysConfig/WebPortal/BostonGlobe/Framework/skins/leaf/story/bn_endpoint.jpt',
-		]
+		const getJson = (urlToFetch) =>
+			fetch(urlToFetch)
+				.then(response => {
+					// if error, continue
+					if (response.status !== 200) return {}
+					return response
+				})
+				.then(parseJson)
 
-		return Promise.all(allUrls.map(getJson))
+		// // Should be 'http://www.bostonglobe.com/bn_endpoint.json'
+		// const allUrls = [fullUrl, config.breakingNewsUrl]
+
+		const { breakingNewsUrl } = config
+
+		return Promise.all([getJsonSafely(fullUrl), getJson(breakingNewsUrl)])
 			.then(([data, breakingNews]) => {
 
 				// Did we not get any races?
