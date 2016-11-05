@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import connectToApi from './connectToApi.js'
 import Timer from './../components/Timer.js'
 import StateResultsTable from './../components/StateResultsTable.js'
+import BreakingBar from './../components/BreakingBar.js'
 import Map from './../components/Map.js'
 import Header from './../components/Header.js'
 import Footer from './../components/Footer.js'
@@ -55,6 +56,9 @@ class PresidentUS extends Component {
 		const { props } = this
 		const { results, timerProps } = props
 
+		// Get breaking news
+		const breakingNews = _.first(results.breakingNews) || {}
+		
 		// Get races.
 		const races = _.get(results, 'data.races', [])
 
@@ -140,7 +144,7 @@ class PresidentUS extends Component {
 			<div className='president-is-open'>
 
 				<TestStatus isTest={isTest} />
-
+				<BreakingBar alert={breakingNews} />
 				<Header />
 				<main id='content'>
 					<Hero className='lead-img' title={nameUtil.presidentUS.name()} />

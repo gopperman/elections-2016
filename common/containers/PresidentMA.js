@@ -2,6 +2,7 @@ import { geoConicConformal } from 'd3-geo'
 import _ from 'lodash'
 import React, { Component } from 'react'
 import connectToApi from './connectToApi.js'
+import BreakingBar from './../components/BreakingBar.js'
 import Header from './../components/Header.js'
 import Footer from './../components/Footer.js'
 import Timer from './../components/Timer.js'
@@ -52,6 +53,9 @@ class PresidentMA extends Component {
 		const { props } = this
 		const { results, timerProps } = props
 
+		// Get breaking news
+		const breakingNews = _.first(results.breakingNews) || {}
+		
 		// Get races.
 		const races = _.get(results, 'data.races', [])
 
@@ -106,7 +110,7 @@ class PresidentMA extends Component {
 			<div>
 
 				<TestStatus isTest={isTest} />
-
+				<BreakingBar alert={breakingNews} />
 				<Header summaryState={usUnit} />
 				<main id='content'>
 					<Hero

@@ -58,7 +58,7 @@ class Election extends Component {
 		const reports = _.get(results, 'data.reports', [])
 
 		// Get breaking news
-		const breakingNews = _.first(results.breakingNews)
+		const breakingNews = _.first(results.breakingNews) || {}
 
 		// Get senate report data.
 		const senateReport =
@@ -143,7 +143,7 @@ class Election extends Component {
 		return (
 			<div className='election-is-open'>
 				<TestStatus isTest={isTest} />
-				<BreakingBar {...breakingNews} />
+				<BreakingBar alert={breakingNews} />
 				<Header />
 				<main id='content'>
 					<Hero

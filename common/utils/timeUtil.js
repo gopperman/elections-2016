@@ -5,8 +5,10 @@ const formatTime = (date) => {
 	const seconds = Math.floor((new Date() - date) / 1000)
 	const minutes = Math.floor(seconds / 60)
 
+	const s = (minutes === 1) ? '' : 's'
+	
 	if (minutes < 60) {
-		return `${minutes} minutes ago`
+		return `${minutes} minute${s} ago`
 	}
 
 	return dateline(date).getAPTime()

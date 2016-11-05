@@ -93,7 +93,7 @@ const fetchResults = ({ url }) =>
 				})
 				.then(response => response.json())
 
-		// Should be http://www.bostonglobe.com/bn_endpoint.json
+		// Should be 'http://www.bostonglobe.com/bn_endpoint.json'
 		const allUrls = [
 			fullUrl,
 			'http://devedit.bostonglobe.com/fragment/SysConfig/WebPortal/BostonGlobe/Framework/skins/leaf/story/bn_endpoint.jpt',

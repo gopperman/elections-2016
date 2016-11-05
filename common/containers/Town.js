@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import _ from 'lodash'
 import connectToApi from './connectToApi.js'
 import Timer from './../components/Timer.js'
+import BreakingBar from './../components/BreakingBar.js'
 import Header from './../components/Header.js'
 import Footer from './../components/Footer.js'
 import TestStatus from './../components/TestStatus.js'
@@ -42,6 +43,9 @@ class Town extends Component {
 		const { props } = this
 		const { results, params, timerProps } = props
 
+		// Get breaking news
+		const breakingNews = _.first(results.breakingNews) || {}
+		
 		// Get races.
 		const races = _.get(results, 'data.races', [])
 
@@ -72,7 +76,7 @@ class Town extends Component {
 			<div>
 
 				<TestStatus isTest={isTest} />
-
+				<BreakingBar alert={breakingNews} />
 				<Header />
 
 				<main id='content'>
