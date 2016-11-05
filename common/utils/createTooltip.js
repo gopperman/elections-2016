@@ -27,8 +27,8 @@ export default ({ subunit = {}, displayName, tooltipSortingDelegate }) => {
 		// Get the display-ready version of the percent.
 		const pctForDisplay = percentForDisplay(pct)
 
-		const candidateClass =
-			classnames('benton-bold', 'r-table__name', { 'is-winner': !!winner && isPresidential })
+		const candidateClass = classnames('benton-bold', 'r-table__name',
+			{ 'is-winner': !!winner && isPresidential })
 
 		const squareClass = `fill-complete-${normalizeParty(party)}`
 
