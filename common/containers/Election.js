@@ -158,8 +158,6 @@ class Election extends Component {
 					</div>
 					<div className='container-lg'>
 						{map}
-					</div>
-					<div className='container-lg'>
 						<SwingStates states={swingStates} />
 						<Legend isPresidential races={presStates} />
 					</div>
