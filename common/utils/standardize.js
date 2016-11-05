@@ -1,5 +1,16 @@
 import _ from 'lodash'
 
+const clean = (s) =>
+	s && s
+		// u.s. => US
+		.replace(/\bu\.s\./gi, 'US')
+		// us => US
+		.replace(/\bus\b/gi, 'US')
+		// Question => Ballot question
+		.replace(/\bquestion\b/gi, 'Ballot questions')
+		.replace(/\bof\b/gi, 'of')
+
+
 /**
  * Normalizes a party string.
  * @memberof standardize
@@ -61,4 +72,5 @@ export {
 	normalizeParty,
 	standardizeParty,
 	orderParties,
+	clean,
 }

@@ -87,6 +87,16 @@ describe('nameUtil', () => {
 
 		describe('title', () => {
 
+			it('should work for ballot questions', () => {
+
+				assert.equal(nameUtil.race.htmlTitle({
+					statePostal: 'ma',
+					officeName: 'question',
+					seatName: '1 - Expand slot machine gaming',
+				}), 'Mass. Ballot questions, 1 - Expand Slot Machine Gaming')
+
+			})
+
 			it('should work for president', () => {
 
 				assert.equal(nameUtil.race.htmlTitle({

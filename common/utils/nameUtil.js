@@ -1,16 +1,9 @@
 import usAbbreviations from 'us-abbreviations'
 import urlManager from './urlManager.js'
-import { toTitleCase } from './standardize.js'
 import compareStringsNoAlpha from './compareStringsNoAlpha.js'
+import { clean, toTitleCase } from './standardize.js'
 
 const convertStateToAP = usAbbreviations('postal', 'ap')
-
-const clean = (s) =>
-	s
-		// u.s. => US
-		.replace(/\bu\.s\./gi, 'US')
-		// us => US
-		.replace(/\bus\b/gi, 'US')
 
 const election = {
 

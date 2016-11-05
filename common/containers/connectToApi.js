@@ -62,7 +62,7 @@ const connectToApi = (WrappedComponent) => {
 				const complete = racesAreComplete(races) &&
 					reportsAreComplete(reports)
 
-				if (!complete) {
+				if (complete) {
 					cancelTimer()
 				} else {
 					startTimer()

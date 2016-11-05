@@ -106,13 +106,15 @@ class PresidentUS extends Component {
 
 		const tooltipSorter = (candidates) => {
 			const cutoff = 4
-			const nationalCandidates = sortByElectoralCount(summaryState.candidates)
+			const nationalCandidates =
+				sortByElectoralCount(summaryState.candidates)
 			const localCandidates = sortByElectoralCount(candidates)
 
 			const natIDs = _.map(nationalCandidates.slice(0, cutoff), 'polID')
 			const locIDs = _.map(localCandidates.slice(0, cutoff), 'polID')
 
-			// If the national leaders are the same as the local ones, just return them
+			// If the national leaders are the same as the local ones,
+			// just return them.
 			if (!_.difference(locIDs, natIDs).length) {
 				return sortByPolIDs({
 					candidates: localCandidates,

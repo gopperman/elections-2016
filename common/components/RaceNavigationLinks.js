@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
 import urlManager from './../utils/urlManager.js'
 import offices from './../../data/offices.json'
+import nameUtil from './../utils/nameUtil.js'
 
 const RaceNavigationLinks = ({ isFooter }) => {
 
@@ -21,11 +22,19 @@ const RaceNavigationLinks = ({ isFooter }) => {
 						source,
 					}
 
+					const href = urlManager.office(superOffice)
+
+					// We do this so office names don't come with 'Mass.' suffix.
+					const nameOffice = {
+						...superOffice,
+						statePostal: '',
+					}
+
 					return (
 						<li key={i} className='subnav__item'>
 							<a
 								className='subnav__link benton-bold'
-								href={urlManager.office(superOffice)}>{superOffice.officeName}</a>
+								href={href}>{nameUtil.office.name(nameOffice)}</a>
 						</li>
 					)
 				})}

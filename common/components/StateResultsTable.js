@@ -12,7 +12,7 @@ const createSummary = (raceName) =>
 
 const StateResultsTable = ({ states, summaryCandidates }) =>
 	<div className='r-block'>
-		<h3 className='subhed benton-bold'><span>State Results</span></h3>
+		<h3 className='subhed benton-bold'><span>State results</span></h3>
 		<div className='table-container--outer'>
 			<div className='table-container--inner'>
 				<table className='r-table' summary={createSummary()}>

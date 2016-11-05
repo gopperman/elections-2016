@@ -7,9 +7,20 @@ import {
 	standardizeParty,
 	orderParties,
 	toTitleCase,
+	clean,
 } from './standardize.js'
 
 describe('standardize', () => {
+
+	describe('clean', () => {
+
+		it('should work', () => {
+
+			assert.equal(clean('Question'), 'Ballot questions')
+
+		})
+
+	})
 
 	describe('toTitleCase', () => {
 
