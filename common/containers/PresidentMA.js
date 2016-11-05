@@ -55,7 +55,7 @@ class PresidentMA extends Component {
 
 		// Get breaking news
 		const breakingNews = _.first(results.breakingNews) || {}
-		
+
 		// Get races.
 		const races = _.get(results, 'data.races', [])
 

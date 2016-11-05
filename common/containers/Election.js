@@ -80,9 +80,6 @@ class Election extends Component {
 			.flatten()
 			.value()
 
-		const presSummaryRace = _.find(races,
-			{ officeName: 'President', statePostal: 'US' })
-
 		// Get presidential summary.
 		const presSummaryUnit = _.find(presUnits, { statePostal: 'US' })
 

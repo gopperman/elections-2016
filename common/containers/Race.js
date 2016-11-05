@@ -56,7 +56,7 @@ class Race extends Component {
 
 		// Get breaking news
 		const breakingNews = _.first(results.breakingNews) || {}
-		
+
 		// Get race.
 		const race = _.get(results, 'data.races[0]', {})
 

@@ -92,10 +92,10 @@ class Office extends Component {
 				<div className='container-inset'>
 					<div className='r-col bop-container'>
 						<BalanceOfPower
-						{...bopData}
-						total={100}
-						rows={5}
-						displayLink={false} />
+							{...bopData}
+							total={100}
+							rows={5}
+							displayLink={false} />
 					</div>
 				</div>
 			)
@@ -113,7 +113,7 @@ class Office extends Component {
 						className={heroClass}
 						title={title} />
 					<Timer {...timerProps} />
-							{bop}
+					{bop}
 					<div className='container-sm'>
 						{raceBlocks}
 					</div>

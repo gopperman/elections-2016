@@ -6,7 +6,7 @@ const formatTime = (date) => {
 	const minutes = Math.floor(seconds / 60)
 
 	const s = (minutes === 1) ? '' : 's'
-	
+
 	if (minutes < 60) {
 		return `${minutes} minute${s} ago`
 	}
