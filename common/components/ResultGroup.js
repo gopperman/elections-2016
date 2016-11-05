@@ -20,11 +20,11 @@ numWinners, hideCheckmark }) => {
 
 		const suffix = overlineSuffix ?
 			(<span className='overline--meta benton-regular'>
-				{overlineSuffix} results
+				&#8195;{overlineSuffix} results
 			</span>) : null
 
 		return overline ?
-			<h3 className={klass}>{overline}&#8195;{suffix}</h3> : null
+			<h3 className={klass}>{overline}{suffix}</h3> : null
 
 	}
 
