@@ -193,12 +193,10 @@ class Map extends Component {
 
 		const { shapefile, projection, labelsName } = this.props
 
-		// Set viewBox on svg.
 		const svg = select(this._svg)
 			.attr('viewBox', `0 0 ${width} ${height}`)
-			.classed('insetted', !!subsetFeature)
-			.attr('width', width)
-			.attr('height', height)
+			.attr('width', subsetFeature ? width * 0.70 : width)
+			.attr('height', subsetFeature ? height * 0.70 : height)
 
 		// Create features group.
 		svg.append('g').attr('class', 'features')
@@ -317,8 +315,10 @@ class Map extends Component {
 		// Fit this projection to the newly-calculated aspect ratio.
 		projection.fitSize([width, height], feature)
 
-		// Set viewBox on svg.
-		const inset = select(svg).attr('viewBox', `0 0 ${width} ${height}`)
+		const inset = select(svg)
+			.attr('viewBox', `0 0 ${width} ${height}`)
+			.attr('width', width * 0.25)
+			.attr('height', height * 0.25)
 
 		inset.append('g').attr('class', 'outline')
 			.append('path')
