@@ -10,16 +10,20 @@ const LegendItem = ({ terms, text }) => (
 
 			{terms.map(term => {
 
+				const { label, klass } = term
+
 				const dtClass = classnames(
 					'legend__term',
 					'benton-regular',
 					{ 'hide-accessible': terms.length < 2 }
 				)
 
-				const ddClass = classnames('legend__def', term.klass)
+				const ddClass = classnames('legend__def', klass)
 
 				return ([
-					<dt title={nameUtil.party.name(term.label)} className={dtClass}>{term.label}</dt>,
+					<dt
+						title={nameUtil.party.name(label)}
+						className={dtClass}>{label}</dt>,
 					<dd className={ddClass} />,
 				])
 
