@@ -21,6 +21,7 @@ const ElectoralCollegeBar = ({
 
 	return (
 		<div className='r-block'>
+			<h3 className='overline benton-bold'>Electoral votes</h3>
 			<div className='r-block__duo-results'>
 				<img
 					className='avatar r-block__img'
