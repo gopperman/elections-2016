@@ -1,0 +1,156 @@
+[
+	{
+		"abbr": "AME", 
+		"name": "Americans Elect"
+	},
+	{
+		"abbr": "AMR",
+		"name": "American Party"
+	},
+	{
+		"abbr": "AO",
+		"name": "All Others"
+	
+	},
+	{
+		"abbr": "CON",
+		"name": "Conservative"
+	},
+	{
+		"abbr": "CST",
+		"name": "Constitution"
+	},
+	{
+		"abbr": "DEM",
+		"name": "Democrat"
+	},
+	{
+		"abbr": "DCG",
+		"name": "DC Statehood Green"
+	},
+	{
+		"abbr": "IGR",
+		"name": "Independent Green"
+	},
+	{
+		"abbr": "GRN",
+		"name": "Green"
+	}
+	{
+		"abbr": "GRP",
+		"name": "Grass Roots"
+	},
+	{
+		"abbr": "IND",
+		"name": "Independent"
+	},
+	{
+		"abbr": "IAP",
+		"name": "Independent American"
+	},
+	{
+		"abbr": "IPH",
+		"name": "Independent Party Of Hawaii"
+	},
+	{
+		"abbr": "INP",
+		"name": "Independence"
+	},
+	{
+		"abbr": "IP",
+		"name": "Independent Party"
+	},
+	{
+		"abbr": "LIB",
+		"name": "Libertarian"
+	},
+	{
+
+		"abbr": "LAB",
+		"name": "Labor"
+	},
+	{
+		"abbr": "LUN",
+		"name": "Liberty Union"
+	},
+	{
+		"abbr": "MNT",
+		"name": "Mountain Party"
+	},
+	{
+		"abbr": "MOD",
+		"name": "Moderate"
+	},
+	{
+		"abbr": "NPD",
+		"name": "No Party Designation"
+	},
+	{
+		"abbr": "NPA",
+		"name": "No Party Affiliation"
+	},
+	{
+		"abbr": "NLP",
+		"name": "Natural Law"
+	},
+	{
+		"abbr": "NO",
+		"name": "No"
+	},
+	{
+		"abbr": "NP",
+		"name": "NON PARTISAN"
+	},
+	{
+		"abbr": "PEC",
+		"name": "Petitioning Candidate"
+	},
+	{
+		"abbr": "PFP",
+		"name": "Peace & Freedom"
+	},
+	{
+		"abbr": "PRG",
+		"name": "Progressive"
+	},
+	{
+		"abbr": "PAG",
+		"name": "Pacific Green"
+	},
+	{
+		"abbr": "GOP",
+		"name": "Republican"
+	},
+	{
+		"abbr": "RP" ,
+		"name": "Reform"
+	},
+	{
+		"abbr": "UST",
+		"name": "U.S. Taxpayers"
+	},
+	{
+		"abbr": "UCZ",
+		"name": "United Citizens"
+	},
+	{
+		"abbr": "UNI",
+		"name": "United Independent"
+	},
+	{
+		"abbr": "UNA",
+		"name": "Unaffiliated"
+	},
+	{
+		"abbr": "UTY",
+		"name": "Unity"
+	},
+	{
+		"abbr": "WF" ,
+		"name": "Working Families"
+	},
+	{
+		"abbr": "YES",
+		"name": "Yes"
+	}
+]
