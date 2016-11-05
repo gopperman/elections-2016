@@ -25,6 +25,10 @@
 		margin-bottom 0.5em
 		float left
 		margin-right 0.25em
+		vertical-align middle
+		+ .r-table__name
+			margin-left 0.5em
+			float left
 	&__cell
 		vertical-align top
 		padding 0.5em 1em
@@ -48,6 +52,13 @@
 				font-size 0.7em
 				+mq('bp-2')
 					font-size 0.8em
+	&__name
+		position relative
+		padding-left 1.5em
+		display inline
+	.is-winner:before
+		position absolute
+		left 0
 // Overflow container
 .table-container--outer
 	position relative

@@ -28,7 +28,7 @@ export default ({ subunit = {}, displayName, tooltipSortingDelegate }) => {
 		const pctForDisplay = percentForDisplay(pct)
 
 		const candidateClass =
-			classnames('benton-bold', { 'is-winner': !!winner && isPresidential })
+			classnames('benton-bold', 'r-table__name', { 'is-winner': !!winner && isPresidential })
 
 		const squareClass = `fill-complete-${normalizeParty(party)}`
 
