@@ -1,4 +1,5 @@
 import usAbbreviations from 'us-abbreviations'
+import parties from './../../data/parties.json'
 import urlManager from './urlManager.js'
 import compareStringsNoAlpha from './compareStringsNoAlpha.js'
 import { clean, toTitleCase } from './standardize.js'
@@ -53,6 +54,12 @@ const office = {
 		return this.htmlTitle(params)
 	},
 
+}
+
+const party = {
+	name(abbr) {
+		return _.get(_.find(parties, { 'abbr': abbr.toUpperCase() }), 'name')
+	},
 }
 
 const race = {
@@ -135,6 +142,7 @@ const nameUtil = {
 	presidentUS,
 	presidentMA,
 	office,
+	party,
 	race,
 	town,
 }

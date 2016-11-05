@@ -14,16 +14,16 @@ import _ from 'lodash'
 const fullName = (candidate) =>
 	[candidate.first, candidate.last].join(' ').trim()
 
-	/**
-	 * Get candidate's vote percent.
-	 * @memberof Candidate
-	 * @function
-	 * @param {Array} $0.candidateID id of the candidate we're interested in
-	 * @param {Array} $0.candidates an array of candidates to which our candidate belongs
-	 * @returns {number} a candidate's vote percent
-	 * @example
-	 * percent({ candidateID, candidates }) //=> 0.5
-	 */
+/**
+ * Get candidate's vote percent.
+ * @memberof Candidate
+ * @function
+ * @param {Array} $0.candidateID id of the candidate we're interested in
+ * @param {Array} $0.candidates an array of candidates to which our candidate belongs
+ * @returns {number} a candidate's vote percent
+ * @example
+ * percent({ candidateID, candidates }) //=> 0.5
+ */
 const percent = ({ candidateID, candidates }) => {
 
 	const total = _.sumBy(candidates, 'voteCount')
