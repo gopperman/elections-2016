@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import usAbbreviations from 'us-abbreviations'
 import parties from './../../data/parties.json'
 import urlManager from './urlManager.js'
@@ -58,7 +59,7 @@ const office = {
 
 const party = {
 	name(abbr) {
-		return _.get(_.find(parties, { 'abbr': abbr.toUpperCase() }), 'name')
+		return _.get(_.find(parties, { abbr: abbr.toUpperCase() }), 'name')
 	},
 }
 
