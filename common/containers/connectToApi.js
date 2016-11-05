@@ -62,7 +62,8 @@ const connectToApi = (WrappedComponent) => {
 				const complete = racesAreComplete(races) &&
 					reportsAreComplete(reports)
 
-				if (complete) {
+				// TODO: remove this
+				if (!complete) {
 					cancelTimer()
 				} else {
 					startTimer()
@@ -80,10 +81,37 @@ const connectToApi = (WrappedComponent) => {
 		render() {
 
 			const { props, fetchData } = this
-			const { timer } = props
+			const { timer, results } = props
 			const { stopTimer } = props.actions
 
+			// Get all races.
+			const races = _.get(results, 'data.races', [])
+
+			// Get all `lastUpdated` race fields.
+			const raceDates = _(races)
+				.map('reportingUnits')
+				.flatten()
+				.map('lastUpdated')
+				.value()
+
+			// Get all reports.
+			const reports = _.get(results, 'data.reports', [])
+
+			// Get all `timestamp` report fields.
+			const reportDates = _(reports)
+				.map('reports')
+				.flatten()
+				.map('report.trendtable.timestamp')
+				.value()
+
+			// Get the most recent of all timestamps.
+			const timestamp = _(raceDates.concat(reportDates))
+				.map(v => new Date(v))
+				.sortBy()
+				.last()
+
 			const timerProps = {
+				timestamp,
 				...timer,
 				callback: () => {
 					stopTimer()

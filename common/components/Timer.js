@@ -3,6 +3,7 @@
 
 import React, { Component, PropTypes } from 'react'
 import { interval } from 'd3-timer'
+import dateline from 'dateline'
 
 const DURATION = 15 * 1000
 
@@ -12,6 +13,7 @@ class Timer extends Component {
 		status: PropTypes.string.isRequired,
 		startedAt: PropTypes.number,
 		callback: PropTypes.func.isRequired,
+		timestamp: PropTypes.instanceOf(Date),
 	}
 
 	// This lifecycle event gets called once, immediately after the initial
@@ -47,7 +49,7 @@ class Timer extends Component {
 
 	render() {
 
-		const { status, startedAt } = this.props
+		const { status, startedAt, timestamp } = this.props
 		const { CANCELED, RUNNING, STOPPED } = Timer.status
 		let message
 
@@ -83,9 +85,31 @@ class Timer extends Component {
 
 		}
 
+		const now = new Date()
+		let updated = ''
+
+		if (timestamp) {
+
+			// Create AP-style time.
+			const time = dateline(timestamp).getAPTime()
+
+			// Only display date if it's not today.
+			const date = (now.toDateString() === timestamp.toDateString()) ?
+				null : dateline(timestamp).getAPDate()
+
+			// Join date and time, but not date if it's today.
+			const timeAndDate = [date, time].filter(v => v).join(', ')
+
+			updated = `Updated ${timeAndDate}`
+
+		}
+
 		return (
 			<div className='timer'>
-				<p className='timer__update benton-bold'>{message}</p>
+				<p className='timer__elements'>
+					<span className='timer__elements__clock benton-bold'>{message}</span>
+					<span className='timer__elements__update benton-regular'>{updated}</span>
+				</p>
 			</div>
 		)
 
