@@ -1,5 +1,5 @@
 import FontFaceObserver from 'fontfaceobserver'
-import serializeError from 'serialize-error'
+import logger from './../utils/logger.js'
 
 const createStylesheet = () => {
 	const style = document.createElement('style')
@@ -19,8 +19,7 @@ const addFontRule = ({ font, sheet }) => {
 }
 
 const handleError = err => {
-	console.error('loadFont.js: error trying to load fonts')
-	console.error(serializeError(err))
+	logger(err)
 }
 
 const loadFont = fonts => {

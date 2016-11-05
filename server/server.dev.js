@@ -1,5 +1,4 @@
 import express from 'express'
-import serializeError from 'serialize-error'
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
 import webpackHotMiddleware from 'webpack-hot-middleware'
@@ -7,6 +6,7 @@ import DashboardPlugin from 'webpack-dashboard/plugin'
 import handleRender from './handleRender.js'
 import api from './api.js'
 import webpackConfig from './../webpack.config.dev.js'
+import logger from './../common/utils/logger.js'
 
 const app = express()
 const port = process.env.PORT || 3001
@@ -42,8 +42,7 @@ app.listen(port, (error) => {
 
 	if (error) {
 
-		console.error('server.dev.js: error trying to start app')
-		console.error(serializeError(error))
+		logger(error)
 
 	} else {
 

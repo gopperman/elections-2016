@@ -1,6 +1,6 @@
 import express from 'express'
-import serializeError from 'serialize-error'
 import compression from 'compression'
+import logger from './../common/utils/logger.js'
 
 const app = express()
 const port = process.env.PORT || 3001
@@ -31,8 +31,7 @@ app.listen(port, (error) => {
 
 	if (error) {
 
-		console.error('server.prod.js: error trying to start app')
-		console.error(serializeError(error))
+		logger(error)
 
 	} else {
 

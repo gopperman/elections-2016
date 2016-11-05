@@ -1,4 +1,4 @@
-import serializeError from 'serialize-error'
+import logger from './../utils/logger.js'
 import {
 
 	START_TIMER,
@@ -129,8 +129,7 @@ const fetchResults = ({ url }) =>
 					} else {
 
 						// log the error,
-						console.error('actionCreator.js: we did not get any races')
-						console.error(message)
+						logger(new Error(message))
 
 						// and fire the failure redux action so the user is notified.
 						return dispatch(fetchResultsFailure({ error: message }))
@@ -152,11 +151,10 @@ const fetchResults = ({ url }) =>
 				if (location) {
 
 					// log the error,
-					console.error('actionCreator.js: error in fetch catch')
-					console.error(serializeError(error))
+					logger(error)
 
 					// and fire the failure redux action so the user is notified.
-					dispatch(fetchResultsFailure({ error: serializeError(error) }))
+					dispatch(fetchResultsFailure({ error }))
 
 				} else {
 

@@ -3,7 +3,7 @@ import { Provider } from 'react-redux'
 import { renderToString } from 'react-dom/server'
 import { match, RouterContext, createMemoryHistory } from 'react-router'
 import { trigger } from 'redial'
-import serializeError from 'serialize-error'
+import logger from './../common/utils/logger.js'
 
 import configureStore from './../common/store/configureStore.js'
 import initialState from './../common/store/initialState.js'
@@ -26,8 +26,7 @@ export default (req, res) => {
 		if (error) {
 
 			// there was an error somewhere during route matching
-			console.error('handleRender.js: error during route matching')
-			console.error(serializeError(error))
+			logger(error)
 			res.status(500).send(error.message)
 
 		} else if (redirect) {
@@ -97,8 +96,7 @@ export default (req, res) => {
 				})
 				.catch(e => {
 
-					console.error('handleRender.js: error during/after fetch trigger')
-					console.error(serializeError(e))
+					logger(e)
 					res.status(404).send(e.message)
 
 				})
@@ -108,8 +106,7 @@ export default (req, res) => {
 			const message = `Not Found: Could not match any routes for ${url}`
 
 			// no errors, no redirect, we just didn't match anything
-			console.error('handleRender.js: could not match anything')
-			console.error(message)
+			logger(new Error(message))
 			res.status(404).send(message)
 
 		}
