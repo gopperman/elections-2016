@@ -27,7 +27,7 @@ const TownResultsTable = ({ towns, summaryCandidates }) =>
 								const { winner, incumbent, last } = candidate
 
 								const candidateClass =
-									classnames('benton-bold', { 'is-winner': !!winner })
+									classnames('benton-bold', 'r-table__name', { 'is-winner': !!winner })
 
 								const incumbentSpan = incumbent ?
 									<span className='r-block__tag benton-regular'>Incumbent</span> : null
