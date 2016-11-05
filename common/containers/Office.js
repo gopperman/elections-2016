@@ -94,13 +94,11 @@ class Office extends Component {
 			case 'US Senate':
 				bopData = senateTrendReport(sortedRaces)
 				bop = (
-					<div className='r-col bop-container'>
 						<BalanceOfPower
 							{...bopData}
 							total={100}
 							rows={5}
 							displayLink={false} />
-					</div>
 				)
 				link = (<LinkButton
 					text={'Switch to US House'}
@@ -120,8 +118,10 @@ class Office extends Component {
 		if (bop || link) {
 			officeSummary = (
 				<div className='container-inset'>
+					<div className='r-col bop-container'>
 					{bop}
 					{link}
+					</div>
 				</div>
 			)
 		}
