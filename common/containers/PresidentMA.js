@@ -125,11 +125,13 @@ class PresidentMA extends Component {
 							<ElectoralCollegeBar {...usUnit} />
 						</div>
 					</div>
-					<div className='container-lg'>
+					<div className='container-sm'>
 						<ResultGroup
 							overline={nameUtil.race.name(maRace)}
 							precinctsReportingPct={maUnit.precinctsReportingPct}
 							candidates={summaryTownCandidates} />
+					</div>
+					<div className='container-lg'>
 						{map}
 					</div>
 					<div className='container-lg'>
