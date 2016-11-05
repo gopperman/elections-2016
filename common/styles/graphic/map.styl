@@ -73,35 +73,26 @@
 		stroke-linecap round
 		stroke-linejoin round
 
-		// width 100%
-		// // trick to make SVG resize in IE
-		// height 1px
-		// overflow visible
-
 		text
 			&.background
 				stroke white
 				stroke-width 3px
 
-		// &.insetted
-		// 	width 70%
-
 		&.inset-map
 			position absolute
 			bottom 0
 			right 0
-			// width 25%
 			pointer-events none
 
-		// 	g.outline
-		// 		fill set-gray('light')
-		// 		+mq('bp-2')
-		// 			fill set-gray('lightest')
+			g.outline
+				fill set-gray('light')
+				+mq('bp-2')
+					fill set-gray('lightest')
 
-		// 	g.subset
-		// 		fill set-gray('darkest')
-		// 		+mq('bp-2')
-		// 			fill set-gray('dark')
+			g.subset
+				fill set-gray('darkest')
+				+mq('bp-2')
+					fill set-gray('dark')
 
 		path
 			&.selected
