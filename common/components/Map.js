@@ -196,9 +196,11 @@ class Map extends Component {
 		// Set viewBox on svg.
 		const svg = select(this._svg)
 			.attr('viewBox', `0 0 ${width} ${height}`)
+
+			.attr('preserveAspectRatio', 'xMidYMin slice')
 			.classed('insetted', !!subsetFeature)
-			.attr('width', width)
-			.attr('height', height)
+			// trick to make SVG resize in IE
+			.style('padding-bottom', `${100 * (height / width)}%`)
 
 		// Create features group.
 		svg.append('g').attr('class', 'features')
