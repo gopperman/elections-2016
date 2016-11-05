@@ -38,7 +38,7 @@ class BreakingBar extends Component {
 						<a
 							href={alert.link}
 							rel='noopener noreferrer'
-							target='_blank'>{alert.headline}</a>
+							target='_blank'>{alert.headline} </a>
 						<time
 							dateTime={alert.timestamp}
 							className='benton-regular'>{time}</time>
