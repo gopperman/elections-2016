@@ -93,8 +93,9 @@ class HpMap extends Component {
 			dropdownName='state'
 			displayName='stateName'
 			isPresidential
-			buttonText={nameUtil.presidentUS.name()}
-			buttonUrl={urlManager.base()}
+			buttonText={nameUtil.presidentMA.name()}
+			buttonUrl={urlManager.race({
+				officeName: 'President', statePostal: 'MA', source: 'MA' })}
 			labelsName='STUSPS' />) : null
 
 		// Finally we can render all the components!
