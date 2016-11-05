@@ -38,13 +38,19 @@ const urlManager = {
 		let result
 
 		if (compareStringsNoAlpha(officeName, 'president')) {
+
 			result = this.race({ officeName: 'President', source })
+
 		} else if (_.includes(['ma', 'nh'], statePostal.toLowerCase())) {
+
 			result = `${this.base()}/${statePostal}/${this.encode(officeName)}`
 			result = this.tag(result, source, 'race')
+
 		} else {
+
 			result = `${this.base()}/${this.encode(officeName)}`
 			result = this.tag(result, source, 'race')
+
 		}
 
 		return result
