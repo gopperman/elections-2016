@@ -15,7 +15,7 @@ const Hero = ({ title, isElectionCtrl, className }) => {
 	) : (<h1 className={h1Class}>{title}</h1>)
 
 	return (
-		<div className={`hero ${className}`}>
+		<div className={`hero lead ${className}`}>
 			{h1}
 			<div
 				aria-hidden='true'

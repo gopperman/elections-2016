@@ -17,20 +17,59 @@ $bg-position-hidden--sm = 10% 35rem, 90% 55rem, 50%, 50%
 $bg-position-shown--sm = 10% 100%, 90% 100%, 50%, 50%
 $hero-height-sm = 13rem
 $hero-height-lg = 22rem
-.lead-img
+.lead
 	position relative
-	background url($assets-path + 'lead/clinton.png') no-repeat, url($assets-path + 'lead/trump.png') no-repeat, url($assets-path + 'lead/map.png') no-repeat, linear-gradient(to top, desaturate(set-color('red', dark), 50%), desaturate(set-color('blue', dark), 50%))
-	background-size 48%, 60%, 75%, 100%
 	min-height $hero-height-sm
-	background-position $bg-position-hidden--sm
-	background-blend-mode multiply, multiply, overlay
-	animation pop-sm 0.75s 0.75s linear forwards
 	padding 1em
 	+mq('bp-2')
 		min-height $hero-height-lg
+_:-ms-fullscreen .lead, :root .ie11up .lead
+	height 15rem
+	+mq('bp-2')
+		height 25rem
+
+.lead-img
+	background url($assets-path + 'lead/clinton.png') no-repeat, url($assets-path + 'lead/trump.png') no-repeat, url($assets-path + 'lead/map.png') no-repeat, linear-gradient(to top, desaturate(set-color('red', dark), 50%), desaturate(set-color('blue', dark), 50%))
+	background-size 48%, 60%, 75%, 100%
+	background-position $bg-position-hidden--sm
+	background-blend-mode multiply, multiply, overlay
+	animation pop-sm 0.75s 0.75s linear forwards
+	+mq('bp-2')
 		background-size 28%, 35%, 75%, 100%
 		background-position $bg-position-hidden--lg
 		animation pop-lg 0.75s 0.5s linear forwards
+	&:before
+		content ''
+		display block
+		position absolute
+		left 0
+		top 0
+		bottom 0
+		width 100%
+		background-image url($assets-path + 'lead/texture.png')
+		opacity 0.07
+
+.lead-us-map
+	background url($assets-path + 'lead/map.png') no-repeat, linear-gradient(to top, desaturate(set-color('red', dark), 50%), desaturate(set-color('blue', dark), 50%))
+	background-size 75%, 100%
+	background-position 50% 20%, 50%
+	background-blend-mode overlay
+	&:before
+		content ''
+		display block
+		position absolute
+		left 0
+		top 0
+		bottom 0
+		width 100%
+		background-image url($assets-path + 'lead/texture.png')
+		opacity 0.07
+
+.lead-ma-map
+	background url($assets-path + 'lead/ma-map.png') no-repeat, linear-gradient(to top, desaturate(set-color('red', dark), 50%), desaturate(set-color('blue', dark), 50%))
+	background-size 75%, 100%
+	background-position 50% 20%, 50%
+	background-blend-mode overlay
 	&:before
 		content ''
 		display block
@@ -54,47 +93,6 @@ $hero-height-lg = 22rem
 	to
 		background-position $bg-position-shown--lg
 
-.lead-us-map
-	position relative
-	background url($assets-path + 'lead/map.png') no-repeat, linear-gradient(to top, desaturate(set-color('red', dark), 50%), desaturate(set-color('blue', dark), 50%))
-	background-size 75%, 100%
-	min-height $hero-height-sm
-	background-position 50% 20%, 50%
-	background-blend-mode overlay
-	padding 1em
-	+mq('bp-2')
-		min-height $hero-height-lg
-	&:before
-		content ''
-		display block
-		position absolute
-		left 0
-		top 0
-		bottom 0
-		width 100%
-		background-image url($assets-path + 'lead/texture.png')
-		opacity 0.07
-
-.lead-ma-map
-	position relative
-	background url($assets-path + 'lead/ma-map.png') no-repeat, linear-gradient(to top, desaturate(set-color('red', dark), 50%), desaturate(set-color('blue', dark), 50%))
-	background-size 75%, 100%
-	min-height $hero-height-sm
-	background-position 50% 20%, 50%
-	background-blend-mode overlay
-	padding 1em
-	+mq('bp-2')
-		min-height $hero-height-lg
-	&:before
-		content ''
-		display block
-		position absolute
-		left 0
-		top 0
-		bottom 0
-		width 100%
-		background-image url($assets-path + 'lead/texture.png')
-		opacity 0.07
 
 // Icons
 
