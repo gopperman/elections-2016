@@ -18,7 +18,8 @@ const node = document.getElementById(`elections-${containerName}`)
 // reloading - see https://github.com/reactjs/redux/pull/1455.
 let render = () => {
 
-	const Root = require('./../common/components/HomepageRoot.js').default
+	const Root =
+		require(`./../common/components/${process.env.HP_CONTAINER}Root.js`).default
 
 	// Render Root to `electoralCollege`.
 	if (node) {
