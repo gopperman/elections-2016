@@ -3,7 +3,7 @@
 	"description": "Description of graphic",
 	"keywords": "Comma, delimited, for, seo",
 	"url": "//apps.bostonglobe.com/graphics/path/to/graphic",
-	"imageUrl": "//apps.bostonglobe.com/graphics/path/to/image",
+	"imageUrl": "https://apps.bostonglobe.com/election-results/2016/general/assets/lead/elections-lead.jpg",
 	"credits": "",
 	"teasers": [],
 	"meter": true,
