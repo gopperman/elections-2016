@@ -21,9 +21,9 @@ const LegendItem = ({ terms, text }) => (
 				const ddClass = classnames('legend__def', klass)
 
 				return ([
-					<dt
-						title={nameUtil.party.name(label)}
-						className={dtClass}>{label}</dt>,
+					<dt className={dtClass}>
+						<abbr title={nameUtil.party.name(label)}>{label}</abbr>
+					</dt>,
 					<dd className={ddClass} />,
 				])
 
