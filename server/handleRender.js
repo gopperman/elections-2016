@@ -1,6 +1,6 @@
 import React from 'react'
 import { Provider } from 'react-redux'
-import { renderToString } from 'react-dom/server'
+import { renderToString, renderToStaticMarkup } from 'react-dom/server'
 import { match, RouterContext, createMemoryHistory } from 'react-router'
 import { trigger } from 'redial'
 import logger from './../common/utils/logger.js'
@@ -12,6 +12,8 @@ import meta from './../data/meta.json'
 import pakage from './../package.json'
 
 export default (req, res) => {
+
+	res.header('Surrogate-Key', 'electionsapp')
 
 	// Create a new Redux store instance
 	const store = configureStore(initialState)
@@ -34,6 +36,8 @@ export default (req, res) => {
 			res.redirect(redirect.pathname + redirect.search)
 
 		} else if (props) {
+
+			const isLite = url.match('/hp/')
 
 			// Get array of route handler components
 			const { components, params } = props
@@ -70,28 +74,43 @@ export default (req, res) => {
 
 					const state = getState()
 
-					// Render the component to a string
-					const appHtml = renderToString(
-						<Provider store={store}>
-							<RouterContext {...props} />
-						</Provider>
-					)
+					if (isLite) {
 
-					res.header('Surrogate-Key', 'electionsapp')
+						// Render the component to a string
+						const appHtml = renderToStaticMarkup(
+							<Provider store={store}>
+								<RouterContext {...props} />
+							</Provider>
+						)
 
-					// Make express render 'html' view with an object as parameter
-					res.render('html', {
-						pretty: true,
-						appHtml,
-						initialState: state,
-						isProduction: process.env.NODE_ENV === 'production',
-						meta: {
-							...meta,
-							section: pageSection,
-						},
-						version: pakage.version,
-						title,
-					})
+						res.render('homepageLite', {
+							pretty: true,
+							appHtml,
+						})
+
+					} else {
+
+						// Render the component to a string
+						const appHtml = renderToString(
+							<Provider store={store}>
+								<RouterContext {...props} />
+							</Provider>
+						)
+
+						res.render('html', {
+							pretty: true,
+							appHtml,
+							initialState: state,
+							isProduction: process.env.NODE_ENV === 'production',
+							meta: {
+								...meta,
+								section: pageSection,
+							},
+							version: pakage.version,
+							title,
+						})
+
+					}
 
 				})
 				.catch(e => {
