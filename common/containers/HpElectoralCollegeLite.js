@@ -49,7 +49,7 @@ class PresidentUS extends Component {
 
 		// Finally we can render all the components!
 		return (
-			<div className='president-is-open'>
+			<div className='election-graphic'>
 				<TestStatus isTest={isTest} />
 				<ElectoralCollegeBar {...summaryState} />
 			</div>
