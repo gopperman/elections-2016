@@ -36,7 +36,7 @@ class TownLookup extends Component {
 
 		const select = this.state.mounted ?
 			<Select
-				placeholder='Select a town...'
+				placeholder='Select a Mass. town...'
 				value={this.state.value}
 				searchable
 				id='town-select'
@@ -49,7 +49,7 @@ class TownLookup extends Component {
 			<div className='container-select'>
 				<label
 					htmlFor='town-select'
-					className='benton-bold form__label form__label--overline'>Find your town results</label>
+					className='benton-bold form__label form__label--overline'>Find your Mass. town results</label>
 				{select}
 			</div>
 		)
