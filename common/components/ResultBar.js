@@ -39,7 +39,7 @@ precinctsReportingPct }) => {
 		<span className={tagClass}>Incumbent</span> : null
 
 	const partySpan = !_.includes(['yes', 'no'], party.toLowerCase()) ?
-		<span title={nameUtil.party.name(party)} className={tagClass}>{party}</span> : null
+		<abbr title={nameUtil.party.name(party)} className={tagClass}>{party}</abbr> : null
 
 	const precincts = precinctsReportingPct ?
 		(<p className='note benton-regular'>
