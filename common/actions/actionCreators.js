@@ -99,11 +99,16 @@ const fetchResults = ({ url }) =>
 		const getJson = (urlToFetch) =>
 			fetch(urlToFetch)
 				.then(response => {
-					// if error, continue
+					// if error, continue.
 					if (response.status !== 200) return {}
 					return response
 				})
 				.then(parseJson)
+				.catch(error => {
+					// if we get an error, swallow it.
+					logger(error)
+					return {}
+				})
 
 		// // Should be 'http://www.bostonglobe.com/bn_endpoint.json'
 		// const allUrls = [fullUrl, config.breakingNewsUrl]
