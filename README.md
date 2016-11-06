@@ -26,6 +26,11 @@ Please note: do not reproduce Boston Globe logos or fonts without written permis
 -   `API_URL=<API_URL> HP_CONTAINER=<HP_CONTAINER> npm run build:hp` - build the homepage app, where HP_CONTAINER is one of `HpElectoralCollege, HpMap, HpFeaturedRaces`.
 -   `npm run prod:hp` - run the homepage app.
 
+## deploy homepage
+
+-   `make homepage env=<env> user=<user>` - deploy js/css files to `apps`.
+-   `upload` - run this on `apps`.
+
 ## License
 
 MIT © [The Boston Globe](http://github.com/BostonGlobe)
