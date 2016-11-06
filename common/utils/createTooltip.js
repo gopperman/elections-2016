@@ -14,9 +14,15 @@ export default ({ subunit = {}, displayName, tooltipSortingDelegate }) => {
 
 	const isPresidential = _.has(candidates[0], 'electWon')
 
+	const electorsTh = isPresidential ?
+		`<th class='r-table__cell' scope='col'>
+			<p class='benton-regular'>Electors</p>
+		</th>` : ''
+
 	const rows = candidates.slice(0, 4).map((candidate, i) => {
 
-		const { candidateID, voteCount, last, winner, party } = candidate
+		const { candidateID, voteCount, last, winner, party,
+			electWon } = candidate
 
 		// Add appropriate commas to the candidate's vote count.
 		const vote = addCommas(voteCount)
@@ -34,6 +40,11 @@ export default ({ subunit = {}, displayName, tooltipSortingDelegate }) => {
 
 		const pctSpan = `<span class='${i > 0 && 'hide-invisible'}'>%</span>`
 
+		const electorsTd = isPresidential ?
+			`<td class='r-table__cell' scope='row'>
+				<p class='benton-bold'>${electWon}</p>
+			</td>` : ''
+
 		// Create this candidate's table row.
 		return `
 			<tr class='r-table__row'>
@@ -41,9 +52,7 @@ export default ({ subunit = {}, displayName, tooltipSortingDelegate }) => {
 					<div aria-hidden='true' class='r-table__square ${squareClass}'></div>
 					<p class='${candidateClass}'>${last}</p>
 				</td>
-				<td class='r-table__cell' scope='row'>
-					<p class='benton-bold'>0</p>
-				</td>
+				${electorsTd}
 				<td class='r-table__cell' scope='row'>
 					<p class='benton-bold'>${+pctForDisplay}${pctSpan}</p>
 				</td>
@@ -62,9 +71,7 @@ export default ({ subunit = {}, displayName, tooltipSortingDelegate }) => {
 					<th class='r-table__cell' scope='col'>
 						<p class='benton-regular'>Candidate</p>
 					</th>
-					<th class='r-table__cell' scope='col'>
-						<p class='benton-regular'>Electors</p>
-					</th>
+					${electorsTh}
 					<th class='r-table__cell' scope='col'>
 						<p class='benton-regular'>Percent</p>
 					</th>
