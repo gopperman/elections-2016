@@ -10,7 +10,7 @@ import {
 } from './../utils/standardize.js'
 
 const ResultBar = ({ candidate, candidates, showImage, hideCheckmark,
-precinctsReportingPct }) => {
+precinctsReportingPct, isUnopposed }) => {
 
 	const { party, candidateID, voteCount, winner, incumbent } = candidate
 
@@ -39,12 +39,29 @@ precinctsReportingPct }) => {
 		<span className={tagClass}>Incumbent</span> : null
 
 	const partySpan = !_.includes(['yes', 'no'], party.toLowerCase()) ?
-		<abbr title={nameUtil.party.name(party)} className={tagClass}>{party}</abbr> : null
+		(<abbr
+			title={nameUtil.party.name(party)}
+			className={tagClass}>{party}</abbr>) : null
 
-	const precincts = precinctsReportingPct ?
+	const precincts = !isUnopposed && precinctsReportingPct ?
 		(<p className='note benton-regular'>
 			<span>{+precinctsReportingPct}% reporting</span>
 		</p>) : null
+
+	const results = !isUnopposed ?
+		(<div className='r-block__results'>
+			<div className='r-block__bar results-bar' aria-hidden='true'>
+				<span
+					className={`fill-complete-${normalizeParty(party)}`}
+					role='progressbar'
+					aria-valuenow={pct}
+					aria-valuemin='0'
+					aria-valuemax='100'
+					style={style} />
+			</div>
+			<p className='r-block__meta benton-bold'>{+pct}%</p>
+			<p className='r-block__meta benton-regular'>{vote} votes</p>
+		</div>) : null
 
 	return (
 
@@ -56,21 +73,7 @@ precinctsReportingPct }) => {
 				{name}{partySpan}{incumbentSpan}{runoffSpan}
 			</p>
 
-			<div className='r-block__results'>
-				<div className='r-block__bar results-bar' aria-hidden='true'>
-
-					<span
-						className={`fill-complete-${normalizeParty(party)}`}
-						role='progressbar'
-						aria-valuenow={pct}
-						aria-valuemin='0'
-						aria-valuemax='100'
-						style={style} />
-
-				</div>
-				<p className='r-block__meta benton-bold'>{+pct}%</p>
-				<p className='r-block__meta benton-regular'>{vote} votes</p>
-			</div>
+			{results}
 
 			{precincts}
 
@@ -86,6 +89,7 @@ ResultBar.propTypes = {
 	precinctsReportingPct: PropTypes.string,
 	showImage: PropTypes.bool,
 	hideCheckmark: PropTypes.bool,
+	isUnopposed: PropTypes.bool,
 }
 
 export default ResultBar

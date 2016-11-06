@@ -7,7 +7,9 @@ const ResultGroup = ({ candidates, precinctsReportingPct, overline,
 overlineSuffix, buttonText, buttonUrl, isFeature,
 numWinners, hideCheckmark }) => {
 
-	const button = buttonUrl && buttonText ?
+	const isUnopposed = candidates.length < 2
+
+	const button = (buttonUrl && buttonText && !isUnopposed) ?
 		<LinkButton text={buttonText} url={buttonUrl} /> : null
 
 	const mainClass = classnames('r-col', { 'r-feature': isFeature })
@@ -15,7 +17,7 @@ numWinners, hideCheckmark }) => {
 	const overlineH3 = () => {
 
 		const klass = classnames('overline', 'benton-bold', {
-			'has-aside': numWinners > 1,
+			'has-aside': numWinners > 1 || isUnopposed,
 		})
 
 		const suffix = overlineSuffix ?
@@ -32,6 +34,10 @@ numWinners, hideCheckmark }) => {
 		// eslint-disable-next-line max-len
 		<aside className='r-block__aside benton-regular'>This race allows a maximum of {numWinners} multiple winners</aside> : null
 
+	const unopposedDescription = isUnopposed ?
+		// eslint-disable-next-line max-len
+		<aside className='r-block__aside benton-regular'>This candidate is unopposed</aside> : null
+
 	return (
 		<div className={mainClass}>
 			{overlineH3()}
@@ -41,6 +47,7 @@ numWinners, hideCheckmark }) => {
 						key,
 						candidate,
 						hideCheckmark,
+						isUnopposed,
 						precinctsReportingPct: key === array.length - 1 ?
 						precinctsReportingPct : null,
 						candidates,
@@ -48,6 +55,7 @@ numWinners, hideCheckmark }) => {
 				/>))
 			}
 			{multipleWinnersDescription}
+			{unopposedDescription}
 			{button}
 		</div>
 	)
