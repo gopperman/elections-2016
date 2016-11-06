@@ -42,6 +42,9 @@ export default ({ subunit = {}, displayName, tooltipSortingDelegate }) => {
 					<p class='${candidateClass}'>${last}</p>
 				</td>
 				<td class='r-table__cell' scope='row'>
+					<p class='benton-bold'>0</p>
+				</td>
+				<td class='r-table__cell' scope='row'>
 					<p class='benton-bold'>${+pctForDisplay}${pctSpan}</p>
 				</td>
 				<td class='r-table__cell' scope='row'>
@@ -58,6 +61,9 @@ export default ({ subunit = {}, displayName, tooltipSortingDelegate }) => {
 				<tr class='r-table__row'>
 					<th class='r-table__cell' scope='col'>
 						<p class='benton-regular'>Candidate</p>
+					</th>
+					<th class='r-table__cell' scope='col'>
+						<p class='benton-regular'>Electors</p>
 					</th>
 					<th class='r-table__cell' scope='col'>
 						<p class='benton-regular'>Percent</p>
