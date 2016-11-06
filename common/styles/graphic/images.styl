@@ -15,14 +15,15 @@ $bg-position-hidden--lg = 30% 25rem, 70% 45rem, 50%, 50%
 $bg-position-shown--lg = 30% 100%, 70% 100%, 50%, 50%
 $bg-position-hidden--sm = 10% 35rem, 90% 55rem, 50%, 50%
 $bg-position-shown--sm = 10% 100%, 90% 100%, 50%, 50%
-$hero-height-sm = 13rem
-$hero-height-lg = 22rem
 .lead
 	position relative
-	min-height $hero-height-sm
+	min-height 15rem
 	padding 1em
 	+mq('bp-2')
-		min-height $hero-height-lg
+		min-height 22rem
+	+mq('mega-big')
+		min-height 30rem
+		
 _:-ms-fullscreen .lead, :root .ie11up .lead
 	height 15rem
 	+mq('bp-2')
