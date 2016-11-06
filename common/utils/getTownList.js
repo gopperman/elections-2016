@@ -1,18 +1,13 @@
-import * as topojson from 'topojson'
 import _ from 'lodash'
 import { toTitleCase } from './standardize.js'
-import getTownsShapefile from './getTownsShapefile.js'
-
-const TOWNS = getTownsShapefile()
+import TOWNS from './../../data/output/townsList.json'
 
 export default () => {
 
-	const { features } = topojson.feature(TOWNS, TOWNS.objects.UNITS)
-
-	const towns = _(features)
-		.map(v => toTitleCase(v.id))
-		.sortBy()
-		.value()
+	const towns = _(TOWNS)
+			.map(toTitleCase)
+			.sortBy()
+			.value()
 
 	return towns
 
