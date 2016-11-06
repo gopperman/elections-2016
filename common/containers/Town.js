@@ -35,7 +35,7 @@ class Town extends Component {
 		return nameUtil.town.htmlTitle(params)
 	}
 
-	static apiUrl(params) {
+	static apiUrl({ params }) {
 		return `${url}${urlManager.stringifyParams(params)}`
 	}
 

@@ -39,7 +39,7 @@ class Office extends Component {
 		return nameUtil.office.htmlTitle(params)
 	}
 
-	static apiUrl(params) {
+	static apiUrl({ params }) {
 		return `${url}${urlManager.stringifyParams(params)}`
 	}
 

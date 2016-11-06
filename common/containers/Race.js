@@ -41,7 +41,7 @@ class Race extends Component {
 		return nameUtil.race.htmlTitle(params)
 	}
 
-	static apiUrl(params) {
+	static apiUrl({ params }) {
 		const newParams = {
 			...params,
 			level: 'ru',
