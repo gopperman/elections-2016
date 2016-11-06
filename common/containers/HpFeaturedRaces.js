@@ -14,17 +14,21 @@ import FeatureGroup from './../components/FeatureGroup.js'
 // const url = '2016-11-08/rezcentral'
 
 // and this one is the correct url - it returns everything.
-const url = '2016-11-08?statePostal=MA&raceID=22949,24805'
+const url = '2016-11-08?statePostal=MA&raceID='
 
 @connectToApi
 class HpFeaturedRaces extends Component {
+
+	static getSection() {
+		return ''
+	}
 
 	static getTitle() {
 		return ''
 	}
 
-	static apiUrl() {
-		return url
+	static apiUrl({ query }) {
+		return `${url}${query.ids}`
 	}
 
 	render() {
