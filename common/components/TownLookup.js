@@ -10,8 +10,8 @@ class TownLookup extends Component {
 		mounted: false,
 	}
 
-	// I have to do this to get around a `react-select` bug that despite
-	// a PR (https://github.com/JedWatson/react-select/pull/1105) is
+	// I have to do this to get around a `react-select` bug that, despite
+	// a PR (https://github.com/JedWatson/react-select/pull/1105), is
 	// not working.
 	componentDidMount = () => {
 		this.setState({ mounted: true })
