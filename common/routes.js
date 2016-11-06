@@ -7,6 +7,7 @@ import PresidentUS from './containers/PresidentUS.js'
 import PresidentMA from './containers/PresidentMA.js'
 import Race from './containers/Race.js'
 import Town from './containers/Town.js'
+import HpElectoralCollegeLite from './containers/HpElectoralCollegeLite.js'
 import urlManager from './utils/urlManager.js'
 
 export default (
@@ -15,6 +16,10 @@ export default (
 		<Route
 			path={urlManager.base()}
 			component={Election} />
+
+		<Route
+			path={`${urlManager.base()}/hp/bar`}
+			component={HpElectoralCollegeLite} />
 
 		<Route
 			path={`${urlManager.base()}/president`}

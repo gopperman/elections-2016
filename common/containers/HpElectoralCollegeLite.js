@@ -1,10 +1,8 @@
 import _ from 'lodash'
 import React, { Component } from 'react'
 import connectToApi from './connectToApi.js'
-import Timer from './../components/Timer.js'
 import TestStatus from './../components/TestStatus.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
-import Navigation from './../components/Navigation.js'
 
 // We'll keep these urls here for testing. A description:
 
@@ -12,13 +10,17 @@ import Navigation from './../components/Navigation.js'
 // const url = 'NO'
 
 // this one returns json but the data is incomplete,
-// const url = '2016-11-08/rezcentral'
+// const url = '016-11-08?officeID=P'
 
 // and this one is the correct url - it returns everything.
-const url = '2016-11-08?officeID=P&statePostal=US'
+const url = '2016-11-08?officeID=P'
 
 @connectToApi
-class HpElectoralCollege extends Component {
+class PresidentUS extends Component {
+
+	static getSection() {
+		return ''
+	}
 
 	static getTitle() {
 		return ''
@@ -31,28 +33,25 @@ class HpElectoralCollege extends Component {
 	render() {
 
 		const { props } = this
-		const { timerProps, results } = props
+		const { results } = props
 
-		// Get the race.
-		const race = _.get(results, 'data.races[0]', {})
+		// Get races.
+		const races = _.get(results, 'data.races', [])
+
+		// Get US race.
+		const allStates = _.map(races, 'reportingUnits[0]')
 
 		// Get test status.
-		const isTest = !!race.test
+		const isTest = _.some(races, 'test')
 
-		// Get the reporting unit.
-		const summaryUnit = _.get(race, 'reportingUnits[0]', {})
+		// Get US presidential race summary.
+		const summaryState = _.find(allStates, { statePostal: 'US' })
 
+		// Finally we can render all the components!
 		return (
-			<div className='election-graphic'>
-
+			<div className='president-is-open'>
 				<TestStatus isTest={isTest} />
-
-				<Timer {...timerProps} />
-
-				<ElectoralCollegeBar {...summaryUnit} />
-
-				<Navigation />
-
+				<ElectoralCollegeBar {...summaryState} />
 			</div>
 		)
 
@@ -60,4 +59,4 @@ class HpElectoralCollege extends Component {
 
 }
 
-export default HpElectoralCollege
+export default PresidentUS
