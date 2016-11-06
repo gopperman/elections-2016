@@ -13,8 +13,6 @@ export default(state = initialState, action) => {
 
 	const { type, data, breakingNews, url, error } = action
 
-	console.log(`${process.env.HP_CONTAINER} fired action ${type}`)
-
 	switch (type) {
 
 		case FETCH_RESULTS_REQUEST:
