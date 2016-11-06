@@ -31,7 +31,7 @@ export default ({ subunit = {}, displayName, tooltipSortingDelegate }) => {
 		const pct = percent({ candidates, candidateID })
 
 		// Get the display-ready version of the percent.
-		const pctForDisplay = percentForDisplay(pct)
+		const pctForDisplay = percentForDisplay(pct, false)
 
 		const candidateClass = classnames('benton-bold', 'r-table__name',
 			{ 'is-winner': !!winner && isPresidential })
@@ -54,7 +54,7 @@ export default ({ subunit = {}, displayName, tooltipSortingDelegate }) => {
 				</td>
 				${electorsTd}
 				<td class='r-table__cell' scope='row'>
-					<p class='benton-bold'>${+pctForDisplay}${pctSpan}</p>
+					<p class='benton-bold'>${pctForDisplay}${pctSpan}</p>
 				</td>
 				<td class='r-table__cell' scope='row'>
 					<p class='benton-bold'>${vote}</p>
