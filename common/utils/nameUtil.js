@@ -43,7 +43,7 @@ const presidentMA = {
 	},
 
 	htmlTitle() {
-		return 'How Mass. voted for president'
+		return 'Mass. president results'
 	},
 
 	name() {
