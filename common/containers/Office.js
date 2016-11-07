@@ -61,8 +61,10 @@ class Office extends Component {
 
 		const sortedRaces = _.sortBy(unsortedRaces, [(o) => {
 			const re = /^([0-9]+)(st|nd|th)(.*)$/
+			const dd = /^([0-9])([0-9]+)(th)(.*)$/ // Double Digits, i.e '10th'
 
-			return o.seatName.replace(re, '$1$3')
+			// To get this to sort correctly, we just pop a Z between the first and second digit
+			return dd.test(o.seatName) ? o.seatName.replace(dd, '$1z$2$4') : o.seatName.replace(re, '$1$3')
 		}])
 
 		// Get test status.
