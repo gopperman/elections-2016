@@ -160,7 +160,7 @@ describe('nameUtil', () => {
 				assert.equal(nameUtil.race.name({
 					statePostal: 'ma',
 					officeName: 'president',
-				}), 'How Mass. voted for president')
+				}), 'Mass. president results')
 
 			})
 
