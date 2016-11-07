@@ -20,7 +20,7 @@ const FeatureGroup = ({ race, isLite }) => {
 			overline={nameUtil.race.name(race)}
 			precinctsReportingPct={stateUnit.precinctsReportingPct}
 			buttonText='See full results'
-			buttonUrl={urlManager.race(race)}
+			buttonUrl={urlManager().race(race)}
 			candidates={sortByVoteCount(candidates)} />
 	)
 

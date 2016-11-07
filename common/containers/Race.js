@@ -51,7 +51,7 @@ class Race extends Component {
 			...params,
 			level: 'ru',
 		}
-		return `${url}${urlManager.stringifyParams(newParams)}`
+		return `${url}${urlManager().stringifyParams(newParams)}`
 	}
 
 	render() {

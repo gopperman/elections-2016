@@ -1,3 +1,5 @@
+/* eslint-disable max-len */
+
 import React, { Component } from 'react'
 import Select from 'react-select'
 import getTownList from './../utils/getTownList.js'
@@ -24,7 +26,7 @@ class TownLookup extends Component {
 			this.setState({ value })
 
 			if (value) {
-				location.href = urlManager.town({
+				location.href = urlManager().town({
 					townName: value.value, source: 'nav' })
 			}
 

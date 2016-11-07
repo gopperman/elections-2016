@@ -45,7 +45,7 @@ class Office extends Component {
 	}
 
 	static apiUrl({ params }) {
-		return `${url}${urlManager.stringifyParams(params)}`
+		return `${url}${urlManager().stringifyParams(params)}`
 	}
 
 	render() {
@@ -80,7 +80,7 @@ class Office extends Component {
 					precinctsReportingPct={stateUnit.precinctsReportingPct}
 					candidates={sortByVoteCount(candidates)}
 					buttonText='See full results'
-					buttonUrl={urlManager.race(race)} />
+					buttonUrl={urlManager().race(race)} />
 			)
 
 		})
@@ -107,12 +107,12 @@ class Office extends Component {
 				)
 				link = (<LinkButton
 					text={'Switch to US House'}
-					url={urlManager.office({ officeName: 'US House', source })} />)
+					url={urlManager().office({ officeName: 'US House', source })} />)
 				break
 			case 'US House':
 				link = (<LinkButton
 					text={'Switch to US Senate'}
-					url={urlManager.office({ officeName: 'US Senate', source })} />)
+					url={urlManager().office({ officeName: 'US Senate', source })} />)
 				break
 			default:
 				// Nothing to see here

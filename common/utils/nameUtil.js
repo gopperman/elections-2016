@@ -60,8 +60,8 @@ const office = {
 	htmlTitle({ statePostal = '', officeName = '' }) {
 
 		return clean([
-			convertStateToAP(urlManager.decode(statePostal).toUpperCase()),
-			toTitleCase(urlManager.decode(officeName)),
+			convertStateToAP(urlManager().decode(statePostal).toUpperCase()),
+			toTitleCase(urlManager().decode(officeName)),
 		]
 		.filter(v => v)
 		.join(' '))
@@ -95,15 +95,15 @@ const race = {
 
 			// e.g. MA State House
 			const firstPart = [
-				convertStateToAP(urlManager.decode(statePostal).toUpperCase()),
-				toTitleCase(urlManager.decode(officeName)),
+				convertStateToAP(urlManager().decode(statePostal).toUpperCase()),
+				toTitleCase(urlManager().decode(officeName)),
 			]
 			.filter(v => v)
 			.join(' ')
 
 			// e.g. 10th Bristol
 			const secondPart = seatName ?
-				toTitleCase(urlManager.decode(seatName)) : null
+				toTitleCase(urlManager().decode(seatName)) : null
 
 			// MA State House, 10th Bristol
 			result = clean([firstPart, (secondPart || null)]
@@ -130,15 +130,15 @@ const race = {
 
 			// e.g. MA State House
 			const firstPart = [
-				convertStateToAP(urlManager.decode(statePostal).toUpperCase()),
-				toTitleCase(urlManager.decode(officeName)),
+				convertStateToAP(urlManager().decode(statePostal).toUpperCase()),
+				toTitleCase(urlManager().decode(officeName)),
 			]
 			.filter(v => v)
 			.join(' ')
 
 			// e.g. 10th Bristol
 			const secondPart = seatName ?
-				toTitleCase(urlManager.decode(seatName)) : null
+				toTitleCase(urlManager().decode(seatName)) : null
 
 			// MA State House, 10th Bristol
 			result = clean([firstPart, (secondPart || null)]
@@ -175,8 +175,8 @@ const town = {
 	omnitureTitle({ location, statePostal }) {
 
 		return [
-			toTitleCase(urlManager.decode(location)),
-			convertStateToAP(urlManager.decode(statePostal).toUpperCase()),
+			toTitleCase(urlManager().decode(location)),
+			convertStateToAP(urlManager().decode(statePostal).toUpperCase()),
 		]
 		.filter(v => v)
 		.join(' | ')
@@ -186,8 +186,8 @@ const town = {
 	htmlTitle({ location, statePostal }) {
 
 		return [
-			toTitleCase(urlManager.decode(location)),
-			convertStateToAP(urlManager.decode(statePostal).toUpperCase()),
+			toTitleCase(urlManager().decode(location)),
+			convertStateToAP(urlManager().decode(statePostal).toUpperCase()),
 		]
 		.filter(v => v)
 		.join(', ')

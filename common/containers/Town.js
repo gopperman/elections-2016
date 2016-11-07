@@ -41,7 +41,7 @@ class Town extends Component {
 	}
 
 	static apiUrl({ params }) {
-		return `${url}${urlManager.stringifyParams(params)}`
+		return `${url}${urlManager().stringifyParams(params)}`
 	}
 
 	render() {
@@ -58,7 +58,7 @@ class Town extends Component {
 		// Get test status.
 		const isTest = _.some(races, 'test')
 
-		const town = toTitleCase(urlManager.decode(params.location))
+		const town = toTitleCase(urlManager().decode(params.location))
 
 		// Create result blocks for all the town races.
 		const raceBlocks = races.map((race, i) => {
@@ -77,7 +77,7 @@ class Town extends Component {
 					candidates={sortByVoteCount(candidates)}
 					buttonText='See full results'
 					hideCheckmark
-					buttonUrl={urlManager.race(race)} />
+					buttonUrl={urlManager().race(race)} />
 			)
 
 		})

@@ -143,7 +143,7 @@ class PresidentUS extends Component {
 			displayName='stateName'
 			isPresidential
 			buttonText={nameUtil.presidentMA.name()}
-			buttonUrl={urlManager.race({
+			buttonUrl={urlManager().race({
 				officeName: 'President', statePostal: 'MA', source: 'MA' })}
 			labelsName='STUSPS' />) : null
 

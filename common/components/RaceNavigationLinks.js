@@ -13,7 +13,7 @@ const RaceNavigationLinks = ({ isFooter }) => {
 				<li className='subnav__item'>
 					<a
 						className='subnav__link benton-bold icon--election'
-						href={urlManager.base(source)}>Election 2016</a>
+						href={urlManager().base(source)}>Election 2016</a>
 				</li>
 				{offices.map((office, i) => {
 
@@ -22,7 +22,7 @@ const RaceNavigationLinks = ({ isFooter }) => {
 						source,
 					}
 
-					const href = urlManager.office(superOffice)
+					const href = urlManager().office(superOffice)
 
 					// We do this so office names don't come with 'Mass.' suffix.
 					const nameOffice = {

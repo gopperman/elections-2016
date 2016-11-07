@@ -50,7 +50,7 @@ class Navigation extends Component {
 					<li className='g-nav__item'>
 						<a
 							className='g-nav__link nav-election benton-bold icon--election'
-							href={urlManager.base('nav')}>Election 2016</a>
+							href={urlManager().base('nav')}>Election 2016</a>
 					</li>
 					<li className='g-nav__item town'>
 						<button
@@ -69,7 +69,7 @@ class Navigation extends Component {
 					<li className='g-nav__item'>
 						<a
 							className='g-nav__link nav-president benton-bold icon--president'
-							href={urlManager.office({ officeName: 'President', source: 'nav' })}>{nameUtil.presidentUS.htmlTitle()}</a>
+							href={urlManager().office({ officeName: 'President', source: 'nav' })}>{nameUtil.presidentUS.htmlTitle()}</a>
 					</li>
 				</ul>
 			</nav>

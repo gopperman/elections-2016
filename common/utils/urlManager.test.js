@@ -5,7 +5,7 @@ import urlManager from './urlManager.js'
 
 describe('urlManager', () => {
 
-	describe.only('function', () => {
+	describe('function', () => {
 
 		it('should allow to set alternate base', () => {
 

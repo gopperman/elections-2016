@@ -15,39 +15,39 @@ export default (
 	<Route path='/' component={App}>
 
 		<Route
-			path={urlManager.base()}
+			path={urlManager().base()}
 			component={Election} />
 
 		<Route
-			path={`${urlManager.base()}/hp/bar`}
+			path={`${urlManager().base()}/hp/bar`}
 			component={HpElectoralCollegeLite} />
 
 		<Route
-			path={`${urlManager.base()}/hp/races`}
+			path={`${urlManager().base()}/hp/races`}
 			component={HpFeaturedRacesLite} />
 
 		<Route
-			path={`${urlManager.base()}/president`}
+			path={`${urlManager().base()}/president`}
 			component={PresidentUS} />
 
 		<Route
-			path={`${urlManager.base()}/MA/president`}
+			path={`${urlManager().base()}/MA/president`}
 			component={PresidentMA} />
 
 		<Route
-			path={`${urlManager.base()}/:officeName`}
+			path={`${urlManager().base()}/:officeName`}
 			component={Office} />
 
 		<Route
-			path={`${urlManager.base()}/:statePostal/:officeName`}
+			path={`${urlManager().base()}/:statePostal/:officeName`}
 			component={Office} />
 
 		<Route
-			path={`${urlManager.base()}/:statePostal/town/:location`}
+			path={`${urlManager().base()}/:statePostal/town/:location`}
 			component={Town} />
 
 		<Route
-			path={`${urlManager.base()}/:statePostal/:officeName/:seatName`}
+			path={`${urlManager().base()}/:statePostal/:officeName/:seatName`}
 			component={Race} />
 
 	</Route>
