@@ -29,7 +29,19 @@
 		color set-gray('darkest')
 		box-shadow none
 
-
+.btn--feature, .btn--feature:visited
+	@extends $btn
+	background linear-gradient(to left,set-color('blue', dark) 0,set-color('red', dark) 100%)
+	color white
+	text-shadow 0 0 4px #222
+	padding 1em
+	box-shadow 7px 7px 0px 1px set-gray('darkest')
+	font-size 0.75em
+	+mq('bp-2')
+		font-size 1em
+	&:visited, &:hover, &:active
+		color white
+		box-shadow none
 // Close btn
 .btn--close
 	position absolute

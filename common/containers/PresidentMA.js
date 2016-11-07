@@ -5,6 +5,7 @@ import connectToApi from './connectToApi.js'
 import BreakingBar from './../components/BreakingBar.js'
 import Header from './../components/Header.js'
 import Footer from './../components/Footer.js'
+import Promo from './../components/Promo.js'
 import Timer from './../components/Timer.js'
 import TownResultsTable from './../components/TownResultsTable.js'
 import Map from './../components/Map.js'
@@ -140,6 +141,7 @@ class PresidentMA extends Component {
 						<TownResultsTable
 							{...{ towns, summaryCandidates: summaryTownCandidates }} />
 					</div>
+					<Promo />
 				</main>
 
 				<Footer />

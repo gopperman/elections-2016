@@ -6,6 +6,7 @@ import Timer from './../components/Timer.js'
 import BreakingBar from './../components/BreakingBar.js'
 import Header from './../components/Header.js'
 import Footer from './../components/Footer.js'
+import Promo from './../components/Promo.js'
 import TestStatus from './../components/TestStatus.js'
 import BalanceOfPower from './../components/BalanceOfPower.js'
 import Hero from './../components/Hero.js'
@@ -174,6 +175,7 @@ class Election extends Component {
 							</div>
 						</div>
 					</div>
+					<Promo />
 				</main>
 				<Footer />
 			</div>

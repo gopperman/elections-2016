@@ -6,6 +6,7 @@ import Timer from './../components/Timer.js'
 import BreakingBar from './../components/BreakingBar.js'
 import Header from './../components/Header.js'
 import Footer from './../components/Footer.js'
+import Promo from './../components/Promo.js'
 import TestStatus from './../components/TestStatus.js'
 import TownResultsTable from './../components/TownResultsTable.js'
 import ResultGroup from './../components/ResultGroup.js'
@@ -116,7 +117,7 @@ class Race extends Component {
 					<div className='container-downpage'>
 						<TownResultsTable {...{ towns, summaryCandidates }} />
 					</div>
-
+					<Promo />
 				</main>
 
 				<Footer />

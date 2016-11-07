@@ -5,6 +5,7 @@ import Timer from './../components/Timer.js'
 import BreakingBar from './../components/BreakingBar.js'
 import Header from './../components/Header.js'
 import Footer from './../components/Footer.js'
+import Promo from './../components/Promo.js'
 import TestStatus from './../components/TestStatus.js'
 import ResultGroup from './../components/ResultGroup.js'
 import { sortByVoteCount } from './../utils/Candidates.js'
@@ -95,7 +96,7 @@ class Town extends Component {
 						{raceBlocks}
 					</div>
 
-
+					<Promo />
 				</main>
 
 				<Footer />

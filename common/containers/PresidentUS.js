@@ -8,6 +8,7 @@ import BreakingBar from './../components/BreakingBar.js'
 import Map from './../components/Map.js'
 import Header from './../components/Header.js'
 import Footer from './../components/Footer.js'
+import Promo from './../components/Promo.js'
 import TestStatus from './../components/TestStatus.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 import Hero from './../components/Hero.js'
@@ -166,6 +167,7 @@ class PresidentUS extends Component {
 						<StateResultsTable
 							{...{ states, summaryCandidates: summaryStateCandidates }} />
 					</div>
+					<Promo />
 				</main>
 
 				<Footer />
