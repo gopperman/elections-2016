@@ -60,11 +60,18 @@ class Office extends Component {
 		const unsortedRaces = _.get(results, 'data.races', [])
 
 		const sortedRaces = _.sortBy(unsortedRaces, [(o) => {
-			const re = /^([0-9]+)(st|nd|th)(.*)$/
-			const dd = /^([0-9])([0-9]+)(th)(.*)$/ // Double Digits, i.e '10th'
+			const seatName = _.get(o, 'seatName')
 
-			// To get this to sort correctly, we just pop a Z between the first and second digit
-			return dd.test(o.seatName) ? o.seatName.replace(dd, '$1z$2$4') : o.seatName.replace(re, '$1$3')
+			if (seatName) {
+				const re = /^([0-9]+)(st|nd|th)(.*)$/
+				const dd = /^([0-9])([0-9]+)(th)(.*)$/ // Double Digits, i.e '10th'
+
+				// To get this to sort correctly, we just pop a Z between the first and second digit
+				return dd.test(o.seatName) ?
+					o.seatName.replace(dd, '$4$1z$2') : o.seatName.replace(re, '$3$1')
+			}
+			// If we don't have a seatname, the regular sort order is fine
+			return ''
 		}])
 
 		// Get test status.
