@@ -51,7 +51,7 @@ precinctsReportingPct, isUnopposed, isLite }) => {
 	const votesEl = !isLite ?
 		<p className='r-block__meta benton-regular'>{vote} votes</p> : null
 
-	const barEl = !isLite ?
+	const barEl =
 		(<div className='r-block__bar results-bar' aria-hidden='true'>
 			<span
 				className={`fill-complete-${normalizeParty(party)}`}
@@ -60,7 +60,7 @@ precinctsReportingPct, isUnopposed, isLite }) => {
 				aria-valuemin='0'
 				aria-valuemax='100'
 				style={style} />
-		</div>) : null
+		</div>)
 
 	const results = !isUnopposed ?
 		(<div className='r-block__results'>
