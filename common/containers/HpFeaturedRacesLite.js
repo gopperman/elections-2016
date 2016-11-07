@@ -17,7 +17,7 @@ import FeatureGroup from './../components/FeatureGroup.js'
 const url = '2016-11-08?statePostal=MA&raceID='
 
 @connectToApi
-class HpFeaturedRaces extends Component {
+class HpFeaturedRacesLite extends Component {
 
 	static getOmnitureTitle() {
 		return ''
@@ -48,7 +48,7 @@ class HpFeaturedRaces extends Component {
 
 		// Get featured races.
 		const featured = _.map(races, (race, key) =>
-			<FeatureGroup {...{ race, key }} />)
+			<FeatureGroup {...{ race, key, isLite: true }} />)
 
 		return (
 			<div className='election-graphic'>
@@ -66,4 +66,4 @@ class HpFeaturedRaces extends Component {
 
 }
 
-export default HpFeaturedRaces
+export default HpFeaturedRacesLite

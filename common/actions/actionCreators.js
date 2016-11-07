@@ -91,8 +91,11 @@ const fetchResults = ({ url }) =>
 			fetch(urlToFetch)
 				.then(response => {
 					// if error, bail out
-					logger(response)
-					if (response.status !== 200) throw new Error(response.statusText)
+					if (response.status !== 200) {
+						const error = new Error(response.statusText)
+						logger(error)
+						throw error
+					}
 					return response
 				})
 				.then(parseJson)
@@ -129,8 +132,9 @@ const fetchResults = ({ url }) =>
 					if (!location) {
 
 						// Then throw an error so we won't render any pages.
-						logger(message)
-						throw new Error(message)
+						const error = new Error(message)
+						logger(error)
+						throw error
 
 					// If we're on the client,
 					} else {
