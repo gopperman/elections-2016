@@ -133,7 +133,6 @@ const fetchResults = ({ url }) =>
 
 						// Then throw an error so we won't render any pages.
 						const error = new Error(message)
-						logger(error)
 						throw error
 
 					// If we're on the client,
