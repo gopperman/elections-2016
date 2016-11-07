@@ -90,7 +90,6 @@ class HpMap extends Component {
 			unitName='stateName'
 			projection={geoAlbersUsa()}
 			tooltipSortingDelegate={sortByElectoralCount}
-			dropdownName='state'
 			displayName='stateName'
 			isPresidential
 			buttonText={nameUtil.presidentMA.name()}
