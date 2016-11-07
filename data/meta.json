@@ -7,6 +7,6 @@
 	"credits": "",
 	"teasers": [],
 	"meter": true,
-	"socialConnect": false,
+	"socialConnect": true,
 	"ads": false
 }
