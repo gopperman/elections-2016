@@ -48,7 +48,13 @@ class HpFeaturedRacesLite extends Component {
 
 		// Get featured races.
 		const featured = _.map(races, (race, key) =>
-			<FeatureGroup {...{ race, key, isLite: true }} />)
+			(<FeatureGroup
+				{...{
+					race,
+					key,
+					isLite: true,
+					domain: '//www.bostonglobe.com',
+				}} />))
 
 		return (
 			<div className='election-graphic'>

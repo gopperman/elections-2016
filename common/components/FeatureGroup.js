@@ -5,7 +5,7 @@ import { sortByVoteCount } from './../utils/Candidates.js'
 import urlManager from './../utils/urlManager.js'
 import nameUtil from './../utils/nameUtil.js'
 
-const FeatureGroup = ({ race, isLite }) => {
+const FeatureGroup = ({ race, isLite, domain = '' }) => {
 
 	const stateUnit =
 		_.find(race.reportingUnits, { level: 'state' }) || {}
@@ -20,7 +20,7 @@ const FeatureGroup = ({ race, isLite }) => {
 			overline={nameUtil.race.name(race)}
 			precinctsReportingPct={stateUnit.precinctsReportingPct}
 			buttonText='See full results'
-			buttonUrl={urlManager().race(race)}
+			buttonUrl={urlManager(domain).race(race)}
 			candidates={sortByVoteCount(candidates)} />
 	)
 
@@ -29,6 +29,7 @@ const FeatureGroup = ({ race, isLite }) => {
 FeatureGroup.propTypes = {
 	race: PropTypes.object.isRequired,
 	isLite: PropTypes.bool,
+	domain: PropTypes.string,
 }
 
 export default FeatureGroup
