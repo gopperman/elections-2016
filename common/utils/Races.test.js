@@ -101,15 +101,12 @@ describe('RacesUtil', () => {
 			const expected = [
 				{
 					foo: '1'
-
 				},
 				{
 					foo: '2'
-
 				},
 				{
 					foo: '3'
-
 				},
 			]
 			assert.deepEqual(expected, _.sortBy(expected, sortRacesBySeatName))
