@@ -116,7 +116,7 @@ export default (req, res) => {
 							isProduction: process.env.NODE_ENV === 'production',
 							meta: {
 								...meta,
-								title: omniturePageName,
+								pageName: omniturePageName,
 							},
 							version: pakage.version,
 							title,
