@@ -59,7 +59,11 @@ class Office extends Component {
 		// Get races.
 		const unsortedRaces = _.get(results, 'data.races', [])
 
-		const sortedRaces = _.sortBy(unsortedRaces, 'seatName')
+		const sortedRaces = _.sortBy(unsortedRaces, [(o) => {
+			const re = /^([0-9]+)(st|nd|th)(.*)$/
+
+			return o.seatName.replace(re, '$1$3')
+		}])
 
 		// Get test status.
 		const isTest = _.some(sortedRaces, 'test')
@@ -95,7 +99,6 @@ class Office extends Component {
 		let bopData = null
 		const source = 'balanceofpower'
 
-		console.log(title)
 		switch (title) {
 			case 'US Senate':
 				bopData = senateTrendReport(sortedRaces)
