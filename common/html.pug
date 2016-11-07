@@ -75,4 +75,4 @@ html(lang='en')
 		#root!=appHtml
 		script window.REDUX__INITIALSTATE=!{JSON.stringify(initialState)}
 		script(src=`${isProduction ? '/elections' : ''}/static/bundle.js?v=${version}`)
-		script(src='//apps.bostonglobe.com/common/js/business/business-1.4.6.js', async=true)
+		script(src='//apps.bostonglobe.com/election-results/2016/general/static/business.js', async=true)
