@@ -110,7 +110,7 @@ describe('nameUtil', () => {
 				assert.equal(nameUtil.race.htmlTitle({
 					statePostal: 'ma',
 					officeName: 'president',
-				}), 'How Mass. voted for president')
+				}), 'Mass. president results')
 
 			})
 
