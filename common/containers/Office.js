@@ -11,6 +11,7 @@ import LinkButton from './../components/LinkButton.js'
 import TestStatus from './../components/TestStatus.js'
 import ResultGroup from './../components/ResultGroup.js'
 import { sortByVoteCount } from './../utils/Candidates.js'
+import { sortRacesBySeatName } from './../utils/Races.js'
 import Hero from './../components/Hero.js'
 import urlManager from './../utils/urlManager.js'
 import compareStringsNoAlpha from './../utils/compareStringsNoAlpha.js'
@@ -59,20 +60,7 @@ class Office extends Component {
 		// Get races.
 		const unsortedRaces = _.get(results, 'data.races', [])
 
-		const sortedRaces = _.sortBy(unsortedRaces, [(o) => {
-			const seatName = _.get(o, 'seatName')
-
-			if (seatName) {
-				const re = /^([0-9]+)(st|nd|th|rd)(.*)$/
-				const dd = /^([0-9])([0-9]+)(th)(.*)$/ // Double Digits, i.e '10th'
-
-				// To get this to sort correctly, we just pop a Z between the first and second digit
-				return dd.test(seatName) ?
-					seatName.replace(dd, '$4 z $1$2') : seatName.replace(re, '$3$1')
-			}
-			// If we don't have a seatname, the regular sort order is fine
-			return ''
-		}])
+		const sortedRaces = _.sortBy(unsortedRaces, sortRacesBySeatName)
 
 		// Get test status.
 		const isTest = _.some(sortedRaces, 'test')
