@@ -5,6 +5,23 @@ import urlManager from './urlManager.js'
 
 describe('urlManager', () => {
 
+	describe.only('function', () => {
+
+		it('should allow to set alternate base', () => {
+
+			const params = {
+				officeName: 'one & two, three - four',
+			}
+
+			assert.equal(
+				urlManager('http://a.b.com').office(params),
+				'http://a.b.com/elections/2016/one %2526 two, three - four'
+			)
+
+		})
+
+	})
+
 	describe('stringifyParams', () => {
 
 		it('should work with a mix of null and non-null params', () => {
@@ -16,7 +33,7 @@ describe('urlManager', () => {
 				four: '',
 			}
 
-			assert.equal(urlManager.stringifyParams(params), 'one=uno&dos=two')
+			assert.equal(urlManager().stringifyParams(params), 'one=uno&dos=two')
 
 		})
 
@@ -31,7 +48,7 @@ describe('urlManager', () => {
 			}
 
 			assert.equal(
-				urlManager.office(params),
+				urlManager().office(params),
 				'/elections/2016/one %2526 two, three - four'
 			)
 

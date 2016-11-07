@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import compareStringsNoAlpha from './compareStringsNoAlpha.js'
 
-const urlManager = {
+const urlManager = (domain = '') => ({
 
 	tag(url, source, page) {
 		return `${url}${source ? `?p1=BG_election_${source}_${page}` : ''}`
@@ -25,7 +25,7 @@ const urlManager = {
 	},
 
 	base(source) {
-		return this.tag('/elections/2016', source, 'central')
+		return this.tag(`${domain}/elections/2016`, source, 'central')
 	},
 
 	town({ townName, source }) {
@@ -95,6 +95,6 @@ const urlManager = {
 
 	},
 
-}
+})
 
 export default urlManager
