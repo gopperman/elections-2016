@@ -23,7 +23,7 @@ precinctsReportingPct, isUnopposed, isLite }) => {
 		(<img
 			className='r-block__img avatar'
 			src={`assets/avatar/${name.toLowerCase()}.jpg`}
-			alt='Donald Trump' />) : null
+			alt={name} />) : null
 
 	const candidateClass = classnames('r-block__name', 'benton-bold',
 		{ 'is-winner': !!winner && !hideCheckmark })
