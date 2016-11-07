@@ -25,17 +25,23 @@ export default (req, res) => {
 
 	match({ routes, history }, (error, redirect, props) => {
 
+		console.log('inside match')
+
 		if (error) {
 
 			// there was an error somewhere during route matching
+			console.log('error during route matching')
 			logger(error)
 			res.status(500).send(error.message)
 
 		} else if (redirect) {
 
+			console.log('redirecting')
 			res.redirect(redirect.pathname + redirect.search)
 
 		} else if (props) {
+
+			console.log('matched props')
 
 			const isLite = url.match('/hp/')
 
@@ -81,12 +87,16 @@ export default (req, res) => {
 			}
 
 			// Wait for async data fetching to complete, then render
+			console.log('about to fetch')
 			trigger('fetch', components, locals)
 				.then(() => {
 
+					console.log('fetched')
 					const state = getState()
 
 					if (isLite) {
+
+						console.log('about to render isLite')
 
 						// Render the component to a string
 						const appHtml = renderToStaticMarkup(
@@ -95,6 +105,8 @@ export default (req, res) => {
 							</Provider>
 						)
 
+						console.log('rendered isLite')
+
 						res.render('homepageLite', {
 							pretty: true,
 							appHtml,
@@ -102,12 +114,16 @@ export default (req, res) => {
 
 					} else {
 
+						console.log('about to render')
+
 						// Render the component to a string
 						const appHtml = renderToString(
 							<Provider store={store}>
 								<RouterContext {...props} />
 							</Provider>
 						)
+
+						console.log('rendered')
 
 						res.render('html', {
 							pretty: true,
@@ -127,6 +143,8 @@ export default (req, res) => {
 				})
 				.catch(e => {
 
+					console.log('error during fetch')
+
 					logger(e)
 					res.status(404).send(e.message)
 
@@ -135,6 +153,7 @@ export default (req, res) => {
 		} else {
 
 			const message = `Not Found: Could not match any routes for ${url}`
+			console.log('error - could not match any routes')
 
 			// no errors, no redirect, we just didn't match anything
 			logger(new Error(message))
