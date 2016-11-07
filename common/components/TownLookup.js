@@ -1,11 +1,15 @@
 /* eslint-disable max-len */
 
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import Select from 'react-select'
 import getTownList from './../utils/getTownList.js'
 import urlManager from './../utils/urlManager.js'
 
 class TownLookup extends Component {
+
+	static propTypes = {
+		domain: PropTypes.string,
+	}
 
 	state = {
 		value: null,
@@ -21,12 +25,14 @@ class TownLookup extends Component {
 
 	onChange = (value) => {
 
+		const { domain } = this.props
+
 		const location = typeof window !== 'undefined' && window.location
 		if (location) {
 			this.setState({ value })
 
 			if (value) {
-				location.href = urlManager().town({
+				location.href = urlManager(domain).town({
 					townName: value.value, source: 'nav' })
 			}
 

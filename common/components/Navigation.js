@@ -1,13 +1,17 @@
 /* eslint-disable max-len */
 
 import classNames from 'classnames'
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import RaceNavigationLinks from './RaceNavigationLinks.js'
 import urlManager from './../utils/urlManager.js'
 import TownLookup from './TownLookup.js'
 import nameUtil from './../utils/nameUtil.js'
 
 class Navigation extends Component {
+
+	static propTypes = {
+		domain: PropTypes.object,
+	}
 
 	state = {
 		townIsOpen: false,
@@ -37,6 +41,7 @@ class Navigation extends Component {
 	render() {
 
 		const { townIsOpen, raceIsOpen } = this.state
+		const { domain } = this.props
 
 		const mainClass = classNames('g-nav', {
 			'is-open': townIsOpen || raceIsOpen,
@@ -50,26 +55,26 @@ class Navigation extends Component {
 					<li className='g-nav__item'>
 						<a
 							className='g-nav__link nav-election benton-bold icon--election'
-							href={urlManager().base('nav')}>Election 2016</a>
+							href={urlManager(domain).base('nav')}>Election 2016</a>
 					</li>
 					<li className='g-nav__item town'>
 						<button
 							className='g-nav__link nav-town benton-bold icon--town'
 							onClick={this.townOnClick}>Town results</button>
 						<nav className='subnav'>
-							<TownLookup />
+							<TownLookup domain={domain} />
 						</nav>
 					</li>
 					<li className='g-nav__item race'>
 						<button
 							className='g-nav__link nav-race benton-bold icon--race'
 							onClick={this.raceOnClick}>Find a race</button>
-						<RaceNavigationLinks />
+						<RaceNavigationLinks domain={domain} />
 					</li>
 					<li className='g-nav__item'>
 						<a
 							className='g-nav__link nav-president benton-bold icon--president'
-							href={urlManager().office({ officeName: 'President', source: 'nav' })}>{nameUtil.presidentUS.htmlTitle()}</a>
+							href={urlManager(domain).office({ officeName: 'President', source: 'nav' })}>{nameUtil.presidentUS.htmlTitle()}</a>
 					</li>
 				</ul>
 			</nav>

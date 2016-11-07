@@ -4,7 +4,7 @@ import Navigation from './../components/Navigation.js'
 const HpNav = () => (
 
 	<div className='election-graphic'>
-		<Navigation />
+		<Navigation domain='//www.bostonglobe.com' />
 	</div>
 
 )

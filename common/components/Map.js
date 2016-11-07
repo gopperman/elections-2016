@@ -32,7 +32,7 @@ class Map extends Component {
 		projection: PropTypes.func.isRequired,
 
 		tooltipSortingDelegate: PropTypes.func.isRequired,
-		dropdownName: PropTypes.string.isRequired,
+		dropdownName: PropTypes.string,
 		displayName: PropTypes.string.isRequired,
 		labelsName: PropTypes.string,
 		isPresidential: PropTypes.bool,
@@ -544,20 +544,23 @@ class Map extends Component {
 				text={`Switch to ${buttonText}`}
 				url={buttonUrl} />) : null
 
+		const dropdown = dropdownName ?
+			(<div className='map__select'>
+				<label
+					htmlFor='map-select'
+					className='benton-bold form__label form__label--overline'>{dropdownLabel}</label>
+				<select
+					id='map-select'
+					className='form__select benton-bold'
+					onChange={this.onSelectChange}
+					ref={(c) => this._dropdown = c}>{options}</select>
+			</div>) : null
+
 		return (
 			<div className='map-component'>
 				<div className='map__tools'>
 					{button}
-					<div className='map__select'>
-						<label
-							htmlFor='map-select'
-							className='benton-bold form__label form__label--overline'>{dropdownLabel}</label>
-						<select
-							id='map-select'
-							className='form__select benton-bold'
-							onChange={this.onSelectChange}
-							ref={(c) => this._dropdown = c}>{options}</select>
-					</div>
+					{dropdown}
 				</div>
 				<div className='map-wrappers'>
 					{serverSvg}
