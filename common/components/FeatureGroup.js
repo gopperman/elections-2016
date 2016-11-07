@@ -16,6 +16,7 @@ const FeatureGroup = ({ race, isLite }) => {
 		<ResultGroup
 			numWinners={race.numWinners}
 			isFeature
+			isLite={isLite}
 			overline={nameUtil.race.name(race)}
 			precinctsReportingPct={stateUnit.precinctsReportingPct}
 			buttonText='See full results'
