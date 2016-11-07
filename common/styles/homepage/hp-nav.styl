@@ -5,24 +5,31 @@
 // Global nav
 .g-nav
 	position relative
-	height 5.5em
+	height 9rem
 	transition 0.3s ease-in-out height
+	width 90%
+	max-width 70rem
+	margin 2em auto 3em auto
 	+mq('bp-2')
-		height 3.2em
+		height 5rem
+	a
+		color #59889d
+		&:hover
+			color #34505c
 	&__list
-		width 90%
-		max-width 50em
+		width 100%
 		margin 0 auto
 		display flex
 		justify-content space-between
 		padding 1em 0
-		border-bottom 1px solid set-gray('lightest')
+		border-bottom 1px solid #efefef
 	&__item
 		width 25%
 		&:not(:last-of-type)
 			margin-right 1.5em
 	&__link
-		font-size 0.8rem
+		cursor pointer
+		font-size 1.3rem
 		border none
 		background-color transparent
 		padding 0
@@ -62,32 +69,36 @@
 			+mq('bp-2')
 				display inline-block
 				margin 0 0.5em 0 0
-	.form__select
-		max-width 35em
+	.container-select
+		max-width 45rem
 		margin 0 auto
 	
 	// Race is open
 	&.race-is-open
-		height 35em
+		height 50rem
 		+mq('bp-2')
-			height 16em
+			height 23rem
 		.nav-race
 			color set-gray('darkest')
 			filter grayscale(0)
 			// IE filtering
 			-ms-filter grayscale(0%)
 			filter none
-		height 10em
+			&:after
+				width 100%
+	// Town is open
+	&.town-is-open
+		height 18rem
 		+mq('bp-2')
-			height 9em
-		+mq('bp-3')
-			height 8em
+			height 15rem
 		.nav-town
 			color set-gray('darkest')
 			filter grayscale(0)
 			// IE filtering
 			-ms-filter grayscale(0%)
 			filter none
+			&:after
+				width 100%
 // President is open
 .president-is-open .nav-president
 	color set-gray('darkest')
@@ -95,7 +106,8 @@
 	// IE filtering
 	-ms-filter grayscale(0%)
 	filter none
-	pointer-events none
+	&:after
+		width 100%
 // President is open
 .election-is-open .nav-election
 	color set-gray('darkest')
@@ -103,7 +115,8 @@
 	// IE filtering
 	-ms-filter grayscale(0%)
 	filter none
-	pointer-events none
+	&:after
+		width 100%
 		
 // Toggle underline if drawer is open
 .president-is-open .g-nav.town-is-open .nav-president:after, .president-is-open .g-nav.race-is-open .nav-president:after, .election-is-open .g-nav.town-is-open .nav-election:after, .election-is-open .g-nav.race-is-open .nav-election:after
@@ -111,8 +124,7 @@
 
 // Sub nav
 .subnav
-	width 90%
-	max-width 50rem
+	width 100%
 	margin 0 auto
 	&__list
 		text-align center
@@ -121,21 +133,16 @@
 			display flex
 			flex-flow column wrap
 			align-content space-between
-			height 10em
+			height 15rem
 	&__link
 		display inline-block
-		font-size 0.85rem
+		font-size 1.3rem
 		line-height 1.2
 		margin-bottom 1.5em
 	&__item
-		&:first-of-type 
+		&:first-of-type
 			a
-				font-size 1em
-			+mq('bp-2')
-				flex 1 0 100%
-// // If in the header, hide the elections-home link
-.header .subnav__item:first-of-type
-	display none
+				display none
 // If part of global nav
 .g-nav .subnav
 	position absolute
@@ -145,13 +152,16 @@
 	hidden(accessible)
 	opacity 0
 	transition opacity 0.25s ease-in-out 0.25s
-	z-index 10000
 .g-nav.race-is-open .race .subnav,
 .g-nav.town-is-open .town .subnav
-	width 90%
+	width 100%
 	height auto
-	max-width 50rem
 	overflow auto
 	opacity 1
+.g-nav.race-is-open .subnav
+	z-index set-index('middle')
 .g-nav.town-is-open .town .subnav
 	overflow visible
+
+.Select-control
+	cursor pointer
