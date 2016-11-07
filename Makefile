@@ -1,10 +1,13 @@
-homepage:
+homepage_build:
 
-	API_URL=http://${env}.bostonglobe.com HP_CONTAINER=HpElectoralCollege npm run build:hp;
 	API_URL=http://${env}.bostonglobe.com HP_CONTAINER=HpMap npm run build:hp;
 	API_URL=http://${env}.bostonglobe.com HP_CONTAINER=HpNav npm run build:hp;
-	API_URL=http://${env}.bostonglobe.com HP_CONTAINER=HpFeaturedRaces npm run build:hp;
+
+homepage_deploy:
+
 	scp -r static ${user}@shell.boston.com:/web/bgapps/html/election-results/2016/general;
+
+homepage: homepage_build homepage_deploy
 
 clean: clean_input clean_output
 
