@@ -5,7 +5,7 @@ import { sortByVoteCount } from './../utils/Candidates.js'
 import urlManager from './../utils/urlManager.js'
 import nameUtil from './../utils/nameUtil.js'
 
-const FeatureGroup = ({ race }) => {
+const FeatureGroup = ({ race, isLite }) => {
 
 	const stateUnit =
 		_.find(race.reportingUnits, { level: 'state' }) || {}
@@ -27,6 +27,7 @@ const FeatureGroup = ({ race }) => {
 
 FeatureGroup.propTypes = {
 	race: PropTypes.object.isRequired,
+	isLite: PropTypes.bool,
 }
 
 export default FeatureGroup
