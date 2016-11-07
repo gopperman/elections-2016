@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 
 const App = ({ children }) => (
 
-	<div className='App ie11up'>
+	<div className='App'>
 		{ children }
 	</div>
 

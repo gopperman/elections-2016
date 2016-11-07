@@ -71,7 +71,7 @@ html(lang='en')
 
 		if isProduction
 			link(href=`/elections/static/compiled.css?v=${version}`, rel='stylesheet', type='text/css')
-	body
+	body.ie11up
 		#root!=appHtml
 		script window.REDUX__INITIALSTATE=!{JSON.stringify(initialState)}
 		script(src=`${isProduction ? '/elections' : ''}/static/bundle.js?v=${version}`)
