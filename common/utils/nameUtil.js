@@ -9,8 +9,8 @@ const convertStateToAP = usAbbreviations('postal', 'ap')
 
 const election = {
 
-	omnitureTitle(params) {
-		return this.htmlTitle(params)
+	omnitureTitle() {
+		return 'Election central'
 	},
 
 	htmlTitle() {
