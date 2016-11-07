@@ -165,6 +165,7 @@ const fetchResults = ({ url }) =>
 
 					// We're on the server.
 					// Throw an error so we won't render any pages.
+					logger(error)
 					throw new Error(error)
 
 				}
