@@ -19,6 +19,10 @@ const url = '2016-11-08?statePostal=MA&raceID='
 @connectToApi
 class HpFeaturedRaces extends Component {
 
+	static getOmnitureTitle() {
+		return ''
+	}
+
 	static getSection() {
 		return ''
 	}

@@ -40,6 +40,10 @@ const url = '2016-11-08?officeID=P'
 @connectToApi
 class PresidentUS extends Component {
 
+	static getOmnitureTitle() {
+		return nameUtil.presidentUS.omnitureTitle()
+	}
+
 	static getSection() {
 		return 'Race'
 	}

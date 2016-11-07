@@ -28,6 +28,10 @@ const url = '2016-11-08?'
 @connectToApi
 class Town extends Component {
 
+	static getOmnitureTitle(params) {
+		return nameUtil.town.omnitureTitle(params)
+	}
+
 	static getSection() {
 		return 'Town'
 	}

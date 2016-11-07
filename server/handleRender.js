@@ -52,11 +52,23 @@ export default (req, res) => {
 				.map(v => v.getSection && v.getSection())
 				.filter(v => v)[0]
 
+			// Get page title
 			const title = [
 				pageTitle,
 				'Election results 2016',
 				'The Boston Globe',
 			].filter(v => v).join(' - ')
+
+			// Get omniture title
+			const omnitureTitle = components
+				.map(v => v.getOmnitureTitle && v.getOmnitureTitle(params))
+				.filter(v => v)[0]
+
+			const omniturePageName = [
+				'Election 2016',
+				pageSection,
+				omnitureTitle,
+			].filter(v => v).join(' | ')
 
 			// Define locals to be provided to all lifecycle hooks
 			const locals = {
@@ -104,7 +116,7 @@ export default (req, res) => {
 							isProduction: process.env.NODE_ENV === 'production',
 							meta: {
 								...meta,
-								section: pageSection,
+								title: omniturePageName,
 							},
 							version: pakage.version,
 							title,

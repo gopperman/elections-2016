@@ -32,8 +32,12 @@ const url = '2016-11-08?'
 @connectToApi
 class Office extends Component {
 
+	static getOmnitureTitle(params) {
+		return nameUtil.office.omnitureTitle(params)
+	}
+
 	static getSection() {
-		return 'Office'
+		return 'Race'
 	}
 
 	static getTitle(params) {

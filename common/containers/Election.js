@@ -38,6 +38,10 @@ const url = '2016-11-08/prezcentral?reports=Trend-s&races=MA-22949,MA-24805'
 @connectToApi
 class Election extends Component {
 
+	static getOmnitureTitle() {
+		return nameUtil.election.omnitureTitle()
+	}
+
 	static getSection() {
 		return ''
 	}

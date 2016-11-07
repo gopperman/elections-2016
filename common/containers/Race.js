@@ -34,6 +34,10 @@ const url = '2016-11-08?'
 @connectToApi
 class Race extends Component {
 
+	static getOmnitureTitle(params) {
+		return nameUtil.race.omnitureTitle(params)
+	}
+
 	static getSection() {
 		return 'Race'
 	}

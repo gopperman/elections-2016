@@ -9,6 +9,10 @@ const convertStateToAP = usAbbreviations('postal', 'ap')
 
 const election = {
 
+	omnitureTitle(params) {
+		return this.htmlTitle(params)
+	},
+
 	htmlTitle() {
 		return ''
 	},
@@ -16,6 +20,10 @@ const election = {
 }
 
 const presidentUS = {
+
+	omnitureTitle(params) {
+		return this.htmlTitle(params)
+	},
 
 	htmlTitle() {
 		return 'President'
@@ -29,6 +37,10 @@ const presidentUS = {
 
 const presidentMA = {
 
+	omnitureTitle(params) {
+		return this.htmlTitle(params)
+	},
+
 	htmlTitle() {
 		return 'How Mass. voted for president'
 	},
@@ -40,6 +52,10 @@ const presidentMA = {
 }
 
 const office = {
+
+	omnitureTitle(params) {
+		return this.htmlTitle(params)
+	},
 
 	htmlTitle({ statePostal = '', officeName = '' }) {
 
@@ -64,6 +80,41 @@ const party = {
 }
 
 const race = {
+
+	omnitureTitle({ officeName, statePostal, seatName }) {
+
+		let result
+
+		if (compareStringsNoAlpha(officeName, 'president')) {
+			if (compareStringsNoAlpha(statePostal, 'ma')) {
+				result = presidentMA.htmlTitle()
+			} else {
+				result = presidentUS.htmlTitle()
+			}
+		} else {
+
+			// e.g. MA State House
+			const firstPart = [
+				convertStateToAP(urlManager.decode(statePostal).toUpperCase()),
+				toTitleCase(urlManager.decode(officeName)),
+			]
+			.filter(v => v)
+			.join(' ')
+
+			// e.g. 10th Bristol
+			const secondPart = seatName ?
+				toTitleCase(urlManager.decode(seatName)) : null
+
+			// MA State House, 10th Bristol
+			result = clean([firstPart, (secondPart || null)]
+					.filter(v => v)
+					.join(' | '))
+
+		}
+
+		return result
+
+	},
 
 	htmlTitle({ officeName, statePostal, seatName }) {
 
@@ -120,6 +171,17 @@ const race = {
 }
 
 const town = {
+
+	omnitureTitle({ location, statePostal }) {
+
+		return [
+			toTitleCase(urlManager.decode(location)),
+			convertStateToAP(urlManager.decode(statePostal).toUpperCase()),
+		]
+		.filter(v => v)
+		.join(' | ')
+
+	},
 
 	htmlTitle({ location, statePostal }) {
 

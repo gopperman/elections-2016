@@ -34,6 +34,10 @@ const connectToApi = (WrappedComponent) => {
 			return WrappedComponent.getTitle(params)
 		}
 
+		static getOmnitureTitle(params) {
+			return WrappedComponent.getOmnitureTitle(params)
+		}
+
 		static propTypes = {
 			params: PropTypes.object.isRequired,
 			actions: PropTypes.object.isRequired,
