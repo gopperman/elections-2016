@@ -5,7 +5,7 @@ const sortRacesBySeatName = (o) => {
 
 	if (seatName) {
 		const re = /^([0-9]+)(st|nd|th|rd)(.*)$/
-		const dd = /^([0-9])([0-9]+)(th)(.*)$/ // Double Digits, i.e '10th'
+		const dd = /^([0-9])([0-9]+)(st|nd|th|rd)(.*)$/ // Double Digits, i.e '10th'
 
 		// To get this to sort correctly, we just pop a Z between the first and second digit
 		return dd.test(seatName) ?
@@ -17,5 +17,6 @@ const sortRacesBySeatName = (o) => {
 
 
 export {
+	// eslint-disable-next-line import/prefer-default-export
 	sortRacesBySeatName,
 }
