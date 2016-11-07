@@ -65,8 +65,8 @@ class Election extends Component {
 		const senateReport =
 			_.find(getReports(reports), { officeType: 'S' })
 
-		const balanceOfPower = senateReport ?
-			<BalanceOfPower {...senateReport} displayLink /> : null
+		// const balanceOfPower = senateReport ?
+		// 	<BalanceOfPower {...senateReport} displayLink /> : null
 
 		// Get all races.
 		const races = _.get(results, 'data.races', [])
@@ -169,7 +169,7 @@ class Election extends Component {
 							</h3>
 							<div className='r-row--full'>
 								<div className='r-col r-feature'>
-									{balanceOfPower}
+									{/*{balanceOfPower}*/}
 								</div>
 								{featured}
 							</div>
