@@ -6,6 +6,7 @@ import compareStringsNoAlpha from './compareStringsNoAlpha.js'
 import { clean, toTitleCase } from './standardize.js'
 
 const convertStateToAP = usAbbreviations('postal', 'ap')
+const convertStateToFull = usAbbreviations('postal', 'full')
 
 const election = {
 
@@ -130,7 +131,7 @@ const race = {
 
 			// e.g. MA State House
 			const firstPart = [
-				convertStateToAP(urlManager().decode(statePostal).toUpperCase()),
+				convertStateToFull(urlManager().decode(statePostal).toUpperCase()),
 				toTitleCase(urlManager().decode(officeName)),
 			]
 			.filter(v => v)

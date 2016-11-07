@@ -118,12 +118,12 @@ class Office extends Component {
 			case 'Mass. State Senate':
 				link = (<LinkButton
 					text={'Switch to Mass. State House'}
-					url={urlManager.office({ officeName: 'State House', statePostal: 'MA', source })} />)
+					url={urlManager().office({ officeName: 'State House', statePostal: 'MA', source })} />)
 				break
 			case 'Mass. State House':
 				link = (<LinkButton
 					text={'Switch to Mass. State Senate'}
-					url={urlManager.office({ officeName: 'State Senate', statePostal: 'MA', source })} />)
+					url={urlManager().office({ officeName: 'State Senate', statePostal: 'MA', source })} />)
 				break
 			default:
 				// Nothing to see here

@@ -93,7 +93,7 @@ describe('nameUtil', () => {
 					statePostal: 'ma',
 					officeName: 'question',
 					seatName: '1 - Expand slot machine gaming',
-				}), 'Mass. Ballot questions, 1 - Expand Slot Machine Gaming')
+				}), 'Massachusetts Ballot questions, 1 - Expand Slot Machine Gaming')
 
 			})
 
@@ -119,7 +119,7 @@ describe('nameUtil', () => {
 				assert.equal(nameUtil.race.htmlTitle({
 					statePostal: 'nh',
 					officeName: 'governor',
-				}), 'N.H. Governor')
+				}), 'New Hampshire Governor')
 
 			})
 
@@ -129,7 +129,7 @@ describe('nameUtil', () => {
 					statePostal: 'ma',
 					officeName: 'State House',
 					seatName: '10th Essex',
-				}), 'Mass. State House, 10th Essex')
+				}), 'Massachusetts State House, 10th Essex')
 
 			})
 
@@ -169,7 +169,7 @@ describe('nameUtil', () => {
 				assert.equal(nameUtil.race.name({
 					statePostal: 'nh',
 					officeName: 'governor',
-				}), 'N.H. Governor')
+				}), 'New Hampshire Governor')
 
 			})
 
@@ -179,7 +179,7 @@ describe('nameUtil', () => {
 					statePostal: 'ma',
 					officeName: 'State House',
 					seatName: '10th Essex',
-				}), 'Mass. State House, 10th Essex')
+				}), 'Massachusetts State House, 10th Essex')
 
 			})
 
