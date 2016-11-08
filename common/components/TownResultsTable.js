@@ -5,7 +5,6 @@ import React, { PropTypes } from 'react'
 import classnames from 'classnames'
 import TownResultsTableRow from './TownResultsTableRow.js'
 
-// TODO: implement
 const createSummary = (raceName) =>
 	// eslint-disable-next-line max-len
 	`A table that has the candidate percent and vote count across the top and the towns down the left hand side for ${raceName}.`
