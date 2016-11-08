@@ -1,0 +1,29 @@
+//========================
+// 404
+//========================
+.not-found
+	min-height 80vh
+	center(flex)
+	flex-direction column
+	justify-content center
+	width 90%
+	max-width 50rem
+	margin 0 auto
+	> *:not(:last-child)
+		margin-bottom 1em
+	&__hed
+		padding 0.5em 0
+		width 100%
+		span
+			position relative
+
+.icon--arrow:after
+	content ''
+	display block
+	position absolute
+	right -1.5em
+	bottom -1em
+	width 1.8em
+	height 1.8em
+	background url($assets-path + 'misc/arrow.svg') no-repeat 50%
+	background-size contain

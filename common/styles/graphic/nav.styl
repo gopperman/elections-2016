@@ -9,6 +9,8 @@
 	transition 0.3s ease-in-out height
 	+mq('bp-2')
 		height 3.2em
+	/.not-found &
+		width 100%
 	&__list
 		width 90%
 		max-width 50em
@@ -16,13 +18,18 @@
 		display flex
 		justify-content space-between
 		padding 1em 0
-		border-bottom 1px solid set-gray('lightest')
+		/.not-found & 
+			max-width 100%
+			width 100%
+			justify-content space-around
 	&__item
 		width 25%
 		&:not(:last-of-type)
 			margin-right 1.5em
+		/.not-found & 
+			width auto
 	&__link
-		font-size 0.8rem
+		font-size 0.8em
 		border none
 		background-color transparent
 		padding 0
@@ -53,6 +60,8 @@
 				width 100%
 		+mq('bp-2')
 			text-align left
+			/.not-found &
+				font-size 0.9em
 		// Icons
 		&:before
 			display block
@@ -73,6 +82,8 @@
 			height 16em
 		.nav-race
 			@extends .g-nav__link:hover
+		.g-nav__list
+			border-bottom 1px solid set-gray('lightest')
 	// Town is open
 	&.town-is-open
 		height 12em
@@ -80,6 +91,8 @@
 			height 10em
 		.nav-town
 			@extends .g-nav__link:hover
+		.g-nav__list
+			border-bottom 1px solid set-gray('lightest')
 	// President is open
 	/.president-is-open .nav-president
 		@extends .g-nav__link:hover
@@ -136,5 +149,5 @@
 			+mq('bp-2')
 				flex 1 0 100%
 			// // If in the header, hide the elections-home link
-			/.header &
+			/.header &, /.not-found &
 				display none

@@ -9,6 +9,7 @@ import Race from './containers/Race.js'
 import Town from './containers/Town.js'
 import HpElectoralCollegeLite from './containers/HpElectoralCollegeLite.js'
 import HpFeaturedRacesLite from './containers/HpFeaturedRacesLite.js'
+import NotFound from './components/NotFound.js'
 import urlManager from './utils/urlManager.js'
 
 export default (
@@ -17,6 +18,10 @@ export default (
 		<Route
 			path={urlManager().base()}
 			component={Election} />
+
+		<Route
+			path={`${urlManager().base()}/404`}
+			component={NotFound} />
 
 		<Route
 			path={`${urlManager().base()}/hp/bar`}
