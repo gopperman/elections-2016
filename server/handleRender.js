@@ -53,7 +53,6 @@ export default (req, res) => {
 				.filter(v => v)[0]
 
 			// Get page title
-			console.log(pageTitle)
 			const title = [
 				'Election results 2016',
 				pageTitle,
