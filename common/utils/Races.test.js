@@ -35,7 +35,7 @@ describe('RacesUtil', () => {
 
 		})
 
-		it('should sort national races by state, then district', () => {
+		it('should sort national races by state (Mass first), then district', () => {
 			const districtRaces = [
 				{
 					seatName: 'District 11',
@@ -62,8 +62,18 @@ describe('RacesUtil', () => {
 					statePostal: 'CA',
 					national: true,
 				},
+				{
+					seatName: 'District 1',
+					statePostal: 'MA',
+					national: true,
+				},
 			]
 			const expected = [
+				{
+					seatName: 'District 1',
+					statePostal: 'MA',
+					national: true,
+				},
 				{
 					seatName: 'District 1',
 					statePostal: 'AK',
