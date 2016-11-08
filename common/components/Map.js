@@ -561,7 +561,7 @@ class Map extends Component {
 		}
 
 		return (
-			<div className='map-component'>
+			<div className='map-component' aria-hidden='true'>
 				<div className='map__tools'>
 					{button}
 					{dropdown}

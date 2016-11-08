@@ -4,12 +4,10 @@ import classnames from 'classnames'
 import { percent } from './Candidate.js'
 import { percentForDisplay, normalizeParty } from './standardize.js'
 
-// TODO: create summary
 export default ({ subunit = {}, displayName, tooltipSortingDelegate }) => {
 
 	const title = subunit[displayName]
 	const { precinctsReportingPct } = subunit
-	const summary = ''
 	const candidates = tooltipSortingDelegate(subunit.candidates || [])
 
 	const isPresidential = _.has(candidates[0], 'electWon')
@@ -65,7 +63,7 @@ export default ({ subunit = {}, displayName, tooltipSortingDelegate }) => {
 
 	return candidates.length ? `
 		<p class='r-block__name benton-bold'>${title}</p>
-		<table class='r-table' summary='${summary}'>
+		<table class='r-table'>
 			<thead class='r-table__head'>
 				<tr class='r-table__row'>
 					<th class='r-table__cell' scope='col'>
