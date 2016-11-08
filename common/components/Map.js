@@ -84,40 +84,40 @@ class Map extends Component {
 
 	}
 
-	// TODO: try selecting something with no data, or the placeholder.
 	onSelectChange = (e) => {
+
+		const value = _.get(e, 'target.value', null)
 
 		// Save this selection to state so it doesn't get cleared out
 		// with new data.
-		// TODO: what happens when e || e.target || e.target.value is null?
-		this.setState({ selectionId: e.target.value })
+		this.setState({ selectionId: value })
 
 		// Deselect all paths.
 		const paths = this.deselectAllPaths()
 
 		// Find the feature that matches the dropdown option,
-		// TODO: what if e || e.target || e.target.value is null?
 		const match = paths
-			.filter(d => compareStringsNoAlpha(d.id, e.target.value))
+			.filter(d => compareStringsNoAlpha(d.id, value))
 
 		// select it, and raise it.
-		// TODO: could match be null?
 		match.classed('selected', true).raise()
 
-		// TODO: this will fail if match is null
-		const datum = match.datum()
+		const datum = match.size() ? match.datum() : null
 
-		// Get the mouse position.
-		const { width, height } = getViewBoxDimensions(this._svg)
-		// TODO: this will fail if datum is null
-		const [x, y] = datum.centroid
-		const position = {
-			x: 100 * (x / width),
-			y: 100 * (y / height),
+		if (datum) {
+
+			// Get the mouse position.
+			const { width, height } = getViewBoxDimensions(this._svg)
+			const [x, y] = datum.centroid
+			const position = {
+				x: 100 * (x / width),
+				y: 100 * (y / height),
+			}
+
+			// Draw the tooltip for this subunit.
+			this.drawTooltip({ subunit: datum.subunit, position })
+
 		}
-
-		// Draw the tooltip for this subunit.
-		this.drawTooltip({ subunit: datum.subunit, position })
 
 	}
 
