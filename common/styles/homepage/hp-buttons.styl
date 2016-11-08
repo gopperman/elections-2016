@@ -13,7 +13,13 @@
 	+mq('bp-2')
 		font-size 1.4rem
 	&:visited
-		@extends .btn--primary
+		@extends $btn
+		border none
+		background-color set-gray('darkest')
+		color white
+		padding 1em 0
+		box-shadow 7px 7px 0px 1px set-gray('light')
+		font-size 1.2rem
 	&:hover, &:active, &:focus
 		color white
 		box-shadow none
