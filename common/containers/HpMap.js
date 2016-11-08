@@ -12,6 +12,7 @@ import Legend from './../components/Legend.js'
 import {
 	sortByElectoralCount,
 	sortByPolIDs,
+	sortByProductRequirements,
 } from './../utils/Candidates.js'
 
 import getStatesShapefile from './../utils/getStatesShapefile.js'
@@ -89,7 +90,7 @@ class HpMap extends Component {
 			data={states}
 			unitName='stateName'
 			projection={geoAlbersUsa()}
-			tooltipSortingDelegate={sortByElectoralCount}
+			tooltipSortingDelegate={sortByProductRequirements}
 			displayName='stateName'
 			isPresidential
 			buttonText={nameUtil.presidentMA.name()}
