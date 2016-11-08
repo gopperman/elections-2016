@@ -21,8 +21,9 @@ class TownResultsTable extends Component {
 	}
 
 	render() {
-		const { isCollapsed } = this.state
 		const { towns, summaryCandidates, raceName } = this.props
+		const isCollapsed = (towns.length > 5) ? this.state.isCollapsed : false
+
 		const tableContainer =
 			classnames('table-container--outer', { 'collapsed': isCollapsed })
 
