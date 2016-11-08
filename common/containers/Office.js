@@ -16,8 +16,8 @@ import Hero from './../components/Hero.js'
 import urlManager from './../utils/urlManager.js'
 import compareStringsNoAlpha from './../utils/compareStringsNoAlpha.js'
 import nameUtil from './../utils/nameUtil.js'
-import { senateTrendReport } from './../utils/visUtils.js'
-import BalanceOfPower from './../components/BalanceOfPower.js'
+// import { senateTrendReport } from './../utils/visUtils.js'
+// import BalanceOfPower from './../components/BalanceOfPower.js'
 
 // We'll keep these urls here for testing. A description:
 
@@ -91,21 +91,21 @@ class Office extends Component {
 
 		const title = nameUtil.office.name(params)
 
-		let bop = null
+		// let bop = null
 		let link = null
-		let bopData = null
+		// let bopData = null
 		const source = 'balanceofpower'
 
 		switch (title) {
 			case 'US Senate':
-				bopData = senateTrendReport(sortedRaces)
-				bop = (
-					<BalanceOfPower
-						{...bopData}
-						total={100}
-						rows={5}
-						displayLink={false} />
-				)
+				// bopData = senateTrendReport(sortedRaces)
+				// bop = (
+				// 	<BalanceOfPower
+				// 		{...bopData}
+				// 		total={100}
+				// 		rows={5}
+				// 		displayLink={false} />
+				// )
 				link = (<LinkButton
 					text={'Switch to US House'}
 					url={urlManager().office({ officeName: 'US House', source })} />)
@@ -131,11 +131,12 @@ class Office extends Component {
 
 		// We can drop this logic once the house gets a balance of power widget, probably
 		let officeSummary = null
-		if (bop || link) {
+		// if (bop || link) {
+		if (link) {
 			officeSummary = (
 				<div className='container-inset'>
 					<div className='r-col bop-container'>
-						{bop}
+						{/* {bop} */}
 						{link}
 					</div>
 				</div>
