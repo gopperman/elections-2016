@@ -348,7 +348,9 @@ class Map extends Component {
 		this.setState({ selectionId: null })
 
 		// clear out the dropdown,
-		this._dropdown.value = ''
+		if (this._dropdown) {
+			this._dropdown.value = ''
+		}
 
 		// and deselect all paths.
 		this.deselectAllPaths()
@@ -448,7 +450,9 @@ class Map extends Component {
 			.on('mousemove', function mousemove(d) {
 
 				// Set the dropdown.
-				_dropdown.value = d.id.toUpperCase()
+				if (_dropdown) {
+					_dropdown.value = d.id.toUpperCase()
+				}
 
 				// Set this feature's `id` to local state on mousemove.
 				setState({ selectionId: d.id })
