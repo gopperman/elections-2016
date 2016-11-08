@@ -35,7 +35,7 @@ const BalanceOfPowerArc = ({ dem, gop, ind, total, name }) => {
 	const metaItems = [
 		{ name: 'Democrats', abbr: 'Dem', value: demTotal, color: 'dem' },
 		{ name: 'Independents', abbr: 'Ind', value: indTotal, color: 'ind' },
-		{ name: 'Undecideds', abbr: 'Undecideds', value: none, color: 'undecided' },
+		{ name: 'Undecided', abbr: 'Undecided', value: none, color: 'undecided' },
 		{ name: 'Republicans', abbr: 'GOP', value: gopTotal, color: 'gop' },
 	]
 

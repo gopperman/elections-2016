@@ -172,7 +172,7 @@ class BalanceOfPower extends Component {
 					<li className='chart-meta__item'>
 						<p className='chart-meta__info'>
 							<abbr
-								title='Undecideds'
+								title='Undecided'
 								className='benton-regular'>Undecided</abbr>
 							<span
 								className='benton-bold color-undecided'>{undecideds}</span>
