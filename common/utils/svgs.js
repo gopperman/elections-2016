@@ -122,22 +122,22 @@ const svgs = {
   		<rect class="fill-none" width="10" height="10" transform="translate(0,0)"></rect>
   	</pattern>
   	<pattern id="crosshatch-dem" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(30)">
-  		<rect class="fill-winner-dem" width="8" height="10" transform="translate(0,0)"></rect>
+  		<rect class="fill-winner-dem" width="9" height="10" transform="translate(0,0)"></rect>
   	</pattern>
   	<pattern id="crosshatch-gop" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(30)">
-  		<rect class="fill-winner-gop" width="8" height="10" transform="translate(0,0)"></rect>
+  		<rect class="fill-winner-gop" width="9" height="10" transform="translate(0,0)"></rect>
   	</pattern>
   	<pattern id="crosshatch-ind" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(30)">
-  		<rect class="fill-winner-ind" width="8" height="10" transform="translate(0,0)"></rect>
+  		<rect class="fill-winner-ind" width="9" height="10" transform="translate(0,0)"></rect>
   	</pattern>
     <pattern id="crosshatch-yes" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(30)">
-      <rect class="fill-complete-yes" width="8" height="10" transform="translate(0,0)"></rect>
+      <rect class="fill-complete-yes" width="9" height="10" transform="translate(0,0)"></rect>
     </pattern>
     <pattern id="crosshatch-no" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(30)">
-      <rect class="fill-complete-no" width="8" height="10" transform="translate(0,0)"></rect>
+      <rect class="fill-complete-no" width="9" height="10" transform="translate(0,0)"></rect>
     </pattern>
     <pattern id="crosshatch-split" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(30)">
-      <rect class="fill-winner-split" width="8" height="10" transform="translate(0,0)"></rect>
+      <rect class="fill-winner-split" width="9" height="10" transform="translate(0,0)"></rect>
     </pattern>
   </defs>`,
 
