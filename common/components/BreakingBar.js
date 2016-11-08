@@ -1,6 +1,5 @@
 import classnames from 'classnames'
 import React, { Component, PropTypes } from 'react'
-import { formatTime } from './../utils/timeUtil.js'
 import svgs from './../utils/svgs.js'
 
 class BreakingBar extends Component {
@@ -18,8 +17,6 @@ class BreakingBar extends Component {
 
 		const { isVisible } = this.state
 		const { alert } = this.props
-
-		const time = formatTime(new Date(alert.timestamp))
 
 		const encodedURI = encodeURIComponent(alert.link)
 		const encodedHeadline = encodeURIComponent(alert.headline)
@@ -39,9 +36,6 @@ class BreakingBar extends Component {
 							href={alert.link}
 							rel='noopener noreferrer'
 							target='_blank'>{alert.headline} </a>
-						<time
-							dateTime={alert.timestamp}
-							className='benton-regular'>{time}</time>
 					</p>
 					<a
 						className='btn--tw'
