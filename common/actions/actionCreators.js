@@ -114,7 +114,6 @@ const fetchResults = ({ url }) =>
 					return {}
 				})
 
-		// // Should be 'http://www.bostonglobe.com/bn_endpoint.json'
 		// const allUrls = [fullUrl, config.breakingNewsUrl]
 
 		const { breakingNewsUrl } = config
