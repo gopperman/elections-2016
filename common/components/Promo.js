@@ -9,7 +9,7 @@ const Promo = () => (
 			<p className='benton-regular promo__copy'>Find out about important stories as they break with our <em className='benton-bold'>free</em> newsletter.</p>
 			<a
 				className='benton-bold btn--feature'
-				href='http://pages.email.bostonglobe.com/BreakingNewsSignUp/'
+				href='http://pages.email.bostonglobe.com/BreakingNewsSignUp/?p1=BG_election_email'
 				rel='noopener noreferrer'
 				target='_blank'>Sign up now</a>
 		</div>
