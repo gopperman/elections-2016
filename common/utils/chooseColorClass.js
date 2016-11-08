@@ -10,7 +10,7 @@ export default ({ candidates, precinctsReportingPct }) => {
 
 	const NO_DATA = 'fill-none'
 	const TIE = 'fill-tie'
-	const PCT_THRESHOLD = 1
+	const PCT_THRESHOLD = 0
 	let result = NO_DATA
 
 	// First of all: do we have candidates?
