@@ -42,16 +42,18 @@ const BalanceOfPowerArc = ({ dem, gop, ind, total, name }) => {
 	return (
 		<div className='balance-of-power r-col'>
 			<h3 className='overline benton-bold'>{name}</h3>
-			<svg viewBox={`0 0 ${width} ${width / 2}`}>
-				<g transform={`translate(${width / 2}, ${width / 2})`}>
-					{pieLayout.map((d, i) => (
-						<path
-							key={i}
-							className={`fill-winner-${d.data.party}`}
-							d={arcGenerator(d)} />
-					))}
-				</g>
-			</svg>
+			<div className='chart-container'>
+				<svg viewBox={`0 0 ${width} ${width / 2}`}>
+					<g transform={`translate(${width / 2}, ${width / 2})`}>
+						{pieLayout.map((d, i) => (
+							<path
+								key={i}
+								className={`fill-winner-${d.data.party}`}
+								d={arcGenerator(d)} />
+						))}
+					</g>
+				</svg>
+			</div>
 			<ChartMetaItems items={metaItems} />
 		</div>
 	)
