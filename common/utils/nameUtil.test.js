@@ -110,7 +110,7 @@ describe('nameUtil', () => {
 				assert.equal(nameUtil.race.htmlTitle({
 					statePostal: 'ma',
 					officeName: 'president',
-				}), 'Mass. president results')
+				}), 'Mass. presidential results')
 
 			})
 
@@ -151,7 +151,7 @@ describe('nameUtil', () => {
 
 				assert.equal(nameUtil.race.name({
 					officeName: 'president',
-				}), 'US president results')
+				}), 'US presidential results')
 
 			})
 
@@ -160,7 +160,7 @@ describe('nameUtil', () => {
 				assert.equal(nameUtil.race.name({
 					statePostal: 'ma',
 					officeName: 'president',
-				}), 'Mass. president results')
+				}), 'Mass. presidential results')
 
 			})
 
