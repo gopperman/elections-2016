@@ -1,18 +1,30 @@
 import _ from 'lodash'
+import usAbbreviations from 'us-abbreviations'
+
+const convertStateToFull = usAbbreviations('postal', 'full')
 
 const sortRacesBySeatName = (o) => {
 	const seatName = _.get(o, 'seatName')
+	const national = _.get(o, 'national')
+	const state = convertStateToFull(_.get(o, 'statePostal'))
 
 	if (seatName) {
-		const re = /^([0-9]+)(st|nd|th|rd)(.*)$/
-		const dd = /^([0-9])([0-9]+)(st|nd|th|rd)(.*)$/ // Double Digits, i.e '10th'
+		const re = (national) ? /^(.*)([0-9+])$/ : /^([0-9]+)(st|nd|th|rd)(.*)$/
 
-		// To get this to sort correctly, we just pop a Z between the first and second digit
-		return dd.test(seatName) ?
+		// Double Digits, i.e '10th'
+		const dd = (national) ? /^(.*)([0-9])([0-9+])$/ : /^([0-9])([0-9]+)(st|nd|th|rd)(.*)$/
+
+		if (national) {
+			// To get this to sort correctly, we just pop a Z before double digit numbers
+			return `${state} ${(dd.test(seatName)) ?
+				seatName.replace(dd, '$1z$2$3') : seatName.replace(re, '$1$2')}`
+		}
+		// State races
+		return (dd.test(seatName)) ?
 			seatName.replace(dd, '$4 z $1$2') : seatName.replace(re, '$3 $1')
 	}
-	// If we don't have a seatname, the regular sort order is fine
-	return ''
+	// If we don't have a seatname, sort by state (US Senate)
+	return state
 }
 
 
