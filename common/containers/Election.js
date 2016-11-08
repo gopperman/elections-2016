@@ -14,8 +14,7 @@ import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 import Map from './../components/Map.js'
 import SwingStates from './../components/SwingStates.js'
 import {
-	sortByElectoralCount,
-	sortByPolIDs,
+	sortByProductRequirements,
 } from './../utils/Candidates.js'
 import FeatureGroup from './../components/FeatureGroup.js'
 import urlManager from './../utils/urlManager.js'
@@ -98,37 +97,13 @@ class Election extends Component {
 			.sortBy(v => _.indexOf(swingStatesSelection, v.statePostal))
 			.value()
 
-		const tooltipSorter = (candidates) => {
-			const cutoff = 4
-			const nationalCandidates =
-				sortByElectoralCount(presSummaryUnit.candidates)
-			const localCandidates = sortByElectoralCount(candidates)
-
-			const natIDs = _.map(nationalCandidates.slice(0, cutoff), 'polID')
-			const locIDs = _.map(localCandidates.slice(0, cutoff), 'polID')
-
-			// If the national leaders are the same as the local ones,
-			// just return them.
-			if (!_.difference(locIDs, natIDs).length) {
-				return sortByPolIDs({
-					candidates: localCandidates,
-					polIDs: natIDs,
-				})
-			}
-
-			return sortByPolIDs({
-				candidates: localCandidates.slice(0, cutoff),
-				polIDs: _.map(nationalCandidates, 'polID'),
-			})
-		}
-
 		// Create the map (if we have data).
 		const map = presStates.length ? (<Map
 			shapefile={STATES}
 			data={presStates}
 			unitName='stateName'
 			projection={geoAlbersUsa()}
-			tooltipSortingDelegate={tooltipSorter}
+			tooltipSortingDelegate={sortByProductRequirements}
 			dropdownName='state'
 			displayName='stateName'
 			buttonText={nameUtil.presidentMA.name()}
