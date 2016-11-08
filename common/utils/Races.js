@@ -16,7 +16,7 @@ const sortRacesBySeatName = (o) => {
 
 		if (national) {
 			return `${state} ${(dd.test(seatName)) ?
-				seatName.replace(dd, '$1$2z$3') : seatName.replace(re, '$1$2')}`
+				seatName.replace(dd, '$1z$2$3') : seatName.replace(re, '$1$2')}`
 		} else {
 			// To get this to sort correctly, we just pop a Z between the first and second digit
 			return (dd.test(seatName)) ?
