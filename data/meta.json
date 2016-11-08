@@ -7,6 +7,6 @@
 	"credits": "Gabriel Florit, Elaina Notario, and Greg Opperman",
 	"teasers": [],
 	"meter": true,
-	"socialConnect": true,
+	"socialConnect": false,
 	"ads": false
 }
