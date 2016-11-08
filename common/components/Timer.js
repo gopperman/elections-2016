@@ -100,7 +100,7 @@ class Timer extends Component {
 			// Join date and time, but not date if it's today.
 			const timeAndDate = [date, time].filter(v => v).join(', ')
 
-			updated = `Updated ${timeAndDate}`
+			updated = `Data last updated ${timeAndDate}`
 
 		}
 
