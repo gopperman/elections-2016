@@ -8,7 +8,7 @@ import Header from './../components/Header.js'
 import Footer from './../components/Footer.js'
 import Promo from './../components/Promo.js'
 import TestStatus from './../components/TestStatus.js'
-import BalanceOfPower from './../components/BalanceOfPower.js'
+import BalanceOfPowerArc from './../components/BalanceOfPowerArc.js'
 import Hero from './../components/Hero.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 import Map from './../components/Map.js'
@@ -16,7 +16,7 @@ import SwingStates from './../components/SwingStates.js'
 import { sortByElectoralCount, sortByPolIDs } from './../utils/Candidates.js'
 import FeatureGroup from './../components/FeatureGroup.js'
 import urlManager from './../utils/urlManager.js'
-import getReports from './../utils/getReports.js'
+// import getReports from './../utils/getReports.js'
 import getStatesShapefile from './../utils/getStatesShapefile.js'
 import nameUtil from './../utils/nameUtil.js'
 import swingStatesSelection from './../../data/swing-states.json'
@@ -59,15 +59,15 @@ class Election extends Component {
 		const { props } = this
 		const { timerProps, results } = props
 
-		// Get the reports.
-		const reports = _.get(results, 'data.reports', [])
+		// // Get the reports.
+		// const reports = _.get(results, 'data.reports', [])
 
 		// Get breaking news.
 		const breakingNews = _.first(results.breakingNews) || {}
 
-		// Get senate report data.
-		const senateReport =
-			_.find(getReports(reports), { officeType: 'S' })
+		// // Get senate report data.
+		// const senateReport =
+		// 	_.find(getReports(reports), { officeType: 'S' })
 
 		// const balanceOfPower = senateReport ?
 		// 	<BalanceOfPower {...senateReport} displayLink /> : null
@@ -173,7 +173,18 @@ class Election extends Component {
 							</h3>
 							<div className='r-row--full'>
 								<div className='r-col r-feature'>
-									{/*{balanceOfPower}*/}
+									<BalanceOfPowerArc
+										dem={10}
+										ind={10}
+										gop={50}
+										total={100} />
+								</div>
+								<div className='r-col r-feature'>
+									<BalanceOfPowerArc
+										dem={10}
+										ind={10}
+										gop={50}
+										total={100} />
 								</div>
 								{featured}
 							</div>
