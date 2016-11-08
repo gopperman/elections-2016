@@ -21,11 +21,15 @@ class TownResultsTable extends Component {
 	}
 
 	render() {
+		const { isCollapsed } = this.state
 		const { towns, summaryCandidates, raceName } = this.props
+		const tableContainer =
+			classnames('table-container--outer', { 'collapsed': isCollapsed })
+
 		return (
 			<div className='r-block'>
 				<h3 className='subhed benton-bold'><span>Town results</span></h3>
-				<div className='table-container--outer'>
+				<div className='{tableContainer}'>
 					<div className='table-container--inner'>
 						<table className='r-table' summary={createSummary(raceName)}>
 							<thead className='r-table__head'>
@@ -60,6 +64,7 @@ class TownResultsTable extends Component {
 							</tbody>
 						</table>
 					</div>
+					<button onClick={this.expandTable}>Button Text</button>
 				</div>
 			</div>
 		)

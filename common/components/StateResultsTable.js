@@ -1,6 +1,5 @@
 // The `StateResultsTable` class displays detailed results for each
 // state in the race.
-
 import React, { Component, PropTypes } from 'react'
 import classnames from 'classnames'
 import StateResultsTableRow from './StateResultsTableRow.js'
@@ -21,12 +20,16 @@ class StateResultsTable extends Component {
 	}
 
 	render() {
+		const { isCollapsed } = this.state
 		const { states, summaryCandidates, raceName } = this.props
+		const tableContainer =
+			classnames('table-container--outer', { 'collapsed': isCollapsed })
+
 		return (
 
 			<div className='r-block'>
 				<h3 className='subhed benton-bold'><span>State results</span></h3>
-				<div className='table-container--outer'>
+				<div className={tableContainer}>
 					<div className='table-container--inner'>
 						<table className='r-table' summary={createSummary(raceName)}>
 							<thead className='r-table__head'>
@@ -63,6 +66,7 @@ class StateResultsTable extends Component {
 							</tbody>
 						</table>
 					</div>
+					<button onClick={this.expandTable}>Button Text</button>
 				</div>
 			</div>
 		)
