@@ -31,7 +31,7 @@ const presidentUS = {
 	},
 
 	name() {
-		return 'US president results'
+		return 'US presidential results'
 	},
 
 }
@@ -43,7 +43,7 @@ const presidentMA = {
 	},
 
 	htmlTitle() {
-		return 'Mass. president results'
+		return 'Mass. presidential results'
 	},
 
 	name() {
