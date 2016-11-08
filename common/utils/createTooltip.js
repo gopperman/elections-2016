@@ -17,7 +17,7 @@ export default ({ subunit = {}, displayName, tooltipSortingDelegate }) => {
 			<p class='benton-regular'>Electors</p>
 		</th>` : ''
 
-	const rows = candidates.slice(0, 4).map((candidate, i) => {
+	const rows = candidates.map((candidate, i) => {
 
 		const { candidateID, voteCount, last, winner, party,
 			electWon } = candidate

@@ -65,6 +65,31 @@ const sortByPolIDs = ({ candidates, polIDs }) => _(candidates)
 	.value()
 
 /**
+ * Sort candidates in the order dictated by product
+ * @memberof Candidates
+ * @function
+ * @param {Array} candidates an array of candidates
+ * @returns {Array} a new array of candidates, sorted. Does not mutate original array.
+ * @example
+ * sortByProductRequirements(candidate) //=> sortedCandidates
+ */
+const sortByProductRequirements = (candidates) => {
+	const polIDs = [
+		'1746', // Clinton
+		'8639', // Trump
+		'31708', // Johnson
+		'65775', // McMullin
+		'895', // Stein
+	]
+	const sortedCandidates = sortByPolIDs({
+		candidates,
+		polIDs,
+	})
+
+	return _.filter(sortedCandidates, (o) => (_.indexOf(polIDs, o.polID) !== -1))
+}
+
+/**
  * Sort candidates by an external array of candidateIDs.
  * @memberof Candidates
  * @function
@@ -102,6 +127,7 @@ export {
 	sortByVoteCount,
 	sortByPolIDs,
 	sortByCandidateIDs,
+	sortByProductRequirements,
 	totalVotes,
 	candidatesAreEqual,
 }
