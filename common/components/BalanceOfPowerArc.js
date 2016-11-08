@@ -1,8 +1,6 @@
 /* eslint-disable no-return-assign */
 
-// import LinkButton from './LinkButton.js'
-// import urlManager from './../utils/urlManager.js'
-
+import _ from 'lodash'
 import React, { PropTypes } from 'react'
 import { pie, arc } from 'd3-shape'
 import ChartMetaItems from './ChartMetaItems.js'
@@ -11,15 +9,17 @@ const BalanceOfPowerArc = ({ dem, gop, ind, total, name }) => {
 
 	const width = 100
 
-	// Calculate `none` seats.
-	const none = total - (dem + ind + gop)
+	const demTotal = _.get(dem, 'holdovers', 0) + _.get(dem, 'won', 0)
+	const indTotal = _.get(ind, 'holdovers', 0) + _.get(ind, 'won', 0)
+	const gopTotal = _.get(gop, 'holdovers', 0) + _.get(gop, 'won', 0)
+	const none = total - (demTotal + indTotal + gopTotal)
 
 	// Prepare data.
 	const data = [
-		{ party: 'dem', seats: dem },
-		{ party: 'ind', seats: ind },
+		{ party: 'dem', seats: demTotal },
+		{ party: 'ind', seats: indTotal },
 		{ party: 'none', seats: none },
-		{ party: 'gop', seats: gop },
+		{ party: 'gop', seats: gopTotal },
 	]
 
 	const pieLayout = pie()
@@ -33,10 +33,10 @@ const BalanceOfPowerArc = ({ dem, gop, ind, total, name }) => {
 		.innerRadius(width / 4)
 
 	const metaItems = [
-		{ name: 'Democrats', abbr: 'Dem', value: dem, color: 'dem' },
-		{ name: 'Independents', abbr: 'Ind', value: ind, color: 'ind' },
+		{ name: 'Democrats', abbr: 'Dem', value: demTotal, color: 'dem' },
+		{ name: 'Independents', abbr: 'Ind', value: indTotal, color: 'ind' },
 		{ name: 'Undecideds', abbr: 'Undecideds', value: none, color: 'undecided' },
-		{ name: 'Republicans', abbr: 'GOP', value: gop, color: 'gop' },
+		{ name: 'Republicans', abbr: 'GOP', value: gopTotal, color: 'gop' },
 	]
 
 	return (
@@ -60,9 +60,9 @@ const BalanceOfPowerArc = ({ dem, gop, ind, total, name }) => {
 
 BalanceOfPowerArc.propTypes = {
 	name: PropTypes.string.isRequired,
-	dem: PropTypes.number.isRequired,
-	gop: PropTypes.number.isRequired,
-	ind: PropTypes.number.isRequired,
+	dem: PropTypes.object.isRequired,
+	gop: PropTypes.object.isRequired,
+	ind: PropTypes.object.isRequired,
 	total: PropTypes.number.isRequired,
 }
 

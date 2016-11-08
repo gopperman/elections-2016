@@ -37,7 +37,7 @@ const STATES = getStatesShapefile()
 // const url = '2016-11-08/rezcentral'
 
 // and this one is the correct url - it returns everything.
-const url = '2016-11-08/prezcentral?reports=Trend-s&races=MA-22949,MA-24805'
+const url = '2016-11-08/prezcentral?reports=Trend-s,Trend-h&races=MA-22949,MA-24805'
 
 @connectToApi
 class Election extends Component {
@@ -69,20 +69,9 @@ class Election extends Component {
 		// Get breaking news.
 		const breakingNews = _.first(results.breakingNews) || {}
 
-		// Get senate report data.
-		const senateReport =
-			_.find(getReports(reports), { officeType: 'S' })
-
-		const senateReportPrepared = {
-			dem: senateReport.dem.holdovers + senateReport.dem.won,
-			gop: senateReport.gop.holdovers + senateReport.gop.won,
-			ind: senateReport.ind.holdovers + senateReport.ind.won,
-			total: 100,
-			name: 'US Senate balance of power',
-		}
-
-		const senateBop = senateReport ?
-			<BalanceOfPowerArc {...senateReportPrepared} /> : null
+		// Get senate / house reports.
+		const senateReport = _.find(getReports(reports), { officeType: 'S' })
+		const houseReport = _.find(getReports(reports), { officeType: 'H' })
 
 		// Get all races.
 		const races = _.get(results, 'data.races', [])
@@ -185,7 +174,12 @@ class Election extends Component {
 							</h3>
 							<div className='r-row--full'>
 								<div className='r-col r-feature'>
-									{senateBop}
+									<BalanceOfPowerArc
+										{...{
+											...senateReport,
+											total: 100,
+											name: 'US Senate balance of power',
+										}} />
 									<LinkButton
 										text='See full results'
 										url={urlManager().office({
@@ -193,7 +187,17 @@ class Election extends Component {
 											source: 'balanceofpower' })} />
 								</div>
 								<div className='r-col r-feature'>
-									{senateBop}
+									<BalanceOfPowerArc
+										{...{
+											...houseReport,
+											total: 435,
+											name: 'US House balance of power',
+										}} />
+									<LinkButton
+										text='See full results'
+										url={urlManager().office({
+											officeName: 'US House',
+											source: 'balanceofpower' })} />
 								</div>
 								{featured}
 							</div>
