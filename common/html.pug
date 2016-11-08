@@ -72,9 +72,9 @@ html(lang='en')
 		if isProduction
 			link(href=`/elections/static/compiled.css?_=${version}`, rel='stylesheet', type='text/css')
 			style='.header__logo-link:hover svg{fill:url(#logoGradient)}.fill-leading-dem{fill:url(#crosshatch-dem)}.fill-leading-gop{fill:url(#crosshatch-gop)}.fill-leading-ind{fill:url(#crosshatch-ind)}.fill-leading-yes{fill:url(#crosshatch-yes)}.fill-leading-no{fill:url(#crosshatch-no)}.fill-leading-split{fill:url(#crosshatch-split)}'
-	
+
 	body.ie11up
 		#root!=appHtml
 		script window.REDUX__INITIALSTATE=!{JSON.stringify(initialState)}
 		script(src=`${isProduction ? '/elections' : ''}/static/bundle.js?_=${version}`)
-		script(src='//apps.bostonglobe.com/election-results/2016/general/static/business.js', async=true)
+		script(src=`//apps.bostonglobe.com/election-results/2016/general/static/business.js?_=${version}`, async=true)
