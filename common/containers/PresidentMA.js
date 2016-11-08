@@ -113,17 +113,17 @@ class PresidentMA extends Component {
 				...usRace, source: 'US' })}
 			displayName='reportingunitName' />) : null
 
+		const title = nameUtil.presidentMA.htmlTitle()
+
 		return (
 			<div>
-
 				<TestStatus isTest={isTest} />
 				<BreakingBar alert={breakingNews} />
 				<Header summaryState={usUnit} />
 				<main id='content'>
 					<Hero
 						className='lead-img'
-						title={nameUtil.presidentMA.htmlTitle()} />
-
+						title={title} />
 					<Timer {...timerProps} />
 					<div className='container-inset'>
 						<div className='container-sm'>
@@ -140,16 +140,17 @@ class PresidentMA extends Component {
 						{map}
 						<Legend isPresidential={false} races={towns} />
 					</div>
-
 					<div className='container-downpage'>
 						<TownResultsTable
-							{...{ towns, summaryCandidates: summaryTownCandidates }} />
+							{...{
+								towns,
+								summaryCandidates: summaryTownCandidates,
+								raceName: title,
+							}} />
 					</div>
 					<Promo />
 				</main>
-
 				<Footer />
-
 			</div>
 		)
 
