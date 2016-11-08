@@ -45,7 +45,7 @@ precinctsReportingPct, isUnopposed, isLite }) => {
 
 	const precincts = !isUnopposed && precinctsReportingPct ?
 		(<p className='note benton-regular'>
-			<span>{+precinctsReportingPct}% reporting</span>
+			<span>{Math.round(+precinctsReportingPct)}% reporting</span>
 		</p>) : null
 
 	const votesEl = !isLite ?
