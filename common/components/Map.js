@@ -524,7 +524,9 @@ class Map extends Component {
 			this.drawInitial({ width, height, subsetFeature })
 
 			serverSvg =
-				<div dangerouslySetInnerHTML={{ __html: this._svg.outerHTML }} />
+				<div
+					className='hide-labels-completely'
+					dangerouslySetInnerHTML={{ __html: this._svg.outerHTML }} />
 
 		}
 
