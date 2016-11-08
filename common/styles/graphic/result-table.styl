@@ -23,14 +23,15 @@
 		height 1em
 		margin-bottom 0.5em
 		float left
-		margin-right 0.25em
+		margin 0 0.25em 0 0.75em
 		vertical-align middle
-		+ .r-table__name
-			margin-left 0.5em
-			float left
+		// + .r-table__name
+		// 	margin-left 0.5em
+		// 	float left
 	&__cell
+		position relative
 		vertical-align top
-		padding 0.5em 1em
+		padding 0.5em
 		&:not(:first-of-type)
 			text-align right
 		p
@@ -53,7 +54,7 @@
 					font-size 0.8em
 	&__name
 		position relative
-		padding-left 1.5em
+		padding-left 0.5em
 		display inline
 	.is-winner:before
 		position absolute

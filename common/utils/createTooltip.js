@@ -33,7 +33,7 @@ export default ({ subunit = {}, displayName, tooltipSortingDelegate }) => {
 		// Get the display-ready version of the percent.
 		const pctForDisplay = percentForDisplay(pct, false)
 
-		const candidateClass = classnames('benton-bold', 'r-table__name',
+		const winnerClass = classnames('r-table__cell',
 			{ 'is-winner': !!winner && isPresidential })
 
 		const squareClass = `fill-complete-${normalizeParty(party)}`
@@ -41,22 +41,22 @@ export default ({ subunit = {}, displayName, tooltipSortingDelegate }) => {
 		const pctSpan = `<span class='${i > 0 && 'hide-invisible'}'>%</span>`
 
 		const electorsTd = isPresidential ?
-			`<td class='r-table__cell' scope='row'>
+			`<td class='r-table__cell' scope='row' style='width: 1.5em;'>
 				<p class='benton-bold'>${electWon}</p>
 			</td>` : ''
 
 		// Create this candidate's table row.
 		return `
 			<tr class='r-table__row'>
-				<td class='r-table__cell' scope='row'>
+				<td class='${winnerClass}' scope='row'>
 					<div aria-hidden='true' class='r-table__square ${squareClass}'></div>
-					<p class='${candidateClass}'>${last}</p>
+					<p class='benton-bold'>${last}</p>
 				</td>
 				${electorsTd}
-				<td class='r-table__cell' scope='row'>
+				<td class='r-table__cell' scope='row' style='width: 1.5em;'>
 					<p class='benton-bold'>${pctForDisplay}${pctSpan}</p>
 				</td>
-				<td class='r-table__cell' scope='row'>
+				<td class='r-table__cell' scope='row' style='width: 7em;'>
 					<p class='benton-bold'>${vote}</p>
 				</td>
 			</tr>
