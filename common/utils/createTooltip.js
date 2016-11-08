@@ -48,7 +48,7 @@ export default ({ subunit = {}, displayName, tooltipSortingDelegate }) => {
 		// Create this candidate's table row.
 		return `
 			<tr class='r-table__row'>
-				<td class='${winnerClass}' scope='row'>
+				<td class='${winnerClass}' scope='row' style='width: 9em;'>
 					<div aria-hidden='true' class='r-table__square ${squareClass}'></div>
 					<p class='benton-bold'>${last}</p>
 				</td>
@@ -56,7 +56,7 @@ export default ({ subunit = {}, displayName, tooltipSortingDelegate }) => {
 				<td class='r-table__cell' scope='row' style='width: 1.5em;'>
 					<p class='benton-bold'>${pctForDisplay}${pctSpan}</p>
 				</td>
-				<td class='r-table__cell' scope='row' style='width: 7em;'>
+				<td class='r-table__cell' scope='row' style='width: 6em;'>
 					<p class='benton-bold'>${vote}</p>
 				</td>
 			</tr>
