@@ -1,5 +1,4 @@
 import _ from 'lodash'
-
 import assert from 'assert'
 import { sortRacesBySeatName } from './Races.js'
 
@@ -33,6 +32,64 @@ describe('RacesUtil', () => {
 			]
 			assert.deepEqual(expected, _.sortBy(townRaces, sortRacesBySeatName))
 
+		})
+
+		it('should sort national races by state, then district', () => {
+			const districtRaces = [
+				{
+					seatName: 'District 11',
+					statePostal: 'CA',
+					national: true,
+				},
+				{
+					seatName: 'District 10',
+					statePostal: 'CA',
+					national: true,
+				},
+				{
+					seatName: 'District 1',
+					statePostal: 'CA',
+					national: true,
+				},
+				{
+					seatName: 'District 1',
+					statePostal: 'AK',
+					national: true,
+				},
+				{
+					seatName: 'District 2',
+					statePostal: 'CA',
+					national: true,
+				},
+			]
+			const expected = [
+				{
+					seatName: 'District 1',
+					statePostal: 'AK',
+					national: true,
+				},
+				{
+					seatName: 'District 1',
+					statePostal: 'CA',
+					national: true,
+				},
+				{
+					seatName: 'District 2',
+					statePostal: 'CA',
+					national: true,
+				},
+				{
+					seatName: 'District 10',
+					statePostal: 'CA',
+					national: true,
+				},
+				{
+					seatName: 'District 11',
+					statePostal: 'CA',
+					national: true,
+				},
+			]
+			assert.deepEqual(expected, _.sortBy(districtRaces, sortRacesBySeatName))
 		})
 
 		it('should sort by district', () => {
@@ -100,13 +157,13 @@ describe('RacesUtil', () => {
 		it('maintain sort order when no seatname doesnt exist', () => {
 			const expected = [
 				{
-					foo: '1'
+					foo: '1',
 				},
 				{
-					foo: '2'
+					foo: '2',
 				},
 				{
-					foo: '3'
+					foo: '3',
 				},
 			]
 			assert.deepEqual(expected, _.sortBy(expected, sortRacesBySeatName))

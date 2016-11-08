@@ -15,13 +15,13 @@ const sortRacesBySeatName = (o) => {
 		const dd = (national) ? /^(.*)([0-9])([0-9+])$/ : /^([0-9])([0-9]+)(st|nd|th|rd)(.*)$/
 
 		if (national) {
+			// To get this to sort correctly, we just pop a Z before double digit numbers
 			return `${state} ${(dd.test(seatName)) ?
 				seatName.replace(dd, '$1z$2$3') : seatName.replace(re, '$1$2')}`
-		} else {
-			// To get this to sort correctly, we just pop a Z between the first and second digit
-			return (dd.test(seatName)) ?
-				seatName.replace(dd, '$4 z $1$2') : seatName.replace(re, '$3 $1')
 		}
+		// State races
+		return (dd.test(seatName)) ?
+			seatName.replace(dd, '$4 z $1$2') : seatName.replace(re, '$3 $1')
 	}
 	// If we don't have a seatname, sort by state (US Senate)
 	return state
