@@ -66,7 +66,7 @@ class StateResultsTable extends Component {
 							</tbody>
 						</table>
 					</div>
-					<button onClick={this.expandTable}>Button Text</button>
+					<button className='btn--primary benton-bold' onClick={this.expandTable}>See all town results</button>
 				</div>
 			</div>
 		)

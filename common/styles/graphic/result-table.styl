@@ -74,5 +74,15 @@
 		width 2em
 		+mq('bp-1')
 			display none
+	&.collapsed
+		.r-table tbody .r-table__row:nth-child(n+6)
+			display none
+		.btn--primary
+			display block
+	.btn--primary
+		display none
+		width 90%
+		margin 1em auto
+		max-width 40rem
 .table-container--inner
 	overflow-x auto
