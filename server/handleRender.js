@@ -128,7 +128,7 @@ export default (req, res) => {
 				.catch(e => {
 
 					logger(e)
-					res.status(404).send(e.message)
+					res.redirect('//www.bostonglobe.com/elections/2016/404')
 
 				})
 
@@ -138,7 +138,7 @@ export default (req, res) => {
 
 			// no errors, no redirect, we just didn't match anything
 			logger(new Error(message))
-			res.status(404).send(message)
+			res.redirect('//www.bostonglobe.com/elections/2016/404')
 
 		}
 
