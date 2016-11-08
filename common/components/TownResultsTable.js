@@ -29,7 +29,7 @@ class TownResultsTable extends Component {
 		return (
 			<div className='r-block'>
 				<h3 className='subhed benton-bold'><span>Town results</span></h3>
-				<div className='{tableContainer}'>
+				<div className={tableContainer}>
 					<div className='table-container--inner'>
 						<table className='r-table' summary={createSummary(raceName)}>
 							<thead className='r-table__head'>
