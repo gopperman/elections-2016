@@ -1,0 +1,8 @@
+<p:out var="basepath" value="${currentObject.basePath}"/>
+<p:style>
+.fill-leading-dem { fill: url("#crosshatch-dem"); } .fill-leading-gop { fill: url("#crosshatch-gop"); } .fill-leading-ind { fill: url("#crosshatch-ind"); } .fill-leading-yes { fill: url("#crosshatch-yes"); } .fill-leading-no { fill: url("#crosshatch-no"); } .fill-leading-split { fill: url("#crosshatch-split"); }
+</p:style>
+ 
+<div id="elections-HpMap"></div><p class='elections-source benton-regular'>Data source: AP</p>
+
+<script src="//apps.bostonglobe.com/election-results/2016/general/static/HpMap.js"></script>

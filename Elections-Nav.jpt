@@ -1,0 +1,5 @@
+<p:out var="basepath" value="${currentObject.basePath}"/>
+ 
+<div id="elections-HpNav"></div>
+
+<script src="//apps.bostonglobe.com/election-results/2016/general/static/HpNav.js"></script>

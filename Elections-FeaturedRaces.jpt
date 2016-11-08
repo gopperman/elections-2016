@@ -3,26 +3,25 @@
 <div class='election-graphic'>
 	<div class='timer'>
 		<p class="timer__elements">
-			<span class="timer__clock benton-bold" id="elections-HpElectoralCollege-clock">loading</span>
+			<span class="timer__clock benton-bold" id="elections-HpFeaturedRaces-clock">loading</span>
 			<span class="timer__update benton-regular"></span>
 		</p>
 	</div>
 </div>
 
-<div id="elections-HpElectoralCollege">
-	<c:import url='http://elections.dev.passenger.bostonglobe.com/elections/2016/hp/bar' />
+<div id="elections-HpFeaturedRaces">
+	<c:import url='http://elections.dev.passenger.bostonglobe.com/elections/2016/hp/races?ids=24802,24803,24804,24805' />
 	<p class='elections-source benton-regular'>Data source: AP</p>
 </div>
-
 <script>
 
 (function outerClosure() {
 
-	globe.onDefine('window.jQuery && $("#elections-HpElectoralCollege").length', function() {
+	globe.onDefine('window.jQuery && $("#elections-HpFeaturedRaces").length', function() {
 	
-		var URL = '//elections.dev.passenger.bostonglobe.com/elections/2016/hp/bar'
-		var MAIN_SELECTOR = '#elections-HpElectoralCollege'
-		var DISPLAY_SELECTOR = '#elections-HpElectoralCollege-clock'
+		var URL = '//elections.dev.passenger.bostonglobe.com/elections/2016/hp/races?ids=24802,24803,24804,24805'
+		var MAIN_SELECTOR = '#elections-HpFeaturedRaces'
+		var DISPLAY_SELECTOR = '#elections-HpFeaturedRaces-clock'
 
 		function fetchData(t){var e=document.querySelector(displaySelector);e.innerHTML="updating",$(mainSelector).load(url,function(){t()})}!function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"function"==typeof define&&define.amd?define(["exports"],e):e(t.d3=t.d3||{})}(this,function(t){"use strict";function e(){return S||(b(n),S=w.now()+x)}function n(){S=0}function o(){this._call=this._time=this._next=null}function i(t,e,n){var i=new o;return i.restart(t,e,n),i}function r(){e(),++m;for(var t,n=p;n;)(t=S-n._time)>=0&&n._call.call(null,t),n=n._next;--m}function l(){S=(v=w.now())+x,m=_=0;try{r()}finally{m=0,a(),S=0}}function c(){var t=w.now(),e=t-v;e>y&&(x-=e,v=t)}function a(){for(var t,e,n=p,o=1/0;n;)n._call?(o>n._time&&(o=n._time),t=n,n=n._next):(e=n._next,n._next=null,n=t?t._next=e:p=e);d=t,u(o)}function u(t){if(!m){_&&(_=clearTimeout(_));var e=t-S;e>24?(t<1/0&&(_=setTimeout(l,e)),h&&(h=clearInterval(h))):(h||(h=setInterval(c,y)),m=1,b(l))}}function f(t,e,n){var i=new o;return e=null==e?0:+e,i.restart(function(n){i.stop(),t(n+e)},e,n),i}function s(t,n,i){var r=new o,l=n;return null==n?(r.restart(t,n,i),r):(n=+n,i=null==i?e():+i,r.restart(function e(o){o+=l,r.restart(e,l+=n,i),t(o)},n,i),r)}var p,d,m=0,_=0,h=0,y=1e3,v=0,S=0,x=0,w="object"==typeof performance&&performance.now?performance:Date,b="function"==typeof requestAnimationFrame?requestAnimationFrame:function(t){setTimeout(t,17)};o.prototype=i.prototype={constructor:o,restart:function(t,n,o){if("function"!=typeof t)throw new TypeError("callback is not a function");o=(null==o?e():+o)+(null==n?0:+n),this._next||d===this||(d?d._next=this:p=this,d=this),this._call=t,this._time=o,u()},stop:function(){this._call&&(this._call=null,this._time=1/0,u())}},t.now=e,t.timer=i,t.timerFlush=r,t.timeout=f,t.interval=s,Object.defineProperty(t,"__esModule",{value:!0})});var PeriodicJS=function(t){function e(t){if(r){var e=document.querySelector(r),n=e.innerHTML,o=Math.ceil(t/1e3);o.toString()!==n&&(e.innerHTML="Update in "+o)}}function n(){o=d3.timer(function(t,r){e(i-t),t>i&&(o.stop(),l(n))})}var o,i=t.duration,r=t.displaySelector,l=t.callback,c=t.runImmediately;c?l(n):n()},url=URL,mainSelector=MAIN_SELECTOR,displaySelector=DISPLAY_SELECTOR,periodic=PeriodicJS({duration:15e3,displaySelector:displaySelector,callback:fetchData});		
 
