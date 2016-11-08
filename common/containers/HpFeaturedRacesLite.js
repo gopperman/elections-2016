@@ -1,7 +1,6 @@
 import _ from 'lodash'
 import React, { Component } from 'react'
 import connectToApi from './connectToApi.js'
-import Timer from './../components/Timer.js'
 import TestStatus from './../components/TestStatus.js'
 import FeatureGroup from './../components/FeatureGroup.js'
 
@@ -38,7 +37,7 @@ class HpFeaturedRacesLite extends Component {
 	render() {
 
 		const { props } = this
-		const { timerProps, results } = props
+		const { results } = props
 
 		// Get all races.
 		const races = _.get(results, 'data.races', [])
@@ -60,8 +59,6 @@ class HpFeaturedRacesLite extends Component {
 			<div className='election-graphic'>
 
 				<TestStatus isTest={isTest} />
-
-				<Timer {...timerProps} />
 
 				{featured}
 

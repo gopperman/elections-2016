@@ -2,7 +2,6 @@ import _ from 'lodash'
 import React, { Component } from 'react'
 import connectToApi from './connectToApi.js'
 import TestStatus from './../components/TestStatus.js'
-import Timer from './../components/Timer.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 
 // We'll keep these urls here for testing. A description:
@@ -52,18 +51,10 @@ class PresidentUS extends Component {
 		// Get US presidential race summary.
 		const summaryState = _.find(allStates, { statePostal: 'US' })
 
-		const timerProps = {
-			status: 'stopped',
-			startedAt: 0,
-			callback: () => {},
-			timestamp: new Date(),
-		}
-
 		// Finally we can render all the components!
 		return (
 			<div className='election-graphic'>
 				<TestStatus isTest={isTest} />
-				<Timer {...timerProps} />
 				<ElectoralCollegeBar {...summaryState} />
 			</div>
 		)
