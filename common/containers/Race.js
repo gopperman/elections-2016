@@ -91,6 +91,8 @@ class Race extends Component {
 			dropdownName='town'
 			displayName='reportingunitName' />) : null
 
+		const title = nameUtil.race.name(race)
+
 		// Finally we can render all the components!
 		return (
 			<div>
@@ -100,7 +102,7 @@ class Race extends Component {
 				<Header />
 
 				<main id='content'>
-					<Hero className='lead-ma-map' title={nameUtil.race.name(race)} />
+					<Hero className='lead-ma-map' title={title} />
 					<Timer {...timerProps} />
 
 					<div className='container-inset'>
@@ -119,7 +121,12 @@ class Race extends Component {
 					</div>
 
 					<div className='container-downpage'>
-						<TownResultsTable {...{ towns, summaryCandidates }} />
+						<TownResultsTable
+							{...{
+								towns,
+								summaryCandidates,
+								raceName: title,
+							}} />
 					</div>
 					<Promo />
 				</main>
