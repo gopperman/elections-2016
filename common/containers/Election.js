@@ -37,7 +37,7 @@ const STATES = getStatesShapefile()
 // const url = '2016-11-08/rezcentral'
 
 // and this one is the correct url - it returns everything.
-const url = '2016-11-08/prezcentral?reports=Trend-s,Trend-h&races=MA-22949,MA-24805'
+const url = '2016-11-08/prezcentral?reports=Trend-s,Trend-h&races=MA-24805,NH-31459,MA-24803,MA-22949'
 
 @connectToApi
 class Election extends Component {
