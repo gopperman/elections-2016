@@ -12,14 +12,16 @@
 	&__row:nth-of-type(even)
 		background-color set-gray('lightest')
 	&__square
-		width 1.2rem
-		height 1.2rem
-		margin-bottom 0.75rem
+		width 1.5em
+		height 1.5em
+		margin-bottom 0.5em
 		float left
-		margin-right 0.5rem
+		margin 0 0.25em 0 1em
+		vertical-align middle
 	&__cell
+		position relative
 		vertical-align top
-		padding 0.5em 1em
+		padding 0.5em
 		&:not(:first-of-type)
 			text-align right
 		p
@@ -40,3 +42,10 @@
 				font-size 1.2rem
 				+mq('bp-2')
 					font-size 1.3rem
+	&__name
+		position relative
+		padding-left 1.5em
+		display inline
+	.is-winner:before
+		position absolute
+		left 0.25em

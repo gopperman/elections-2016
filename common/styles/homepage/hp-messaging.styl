@@ -46,18 +46,12 @@
 		position relative
 		width auto
 
-		&__button
-			position absolute
-			font-size 1.5rem
-			right 0.5em
-			top 1em
-			pointer-events all
-			background-color transparent
-			border none
-			svg
-				display block
-		.r-table
-			margin-top 2rem
+		.btn--close
+			right 0.75em
+			top 0.75em
+		
+		.r-table__name
+			padding-left 0.5em
 
 		@media (max-width: 40em)
 			// pin to bottom
@@ -65,3 +59,6 @@
 			bottom 0
 			left 0 !important
 			right 0
+			
+		.r-table__row .r-table__cell:first-of-type
+			clearfix()

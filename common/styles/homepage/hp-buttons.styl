@@ -23,3 +23,20 @@
 	&:hover, &:active, &:focus
 		color white
 		box-shadow none
+
+// Close btn
+.btn--close
+	position absolute
+	padding 0
+	pointer-events all
+	background-color transparent
+	border none
+	transition $transition
+	&:hover svg line
+		stroke set-color('purple')
+	svg
+		display block
+		width 1.8em
+		height 1.8em
+		line
+			transition $transition
