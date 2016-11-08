@@ -92,7 +92,7 @@
   },
   "name": "elections-2016",
   "description": "Please note: do not reproduce Boston Globe logos or fonts without written permission.",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "main": "client/index.js",
   "directories": {
     "doc": "docs"
