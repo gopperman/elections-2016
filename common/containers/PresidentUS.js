@@ -169,7 +169,11 @@ class PresidentUS extends Component {
 					</div>
 					<div className='container-downpage'>
 						<StateResultsTable
-							{...{ states, summaryCandidates: summaryStateCandidates }} />
+							{...{
+								states,
+								summaryCandidates: summaryStateCandidates,
+								raceName: 'US president race',
+							}} />
 					</div>
 					<Promo />
 				</main>

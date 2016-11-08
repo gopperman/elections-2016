@@ -10,12 +10,12 @@ const createSummary = (raceName) =>
 	// eslint-disable-next-line max-len
 	`A table that has the candidate percent and vote count across the top and the states down the left hand side for the ${raceName}.`
 
-const StateResultsTable = ({ states, summaryCandidates }) =>
+const StateResultsTable = ({ states, summaryCandidates, raceName }) =>
 	<div className='r-block'>
 		<h3 className='subhed benton-bold'><span>State results</span></h3>
 		<div className='table-container--outer'>
 			<div className='table-container--inner'>
-				<table className='r-table' summary={createSummary()}>
+				<table className='r-table' summary={createSummary(raceName)}>
 					<thead className='r-table__head'>
 						<tr className='r-table__row'>
 							<th className='r-table__cell'>
@@ -56,6 +56,7 @@ const StateResultsTable = ({ states, summaryCandidates }) =>
 StateResultsTable.propTypes = {
 	states: PropTypes.array.isRequired,
 	summaryCandidates: PropTypes.array.isRequired,
+	raceName: PropTypes.string.isRequired,
 }
 
 export default StateResultsTable
