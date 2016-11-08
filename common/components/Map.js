@@ -35,7 +35,6 @@ class Map extends Component {
 		dropdownName: PropTypes.string,
 		displayName: PropTypes.string.isRequired,
 		labelsName: PropTypes.string,
-		isPresidential: PropTypes.bool,
 		buttonText: PropTypes.string,
 		buttonUrl: PropTypes.string,
 	}
@@ -195,8 +194,6 @@ class Map extends Component {
 
 		const svg = select(this._svg)
 			.attr('viewBox', `0 0 ${width} ${height}`)
-			.attr('width', subsetFeature ? width * 0.70 : width)
-			.attr('height', subsetFeature ? height * 0.70 : height)
 
 		// Create features group.
 		svg.append('g').attr('class', 'features')
@@ -317,8 +314,6 @@ class Map extends Component {
 
 		const inset = select(svg)
 			.attr('viewBox', `0 0 ${width} ${height}`)
-			.attr('width', width * 0.25)
-			.attr('height', height * 0.25)
 
 		inset.append('g').attr('class', 'outline')
 			.append('path')
@@ -556,6 +551,15 @@ class Map extends Component {
 					ref={(c) => this._dropdown = c}>{options}</select>
 			</div>) : null
 
+		let mapClass
+		if (unitName === 'stateName') {
+			mapClass = 'us-map-wrapper'
+		} else if (data.length < 351) {
+			mapClass = 'towns-map-wrapper'
+		} else {
+			mapClass = 'mass-map-wrapper'
+		}
+
 		return (
 			<div className='map-component'>
 				<div className='map__tools'>
@@ -564,12 +568,16 @@ class Map extends Component {
 				</div>
 				<div className='map-wrappers'>
 					{serverSvg}
-					<svg
-						aria-hidden='true'
-						className='full-map'
-						ref={(c) => this._svg = c}
-						dangerouslySetInnerHTML={{ __html: svgs.crossHatchesDefs }} />
-					<svg className='inset-map' ref={(c) => this._inset = c} />
+					<div className={mapClass}>
+						<svg
+							aria-hidden='true'
+							className='full-map'
+							ref={(c) => this._svg = c}
+							dangerouslySetInnerHTML={{ __html: svgs.crossHatchesDefs }} />
+					</div>
+					<div className='inset-map-wrapper'>
+						<svg className='inset-map' ref={(c) => this._inset = c} />
+					</div>
 					<div className='tooltip-wrapper' ref={(c) => this._tooltip = c}>
 						<div className='r-block tooltip js-tooltip'>
 							<button

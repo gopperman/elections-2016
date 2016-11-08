@@ -131,7 +131,6 @@ class Election extends Component {
 			tooltipSortingDelegate={tooltipSorter}
 			dropdownName='state'
 			displayName='stateName'
-			isPresidential
 			buttonText={nameUtil.presidentMA.name()}
 			buttonUrl={urlManager().race({
 				officeName: 'President', statePostal: 'MA', source: 'MA' })}
