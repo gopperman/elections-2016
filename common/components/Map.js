@@ -447,6 +447,16 @@ class Map extends Component {
 				return [colorClass, selectedClass].join(' ')
 
 			})
+			.style('fill', d => {
+
+				const { colorClass } = d
+				const result = colorClass.indexOf('fill-leading') > -1 ?
+					`url("#${colorClass.replace('fill-leading', 'crosshatch')}")` :
+					''
+
+				return result
+
+			})
 			.on('mousemove', function mousemove(d) {
 
 				// Set the dropdown.
