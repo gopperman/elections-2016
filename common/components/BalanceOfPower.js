@@ -145,6 +145,7 @@ class BalanceOfPower extends Component {
 					<svg aria-hidden='true' ref={(c) => this._svg = c} />
 					<div className='plumbline' />
 				</div>
+
 				<ul className='chart-meta'>
 					<li className='chart-meta__item'>
 						<p className='chart-meta__info'>
@@ -178,6 +179,7 @@ class BalanceOfPower extends Component {
 						</p>
 					</li>
 				</ul>
+
 				<dl className='sublegend'>
 					<dt className='sublegend__term benton-regular'>Holdovers</dt>
 					<dd className='sublegend__def circle-sm' />

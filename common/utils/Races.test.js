@@ -1,8 +1,9 @@
+/* global describe, it, afterEach */
+
 import _ from 'lodash'
 
 import assert from 'assert'
 import { sortRacesBySeatName } from './Races.js'
-
 
 describe('RacesUtil', () => {
 
@@ -100,13 +101,13 @@ describe('RacesUtil', () => {
 		it('maintain sort order when no seatname doesnt exist', () => {
 			const expected = [
 				{
-					foo: '1'
+					foo: '1',
 				},
 				{
-					foo: '2'
+					foo: '2',
 				},
 				{
-					foo: '3'
+					foo: '3',
 				},
 			]
 			assert.deepEqual(expected, _.sortBy(expected, sortRacesBySeatName))

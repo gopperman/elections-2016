@@ -13,14 +13,18 @@ import Hero from './../components/Hero.js'
 import ElectoralCollegeBar from './../components/ElectoralCollegeBar.js'
 import Map from './../components/Map.js'
 import SwingStates from './../components/SwingStates.js'
-import { sortByElectoralCount, sortByPolIDs } from './../utils/Candidates.js'
+import {
+	sortByElectoralCount,
+	sortByPolIDs,
+} from './../utils/Candidates.js'
 import FeatureGroup from './../components/FeatureGroup.js'
 import urlManager from './../utils/urlManager.js'
-// import getReports from './../utils/getReports.js'
+import getReports from './../utils/getReports.js'
 import getStatesShapefile from './../utils/getStatesShapefile.js'
 import nameUtil from './../utils/nameUtil.js'
 import swingStatesSelection from './../../data/swing-states.json'
 import Legend from './../components/Legend.js'
+import LinkButton from './../components/LinkButton.js'
 
 const STATES = getStatesShapefile()
 
@@ -59,18 +63,26 @@ class Election extends Component {
 		const { props } = this
 		const { timerProps, results } = props
 
-		// // Get the reports.
-		// const reports = _.get(results, 'data.reports', [])
+		// Get the reports.
+		const reports = _.get(results, 'data.reports', [])
 
 		// Get breaking news.
 		const breakingNews = _.first(results.breakingNews) || {}
 
-		// // Get senate report data.
-		// const senateReport =
-		// 	_.find(getReports(reports), { officeType: 'S' })
+		// Get senate report data.
+		const senateReport =
+			_.find(getReports(reports), { officeType: 'S' })
 
-		// const balanceOfPower = senateReport ?
-		// 	<BalanceOfPower {...senateReport} displayLink /> : null
+		const senateReportPrepared = {
+			dem: senateReport.dem.holdovers + senateReport.dem.won,
+			gop: senateReport.gop.holdovers + senateReport.gop.won,
+			ind: senateReport.ind.holdovers + senateReport.ind.won,
+			total: 100,
+			name: 'US Senate balance of power',
+		}
+
+		const senateBop = senateReport ?
+			<BalanceOfPowerArc {...senateReportPrepared} /> : null
 
 		// Get all races.
 		const races = _.get(results, 'data.races', [])
@@ -173,18 +185,15 @@ class Election extends Component {
 							</h3>
 							<div className='r-row--full'>
 								<div className='r-col r-feature'>
-									<BalanceOfPowerArc
-										dem={10}
-										ind={10}
-										gop={50}
-										total={100} />
+									{senateBop}
+									<LinkButton
+										text='See full results'
+										url={urlManager().office({
+											officeName: 'US Senate',
+											source: 'balanceofpower' })} />
 								</div>
 								<div className='r-col r-feature'>
-									<BalanceOfPowerArc
-										dem={10}
-										ind={10}
-										gop={50}
-										total={100} />
+									{senateBop}
 								</div>
 								{featured}
 							</div>
