@@ -54,8 +54,8 @@ export default (req, res) => {
 
 			// Get page title
 			const title = [
-				pageTitle,
 				'Election results 2016',
+				pageTitle,
 				'The Boston Globe',
 			].filter(v => v).join(' - ')
 
