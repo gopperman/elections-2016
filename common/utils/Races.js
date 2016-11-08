@@ -15,8 +15,10 @@ const sortRacesBySeatName = (o) => {
 		const dd = (national) ? /^(.*)([0-9])([0-9+])$/ : /^([0-9])([0-9]+)(st|nd|th|rd)(.*)$/
 
 		if (national) {
+			const massFlag = (state === 'Massachusetts') ? 'AA' : '' // Make Massachusetts first again!
+
 			// To get this to sort correctly, we just pop a Z before double digit numbers
-			return `${state} ${(dd.test(seatName)) ?
+			return `${massFlag}${state} ${(dd.test(seatName)) ?
 				seatName.replace(dd, '$1z$2$3') : seatName.replace(re, '$1$2')}`
 		}
 		// State races
