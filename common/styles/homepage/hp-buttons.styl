@@ -2,7 +2,7 @@
 // Buttons
 //========================
 
-.btn--primary, .btn--primary:visited
+.btn--primary
 	@extends $btn
 	border none
 	background-color set-gray('darkest')
@@ -12,6 +12,8 @@
 	font-size 1.2rem
 	+mq('bp-2')
 		font-size 1.4rem
-	&:hover, &:active
+	&:visited
+		@extends .btn--primary
+	&:hover, &:active, &:focus
 		color white
 		box-shadow none

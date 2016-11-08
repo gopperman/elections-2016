@@ -1,7 +1,7 @@
 //========================
 // Buttons
 //========================
-.btn--primary, .btn--primary:visited
+.btn--primary
 	@extends $btn
 	border none
 	background-color set-gray('darkest')
@@ -11,11 +11,13 @@
 	font-size 0.75em
 	+mq('bp-2')
 		font-size 1em
-	&:hover, &:active
+	&:visited
+		@extends .btn--primary
+	&:hover, &:active, &:focus
 		color white
 		box-shadow none
 
-.btn--secondary, .btn--secondary:visited
+.btn--secondary
 	@extends $btn
 	border 1px solid set-gray('lightest')
 	background-color white
@@ -25,11 +27,13 @@
 	font-size 0.75em
 	+mq('bp-2')
 		font-size 1em
-	&:visited, &:hover, &:active
+	&:visited
+		@extends .btn--secondary
+	&:hover, &:active, &:focus
 		color set-gray('darkest')
 		box-shadow none
 
-.btn--feature, .btn--feature:visited
+.btn--feature
 	@extends $btn
 	background linear-gradient(to left,set-color('blue', dark) 0,set-color('red', dark) 100%)
 	color white
@@ -39,9 +43,12 @@
 	font-size 0.75em
 	+mq('bp-2')
 		font-size 1em
-	&:visited, &:hover, &:active
+	&:visited
+		@extends .btn--feature
+	&:hover, &:active, &:focus
 		color white
 		box-shadow none
+
 // Close btn
 .btn--close
 	position absolute
