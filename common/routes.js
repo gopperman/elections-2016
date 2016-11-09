@@ -9,6 +9,7 @@ import Race from './containers/Race.js'
 import Town from './containers/Town.js'
 import HpElectoralCollegeLite from './containers/HpElectoralCollegeLite.js'
 import HpFeaturedRacesLite from './containers/HpFeaturedRacesLite.js'
+import HpFeaturedRacesMixed from './containers/HpFeaturedRacesMixed.js'
 import NotFound from './components/NotFound.js'
 import urlManager from './utils/urlManager.js'
 
@@ -30,6 +31,10 @@ export default (
 		<Route
 			path={`${urlManager().base()}/hp/races`}
 			component={HpFeaturedRacesLite} />
+
+		<Route
+			path={`${urlManager().base()}/hp/racesMixed`}
+			component={HpFeaturedRacesMixed} />
 
 		<Route
 			path={`${urlManager().base()}/president`}
