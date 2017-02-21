@@ -1,3 +1,5 @@
+// This module houses the Redux action creators.
+
 import logger from './../utils/logger.js'
 import {
 
@@ -50,6 +52,7 @@ const fetchResults = ({ url }) =>
 
 	(dispatch) => {
 
+		// Fire the `request` action.
 		dispatch(fetchResultsRequest({ url }))
 
 		let fullUrl
