@@ -1,0 +1,327 @@
+<!doctype html>
+<html>
+  <head>
+    <title>./server/server.dev.js</title>
+    <link rel="stylesheet" href="./../../public/style.css" />
+    <link rel="icon" type="image/png" href="./../../public/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./../../public/jquery.min.js"></script>
+    <script src="./../../public/script.js"></script>
+  </head>
+  <body class="code">
+    
+    <main id="sections">
+
+      <!-- The header -->
+
+        
+      <section class="section header files-hidden" id="header">
+
+        <aside class="comment">
+
+          <header>
+
+            <div class="file-path">
+              
+              
+              <a id="project-overview" href="./../.." title="Project Overview">elections-2016<span id="version"></span></a>
+              
+              <div class="files-menu">
+                <span id="filename" title="./server/server.dev.js">./server/server.dev.js</span>
+                
+              
+                <ul class="files hidable">
+                  
+                  
+<li class="file">
+  
+<a href="../handleRender.js" title="./server/handleRender.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">./server/handleRender.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../server.prod.js" title="./server/server.prod.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">./server/server.prod.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../../client/index.js" title="client/index.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">client/index.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../../common/components/StateResultsTable.js" title="common/components/StateResultsTable.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/StateResultsTable.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../common/components/StateResultsTableRow.js" title="common/components/StateResultsTableRow.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/StateResultsTableRow.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../common/components/Timer.js" title="common/components/Timer.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/Timer.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../common/components/TownResultsTable.js" title="common/components/TownResultsTable.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/TownResultsTable.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../common/components/TownResultsTableRow.js" title="common/components/TownResultsTableRow.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/TownResultsTableRow.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../../common/containers/Race.js" title="common/containers/Race.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/containers/Race.js</span>
+
+</a>
+
+</li>
+
+                  
+                </ul>
+                
+              </div>
+                
+            </div>
+
+            <div class="spacer"></div>
+            
+            
+          </header>
+            
+        </aside>
+
+        
+        <div class="code empty">
+        </div>
+
+      </section>
+
+      <!-- The main code section -->
+      
+      <section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>This module starts the express server on dev</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code><span class="hljs-keyword">import</span> express <span class="hljs-keyword">from</span> <span class="hljs-string">'express'</span>
+<span class="hljs-keyword">import</span> webpack <span class="hljs-keyword">from</span> <span class="hljs-string">'webpack'</span>
+<span class="hljs-keyword">import</span> webpackDevMiddleware <span class="hljs-keyword">from</span> <span class="hljs-string">'webpack-dev-middleware'</span>
+<span class="hljs-keyword">import</span> webpackHotMiddleware <span class="hljs-keyword">from</span> <span class="hljs-string">'webpack-hot-middleware'</span>
+<span class="hljs-keyword">import</span> DashboardPlugin <span class="hljs-keyword">from</span> <span class="hljs-string">'webpack-dashboard/plugin'</span>
+<span class="hljs-keyword">import</span> handleRender <span class="hljs-keyword">from</span> <span class="hljs-string">'./handleRender.js'</span>
+<span class="hljs-keyword">import</span> api <span class="hljs-keyword">from</span> <span class="hljs-string">'./api.js'</span>
+<span class="hljs-keyword">import</span> webpackConfig <span class="hljs-keyword">from</span> <span class="hljs-string">'./../webpack.config.dev.js'</span>
+<span class="hljs-keyword">import</span> logger <span class="hljs-keyword">from</span> <span class="hljs-string">'./../common/utils/logger.js'</span>
+
+<span class="hljs-keyword">const</span> app = express()
+<span class="hljs-keyword">const</span> port = process.env.PORT || <span class="hljs-number">3001</span></code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Get webpack config</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code><span class="hljs-keyword">const</span> compiler = webpack(webpackConfig)</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Add the webpack DashboardPlugin</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>compiler.apply(<span class="hljs-keyword">new</span> DashboardPlugin())</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Tell express to use webpack dev middleware to compile js on the fly</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>app.use(webpackDevMiddleware(compiler, {
+	<span class="hljs-attr">quiet</span>: <span class="hljs-literal">true</span>,
+	<span class="hljs-attr">noInfo</span>: <span class="hljs-literal">true</span>,
+	<span class="hljs-attr">publicPath</span>: webpackConfig.output.publicPath,
+}))</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Use this middleware to set up hot module reloading via webpack</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>app.use(webpackHotMiddleware(compiler, {
+	<span class="hljs-attr">log</span>: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {},
+}))</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Tell express to use pug as our view engine
+We&#39;ll only use this to render the top-level html wrapper</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>app.set(<span class="hljs-string">'views'</span>, <span class="hljs-string">'./common'</span>)
+app.set(<span class="hljs-string">'view engine'</span>, <span class="hljs-string">'pug'</span>)
+
+app.get(<span class="hljs-string">'/api/*'</span>, api)</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>This is fired every time the server side receives a request</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>app.get(<span class="hljs-string">'*'</span>, handleRender)
+
+app.listen(port, (error) =&gt; {
+
+	<span class="hljs-keyword">if</span> (error) {
+
+		logger(error)
+
+	} <span class="hljs-keyword">else</span> {
+
+		<span class="hljs-built_in">console</span>.info(<span class="hljs-string">`==&gt; 🌎  Open http://localhost:<span class="hljs-subst">${port}</span>/.`</span>)
+
+	}
+
+})</code></pre>
+  </div>
+
+  
+</section>
+
+      
+      
+      <section class="section footer" id="footer">
+        
+        <aside class="comment">
+          <span class="content project-copyright">&copy; Copyright 2017 The Boston Globe.</span>
+        </aside>
+
+        <div class="code">
+          <span class="content page-generation-time">Generated Tue, 21 Feb 2017 00:54:42 GMT</span>
+        </div>
+        
+      </section>
+      
+    </main>
+
+  </body>
+</html>
+

@@ -35,6 +35,45 @@
                   
 <li class="file">
   
+<a href="../../../server/handleRender.js" title="./server/handleRender.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">./server/handleRender.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../../server/server.dev.js" title="./server/server.dev.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">./server/server.dev.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../../server/server.prod.js" title="./server/server.prod.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">./server/server.prod.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
 <a href="../../../client/index.js" title="client/index.js">
     
 <span class="language" style="background-color: #f1e05a">js</span>
@@ -47,19 +86,6 @@
 </li>
 <li class="file separator">
   
-  
-<a href="../RaceSummary.js" title="common/components/RaceSummary.js">
-    
-<span class="language" style="background-color: #f1e05a">js</span>
-
-
-<span class="filename">common/components/RaceSummary.js</span>
-
-</a>
-
-</li>
-  
-<li class="file">
   
 <a href="../StateResultsTable.js" title="common/components/StateResultsTable.js">
     
@@ -161,13 +187,14 @@ within a <code>TownResultsTable</code>.</p>
 <span class="hljs-keyword">import</span> addCommas <span class="hljs-keyword">from</span> <span class="hljs-string">'add-commas'</span>
 <span class="hljs-keyword">import</span> { percent } <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/Candidate.js'</span>
 <span class="hljs-keyword">import</span> { percentForDisplay } <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/standardize.js'</span>
+<span class="hljs-keyword">import</span> TableCell <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/TableCell.js'</span>
 
 <span class="hljs-keyword">const</span> TownResultsTableRow = ({ reportingunitName, precinctsReporting,
 precinctsTotal, candidates, summaryCandidates }) =&gt;
-	<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">tr</span>&gt;</span>
-		<span class="hljs-tag">&lt;<span class="hljs-name">td</span>&gt;</span>
-			<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{reportingunitName}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-			<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{precinctsReporting} of {precinctsTotal}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+	<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">tr</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'r-table__row'</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'r-table__cell'</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'benton-bold'</span>&gt;</span>{reportingunitName}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+			<span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'benton-regular'</span>&gt;</span>{precinctsReporting} of {precinctsTotal}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
 		<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span>
 		{ summaryCandidates.map((v, i) =&gt; {</span></code></pre>
   </div>
@@ -186,26 +213,26 @@ precinctsTotal, candidates, summaryCandidates }) =&gt;
     <pre><code>			<span class="hljs-keyword">const</span> candidate = _.find(candidates, { <span class="hljs-attr">candidateID</span>: v.candidateID })
 
 			<span class="hljs-keyword">return</span> candidate ? (
-				<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{i}</span>&gt;</span>
-					<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{candidate.last}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-					<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{percentForDisplay(percent({
-						candidates, candidateID: candidate.candidateID }))}%<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-					<span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>{addCommas(candidate.voteCount)}<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
-				<span class="hljs-tag">&lt;/<span class="hljs-name">td</span>&gt;</span></span>
-			) : (<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{i}</span> /&gt;</span>)
+				<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">TableCell</span>
+					<span class="hljs-attr">key</span>=<span class="hljs-string">{i}</span>
+					<span class="hljs-attr">name</span>=<span class="hljs-string">{candidate.last}</span>
+					<span class="hljs-attr">pct</span>=<span class="hljs-string">{+percentForDisplay(percent({</span>
+						<span class="hljs-attr">candidates</span>, <span class="hljs-attr">candidateID:</span> <span class="hljs-attr">candidate.candidateID</span> }))}
+					<span class="hljs-attr">votes</span>=<span class="hljs-string">{addCommas(candidate.voteCount)}</span> /&gt;</span>
+			) : (<span class="hljs-tag">&lt;<span class="hljs-name">td</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{i}</span> /&gt;</span>)
 
 		})}
-	<span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span></span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
 
 TownResultsTableRow.propTypes = {
-	<span class="hljs-attr">summaryCandidates</span>: PropTypes.array.isRequired,
-	<span class="hljs-attr">candidates</span>: PropTypes.array.isRequired,
-	<span class="hljs-attr">reportingunitName</span>: PropTypes.string.isRequired,
-	<span class="hljs-attr">precinctsReporting</span>: PropTypes.number.isRequired,
-	<span class="hljs-attr">precinctsTotal</span>: PropTypes.number.isRequired,
+	summaryCandidates: PropTypes.array.isRequired,
+	candidates: PropTypes.array.isRequired,
+	reportingunitName: PropTypes.string.isRequired,
+	precinctsReporting: PropTypes.number.isRequired,
+	precinctsTotal: PropTypes.number.isRequired,
 }
 
-<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> TownResultsTableRow</code></pre>
+export default TownResultsTableRow</span></code></pre>
   </div>
 
   
@@ -216,11 +243,11 @@ TownResultsTableRow.propTypes = {
       <section class="section footer" id="footer">
         
         <aside class="comment">
-          <span class="content project-copyright">&copy; Copyright 2016 The Boston Globe.</span>
+          <span class="content project-copyright">&copy; Copyright 2017 The Boston Globe.</span>
         </aside>
 
         <div class="code">
-          <span class="content page-generation-time">Generated Fri, 07 Oct 2016 18:36:13 GMT</span>
+          <span class="content page-generation-time">Generated Tue, 21 Feb 2017 00:54:42 GMT</span>
         </div>
         
       </section>

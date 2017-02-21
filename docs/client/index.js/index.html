@@ -35,18 +35,44 @@
                   
 <li class="file">
   
-<a href="../../common/components/RaceSummary.js" title="common/components/RaceSummary.js">
+<a href="../../server/handleRender.js" title="./server/handleRender.js">
     
 <span class="language" style="background-color: #f1e05a">js</span>
 
 
-<span class="filename">common/components/RaceSummary.js</span>
+<span class="filename">./server/handleRender.js</span>
 
 </a>
 
 </li>
   
 <li class="file">
+  
+<a href="../../server/server.dev.js" title="./server/server.dev.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">./server/server.dev.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../server/server.prod.js" title="./server/server.prod.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">./server/server.prod.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
   
 <a href="../../common/components/StateResultsTable.js" title="common/components/StateResultsTable.js">
     
@@ -174,7 +200,13 @@ bundling the entire codebase.</p>
 <span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">'react-dom'</span>
 <span class="hljs-keyword">import</span> { browserHistory } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-router'</span>
 <span class="hljs-keyword">import</span> configureStore <span class="hljs-keyword">from</span> <span class="hljs-string">'./../common/store/configureStore.js'</span>
-<span class="hljs-keyword">import</span> css <span class="hljs-keyword">from</span> <span class="hljs-string">'./../common/styles/config.styl'</span></code></pre>
+<span class="hljs-keyword">import</span> css <span class="hljs-keyword">from</span> <span class="hljs-string">'./../common/styles/config.styl'</span>
+<span class="hljs-keyword">import</span> critical <span class="hljs-keyword">from</span> <span class="hljs-string">'./../common/appUtils/critical.js'</span>
+<span class="hljs-keyword">import</span> setPathCookie <span class="hljs-keyword">from</span> <span class="hljs-string">'./../common/appUtils/setPathCookie.js'</span>
+<span class="hljs-keyword">import</span> removeMobileHover <span class="hljs-keyword">from</span> <span class="hljs-string">'./../common/appUtils/removeMobileHover.js'</span>
+
+removeMobileHover()
+setPathCookie()</code></pre>
   </div>
 
   
@@ -327,11 +359,11 @@ render()</code></pre>
       <section class="section footer" id="footer">
         
         <aside class="comment">
-          <span class="content project-copyright">&copy; Copyright 2016 The Boston Globe.</span>
+          <span class="content project-copyright">&copy; Copyright 2017 The Boston Globe.</span>
         </aside>
 
         <div class="code">
-          <span class="content page-generation-time">Generated Fri, 07 Oct 2016 18:36:13 GMT</span>
+          <span class="content page-generation-time">Generated Tue, 21 Feb 2017 00:54:42 GMT</span>
         </div>
         
       </section>

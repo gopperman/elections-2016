@@ -35,6 +35,45 @@
                   
 <li class="file">
   
+<a href="../../../server/handleRender.js" title="./server/handleRender.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">./server/handleRender.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../../server/server.dev.js" title="./server/server.dev.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">./server/server.dev.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../../server/server.prod.js" title="./server/server.prod.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">./server/server.prod.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
 <a href="../../../client/index.js" title="client/index.js">
     
 <span class="language" style="background-color: #f1e05a">js</span>
@@ -47,19 +86,6 @@
 </li>
 <li class="file separator">
   
-  
-<a href="../RaceSummary.js" title="common/components/RaceSummary.js">
-    
-<span class="language" style="background-color: #f1e05a">js</span>
-
-
-<span class="filename">common/components/RaceSummary.js</span>
-
-</a>
-
-</li>
-  
-<li class="file">
   
 <a href="../StateResultsTableRow.js" title="common/components/StateResultsTableRow.js">
     
@@ -156,22 +182,11 @@ state in the race.</p>
   
 
   <div class="code">
-    <pre><code><span class="hljs-keyword">import</span> React, { PropTypes } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
-<span class="hljs-keyword">import</span> StateResultsTableRow <span class="hljs-keyword">from</span> <span class="hljs-string">'./StateResultsTableRow.js'</span></code></pre>
-  </div>
+    <pre><code><span class="hljs-keyword">import</span> React, { Component, PropTypes } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
+<span class="hljs-keyword">import</span> classnames <span class="hljs-keyword">from</span> <span class="hljs-string">'classnames'</span>
+<span class="hljs-keyword">import</span> StateResultsTableRow <span class="hljs-keyword">from</span> <span class="hljs-string">'./StateResultsTableRow.js'</span>
 
-  
-</section>
-<section class="section">
-
-  <aside class="comment">
-    <div class="text markdown"><p>TODO: implement</p>
-</div>
-  </aside>
-  
-
-  <div class="code">
-    <pre><code><span class="hljs-keyword">const</span> createSummary = <span class="hljs-function">(<span class="hljs-params">raceName</span>) =&gt;</span></code></pre>
+<span class="hljs-keyword">const</span> createSummary = <span class="hljs-function">(<span class="hljs-params">raceName</span>) =&gt;</span></code></pre>
   </div>
 
   
@@ -185,44 +200,80 @@ state in the race.</p>
   
 
   <div class="code">
-    <pre><code>	`A table that has the candidate percent and vote count across the top and the states down the left hand side for the ${raceName}.`
+    <pre><code>	<span class="hljs-string">`A table that has the candidate percent and vote count across the top and the states down the left hand side for the <span class="hljs-subst">${raceName}</span>.`</span>
 
-const StateResultsTable = ({ states, summaryCandidates }) =&gt;
-	&lt;div&gt;
-		&lt;h1&gt;State by state results&lt;/h1&gt;
-		&lt;table summary={createSummary()}&gt;
-			&lt;thead&gt;
-				&lt;tr&gt;
-					&lt;th scope='col'&gt;
-						&lt;div&gt;State&lt;/div&gt;
-						&lt;div&gt;Precincts reporting&lt;/div&gt;
-					&lt;/th&gt;
-					{ summaryCandidates
-						.filter(v =&gt; v.isMainCandidate)
-						.map((v, i) =&gt; (
-							&lt;th scope='col' key={i}&gt;
-								&lt;div&gt;{v.last}&lt;/div&gt;
-								&lt;div&gt;{i === 0 ? 'Votes' : ''}&lt;/div&gt;
-								&lt;div&gt;{v.polID}&lt;/div&gt;
-							&lt;/th&gt;
-					))}
-				&lt;/tr&gt;
-			&lt;/thead&gt;
-			&lt;tbody&gt;
-				{ states.map((state, key) =&gt; (
-					&lt;StateResultsTableRow
-						{...{ key, ...state, summaryCandidates }} /&gt;
-				))}
-			&lt;/tbody&gt;
-		&lt;/table&gt;
-	&lt;/div&gt;
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StateResultsTable</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+	state = {
+		<span class="hljs-attr">isCollapsed</span>: <span class="hljs-literal">true</span>,
+	}
+
+	expandTable = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+		<span class="hljs-keyword">this</span>.setState({
+			<span class="hljs-attr">isCollapsed</span>: <span class="hljs-literal">false</span>,
+		})
+	}
+
+	render() {
+		<span class="hljs-keyword">const</span> { isCollapsed } = <span class="hljs-keyword">this</span>.state
+		<span class="hljs-keyword">const</span> { states, summaryCandidates, raceName } = <span class="hljs-keyword">this</span>.props
+		<span class="hljs-keyword">const</span> tableContainer =
+			classnames(<span class="hljs-string">'table-container--outer'</span>, { <span class="hljs-string">'collapsed'</span>: isCollapsed })
+
+		<span class="hljs-keyword">return</span> (
+
+			<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'r-block'</span>&gt;</span>
+				<span class="hljs-tag">&lt;<span class="hljs-name">h3</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'subhed benton-bold'</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span>State results<span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">h3</span>&gt;</span>
+				<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{tableContainer}</span>&gt;</span>
+					<span class="hljs-tag">&lt;<span class="hljs-name">div</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'table-container--inner'</span>&gt;</span>
+						<span class="hljs-tag">&lt;<span class="hljs-name">table</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'r-table'</span> <span class="hljs-attr">summary</span>=<span class="hljs-string">{createSummary(raceName)}</span>&gt;</span>
+							<span class="hljs-tag">&lt;<span class="hljs-name">thead</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'r-table__head'</span>&gt;</span>
+								<span class="hljs-tag">&lt;<span class="hljs-name">tr</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'r-table__row'</span>&gt;</span>
+									<span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'r-table__cell'</span>&gt;</span>
+										<span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'benton-bold'</span>&gt;</span>State<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+										<span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'benton-regular'</span>&gt;</span>Precincts reporting<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+									<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+									{ summaryCandidates
+										.filter(v =&gt; v.isMainCandidate)
+										.map((candidate, i) =&gt; {
+
+											const { winner, last } = candidate
+
+											const candidateClass =
+												classnames('benton-bold', 'r-table__name',
+													{ 'is-winner': !!winner })
+
+											return (
+												<span class="hljs-tag">&lt;<span class="hljs-name">th</span> <span class="hljs-attr">scope</span>=<span class="hljs-string">'col'</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'r-table__cell'</span> <span class="hljs-attr">key</span>=<span class="hljs-string">{i}</span>&gt;</span>
+													<span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">className</span>=<span class="hljs-string">{candidateClass}</span>&gt;</span>{last}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+													<span class="hljs-tag">&lt;<span class="hljs-name">p</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'benton-regular'</span>&gt;</span>{i === 0 ? 'Votes' : ''}<span class="hljs-tag">&lt;/<span class="hljs-name">p</span>&gt;</span>
+												<span class="hljs-tag">&lt;/<span class="hljs-name">th</span>&gt;</span>
+											)
+										})
+									}
+								<span class="hljs-tag">&lt;/<span class="hljs-name">tr</span>&gt;</span>
+							<span class="hljs-tag">&lt;/<span class="hljs-name">thead</span>&gt;</span>
+							<span class="hljs-tag">&lt;<span class="hljs-name">tbody</span>&gt;</span>
+								{ states.map((state, key) =&gt; (
+									<span class="hljs-tag">&lt;<span class="hljs-name">StateResultsTableRow</span>
+										{<span class="hljs-attr">...</span>{ <span class="hljs-attr">key</span>, <span class="hljs-attr">...state</span>, <span class="hljs-attr">summaryCandidates</span> }} /&gt;</span>
+								))}
+							<span class="hljs-tag">&lt;/<span class="hljs-name">tbody</span>&gt;</span>
+						<span class="hljs-tag">&lt;/<span class="hljs-name">table</span>&gt;</span>
+					<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+					<span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">className</span>=<span class="hljs-string">'btn--primary benton-bold'</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{this.expandTable}</span>&gt;</span>See all town results<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span>
+				<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+			<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span>
+		)
+	}
+}
 
 StateResultsTable.propTypes = {
 	states: PropTypes.array.isRequired,
 	summaryCandidates: PropTypes.array.isRequired,
+	raceName: PropTypes.string.isRequired,
 }
 
-export default StateResultsTable</code></pre>
+export default StateResultsTable</span></code></pre>
   </div>
 
   
@@ -233,11 +284,11 @@ export default StateResultsTable</code></pre>
       <section class="section footer" id="footer">
         
         <aside class="comment">
-          <span class="content project-copyright">&copy; Copyright 2016 The Boston Globe.</span>
+          <span class="content project-copyright">&copy; Copyright 2017 The Boston Globe.</span>
         </aside>
 
         <div class="code">
-          <span class="content page-generation-time">Generated Fri, 07 Oct 2016 18:36:13 GMT</span>
+          <span class="content page-generation-time">Generated Tue, 21 Feb 2017 00:54:42 GMT</span>
         </div>
         
       </section>
