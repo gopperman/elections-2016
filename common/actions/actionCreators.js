@@ -14,6 +14,7 @@ import config from './../../data/config.json'
 
 const { fetch } = require('fetch-ponyfill')()
 
+// The timer actions deal with the "next update in" clock.
 const startTimer = (now = Date.now()) => ({
 	type: START_TIMER,
 	now,
@@ -27,6 +28,7 @@ const cancelTimer = () => ({
 	type: CANCEL_TIMER,
 })
 
+// The fetch results actions deal with requesting new election results.
 const fetchResultsRequest = ({ url }) => ({
 	type: FETCH_RESULTS_REQUEST,
 	url,
@@ -43,6 +45,7 @@ const fetchResultsFailure = ({ error }) => ({
 	error,
 })
 
+// This is the fetch results thunk.
 const fetchResults = ({ url }) =>
 
 	(dispatch) => {
@@ -85,8 +88,11 @@ const fetchResults = ({ url }) =>
 
 		}
 
+		// Convenience function to parse JSON.
 		const parseJson = (response) => response.json()
 
+		// This function tries to fetch JSON,
+		// and throws an error if the response is invalid.
 		const getJsonSafely = (urlToFetch) =>
 			fetch(urlToFetch)
 				.then(response => {
@@ -100,6 +106,8 @@ const fetchResults = ({ url }) =>
 				})
 				.then(parseJson)
 
+		// This function tries to fetch JSON,
+		// and returns a blank object if the response is invalid.
 		const getJson = (urlToFetch) =>
 			fetch(urlToFetch)
 				.then(response => {
@@ -114,10 +122,9 @@ const fetchResults = ({ url }) =>
 					return {}
 				})
 
-		// const allUrls = [fullUrl, config.breakingNewsUrl]
-
 		const { breakingNewsUrl } = config
 
+		// Get both election results and breaking news.
 		return Promise.all([getJsonSafely(fullUrl), getJson(breakingNewsUrl)])
 			.then(([data, breakingNews]) => {
 
