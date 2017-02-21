@@ -187,10 +187,11 @@
       
       <section class="section">
 
-  
-  <aside class="comment empty">
-    <div class="text markdown"></div>
+  <aside class="comment">
+    <div class="text markdown"><p>This module houses the Redux action creators.</p>
+</div>
   </aside>
+  
 
   <div class="code">
     <pre><code><span class="hljs-keyword">import</span> logger <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/logger.js'</span>
@@ -276,9 +277,21 @@
   <div class="code">
     <pre><code><span class="hljs-keyword">const</span> fetchResults = <span class="hljs-function">(<span class="hljs-params">{ url }</span>) =&gt;</span>
 
-	(dispatch) =&gt; {
+	(dispatch) =&gt; {</code></pre>
+  </div>
 
-		dispatch(fetchResultsRequest({ url }))
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Fire the <code>request</code> action.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		dispatch(fetchResultsRequest({ url }))
 
 		<span class="hljs-keyword">let</span> fullUrl
 		<span class="hljs-keyword">const</span> location = <span class="hljs-keyword">typeof</span> <span class="hljs-built_in">window</span> !== <span class="hljs-string">'undefined'</span> &amp;&amp; <span class="hljs-built_in">window</span>.location</code></pre>
@@ -723,7 +736,7 @@ Throw an error so we won&#39;t render any pages.</p>
         </aside>
 
         <div class="code">
-          <span class="content page-generation-time">Generated Tue, 21 Feb 2017 01:07:54 GMT</span>
+          <span class="content page-generation-time">Generated Tue, 21 Feb 2017 19:44:15 GMT</span>
         </div>
         
       </section>
