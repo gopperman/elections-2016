@@ -1,3 +1,5 @@
+// This module starts the express server on dev
+
 import express from 'express'
 import webpack from 'webpack'
 import webpackDevMiddleware from 'webpack-dev-middleware'
@@ -14,6 +16,7 @@ const port = process.env.PORT || 3001
 // Get webpack config
 const compiler = webpack(webpackConfig)
 
+// Add the webpack DashboardPlugin
 compiler.apply(new DashboardPlugin())
 
 // Tell express to use webpack dev middleware to compile js on the fly

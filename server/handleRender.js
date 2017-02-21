@@ -1,3 +1,5 @@
+// This module does server-side rendering.
+
 import React from 'react'
 import { Provider } from 'react-redux'
 import { renderToString, renderToStaticMarkup } from 'react-dom/server'
