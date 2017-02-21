@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
   <head>
-    <title>./common/store/configureStore.js</title>
+    <title>common/store/configureStore.js</title>
     <link rel="stylesheet" href="./../../../public/style.css" />
     <link rel="icon" type="image/png" href="./../../../public/favicon.png" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -27,7 +27,7 @@
               <a id="project-overview" href="./../../.." title="Project Overview">elections-2016<span id="version"></span></a>
               
               <div class="files-menu">
-                <span id="filename" title="./common/store/configureStore.js">./common/store/configureStore.js</span>
+                <span id="filename" title="common/store/configureStore.js">common/store/configureStore.js</span>
                 
               
                 <ul class="files hidable">
@@ -35,12 +35,12 @@
                   
 <li class="file">
   
-<a href="../../components/Root.js" title="./common/components/Root.js">
+<a href="../../../client/index.js" title="client/index.js">
     
 <span class="language" style="background-color: #f1e05a">js</span>
 
 
-<span class="filename">./common/components/Root.js</span>
+<span class="filename">client/index.js</span>
 
 </a>
 
@@ -48,12 +48,12 @@
 <li class="file separator">
   
   
-<a href="../../../client/index.js" title="client/index.js">
+<a href="../../components/Root.js" title="common/components/Root.js">
     
 <span class="language" style="background-color: #f1e05a">js</span>
 
 
-<span class="filename">client/index.js</span>
+<span class="filename">common/components/Root.js</span>
 
 </a>
 
@@ -83,10 +83,11 @@
       
       <section class="section">
 
-  
-  <aside class="comment empty">
-    <div class="text markdown"></div>
+  <aside class="comment">
+    <div class="text markdown"><p>This creates the Redux store.</p>
+</div>
   </aside>
+  
 
   <div class="code">
     <pre><code><span class="hljs-keyword">import</span> { createStore, applyMiddleware, compose } <span class="hljs-keyword">from</span> <span class="hljs-string">'redux'</span>
@@ -98,16 +99,80 @@
 	<span class="hljs-keyword">const</span> isProd = process.env.NODE_ENV === <span class="hljs-string">'production'</span>
 	<span class="hljs-keyword">const</span> showDevTools = !isProd &amp;&amp;
 		<span class="hljs-keyword">typeof</span> <span class="hljs-built_in">window</span> !== <span class="hljs-string">'undefined'</span> &amp;&amp;
-		<span class="hljs-built_in">window</span>.devToolsExtension
+		<span class="hljs-built_in">window</span>.devToolsExtension</code></pre>
+  </div>
 
-	<span class="hljs-keyword">const</span> store = createStore(
-		reducers,
-		initialState,
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Create the Redux store and</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>	<span class="hljs-keyword">const</span> store = createStore(</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>add our app reducers,</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		reducers,</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>the app&#39;s initial state,</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		initialState,
 		compose(
-			applyMiddleware(
-				thunk,
-			),
-			showDevTools ? <span class="hljs-built_in">window</span>.devToolsExtension() : <span class="hljs-function"><span class="hljs-params">f</span> =&gt;</span> f,
+			applyMiddleware(</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>redux-thunk (for async fetching),</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>				thunk,
+			),</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>and the redux dev tools extension.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>			showDevTools ? <span class="hljs-built_in">window</span>.devToolsExtension() : <span class="hljs-function"><span class="hljs-params">f</span> =&gt;</span> f,
 		)
 	)
 
@@ -128,7 +193,7 @@
         </aside>
 
         <div class="code">
-          <span class="content page-generation-time">Generated Tue, 21 Feb 2017 21:51:07 GMT</span>
+          <span class="content page-generation-time">Generated Tue, 21 Feb 2017 22:58:57 GMT</span>
         </div>
         
       </section>

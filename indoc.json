@@ -5,7 +5,14 @@
 	"readme": "README.md",
 	"files": [
 		"client/index.js",
-		"./common/store/configureStore.js",
-		"./common/components/Root.js"
-	]
+		"common/routes.js",
+		"common/store/configureStore.js",
+		"common/utils/urlManager.js",
+		"common/components/Root.js"
+	],
+	"languages": {
+		"JavaScript": {
+			"ignore": ["eslint-disable"]
+		}
+	}
 }

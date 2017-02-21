@@ -1,3 +1,6 @@
+// This module contains various utilities dealing with urls. Use this to
+// avoid dropping magic strings like `/elections/2016` everywhere.
+
 import _ from 'lodash'
 import compareStringsNoAlpha from './compareStringsNoAlpha.js'
 
