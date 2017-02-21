@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+  <head>
+    <title>./common/components/Root.js</title>
+    <link rel="stylesheet" href="./../../../public/style.css" />
+    <link rel="icon" type="image/png" href="./../../../public/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./../../../public/jquery.min.js"></script>
+    <script src="./../../../public/script.js"></script>
+  </head>
+  <body class="code">
+    
+    <main id="sections">
+
+      <!-- The header -->
+
+        
+      <section class="section header files-hidden" id="header">
+
+        <aside class="comment">
+
+          <header>
+
+            <div class="file-path">
+              
+              
+              <a id="project-overview" href="./../../.." title="Project Overview">elections-2016<span id="version"></span></a>
+              
+              <div class="files-menu">
+                <span id="filename" title="./common/components/Root.js">./common/components/Root.js</span>
+                
+              
+                <ul class="files hidable">
+                  
+                  
+<li class="file">
+  
+<a href="../../store/configureStore.js" title="./common/store/configureStore.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">./common/store/configureStore.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../../../client/index.js" title="client/index.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">client/index.js</span>
+
+</a>
+
+</li>
+
+                  
+                </ul>
+                
+              </div>
+                
+            </div>
+
+            <div class="spacer"></div>
+            
+            
+          </header>
+            
+        </aside>
+
+        
+        <div class="code empty">
+        </div>
+
+      </section>
+
+      <!-- The main code section -->
+      
+      <section class="section">
+
+  
+  <aside class="comment empty">
+    <div class="text markdown"></div>
+  </aside>
+
+  <div class="code">
+    <pre><code><span class="hljs-keyword">import</span> { Provider } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-redux'</span>
+<span class="hljs-keyword">import</span> React, { PropTypes } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
+<span class="hljs-keyword">import</span> { Router } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-router'</span>
+<span class="hljs-keyword">import</span> routes <span class="hljs-keyword">from</span> <span class="hljs-string">'./../routes.js'</span>
+
+<span class="hljs-keyword">const</span> Root = <span class="hljs-function">(<span class="hljs-params">{ store, history }</span>) =&gt;</span> (
+	<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Provider</span> <span class="hljs-attr">store</span>=<span class="hljs-string">{store}</span>&gt;</span>
+		<span class="hljs-tag">&lt;<span class="hljs-name">Router</span> <span class="hljs-attr">history</span>=<span class="hljs-string">{history}</span>&gt;</span>
+			{ routes }
+		<span class="hljs-tag">&lt;/<span class="hljs-name">Router</span>&gt;</span>
+	<span class="hljs-tag">&lt;/<span class="hljs-name">Provider</span>&gt;</span></span>
+)
+
+Root.propTypes = {
+	<span class="hljs-attr">store</span>: PropTypes.object.isRequired,
+	<span class="hljs-attr">history</span>: PropTypes.object.isRequired,
+}
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Root</code></pre>
+  </div>
+
+  
+</section>
+
+      
+      
+      <section class="section footer" id="footer">
+        
+        <aside class="comment">
+          <span class="content project-copyright">&copy; Copyright 2017 The Boston Globe.</span>
+        </aside>
+
+        <div class="code">
+          <span class="content page-generation-time">Generated Tue, 21 Feb 2017 21:51:07 GMT</span>
+        </div>
+        
+      </section>
+      
+    </main>
+
+  </body>
+</html>
+

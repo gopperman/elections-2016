@@ -11,6 +11,7 @@ import critical from './../common/appUtils/critical.js'
 import setPathCookie from './../common/appUtils/setPathCookie.js'
 import removeMobileHover from './../common/appUtils/removeMobileHover.js'
 
+// These two calls are apps boilerplate.
 removeMobileHover()
 setPathCookie()
 
@@ -20,6 +21,7 @@ const initialState = window.REDUX__INITIALSTATE
 // Hydrate the Redux store with `initialState`.
 const store = configureStore(initialState)
 
+// Get the DOM element that will house our app.
 const rootElement = document.getElementById('root')
 
 // Setup a `render` function that we will overwrite for hot module

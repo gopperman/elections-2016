@@ -70,6 +70,12 @@
                     <li class='h5'><span>Static members</span></li>
                     
                       <li><a
+                        href='#CandidatescandidatesAreEqual'
+                        class='regular pre-open'>
+                        .candidatesAreEqual
+                      </a></li>
+                    
+                      <li><a
                         href='#CandidatessortByElectoralCount'
                         class='regular pre-open'>
                         .sortByElectoralCount
@@ -85,6 +91,12 @@
                         href='#CandidatessortByPolIDs'
                         class='regular pre-open'>
                         .sortByPolIDs
+                      </a></li>
+                    
+                      <li><a
+                        href='#CandidatessortByProductRequirements'
+                        class='regular pre-open'>
+                        .sortByProductRequirements
                       </a></li>
                     
                       <li><a
@@ -107,6 +119,26 @@
                 
                 </li>
               
+                
+                <li><a
+                  href='#normalizeparty'
+                  class="">
+                  normalizeParty
+                  
+                </a>
+                
+                </li>
+              
+                
+                <li><a
+                  href='#visutils'
+                  class="">
+                  visUtils
+                  
+                </a>
+                
+                </li>
+              
             </ul>
           </div>
           <div class='mt1 h6 quiet'>
@@ -121,11 +153,13 @@
 
   
   <div class='clearfix'>
+    
     <h3 class='fl m0' id='candidate'>
       Candidate
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/BostonGlobe/elections-2016/blob/1ef5eb43b4032d18a6dcc3253f071dbdb50094a3/common/utils/Candidate.js#L3-L3'>
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/BostonGlobe/elections-2016/blob/d3054007d6be130a00a3923f03604b2047d4ecab/common/utils/Candidate.js#L3-L3'>
       <span>common/utils/Candidate.js</span>
       </a>
     
@@ -169,8 +203,17 @@
         <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/BostonGlobe/elections-2016/blob/d3054007d6be130a00a3923f03604b2047d4ecab/common/utils/Candidate.js#L14-L15'>
+      <span>common/utils/Candidate.js</span>
+      </a>
+    
+  </div>
+  
 
-  <p>Get candidate&#x27;s full name (first and last).</p>
+  <p>Get candidate's full name (first and last).</p>
 
 
   <div class='pre p1 fill-light mt0'>fullName(candidate: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></div>
@@ -204,7 +247,7 @@
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>:
-        a candidate&#x27;s full name
+        a candidate's full name
 
       
     
@@ -241,8 +284,17 @@
         <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/BostonGlobe/elections-2016/blob/d3054007d6be130a00a3923f03604b2047d4ecab/common/utils/Candidate.js#L27-L35'>
+      <span>common/utils/Candidate.js</span>
+      </a>
+    
+  </div>
+  
 
-  <p>Get candidate&#x27;s vote percent.</p>
+  <p>Get candidate's vote percent.</p>
 
 
   <div class='pre p1 fill-light mt0'>percent($0: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>
@@ -280,7 +332,7 @@
                 <tr>
                   <td class='break-word'><span class='code bold'>$0.candidateID</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></code>
                   </td>
-                  <td class='break-word'><span>id of the candidate we&#x27;re interested in
+                  <td class='break-word'><span>id of the candidate we're interested in
 </span></td>
                 </tr>
               
@@ -305,7 +357,7 @@
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>:
-        a candidate&#x27;s vote percent
+        a candidate's vote percent
 
       
     
@@ -347,11 +399,13 @@
 
   
   <div class='clearfix'>
+    
     <h3 class='fl m0' id='candidates'>
       Candidates
     </h3>
     
-      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/BostonGlobe/elections-2016/blob/1ef5eb43b4032d18a6dcc3253f071dbdb50094a3/common/utils/Candidates.js#L5-L5'>
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/BostonGlobe/elections-2016/blob/d3054007d6be130a00a3923f03604b2047d4ecab/common/utils/Candidates.js#L5-L5'>
       <span>common/utils/Candidates.js</span>
       </a>
     
@@ -384,6 +438,95 @@
     <div class='py1 quiet mt1 prose-big'>Static Members</div>
     <div class="clearfix">
   
+    <div class='border-bottom' id='CandidatescandidatesAreEqual'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>candidatesAreEqual(left, right)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/BostonGlobe/elections-2016/blob/d3054007d6be130a00a3923f03604b2047d4ecab/common/utils/Candidates.js#L17-L20'>
+      <span>common/utils/Candidates.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Determine candidate equality by winner, electWon, and voteCount.</p>
+
+
+  <div class='pre p1 fill-light mt0'>candidatesAreEqual(left: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>, right: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></div>
+
+  
+
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>left</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code> a candidate
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>right</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a>)</code> a candidate
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean">Boolean</a></code>:
+        whether candidates are equal
+
+      
+    
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'>candidatesAreEqual(left, right) <span class="hljs-comment">//=&gt; false</span></pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
     <div class='border-bottom' id='CandidatessortByElectoralCount'>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
@@ -394,6 +537,15 @@
       <div class="clearfix display-none toggle-target">
         <section class='p2 mb2 clearfix bg-white minishadow'>
 
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/BostonGlobe/elections-2016/blob/d3054007d6be130a00a3923f03604b2047d4ecab/common/utils/Candidates.js#L31-L32'>
+      <span>common/utils/Candidates.js</span>
+      </a>
+    
+  </div>
   
 
   <p>Sort candidates by electoral votes won and voteCount, in that order.</p>
@@ -467,6 +619,15 @@
         <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/BostonGlobe/elections-2016/blob/d3054007d6be130a00a3923f03604b2047d4ecab/common/utils/Candidates.js#L43-L44'>
+      <span>common/utils/Candidates.js</span>
+      </a>
+    
+  </div>
+  
 
   <p>Sort candidates by total vote count.</p>
 
@@ -538,6 +699,15 @@
       <div class="clearfix display-none toggle-target">
         <section class='p2 mb2 clearfix bg-white minishadow'>
 
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/BostonGlobe/elections-2016/blob/d3054007d6be130a00a3923f03604b2047d4ecab/common/utils/Candidates.js#L56-L65'>
+      <span>common/utils/Candidates.js</span>
+      </a>
+    
+  </div>
   
 
   <p>Sort candidates by an external array of polIDs.</p>
@@ -629,6 +799,87 @@
       </div>
     </div>
   
+    <div class='border-bottom' id='CandidatessortByProductRequirements'>
+      <div class="clearfix small pointer toggle-sibling">
+        <div class="py1 contain">
+            <a class='icon pin-right py1 dark-link caret-right'>▸</a>
+            <span class='code strong strong truncate'>sortByProductRequirements(candidates)</span>
+        </div>
+      </div>
+      <div class="clearfix display-none toggle-target">
+        <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/BostonGlobe/elections-2016/blob/d3054007d6be130a00a3923f03604b2047d4ecab/common/utils/Candidates.js#L76-L90'>
+      <span>common/utils/Candidates.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Sort candidates in the order dictated by product</p>
+
+
+  <div class='pre p1 fill-light mt0'>sortByProductRequirements(candidates: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></div>
+
+  
+
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>candidates</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>)</code> an array of candidates
+
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></code>:
+        a new array of candidates, sorted. Does not mutate original array.
+
+      
+    
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'>sortByProductRequirements(candidate) <span class="hljs-comment">//=&gt; sortedCandidates</span></pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+      </div>
+    </div>
+  
     <div class='border-bottom' id='CandidatessortByCandidateIDs'>
       <div class="clearfix small pointer toggle-sibling">
         <div class="py1 contain">
@@ -639,6 +890,15 @@
       <div class="clearfix display-none toggle-target">
         <section class='p2 mb2 clearfix bg-white minishadow'>
 
+  
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/BostonGlobe/elections-2016/blob/d3054007d6be130a00a3923f03604b2047d4ecab/common/utils/Candidates.js#L102-L111'>
+      <span>common/utils/Candidates.js</span>
+      </a>
+    
+  </div>
   
 
   <p>Sort candidates by an external array of candidateIDs.</p>
@@ -686,7 +946,7 @@
                 <tr>
                   <td class='break-word'><span class='code bold'>$0.candidateIDs</span> <code class='quiet'><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a></code>
                   </td>
-                  <td class='break-word'><span>an array of candidate IDs, which are unique for this candidate in a state&#x27;s race.
+                  <td class='break-word'><span>an array of candidate IDs, which are unique for this candidate in a state's race.
 </span></td>
                 </tr>
               
@@ -741,8 +1001,17 @@
         <section class='p2 mb2 clearfix bg-white minishadow'>
 
   
+  <div class='clearfix'>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/BostonGlobe/elections-2016/blob/d3054007d6be130a00a3923f03604b2047d4ecab/common/utils/Candidates.js#L122-L123'>
+      <span>common/utils/Candidates.js</span>
+      </a>
+    
+  </div>
+  
 
-  <p>Get candidates&#x27; total vote count.</p>
+  <p>Get candidates' total vote count.</p>
 
 
   <div class='pre p1 fill-light mt0'>totalVotes(candidates: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array">Array</a>): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></div>
@@ -776,7 +1045,7 @@
     
       <div class='py1 quiet mt1 prose-big'>Returns</div>
       <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number">number</a></code>:
-        the candidates&#x27; total vote count.
+        the candidates' total vote count.
 
       
     
@@ -803,6 +1072,141 @@
     </div>
   
 </div>
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='normalizeparty'>
+      normalizeParty
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/BostonGlobe/elections-2016/blob/d3054007d6be130a00a3923f03604b2047d4ecab/common/utils/standardize.js#L25-L35'>
+      <span>common/utils/standardize.js</span>
+      </a>
+    
+  </div>
+  
+
+  <p>Normalizes a party string.</p>
+
+
+  <div class='pre p1 fill-light mt0'>normalizeParty(a: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>, s: any): <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></div>
+
+  
+
+  
+  
+  
+  
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Parameters</div>
+    <div class='prose'>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>a</span> <code class='quiet'>(<a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a>)</code> party string, e.g. 'DEM'
+
+          </div>
+          
+        </div>
+      
+        <div class='space-bottom0'>
+          <div>
+            <span class='code bold'>s</span> <code class='quiet'>(any)</code> 
+          </div>
+          
+        </div>
+      
+    </div>
+  
+
+  
+
+  
+    
+      <div class='py1 quiet mt1 prose-big'>Returns</div>
+      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></code>:
+        a normalized party string
+
+      
+    
+  
+
+  
+
+  
+    <div class='py1 quiet mt1 prose-big'>Example</div>
+    
+      
+      <pre class='p1 overflow-auto round fill-light'>normalizeParty(<span class="hljs-string">'DEM'</span>) <span class="hljs-comment">//=&gt; 'dem'</span>
+normalizeParty(<span class="hljs-string">'gop'</span>) <span class="hljs-comment">//=&gt; 'gop'</span>
+normalizeParty(<span class="hljs-string">'green'</span>) <span class="hljs-comment">//=&gt; 'ind'</span></pre>
+    
+  
+
+  
+
+  
+
+  
+</section>
+
+          
+        
+          
+            <section class='p2 mb2 clearfix bg-white minishadow'>
+
+  
+  <div class='clearfix'>
+    
+    <h3 class='fl m0' id='visutils'>
+      visUtils
+    </h3>
+    
+    
+      <a class='fr fill-darken0 round round pad1x quiet h5' href='https://github.com/BostonGlobe/elections-2016/blob/d3054007d6be130a00a3923f03604b2047d4ecab/common/utils/visUtils.js#L3-L3'>
+      <span>common/utils/visUtils.js</span>
+      </a>
+    
+  </div>
+  
+
+  
+
+  <div class='pre p1 fill-light mt0'>visUtils</div>
+
+  
+
+  
+  
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 
   
 
