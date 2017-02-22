@@ -223,7 +223,7 @@ const url = &#39;2016-11-08/rezcentral&#39;</p>
 <section class="section">
 
   <aside class="comment">
-    <div class="text markdown"><p>Note the <code>@connectToApi</code> decorator. This higher-order component
+    <div class="text markdown"><p>Note the <code>@connectToApi</code> decorator. This higher-order component (HOC)
 is pretty essential. Make sure to familiarize yourself with its inner
 workings.</p>
 </div>
@@ -232,9 +232,22 @@ workings.</p>
 
   <div class="code">
     <pre><code>@connectToApi
-<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Election</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Election</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{</code></pre>
+  </div>
 
-	<span class="hljs-keyword">static</span> getOmnitureTitle() {
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>These four static functions return strings that the <code>connectToApi</code>
+HOC will pick up.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>	<span class="hljs-keyword">static</span> getOmnitureTitle() {
 		<span class="hljs-keyword">return</span> nameUtil.election.omnitureTitle()
 	}
 
@@ -252,8 +265,23 @@ workings.</p>
 
 	render() {
 
-		<span class="hljs-keyword">const</span> { props } = <span class="hljs-keyword">this</span>
-		<span class="hljs-keyword">const</span> { timerProps, results } = props</code></pre>
+		<span class="hljs-keyword">const</span> { props } = <span class="hljs-keyword">this</span></code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p><code>timerProps</code> has data to power the updater clock. <code>results</code> is the
+API election results for this container. The HOC fetches data from
+this container&#39;s <code>apiUrl</code> function.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">const</span> { timerProps, results } = props</code></pre>
   </div>
 
   
@@ -403,7 +431,7 @@ workings.</p>
 <section class="section">
 
   <aside class="comment">
-    <div class="text markdown"><p>Specify list of swing states</p>
+    <div class="text markdown"><p>Specify list of swing states.</p>
 </div>
   </aside>
   
@@ -552,7 +580,7 @@ export default Election</code></pre>
         </aside>
 
         <div class="code">
-          <span class="content page-generation-time">Generated Wed, 22 Feb 2017 16:57:30 GMT</span>
+          <span class="content page-generation-time">Generated Wed, 22 Feb 2017 17:39:11 GMT</span>
         </div>
         
       </section>
