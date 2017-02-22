@@ -1,0 +1,564 @@
+<!doctype html>
+<html>
+  <head>
+    <title>common/containers/Election.js</title>
+    <link rel="stylesheet" href="./../../../public/style.css" />
+    <link rel="icon" type="image/png" href="./../../../public/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./../../../public/jquery.min.js"></script>
+    <script src="./../../../public/script.js"></script>
+  </head>
+  <body class="code">
+    
+    <main id="sections">
+
+      <!-- The header -->
+
+        
+      <section class="section header files-hidden" id="header">
+
+        <aside class="comment">
+
+          <header>
+
+            <div class="file-path">
+              
+              
+              <a id="project-overview" href="./../../.." title="Project Overview">elections-2016<span id="version"></span></a>
+              
+              <div class="files-menu">
+                <span id="filename" title="common/containers/Election.js">common/containers/Election.js</span>
+                
+              
+                <ul class="files hidable">
+                  
+                  
+<li class="file">
+  
+<a href="../../../client/index.js" title="client/index.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">client/index.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../../routes.js" title="common/routes.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/routes.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../../components/Root.js" title="common/components/Root.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/Root.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../../store/configureStore.js" title="common/store/configureStore.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/store/configureStore.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../../utils/urlManager.js" title="common/utils/urlManager.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/utils/urlManager.js</span>
+
+</a>
+
+</li>
+
+                  
+                </ul>
+                
+              </div>
+                
+            </div>
+
+            <div class="spacer"></div>
+            
+            
+          </header>
+            
+        </aside>
+
+        
+        <div class="code empty">
+        </div>
+
+      </section>
+
+      <!-- The main code section -->
+      
+      <section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>This container renders the &#39;Election Central&#39; page.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code><span class="hljs-keyword">import</span> _ <span class="hljs-keyword">from</span> <span class="hljs-string">'lodash'</span>
+<span class="hljs-keyword">import</span> { geoAlbersUsa } <span class="hljs-keyword">from</span> <span class="hljs-string">'d3-geo'</span>
+<span class="hljs-keyword">import</span> React, { Component } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
+<span class="hljs-keyword">import</span> connectToApi <span class="hljs-keyword">from</span> <span class="hljs-string">'./connectToApi.js'</span>
+<span class="hljs-keyword">import</span> Timer <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/Timer.js'</span>
+<span class="hljs-keyword">import</span> BreakingBar <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/BreakingBar.js'</span>
+<span class="hljs-keyword">import</span> Header <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/Header.js'</span>
+<span class="hljs-keyword">import</span> Footer <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/Footer.js'</span>
+<span class="hljs-keyword">import</span> Promo <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/Promo.js'</span>
+<span class="hljs-keyword">import</span> TestStatus <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/TestStatus.js'</span>
+<span class="hljs-keyword">import</span> BalanceOfPowerArc <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/BalanceOfPowerArc.js'</span>
+<span class="hljs-keyword">import</span> Hero <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/Hero.js'</span>
+<span class="hljs-keyword">import</span> ElectoralCollegeBar <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/ElectoralCollegeBar.js'</span>
+<span class="hljs-keyword">import</span> <span class="hljs-built_in">Map</span> <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/Map.js'</span>
+<span class="hljs-keyword">import</span> SwingStates <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/SwingStates.js'</span>
+<span class="hljs-keyword">import</span> {
+	sortByProductRequirements,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/Candidates.js'</span>
+<span class="hljs-keyword">import</span> FeatureGroup <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/FeatureGroup.js'</span>
+<span class="hljs-keyword">import</span> urlManager <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/urlManager.js'</span>
+<span class="hljs-keyword">import</span> getReports <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/getReports.js'</span>
+<span class="hljs-keyword">import</span> getStatesShapefile <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/getStatesShapefile.js'</span>
+<span class="hljs-keyword">import</span> nameUtil <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/nameUtil.js'</span>
+<span class="hljs-keyword">import</span> swingStatesSelection <span class="hljs-keyword">from</span> <span class="hljs-string">'./../../data/swing-states.json'</span>
+<span class="hljs-keyword">import</span> Legend <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/Legend.js'</span>
+<span class="hljs-keyword">import</span> LinkButton <span class="hljs-keyword">from</span> <span class="hljs-string">'./../components/LinkButton.js'</span>
+
+<span class="hljs-keyword">const</span> STATES = getStatesShapefile()</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>We&#39;ll keep these urls here for testing. A description:</p>
+</div>
+  </aside>
+  
+
+
+  <div class="code empty">
+    <pre><code></code></pre>
+  </div>
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>this one returns a 500,
+const url = &#39;NO&#39;</p>
+</div>
+  </aside>
+  
+
+
+  <div class="code empty">
+    <pre><code></code></pre>
+  </div>
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>this one returns json but the data is incomplete,
+const url = &#39;2016-11-08/rezcentral&#39;</p>
+</div>
+  </aside>
+  
+
+
+  <div class="code empty">
+    <pre><code></code></pre>
+  </div>
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>and this one is the correct url - it returns everything.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code><span class="hljs-comment">// eslint-disable-next-line max-len</span>
+<span class="hljs-keyword">const</span> url = <span class="hljs-string">'2016-11-08/prezcentral?reports=Trend-s,Trend-h&amp;races=MA-24805,NH-31459,MA-24803,MA-22949'</span></code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Note the <code>@connectToApi</code> decorator. This higher-order component
+is pretty essential. Make sure to familiarize yourself with its inner
+workings.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>@connectToApi
+<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Election</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+
+	<span class="hljs-keyword">static</span> getOmnitureTitle() {
+		<span class="hljs-keyword">return</span> nameUtil.election.omnitureTitle()
+	}
+
+	<span class="hljs-keyword">static</span> getSection() {
+		<span class="hljs-keyword">return</span> <span class="hljs-string">''</span>
+	}
+
+	<span class="hljs-keyword">static</span> getTitle() {
+		<span class="hljs-keyword">return</span> nameUtil.election.htmlTitle()
+	}
+
+	<span class="hljs-keyword">static</span> apiUrl() {
+		<span class="hljs-keyword">return</span> url
+	}
+
+	render() {
+
+		<span class="hljs-keyword">const</span> { props } = <span class="hljs-keyword">this</span>
+		<span class="hljs-keyword">const</span> { timerProps, results } = props</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Get the reports.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">const</span> reports = _.get(results, <span class="hljs-string">'data.reports'</span>, [])</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Get breaking news.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">const</span> breakingNews = _.first(results.breakingNews) || {}</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Get senate / house reports.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">const</span> senateReport = _.find(getReports(reports), { <span class="hljs-attr">officeType</span>: <span class="hljs-string">'S'</span> })
+		<span class="hljs-keyword">const</span> houseReport = _.find(getReports(reports), { <span class="hljs-attr">officeType</span>: <span class="hljs-string">'H'</span> })</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Get all races.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">const</span> races = _.get(results, <span class="hljs-string">'data.races'</span>, [])</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Get all presidential units:</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">const</span> presUnits = _(races)</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>get all races where officeName=&#39;President&#39;,</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>			.filter({ <span class="hljs-attr">officeName</span>: <span class="hljs-string">'President'</span> })</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>get the reporting units,</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>			.map(<span class="hljs-string">'reportingUnits'</span>)</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>and flatten.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>			.flatten()
+			.value()</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Get presidential summary.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">const</span> presSummaryUnit = _.find(presUnits, { <span class="hljs-attr">statePostal</span>: <span class="hljs-string">'US'</span> })</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Get all 51 state units.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">const</span> presStates = _.reject(presUnits, { <span class="hljs-attr">statePostal</span>: <span class="hljs-string">'US'</span> })</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Specify list of swing states</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">const</span> swingStates = _(presStates)
+			.filter(<span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> _.includes(swingStatesSelection, v.statePostal))
+			.sortBy(<span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> _.indexOf(swingStatesSelection, v.statePostal))
+			.value()</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Create the map (if we have data).</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">const</span> map = presStates.length ? (<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">Map</span>
+			<span class="hljs-attr">shapefile</span>=<span class="hljs-string">{STATES}</span>
+			<span class="hljs-attr">data</span>=<span class="hljs-string">{presStates}</span>
+			<span class="hljs-attr">unitName</span>=<span class="hljs-string">'stateName'</span>
+			<span class="hljs-attr">projection</span>=<span class="hljs-string">{geoAlbersUsa()}</span>
+			<span class="hljs-attr">tooltipSortingDelegate</span>=<span class="hljs-string">{sortByProductRequirements}</span>
+			<span class="hljs-attr">dropdownName</span>=<span class="hljs-string">'state'</span>
+			<span class="hljs-attr">displayName</span>=<span class="hljs-string">'stateName'</span>
+			<span class="hljs-attr">buttonText</span>=<span class="hljs-string">{nameUtil.presidentMA.name()}</span>
+			<span class="hljs-attr">buttonUrl</span>=<span class="hljs-string">{urlManager().race({</span>
+				<span class="hljs-attr">officeName:</span> '<span class="hljs-attr">President</span>', <span class="hljs-attr">statePostal:</span> '<span class="hljs-attr">MA</span>', <span class="hljs-attr">source:</span> '<span class="hljs-attr">MA</span>' })}
+			<span class="hljs-attr">labelsName</span>=<span class="hljs-string">'STUSPS'</span> /&gt;</span>) : null</span></code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Get test status.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">const</span> isTest = _.some(races, <span class="hljs-string">'test'</span>)</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Get featured races.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">const</span> featured = _(races)
+			.reject({ <span class="hljs-attr">officeName</span>: <span class="hljs-string">'President'</span> })
+			.map(<span class="hljs-function">(<span class="hljs-params">race, key</span>) =&gt;</span> &lt;FeatureGroup {...{ race, key }} /&gt;)
+			.value()
+
+		<span class="hljs-keyword">return</span> (
+			&lt;div className='election-is-open'&gt;
+				&lt;TestStatus isTest={isTest} /&gt;
+				&lt;BreakingBar alert={breakingNews} /&gt;
+				&lt;Header /&gt;
+				&lt;main id='content'&gt;
+					&lt;Hero
+						title='Election Home'
+						className='lead-img'
+						isElectionCtrl /&gt;
+					&lt;Timer {...timerProps} /&gt;
+					&lt;div className='container-inset'&gt;
+						&lt;div className='container-sm'&gt;
+							&lt;ElectoralCollegeBar {...presSummaryUnit} /&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;
+					&lt;div className='container-lg'&gt;
+						{map}
+						&lt;SwingStates states={swingStates} /&gt;
+						&lt;Legend isPresidential races={presStates} /&gt;
+					&lt;/div&gt;
+					&lt;div className='container-downpage'&gt;
+						&lt;div className='container-lg'&gt;
+							&lt;h3 className='subhed benton-bold'&gt;
+								&lt;span&gt;Featured races&lt;/span&gt;
+							&lt;/h3&gt;
+							&lt;div className='r-row--full'&gt;
+								&lt;div className='r-col r-feature'&gt;
+									&lt;BalanceOfPowerArc
+										{...{
+											...senateReport,
+											total: 100,
+											name: 'US Senate balance of power',
+										}} /&gt;
+									&lt;LinkButton
+										text='See full results'
+										url={urlManager().office({
+											officeName: 'US Senate',
+											source: 'balanceofpower' })} /&gt;
+								&lt;/div&gt;
+								&lt;div className='r-col r-feature'&gt;
+									&lt;BalanceOfPowerArc
+										{...{
+											...houseReport,
+											total: 435,
+											name: 'US House balance of power',
+										}} /&gt;
+									&lt;LinkButton
+										text='See full results'
+										url={urlManager().office({
+											officeName: 'US House',
+											source: 'balanceofpower' })} /&gt;
+								&lt;/div&gt;
+								{featured}
+							&lt;/div&gt;
+						&lt;/div&gt;
+					&lt;/div&gt;
+					&lt;Promo /&gt;
+				&lt;/main&gt;
+				&lt;Footer /&gt;
+			&lt;/div&gt;
+		)
+
+	}
+
+}
+
+export default Election</code></pre>
+  </div>
+
+  
+</section>
+
+      
+      
+      <section class="section footer" id="footer">
+        
+        <aside class="comment">
+          <span class="content project-copyright">&copy; Copyright 2017 The Boston Globe.</span>
+        </aside>
+
+        <div class="code">
+          <span class="content page-generation-time">Generated Wed, 22 Feb 2017 16:57:30 GMT</span>
+        </div>
+        
+      </section>
+      
+    </main>
+
+  </body>
+</html>
+

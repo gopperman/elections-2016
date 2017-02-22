@@ -4,20 +4,27 @@
 import _ from 'lodash'
 import compareStringsNoAlpha from './compareStringsNoAlpha.js'
 
+// Specify `domain` if you don't want relative urls (for example when
+// building components for the homepage).
 const urlManager = (domain = '') => ({
 
+	// Add analytics tag if `source` is not empty.
 	tag(url, source, page) {
 		return `${url}${source ? `?p1=BG_election_${source}_${page}` : ''}`
 	},
 
+	// Encode ampersands to deal with names that have them (e.g.
+	// '1st & Barnstable'.
 	encode(s) {
 		return s.replace(/&/g, '%2526')
 	},
 
+	// Decode ampersands.
 	decode(s) {
 		return s.replace(/%2526/g, '&')
 	},
 
+	// Convert an object of key/values into a query string.
 	stringifyParams(params) {
 		return _(_.map(params, (value, key) => ({ value, key })))
 			.filter(v => v.value)
@@ -27,31 +34,44 @@ const urlManager = (domain = '') => ({
 
 	},
 
+	// Return the app's base url.
 	base(source) {
 		return this.tag(`${domain}/elections/2016`, source, 'central')
 	},
 
+	// Return the town's url.
 	town({ townName, source }) {
 		return this.tag(
 			`${this.base()}/MA/town/${this.encode(townName)}`, source, 'town')
 	},
 
+	// Return the office's url.
 	office({ officeName, statePostal = '', source }) {
 
 		let result
 
+		// If this is the president's office,
 		if (compareStringsNoAlpha(officeName, 'president')) {
 
+			// return the president's race url.
 			result = this.race({ officeName: 'President', source })
 
+		// If we're on a MA/NH office,
 		} else if (_.includes(['ma', 'nh'], statePostal.toLowerCase())) {
 
+			// create this state's office url,
 			result = `${this.base()}/${statePostal}/${this.encode(officeName)}`
+
+			// and add analytics.
 			result = this.tag(result, source, 'race')
 
+		// Otherwise,
 		} else {
 
+			// Create an office url with no state,
 			result = `${this.base()}/${this.encode(officeName)}`
+
+			// and add analytics.
 			result = this.tag(result, source, 'race')
 
 		}
@@ -60,6 +80,7 @@ const urlManager = (domain = '') => ({
 
 	},
 
+	// Return the race's url.
 	race({ officeName, seatName, statePostal, source }) {
 
 		let result

@@ -1,3 +1,5 @@
+// This container renders the 'Election Central' page.
+
 import _ from 'lodash'
 import { geoAlbersUsa } from 'd3-geo'
 import React, { Component } from 'react'
@@ -36,8 +38,12 @@ const STATES = getStatesShapefile()
 // const url = '2016-11-08/rezcentral'
 
 // and this one is the correct url - it returns everything.
+// eslint-disable-next-line max-len
 const url = '2016-11-08/prezcentral?reports=Trend-s,Trend-h&races=MA-24805,NH-31459,MA-24803,MA-22949'
 
+// Note the `@connectToApi` decorator. This higher-order component
+// is pretty essential. Make sure to familiarize yourself with its inner
+// workings.
 @connectToApi
 class Election extends Component {
 

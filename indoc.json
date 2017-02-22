@@ -8,6 +8,7 @@
 		"common/routes.js",
 		"common/store/configureStore.js",
 		"common/utils/urlManager.js",
+		"common/containers/Election.js",
 		"common/components/Root.js"
 	],
 	"languages": {
