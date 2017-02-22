@@ -9,6 +9,7 @@
 		"common/store/configureStore.js",
 		"common/utils/urlManager.js",
 		"common/containers/Election.js",
+		"common/containers/connectToApi.js",
 		"common/components/Root.js"
 	],
 	"languages": {

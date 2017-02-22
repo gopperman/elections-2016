@@ -1,0 +1,457 @@
+<!doctype html>
+<html>
+  <head>
+    <title>common/containers/connectToApi.js</title>
+    <link rel="stylesheet" href="./../../../public/style.css" />
+    <link rel="icon" type="image/png" href="./../../../public/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./../../../public/jquery.min.js"></script>
+    <script src="./../../../public/script.js"></script>
+  </head>
+  <body class="code">
+    
+    <main id="sections">
+
+      <!-- The header -->
+
+        
+      <section class="section header files-hidden" id="header">
+
+        <aside class="comment">
+
+          <header>
+
+            <div class="file-path">
+              
+              
+              <a id="project-overview" href="./../../.." title="Project Overview">elections-2016<span id="version"></span></a>
+              
+              <div class="files-menu">
+                <span id="filename" title="common/containers/connectToApi.js">common/containers/connectToApi.js</span>
+                
+              
+                <ul class="files hidable">
+                  
+                  
+<li class="file">
+  
+<a href="../../../client/index.js" title="client/index.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">client/index.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../../routes.js" title="common/routes.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/routes.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../../components/Root.js" title="common/components/Root.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/Root.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../Election.js" title="common/containers/Election.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/containers/Election.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../../store/configureStore.js" title="common/store/configureStore.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/store/configureStore.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../../utils/urlManager.js" title="common/utils/urlManager.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/utils/urlManager.js</span>
+
+</a>
+
+</li>
+
+                  
+                </ul>
+                
+              </div>
+                
+            </div>
+
+            <div class="spacer"></div>
+            
+            
+          </header>
+            
+        </aside>
+
+        
+        <div class="code empty">
+        </div>
+
+      </section>
+
+      <!-- The main code section -->
+      
+      <section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>This higher-order component (HOC) contains logic that is used by most
+containers.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code><span class="hljs-keyword">import</span> _ <span class="hljs-keyword">from</span> <span class="hljs-string">'lodash'</span>
+<span class="hljs-keyword">import</span> React, { Component, PropTypes } <span class="hljs-keyword">from</span> <span class="hljs-string">'react'</span>
+<span class="hljs-keyword">import</span> { provideHooks } <span class="hljs-keyword">from</span> <span class="hljs-string">'redial'</span>
+<span class="hljs-keyword">import</span> { bindActionCreators } <span class="hljs-keyword">from</span> <span class="hljs-string">'redux'</span>
+<span class="hljs-keyword">import</span> { connect } <span class="hljs-keyword">from</span> <span class="hljs-string">'react-redux'</span>
+<span class="hljs-keyword">import</span> * <span class="hljs-keyword">as</span> actions <span class="hljs-keyword">from</span> <span class="hljs-string">'./../actions/actionCreators.js'</span>
+<span class="hljs-keyword">import</span> {
+	reportsAreComplete,
+	racesAreComplete,
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/completenessUtil.js'</span></code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p><code>WrappedComponent</code> is the container (e.g. <code>common/containers/Election.js</code>.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code><span class="hljs-keyword">const</span> connectToApi = <span class="hljs-function">(<span class="hljs-params">WrappedComponent</span>) =&gt;</span> {</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>This object is passed to <code>provideHooks</code>, the <code>redial-redux</code> decorator
+that enables client and server-side data fetching.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>	<span class="hljs-keyword">const</span> hooks = {</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p><code>fetch</code> fires the <code>fetchResults</code> redux action with this container&#39;s
+<code>apiUrl</code> as the action&#39;s <code>url</code> parameter.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		fetch: <span class="hljs-function">(<span class="hljs-params">{ dispatch, params, query }</span>) =&gt;</span>
+			dispatch(actions.fetchResults({
+				<span class="hljs-attr">url</span>: WrappedComponent.apiUrl({ params, query }) })),
+	}</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Standard Redux convenience function.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>	<span class="hljs-keyword">const</span> mapDispatchToProps = <span class="hljs-function">(<span class="hljs-params">dispatch</span>) =&gt;</span> ({
+		dispatch,
+		<span class="hljs-attr">actions</span>: bindActionCreators(actions, dispatch),
+	})</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Note the double decorators! <code>provideHooks</code> enables server-side data
+fetching. <code>connect</code> enables react and redux talking to each other.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>	<span class="hljs-keyword">return</span> @provideHooks(hooks)
+	@connect(<span class="hljs-function"><span class="hljs-params">s</span> =&gt;</span> s, mapDispatchToProps)
+	<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ConnectToApiHoc</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Component</span> </span>{
+
+		<span class="hljs-keyword">static</span> getSection() {
+			<span class="hljs-keyword">return</span> WrappedComponent.getSection()
+		}
+
+		<span class="hljs-keyword">static</span> getTitle(params) {
+			<span class="hljs-keyword">return</span> WrappedComponent.getTitle(params)
+		}
+
+		<span class="hljs-keyword">static</span> getOmnitureTitle(params) {
+			<span class="hljs-keyword">return</span> WrappedComponent.getOmnitureTitle(params)
+		}
+
+		<span class="hljs-keyword">static</span> propTypes = {
+			<span class="hljs-attr">params</span>: PropTypes.object.isRequired,
+			<span class="hljs-attr">actions</span>: PropTypes.object.isRequired,
+			<span class="hljs-attr">timer</span>: PropTypes.object.isRequired,
+			<span class="hljs-attr">results</span>: PropTypes.object.isRequired,
+			<span class="hljs-attr">dispatch</span>: PropTypes.func.isRequired,
+		}
+
+		componentDidMount = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+			<span class="hljs-keyword">this</span>.fetchData()
+		}
+
+		componentDidUpdate = <span class="hljs-function">(<span class="hljs-params">prevProps</span>) =&gt;</span> {
+
+			<span class="hljs-keyword">const</span> { props } = <span class="hljs-keyword">this</span>
+			<span class="hljs-keyword">const</span> { startTimer, cancelTimer } = props.actions</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Did we stop fetching?</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>			<span class="hljs-keyword">if</span> (prevProps.results.isFetching &amp;&amp; !props.results.isFetching) {</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Get the races and reports,</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>				<span class="hljs-keyword">const</span> races = _.get(props.results, <span class="hljs-string">'data.races'</span>, [])
+				<span class="hljs-keyword">const</span> reports = _.get(props.results, <span class="hljs-string">'data.reports'</span>, [])</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>and check that they are both complete.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>				<span class="hljs-keyword">const</span> complete = racesAreComplete(races) &amp;&amp;
+					reportsAreComplete(reports)
+
+				<span class="hljs-keyword">if</span> (complete) {
+					cancelTimer()
+				} <span class="hljs-keyword">else</span> {
+					startTimer()
+				}
+
+			}
+
+		}
+
+		fetchData = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+			<span class="hljs-keyword">const</span> { dispatch, params } = <span class="hljs-keyword">this</span>.props
+			hooks.fetch({ dispatch, params })
+		}
+
+		render() {
+
+			<span class="hljs-keyword">const</span> { props, fetchData } = <span class="hljs-keyword">this</span>
+			<span class="hljs-keyword">const</span> { timer, results } = props
+			<span class="hljs-keyword">const</span> { stopTimer } = props.actions</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Get all races.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>			<span class="hljs-keyword">const</span> races = _.get(results, <span class="hljs-string">'data.races'</span>, [])</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Get all <code>lastUpdated</code> race fields.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>			<span class="hljs-keyword">const</span> raceDates = _(races)
+				.map(<span class="hljs-string">'reportingUnits'</span>)
+				.flatten()
+				.map(<span class="hljs-string">'lastUpdated'</span>)
+				.value()</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Get all reports.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>			<span class="hljs-keyword">const</span> reports = _.get(results, <span class="hljs-string">'data.reports'</span>, [])</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Get all <code>timestamp</code> report fields.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>			<span class="hljs-keyword">const</span> reportDates = _(reports)
+				.map(<span class="hljs-string">'reports'</span>)
+				.flatten()
+				.map(<span class="hljs-string">'report.trendtable.timestamp'</span>)
+				.value()</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Get the most recent of all timestamps.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>			<span class="hljs-keyword">const</span> timestamp = _(raceDates.concat(reportDates))
+				.map(<span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Date</span>(v))
+				.sortBy()
+				.last()
+
+			<span class="hljs-keyword">const</span> timerProps = {
+				timestamp,
+				...timer,
+				<span class="hljs-attr">callback</span>: <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {
+					stopTimer()
+					fetchData()
+				},
+			}
+
+			<span class="hljs-keyword">return</span> (
+				<span class="xml"><span class="hljs-tag">&lt;<span class="hljs-name">WrappedComponent</span>
+					<span class="hljs-attr">timerProps</span>=<span class="hljs-string">{timerProps}</span> {<span class="hljs-attr">...this.props</span>} {<span class="hljs-attr">...this.state</span>} /&gt;</span>
+			)
+
+		}
+
+	}
+
+}
+
+export default connectToApi</span></code></pre>
+  </div>
+
+  
+</section>
+
+      
+      
+      <section class="section footer" id="footer">
+        
+        <aside class="comment">
+          <span class="content project-copyright">&copy; Copyright 2017 The Boston Globe.</span>
+        </aside>
+
+        <div class="code">
+          <span class="content page-generation-time">Generated Wed, 22 Feb 2017 18:30:36 GMT</span>
+        </div>
+        
+      </section>
+      
+    </main>
+
+  </body>
+</html>
+
