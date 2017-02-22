@@ -1,3 +1,6 @@
+// This higher-order component (HOC) contains logic that is used by most
+// containers.
+
 import _ from 'lodash'
 import React, { Component, PropTypes } from 'react'
 import { provideHooks } from 'redial'
@@ -9,19 +12,28 @@ import {
 	racesAreComplete,
 } from './../utils/completenessUtil.js'
 
+// `WrappedComponent` is the container (e.g. `common/containers/Election.js`.
 const connectToApi = (WrappedComponent) => {
 
+	// This object is passed to `provideHooks`, the `redial-redux` decorator
+	// that enables client and server-side data fetching.
 	const hooks = {
+
+		// `fetch` fires the `fetchResults` redux action with this container's
+		// `apiUrl` as the action's `url` parameter.
 		fetch: ({ dispatch, params, query }) =>
 			dispatch(actions.fetchResults({
 				url: WrappedComponent.apiUrl({ params, query }) })),
 	}
 
+	// Standard Redux convenience function.
 	const mapDispatchToProps = (dispatch) => ({
 		dispatch,
 		actions: bindActionCreators(actions, dispatch),
 	})
 
+	// Note the double decorators! `provideHooks` enables server-side data
+	// fetching. `connect` enables react and redux talking to each other.
 	return @provideHooks(hooks)
 	@connect(s => s, mapDispatchToProps)
 	class ConnectToApiHoc extends Component {
