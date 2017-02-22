@@ -6,6 +6,7 @@
 	"files": [
 		"client/index.js",
 		"common/routes.js",
+		"common/actions/actionCreators.js",
 		"common/store/configureStore.js",
 		"common/utils/urlManager.js",
 		"common/containers/Election.js",
