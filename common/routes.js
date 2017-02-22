@@ -1,3 +1,5 @@
+// This module contains the app's routes.
+
 import React from 'react'
 import { Route } from 'react-router'
 import App from './components/App.js'
@@ -13,6 +15,7 @@ import HpFeaturedRacesMixed from './containers/HpFeaturedRacesMixed.js'
 import NotFound from './components/NotFound.js'
 import urlManager from './utils/urlManager.js'
 
+// Note that both on dev and prod the app is mounted on `/elections`.
 export default (
 	<Route path='/' component={App}>
 

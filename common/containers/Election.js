@@ -1,3 +1,5 @@
+// This container renders the 'Election Central' page.
+
 import _ from 'lodash'
 import { geoAlbersUsa } from 'd3-geo'
 import React, { Component } from 'react'
@@ -36,11 +38,17 @@ const STATES = getStatesShapefile()
 // const url = '2016-11-08/rezcentral'
 
 // and this one is the correct url - it returns everything.
+// eslint-disable-next-line max-len
 const url = '2016-11-08/prezcentral?reports=Trend-s,Trend-h&races=MA-24805,NH-31459,MA-24803,MA-22949'
 
+// Note the `@connectToApi` decorator. This higher-order component (HOC)
+// is pretty essential. Make sure to familiarize yourself with its inner
+// workings.
 @connectToApi
 class Election extends Component {
 
+	// These four static functions return strings that the `connectToApi`
+	// HOC will pick up.
 	static getOmnitureTitle() {
 		return nameUtil.election.omnitureTitle()
 	}
@@ -60,6 +68,10 @@ class Election extends Component {
 	render() {
 
 		const { props } = this
+
+		// `timerProps` has data to power the updater clock. `results` is the
+		// API election results for this container. The HOC fetches data from
+		// this container's `apiUrl` function.
 		const { timerProps, results } = props
 
 		// Get the reports.
@@ -91,7 +103,7 @@ class Election extends Component {
 		// Get all 51 state units.
 		const presStates = _.reject(presUnits, { statePostal: 'US' })
 
-		// Specify list of swing states
+		// Specify list of swing states.
 		const swingStates = _(presStates)
 			.filter(v => _.includes(swingStatesSelection, v.statePostal))
 			.sortBy(v => _.indexOf(swingStatesSelection, v.statePostal))

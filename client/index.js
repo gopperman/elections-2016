@@ -15,7 +15,7 @@ import removeMobileHover from './../common/appUtils/removeMobileHover.js'
 removeMobileHover()
 setPathCookie()
 
-// Grab the initial Redux state (a json string created by the server).
+// Grab the initial Redux state (a JSON string created by the server).
 const initialState = window.REDUX__INITIALSTATE
 
 // Hydrate the Redux store with `initialState`.

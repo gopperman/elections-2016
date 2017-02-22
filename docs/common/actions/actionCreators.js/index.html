@@ -1,0 +1,709 @@
+<!doctype html>
+<html>
+  <head>
+    <title>common/actions/actionCreators.js</title>
+    <link rel="stylesheet" href="./../../../public/style.css" />
+    <link rel="icon" type="image/png" href="./../../../public/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./../../../public/jquery.min.js"></script>
+    <script src="./../../../public/script.js"></script>
+  </head>
+  <body class="code">
+    
+    <main id="sections">
+
+      <!-- The header -->
+
+        
+      <section class="section header files-hidden" id="header">
+
+        <aside class="comment">
+
+          <header>
+
+            <div class="file-path">
+              
+              
+              <a id="project-overview" href="./../../.." title="Project Overview">elections-2016<span id="version"></span></a>
+              
+              <div class="files-menu">
+                <span id="filename" title="common/actions/actionCreators.js">common/actions/actionCreators.js</span>
+                
+              
+                <ul class="files hidable">
+                  
+                  
+<li class="file">
+  
+<a href="../../../client/index.js" title="client/index.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">client/index.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../../routes.js" title="common/routes.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/routes.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../../components/Root.js" title="common/components/Root.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/Root.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../../containers/Election.js" title="common/containers/Election.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/containers/Election.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../containers/connectToApi.js" title="common/containers/connectToApi.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/containers/connectToApi.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../../store/configureStore.js" title="common/store/configureStore.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/store/configureStore.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../../utils/urlManager.js" title="common/utils/urlManager.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/utils/urlManager.js</span>
+
+</a>
+
+</li>
+
+                  
+                </ul>
+                
+              </div>
+                
+            </div>
+
+            <div class="spacer"></div>
+            
+            
+          </header>
+            
+        </aside>
+
+        
+        <div class="code empty">
+        </div>
+
+      </section>
+
+      <!-- The main code section -->
+      
+      <section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>This module houses the Redux action creators.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code><span class="hljs-keyword">import</span> logger <span class="hljs-keyword">from</span> <span class="hljs-string">'./../utils/logger.js'</span>
+<span class="hljs-keyword">import</span> {
+
+	START_TIMER,
+	STOP_TIMER,
+	CANCEL_TIMER,
+
+	FETCH_RESULTS_REQUEST,
+	FETCH_RESULTS_SUCCESS,
+	FETCH_RESULTS_FAILURE,
+
+} <span class="hljs-keyword">from</span> <span class="hljs-string">'./actionTypes.js'</span>
+<span class="hljs-keyword">import</span> config <span class="hljs-keyword">from</span> <span class="hljs-string">'./../../data/config.json'</span>
+
+<span class="hljs-keyword">const</span> { fetch } = <span class="hljs-built_in">require</span>(<span class="hljs-string">'fetch-ponyfill'</span>)()</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>The timer actions deal with the &quot;next update in&quot; clock.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code><span class="hljs-keyword">const</span> startTimer = <span class="hljs-function">(<span class="hljs-params">now = <span class="hljs-built_in">Date</span>.now(</span>)) =&gt;</span> ({
+	<span class="hljs-attr">type</span>: START_TIMER,
+	now,
+})
+
+<span class="hljs-keyword">const</span> stopTimer = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> ({
+	<span class="hljs-attr">type</span>: STOP_TIMER,
+})
+
+<span class="hljs-keyword">const</span> cancelTimer = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> ({
+	<span class="hljs-attr">type</span>: CANCEL_TIMER,
+})</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>The fetch results actions deal with requesting new election results.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code><span class="hljs-keyword">const</span> fetchResultsRequest = <span class="hljs-function">(<span class="hljs-params">{ url }</span>) =&gt;</span> ({
+	<span class="hljs-attr">type</span>: FETCH_RESULTS_REQUEST,
+	url,
+})
+
+<span class="hljs-keyword">const</span> fetchResultsSuccess = <span class="hljs-function">(<span class="hljs-params">{ data, breakingNews }</span>) =&gt;</span> ({
+	<span class="hljs-attr">type</span>: FETCH_RESULTS_SUCCESS,
+	data,
+	breakingNews,
+})
+
+<span class="hljs-keyword">const</span> fetchResultsFailure = <span class="hljs-function">(<span class="hljs-params">{ error }</span>) =&gt;</span> ({
+	<span class="hljs-attr">type</span>: FETCH_RESULTS_FAILURE,
+	error,
+})</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>This is the fetch results thunk.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code><span class="hljs-keyword">const</span> fetchResults = <span class="hljs-function">(<span class="hljs-params">{ url }</span>) =&gt;</span>
+
+	(dispatch) =&gt; {</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Fire the <code>request</code> action.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		dispatch(fetchResultsRequest({ url }))
+
+		<span class="hljs-keyword">let</span> fullUrl
+		<span class="hljs-keyword">const</span> location = <span class="hljs-keyword">typeof</span> <span class="hljs-built_in">window</span> !== <span class="hljs-string">'undefined'</span> &amp;&amp; <span class="hljs-built_in">window</span>.location</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>If we&#39;re on prod,</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">if</span> (process.env.NODE_ENV === <span class="hljs-string">'production'</span>) {</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>and we&#39;re building a homepage component,</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>			<span class="hljs-keyword">if</span> (process.env.HP_CONTAINER) {</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>use an env variable to construct the full url.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>				fullUrl = <span class="hljs-string">`<span class="hljs-subst">${process.env.API_URL}</span>/electionapi/elections/<span class="hljs-subst">${url}</span>`</span></code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Else, if we&#39;re on the client,</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>			} <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (location) {</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>use the window location to construct the full url.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>				fullUrl = <span class="hljs-string">`<span class="hljs-subst">${location.origin}</span>/electionapi/elections/<span class="hljs-subst">${url}</span>`</span>
+
+			} <span class="hljs-keyword">else</span> {</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>But if we&#39;re on the server,
+use an env variable to construct the full url.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>				fullUrl = <span class="hljs-string">`<span class="hljs-subst">${process.env.API_URL}</span>/electionapi/elections/<span class="hljs-subst">${url}</span>`</span>
+
+			}
+
+		} <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (process.env.NODE_ENV === <span class="hljs-string">'staging'</span>) {
+
+			fullUrl = <span class="hljs-string">`<span class="hljs-subst">${process.env.API_URL}</span>/electionapi/elections/<span class="hljs-subst">${url}</span>`</span>
+
+		} <span class="hljs-keyword">else</span> {</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Finally, if we&#39;re on dev, use localhost:3001/api.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>			fullUrl = <span class="hljs-string">`http://localhost:3001/api/<span class="hljs-subst">${url}</span>`</span>
+
+		}</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Convenience function to parse JSON.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">const</span> parseJson = <span class="hljs-function">(<span class="hljs-params">response</span>) =&gt;</span> response.json()</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>This function tries to fetch JSON,
+and throws an error if the response is invalid.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">const</span> getJsonSafely = <span class="hljs-function">(<span class="hljs-params">urlToFetch</span>) =&gt;</span>
+			fetch(urlToFetch)
+				.then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> {</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>if error, bail out</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>					<span class="hljs-keyword">if</span> (response.status !== <span class="hljs-number">200</span>) {
+						<span class="hljs-keyword">const</span> error = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(response.statusText)
+						logger(error)
+						<span class="hljs-keyword">throw</span> error
+					}
+					<span class="hljs-keyword">return</span> response
+				})
+				.then(parseJson)</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>This function tries to fetch JSON,
+and returns a blank object if the response is invalid.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">const</span> getJson = <span class="hljs-function">(<span class="hljs-params">urlToFetch</span>) =&gt;</span>
+			fetch(urlToFetch)
+				.then(<span class="hljs-function"><span class="hljs-params">response</span> =&gt;</span> {</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>if error, continue.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>					<span class="hljs-keyword">if</span> (response.status !== <span class="hljs-number">200</span>) <span class="hljs-keyword">return</span> {}
+					<span class="hljs-keyword">return</span> response
+				})
+				.then(parseJson)
+				.catch(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> {</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>if we get an error, swallow it.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>					logger(error)
+					<span class="hljs-keyword">return</span> {}
+				})
+
+		<span class="hljs-keyword">const</span> { breakingNewsUrl } = config</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Get both election results and breaking news.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">return</span> <span class="hljs-built_in">Promise</span>.all([getJsonSafely(fullUrl), getJson(breakingNewsUrl)])
+			.then(<span class="hljs-function">(<span class="hljs-params">[data, breakingNews]</span>) =&gt;</span> {</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Did we not get any races?</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>				<span class="hljs-keyword">if</span> (!data || !data.races || !data.races.length) {</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Indeed we got no races. Prepare an error message.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>					<span class="hljs-keyword">const</span> message = <span class="hljs-string">`API didn't return any races for <span class="hljs-subst">${url}</span>`</span></code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Are we on the server?</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>					<span class="hljs-keyword">if</span> (!location) {</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Then throw an error so we won&#39;t render any pages.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>						<span class="hljs-keyword">const</span> error = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(message)
+						<span class="hljs-keyword">throw</span> error</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>If we&#39;re on the client,</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>					} <span class="hljs-keyword">else</span> {</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>log the error,</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>						logger(<span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(message))</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>and fire the failure redux action so the user is notified.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>						<span class="hljs-keyword">return</span> dispatch(fetchResultsFailure({ <span class="hljs-attr">error</span>: message }))
+
+					}
+
+				} <span class="hljs-keyword">else</span> {</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>We did get at least 1 race! Proceed.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>					<span class="hljs-keyword">return</span> dispatch(fetchResultsSuccess({ data, breakingNews }))
+
+				}
+
+			})
+			.catch(<span class="hljs-function"><span class="hljs-params">error</span> =&gt;</span> {</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>We got an error.
+If we&#39;re on the client,</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>				<span class="hljs-keyword">if</span> (location) {</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>log the error,</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>					logger(error)</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>and fire the failure redux action so the user is notified.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>					dispatch(fetchResultsFailure({ error }))
+
+				} <span class="hljs-keyword">else</span> {</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>We&#39;re on the server.
+Throw an error so we won&#39;t render any pages.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>					logger(error)
+					<span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(error)
+
+				}
+
+			})
+	}
+
+<span class="hljs-keyword">export</span> {
+
+	startTimer,
+	stopTimer,
+	cancelTimer,
+	fetchResults,
+}</code></pre>
+  </div>
+
+  
+</section>
+
+      
+      
+      <section class="section footer" id="footer">
+        
+        <aside class="comment">
+          <span class="content project-copyright">&copy; Copyright 2017 The Boston Globe.</span>
+        </aside>
+
+        <div class="code">
+          <span class="content page-generation-time">Generated Wed, 22 Feb 2017 19:58:26 GMT</span>
+        </div>
+        
+      </section>
+      
+    </main>
+
+  </body>
+</html>
+

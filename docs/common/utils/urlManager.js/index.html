@@ -1,0 +1,512 @@
+<!doctype html>
+<html>
+  <head>
+    <title>common/utils/urlManager.js</title>
+    <link rel="stylesheet" href="./../../../public/style.css" />
+    <link rel="icon" type="image/png" href="./../../../public/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script src="./../../../public/jquery.min.js"></script>
+    <script src="./../../../public/script.js"></script>
+  </head>
+  <body class="code">
+    
+    <main id="sections">
+
+      <!-- The header -->
+
+        
+      <section class="section header files-hidden" id="header">
+
+        <aside class="comment">
+
+          <header>
+
+            <div class="file-path">
+              
+              
+              <a id="project-overview" href="./../../.." title="Project Overview">elections-2016<span id="version"></span></a>
+              
+              <div class="files-menu">
+                <span id="filename" title="common/utils/urlManager.js">common/utils/urlManager.js</span>
+                
+              
+                <ul class="files hidable">
+                  
+                  
+<li class="file">
+  
+<a href="../../../client/index.js" title="client/index.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">client/index.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../../routes.js" title="common/routes.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/routes.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../../actions/actionCreators.js" title="common/actions/actionCreators.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/actions/actionCreators.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../../components/Root.js" title="common/components/Root.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/components/Root.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../../containers/Election.js" title="common/containers/Election.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/containers/Election.js</span>
+
+</a>
+
+</li>
+  
+<li class="file">
+  
+<a href="../../containers/connectToApi.js" title="common/containers/connectToApi.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/containers/connectToApi.js</span>
+
+</a>
+
+</li>
+<li class="file separator">
+  
+  
+<a href="../../store/configureStore.js" title="common/store/configureStore.js">
+    
+<span class="language" style="background-color: #f1e05a">js</span>
+
+
+<span class="filename">common/store/configureStore.js</span>
+
+</a>
+
+</li>
+
+                  
+                </ul>
+                
+              </div>
+                
+            </div>
+
+            <div class="spacer"></div>
+            
+            
+          </header>
+            
+        </aside>
+
+        
+        <div class="code empty">
+        </div>
+
+      </section>
+
+      <!-- The main code section -->
+      
+      <section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>This module contains various utilities dealing with urls. Use this to
+avoid dropping magic strings like <code>/elections/2016</code> everywhere.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code><span class="hljs-keyword">import</span> _ <span class="hljs-keyword">from</span> <span class="hljs-string">'lodash'</span>
+<span class="hljs-keyword">import</span> compareStringsNoAlpha <span class="hljs-keyword">from</span> <span class="hljs-string">'./compareStringsNoAlpha.js'</span></code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Specify <code>domain</code> if you don&#39;t want relative urls (for example when
+building components for the homepage).</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code><span class="hljs-keyword">const</span> urlManager = <span class="hljs-function">(<span class="hljs-params">domain = <span class="hljs-string">''</span></span>) =&gt;</span> ({</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Add analytics tag if <code>source</code> is not empty.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>	tag(url, source, page) {
+		<span class="hljs-keyword">return</span> <span class="hljs-string">`<span class="hljs-subst">${url}</span><span class="hljs-subst">${source ? <span class="hljs-string">`?p1=BG_election_<span class="hljs-subst">${source}</span>_<span class="hljs-subst">${page}</span>`</span> : <span class="hljs-string">''</span>}</span>`</span>
+	},</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Encode ampersands to deal with names that have them (e.g.
+&#39;1st &amp; Barnstable&#39;.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>	encode(s) {
+		<span class="hljs-keyword">return</span> s.replace(<span class="hljs-regexp">/&amp;/g</span>, <span class="hljs-string">'%2526'</span>)
+	},</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Decode ampersands.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>	decode(s) {
+		<span class="hljs-keyword">return</span> s.replace(<span class="hljs-regexp">/%2526/g</span>, <span class="hljs-string">'&amp;'</span>)
+	},</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Convert an object of key/values into a query string.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>	stringifyParams(params) {
+		<span class="hljs-keyword">return</span> _(_.map(params, (value, key) =&gt; ({ value, key })))
+			.filter(<span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> v.value)
+			.map(<span class="hljs-function"><span class="hljs-params">v</span> =&gt;</span> <span class="hljs-string">`<span class="hljs-subst">${v.key}</span>=<span class="hljs-subst">${v.value}</span>`</span>)
+			.value()
+			.join(<span class="hljs-string">'&amp;'</span>)
+
+	},</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Return the app&#39;s base url.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>	base(source) {
+		<span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.tag(<span class="hljs-string">`<span class="hljs-subst">${domain}</span>/elections/2016`</span>, source, <span class="hljs-string">'central'</span>)
+	},</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Return the town&#39;s url.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>	town({ townName, source }) {
+		<span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.tag(
+			<span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-keyword">this</span>.base()}</span>/MA/town/<span class="hljs-subst">${<span class="hljs-keyword">this</span>.encode(townName)}</span>`</span>, source, <span class="hljs-string">'town'</span>)
+	},</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Return the office&#39;s url.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>	office({ officeName, statePostal = <span class="hljs-string">''</span>, source }) {
+
+		<span class="hljs-keyword">let</span> result</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>If this is the president&#39;s office,</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">if</span> (compareStringsNoAlpha(officeName, <span class="hljs-string">'president'</span>)) {</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>return the president&#39;s race url.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>			result = <span class="hljs-keyword">this</span>.race({ <span class="hljs-attr">officeName</span>: <span class="hljs-string">'President'</span>, source })</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>If we&#39;re on a MA/NH office,</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		} <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (_.includes([<span class="hljs-string">'ma'</span>, <span class="hljs-string">'nh'</span>], statePostal.toLowerCase())) {</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>create this state&#39;s office url,</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>			result = <span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-keyword">this</span>.base()}</span>/<span class="hljs-subst">${statePostal}</span>/<span class="hljs-subst">${<span class="hljs-keyword">this</span>.encode(officeName)}</span>`</span></code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>and add analytics.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>			result = <span class="hljs-keyword">this</span>.tag(result, source, <span class="hljs-string">'race'</span>)</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Otherwise,</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		} <span class="hljs-keyword">else</span> {</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Create an office url with no state,</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>			result = <span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-keyword">this</span>.base()}</span>/<span class="hljs-subst">${<span class="hljs-keyword">this</span>.encode(officeName)}</span>`</span></code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>and add analytics.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>			result = <span class="hljs-keyword">this</span>.tag(result, source, <span class="hljs-string">'race'</span>)
+
+		}
+
+		<span class="hljs-keyword">return</span> result
+
+	},</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>Return the race&#39;s url.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>	race({ officeName, seatName, statePostal, source }) {
+
+		<span class="hljs-keyword">let</span> result</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>This function will only return urls for either president page,</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		<span class="hljs-keyword">if</span> (compareStringsNoAlpha(officeName, <span class="hljs-string">'president'</span>)) {
+
+			<span class="hljs-keyword">if</span> (compareStringsNoAlpha(statePostal, <span class="hljs-string">'ma'</span>)) {
+				result = <span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-keyword">this</span>.base()}</span>/<span class="hljs-subst">${statePostal}</span>/<span class="hljs-subst">${officeName}</span>`</span>
+			} <span class="hljs-keyword">else</span> {
+				result = <span class="hljs-string">`<span class="hljs-subst">${<span class="hljs-keyword">this</span>.base()}</span>/<span class="hljs-subst">${officeName}</span>`</span>
+			}
+
+			result = <span class="hljs-keyword">this</span>.tag(result, source, <span class="hljs-string">'president'</span>)</code></pre>
+  </div>
+
+  
+</section>
+<section class="section">
+
+  <aside class="comment">
+    <div class="text markdown"><p>or a MA race.</p>
+</div>
+  </aside>
+  
+
+  <div class="code">
+    <pre><code>		} <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (compareStringsNoAlpha(statePostal, <span class="hljs-string">'ma'</span>) &amp;&amp;
+		officeName &amp;&amp; seatName) {
+
+			result = [
+				<span class="hljs-keyword">this</span>.base(),
+				statePostal,
+				<span class="hljs-keyword">this</span>.encode(officeName),
+				<span class="hljs-keyword">this</span>.encode(seatName),
+			].join(<span class="hljs-string">'/'</span>)
+
+			result = <span class="hljs-keyword">this</span>.tag(result, <span class="hljs-string">'full'</span>, <span class="hljs-string">'results'</span>)
+
+		} <span class="hljs-keyword">else</span> {
+
+			result = <span class="hljs-literal">null</span>
+
+		}
+
+		<span class="hljs-keyword">return</span> result
+
+	},
+
+})
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> urlManager</code></pre>
+  </div>
+
+  
+</section>
+
+      
+      
+      <section class="section footer" id="footer">
+        
+        <aside class="comment">
+          <span class="content project-copyright">&copy; Copyright 2017 The Boston Globe.</span>
+        </aside>
+
+        <div class="code">
+          <span class="content page-generation-time">Generated Wed, 22 Feb 2017 19:58:26 GMT</span>
+        </div>
+        
+      </section>
+      
+    </main>
+
+  </body>
+</html>
+
